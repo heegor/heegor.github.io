@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jetty on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/jetty/</link>
+    <description>Recent content in jetty on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Tue, 14 Jul 2020 22:03:51 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/jetty/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>jetty临时目录下的资源文件被删导致js等资源找不到</title>
+      <link>https://www.zengxi.net/posts/2020/07/jetty_tmp_dir/</link>
+      <pubDate>Tue, 14 Jul 2020 22:03:51 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2020/07/jetty_tmp_dir/</guid>
+      <description>生产环境上jetty运行一段时间后，在打开某个网页的时候发现有js、css文件找不到，但是重启之后问题会解决。后来发现是设定了tmpwatch后台任务，定时会清理一次系统的tmp目录。
+默认情况下，如果没有指定jetty的临时目录，默认会使用系统的临时目录。解决方案就是，修改jetty的临时文件存放目录，不要放在 /tmp 目录下面。主要有下面几个方法：
+ 设置basetempdir值  1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Call name=&amp;#34;setAttribute&amp;#34;&amp;gt; 7 &amp;lt;Arg&amp;gt;org.eclipse.jetty.webapp.basetempdir&amp;lt;/Arg&amp;gt; 8 &amp;lt;Arg&amp;gt;/home/my/foo&amp;lt;/Arg&amp;gt; 9 &amp;lt;/Call&amp;gt; 10&amp;lt;/Configure&amp;gt;  设置tempDirectory值  1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Set name=&amp;#34;tempDirectory&amp;#34;&amp;gt;/some/dir/foo&amp;lt;/Set&amp;gt; 7&amp;lt;/Configure&amp;gt;  设置 javax.servlet.context.tempdir 属性  1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Call name=&amp;#34;setAttribute&amp;#34;&amp;gt; 7 &amp;lt;Arg&amp;gt;javax.servlet.context.tempdir&amp;lt;/Arg&amp;gt; 8 &amp;lt;Arg&amp;gt;/some/dir/foo&amp;lt;/Arg&amp;gt; 9 &amp;lt;/Call&amp;gt; 10 11&amp;lt;/Configure&amp;gt;  在启动参数里面修改  1java -jar .</description>
+    </item>
+    
+  </channel>
+</rss>

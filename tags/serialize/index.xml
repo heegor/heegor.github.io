@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>serialize on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/serialize/</link>
+    <description>Recent content in serialize on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Tue, 12 Jun 2018 10:57:35 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/serialize/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>实现InputStream的序列化</title>
+      <link>https://www.zengxi.net/posts/2018/06/inputstream-serialize/</link>
+      <pubDate>Tue, 12 Jun 2018 10:57:35 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2018/06/inputstream-serialize/</guid>
+      <description>InputStream本身是不支持序列化的，但是在实际开发的过程中有时会需要将输入流通过socket传输，比如RMI的远程调用。
+在Serializable的Java文档文档中有下面的描述：
+ Classes that require special handling during the serialization and deserialization process must implement special methods with these exact signatures:
+ private void writeObject(java.io.ObjectOutputStream out) throws IOException private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException; private void readObjectNoData() throws ObjectStreamException;  1 2对于这个场景，序列化的类只需实现writeObject与readObject这两个方法就足够了。readObjectNoData这个方法只是在特定的情况下才需要用，对于简单的应用场景来说，可以不用实现。 3 4为了实现输入流的序列化，需要新建一个继承于Serializable接口的实体类，序列化的时候将输入流转成字节数组（writeObject方法），反序列化则将字节流转成输入流（readObject方法）。值得注意的是，这里要用到transient关键字来修饰不可序列化的InputStream私有字段。 5 6示例代码： 7```java 8public class SerializableStream implements Serializable { 9 private final static int LENGTH = 1024; 10 private transient InputStream inputStream; 11 12 public SerializableStream(InputStream is) { 13 this.</description>
+    </item>
+    
+  </channel>
+</rss>

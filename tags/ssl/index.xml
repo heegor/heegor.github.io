@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ssl on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/ssl/</link>
+    <description>Recent content in ssl on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Fri, 13 Nov 2020 08:23:45 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/ssl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cloudflare开启HTTPS加密后，请求转发到源站报522错误</title>
+      <link>https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/</link>
+      <pubDate>Fri, 13 Nov 2020 08:23:45 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/</guid>
+      <description>笔者使用Cloudflare做DNS，同时使用Cloudflare的SSL证书服务。整个链路如下图:
+1|----------| |-----------| |---------------| 2| Brower | ------&amp;gt; | Cloudfare | ------&amp;gt; | Origin Server | 3|----------| |-----------| |---------------| 4 笔者想要做整个链路的https，但是在配置完之后，打开页面是看到522的错误。这个错误表示连接上源站点，但是请求超时。可以参考这个页面来找到可能的原因： https://support.cloudflare.com/hc/en-us/articles/115003011431-Error-522-Connection-timed-out#522error
+Cloudfare在配置https的时候有4个选项：
+ Off (not secure): 不开启 Flexible: 仅在浏览器与Cloudflare之间用https加密传输, Cloudflare到源站之间不加密 Full: 整个链路的端到端加密, 源站可使用自签名的证书 Full (strict)：整个链路的端到端加密，但是源站必须使用可信任的CA证书或者Cloudflare Origin CA证书。Cloudflare Origin CA证书是用于Cloudfare与源站之间的加密通讯，需要在Cloudflare控制台配置  如果选择不恰当的选项，可能会导致访问错误。比如，如果源网站用的是自签名的证书，但是选择Full (strict)选项，会报证书错误。
+笔者遇到522的问题，是由于iptables规则的设置问题。把cloudflare的ip段添加到iptables的允许列表中就可以了。ip列表见： https://www.cloudflare.com/zh-cn/ips
+1iptables -A INPUT -p tcp -s 173.245.48.0/20 -j ACCEPT 2iptables -A INPUT -p tcp -s 103.21.244.0/22 -j ACCEPT 3iptables -A INPUT -p tcp -s 103.22.200.0/22 -j ACCEPT 4iptables -A INPUT -p tcp -s 103.</description>
+    </item>
+    
+  </channel>
+</rss>

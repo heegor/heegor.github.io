@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>security on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/security/</link>
+    <description>Recent content in security on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Sun, 22 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nginx服务器安全加固</title>
+      <link>https://www.zengxi.net/posts/2020/11/nginx_security/</link>
+      <pubDate>Sun, 22 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2020/11/nginx_security/</guid>
+      <description>基础知识 常用配置 顶部配置
+1#定义 Nginx 运行的用户和用户组 2user nginx; 3 4#进程文件 5pid /var/run/nginx.pid; 6 7#错误日志位置和级别，debug、info、notice、warn、error、crit 8error_log /var/log/nginx/error.log warn; 9 10#Nginx worker 的进程数，一般可设置为可用的CPU内核数。 11worker_processes 8; 12 13#每个 worker 打开文件描述符的最大数量限制。理论值应该是最多打开文件数（系统的值ulimit -n） 14#与 nginx 进程数相除，但是 nginx 分配请求并不均匀，所以建议与ulimit -n的值保持一致。 15worker_rlimit_nofile 65535; Events 模块
+1events { 2 #设置一个worker进程同时打开的最大连接数 3 worker_connections 2048; 4 5 #告诉nginx收到一个新连接通知后接受尽可能多的连接 6 multi_accept on; 7 8 #设置用于复用客户端线程的轮询方法。如果你使用Linux 2.6+，你应该使用epoll。 9 # 如果你使用*BSD，你应该使用kqueue。 10 use epoll; 11} HTTP 模块
+1http { 2 #隐藏 Nginx 的版本号，提高安全性。 3 server_tokens off; 4 5 #开启高效文件传输模式，sendfile 指令指定 Nginx 是否调用sendfile 函数来输出文件， 6 #对于普通应用设为 on，如果用来进行下载等应用磁盘 IO 重负载应用，可设置为 off，以平 7 #衡磁盘与网络 I/O 处理速度，降低系统的负载。 8 sendfile on; 9 10 #是否开启目录列表访问，默认关闭。 11 autoindex off; 12 13 #告诉 Nginx 在一个数据包里发送所有头文件，而不一个接一个的发送 14 tcp_nopush on; 15 16 #告诉 Nginx 不要缓存数据，而是一段一段的发送--当需要及时发送数据时，就应该给应用设置 17 #这个属性，这样发送一小块数据信息时就不能立即得到返回值。Nginx 默认会始终工作在 tcp  18 #nopush 状态下。但是当开启前面的 sendfile on; 时，它的工作特点是 nopush 的最后一 19 #个包会自动转转换到 nopush off。为了减小那200ms的延迟，开启 nodelay on; 将其很快 20 #传送出去。结论就是 sendfile on; 开启时，tcp_nopush 和 tcp_nodelay 都是on 是可以的。 21 tcp_nodelay on; 22 23 #日志格式设定 24 log_format main &amp;#39;$remote_addr - $remote_user [$time_local] &amp;#34;$request&amp;#34; &amp;#39; 25 &amp;#39;$status $body_bytes_sent &amp;#34;$http_referer&amp;#34; &amp;#39; 26 &amp;#39;&amp;#34;$http_user_agent&amp;#34; &amp;#34;$http_x_forwarded_for&amp;#34;&amp;#39;; 27 #定义访问日志，设置为 off 可以关闭日志，提高性能 28 access_log /var/log/nginx/access.</description>
+    </item>
+    
+  </channel>
+</rss>

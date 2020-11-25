@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rsyslog on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/rsyslog/</link>
+    <description>Recent content in rsyslog on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Mon, 22 Jun 2020 09:29:31 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/rsyslog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>rsyslog内存占用高导致服务不可用</title>
+      <link>https://www.zengxi.net/posts/2020/06/rsyslog_high_memory_usage/</link>
+      <pubDate>Mon, 22 Jun 2020 09:29:31 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2020/06/rsyslog_high_memory_usage/</guid>
+      <description>这几天生产环境中某个服务内存不时地被撑爆，原先以为是应用的问题，但是近来没有上过新的代码。该服务的总内存是8G，启动参数关于内存的配置大致是：-Xmx=6.4G，-Xms=4G 左右。看了Grafana上面的监控记录，JVM 老年代使用最多也就到4G左右，在GC的日志中发现也仅仅用到4G左右，并没有到达最高的内存值。这两个结果可以看出来，应该不是应用程序导致内存占用过大。
+后来用top命令看了一下，发现rsyslog进程使用了将近40%的内存。再查一下日志文件，发现一些日志文件大小都达到2G以上。
+rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程，不应该占用那么内存，即使它同步延迟较大甚至不工作，也不应该影响到应用程序的正常运行。那么，我们可以通过限制它的内存使用率来解决这个问题。
+如果是Ubuntu系统，可以通过修改 /etc/systemd/system/rsyslog.service 文件，在Service项目下面修改或者添加以下参数。在其他的Linux系统下，路径可能不同。通常情况下rsyslogd大小只有5M，所以将内存上限设置为8M，绝对内存限制为80M。注意: $SYSLOGD_OPTIONS这个参数必须添加上去，否则限制可能不生效。
+1[Service] 2ExecStart=/usr/sbin/rsyslogd -n $SYSLOGD_OPTIONS 3MemoryAccounting=yes 4MemoryMax=80M 5MemoryHigh=8M 然后重启服务:
+1systemctl daemon-reload 2systemctl restart rsyslog 几个参数的含义：
+   名称 描述     MemoryAccounting 若设为”yes”则表示为此单元开启内存占用统计。 注意，这同时也隐含的开启了该单元 所属的 slice 以及父 slice 内所有单元的内存占用统计。 此选项的默认值由 DefaultMemoryAccounting= 决定   MemoryHigh 尽可能限制该单元中的进程最多可以使用多少内存。 虽然这是一个允许被突破的柔性限制，但是突破限制后，进程的运行速度将会大打折扣， 并且系统将会尽可能尽快回收超出的内存。此选项的目的在于柔性限制内存使用量。选项值可以是以字节为单位的绝对内存大小(可以使用以1024为基数的 K, M, G, T 后缀)， 也可以是以百分比表示的相对内存大小(相对于系统的全部物理内存)， 还可以设为特殊值 “infinity” 表示不作限制。   MemoryMax 绝对刚性的限制该单元中的进程最多可以使用多少内存。 这是一个不允许突破的刚性限制，触碰此限制会导致进程由于内存不足而被强制杀死。 建议将 MemoryHigh= 用作主要的内存限制手段， 而将 MemoryMax= 用作不可突破的底线。选项值可以是以字节为单位的绝对大小(可以使用以1024为基数的 K, M, G, T 后缀)， 也可以是以百分比表示的相对大小(相对于系统的全部物理内存)， 还可以设为特殊值 “infinity” 表示不作限制。     参考链接：</description>
+    </item>
+    
+  </channel>
+</rss>

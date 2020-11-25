@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>分布式 on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</link>
+    <description>Recent content in 分布式 on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Sun, 26 Jan 2020 16:21:39 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</title>
+      <link>https://www.zengxi.net/posts/2020/01/manage-distribution-session-by-id/</link>
+      <pubDate>Sun, 26 Jan 2020 16:21:39 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2020/01/manage-distribution-session-by-id/</guid>
+      <description>背景 由于历史原因，原先的界面是用vaadin框架来实现。但是这个框架不适合互联网的分布式系统，正在逐步用目前主流的前端框架重写各个模块，把旧的vaadin页面替换掉。在替换过程中，新老界面并存。
+vaadin界面的servlet，每次都会判断请求中的session id值，如果在服务器中找不到对应这个id的session，就会重新生成一个。由于session id是在新界面登录的时候生成的，当点击链接从新界面跳转到vaadin界面的时候，vaadin服务会发现没有这个session id，就会重新生成一个新的session。换句话说，新老界面会有各自的session id。当然，分布式系统本来就有这个问题，可以采用分布式session的来解决。
+原先开发人员的解决方案是:
+ 把session信息存入redis缓存，session id作为key 每次跳转到vaadin界面后，用新生成的session id替换掉旧的session id，同时在redis里面把session信息从旧的key，复制到新的key这边。  但是这种解决方案存在一个问题，主要是由上面解决方案的第2点引起的。由于每次从新界面跳转到vaadin界面都会生成新的session id，如果打开两个浏览器页面，分别跳转到新的界面，那么这个就会导致第一个跳转的那个浏览器页面中的session id被覆盖。vaadin框架是有状态的，它在客户端与服务器端保持一个长连接，并检测session id的有效性。session id的变化，导致长连接的登录信息失效，被弹回到登录界面。从用户体验上来讲，就是被强制登出。
+从另外一个角度说，原先开发人员的解决方案是不合理的，它也不是一种标准的分布式session的解决方案。
+如何解决 比较合适的解决方案是，vaadin界面不能自己生成session id，而是要复用在新界面登录之后所生成的session id。当vaadin界面有请求的时候，根据请求中的session id查询服务器上是否有对应的session，如果有则返回对应的session；如果没有，则新建一个以该session id为主键的session。换句话说，新老界面都应该要使用相同session id，一旦登录之后，在当前用户这次登录的有效生命周期内，session id保持不变。这样就不会存在上面说的，由于session id的变化而导致被强制登出的问题。
+具体实现的关键是用到HttpServletRequesWrapper类，它能够快速提供HttpServletRequest的自定义实现。
+ |----------------------| | (I) ServletRequest | |----------------------| | | ------------------------------------------- | | | | |--------------------------| |-----------------------------| | (I) HttpServletRequest | | (C) ServletRequestWrapper | |--------------------------| |-----------------------------| | | | | ------------------------------------------- | | |---------------------------------| | (C) HttpServletRequestWrapper | |---------------------------------|  如下的代码是从 Tomcat 抽取出来的，展现了HttpServletRequesWrapper类是如何运行的。</description>
+    </item>
+    
+  </channel>
+</rss>

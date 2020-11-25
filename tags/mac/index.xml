@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mac on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/mac/</link>
+    <description>Recent content in mac on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Thu, 21 May 2020 10:10:07 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/mac/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MacOS中通过ISO镜像制作U盘安装盘</title>
+      <link>https://www.zengxi.net/posts/2020/05/mac_write_iso_into_udisk/</link>
+      <pubDate>Thu, 21 May 2020 10:10:07 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2020/05/mac_write_iso_into_udisk/</guid>
+      <description>使用MacOS自带的dd命令，就可以将ISO镜像写入到U盘。这就可以利用这个命令来制作安装windows，Linux等系统用U盘
+通过下面的命令，找出U盘挂载的路径
+1diskutil list 将U盘取消挂载，在下面命令中将N替换为所对应的挂载盘：
+1diskutil unmountDisk /dev/disk[N] 将内容写入U盘。下面的命令中 rdisk 的 r 可以加快写入速度
+1sudo dd if=iso路径 of=/dev/rdisk[N] bs=1m 弹出磁盘
+1diskutil eject /dev/disk[N] </description>
+    </item>
+    
+  </channel>
+</rss>

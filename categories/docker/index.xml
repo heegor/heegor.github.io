@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on 保罗札记</title>
+    <link>https://www.zengxi.net/categories/docker/</link>
+    <description>Recent content in docker on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Wed, 22 Apr 2020 14:43:24 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker Hub国内镜像加速</title>
+      <link>https://www.zengxi.net/posts/2020/04/docker-hub-mirror/</link>
+      <pubDate>Wed, 22 Apr 2020 14:43:24 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2020/04/docker-hub-mirror/</guid>
+      <description>国内访问Docker Hub速度比较感人，这个时候需要配置国内的镜像，来加速下载。由于镜像服务可能出现宕机，建议同时配置多个镜像。
+Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json，写入如下内容
+1{ 2 &amp;#34;registry-mirrors&amp;#34;: [ 3 &amp;#34;https://hub-mirror.c.163.com&amp;#34;, 4 &amp;#34;https://registry.docker-cn.com&amp;#34; 5 ] 6} 重启服务
+1sudo systemctl daemon-reload 2sudo systemctl restart docker Windows 10 在任务栏托盘 Docker 图标内右键菜单选择 Settings，打开配置窗口后在左侧导航菜单选择 Docker Engine，在右侧像下边一样编辑 json 文件，之后点击 Apply &amp;amp; Restart 保存后 Docker 就会重启并应用配置的镜像地址了。
+1{ 2 &amp;#34;registry-mirrors&amp;#34;: [ 3 &amp;#34;https://hub-mirror.c.163.com&amp;#34;, 4 &amp;#34;https://registry.docker-cn.com&amp;#34; 5 ] 6} macOS 在任务栏点击 Docker Desktop 应用图标 -&amp;gt; Perferences，在左侧导航菜单选择 Docker Engine，在右侧像下边一样编辑 json 文件。修改完成之后，点击 Apply &amp;amp; Restart 按钮，Docker 就会重启并应用配置的镜像地址了。</description>
+    </item>
+    
+    <item>
+      <title>修改Alpine镜像源</title>
+      <link>https://www.zengxi.net/posts/2020/04/modify-apine-mirror/</link>
+      <pubDate>Tue, 21 Apr 2020 10:18:24 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2020/04/modify-apine-mirror/</guid>
+      <description>docker使用alpine作为基础可以减少image的大小，但是如果编写的dockerfile中需要安装一些软件，在编译image过程中，可能速度会很慢甚至卡住。
+Alpine 的源文件为/etc/apk/repositories。默认的配置类似：
+1http://dl-cdn.alpinelinux.org/alpine/v3.11/main 2http://dl-cdn.alpinelinux.org/alpine/v3.11/community 这个时候就需要在dockerfile中添加下面的命令，将安装包路径指向国内的镜像。
+1# 使用阿里云的镜像源 2sed -i &amp;#39;s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g&amp;#39; /etc/apk/repositories 国内的其他一些镜像源
+1# 中国科技大学 2sed -i &amp;#39;s/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g&amp;#39; /etc/apk/repositories 3 4# 清华大学 5sed -i &amp;#39;s/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g&amp;#39; /etc/apk/repositories </description>
+    </item>
+    
+  </channel>
+</rss>

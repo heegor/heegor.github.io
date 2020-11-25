@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据迁移 on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/</link>
+    <description>Recent content in 数据迁移 on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Wed, 27 Jun 2018 08:57:29 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用redis-cli与AOF迁移数据</title>
+      <link>https://www.zengxi.net/posts/2018/06/redis-data-migration/</link>
+      <pubDate>Wed, 27 Jun 2018 08:57:29 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2018/06/redis-data-migration/</guid>
+      <description>把一台Redis上的数据，迁移到另外一台Redis服务器上，有很多种方式。其中一个简便的方法是，利用Redis自带的命令行工具redis-cli，实现数据的无缝迁移。
+在旧的Redis服务器上开启AOF 执行下面的命令，检查AOF是否开启。返回yes表示开启，no表示关闭
+1redis-cli -h old_redis_ip -p old_redis_port config get appendonly 如果未开启，执行下面的命令开启AOF
+1redis-cli -h old_redis_ip -p old_redis_port config set appendonly yes 复制AOF文件 默认生成的AOF文件名是appendonly.aof。到Redis数据目录可以看到appendonly.aof文件，复制该文件到新的Redis服务器上。
+如果不知道Redis数据目录或者改过AOF的文件名，可以查看Redis的配置文件中的配置:
+ # The name of the append only file (default: &#34;appendonly.aof&#34;) appendfilename &#34;appendonly.aof&#34; # The working directory. # # The DB will be written inside this directory, with the filename specified # above using the &#39;dbfilename&#39; configuration directive. # # The Append Only File will also be created inside this directory.</description>
+    </item>
+    
+  </channel>
+</rss>

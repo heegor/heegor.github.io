@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/</link>
+    <description>Recent content in Tags on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Sun, 22 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>nginx</title>
+      <link>https://www.zengxi.net/tags/nginx/</link>
+      <pubDate>Sun, 22 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>security</title>
+      <link>https://www.zengxi.net/tags/security/</link>
+      <pubDate>Sun, 22 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/security/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>elastic search</title>
+      <link>https://www.zengxi.net/tags/elastic-search/</link>
+      <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/elastic-search/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>frp</title>
+      <link>https://www.zengxi.net/tags/frp/</link>
+      <pubDate>Sat, 14 Nov 2020 11:45:39 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/frp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kcp</title>
+      <link>https://www.zengxi.net/tags/kcp/</link>
+      <pubDate>Sat, 14 Nov 2020 11:45:39 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/kcp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nas</title>
+      <link>https://www.zengxi.net/tags/nas/</link>
+      <pubDate>Sat, 14 Nov 2020 11:45:39 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/nas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloudflare</title>
+      <link>https://www.zengxi.net/tags/cloudflare/</link>
+      <pubDate>Fri, 13 Nov 2020 08:23:45 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/cloudflare/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssl</title>
+      <link>https://www.zengxi.net/tags/ssl/</link>
+      <pubDate>Fri, 13 Nov 2020 08:23:45 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/ssl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://www.zengxi.net/tags/linux/</link>
+      <pubDate>Mon, 09 Nov 2020 08:23:45 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postgres</title>
+      <link>https://www.zengxi.net/tags/postgres/</link>
+      <pubDate>Tue, 27 Oct 2020 08:23:45 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/postgres/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ubuntu</title>
+      <link>https://www.zengxi.net/tags/ubuntu/</link>
+      <pubDate>Tue, 27 Oct 2020 08:23:45 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nodejs</title>
+      <link>https://www.zengxi.net/tags/nodejs/</link>
+      <pubDate>Tue, 20 Oct 2020 08:23:45 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/nodejs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>manjaro</title>
+      <link>https://www.zengxi.net/tags/manjaro/</link>
+      <pubDate>Thu, 13 Aug 2020 12:23:45 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/manjaro/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gitbook</title>
+      <link>https://www.zengxi.net/tags/gitbook/</link>
+      <pubDate>Sat, 01 Aug 2020 09:21:02 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/gitbook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zookeeper</title>
+      <link>https://www.zengxi.net/tags/zookeeper/</link>
+      <pubDate>Wed, 29 Jul 2020 10:32:19 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/zookeeper/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>terraform</title>
+      <link>https://www.zengxi.net/tags/terraform/</link>
+      <pubDate>Thu, 23 Jul 2020 06:05:31 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/terraform/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>阿里云</title>
+      <link>https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/</link>
+      <pubDate>Thu, 23 Jul 2020 06:05:31 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>grep</title>
+      <link>https://www.zengxi.net/tags/grep/</link>
+      <pubDate>Mon, 20 Jul 2020 11:31:49 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/grep/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shell</title>
+      <link>https://www.zengxi.net/tags/shell/</link>
+      <pubDate>Mon, 20 Jul 2020 11:31:49 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>chrome</title>
+      <link>https://www.zengxi.net/tags/chrome/</link>
+      <pubDate>Wed, 15 Jul 2020 09:21:02 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/chrome/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>证书</title>
+      <link>https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/</link>
+      <pubDate>Wed, 15 Jul 2020 09:21:02 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jetty</title>
+      <link>https://www.zengxi.net/tags/jetty/</link>
+      <pubDate>Tue, 14 Jul 2020 22:03:51 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/jetty/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rsyslog</title>
+      <link>https://www.zengxi.net/tags/rsyslog/</link>
+      <pubDate>Mon, 22 Jun 2020 09:29:31 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/rsyslog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wal-e</title>
+      <link>https://www.zengxi.net/tags/wal-e/</link>
+      <pubDate>Tue, 09 Jun 2020 12:31:50 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/wal-e/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>java</title>
+      <link>https://www.zengxi.net/tags/java/</link>
+      <pubDate>Mon, 01 Jun 2020 13:44:01 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>quartz</title>
+      <link>https://www.zengxi.net/tags/quartz/</link>
+      <pubDate>Sun, 31 May 2020 15:43:31 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/quartz/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>spring</title>
+      <link>https://www.zengxi.net/tags/spring/</link>
+      <pubDate>Sun, 31 May 2020 15:43:31 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/spring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vmware</title>
+      <link>https://www.zengxi.net/tags/vmware/</link>
+      <pubDate>Tue, 26 May 2020 14:23:31 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/vmware/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mac</title>
+      <link>https://www.zengxi.net/tags/mac/</link>
+      <pubDate>Thu, 21 May 2020 10:10:07 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://www.zengxi.net/tags/docker/</link>
+      <pubDate>Wed, 22 Apr 2020 14:43:24 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>alpine</title>
+      <link>https://www.zengxi.net/tags/alpine/</link>
+      <pubDate>Tue, 21 Apr 2020 10:18:24 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/alpine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>session</title>
+      <link>https://www.zengxi.net/tags/session/</link>
+      <pubDate>Sun, 26 Jan 2020 16:21:39 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/session/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>分布式</title>
+      <link>https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</link>
+      <pubDate>Sun, 26 Jan 2020 16:21:39 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wifi</title>
+      <link>https://www.zengxi.net/tags/wifi/</link>
+      <pubDate>Fri, 24 Jan 2020 12:53:21 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/wifi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>declare</title>
+      <link>https://www.zengxi.net/tags/declare/</link>
+      <pubDate>Sun, 19 Jan 2020 16:40:17 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/declare/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>复盘</title>
+      <link>https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/</link>
+      <pubDate>Tue, 10 Dec 2019 23:46:11 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>生产事故</title>
+      <link>https://www.zengxi.net/tags/%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85/</link>
+      <pubDate>Tue, 10 Dec 2019 23:46:11 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pglogical</title>
+      <link>https://www.zengxi.net/tags/pglogical/</link>
+      <pubDate>Fri, 06 Dec 2019 21:48:18 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/pglogical/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>从库</title>
+      <link>https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/</link>
+      <pubDate>Fri, 06 Dec 2019 21:48:18 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>升级</title>
+      <link>https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/</link>
+      <pubDate>Sun, 01 Dec 2019 21:31:18 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>criteria builder</title>
+      <link>https://www.zengxi.net/tags/criteria-builder/</link>
+      <pubDate>Thu, 06 Dec 2018 16:35:24 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/criteria-builder/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hibernate</title>
+      <link>https://www.zengxi.net/tags/hibernate/</link>
+      <pubDate>Thu, 06 Dec 2018 16:35:24 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/hibernate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>excel</title>
+      <link>https://www.zengxi.net/tags/excel/</link>
+      <pubDate>Wed, 05 Dec 2018 17:56:09 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/excel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>轮询</title>
+      <link>https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/</link>
+      <pubDate>Wed, 21 Nov 2018 17:13:06 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cluster</title>
+      <link>https://www.zengxi.net/tags/cluster/</link>
+      <pubDate>Wed, 18 Jul 2018 23:00:47 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/cluster/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>minio</title>
+      <link>https://www.zengxi.net/tags/minio/</link>
+      <pubDate>Wed, 18 Jul 2018 23:00:47 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/minio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>对象存储</title>
+      <link>https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/</link>
+      <pubDate>Wed, 18 Jul 2018 23:00:47 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>集群</title>
+      <link>https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/</link>
+      <pubDate>Wed, 18 Jul 2018 23:00:47 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>date</title>
+      <link>https://www.zengxi.net/tags/date/</link>
+      <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/date/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>locale</title>
+      <link>https://www.zengxi.net/tags/locale/</link>
+      <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/locale/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>unix</title>
+      <link>https://www.zengxi.net/tags/unix/</link>
+      <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/unix/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>命令</title>
+      <link>https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>排序</title>
+      <link>https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Mon, 02 Jul 2018 22:23:07 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>算法</title>
+      <link>https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Mon, 02 Jul 2018 22:23:07 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jconsole</title>
+      <link>https://www.zengxi.net/tags/jconsole/</link>
+      <pubDate>Thu, 28 Jun 2018 09:26:06 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/jconsole/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jmx</title>
+      <link>https://www.zengxi.net/tags/jmx/</link>
+      <pubDate>Thu, 28 Jun 2018 09:26:06 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/jmx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jvisualvm</title>
+      <link>https://www.zengxi.net/tags/jvisualvm/</link>
+      <pubDate>Thu, 28 Jun 2018 09:26:06 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/jvisualvm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssh</title>
+      <link>https://www.zengxi.net/tags/ssh/</link>
+      <pubDate>Thu, 28 Jun 2018 09:26:06 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/ssh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>监控</title>
+      <link>https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/</link>
+      <pubDate>Thu, 28 Jun 2018 09:26:06 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>远程</title>
+      <link>https://www.zengxi.net/tags/%E8%BF%9C%E7%A8%8B/</link>
+      <pubDate>Thu, 28 Jun 2018 09:26:06 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E8%BF%9C%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>migration</title>
+      <link>https://www.zengxi.net/tags/migration/</link>
+      <pubDate>Wed, 27 Jun 2018 08:57:29 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/migration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>redis</title>
+      <link>https://www.zengxi.net/tags/redis/</link>
+      <pubDate>Wed, 27 Jun 2018 08:57:29 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/redis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数据迁移</title>
+      <link>https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/</link>
+      <pubDate>Wed, 27 Jun 2018 08:57:29 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>截屏</title>
+      <link>https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/</link>
+      <pubDate>Mon, 25 Jun 2018 03:34:29 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>schema</title>
+      <link>https://www.zengxi.net/tags/schema/</link>
+      <pubDate>Fri, 15 Jun 2018 10:26:05 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/schema/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>inputstream</title>
+      <link>https://www.zengxi.net/tags/inputstream/</link>
+      <pubDate>Tue, 12 Jun 2018 10:57:35 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/inputstream/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>serialize</title>
+      <link>https://www.zengxi.net/tags/serialize/</link>
+      <pubDate>Tue, 12 Jun 2018 10:57:35 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/serialize/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>序列化</title>
+      <link>https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/</link>
+      <pubDate>Tue, 12 Jun 2018 10:57:35 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

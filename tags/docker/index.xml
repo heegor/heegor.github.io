@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/docker/</link>
+    <description>Recent content in docker on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Wed, 22 Apr 2020 14:43:24 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker Hub国内镜像加速</title>
+      <link>https://www.zengxi.net/posts/2020/04/docker-hub-mirror/</link>
+      <pubDate>Wed, 22 Apr 2020 14:43:24 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2020/04/docker-hub-mirror/</guid>
+      <description>国内访问Docker Hub速度比较感人，这个时候需要配置国内的镜像，来加速下载。由于镜像服务可能出现宕机，建议同时配置多个镜像。
+Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json，写入如下内容
+1{ 2 &amp;#34;registry-mirrors&amp;#34;: [ 3 &amp;#34;https://hub-mirror.c.163.com&amp;#34;, 4 &amp;#34;https://registry.docker-cn.com&amp;#34; 5 ] 6} 重启服务
+1sudo systemctl daemon-reload 2sudo systemctl restart docker Windows 10 在任务栏托盘 Docker 图标内右键菜单选择 Settings，打开配置窗口后在左侧导航菜单选择 Docker Engine，在右侧像下边一样编辑 json 文件，之后点击 Apply &amp;amp; Restart 保存后 Docker 就会重启并应用配置的镜像地址了。
+1{ 2 &amp;#34;registry-mirrors&amp;#34;: [ 3 &amp;#34;https://hub-mirror.c.163.com&amp;#34;, 4 &amp;#34;https://registry.docker-cn.com&amp;#34; 5 ] 6} macOS 在任务栏点击 Docker Desktop 应用图标 -&amp;gt; Perferences，在左侧导航菜单选择 Docker Engine，在右侧像下边一样编辑 json 文件。修改完成之后，点击 Apply &amp;amp; Restart 按钮，Docker 就会重启并应用配置的镜像地址了。</description>
+    </item>
+    
+    <item>
+      <title>修改Alpine镜像源</title>
+      <link>https://www.zengxi.net/posts/2020/04/modify-apine-mirror/</link>
+      <pubDate>Tue, 21 Apr 2020 10:18:24 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2020/04/modify-apine-mirror/</guid>
+      <description>docker使用alpine作为基础可以减少image的大小，但是如果编写的dockerfile中需要安装一些软件，在编译image过程中，可能速度会很慢甚至卡住。
+Alpine 的源文件为/etc/apk/repositories。默认的配置类似：
+1http://dl-cdn.alpinelinux.org/alpine/v3.11/main 2http://dl-cdn.alpinelinux.org/alpine/v3.11/community 这个时候就需要在dockerfile中添加下面的命令，将安装包路径指向国内的镜像。
+1# 使用阿里云的镜像源 2sed -i &amp;#39;s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g&amp;#39; /etc/apk/repositories 国内的其他一些镜像源
+1# 中国科技大学 2sed -i &amp;#39;s/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g&amp;#39; /etc/apk/repositories 3 4# 清华大学 5sed -i &amp;#39;s/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g&amp;#39; /etc/apk/repositories </description>
+    </item>
+    
+    <item>
+      <title>Docker Compose创建minio集群</title>
+      <link>https://www.zengxi.net/posts/2018/07/docker-mino-cluster/</link>
+      <pubDate>Wed, 18 Jul 2018 23:00:47 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2018/07/docker-mino-cluster/</guid>
+      <description>Minio是一个简单易用的轻量级对象存储服务，同时它也支持集群环境。使用Minio的docker镜像可以快速地搭建集群环境。
+下面是docker-compose.yml文件的示例。分布式的Minio服务至少需要4个节点，所以在docker-compose.yml文件中，至少要配置4个服务。每个服务的command配置必须一样，保证集群环境正常运行。
+1version:&amp;#39;3&amp;#39;2services:3minio-node1:4image:minio/minio 5hostname:minio-node1 6ports:7- &amp;#34;29001:9000&amp;#34;8volumes:9- ./node1/data:/data10env_file:./key.env11command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data 12minio-node2:13image:minio/minio14hostname:minio-node215ports:16- &amp;#34;29002:9000&amp;#34;17volumes:18- ./node2/data:/data19env_file:./key.env20command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data21minio-node3:22image:minio/minio23hostname:minio-node324ports:25- &amp;#34;29003:9000&amp;#34;26volumes:27- ./node3/data:/data28env_file:./key.env29command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data30minio-node4:31image:minio/minio32hostname:minio-node433ports:34- &amp;#34;29004:9000&amp;#34;35volumes:36- ./node4/data:/data37env_file:./key.env38command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data上面的配置中env_file指定的加载环境变量文件key.env，这里是为了设置登录minio的用户名密码。下面的key.env示例：
+1MINIO_ACCESS_KEY=testkey 2MINIO_SECRET_KEY=testpassword 通过上述的docker-compose.yml文件，就可以启动一个minio的集群环境。可以做一些测试，通过浏览器访问 http://localhost:29001 ，新建bucket并上传一个文件，然后在 http://localhost:29002 上面也可以正常访问。同时，可以特地停掉或者启用其中一些服务，用来测试minio集群环境的高可用性。
+如果其中某一个节点服务不可用，这就意味着无法向该节点发起请求来操作对象。比如上述的节点1挂掉， 就无法通过浏览器来访问 http://localhost:29001。 从高可用和负载均衡角度来讲，必须通过负载均衡器来转发请求到各个节点，而不是直接访问某个节点的服务。可以在nginx上做个简单的配置来实现。
+下面是nginx配置的示例。配置完重启nginx服务后，就可以使用 http://localhost:29000 来访问和操作对象
+1upstream minio_servers { 2 server 127.0.0.1:29001; 3 server 127.0.0.1:29002; 4 server 127.0.0.1:29003; 5 server 127.0.0.1:29004; 6} 7 8server { 9 listen 29000; 10 server_name localhost; 11 12 location / { 13 proxy_set_header Host $http_host; 14 proxy_pass http://minio_servers; 15 } 16} 17 </description>
+    </item>
+    
+  </channel>
+</rss>

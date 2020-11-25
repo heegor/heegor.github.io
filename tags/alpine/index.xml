@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>alpine on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/alpine/</link>
+    <description>Recent content in alpine on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Tue, 21 Apr 2020 10:18:24 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/alpine/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>修改Alpine镜像源</title>
+      <link>https://www.zengxi.net/posts/2020/04/modify-apine-mirror/</link>
+      <pubDate>Tue, 21 Apr 2020 10:18:24 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2020/04/modify-apine-mirror/</guid>
+      <description>docker使用alpine作为基础可以减少image的大小，但是如果编写的dockerfile中需要安装一些软件，在编译image过程中，可能速度会很慢甚至卡住。
+Alpine 的源文件为/etc/apk/repositories。默认的配置类似：
+1http://dl-cdn.alpinelinux.org/alpine/v3.11/main 2http://dl-cdn.alpinelinux.org/alpine/v3.11/community 这个时候就需要在dockerfile中添加下面的命令，将安装包路径指向国内的镜像。
+1# 使用阿里云的镜像源 2sed -i &amp;#39;s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g&amp;#39; /etc/apk/repositories 国内的其他一些镜像源
+1# 中国科技大学 2sed -i &amp;#39;s/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g&amp;#39; /etc/apk/repositories 3 4# 清华大学 5sed -i &amp;#39;s/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g&amp;#39; /etc/apk/repositories </description>
+    </item>
+    
+  </channel>
+</rss>

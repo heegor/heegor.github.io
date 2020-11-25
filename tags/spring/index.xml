@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>spring on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/spring/</link>
+    <description>Recent content in spring on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Sun, 31 May 2020 15:43:31 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring Quartz 指定Scheduler Name</title>
+      <link>https://www.zengxi.net/posts/2020/05/spring_quartz_customize_scheduler_name/</link>
+      <pubDate>Sun, 31 May 2020 15:43:31 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2020/05/spring_quartz_customize_scheduler_name/</guid>
+      <description>当前项目使用quartz与spring来做基于数据库的集群化任务调度，但是在实际使用过程发现同一个scheduler中，不同group之间任务调度可能会相互跑串。当前项目中使用的 quartz-scheduler 版本 2.3.1， spring 版本 3.2.18.RELEASE。
+举个例子，配置是这样的, 下面示例中隐去不重要的配置
+1&amp;lt;bean id=&amp;#34;my-cluster-scheduler&amp;#34; 2 class=&amp;#34;org.springframework.scheduling.quartz.SchedulerFactoryBean&amp;#34; 3 lazy-init=&amp;#34;false&amp;#34;&amp;gt; 4 ... 5 &amp;lt;property name=&amp;#34;quartzProperties&amp;#34;&amp;gt; 6 &amp;lt;props&amp;gt; 7 &amp;lt;prop key=&amp;#34;org.quartz.jobStore.isClustered&amp;#34;&amp;gt;true&amp;lt;/prop&amp;gt; 8 &amp;lt;prop key=&amp;#34;org.quartz.jobStore.class&amp;#34;&amp;gt;org.quartz.impl.jdbcjobstore.JobStoreCMT&amp;lt;/prop&amp;gt; 9 &amp;lt;/props&amp;gt; 10 ... 11 &amp;lt;/property&amp;gt; 12 &amp;lt;property name=&amp;#34;jobDetails&amp;#34;&amp;gt; 13 &amp;lt;list&amp;gt; 14 &amp;lt;ref bean=&amp;#34;myTestJobDetailBean&amp;#34;/&amp;gt; 15 &amp;lt;/list&amp;gt; 16 &amp;lt;/property&amp;gt; 17 &amp;lt;property name=&amp;#34;triggers&amp;#34;&amp;gt; 18 &amp;lt;list&amp;gt; 19 &amp;lt;ref bean=&amp;#34;myTestJobTrigger&amp;#34;/&amp;gt; 20 &amp;lt;/list&amp;gt; 21 &amp;lt;/property&amp;gt; 22&amp;lt;/bean&amp;gt; 23 24&amp;lt;bean id=&amp;#34;myTestJobTrigger&amp;#34; class=&amp;#34;org.springframework.scheduling.quartz.CronTriggerFactoryBean&amp;#34;&amp;gt; 25 &amp;lt;property name=&amp;#34;jobDetail&amp;#34; ref=&amp;#34;myTestJobDetailBean&amp;#34;/&amp;gt; 26 &amp;lt;property name=&amp;#34;cronExpression&amp;#34; value=&amp;#34;${my.</description>
+    </item>
+    
+  </channel>
+</rss>

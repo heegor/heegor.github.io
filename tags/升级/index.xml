@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>升级 on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/</link>
+    <description>Recent content in 升级 on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Sun, 01 Dec 2019 21:31:18 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Postgres 9.x 升级至 10.x</title>
+      <link>https://www.zengxi.net/posts/2019/12/pg-upgrade-version/</link>
+      <pubDate>Sun, 01 Dec 2019 21:31:18 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2019/12/pg-upgrade-version/</guid>
+      <description>目前主要有两种升级方式，它们分别使用于不同的场景。
+   升级方式 优点 缺点     pglogical逻辑复制升级 停机时间短 需提前准备从库，并搭建replication，在replication期间，需考虑DDL语句带来的影响。   pg_upgrade升级 不需要提前准备replication 升级完成后需检查index是否正常，并执行vacuum analyze，对于数据量较大的库，这可能耗时较长    逻辑复制升级 前提条件 所有表都必须有主键 可以用下面的语句来检查
+1SELECT table_name 2 FROM information_schema.tables 3 WHERE (table_catalog, table_schema, table_name) NOT IN 4 (SELECT table_catalog, table_schema, table_name 5 FROM information_schema.table_constraints 6 WHERE constraint_type = &amp;#39;PRIMARY KEY&amp;#39;) 7 AND table_schema IN (&amp;#39;myschema&amp;#39;) super user无密码访问provider和subscriber 修改配置文件
+1# prodvider 上配置允许 super user 从 subscriber 上访问 replication。 2# 假如 subscriber IP 是 10.</description>
+    </item>
+    
+  </channel>
+</rss>

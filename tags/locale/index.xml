@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>locale on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/locale/</link>
+    <description>Recent content in locale on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Wed, 04 Jul 2018 23:03:18 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/locale/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>date命令按指定locale所对应的日期格式输出</title>
+      <link>https://www.zengxi.net/posts/2018/07/force-date-use-locale/</link>
+      <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
+      
+      <guid>https://www.zengxi.net/posts/2018/07/force-date-use-locale/</guid>
+      <description>在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。
+比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出
+1date +%a 下面是locale为zh_CN的输出：
+ 三  下面是locale为en_US的输出：
+ Wed  如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值
+首先我们可以运行下面的命令来列出当前系统安装了哪些locale。这一步有一定的必要，因为在不同的系统下面，locale名称可能不同。比如，Ubuntu下面叫做zh_CN.utf8，而MacOS下面叫做zh_CN.UTF-8。如果locale名称没用对，那么看到的就不是所期望的结果。
+1locale -a 知道locale的具体名称之后，可以用类似下面的命令来指定locale并按照指定格式输出。
+1LC_ALL=zh_CN.UTF-8 date 2LC_ALL=zh_CN.UTF-8 date +%a 3 4LC_ALL=en_US.UTF-8 date 5LC_ALL=en_US.UTF-8 date +%a 上面的命令分别有如下的输出:
+ 2018年 7月 4日 星期三 20时33分41秒 CST 三 Wed Jul 4 20:33:41 CST 2018 Wed  </description>
+    </item>
+    
+  </channel>
+</rss>
