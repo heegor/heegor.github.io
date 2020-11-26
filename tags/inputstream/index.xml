@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 12 Jun 2018 10:57:35 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/inputstream/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>实现InputStream的序列化</title>
-      <link>https://www.zengxi.net/posts/2018/06/inputstream-serialize/</link>
+      <link>https://www.zengxi.net/2018/06/inputstream-serialize/</link>
       <pubDate>Tue, 12 Jun 2018 10:57:35 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/inputstream-serialize/</guid>
+      <guid>https://www.zengxi.net/2018/06/inputstream-serialize/</guid>
       <description>InputStream本身是不支持序列化的，但是在实际开发的过程中有时会需要将输入流通过socket传输，比如RMI的远程调用。
 在Serializable的Java文档文档中有下面的描述：
  Classes that require special handling during the serialization and deserialization process must implement special methods with these exact signatures:

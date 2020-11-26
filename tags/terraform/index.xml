@@ -9,10 +9,10 @@
     <lastBuildDate>Thu, 23 Jul 2020 06:05:31 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/terraform/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>terraform中阿里云ECS ssh key变化问题</title>
-      <link>https://www.zengxi.net/posts/2020/07/terraform_aliyun_ecs_ssh_key/</link>
+      <link>https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/</link>
       <pubDate>Thu, 23 Jul 2020 06:05:31 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/07/terraform_aliyun_ecs_ssh_key/</guid>
+      <guid>https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/</guid>
       <description>目前的terraform脚本中，在新建阿里云ECS的时候，会通过 user_data 属性值来设定初始的ssh key。但是这个就存在一个隐患，如果将来想要改变初始的ssh key，再用terraform来推机器的时候，terraform发现user_data属性值发生变化，会删除现有的ECS并重建。
 解决的方法是，修改ECS的lifecycle，将user_data添加到忽略列表中。这样terraform就可以忽略掉该属性值的变化。
 1{ 2 resource &amp;#34;alicloud_instance&amp;#34; &amp;#34;test_instance&amp;#34; { 3 ... 4 5 lifecycle { 6 ignore_changes = [&amp;#34;user_data&amp;#34;] 7 } 8 } 9} </description>
@@ -20,10 +20,10 @@
     
     <item>
       <title>解决terraform与远程云服务器资源状态不一致的问题</title>
-      <link>https://www.zengxi.net/posts/2020/07/terraform_state_consistent/</link>
+      <link>https://www.zengxi.net/2020/07/terraform_state_consistent/</link>
       <pubDate>Wed, 22 Jul 2020 14:37:54 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/07/terraform_state_consistent/</guid>
+      <guid>https://www.zengxi.net/2020/07/terraform_state_consistent/</guid>
       <description>概述 在运维过程中遇到了下面的情况：长期使用terraform管理资源，但是通过terraform以外的工具对云资源做过属性变更（比如通过网页上的控制台对云资源做属性变更）。此时，云资源的属性与terraform state的信息已经不一致，跑terraform plan就会发现，它会删除现有的，然后重建一个。但是这个是我们不希望看到的，我们希望可以保留原有实例并且把本地的terraform state更新成最新的属性。
 解决方案 要想解决这个问题，可以利用 terraform import 命令。也就是重新导入云资源的实例，然后同步成最新的信息。
 下面以阿里云ECS为例子。

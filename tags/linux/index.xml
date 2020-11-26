@@ -9,19 +9,19 @@
     <lastBuildDate>Mon, 09 Nov 2020 08:23:45 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux查看某个端口是否被占用</title>
-      <link>https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/</link>
+      <link>https://www.zengxi.net/2020/11/ubuntu_install_postgresql/</link>
       <pubDate>Mon, 09 Nov 2020 08:23:45 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/</guid>
+      <guid>https://www.zengxi.net/2020/11/ubuntu_install_postgresql/</guid>
       <description> 使用lsof  1lsof -i 2 3lsof -i:80 使用netstat  1netstat -anp | grep 80 </description>
     </item>
     
     <item>
       <title>Linux下面使用dd命令烧录U盘并查看执行进度</title>
-      <link>https://www.zengxi.net/posts/2020/07/linux_dd_cmd_write_usb_disk/</link>
+      <link>https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/</link>
       <pubDate>Mon, 13 Jul 2020 10:36:12 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/07/linux_dd_cmd_write_usb_disk/</guid>
+      <guid>https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/</guid>
       <description>烧录U盘 先用fdisk来查看U盘的盘符
 1sudo fdisk -l 再用dd命令来写数据到U盘
 1sudo dd if=/home/paul/Downloads/test.iso of=/dev/sdc bs=1M count=10000 查看执行进度 假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命令行窗口，执行下面的命令，注意命令上面可能需要加上sudo
@@ -36,10 +36,10 @@
     
     <item>
       <title>shell中用tr命令转换字符大小写</title>
-      <link>https://www.zengxi.net/posts/2018/07/shell-translate-character/</link>
+      <link>https://www.zengxi.net/2018/07/shell-translate-character/</link>
       <pubDate>Wed, 25 Jul 2018 21:40:22 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/07/shell-translate-character/</guid>
+      <guid>https://www.zengxi.net/2018/07/shell-translate-character/</guid>
       <description>在写shell脚本的时候，可能需要将特定的英文字符转换大小写。可以借助tr命令来实现这个功能。
 （1）tr的下面这个命令表示把string1替换成string2
  tr string1 string2  运行下面的命令
@@ -55,10 +55,10 @@
     
     <item>
       <title>date命令按指定locale所对应的日期格式输出</title>
-      <link>https://www.zengxi.net/posts/2018/07/force-date-use-locale/</link>
+      <link>https://www.zengxi.net/2018/07/force-date-use-locale/</link>
       <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/07/force-date-use-locale/</guid>
+      <guid>https://www.zengxi.net/2018/07/force-date-use-locale/</guid>
       <description>在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。
 比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出
 1date +%a 下面是locale为zh_CN的输出：
@@ -72,10 +72,10 @@
     
     <item>
       <title>如何控制grep命令显示在相关文本前后的行数</title>
-      <link>https://www.zengxi.net/posts/2018/06/grep-cmd-display-lines/</link>
+      <link>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</link>
       <pubDate>Tue, 19 Jun 2018 23:03:44 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/grep-cmd-display-lines/</guid>
+      <guid>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</guid>
       <description>在Linux/Unix系统中使用grep命令的时候，有时候我们想要把匹配文本的前后几行的信息也同时显示出来。这可以通过设置一些参数来达到目的。
 grep的帮助文档中有这几个参数：
  -A num, --after-context=num Print num lines of trailing context after each match.

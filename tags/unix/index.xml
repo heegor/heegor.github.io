@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 04 Jul 2018 23:03:18 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/unix/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>date命令按指定locale所对应的日期格式输出</title>
-      <link>https://www.zengxi.net/posts/2018/07/force-date-use-locale/</link>
+      <link>https://www.zengxi.net/2018/07/force-date-use-locale/</link>
       <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/07/force-date-use-locale/</guid>
+      <guid>https://www.zengxi.net/2018/07/force-date-use-locale/</guid>
       <description>在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。
 比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出
 1date +%a 下面是locale为zh_CN的输出：
@@ -26,10 +26,10 @@
     
     <item>
       <title>如何控制grep命令显示在相关文本前后的行数</title>
-      <link>https://www.zengxi.net/posts/2018/06/grep-cmd-display-lines/</link>
+      <link>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</link>
       <pubDate>Tue, 19 Jun 2018 23:03:44 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/grep-cmd-display-lines/</guid>
+      <guid>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</guid>
       <description>在Linux/Unix系统中使用grep命令的时候，有时候我们想要把匹配文本的前后几行的信息也同时显示出来。这可以通过设置一些参数来达到目的。
 grep的帮助文档中有这几个参数：
  -A num, --after-context=num Print num lines of trailing context after each match.

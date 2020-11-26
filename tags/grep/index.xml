@@ -9,10 +9,10 @@
     <lastBuildDate>Mon, 20 Jul 2020 11:31:49 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/grep/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>grep 返回 Binary file (standard input) matches</title>
-      <link>https://www.zengxi.net/posts/2020/07/grep_binary_file_match/</link>
+      <link>https://www.zengxi.net/2020/07/grep_binary_file_match/</link>
       <pubDate>Mon, 20 Jul 2020 11:31:49 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/07/grep_binary_file_match/</guid>
+      <guid>https://www.zengxi.net/2020/07/grep_binary_file_match/</guid>
       <description>grep &amp;quot;keyword&amp;quot; xxx.log时输出: Binary file (standard input) matches
 这个是因为grep命令认为它是一个二进制文件。解决方案是，加上一个参数 -a：
 1grep -a &amp;#34;keyword&amp;#34; xxx.log 该参数的解释：
@@ -21,10 +21,10 @@
     
     <item>
       <title>如何控制grep命令显示在相关文本前后的行数</title>
-      <link>https://www.zengxi.net/posts/2018/06/grep-cmd-display-lines/</link>
+      <link>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</link>
       <pubDate>Tue, 19 Jun 2018 23:03:44 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/grep-cmd-display-lines/</guid>
+      <guid>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</guid>
       <description>在Linux/Unix系统中使用grep命令的时候，有时候我们想要把匹配文本的前后几行的信息也同时显示出来。这可以通过设置一些参数来达到目的。
 grep的帮助文档中有这几个参数：
  -A num, --after-context=num Print num lines of trailing context after each match.

@@ -9,10 +9,10 @@
     <lastBuildDate>Fri, 24 Jan 2020 12:53:21 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/wifi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mac 检查附近wifi所使用的信道</title>
-      <link>https://www.zengxi.net/posts/2020/01/mac-check-nearby-wifi-channel/</link>
+      <link>https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/</link>
       <pubDate>Fri, 24 Jan 2020 12:53:21 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/01/mac-check-nearby-wifi-channel/</guid>
+      <guid>https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/</guid>
       <description>信道，也称作通道或频段，是以无线信号作为传输载体的数据信号传送通道。2.4G频段的工作频率为2.4-2.4835GHz，这83.5MHz频带划分为13个信道，各信道中心频率相差5MHz，向上向下分别扩展11MHz，信道带宽22MHz。中国采用欧洲/ETSI标准，使用1-13信道。
 相近无线路由器采用相同或重叠信道会形成信道竞争关系，相互影响无线链路质量，为了有效避免信道重叠造成的相互干扰，相近无线路由器应选择互不重叠的信道工作。
 早期无线路由器出厂时预设相同的信道（大多为6），因用户很少会修改信道，从而导致相互影响的情况。随着无线应用的迅速普及，无线路由器增加了信道自动选择功能，在设备启动时检测周围无线信道分布情况，选择最佳信道工作。

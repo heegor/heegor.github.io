@@ -9,10 +9,10 @@
     <lastBuildDate>Mon, 20 Jul 2020 11:31:49 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/shell/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>grep 返回 Binary file (standard input) matches</title>
-      <link>https://www.zengxi.net/posts/2020/07/grep_binary_file_match/</link>
+      <link>https://www.zengxi.net/2020/07/grep_binary_file_match/</link>
       <pubDate>Mon, 20 Jul 2020 11:31:49 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/07/grep_binary_file_match/</guid>
+      <guid>https://www.zengxi.net/2020/07/grep_binary_file_match/</guid>
       <description>grep &amp;quot;keyword&amp;quot; xxx.log时输出: Binary file (standard input) matches
 这个是因为grep命令认为它是一个二进制文件。解决方案是，加上一个参数 -a：
 1grep -a &amp;#34;keyword&amp;#34; xxx.log 该参数的解释：
@@ -21,10 +21,10 @@
     
     <item>
       <title>Mac下shell命令支持map</title>
-      <link>https://www.zengxi.net/posts/2020/01/mac-shell-support-map/</link>
+      <link>https://www.zengxi.net/2020/01/mac-shell-support-map/</link>
       <pubDate>Sun, 19 Jan 2020 16:40:17 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/01/mac-shell-support-map/</guid>
+      <guid>https://www.zengxi.net/2020/01/mac-shell-support-map/</guid>
       <description>Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：
 1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持，需要升级至4.x以上的版本
 1# 安装最新版本的bash 2brew install bash 3 4# 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash 5# 需要把新版本的shell添加至信任列表中 6sudo bash -c &amp;#39;echo /usr/local/bin/bash &amp;gt;&amp;gt; /etc/shells&amp;#39; 7 8# 如果需要的话，修改默认shell为新版本的bash 9chsh -s /usr/local/bin/bash 需要注意的是，升级完之后，如果shell脚本需要用新版本的bash来执行，必须在相关的shell脚本开头的部分，将 #!/bin/bash 替换成 #!/usr/local/bin/bash， 否则还是用旧版本的bash来执行。
@@ -35,10 +35,10 @@
     
     <item>
       <title>shell中用tr命令转换字符大小写</title>
-      <link>https://www.zengxi.net/posts/2018/07/shell-translate-character/</link>
+      <link>https://www.zengxi.net/2018/07/shell-translate-character/</link>
       <pubDate>Wed, 25 Jul 2018 21:40:22 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/07/shell-translate-character/</guid>
+      <guid>https://www.zengxi.net/2018/07/shell-translate-character/</guid>
       <description>在写shell脚本的时候，可能需要将特定的英文字符转换大小写。可以借助tr命令来实现这个功能。
 （1）tr的下面这个命令表示把string1替换成string2
  tr string1 string2  运行下面的命令
@@ -54,10 +54,10 @@
     
     <item>
       <title>date命令按指定locale所对应的日期格式输出</title>
-      <link>https://www.zengxi.net/posts/2018/07/force-date-use-locale/</link>
+      <link>https://www.zengxi.net/2018/07/force-date-use-locale/</link>
       <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/07/force-date-use-locale/</guid>
+      <guid>https://www.zengxi.net/2018/07/force-date-use-locale/</guid>
       <description>在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。
 比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出
 1date +%a 下面是locale为zh_CN的输出：

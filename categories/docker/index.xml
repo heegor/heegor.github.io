@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 22 Apr 2020 14:43:24 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/categories/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker Hub国内镜像加速</title>
-      <link>https://www.zengxi.net/posts/2020/04/docker-hub-mirror/</link>
+      <link>https://www.zengxi.net/2020/04/docker-hub-mirror/</link>
       <pubDate>Wed, 22 Apr 2020 14:43:24 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/04/docker-hub-mirror/</guid>
+      <guid>https://www.zengxi.net/2020/04/docker-hub-mirror/</guid>
       <description>国内访问Docker Hub速度比较感人，这个时候需要配置国内的镜像，来加速下载。由于镜像服务可能出现宕机，建议同时配置多个镜像。
 Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json，写入如下内容
 1{ 2 &amp;#34;registry-mirrors&amp;#34;: [ 3 &amp;#34;https://hub-mirror.c.163.com&amp;#34;, 4 &amp;#34;https://registry.docker-cn.com&amp;#34; 5 ] 6} 重启服务
@@ -22,10 +22,10 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
     
     <item>
       <title>修改Alpine镜像源</title>
-      <link>https://www.zengxi.net/posts/2020/04/modify-apine-mirror/</link>
+      <link>https://www.zengxi.net/2020/04/modify-apine-mirror/</link>
       <pubDate>Tue, 21 Apr 2020 10:18:24 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/04/modify-apine-mirror/</guid>
+      <guid>https://www.zengxi.net/2020/04/modify-apine-mirror/</guid>
       <description>docker使用alpine作为基础可以减少image的大小，但是如果编写的dockerfile中需要安装一些软件，在编译image过程中，可能速度会很慢甚至卡住。
 Alpine 的源文件为/etc/apk/repositories。默认的配置类似：
 1http://dl-cdn.alpinelinux.org/alpine/v3.11/main 2http://dl-cdn.alpinelinux.org/alpine/v3.11/community 这个时候就需要在dockerfile中添加下面的命令，将安装包路径指向国内的镜像。

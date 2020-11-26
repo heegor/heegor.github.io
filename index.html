@@ -130,7 +130,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/11/nginx_security/">Nginx服务器安全加固</a>
+        <a href="https://www.zengxi.net/2020/11/nginx_security/">Nginx服务器安全加固</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -149,7 +149,7 @@
         <div>
           <p class="pale">基础知识 常用配置 顶部配置
 1#定义 Nginx 运行的用户和用户组 2user nginx; 3 4#进程文件 5pid /var/run/nginx.pid; 6 7#错误日志位置和级别，debug、info、notice、warn、error、crit 8error_log /var/log/nginx/error.log warn; 9 10#Nginx worker 的进程数，一般可设置为可用的CPU内核数。 11worker_processes 8; 12 13#每个 worker 打开文件描述符的最大数量限制。理论值应该是最多打开文件数（系统的值ulimit -n） 14#与 nginx 进程数相除，但是 nginx …</p>
-          <a href="https://www.zengxi.net/posts/2020/11/nginx_security/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/11/nginx_security/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -159,7 +159,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/11/es_max_map_count_error/">Elastic Search vm.max_map_count too low 错误</a>
+        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/">Elastic Search vm.max_map_count too low 错误</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -180,7 +180,7 @@
 永久生效  编辑/etc/sysctl.conf, 添加或者修改下面参数：
 1vm.max_map_count=262144 重启系统，或者执行下面命令加载参数：
 1sysctl --system </p>
-          <a href="https://www.zengxi.net/posts/2020/11/es_max_map_count_error/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -190,7 +190,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/11/nas_frp_nginx/">利用frp与nginx实现公网访问NAS</a>
+        <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/">利用frp与nginx实现公网访问NAS</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -215,7 +215,7 @@
 如果拥有一个有公网IP的VPS，可以通过 frp + Nginx 来实现内网穿透解决这个问题。另外，从安全角度考虑，如果有可能的话，整个链路上面的都使用 https 协议通讯更加安全。
 下面大致描绘了访问的链路图：
  浏览器通过https协议与 VPS 通讯。浏览器的请求先发到nginx上，ngnix再将请求转发的至frps。在frps前面加上nginx做反向代理的好处是，如果这个VPS上面有其他请求转发的需求（比如这个VPS部署了个人网站或者博客），那在访问所有这些服务的时候，都可 …</p>
-          <a href="https://www.zengxi.net/posts/2020/11/nas_frp_nginx/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -225,7 +225,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
+        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -244,7 +244,7 @@
         <div>
           <p class="pale">笔者使用Cloudflare做DNS，同时使用Cloudflare的SSL证书服务。整个链路如下图:
 1|----------| |-----------| |---------------| 2| Brower | ------&gt; | Cloudfare | ------&gt; | Origin Server | 3|----------| |-----------| |---------------| 4 笔者想要做整个链路的https，但是在配置完之后，打开页面是看到522的错误。这个错误表示连接上源站点，但是请求超时。可以参考这个页面来找到可能的原因： …</p>
-          <a href="https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -254,7 +254,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/">Linux查看某个端口是否被占用</a>
+        <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/">Linux查看某个端口是否被占用</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -270,7 +270,7 @@
       <div class="excerpt_footer">
         <div>
           <p class="pale"> 使用lsof  1lsof -i 2 3lsof -i:80 使用netstat  1netstat -anp | grep 80 </p>
-          <a href="https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -280,7 +280,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/10/ubuntu_install_postgresql/">Ubuntu安装Postgres</a>
+        <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/">Ubuntu安装Postgres</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -299,7 +299,7 @@
         <div>
           <p class="pale">ubuntu自带的软件仓库可能没有最新的postgres，这就需要自己手动添加安装源，再安装
 1# 添加安装源 2sudo sh -c &#39;echo &#34;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&#34; &gt; /etc/apt/sources.list.d/pgdg.list&#39; 3 4# 导入key 5wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - 6 7# …</p>
-          <a href="https://www.zengxi.net/posts/2020/10/ubuntu_install_postgresql/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -309,7 +309,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/10/nodejs_switch_version/">利用n来切换Nodejs版本</a>
+        <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/">利用n来切换Nodejs版本</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -329,7 +329,7 @@
 需要切换版本时，执行下面的命令。然后用键盘上面的上下方向键即可切换
 1sudo n 切换完后，执行下面命令来验证当前版本号
 1node -v </p>
-          <a href="https://www.zengxi.net/posts/2020/10/nodejs_switch_version/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -339,7 +339,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/09/postgres_startup_readonly_file_error/">Postgres启动时遇到只读文件系统的错误</a>
+        <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/">Postgres启动时遇到只读文件系统的错误</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -356,7 +356,7 @@
         <div>
           <p class="pale">问题与解决方法 公司内部私有云由于断电，机器没有正常关机，结果导致 Postgres 服务器启动时，报错
 12020-09-09 07:22:15.296 UTC [3876] FATAL: could not remove old lock file &#34;postmaster.pid&#34;: Read-only file system 22020-09-09 07:22:15.296 UTC [3876] HINT: The file seems accidentally left over, but it could not be removed. Please remove the file by hand and …</p>
-          <a href="https://www.zengxi.net/posts/2020/09/postgres_startup_readonly_file_error/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -366,7 +366,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/08/manjaro_debtap/">Manjaro安装deb包</a>
+        <a href="https://www.zengxi.net/2020/08/manjaro_debtap/">Manjaro安装deb包</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -385,7 +385,7 @@
 1yay -S debtap 替换源，解决国内debtap同步仓库执行超慢的问题。打开 /usr/bin/debtap，更换 debtap 内容：
  将 http://ftp.debian.org/debian/dists 替换成 https://mirrors.ustc.edu.cn/debian/dists 将 http://archive.ubuntu.com/ubuntu/dists 替换成 https://mirrors.ustc.edu.cn/ubuntu/dists  升级debtap数据库
 1sudo debtap -u 转换deb包。注意： 转换过程中会提示输入包名，以及license。包名随 …</p>
-          <a href="https://www.zengxi.net/posts/2020/08/manjaro_debtap/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/08/manjaro_debtap/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -395,7 +395,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/08/linux_auto_set_brightness/">Manjaro笔记本启动时自动设置屏幕亮度</a>
+        <a href="https://www.zengxi.net/2020/08/linux_auto_set_brightness/">Manjaro笔记本启动时自动设置屏幕亮度</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -414,7 +414,7 @@
 1. 创建一个启动service脚本 执行下面的命令
 1sudo vim /etc/systemd/system/rc-local.service 输入下面的内容
 1[Unit] 2Description=&#34;/etc/rc.local Compatibility&#34; 3 4[Service] 5Type=oneshot 6ExecStart=/etc/rc.local start 7TimeoutSec=0 8StandardInput=tty 9RemainAfterExit=yes …</p>
-          <a href="https://www.zengxi.net/posts/2020/08/linux_auto_set_brightness/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/08/linux_auto_set_brightness/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -464,28 +464,28 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
+        <a href="https://www.zengxi.net/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
+        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
+        <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
+        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
+        <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
+        <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
+        <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
+        <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
       </li>
     </ul>
     <div>

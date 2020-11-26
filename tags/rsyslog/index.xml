@@ -9,10 +9,10 @@
     <lastBuildDate>Mon, 22 Jun 2020 09:29:31 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/rsyslog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>rsyslog内存占用高导致服务不可用</title>
-      <link>https://www.zengxi.net/posts/2020/06/rsyslog_high_memory_usage/</link>
+      <link>https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/</link>
       <pubDate>Mon, 22 Jun 2020 09:29:31 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/06/rsyslog_high_memory_usage/</guid>
+      <guid>https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/</guid>
       <description>这几天生产环境中某个服务内存不时地被撑爆，原先以为是应用的问题，但是近来没有上过新的代码。该服务的总内存是8G，启动参数关于内存的配置大致是：-Xmx=6.4G，-Xms=4G 左右。看了Grafana上面的监控记录，JVM 老年代使用最多也就到4G左右，在GC的日志中发现也仅仅用到4G左右，并没有到达最高的内存值。这两个结果可以看出来，应该不是应用程序导致内存占用过大。
 后来用top命令看了一下，发现rsyslog进程使用了将近40%的内存。再查一下日志文件，发现一些日志文件大小都达到2G以上。
 rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程，不应该占用那么内存，即使它同步延迟较大甚至不工作，也不应该影响到应用程序的正常运行。那么，我们可以通过限制它的内存使用率来解决这个问题。

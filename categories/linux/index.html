@@ -125,7 +125,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/11/nas_frp_nginx/">利用frp与nginx实现公网访问NAS</a>
+        <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/">利用frp与nginx实现公网访问NAS</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -150,7 +150,7 @@
 如果拥有一个有公网IP的VPS，可以通过 frp + Nginx 来实现内网穿透解决这个问题。另外，从安全角度考虑，如果有可能的话，整个链路上面的都使用 https 协议通讯更加安全。
 下面大致描绘了访问的链路图：
  浏览器通过https协议与 VPS 通讯。浏览器的请求先发到nginx上，ngnix再将请求转发的至frps。在frps前面加上nginx做反向代理的好处是，如果这个VPS上面有其他请求转发的需求（比如这个VPS部署了个人网站或者博客），那在访问所有这些服务的时候，都可 …</p>
-          <a href="https://www.zengxi.net/posts/2020/11/nas_frp_nginx/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -160,7 +160,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
+        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -179,7 +179,7 @@
         <div>
           <p class="pale">笔者使用Cloudflare做DNS，同时使用Cloudflare的SSL证书服务。整个链路如下图:
 1|----------| |-----------| |---------------| 2| Brower | ------&gt; | Cloudfare | ------&gt; | Origin Server | 3|----------| |-----------| |---------------| 4 笔者想要做整个链路的https，但是在配置完之后，打开页面是看到522的错误。这个错误表示连接上源站点，但是请求超时。可以参考这个页面来找到可能的原因： …</p>
-          <a href="https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -189,7 +189,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/">Linux查看某个端口是否被占用</a>
+        <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/">Linux查看某个端口是否被占用</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -205,7 +205,7 @@
       <div class="excerpt_footer">
         <div>
           <p class="pale"> 使用lsof  1lsof -i 2 3lsof -i:80 使用netstat  1netstat -anp | grep 80 </p>
-          <a href="https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -215,7 +215,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/07/grep_binary_file_match/">grep 返回 Binary file (standard input) matches</a>
+        <a href="https://www.zengxi.net/2020/07/grep_binary_file_match/">grep 返回 Binary file (standard input) matches</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -236,7 +236,7 @@
 这个是因为grep命令认为它是一个二进制文件。解决方案是，加上一个参数 -a：
 1grep -a &#34;keyword&#34; xxx.log 该参数的解释：
 1-a, --text equivalent to --binary-files=text </p>
-          <a href="https://www.zengxi.net/posts/2020/07/grep_binary_file_match/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/07/grep_binary_file_match/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -246,7 +246,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/07/linux_dd_cmd_write_usb_disk/">Linux下面使用dd命令烧录U盘并查看执行进度</a>
+        <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/">Linux下面使用dd命令烧录U盘并查看执行进度</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -269,7 +269,7 @@
 1watch -n 5 killall -USR1 dd 方法三：
 1while killall -USR1 dd; do sleep 5; done 方法四：
 1while (ps …</p>
-          <a href="https://www.zengxi.net/posts/2020/07/linux_dd_cmd_write_usb_disk/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -279,7 +279,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2018/07/shell-translate-character/">shell中用tr命令转换字符大小写</a>
+        <a href="https://www.zengxi.net/2018/07/shell-translate-character/">shell中用tr命令转换字符大小写</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -303,7 +303,7 @@
  this is A pen  （2）同时，tr命令也支持指定一个字符的范围，在这个范围内分别作替换
  tr 'c1-c2' 'c3-c4'  比如，如果只需要把从a到h的字符，替换成大写，那么可以用下面的命令
 1tr &#39;a-h&#39; …</p>
-          <a href="https://www.zengxi.net/posts/2018/07/shell-translate-character/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2018/07/shell-translate-character/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -313,7 +313,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2018/07/force-date-use-locale/">date命令按指定locale所对应的日期格式输出</a>
+        <a href="https://www.zengxi.net/2018/07/force-date-use-locale/">date命令按指定locale所对应的日期格式输出</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -344,7 +344,7 @@
  三  下面是locale为en_US的输出：
  Wed  如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值
 首先我们可以运行 …</p>
-          <a href="https://www.zengxi.net/posts/2018/07/force-date-use-locale/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2018/07/force-date-use-locale/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -354,7 +354,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2018/06/ubuntu-screenshot-shortcut/">Ubuntu 16.04系统自带截屏工具快捷键</a>
+        <a href="https://www.zengxi.net/2018/06/ubuntu-screenshot-shortcut/">Ubuntu 16.04系统自带截屏工具快捷键</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -373,7 +373,7 @@
         <div>
           <p class="pale">Ubuntu 16.04系统自带了截屏工具，可以实现窗口截屏、区域截屏等。默认的快捷键是：
 1 Print 全屏截图 2 Ctrl + Print 全屏截图并保存到剪贴板 3 4 Alt + Print 窗口截图 5 Ctrl + Alt + Print 窗口截图并保存到剪贴板 6 7 Shift + Print 区域截图 8 Ctrl + Shift + Print 区域截图并保存到剪贴板 9 10 Ctrl + Shift + Alt + R 录制屏幕短视频 </p>
-          <a href="https://www.zengxi.net/posts/2018/06/ubuntu-screenshot-shortcut/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2018/06/ubuntu-screenshot-shortcut/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -383,7 +383,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2018/06/grep-cmd-display-lines/">如何控制grep命令显示在相关文本前后的行数</a>
+        <a href="https://www.zengxi.net/2018/06/grep-cmd-display-lines/">如何控制grep命令显示在相关文本前后的行数</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -409,7 +409,7 @@ grep的帮助文档中有这几个参数：
  -A num, --after-context=num Print num lines of trailing context after each match.
 -B num, --before-context=num Print num lines of leading context before each match.
 -C num, --context=num Print num lines of leading and trailing …</p>
-          <a href="https://www.zengxi.net/posts/2018/06/grep-cmd-display-lines/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2018/06/grep-cmd-display-lines/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -430,28 +430,28 @@ grep的帮助文档中有这几个参数：
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
+        <a href="https://www.zengxi.net/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
+        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
+        <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
+        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
+        <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
+        <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
+        <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
+        <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
       </li>
     </ul>
     <div>

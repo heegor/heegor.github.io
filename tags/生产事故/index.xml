@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 10 Dec 2019 23:46:11 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>复盘 - 手机app上一行代码导致的生产事故</title>
-      <link>https://www.zengxi.net/posts/2019/12/incident-caused-by-app/</link>
+      <link>https://www.zengxi.net/2019/12/incident-caused-by-app/</link>
       <pubDate>Tue, 10 Dec 2019 23:46:11 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2019/12/incident-caused-by-app/</guid>
+      <guid>https://www.zengxi.net/2019/12/incident-caused-by-app/</guid>
       <description>过程 由于一些历史原因，以及与原先代码的兼容性，临时文件存储在minio中。
 某天，生产环境突发事故，minio集群的CPU与内存爆了，只能重启集群。过了十来分钟，很多服务都不可用，健康检查都不通过。日志中的错误信息显示，这些服务都是数据库拿不到连接。需要事先处理数据库连接的问题，于是连接到数据库查死锁，终止导致死锁的sql进程，再重启来恢复这些服务。
 由于前不久minio集群挂掉，很容易就想到是由于minio的原因。其他服务通过RPC调用一个文件存储服务来操作minio中的数据，当minio集群挂掉的时候，文件存储服务访问minio一直想访问minio直到超时。在这个期间，其他服务如果有事务调用文件存储服务来操作minio中文件，那么这个事务就不会被提交，一会占着数据库连接。

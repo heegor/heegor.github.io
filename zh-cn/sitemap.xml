@@ -43,7 +43,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/11/nginx_security/</loc>
+    <loc>https://www.zengxi.net/2020/11/nginx_security/</loc>
     <lastmod>2020-11-22T00:00:00+00:00</lastmod>
   </url>
   
@@ -83,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/11/es_max_map_count_error/</loc>
+    <loc>https://www.zengxi.net/2020/11/es_max_map_count_error/</loc>
     <lastmod>2020-11-19T00:00:00+00:00</lastmod>
   </url>
   
@@ -108,7 +108,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/11/nas_frp_nginx/</loc>
+    <loc>https://www.zengxi.net/2020/11/nas_frp_nginx/</loc>
     <lastmod>2020-11-14T11:45:39+00:00</lastmod>
   </url>
   
@@ -118,7 +118,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/</loc>
+    <loc>https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/</loc>
     <lastmod>2020-11-13T08:23:45+00:00</lastmod>
   </url>
   
@@ -133,7 +133,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/</loc>
+    <loc>https://www.zengxi.net/2020/11/ubuntu_install_postgresql/</loc>
     <lastmod>2020-11-09T08:23:45+00:00</lastmod>
   </url>
   
@@ -153,7 +153,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/10/ubuntu_install_postgresql/</loc>
+    <loc>https://www.zengxi.net/2020/10/ubuntu_install_postgresql/</loc>
     <lastmod>2020-10-27T08:23:45+00:00</lastmod>
   </url>
   
@@ -168,7 +168,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/10/nodejs_switch_version/</loc>
+    <loc>https://www.zengxi.net/2020/10/nodejs_switch_version/</loc>
     <lastmod>2020-10-20T08:23:45+00:00</lastmod>
   </url>
   
@@ -178,7 +178,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/09/postgres_startup_readonly_file_error/</loc>
+    <loc>https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/</loc>
     <lastmod>2020-09-20T20:23:45+00:00</lastmod>
   </url>
   
@@ -193,12 +193,12 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/08/manjaro_debtap/</loc>
+    <loc>https://www.zengxi.net/2020/08/manjaro_debtap/</loc>
     <lastmod>2020-08-13T12:23:45+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/08/linux_auto_set_brightness/</loc>
+    <loc>https://www.zengxi.net/2020/08/linux_auto_set_brightness/</loc>
     <lastmod>2020-08-10T10:33:42+00:00</lastmod>
   </url>
   
@@ -208,7 +208,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/08/gitbook_installation_error/</loc>
+    <loc>https://www.zengxi.net/2020/08/gitbook_installation_error/</loc>
     <lastmod>2020-08-01T09:21:02+00:00</lastmod>
   </url>
   
@@ -223,12 +223,12 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/07/zookeeper_purge_file/</loc>
+    <loc>https://www.zengxi.net/2020/07/zookeeper_purge_file/</loc>
     <lastmod>2020-07-29T10:32:19+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/07/check_zookeeper_version/</loc>
+    <loc>https://www.zengxi.net/2020/07/check_zookeeper_version/</loc>
     <lastmod>2020-07-28T13:22:06+00:00</lastmod>
   </url>
   
@@ -243,7 +243,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/07/terraform_aliyun_ecs_ssh_key/</loc>
+    <loc>https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/</loc>
     <lastmod>2020-07-23T06:05:31+00:00</lastmod>
   </url>
   
@@ -253,7 +253,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/07/terraform_state_consistent/</loc>
+    <loc>https://www.zengxi.net/2020/07/terraform_state_consistent/</loc>
     <lastmod>2020-07-22T14:37:54+00:00</lastmod>
   </url>
   
@@ -263,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/07/grep_binary_file_match/</loc>
+    <loc>https://www.zengxi.net/2020/07/grep_binary_file_match/</loc>
     <lastmod>2020-07-20T11:31:49+00:00</lastmod>
   </url>
   
@@ -283,7 +283,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/07/clear_chrome_https_cert_cache/</loc>
+    <loc>https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/</loc>
     <lastmod>2020-07-15T09:21:02+00:00</lastmod>
   </url>
   
@@ -298,7 +298,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/07/jetty_tmp_dir/</loc>
+    <loc>https://www.zengxi.net/2020/07/jetty_tmp_dir/</loc>
     <lastmod>2020-07-14T22:03:51+00:00</lastmod>
   </url>
   
@@ -308,7 +308,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/07/linux_dd_cmd_write_usb_disk/</loc>
+    <loc>https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/</loc>
     <lastmod>2020-07-13T10:36:12+00:00</lastmod>
   </url>
   
@@ -318,17 +318,17 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/06/rsyslog_high_memory_usage/</loc>
+    <loc>https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/</loc>
     <lastmod>2020-06-22T09:29:31+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/06/pg_check_table_size/</loc>
+    <loc>https://www.zengxi.net/2020/06/pg_check_table_size/</loc>
     <lastmod>2020-06-15T10:35:08+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/06/pg_wale_continuous_archiving/</loc>
+    <loc>https://www.zengxi.net/2020/06/pg_wale_continuous_archiving/</loc>
     <lastmod>2020-06-09T12:31:50+00:00</lastmod>
   </url>
   
@@ -343,7 +343,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/06/string_adapter/</loc>
+    <loc>https://www.zengxi.net/2020/06/string_adapter/</loc>
     <lastmod>2020-06-01T13:44:01+00:00</lastmod>
   </url>
   
@@ -358,12 +358,12 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/05/spring_quartz_customize_scheduler_name/</loc>
+    <loc>https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/</loc>
     <lastmod>2020-05-31T15:43:31+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/05/manjaro_install_vmware/</loc>
+    <loc>https://www.zengxi.net/2020/05/manjaro_install_vmware/</loc>
     <lastmod>2020-05-26T14:23:31+00:00</lastmod>
   </url>
   
@@ -373,7 +373,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/05/manjaro_chrome_default_browser/</loc>
+    <loc>https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/</loc>
     <lastmod>2020-05-25T14:01:11+00:00</lastmod>
   </url>
   
@@ -388,12 +388,12 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/05/mac_write_iso_into_udisk/</loc>
+    <loc>https://www.zengxi.net/2020/05/mac_write_iso_into_udisk/</loc>
     <lastmod>2020-05-21T10:10:07+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/04/pg_close_session_remove_db/</loc>
+    <loc>https://www.zengxi.net/2020/04/pg_close_session_remove_db/</loc>
     <lastmod>2020-04-23T10:10:07+00:00</lastmod>
   </url>
   
@@ -408,7 +408,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/04/docker-hub-mirror/</loc>
+    <loc>https://www.zengxi.net/2020/04/docker-hub-mirror/</loc>
     <lastmod>2020-04-22T14:43:24+00:00</lastmod>
   </url>
   
@@ -418,12 +418,12 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/04/modify-apine-mirror/</loc>
+    <loc>https://www.zengxi.net/2020/04/modify-apine-mirror/</loc>
     <lastmod>2020-04-21T10:18:24+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/01/postgres-frequently-used-commands/</loc>
+    <loc>https://www.zengxi.net/2020/01/postgres-frequently-used-commands/</loc>
     <lastmod>2020-01-27T21:22:07+00:00</lastmod>
   </url>
   
@@ -438,12 +438,12 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/01/manage-distribution-session-by-id/</loc>
+    <loc>https://www.zengxi.net/2020/01/manage-distribution-session-by-id/</loc>
     <lastmod>2020-01-26T16:21:39+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/01/mac-check-nearby-wifi-channel/</loc>
+    <loc>https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/</loc>
     <lastmod>2020-01-24T12:53:21+00:00</lastmod>
   </url>
   
@@ -458,12 +458,12 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/01/mac-shell-support-map/</loc>
+    <loc>https://www.zengxi.net/2020/01/mac-shell-support-map/</loc>
     <lastmod>2020-01-19T16:40:17+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2020/01/quartz-job-issue-improvement/</loc>
+    <loc>https://www.zengxi.net/2020/01/quartz-job-issue-improvement/</loc>
     <lastmod>2020-01-05T18:22:24+00:00</lastmod>
   </url>
   
@@ -473,7 +473,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2019/12/incident-caused-by-app/</loc>
+    <loc>https://www.zengxi.net/2019/12/incident-caused-by-app/</loc>
     <lastmod>2019-12-10T23:46:11+00:00</lastmod>
   </url>
   
@@ -493,12 +493,12 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2019/12/pg-recreate-pglogical-slave/</loc>
+    <loc>https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/</loc>
     <lastmod>2019-12-06T21:48:18+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2019/12/pg-upgrade-version/</loc>
+    <loc>https://www.zengxi.net/2019/12/pg-upgrade-version/</loc>
     <lastmod>2019-12-01T21:31:18+00:00</lastmod>
   </url>
   
@@ -528,7 +528,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/12/hibernate-criteria-builder-time-range/</loc>
+    <loc>https://www.zengxi.net/2018/12/hibernate-criteria-builder-time-range/</loc>
     <lastmod>2018-12-06T16:35:24+00:00</lastmod>
   </url>
   
@@ -538,7 +538,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/12/excel-trouble-shooting-zip-file/</loc>
+    <loc>https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/</loc>
     <lastmod>2018-12-05T17:56:09+00:00</lastmod>
   </url>
   
@@ -548,12 +548,12 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/11/nginx-setting-for-long-polling/</loc>
+    <loc>https://www.zengxi.net/2018/11/nginx-setting-for-long-polling/</loc>
     <lastmod>2018-11-21T17:13:06+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/07/shell-translate-character/</loc>
+    <loc>https://www.zengxi.net/2018/07/shell-translate-character/</loc>
     <lastmod>2018-07-25T21:40:22+00:00</lastmod>
   </url>
   
@@ -563,7 +563,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/07/docker-mino-cluster/</loc>
+    <loc>https://www.zengxi.net/2018/07/docker-mino-cluster/</loc>
     <lastmod>2018-07-18T23:00:47+00:00</lastmod>
   </url>
   
@@ -593,7 +593,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/07/force-date-use-locale/</loc>
+    <loc>https://www.zengxi.net/2018/07/force-date-use-locale/</loc>
     <lastmod>2018-07-04T23:03:18+00:00</lastmod>
   </url>
   
@@ -618,7 +618,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/07/insertion-sort/</loc>
+    <loc>https://www.zengxi.net/2018/07/insertion-sort/</loc>
     <lastmod>2018-07-02T22:23:07+00:00</lastmod>
   </url>
   
@@ -668,7 +668,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/06/connect-remote-jmx-with-ssh/</loc>
+    <loc>https://www.zengxi.net/2018/06/connect-remote-jmx-with-ssh/</loc>
     <lastmod>2018-06-28T09:26:06+00:00</lastmod>
   </url>
   
@@ -688,7 +688,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/06/redis-data-migration/</loc>
+    <loc>https://www.zengxi.net/2018/06/redis-data-migration/</loc>
     <lastmod>2018-06-27T08:57:29+00:00</lastmod>
   </url>
   
@@ -703,7 +703,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/06/ubuntu-screenshot-shortcut/</loc>
+    <loc>https://www.zengxi.net/2018/06/ubuntu-screenshot-shortcut/</loc>
     <lastmod>2018-06-25T03:34:29+00:00</lastmod>
   </url>
   
@@ -713,17 +713,17 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/06/simple-selection-sort/</loc>
+    <loc>https://www.zengxi.net/2018/06/simple-selection-sort/</loc>
     <lastmod>2018-06-20T10:54:52+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/06/grep-cmd-display-lines/</loc>
+    <loc>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</loc>
     <lastmod>2018-06-19T23:03:44+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/06/bubble-sort/</loc>
+    <loc>https://www.zengxi.net/2018/06/bubble-sort/</loc>
     <lastmod>2018-06-17T17:26:06+00:00</lastmod>
   </url>
   
@@ -733,7 +733,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/06/set-postgres-default-schema/</loc>
+    <loc>https://www.zengxi.net/2018/06/set-postgres-default-schema/</loc>
     <lastmod>2018-06-15T10:26:05+00:00</lastmod>
   </url>
   
@@ -748,7 +748,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/2018/06/inputstream-serialize/</loc>
+    <loc>https://www.zengxi.net/2018/06/inputstream-serialize/</loc>
     <lastmod>2018-06-12T10:57:35+00:00</lastmod>
   </url>
   

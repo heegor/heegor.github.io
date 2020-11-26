@@ -9,10 +9,10 @@
     <lastBuildDate>Thu, 21 May 2020 10:10:07 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/categories/mac/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MacOS中通过ISO镜像制作U盘安装盘</title>
-      <link>https://www.zengxi.net/posts/2020/05/mac_write_iso_into_udisk/</link>
+      <link>https://www.zengxi.net/2020/05/mac_write_iso_into_udisk/</link>
       <pubDate>Thu, 21 May 2020 10:10:07 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/05/mac_write_iso_into_udisk/</guid>
+      <guid>https://www.zengxi.net/2020/05/mac_write_iso_into_udisk/</guid>
       <description>使用MacOS自带的dd命令，就可以将ISO镜像写入到U盘。这就可以利用这个命令来制作安装windows，Linux等系统用U盘
 通过下面的命令，找出U盘挂载的路径
 1diskutil list 将U盘取消挂载，在下面命令中将N替换为所对应的挂载盘：
@@ -23,10 +23,10 @@
     
     <item>
       <title>Mac 检查附近wifi所使用的信道</title>
-      <link>https://www.zengxi.net/posts/2020/01/mac-check-nearby-wifi-channel/</link>
+      <link>https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/</link>
       <pubDate>Fri, 24 Jan 2020 12:53:21 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/01/mac-check-nearby-wifi-channel/</guid>
+      <guid>https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/</guid>
       <description>信道，也称作通道或频段，是以无线信号作为传输载体的数据信号传送通道。2.4G频段的工作频率为2.4-2.4835GHz，这83.5MHz频带划分为13个信道，各信道中心频率相差5MHz，向上向下分别扩展11MHz，信道带宽22MHz。中国采用欧洲/ETSI标准，使用1-13信道。
 相近无线路由器采用相同或重叠信道会形成信道竞争关系，相互影响无线链路质量，为了有效避免信道重叠造成的相互干扰，相近无线路由器应选择互不重叠的信道工作。
 早期无线路由器出厂时预设相同的信道（大多为6），因用户很少会修改信道，从而导致相互影响的情况。随着无线应用的迅速普及，无线路由器增加了信道自动选择功能，在设备启动时检测周围无线信道分布情况，选择最佳信道工作。
@@ -38,10 +38,10 @@
     
     <item>
       <title>Mac下shell命令支持map</title>
-      <link>https://www.zengxi.net/posts/2020/01/mac-shell-support-map/</link>
+      <link>https://www.zengxi.net/2020/01/mac-shell-support-map/</link>
       <pubDate>Sun, 19 Jan 2020 16:40:17 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/01/mac-shell-support-map/</guid>
+      <guid>https://www.zengxi.net/2020/01/mac-shell-support-map/</guid>
       <description>Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：
 1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持，需要升级至4.x以上的版本
 1# 安装最新版本的bash 2brew install bash 3 4# 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash 5# 需要把新版本的shell添加至信任列表中 6sudo bash -c &amp;#39;echo /usr/local/bin/bash &amp;gt;&amp;gt; /etc/shells&amp;#39; 7 8# 如果需要的话，修改默认shell为新版本的bash 9chsh -s /usr/local/bin/bash 需要注意的是，升级完之后，如果shell脚本需要用新版本的bash来执行，必须在相关的shell脚本开头的部分，将 #!/bin/bash 替换成 #!/usr/local/bin/bash， 否则还是用旧版本的bash来执行。

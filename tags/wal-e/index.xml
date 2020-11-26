@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 09 Jun 2020 12:31:50 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/wal-e/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>postgres增量备份工具：wal-e</title>
-      <link>https://www.zengxi.net/posts/2020/06/pg_wale_continuous_archiving/</link>
+      <link>https://www.zengxi.net/2020/06/pg_wale_continuous_archiving/</link>
       <pubDate>Tue, 09 Jun 2020 12:31:50 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/06/pg_wale_continuous_archiving/</guid>
+      <guid>https://www.zengxi.net/2020/06/pg_wale_continuous_archiving/</guid>
       <description>wal-e这个工具可以用来给postgres数据库做基础备份与增量备份，这个对数据库容灾很有帮助。目前它支持将备份存储到AWS S3，Azure Blob Store与Google Storage等。
 一些基本概念 Base Backup 也称为热备份，它不会中断PostgreSQL中任何事务。一旦启动了basebackup，它将等待一个checkpoint。如果到达了checkpoint，那么它将把整个数据目录复制到一个文件中。这些备份将会是replication或POINT IN TIME恢复的起点。通常，basebackup是不一致的，可能包含已经损坏的数据。这时，就需要用到WAL文件
 WAL 通过WAL文件可以获得数据库内所有数据的变更。这些变更首先写入WAL文件，然后再对数据库进行实际性地写入 。因此被称作Write Ahead Log。

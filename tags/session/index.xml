@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 26 Jan 2020 16:21:39 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/session/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</title>
-      <link>https://www.zengxi.net/posts/2020/01/manage-distribution-session-by-id/</link>
+      <link>https://www.zengxi.net/2020/01/manage-distribution-session-by-id/</link>
       <pubDate>Sun, 26 Jan 2020 16:21:39 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/01/manage-distribution-session-by-id/</guid>
+      <guid>https://www.zengxi.net/2020/01/manage-distribution-session-by-id/</guid>
       <description>背景 由于历史原因，原先的界面是用vaadin框架来实现。但是这个框架不适合互联网的分布式系统，正在逐步用目前主流的前端框架重写各个模块，把旧的vaadin页面替换掉。在替换过程中，新老界面并存。
 vaadin界面的servlet，每次都会判断请求中的session id值，如果在服务器中找不到对应这个id的session，就会重新生成一个。由于session id是在新界面登录的时候生成的，当点击链接从新界面跳转到vaadin界面的时候，vaadin服务会发现没有这个session id，就会重新生成一个新的session。换句话说，新老界面会有各自的session id。当然，分布式系统本来就有这个问题，可以采用分布式session的来解决。
 原先开发人员的解决方案是:

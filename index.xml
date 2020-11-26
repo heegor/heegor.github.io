@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 22 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Nginx服务器安全加固</title>
-      <link>https://www.zengxi.net/posts/2020/11/nginx_security/</link>
+      <link>https://www.zengxi.net/2020/11/nginx_security/</link>
       <pubDate>Sun, 22 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/11/nginx_security/</guid>
+      <guid>https://www.zengxi.net/2020/11/nginx_security/</guid>
       <description>基础知识 常用配置 顶部配置
 1#定义 Nginx 运行的用户和用户组 2user nginx; 3 4#进程文件 5pid /var/run/nginx.pid; 6 7#错误日志位置和级别，debug、info、notice、warn、error、crit 8error_log /var/log/nginx/error.log warn; 9 10#Nginx worker 的进程数，一般可设置为可用的CPU内核数。 11worker_processes 8; 12 13#每个 worker 打开文件描述符的最大数量限制。理论值应该是最多打开文件数（系统的值ulimit -n） 14#与 nginx 进程数相除，但是 nginx 分配请求并不均匀，所以建议与ulimit -n的值保持一致。 15worker_rlimit_nofile 65535; Events 模块
 1events { 2 #设置一个worker进程同时打开的最大连接数 3 worker_connections 2048; 4 5 #告诉nginx收到一个新连接通知后接受尽可能多的连接 6 multi_accept on; 7 8 #设置用于复用客户端线程的轮询方法。如果你使用Linux 2.6+，你应该使用epoll。 9 # 如果你使用*BSD，你应该使用kqueue。 10 use epoll; 11} HTTP 模块
@@ -21,10 +21,10 @@
     
     <item>
       <title>Elastic Search vm.max_map_count too low 错误</title>
-      <link>https://www.zengxi.net/posts/2020/11/es_max_map_count_error/</link>
+      <link>https://www.zengxi.net/2020/11/es_max_map_count_error/</link>
       <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/11/es_max_map_count_error/</guid>
+      <guid>https://www.zengxi.net/2020/11/es_max_map_count_error/</guid>
       <description>在启动elastic search的时候，在启动日志看到下面的错误提示
 1Max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144] 解决这个问题，有两个办法：
  临时的，仅当前会话窗口有效 执行下面命令  1sysctl -w vm.max_map_count=262144 然后启动elastic search
@@ -35,10 +35,10 @@
     
     <item>
       <title>利用frp与nginx实现公网访问NAS</title>
-      <link>https://www.zengxi.net/posts/2020/11/nas_frp_nginx/</link>
+      <link>https://www.zengxi.net/2020/11/nas_frp_nginx/</link>
       <pubDate>Sat, 14 Nov 2020 11:45:39 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/11/nas_frp_nginx/</guid>
+      <guid>https://www.zengxi.net/2020/11/nas_frp_nginx/</guid>
       <description>能够在远程访问存储NAS上面的资料，才能真正发挥NAS的作用。但是对于没有公网IP的内网用户，如何实现在公网上面访问NAS，是一个需要事先解决的问题。
 如果拥有一个有公网IP的VPS，可以通过 frp + Nginx 来实现内网穿透解决这个问题。另外，从安全角度考虑，如果有可能的话，整个链路上面的都使用 https 协议通讯更加安全。
 下面大致描绘了访问的链路图：
@@ -48,10 +48,10 @@
     
     <item>
       <title>Cloudflare开启HTTPS加密后，请求转发到源站报522错误</title>
-      <link>https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/</link>
+      <link>https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/</link>
       <pubDate>Fri, 13 Nov 2020 08:23:45 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/</guid>
+      <guid>https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/</guid>
       <description>笔者使用Cloudflare做DNS，同时使用Cloudflare的SSL证书服务。整个链路如下图:
 1|----------| |-----------| |---------------| 2| Brower | ------&amp;gt; | Cloudfare | ------&amp;gt; | Origin Server | 3|----------| |-----------| |---------------| 4 笔者想要做整个链路的https，但是在配置完之后，打开页面是看到522的错误。这个错误表示连接上源站点，但是请求超时。可以参考这个页面来找到可能的原因： https://support.cloudflare.com/hc/en-us/articles/115003011431-Error-522-Connection-timed-out#522error
 Cloudfare在配置https的时候有4个选项：
@@ -62,19 +62,19 @@ Cloudfare在配置https的时候有4个选项：
     
     <item>
       <title>Linux查看某个端口是否被占用</title>
-      <link>https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/</link>
+      <link>https://www.zengxi.net/2020/11/ubuntu_install_postgresql/</link>
       <pubDate>Mon, 09 Nov 2020 08:23:45 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/</guid>
+      <guid>https://www.zengxi.net/2020/11/ubuntu_install_postgresql/</guid>
       <description> 使用lsof  1lsof -i 2 3lsof -i:80 使用netstat  1netstat -anp | grep 80 </description>
     </item>
     
     <item>
       <title>Ubuntu安装Postgres</title>
-      <link>https://www.zengxi.net/posts/2020/10/ubuntu_install_postgresql/</link>
+      <link>https://www.zengxi.net/2020/10/ubuntu_install_postgresql/</link>
       <pubDate>Tue, 27 Oct 2020 08:23:45 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/10/ubuntu_install_postgresql/</guid>
+      <guid>https://www.zengxi.net/2020/10/ubuntu_install_postgresql/</guid>
       <description>ubuntu自带的软件仓库可能没有最新的postgres，这就需要自己手动添加安装源，再安装
 1# 添加安装源 2sudo sh -c &amp;#39;echo &amp;#34;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&amp;#34; &amp;gt; /etc/apt/sources.list.d/pgdg.list&amp;#39; 3 4# 导入key 5wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - 6 7# 更新软件列表 8sudo apt-get update 9 10# 查找相关的软件包 11sudo apt-cache search postgres 12 13# 安装 14sudo apt install &amp;lt;对应的软件名称&amp;gt;  参考：
  https://www.postgresql.org/download/linux/ubuntu/  </description>
@@ -82,10 +82,10 @@ Cloudfare在配置https的时候有4个选项：
     
     <item>
       <title>利用n来切换Nodejs版本</title>
-      <link>https://www.zengxi.net/posts/2020/10/nodejs_switch_version/</link>
+      <link>https://www.zengxi.net/2020/10/nodejs_switch_version/</link>
       <pubDate>Tue, 20 Oct 2020 08:23:45 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/10/nodejs_switch_version/</guid>
+      <guid>https://www.zengxi.net/2020/10/nodejs_switch_version/</guid>
       <description>安装n
 1sudo npm install n -g 安装完后，可以使用命令 sudo n &amp;lt;NODEJS 版本号&amp;gt; 来安装对应的nodejs版本
 需要切换版本时，执行下面的命令。然后用键盘上面的上下方向键即可切换
@@ -106,10 +106,10 @@ Cloudfare在配置https的时候有4个选项：
     
     <item>
       <title>Postgres启动时遇到只读文件系统的错误</title>
-      <link>https://www.zengxi.net/posts/2020/09/postgres_startup_readonly_file_error/</link>
+      <link>https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/</link>
       <pubDate>Sun, 20 Sep 2020 20:23:45 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/09/postgres_startup_readonly_file_error/</guid>
+      <guid>https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/</guid>
       <description>问题与解决方法 公司内部私有云由于断电，机器没有正常关机，结果导致 Postgres 服务器启动时，报错
 12020-09-09 07:22:15.296 UTC [3876] FATAL: could not remove old lock file &amp;#34;postmaster.pid&amp;#34;: Read-only file system 22020-09-09 07:22:15.296 UTC [3876] HINT: The file seems accidentally left over, but it could not be removed. Please remove the file by hand and try again. 3pg_ctl: could not start server 尝试执行下面命令去重新挂载磁盘目录
 1mount -o remount -w /var/lib/postgresql/ 但是报错
@@ -119,10 +119,10 @@ Cloudfare在配置https的时候有4个选项：
     
     <item>
       <title>Manjaro安装deb包</title>
-      <link>https://www.zengxi.net/posts/2020/08/manjaro_debtap/</link>
+      <link>https://www.zengxi.net/2020/08/manjaro_debtap/</link>
       <pubDate>Thu, 13 Aug 2020 12:23:45 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/08/manjaro_debtap/</guid>
+      <guid>https://www.zengxi.net/2020/08/manjaro_debtap/</guid>
       <description>安装debtap
 1yay -S debtap 替换源，解决国内debtap同步仓库执行超慢的问题。打开 /usr/bin/debtap，更换 debtap 内容：
  将 http://ftp.debian.org/debian/dists 替换成 https://mirrors.ustc.edu.cn/debian/dists 将 http://archive.ubuntu.com/ubuntu/dists 替换成 https://mirrors.ustc.edu.cn/ubuntu/dists  升级debtap数据库
@@ -134,10 +134,10 @@ Cloudfare在配置https的时候有4个选项：
     
     <item>
       <title>Manjaro笔记本启动时自动设置屏幕亮度</title>
-      <link>https://www.zengxi.net/posts/2020/08/linux_auto_set_brightness/</link>
+      <link>https://www.zengxi.net/2020/08/linux_auto_set_brightness/</link>
       <pubDate>Mon, 10 Aug 2020 10:33:42 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/08/linux_auto_set_brightness/</guid>
+      <guid>https://www.zengxi.net/2020/08/linux_auto_set_brightness/</guid>
       <description>笔记本在manjaro在启动的时候，屏幕可能会默认设置为最大亮度。可以通过设置开机启动脚本，来设置启动时候的亮度。
 1. 创建一个启动service脚本 执行下面的命令
 1sudo vim /etc/systemd/system/rc-local.service 输入下面的内容
@@ -148,10 +148,10 @@ Cloudfare在配置https的时候有4个选项：
     
     <item>
       <title>gitbook因为nodejs版本不匹配导致安装报错</title>
-      <link>https://www.zengxi.net/posts/2020/08/gitbook_installation_error/</link>
+      <link>https://www.zengxi.net/2020/08/gitbook_installation_error/</link>
       <pubDate>Sat, 01 Aug 2020 09:21:02 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/08/gitbook_installation_error/</guid>
+      <guid>https://www.zengxi.net/2020/08/gitbook_installation_error/</guid>
       <description>如果nodejs使用的不是10.x版本，就会报错
 1Installing GitBook 3.2.3 2/usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287 3 if (cb) cb.apply(this, arguments) 4 ^ 5 6TypeError: cb.apply is not a function 7 at /usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287:18 8 at FSReqCallback.oncomplete (fs.js:177:5)  参考：
  https://www.bilibili.com/read/cv6932054/  </description>
@@ -159,10 +159,10 @@ Cloudfare在配置https的时候有4个选项：
     
     <item>
       <title>zookeeper服务器文件清理</title>
-      <link>https://www.zengxi.net/posts/2020/07/zookeeper_purge_file/</link>
+      <link>https://www.zengxi.net/2020/07/zookeeper_purge_file/</link>
       <pubDate>Wed, 29 Jul 2020 10:32:19 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/07/zookeeper_purge_file/</guid>
+      <guid>https://www.zengxi.net/2020/07/zookeeper_purge_file/</guid>
       <description>zookeeper主要存放了三类文件，他们都可以在配置文件中指定存储路径：
  snapshot： 内存数据的快照，配置项为dataDir 事务日志：所有与修改数据相关的操作记录，配置项为dataLogDir。在没有dataLogDir配置项的时候，zookeeper默认将事务日志文件和快照日志文件都存储在dataDir对应的目录下。 log4j日志：记录zookeeper集群服务器运行日志。日志的配置地址在conf/目录下的log4j.properties文件中，该文件中有一个配置项为&amp;quot;zookeeper.log.dir=.&amp;quot;  正常运行过程中，zookeeper会不断地把快照数据和日志输出到这些目录。如果没有专门做配置或者人为清理，日志文件不会自动清理，磁盘会越占越多。
 主要的清理方法有下面几种。
@@ -173,10 +173,10 @@ Cloudfare在配置https的时候有4个选项：
     
     <item>
       <title>查看zookeeper版本</title>
-      <link>https://www.zengxi.net/posts/2020/07/check_zookeeper_version/</link>
+      <link>https://www.zengxi.net/2020/07/check_zookeeper_version/</link>
       <pubDate>Tue, 28 Jul 2020 13:22:06 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/07/check_zookeeper_version/</guid>
+      <guid>https://www.zengxi.net/2020/07/check_zookeeper_version/</guid>
       <description>在控制台下面命令
 1echo stat|nc localhost 2181 返回结果示例
 1Zookeeper version: 3.4.8-1--1, built on Fri, 26 Feb 2016 14:51:43 +0100 2Clients: 3 /10.30.1.186:33824[1](queued=0,recved=203121,sent=203148) 4 /10.30.1.116:39374[1](queued=0,recved=56774,sent=56790) 5 /10.30.1.171:37240[1](queued=0,recved=20793,sent=20793) 6 7Latency min/avg/max: 0/0/10748 8Received: 855235993 9Sent: 856603574 10Connections: 36 11Outstanding: 0 12Zxid: 0x125c07103 13Mode: leader 14Node count: 6047 </description>
@@ -184,10 +184,10 @@ Cloudfare在配置https的时候有4个选项：
     
     <item>
       <title>terraform中阿里云ECS ssh key变化问题</title>
-      <link>https://www.zengxi.net/posts/2020/07/terraform_aliyun_ecs_ssh_key/</link>
+      <link>https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/</link>
       <pubDate>Thu, 23 Jul 2020 06:05:31 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/07/terraform_aliyun_ecs_ssh_key/</guid>
+      <guid>https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/</guid>
       <description>目前的terraform脚本中，在新建阿里云ECS的时候，会通过 user_data 属性值来设定初始的ssh key。但是这个就存在一个隐患，如果将来想要改变初始的ssh key，再用terraform来推机器的时候，terraform发现user_data属性值发生变化，会删除现有的ECS并重建。
 解决的方法是，修改ECS的lifecycle，将user_data添加到忽略列表中。这样terraform就可以忽略掉该属性值的变化。
 1{ 2 resource &amp;#34;alicloud_instance&amp;#34; &amp;#34;test_instance&amp;#34; { 3 ... 4 5 lifecycle { 6 ignore_changes = [&amp;#34;user_data&amp;#34;] 7 } 8 } 9} </description>
@@ -195,10 +195,10 @@ Cloudfare在配置https的时候有4个选项：
     
     <item>
       <title>解决terraform与远程云服务器资源状态不一致的问题</title>
-      <link>https://www.zengxi.net/posts/2020/07/terraform_state_consistent/</link>
+      <link>https://www.zengxi.net/2020/07/terraform_state_consistent/</link>
       <pubDate>Wed, 22 Jul 2020 14:37:54 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/07/terraform_state_consistent/</guid>
+      <guid>https://www.zengxi.net/2020/07/terraform_state_consistent/</guid>
       <description>概述 在运维过程中遇到了下面的情况：长期使用terraform管理资源，但是通过terraform以外的工具对云资源做过属性变更（比如通过网页上的控制台对云资源做属性变更）。此时，云资源的属性与terraform state的信息已经不一致，跑terraform plan就会发现，它会删除现有的，然后重建一个。但是这个是我们不希望看到的，我们希望可以保留原有实例并且把本地的terraform state更新成最新的属性。
 解决方案 要想解决这个问题，可以利用 terraform import 命令。也就是重新导入云资源的实例，然后同步成最新的信息。
 下面以阿里云ECS为例子。
@@ -212,10 +212,10 @@ Cloudfare在配置https的时候有4个选项：
     
     <item>
       <title>grep 返回 Binary file (standard input) matches</title>
-      <link>https://www.zengxi.net/posts/2020/07/grep_binary_file_match/</link>
+      <link>https://www.zengxi.net/2020/07/grep_binary_file_match/</link>
       <pubDate>Mon, 20 Jul 2020 11:31:49 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/07/grep_binary_file_match/</guid>
+      <guid>https://www.zengxi.net/2020/07/grep_binary_file_match/</guid>
       <description>grep &amp;quot;keyword&amp;quot; xxx.log时输出: Binary file (standard input) matches
 这个是因为grep命令认为它是一个二进制文件。解决方案是，加上一个参数 -a：
 1grep -a &amp;#34;keyword&amp;#34; xxx.log 该参数的解释：
@@ -224,19 +224,19 @@ Cloudfare在配置https的时候有4个选项：
     
     <item>
       <title>清除chrome中 HTTPS 证书缓存</title>
-      <link>https://www.zengxi.net/posts/2020/07/clear_chrome_https_cert_cache/</link>
+      <link>https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/</link>
       <pubDate>Wed, 15 Jul 2020 09:21:02 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/07/clear_chrome_https_cert_cache/</guid>
+      <guid>https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/</guid>
       <description>在地址栏输入 chrome://net-internals/#hsts ， 找到 “Delete domain security policies”， 输入对应的域名，点击 Delete 按钮</description>
     </item>
     
     <item>
       <title>jetty临时目录下的资源文件被删导致js等资源找不到</title>
-      <link>https://www.zengxi.net/posts/2020/07/jetty_tmp_dir/</link>
+      <link>https://www.zengxi.net/2020/07/jetty_tmp_dir/</link>
       <pubDate>Tue, 14 Jul 2020 22:03:51 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/07/jetty_tmp_dir/</guid>
+      <guid>https://www.zengxi.net/2020/07/jetty_tmp_dir/</guid>
       <description>生产环境上jetty运行一段时间后，在打开某个网页的时候发现有js、css文件找不到，但是重启之后问题会解决。后来发现是设定了tmpwatch后台任务，定时会清理一次系统的tmp目录。
 默认情况下，如果没有指定jetty的临时目录，默认会使用系统的临时目录。解决方案就是，修改jetty的临时文件存放目录，不要放在 /tmp 目录下面。主要有下面几个方法：
  设置basetempdir值  1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Call name=&amp;#34;setAttribute&amp;#34;&amp;gt; 7 &amp;lt;Arg&amp;gt;org.eclipse.jetty.webapp.basetempdir&amp;lt;/Arg&amp;gt; 8 &amp;lt;Arg&amp;gt;/home/my/foo&amp;lt;/Arg&amp;gt; 9 &amp;lt;/Call&amp;gt; 10&amp;lt;/Configure&amp;gt;  设置tempDirectory值  1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Set name=&amp;#34;tempDirectory&amp;#34;&amp;gt;/some/dir/foo&amp;lt;/Set&amp;gt; 7&amp;lt;/Configure&amp;gt;  设置 javax.servlet.context.tempdir 属性  1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Call name=&amp;#34;setAttribute&amp;#34;&amp;gt; 7 &amp;lt;Arg&amp;gt;javax.servlet.context.tempdir&amp;lt;/Arg&amp;gt; 8 &amp;lt;Arg&amp;gt;/some/dir/foo&amp;lt;/Arg&amp;gt; 9 &amp;lt;/Call&amp;gt; 10 11&amp;lt;/Configure&amp;gt;  在启动参数里面修改  1java -jar .</description>
@@ -244,10 +244,10 @@ Cloudfare在配置https的时候有4个选项：
     
     <item>
       <title>Linux下面使用dd命令烧录U盘并查看执行进度</title>
-      <link>https://www.zengxi.net/posts/2020/07/linux_dd_cmd_write_usb_disk/</link>
+      <link>https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/</link>
       <pubDate>Mon, 13 Jul 2020 10:36:12 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/07/linux_dd_cmd_write_usb_disk/</guid>
+      <guid>https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/</guid>
       <description>烧录U盘 先用fdisk来查看U盘的盘符
 1sudo fdisk -l 再用dd命令来写数据到U盘
 1sudo dd if=/home/paul/Downloads/test.iso of=/dev/sdc bs=1M count=10000 查看执行进度 假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命令行窗口，执行下面的命令，注意命令上面可能需要加上sudo
@@ -262,10 +262,10 @@ Cloudfare在配置https的时候有4个选项：
     
     <item>
       <title>rsyslog内存占用高导致服务不可用</title>
-      <link>https://www.zengxi.net/posts/2020/06/rsyslog_high_memory_usage/</link>
+      <link>https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/</link>
       <pubDate>Mon, 22 Jun 2020 09:29:31 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/06/rsyslog_high_memory_usage/</guid>
+      <guid>https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/</guid>
       <description>这几天生产环境中某个服务内存不时地被撑爆，原先以为是应用的问题，但是近来没有上过新的代码。该服务的总内存是8G，启动参数关于内存的配置大致是：-Xmx=6.4G，-Xms=4G 左右。看了Grafana上面的监控记录，JVM 老年代使用最多也就到4G左右，在GC的日志中发现也仅仅用到4G左右，并没有到达最高的内存值。这两个结果可以看出来，应该不是应用程序导致内存占用过大。
 后来用top命令看了一下，发现rsyslog进程使用了将近40%的内存。再查一下日志文件，发现一些日志文件大小都达到2G以上。
 rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程，不应该占用那么内存，即使它同步延迟较大甚至不工作，也不应该影响到应用程序的正常运行。那么，我们可以通过限制它的内存使用率来解决这个问题。
@@ -277,10 +277,10 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
     
     <item>
       <title>转: postgresql 查看单个表大小</title>
-      <link>https://www.zengxi.net/posts/2020/06/pg_check_table_size/</link>
+      <link>https://www.zengxi.net/2020/06/pg_check_table_size/</link>
       <pubDate>Mon, 15 Jun 2020 10:35:08 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/06/pg_check_table_size/</guid>
+      <guid>https://www.zengxi.net/2020/06/pg_check_table_size/</guid>
       <description>原文链接：https://blog.csdn.net/kmust20093211/article/details/47616345
 方法一 ，查某个表
 1select pg_size_pretty(pg_relation_size(&amp;#39;table_name&amp;#39;)); 方法二 ，查出所有表并按大小排序
@@ -290,10 +290,10 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
     
     <item>
       <title>postgres增量备份工具：wal-e</title>
-      <link>https://www.zengxi.net/posts/2020/06/pg_wale_continuous_archiving/</link>
+      <link>https://www.zengxi.net/2020/06/pg_wale_continuous_archiving/</link>
       <pubDate>Tue, 09 Jun 2020 12:31:50 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/06/pg_wale_continuous_archiving/</guid>
+      <guid>https://www.zengxi.net/2020/06/pg_wale_continuous_archiving/</guid>
       <description>wal-e这个工具可以用来给postgres数据库做基础备份与增量备份，这个对数据库容灾很有帮助。目前它支持将备份存储到AWS S3，Azure Blob Store与Google Storage等。
 一些基本概念 Base Backup 也称为热备份，它不会中断PostgreSQL中任何事务。一旦启动了basebackup，它将等待一个checkpoint。如果到达了checkpoint，那么它将把整个数据目录复制到一个文件中。这些备份将会是replication或POINT IN TIME恢复的起点。通常，basebackup是不一致的，可能包含已经损坏的数据。这时，就需要用到WAL文件
 WAL 通过WAL文件可以获得数据库内所有数据的变更。这些变更首先写入WAL文件，然后再对数据库进行实际性地写入 。因此被称作Write Ahead Log。
@@ -307,10 +307,10 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
     
     <item>
       <title>用string adapter来解决系统接口对接中发现的空值验证问题</title>
-      <link>https://www.zengxi.net/posts/2020/06/string_adapter/</link>
+      <link>https://www.zengxi.net/2020/06/string_adapter/</link>
       <pubDate>Mon, 01 Jun 2020 13:44:01 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/06/string_adapter/</guid>
+      <guid>https://www.zengxi.net/2020/06/string_adapter/</guid>
       <description>客户用的是很旧版本的ERP系统，在与客户系统做接口对接的时候发现了一个问题。假设接口请求需要的body是xml格式的，共有三个字段：name, mobile, email。由于客户ERP系统比较老，如果某个字段没有值，传的是空字符串，而不是将该字段在请求消息体中隐藏。客户发的请求类似下面的例子：
 1&amp;lt;xml&amp;gt; 2 &amp;lt;name&amp;gt;John&amp;lt;/name&amp;gt; 3 &amp;lt;mobile&amp;gt;13800138000&amp;lt;/mobile&amp;gt; 4 &amp;lt;email&amp;gt;&amp;lt;/email&amp;gt; 5&amp;lt;/xml&amp;gt; 由于历史遗留问题，我方系统里在字段上面加了 javax.validation.constraints.Pattern 注解使用正则表达式来对传入的请求值做验证。当传入值为空字符串的时候，正则表达式验证就无法通过。
 与客户做过沟通，对于空值的字段，他们也没有办法在请求中隐藏字段，只能传空字符串。那就只能在我方系统这边看看是否可以通过修改代码来解决。一种方案是修改正则表达式，来兼容空字符串，但是由于这些都是传统代码，不确定把空字符串设置在这个字段上面会对后面的处理会有什么影响。如果有更合适的、代价更小的方案，那么就最好不选择这种。
@@ -319,10 +319,10 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
     
     <item>
       <title>Spring Quartz 指定Scheduler Name</title>
-      <link>https://www.zengxi.net/posts/2020/05/spring_quartz_customize_scheduler_name/</link>
+      <link>https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/</link>
       <pubDate>Sun, 31 May 2020 15:43:31 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/05/spring_quartz_customize_scheduler_name/</guid>
+      <guid>https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/</guid>
       <description>当前项目使用quartz与spring来做基于数据库的集群化任务调度，但是在实际使用过程发现同一个scheduler中，不同group之间任务调度可能会相互跑串。当前项目中使用的 quartz-scheduler 版本 2.3.1， spring 版本 3.2.18.RELEASE。
 举个例子，配置是这样的, 下面示例中隐去不重要的配置
 1&amp;lt;bean id=&amp;#34;my-cluster-scheduler&amp;#34; 2 class=&amp;#34;org.springframework.scheduling.quartz.SchedulerFactoryBean&amp;#34; 3 lazy-init=&amp;#34;false&amp;#34;&amp;gt; 4 ... 5 &amp;lt;property name=&amp;#34;quartzProperties&amp;#34;&amp;gt; 6 &amp;lt;props&amp;gt; 7 &amp;lt;prop key=&amp;#34;org.quartz.jobStore.isClustered&amp;#34;&amp;gt;true&amp;lt;/prop&amp;gt; 8 &amp;lt;prop key=&amp;#34;org.quartz.jobStore.class&amp;#34;&amp;gt;org.quartz.impl.jdbcjobstore.JobStoreCMT&amp;lt;/prop&amp;gt; 9 &amp;lt;/props&amp;gt; 10 ... 11 &amp;lt;/property&amp;gt; 12 &amp;lt;property name=&amp;#34;jobDetails&amp;#34;&amp;gt; 13 &amp;lt;list&amp;gt; 14 &amp;lt;ref bean=&amp;#34;myTestJobDetailBean&amp;#34;/&amp;gt; 15 &amp;lt;/list&amp;gt; 16 &amp;lt;/property&amp;gt; 17 &amp;lt;property name=&amp;#34;triggers&amp;#34;&amp;gt; 18 &amp;lt;list&amp;gt; 19 &amp;lt;ref bean=&amp;#34;myTestJobTrigger&amp;#34;/&amp;gt; 20 &amp;lt;/list&amp;gt; 21 &amp;lt;/property&amp;gt; 22&amp;lt;/bean&amp;gt; 23 24&amp;lt;bean id=&amp;#34;myTestJobTrigger&amp;#34; class=&amp;#34;org.springframework.scheduling.quartz.CronTriggerFactoryBean&amp;#34;&amp;gt; 25 &amp;lt;property name=&amp;#34;jobDetail&amp;#34; ref=&amp;#34;myTestJobDetailBean&amp;#34;/&amp;gt; 26 &amp;lt;property name=&amp;#34;cronExpression&amp;#34; value=&amp;#34;${my.</description>
@@ -330,10 +330,10 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
     
     <item>
       <title>Manjaro安装VMware Workstation</title>
-      <link>https://www.zengxi.net/posts/2020/05/manjaro_install_vmware/</link>
+      <link>https://www.zengxi.net/2020/05/manjaro_install_vmware/</link>
       <pubDate>Tue, 26 May 2020 14:23:31 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/05/manjaro_install_vmware/</guid>
+      <guid>https://www.zengxi.net/2020/05/manjaro_install_vmware/</guid>
       <description>安装VMware workstation
 1yay -S vmware-workstation 启动时候如果报错：Please make sure that the kernel module `vmmon’ is loaded. 则需要重新安装一下linux-headers，加载一下vmmon模块
 1# 先查看内核。返回值版本号格式为: A.B.C-D-MANJARO。示例： 5.2.8-1-MANJARO， 2uname -r 3 4# 安装 linux-headers。根据上面的内核版本来选择安装包，安装包名字为：linuxAB-headers 5sudo pacman -S linux52-headers 6 7# 加载vmmon模块 8sudo modprobe -a vmw_vmci vmmon 如果需要虚拟机要访问网络，则需要执行下面命令来启动服务
@@ -344,20 +344,20 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
     
     <item>
       <title>Manjaro设置chrome为默认浏览器</title>
-      <link>https://www.zengxi.net/posts/2020/05/manjaro_chrome_default_browser/</link>
+      <link>https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/</link>
       <pubDate>Mon, 25 May 2020 14:01:11 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/05/manjaro_chrome_default_browser/</guid>
+      <guid>https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/</guid>
       <description>安装完 Manjaro，一般会自带 Firefox浏览器。如果自己想再安装 chrome，并且设置成默认浏览器，则需要两个步骤：
  在 Default Applications 中选择 Chrome 为默认的浏览器。除了这一步还不够，打开 chrome 依然有提示说“chrome 不是默认浏览器”，这就需要下面的第二步来解决。 在 File Association 中找到 html 项， 选择使用 Chrome 打开该类型的文件。  </description>
     </item>
     
     <item>
       <title>MacOS中通过ISO镜像制作U盘安装盘</title>
-      <link>https://www.zengxi.net/posts/2020/05/mac_write_iso_into_udisk/</link>
+      <link>https://www.zengxi.net/2020/05/mac_write_iso_into_udisk/</link>
       <pubDate>Thu, 21 May 2020 10:10:07 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/05/mac_write_iso_into_udisk/</guid>
+      <guid>https://www.zengxi.net/2020/05/mac_write_iso_into_udisk/</guid>
       <description>使用MacOS自带的dd命令，就可以将ISO镜像写入到U盘。这就可以利用这个命令来制作安装windows，Linux等系统用U盘
 通过下面的命令，找出U盘挂载的路径
 1diskutil list 将U盘取消挂载，在下面命令中将N替换为所对应的挂载盘：
@@ -368,10 +368,10 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
     
     <item>
       <title>Postgres关闭某个数据库关联的session</title>
-      <link>https://www.zengxi.net/posts/2020/04/pg_close_session_remove_db/</link>
+      <link>https://www.zengxi.net/2020/04/pg_close_session_remove_db/</link>
       <pubDate>Thu, 23 Apr 2020 10:10:07 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/04/pg_close_session_remove_db/</guid>
+      <guid>https://www.zengxi.net/2020/04/pg_close_session_remove_db/</guid>
       <description>Postgres删除数据库的时候，报错：有其他用户正在使用该数据库，无法删除。这时，需要关闭这个数据库的相关的连接，然后再删除数据库
 可以执行下面的命令来关闭连接：
 1 SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname=&amp;#39;要删除的数据库名称&amp;#39; AND pid&amp;lt;&amp;gt;pg_backend_pid(); </description>
@@ -379,10 +379,10 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
     
     <item>
       <title>Docker Hub国内镜像加速</title>
-      <link>https://www.zengxi.net/posts/2020/04/docker-hub-mirror/</link>
+      <link>https://www.zengxi.net/2020/04/docker-hub-mirror/</link>
       <pubDate>Wed, 22 Apr 2020 14:43:24 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/04/docker-hub-mirror/</guid>
+      <guid>https://www.zengxi.net/2020/04/docker-hub-mirror/</guid>
       <description>国内访问Docker Hub速度比较感人，这个时候需要配置国内的镜像，来加速下载。由于镜像服务可能出现宕机，建议同时配置多个镜像。
 Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json，写入如下内容
 1{ 2 &amp;#34;registry-mirrors&amp;#34;: [ 3 &amp;#34;https://hub-mirror.c.163.com&amp;#34;, 4 &amp;#34;https://registry.docker-cn.com&amp;#34; 5 ] 6} 重启服务
@@ -392,10 +392,10 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
     
     <item>
       <title>修改Alpine镜像源</title>
-      <link>https://www.zengxi.net/posts/2020/04/modify-apine-mirror/</link>
+      <link>https://www.zengxi.net/2020/04/modify-apine-mirror/</link>
       <pubDate>Tue, 21 Apr 2020 10:18:24 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/04/modify-apine-mirror/</guid>
+      <guid>https://www.zengxi.net/2020/04/modify-apine-mirror/</guid>
       <description>docker使用alpine作为基础可以减少image的大小，但是如果编写的dockerfile中需要安装一些软件，在编译image过程中，可能速度会很慢甚至卡住。
 Alpine 的源文件为/etc/apk/repositories。默认的配置类似：
 1http://dl-cdn.alpinelinux.org/alpine/v3.11/main 2http://dl-cdn.alpinelinux.org/alpine/v3.11/community 这个时候就需要在dockerfile中添加下面的命令，将安装包路径指向国内的镜像。
@@ -405,10 +405,10 @@ Alpine 的源文件为/etc/apk/repositories。默认的配置类似：
     
     <item>
       <title>转: Postgres数据库DBA常用命令</title>
-      <link>https://www.zengxi.net/posts/2020/01/postgres-frequently-used-commands/</link>
+      <link>https://www.zengxi.net/2020/01/postgres-frequently-used-commands/</link>
       <pubDate>Mon, 27 Jan 2020 21:22:07 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/01/postgres-frequently-used-commands/</guid>
+      <guid>https://www.zengxi.net/2020/01/postgres-frequently-used-commands/</guid>
       <description>原作者：廖学强 原文链接：点击这里   查看帮助命令
 1DB=# help --总的帮助 2 3DB=# \h --SQL commands级的帮助 4 5DB=# \? --psql commands级的帮助 按列显示，类似mysql的\G
 1DB=# \x 2 3Expanded display is on. 查看DB安装目录(最好root用户执行)
@@ -421,10 +421,10 @@ Alpine 的源文件为/etc/apk/repositories。默认的配置类似：
     
     <item>
       <title>根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</title>
-      <link>https://www.zengxi.net/posts/2020/01/manage-distribution-session-by-id/</link>
+      <link>https://www.zengxi.net/2020/01/manage-distribution-session-by-id/</link>
       <pubDate>Sun, 26 Jan 2020 16:21:39 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/01/manage-distribution-session-by-id/</guid>
+      <guid>https://www.zengxi.net/2020/01/manage-distribution-session-by-id/</guid>
       <description>背景 由于历史原因，原先的界面是用vaadin框架来实现。但是这个框架不适合互联网的分布式系统，正在逐步用目前主流的前端框架重写各个模块，把旧的vaadin页面替换掉。在替换过程中，新老界面并存。
 vaadin界面的servlet，每次都会判断请求中的session id值，如果在服务器中找不到对应这个id的session，就会重新生成一个。由于session id是在新界面登录的时候生成的，当点击链接从新界面跳转到vaadin界面的时候，vaadin服务会发现没有这个session id，就会重新生成一个新的session。换句话说，新老界面会有各自的session id。当然，分布式系统本来就有这个问题，可以采用分布式session的来解决。
 原先开发人员的解决方案是:
@@ -437,10 +437,10 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     
     <item>
       <title>Mac 检查附近wifi所使用的信道</title>
-      <link>https://www.zengxi.net/posts/2020/01/mac-check-nearby-wifi-channel/</link>
+      <link>https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/</link>
       <pubDate>Fri, 24 Jan 2020 12:53:21 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/01/mac-check-nearby-wifi-channel/</guid>
+      <guid>https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/</guid>
       <description>信道，也称作通道或频段，是以无线信号作为传输载体的数据信号传送通道。2.4G频段的工作频率为2.4-2.4835GHz，这83.5MHz频带划分为13个信道，各信道中心频率相差5MHz，向上向下分别扩展11MHz，信道带宽22MHz。中国采用欧洲/ETSI标准，使用1-13信道。
 相近无线路由器采用相同或重叠信道会形成信道竞争关系，相互影响无线链路质量，为了有效避免信道重叠造成的相互干扰，相近无线路由器应选择互不重叠的信道工作。
 早期无线路由器出厂时预设相同的信道（大多为6），因用户很少会修改信道，从而导致相互影响的情况。随着无线应用的迅速普及，无线路由器增加了信道自动选择功能，在设备启动时检测周围无线信道分布情况，选择最佳信道工作。
@@ -452,10 +452,10 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     
     <item>
       <title>Mac下shell命令支持map</title>
-      <link>https://www.zengxi.net/posts/2020/01/mac-shell-support-map/</link>
+      <link>https://www.zengxi.net/2020/01/mac-shell-support-map/</link>
       <pubDate>Sun, 19 Jan 2020 16:40:17 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/01/mac-shell-support-map/</guid>
+      <guid>https://www.zengxi.net/2020/01/mac-shell-support-map/</guid>
       <description>Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：
 1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持，需要升级至4.x以上的版本
 1# 安装最新版本的bash 2brew install bash 3 4# 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash 5# 需要把新版本的shell添加至信任列表中 6sudo bash -c &amp;#39;echo /usr/local/bin/bash &amp;gt;&amp;gt; /etc/shells&amp;#39; 7 8# 如果需要的话，修改默认shell为新版本的bash 9chsh -s /usr/local/bin/bash 需要注意的是，升级完之后，如果shell脚本需要用新版本的bash来执行，必须在相关的shell脚本开头的部分，将 #!/bin/bash 替换成 #!/usr/local/bin/bash， 否则还是用旧版本的bash来执行。
@@ -466,10 +466,10 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     
     <item>
       <title>Quartz job使用过程中的发现问题与改进</title>
-      <link>https://www.zengxi.net/posts/2020/01/quartz-job-issue-improvement/</link>
+      <link>https://www.zengxi.net/2020/01/quartz-job-issue-improvement/</link>
       <pubDate>Sun, 05 Jan 2020 18:22:24 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/01/quartz-job-issue-improvement/</guid>
+      <guid>https://www.zengxi.net/2020/01/quartz-job-issue-improvement/</guid>
       <description>遇到的问题与原因分析 生产环境中遇到的问题：
  服务在启动过程中，不时地卡住，后来发生的越来越频繁。看日志分析，卡在初始化quartz job store的时候 服务在运行过程中，不时地出现定时任务不被触发的情况  通过分析，得知问题产生的原因：
  目前代码中用的是Quartz scheduler 1.8.3版本，定时框架采用的是行锁，通过执行下面的SQL来锁住特定的记录。在分布式的系统的情况下，节点越多越容易发生锁等待，甚至死锁。Quartz scheduler 的 2.x 版本做了改进，在QRTZ_LOCKS表中多加了一个字段 SCHED_NAME。这有一个好处就是，可以给不同的应用分配不同的scheduler name，这样定时框架在调度的时候，不同的应用分别去尝试锁定不同的行，而不像之前锁的时同一个行，避免死锁的发生。  1SELECT * FROM QRTZ_LOCKS WHERE LOCK_NAME = $1 FOR UPDATE;  org.quartz.threadPool.threadCount 值设置太小。Quartz scheduler的线程池大小不足，这个也有可能导致定时任务在排队，无法被触发。  另外，在研究现有代码过程中，还发现另外3个问题：
@@ -479,10 +479,10 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     
     <item>
       <title>复盘 - 手机app上一行代码导致的生产事故</title>
-      <link>https://www.zengxi.net/posts/2019/12/incident-caused-by-app/</link>
+      <link>https://www.zengxi.net/2019/12/incident-caused-by-app/</link>
       <pubDate>Tue, 10 Dec 2019 23:46:11 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2019/12/incident-caused-by-app/</guid>
+      <guid>https://www.zengxi.net/2019/12/incident-caused-by-app/</guid>
       <description>过程 由于一些历史原因，以及与原先代码的兼容性，临时文件存储在minio中。
 某天，生产环境突发事故，minio集群的CPU与内存爆了，只能重启集群。过了十来分钟，很多服务都不可用，健康检查都不通过。日志中的错误信息显示，这些服务都是数据库拿不到连接。需要事先处理数据库连接的问题，于是连接到数据库查死锁，终止导致死锁的sql进程，再重启来恢复这些服务。
 由于前不久minio集群挂掉，很容易就想到是由于minio的原因。其他服务通过RPC调用一个文件存储服务来操作minio中的数据，当minio集群挂掉的时候，文件存储服务访问minio一直想访问minio直到超时。在这个期间，其他服务如果有事务调用文件存储服务来操作minio中文件，那么这个事务就不会被提交，一会占着数据库连接。
@@ -496,10 +496,10 @@ minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉
     
     <item>
       <title>重建基于pglogical逻辑复制的从库</title>
-      <link>https://www.zengxi.net/posts/2019/12/pg-recreate-pglogical-slave/</link>
+      <link>https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/</link>
       <pubDate>Fri, 06 Dec 2019 21:48:18 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2019/12/pg-recreate-pglogical-slave/</guid>
+      <guid>https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/</guid>
       <description>《Postgres 9.x 升级至 10.x》一文中提到了使用pglogical逻辑复制升级。基于这种方式的升级有个缺点，就是主库的DDL发生改变的话，那么从库的复制就会有影响，可能需要重建从库来解决。
 重建从库的步骤与之前创建逻辑复制有点类似，但是由于之前已经做过一些操作，所以相比之下，少了一些步骤。
 从库中删除数据库，再创建一个空的数据库 由于表结构的改变，原先的数据都不能用了，需要重新同步。创建新的空数据库是最快的方式
@@ -510,10 +510,10 @@ minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉
     
     <item>
       <title>Postgres 9.x 升级至 10.x</title>
-      <link>https://www.zengxi.net/posts/2019/12/pg-upgrade-version/</link>
+      <link>https://www.zengxi.net/2019/12/pg-upgrade-version/</link>
       <pubDate>Sun, 01 Dec 2019 21:31:18 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2019/12/pg-upgrade-version/</guid>
+      <guid>https://www.zengxi.net/2019/12/pg-upgrade-version/</guid>
       <description>目前主要有两种升级方式，它们分别使用于不同的场景。
    升级方式 优点 缺点     pglogical逻辑复制升级 停机时间短 需提前准备从库，并搭建replication，在replication期间，需考虑DDL语句带来的影响。   pg_upgrade升级 不需要提前准备replication 升级完成后需检查index是否正常，并执行vacuum analyze，对于数据量较大的库，这可能耗时较长    逻辑复制升级 前提条件 所有表都必须有主键 可以用下面的语句来检查
 1SELECT table_name 2 FROM information_schema.tables 3 WHERE (table_catalog, table_schema, table_name) NOT IN 4 (SELECT table_catalog, table_schema, table_name 5 FROM information_schema.table_constraints 6 WHERE constraint_type = &amp;#39;PRIMARY KEY&amp;#39;) 7 AND table_schema IN (&amp;#39;myschema&amp;#39;) super user无密码访问provider和subscriber 修改配置文件
@@ -531,10 +531,10 @@ minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉
     
     <item>
       <title>Hibernate中用criteria builder处理日期与时间分开的字段</title>
-      <link>https://www.zengxi.net/posts/2018/12/hibernate-criteria-builder-time-range/</link>
+      <link>https://www.zengxi.net/2018/12/hibernate-criteria-builder-time-range/</link>
       <pubDate>Thu, 06 Dec 2018 16:35:24 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/12/hibernate-criteria-builder-time-range/</guid>
+      <guid>https://www.zengxi.net/2018/12/hibernate-criteria-builder-time-range/</guid>
       <description>现有系统中原先在设计数据库字段的时候，把日期与时间分别存入两个不同的字段，但是这两个字段在数据库中都是以timestamp类型来保存。这样的话，如果需要在where条件中把这两个字段与某个特定的时间做比较，则需要分别截取有效的信息。对于日期字段仅仅取出日期的值，把时间舍弃；对于时间字段仅仅取出时间的值，把日期舍弃。
 举个例子，假设数据库中有两个字段：returnSlaDate存的是物品归还截止日期，returnSlaTime存的是物品归还截止时间。实际在保存的时候，数据库中returnSlaDate字段的值可能会是 2018-12-31 00:00:00 ，其中 00:00:00 是没有用的，在与特定时间做比较的时候，需要舍弃；returnSlaTime字段的值可能会是 1970-01-01 17:59:59 ，其中 1970-01-01 是没有用的，在与特定时间做比较的时候，需要舍弃。
 假设数据库中有另外一个字段actualReturnDate，它表示物品实际归还时间（仅仅一个字段表示，包含有效的日期与时间）。如果现在有个需求，要在系统中查出来物品未按时归还的记录，需要怎么处理呢？直接用SQL写会相对简单，如果用hibernate的criteria builder则需要用as关键字做一下转换。下面是示例代码：
@@ -544,10 +544,10 @@ minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉
     
     <item>
       <title>记一次打开Excel文件错误的排查</title>
-      <link>https://www.zengxi.net/posts/2018/12/excel-trouble-shooting-zip-file/</link>
+      <link>https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/</link>
       <pubDate>Wed, 05 Dec 2018 17:56:09 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/12/excel-trouble-shooting-zip-file/</guid>
+      <guid>https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/</guid>
       <description>在生产环境中，某个结果集导出的excel文件用Microsoft Excel无法打开，看到如下错误：
 最开始怀疑是在生成文件的时候，文件损坏掉了，但是重新生成多次，得到的结果都是一样的。在相同的界面，导出其他结果集所生成的文件却都是可以成功打开的，这样就可以排除代码功能方面的问题。如果和代码无关，那么就可能和数据有关系。根据出错提示给出的文件地址“C:\Users\ZHANGZ~1\AppData\Local\Temp\error083200_01.xml”, 打开该临时文件，可以看到下面的信息
 1&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; standalone=&amp;#34;true&amp;#34;?&amp;gt; 2@namespace html url(http://www.w3.org/1999/xhtml); :root { font:small Verdana; font-weight: bold; padding: 2em; padding-left:4em; } * { display: block; padding-left: 2em; } html|style { display: none; } html|span, html|a { display: inline; padding: 0; font-weight: normal; text-decoration: none; } html|span.block { display: block; } *[html|hidden], span.block[html|hidden] { display: none; } .expand { display: block; } .expand:before { content: &amp;#39;+&amp;#39;; color: red; position: absolute; left: -1em; } .</description>
@@ -555,20 +555,20 @@ minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉
     
     <item>
       <title>配置Nginx支持长轮询</title>
-      <link>https://www.zengxi.net/posts/2018/11/nginx-setting-for-long-polling/</link>
+      <link>https://www.zengxi.net/2018/11/nginx-setting-for-long-polling/</link>
       <pubDate>Wed, 21 Nov 2018 17:13:06 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/11/nginx-setting-for-long-polling/</guid>
+      <guid>https://www.zengxi.net/2018/11/nginx-setting-for-long-polling/</guid>
       <description>对于需要用到长轮询的web项目，可以在Nginx做一些配置来支持请求转发。分别在http与server块中加入下面的配置：
 1http { 2 map $http_upgrade $connection_upgrade { 3 default upgrade; 4 &amp;#39;&amp;#39; close; 5 } 6} 7 8server { 9 location /your-api-url/ { 10 proxy_pass http://127.0.0.1:9000/your-api-url/; 11 proxy_http_version 1.1; 12 proxy_set_header Upgrade $http_upgrade; 13 proxy_set_header Connection $connection_upgrade; 14 proxy_set_header Host $http_host; 15 proxy_set_header X-Forwarded-Host $host; 16 proxy_set_header X-Forwarded-Server $host; 17 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; 18 proxy_buffering off; 19 proxy_ignore_client_abort off; 20 } 21} 22 </description>
     </item>
     
     <item>
       <title>shell中用tr命令转换字符大小写</title>
-      <link>https://www.zengxi.net/posts/2018/07/shell-translate-character/</link>
+      <link>https://www.zengxi.net/2018/07/shell-translate-character/</link>
       <pubDate>Wed, 25 Jul 2018 21:40:22 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/07/shell-translate-character/</guid>
+      <guid>https://www.zengxi.net/2018/07/shell-translate-character/</guid>
       <description>在写shell脚本的时候，可能需要将特定的英文字符转换大小写。可以借助tr命令来实现这个功能。
 （1）tr的下面这个命令表示把string1替换成string2
  tr string1 string2  运行下面的命令
@@ -584,10 +584,10 @@ minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉
     
     <item>
       <title>Docker Compose创建minio集群</title>
-      <link>https://www.zengxi.net/posts/2018/07/docker-mino-cluster/</link>
+      <link>https://www.zengxi.net/2018/07/docker-mino-cluster/</link>
       <pubDate>Wed, 18 Jul 2018 23:00:47 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/07/docker-mino-cluster/</guid>
+      <guid>https://www.zengxi.net/2018/07/docker-mino-cluster/</guid>
       <description>Minio是一个简单易用的轻量级对象存储服务，同时它也支持集群环境。使用Minio的docker镜像可以快速地搭建集群环境。
 下面是docker-compose.yml文件的示例。分布式的Minio服务至少需要4个节点，所以在docker-compose.yml文件中，至少要配置4个服务。每个服务的command配置必须一样，保证集群环境正常运行。
 1version:&amp;#39;3&amp;#39;2services:3minio-node1:4image:minio/minio 5hostname:minio-node1 6ports:7- &amp;#34;29001:9000&amp;#34;8volumes:9- ./node1/data:/data10env_file:./key.env11command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data 12minio-node2:13image:minio/minio14hostname:minio-node215ports:16- &amp;#34;29002:9000&amp;#34;17volumes:18- ./node2/data:/data19env_file:./key.env20command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data21minio-node3:22image:minio/minio23hostname:minio-node324ports:25- &amp;#34;29003:9000&amp;#34;26volumes:27- ./node3/data:/data28env_file:./key.env29command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data30minio-node4:31image:minio/minio32hostname:minio-node433ports:34- &amp;#34;29004:9000&amp;#34;35volumes:36- ./node4/data:/data37env_file:./key.env38command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data上面的配置中env_file指定的加载环境变量文件key.env，这里是为了设置登录minio的用户名密码。下面的key.env示例：
@@ -599,10 +599,10 @@ minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉
     
     <item>
       <title>date命令按指定locale所对应的日期格式输出</title>
-      <link>https://www.zengxi.net/posts/2018/07/force-date-use-locale/</link>
+      <link>https://www.zengxi.net/2018/07/force-date-use-locale/</link>
       <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/07/force-date-use-locale/</guid>
+      <guid>https://www.zengxi.net/2018/07/force-date-use-locale/</guid>
       <description>在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。
 比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出
 1date +%a 下面是locale为zh_CN的输出：
@@ -616,10 +616,10 @@ minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉
     
     <item>
       <title>排序算法 - （直接）插入排序 （Insertion Sort)</title>
-      <link>https://www.zengxi.net/posts/2018/07/insertion-sort/</link>
+      <link>https://www.zengxi.net/2018/07/insertion-sort/</link>
       <pubDate>Mon, 02 Jul 2018 22:23:07 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/07/insertion-sort/</guid>
+      <guid>https://www.zengxi.net/2018/07/insertion-sort/</guid>
       <description>基本思路 假设按照从小到大排列，总共有n个元素。
  整个数组从逻辑上会被分成两个部分，左边部分是有序的序列，右边部分是待排序的元素。当然，刚开始左边的有序序列仅有一个元素，即第一个元素 将右边待排序元素的第一个元素，与左边有序序列进行比较。比较的时候，是从有序序列的末端（即有序序列最大的一个数）开始进行比较，如果比它大或者与之相等则直接插在其后面，否则一直往前面找，直到找到该插入的位置。插入的时候，需要把所插入位置右边的所有元素往右移。 重复上面的步骤，直到所有待排序的元素处理完毕  性能 平均需要n2/4次比较， n2/4次交换；最差情况n2次比较，n2次交换；最好情况n-1次比较，0次交换
 时间复杂度：平均O(n2)，最坏O(n2)，最好O(n)
@@ -630,10 +630,10 @@ minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉
     
     <item>
       <title>通过SSH和JMX远程监控Java服务</title>
-      <link>https://www.zengxi.net/posts/2018/06/connect-remote-jmx-with-ssh/</link>
+      <link>https://www.zengxi.net/2018/06/connect-remote-jmx-with-ssh/</link>
       <pubDate>Thu, 28 Jun 2018 09:26:06 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/connect-remote-jmx-with-ssh/</guid>
+      <guid>https://www.zengxi.net/2018/06/connect-remote-jmx-with-ssh/</guid>
       <description>在日常工作中，可以使用一些监控数据的图形展示工具（比如Grafana等）来查看服务器上面JVM的使用情况，比如内存或者CPU的占用情况。但是，在需要解决实际问题的时候，比如CPU或者内存占用过高，还是需要连接到远程的服务器，查看JVM的具体运行情况来分析问题产生的原因。
 通常情况下，我们是通过开启远程服务器上的JMX，使用JVisualVM或JConsole客户端，远程连接到服务器上。然而，在实际的生产环境中，Java应用服务器并没有直接暴露在公网，必须通过跳板机来连接。
 网上查了一些资料，多数比较麻烦，有些还需要借助第三方工具。后来找到一个简便的方法，在使用JVisualVM或JConsole客户端的时候，通过指定socks代理的方式来连接远程服务器。下面是具体的步骤。
@@ -650,10 +650,10 @@ Java应用开启JMX 在应用启动命令里面添加下面的参数。指定JMX
     
     <item>
       <title>使用redis-cli与AOF迁移数据</title>
-      <link>https://www.zengxi.net/posts/2018/06/redis-data-migration/</link>
+      <link>https://www.zengxi.net/2018/06/redis-data-migration/</link>
       <pubDate>Wed, 27 Jun 2018 08:57:29 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/redis-data-migration/</guid>
+      <guid>https://www.zengxi.net/2018/06/redis-data-migration/</guid>
       <description>把一台Redis上的数据，迁移到另外一台Redis服务器上，有很多种方式。其中一个简便的方法是，利用Redis自带的命令行工具redis-cli，实现数据的无缝迁移。
 在旧的Redis服务器上开启AOF 执行下面的命令，检查AOF是否开启。返回yes表示开启，no表示关闭
 1redis-cli -h old_redis_ip -p old_redis_port config get appendonly 如果未开启，执行下面的命令开启AOF
@@ -664,20 +664,20 @@ Java应用开启JMX 在应用启动命令里面添加下面的参数。指定JMX
     
     <item>
       <title>Ubuntu 16.04系统自带截屏工具快捷键</title>
-      <link>https://www.zengxi.net/posts/2018/06/ubuntu-screenshot-shortcut/</link>
+      <link>https://www.zengxi.net/2018/06/ubuntu-screenshot-shortcut/</link>
       <pubDate>Mon, 25 Jun 2018 03:34:29 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/ubuntu-screenshot-shortcut/</guid>
+      <guid>https://www.zengxi.net/2018/06/ubuntu-screenshot-shortcut/</guid>
       <description>Ubuntu 16.04系统自带了截屏工具，可以实现窗口截屏、区域截屏等。默认的快捷键是：
 1 Print 全屏截图 2 Ctrl + Print 全屏截图并保存到剪贴板 3 4 Alt + Print 窗口截图 5 Ctrl + Alt + Print 窗口截图并保存到剪贴板 6 7 Shift + Print 区域截图 8 Ctrl + Shift + Print 区域截图并保存到剪贴板 9 10 Ctrl + Shift + Alt + R 录制屏幕短视频 </description>
     </item>
     
     <item>
       <title>排序算法 - （简单）选择排序 (Selection Sort）</title>
-      <link>https://www.zengxi.net/posts/2018/06/simple-selection-sort/</link>
+      <link>https://www.zengxi.net/2018/06/simple-selection-sort/</link>
       <pubDate>Wed, 20 Jun 2018 10:54:52 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/simple-selection-sort/</guid>
+      <guid>https://www.zengxi.net/2018/06/simple-selection-sort/</guid>
       <description>基本思路 假设按照从小到大排列，总共有n个元素
  第一轮，找出数组中最小的元素，与第一个元素交换 第二轮，找出剩余元素中最小的元素，与第二个元素交换 第三轮，找出剩余元素中最小的元素，与第三个元素交换 如此重复上述步骤，直至处理完所有元素  性能 时间复杂度：O(n2)
 空间复杂度：O(1)
@@ -687,10 +687,10 @@ Java应用开启JMX 在应用启动命令里面添加下面的参数。指定JMX
     
     <item>
       <title>如何控制grep命令显示在相关文本前后的行数</title>
-      <link>https://www.zengxi.net/posts/2018/06/grep-cmd-display-lines/</link>
+      <link>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</link>
       <pubDate>Tue, 19 Jun 2018 23:03:44 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/grep-cmd-display-lines/</guid>
+      <guid>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</guid>
       <description>在Linux/Unix系统中使用grep命令的时候，有时候我们想要把匹配文本的前后几行的信息也同时显示出来。这可以通过设置一些参数来达到目的。
 grep的帮助文档中有这几个参数：
  -A num, --after-context=num Print num lines of trailing context after each match.
@@ -704,10 +704,10 @@ grep的帮助文档中有这几个参数：
     
     <item>
       <title>排序算法 - 冒泡排序(Bubble Sort)</title>
-      <link>https://www.zengxi.net/posts/2018/06/bubble-sort/</link>
+      <link>https://www.zengxi.net/2018/06/bubble-sort/</link>
       <pubDate>Sun, 17 Jun 2018 17:26:06 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/bubble-sort/</guid>
+      <guid>https://www.zengxi.net/2018/06/bubble-sort/</guid>
       <description>算法思路 基本思路 假设按照从小到大排列，总共有n个元素
  从第一个元素开始至第n-1个元素，依次比较当前元素与它后面相邻元素的大小，如果前面一个比后面一个大，交换两个元素的位置。第一遍处理之后，最后一个元素就是当前循环中最大的一个。 重复上面的步骤，第二遍处理第一至第n-2个元素，第三遍处理第一至第n-3个元素……直到仅剩一个元素。  改进后的思路 上面的基本思路中需要进行n-1轮的比较。但是存在一种可能，在其中的某一轮之后，该数组就已经是有序的了，也就意味着后面就不需要再进行额外的比较和交换。可以设置一个标志位，用来表示当前这一轮是否存在元素交换，如果没有的话，就结束整个排序过程
 性能 时间复杂度：最好的情况O(n),最差的情况O(n2)， 平均O(n2)
@@ -718,10 +718,10 @@ grep的帮助文档中有这几个参数：
     
     <item>
       <title>设置Postgres数据库的默认schema</title>
-      <link>https://www.zengxi.net/posts/2018/06/set-postgres-default-schema/</link>
+      <link>https://www.zengxi.net/2018/06/set-postgres-default-schema/</link>
       <pubDate>Fri, 15 Jun 2018 10:26:05 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/set-postgres-default-schema/</guid>
+      <guid>https://www.zengxi.net/2018/06/set-postgres-default-schema/</guid>
       <description>查看当前的schema
 1SHOW search_path; 设置默认schema，仅对当前连接有效
 1SET search_path TO your_schema; 设置默认schema，数据库级别，修改之后的所有连接都有效
@@ -730,10 +730,10 @@ grep的帮助文档中有这几个参数：
     
     <item>
       <title>实现InputStream的序列化</title>
-      <link>https://www.zengxi.net/posts/2018/06/inputstream-serialize/</link>
+      <link>https://www.zengxi.net/2018/06/inputstream-serialize/</link>
       <pubDate>Tue, 12 Jun 2018 10:57:35 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/inputstream-serialize/</guid>
+      <guid>https://www.zengxi.net/2018/06/inputstream-serialize/</guid>
       <description>InputStream本身是不支持序列化的，但是在实际开发的过程中有时会需要将输入流通过socket传输，比如RMI的远程调用。
 在Serializable的Java文档文档中有下面的描述：
  Classes that require special handling during the serialization and deserialization process must implement special methods with these exact signatures:

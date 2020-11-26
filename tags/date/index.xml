@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 04 Jul 2018 23:03:18 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/date/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>date命令按指定locale所对应的日期格式输出</title>
-      <link>https://www.zengxi.net/posts/2018/07/force-date-use-locale/</link>
+      <link>https://www.zengxi.net/2018/07/force-date-use-locale/</link>
       <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/07/force-date-use-locale/</guid>
+      <guid>https://www.zengxi.net/2018/07/force-date-use-locale/</guid>
       <description>在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。
 比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出
 1date +%a 下面是locale为zh_CN的输出：

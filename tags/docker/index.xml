@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 22 Apr 2020 14:43:24 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker Hub国内镜像加速</title>
-      <link>https://www.zengxi.net/posts/2020/04/docker-hub-mirror/</link>
+      <link>https://www.zengxi.net/2020/04/docker-hub-mirror/</link>
       <pubDate>Wed, 22 Apr 2020 14:43:24 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/04/docker-hub-mirror/</guid>
+      <guid>https://www.zengxi.net/2020/04/docker-hub-mirror/</guid>
       <description>国内访问Docker Hub速度比较感人，这个时候需要配置国内的镜像，来加速下载。由于镜像服务可能出现宕机，建议同时配置多个镜像。
 Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json，写入如下内容
 1{ 2 &amp;#34;registry-mirrors&amp;#34;: [ 3 &amp;#34;https://hub-mirror.c.163.com&amp;#34;, 4 &amp;#34;https://registry.docker-cn.com&amp;#34; 5 ] 6} 重启服务
@@ -22,10 +22,10 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
     
     <item>
       <title>修改Alpine镜像源</title>
-      <link>https://www.zengxi.net/posts/2020/04/modify-apine-mirror/</link>
+      <link>https://www.zengxi.net/2020/04/modify-apine-mirror/</link>
       <pubDate>Tue, 21 Apr 2020 10:18:24 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/04/modify-apine-mirror/</guid>
+      <guid>https://www.zengxi.net/2020/04/modify-apine-mirror/</guid>
       <description>docker使用alpine作为基础可以减少image的大小，但是如果编写的dockerfile中需要安装一些软件，在编译image过程中，可能速度会很慢甚至卡住。
 Alpine 的源文件为/etc/apk/repositories。默认的配置类似：
 1http://dl-cdn.alpinelinux.org/alpine/v3.11/main 2http://dl-cdn.alpinelinux.org/alpine/v3.11/community 这个时候就需要在dockerfile中添加下面的命令，将安装包路径指向国内的镜像。
@@ -35,10 +35,10 @@ Alpine 的源文件为/etc/apk/repositories。默认的配置类似：
     
     <item>
       <title>Docker Compose创建minio集群</title>
-      <link>https://www.zengxi.net/posts/2018/07/docker-mino-cluster/</link>
+      <link>https://www.zengxi.net/2018/07/docker-mino-cluster/</link>
       <pubDate>Wed, 18 Jul 2018 23:00:47 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/07/docker-mino-cluster/</guid>
+      <guid>https://www.zengxi.net/2018/07/docker-mino-cluster/</guid>
       <description>Minio是一个简单易用的轻量级对象存储服务，同时它也支持集群环境。使用Minio的docker镜像可以快速地搭建集群环境。
 下面是docker-compose.yml文件的示例。分布式的Minio服务至少需要4个节点，所以在docker-compose.yml文件中，至少要配置4个服务。每个服务的command配置必须一样，保证集群环境正常运行。
 1version:&amp;#39;3&amp;#39;2services:3minio-node1:4image:minio/minio 5hostname:minio-node1 6ports:7- &amp;#34;29001:9000&amp;#34;8volumes:9- ./node1/data:/data10env_file:./key.env11command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data 12minio-node2:13image:minio/minio14hostname:minio-node215ports:16- &amp;#34;29002:9000&amp;#34;17volumes:18- ./node2/data:/data19env_file:./key.env20command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data21minio-node3:22image:minio/minio23hostname:minio-node324ports:25- &amp;#34;29003:9000&amp;#34;26volumes:27- ./node3/data:/data28env_file:./key.env29command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data30minio-node4:31image:minio/minio32hostname:minio-node433ports:34- &amp;#34;29004:9000&amp;#34;35volumes:36- ./node4/data:/data37env_file:./key.env38command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data上面的配置中env_file指定的加载环境变量文件key.env，这里是为了设置登录minio的用户名密码。下面的key.env示例：

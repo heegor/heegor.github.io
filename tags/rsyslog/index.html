@@ -125,7 +125,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/06/rsyslog_high_memory_usage/">rsyslog内存占用高导致服务不可用</a>
+        <a href="https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/">rsyslog内存占用高导致服务不可用</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -143,7 +143,7 @@
           <p class="pale">这几天生产环境中某个服务内存不时地被撑爆，原先以为是应用的问题，但是近来没有上过新的代码。该服务的总内存是8G，启动参数关于内存的配置大致是：-Xmx=6.4G，-Xms=4G 左右。看了Grafana上面的监控记录，JVM 老年代使用最多也就到4G左右，在GC的日志中发现也仅仅用到4G左右，并没有到达最高的内存值。这两个结果可以看出来，应该不是应用程序导致内存占用过大。
 后来用top命令看了一下，发现rsyslog进程使用了将近40%的内存。再查一下日志文件，发现一些日志文件大小都达到2G以上。
 rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程，不应该占用那么内存，即使它同步延迟较大甚至不工作，也不应该影响到应用程序 …</p>
-          <a href="https://www.zengxi.net/posts/2020/06/rsyslog_high_memory_usage/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -164,28 +164,28 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
+        <a href="https://www.zengxi.net/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
+        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
+        <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
+        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
+        <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
+        <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
+        <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
+        <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
       </li>
     </ul>
     <div>

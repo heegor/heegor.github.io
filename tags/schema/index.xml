@@ -9,10 +9,10 @@
     <lastBuildDate>Fri, 15 Jun 2018 10:26:05 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/schema/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>设置Postgres数据库的默认schema</title>
-      <link>https://www.zengxi.net/posts/2018/06/set-postgres-default-schema/</link>
+      <link>https://www.zengxi.net/2018/06/set-postgres-default-schema/</link>
       <pubDate>Fri, 15 Jun 2018 10:26:05 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/set-postgres-default-schema/</guid>
+      <guid>https://www.zengxi.net/2018/06/set-postgres-default-schema/</guid>
       <description>查看当前的schema
 1SHOW search_path; 设置默认schema，仅对当前连接有效
 1SET search_path TO your_schema; 设置默认schema，数据库级别，修改之后的所有连接都有效

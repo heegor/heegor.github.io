@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 27 Jun 2018 08:57:29 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/migration/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用redis-cli与AOF迁移数据</title>
-      <link>https://www.zengxi.net/posts/2018/06/redis-data-migration/</link>
+      <link>https://www.zengxi.net/2018/06/redis-data-migration/</link>
       <pubDate>Wed, 27 Jun 2018 08:57:29 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/redis-data-migration/</guid>
+      <guid>https://www.zengxi.net/2018/06/redis-data-migration/</guid>
       <description>把一台Redis上的数据，迁移到另外一台Redis服务器上，有很多种方式。其中一个简便的方法是，利用Redis自带的命令行工具redis-cli，实现数据的无缝迁移。
 在旧的Redis服务器上开启AOF 执行下面的命令，检查AOF是否开启。返回yes表示开启，no表示关闭
 1redis-cli -h old_redis_ip -p old_redis_port config get appendonly 如果未开启，执行下面的命令开启AOF

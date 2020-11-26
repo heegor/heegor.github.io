@@ -9,10 +9,10 @@
     <lastBuildDate>Fri, 13 Nov 2020 08:23:45 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/ssl/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cloudflare开启HTTPS加密后，请求转发到源站报522错误</title>
-      <link>https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/</link>
+      <link>https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/</link>
       <pubDate>Fri, 13 Nov 2020 08:23:45 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/</guid>
+      <guid>https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/</guid>
       <description>笔者使用Cloudflare做DNS，同时使用Cloudflare的SSL证书服务。整个链路如下图:
 1|----------| |-----------| |---------------| 2| Brower | ------&amp;gt; | Cloudfare | ------&amp;gt; | Origin Server | 3|----------| |-----------| |---------------| 4 笔者想要做整个链路的https，但是在配置完之后，打开页面是看到522的错误。这个错误表示连接上源站点，但是请求超时。可以参考这个页面来找到可能的原因： https://support.cloudflare.com/hc/en-us/articles/115003011431-Error-522-Connection-timed-out#522error
 Cloudfare在配置https的时候有4个选项：

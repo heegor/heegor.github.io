@@ -125,7 +125,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/11/nginx_security/">Nginx服务器安全加固</a>
+        <a href="https://www.zengxi.net/2020/11/nginx_security/">Nginx服务器安全加固</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -144,7 +144,7 @@
         <div>
           <p class="pale">基础知识 常用配置 顶部配置
 1#定义 Nginx 运行的用户和用户组 2user nginx; 3 4#进程文件 5pid /var/run/nginx.pid; 6 7#错误日志位置和级别，debug、info、notice、warn、error、crit 8error_log /var/log/nginx/error.log warn; 9 10#Nginx worker 的进程数，一般可设置为可用的CPU内核数。 11worker_processes 8; 12 13#每个 worker 打开文件描述符的最大数量限制。理论值应该是最多打开文件数（系统的值ulimit -n） 14#与 nginx 进程数相除，但是 nginx …</p>
-          <a href="https://www.zengxi.net/posts/2020/11/nginx_security/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/11/nginx_security/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -154,7 +154,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2018/11/nginx-setting-for-long-polling/">配置Nginx支持长轮询</a>
+        <a href="https://www.zengxi.net/2018/11/nginx-setting-for-long-polling/">配置Nginx支持长轮询</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -173,7 +173,7 @@
         <div>
           <p class="pale">对于需要用到长轮询的web项目，可以在Nginx做一些配置来支持请求转发。分别在http与server块中加入下面的配置：
 1http { 2 map $http_upgrade $connection_upgrade { 3 default upgrade; 4 &#39;&#39; close; 5 } 6} 7 8server { 9 location /your-api-url/ { 10 proxy_pass http://127.0.0.1:9000/your-api-url/; 11 proxy_http_version 1.1; 12 proxy_set_header Upgrade $http_upgrade; …</p>
-          <a href="https://www.zengxi.net/posts/2018/11/nginx-setting-for-long-polling/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2018/11/nginx-setting-for-long-polling/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -194,28 +194,28 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
+        <a href="https://www.zengxi.net/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
+        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
+        <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
+        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
+        <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
+        <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
+        <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
+        <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
       </li>
     </ul>
     <div>

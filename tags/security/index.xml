@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 22 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/security/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Nginx服务器安全加固</title>
-      <link>https://www.zengxi.net/posts/2020/11/nginx_security/</link>
+      <link>https://www.zengxi.net/2020/11/nginx_security/</link>
       <pubDate>Sun, 22 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/11/nginx_security/</guid>
+      <guid>https://www.zengxi.net/2020/11/nginx_security/</guid>
       <description>基础知识 常用配置 顶部配置
 1#定义 Nginx 运行的用户和用户组 2user nginx; 3 4#进程文件 5pid /var/run/nginx.pid; 6 7#错误日志位置和级别，debug、info、notice、warn、error、crit 8error_log /var/log/nginx/error.log warn; 9 10#Nginx worker 的进程数，一般可设置为可用的CPU内核数。 11worker_processes 8; 12 13#每个 worker 打开文件描述符的最大数量限制。理论值应该是最多打开文件数（系统的值ulimit -n） 14#与 nginx 进程数相除，但是 nginx 分配请求并不均匀，所以建议与ulimit -n的值保持一致。 15worker_rlimit_nofile 65535; Events 模块
 1events { 2 #设置一个worker进程同时打开的最大连接数 3 worker_connections 2048; 4 5 #告诉nginx收到一个新连接通知后接受尽可能多的连接 6 multi_accept on; 7 8 #设置用于复用客户端线程的轮询方法。如果你使用Linux 2.6+，你应该使用epoll。 9 # 如果你使用*BSD，你应该使用kqueue。 10 use epoll; 11} HTTP 模块

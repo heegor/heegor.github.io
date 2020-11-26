@@ -9,10 +9,10 @@
     <lastBuildDate>Mon, 02 Jul 2018 22:23:07 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>排序算法 - （直接）插入排序 （Insertion Sort)</title>
-      <link>https://www.zengxi.net/posts/2018/07/insertion-sort/</link>
+      <link>https://www.zengxi.net/2018/07/insertion-sort/</link>
       <pubDate>Mon, 02 Jul 2018 22:23:07 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/07/insertion-sort/</guid>
+      <guid>https://www.zengxi.net/2018/07/insertion-sort/</guid>
       <description>基本思路 假设按照从小到大排列，总共有n个元素。
  整个数组从逻辑上会被分成两个部分，左边部分是有序的序列，右边部分是待排序的元素。当然，刚开始左边的有序序列仅有一个元素，即第一个元素 将右边待排序元素的第一个元素，与左边有序序列进行比较。比较的时候，是从有序序列的末端（即有序序列最大的一个数）开始进行比较，如果比它大或者与之相等则直接插在其后面，否则一直往前面找，直到找到该插入的位置。插入的时候，需要把所插入位置右边的所有元素往右移。 重复上面的步骤，直到所有待排序的元素处理完毕  性能 平均需要n2/4次比较， n2/4次交换；最差情况n2次比较，n2次交换；最好情况n-1次比较，0次交换
 时间复杂度：平均O(n2)，最坏O(n2)，最好O(n)
@@ -23,10 +23,10 @@
     
     <item>
       <title>排序算法 - （简单）选择排序 (Selection Sort）</title>
-      <link>https://www.zengxi.net/posts/2018/06/simple-selection-sort/</link>
+      <link>https://www.zengxi.net/2018/06/simple-selection-sort/</link>
       <pubDate>Wed, 20 Jun 2018 10:54:52 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/simple-selection-sort/</guid>
+      <guid>https://www.zengxi.net/2018/06/simple-selection-sort/</guid>
       <description>基本思路 假设按照从小到大排列，总共有n个元素
  第一轮，找出数组中最小的元素，与第一个元素交换 第二轮，找出剩余元素中最小的元素，与第二个元素交换 第三轮，找出剩余元素中最小的元素，与第三个元素交换 如此重复上述步骤，直至处理完所有元素  性能 时间复杂度：O(n2)
 空间复杂度：O(1)
@@ -36,10 +36,10 @@
     
     <item>
       <title>排序算法 - 冒泡排序(Bubble Sort)</title>
-      <link>https://www.zengxi.net/posts/2018/06/bubble-sort/</link>
+      <link>https://www.zengxi.net/2018/06/bubble-sort/</link>
       <pubDate>Sun, 17 Jun 2018 17:26:06 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/bubble-sort/</guid>
+      <guid>https://www.zengxi.net/2018/06/bubble-sort/</guid>
       <description>算法思路 基本思路 假设按照从小到大排列，总共有n个元素
  从第一个元素开始至第n-1个元素，依次比较当前元素与它后面相邻元素的大小，如果前面一个比后面一个大，交换两个元素的位置。第一遍处理之后，最后一个元素就是当前循环中最大的一个。 重复上面的步骤，第二遍处理第一至第n-2个元素，第三遍处理第一至第n-3个元素……直到仅剩一个元素。  改进后的思路 上面的基本思路中需要进行n-1轮的比较。但是存在一种可能，在其中的某一轮之后，该数组就已经是有序的了，也就意味着后面就不需要再进行额外的比较和交换。可以设置一个标志位，用来表示当前这一轮是否存在元素交换，如果没有的话，就结束整个排序过程
 性能 时间复杂度：最好的情况O(n),最差的情况O(n2)， 平均O(n2)

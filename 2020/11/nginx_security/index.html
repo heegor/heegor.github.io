@@ -1,0 +1,1333 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn" data-figures="" class="page">
+  <head>
+<title>Nginx服务器安全加固 | 保罗札记</title>
+<meta charset="utf-8">
+<meta name="generator" content="Hugo 0.78.1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?5d22e243df126e5005869c37f7714a99";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<meta property="og:locale" content="zh-cn" />
+
+<meta property="og:type" content="article">
+<meta name="description" content="基础知识 常用配置 顶部配置
+1#定义 Nginx 运行的用户和用户组 2user nginx; 3 4#进程文件 5pid /var/run/nginx.pid; 6 7#错误日志位置和级别，debug、info、notice、warn、error、crit 8error_log …">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:creator" content="">
+<meta name="twitter:title" content="Nginx服务器安全加固" />
+<meta property="og:url" content="https://www.zengxi.net/2020/11/nginx_security/" />
+<meta property="og:title" content="Nginx服务器安全加固" />
+<meta property="og:description" content="基础知识 常用配置 顶部配置
+1#定义 Nginx 运行的用户和用户组 2user nginx; 3 4#进程文件 5pid /var/run/nginx.pid; 6 7#错误日志位置和级别，debug、info、notice、warn、error、crit 8error_log …" />
+<meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
+<link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
+<link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
+<link rel="manifest" href='https://www.zengxi.net/icons/site.webmanifest'>
+<link rel="mask-icon" href='https://www.zengxi.net/safari-pinned-tab.svg' color="#002538">
+<meta name="msapplication-TileColor" content="#002538">
+<meta name="theme-color" content="#002538">
+
+<link rel="canonical" href="https://www.zengxi.net/2020/11/nginx_security/">
+
+    
+
+    
+    
+    <link rel="preload" href="https://www.zengxi.net/css/styles.17bd8db1e1e9d3fde7e52431779c901a12c654a66914bb4472fd4b0c6880c72ea87f9dc818f7ca35bf2e934c65a6a7d6c7afa12a18e60a79ff4e093e3ac621ba.css" integrity = "sha512-F72NseHp0/3n5SQxd5yQGhLGVKZpFLtEcv1LDGiAxy6of53IGPfKNb8uk0xlpqfWx6&#43;hKhjmCnn/Tgk&#43;OsYhug==" as="style" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.8247567be6f4dd123beccbeea5c7a9195169f206ea800a9ee95147c14e6a77ebc43c7dda9eefc04bbcb16d328234c5be2fa40712cef55a1543065206b2943a15.js" as="script" integrity=
+    "sha512-gkdWe&#43;b03RI77MvupcepGVFp8gbqgAqe6VFHwU5qd&#43;vEPH3anu/AS7yxbTKCNMW&#43;L6QHEs71WhVDBlIGspQ6FQ==" crossorigin="anonymous">
+
+    
+    <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.17bd8db1e1e9d3fde7e52431779c901a12c654a66914bb4472fd4b0c6880c72ea87f9dc818f7ca35bf2e934c65a6a7d6c7afa12a18e60a79ff4e093e3ac621ba.css" integrity="sha512-F72NseHp0/3n5SQxd5yQGhLGVKZpFLtEcv1LDGiAxy6of53IGPfKNb8uk0xlpqfWx6&#43;hKhjmCnn/Tgk&#43;OsYhug==" crossorigin="anonymous">
+    
+  </head>
+  
+  
+    
+  
+  <body data-code="7" data-lines="false" id="documentTop">
+
+<header class="nav_header" >
+  <nav class="nav">
+    <a href='https://www.zengxi.net/' class="nav_brand nav_item">
+      <img src="https://www.zengxi.net/logos/logo.png" class="logo">
+      <div class="nav_close">
+        <div>
+          <svg class="icon">
+  <use xlink:href="#open-menu"></use>
+</svg>
+          <svg class="icon">
+  <use xlink:href="#closeme"></use>
+</svg>
+        </div>
+      </div>
+    </a>
+    <div class='nav_body nav_body_left'>
+      
+      
+      
+        
+
+  <div class="nav_parent">
+    <a href="https://www.zengxi.net/" class="nav_item">首页 </a>
+  </div>
+  <div class="nav_parent">
+    <a href="https://www.zengxi.net/about/" class="nav_item">关于 </a>
+  </div>
+      
+      <div class="nav_parent">
+        <a href="#" class="nav_item"></a>
+        <div class="nav_sub">
+          <span class="nav_child"></span>
+          
+          <a href="https://www.zengxi.net/" class="nav_child nav_item">简体中文</a>
+          
+          <a href="https://www.zengxi.net/en/" class="nav_child nav_item"></a>
+          
+        </div>
+      </div>
+      
+<div class='follow'>
+  <a href="https://github.com/heegor">
+    <svg class="icon">
+  <use xlink:href="#github"></use>
+</svg>
+  </a>
+    
+  <a href="https://www.zengxi.net/index.xml">
+    <svg class="icon">
+  <use xlink:href="#rss"></use>
+</svg>
+  </a>
+<div class="color_mode">
+  <input type="checkbox" class="color_choice" id="mode">
+</div>
+
+</div>
+
+    </div>
+  </nav>
+</header>
+
+    <main>
+  
+<div class="grid-inverse wrap content">
+  <article class="post_content">
+    <h1 class="post_title">Nginx服务器安全加固</h1><div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Nov 22, 2020</span>
+    <a href='https://www.zengxi.net/tags/nginx' class="post_tag button button_translucent">nginx
+    </a>
+    <a href='https://www.zengxi.net/tags/security' class="post_tag button button_translucent">security
+    </a>
+</div>
+
+    
+<div class="post_share">
+  分享到:
+  <a href="https://twitter.com/intent/tweet?text=Nginx%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%ae%89%e5%85%a8%e5%8a%a0%e5%9b%ba&url=https%3a%2f%2fwww.zengxi.net%2f2020%2f11%2fnginx_security%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#twitter"></use>
+</svg>
+  </a>
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2020%2f11%2fnginx_security%2f&t=Nginx%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%ae%89%e5%85%a8%e5%8a%a0%e5%9b%ba" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#facebook"></use>
+</svg>
+  </a>
+  <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="分享到 LinkedIn" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#linkedin"></use>
+</svg>
+  </a>
+  <a href="https://www.zengxi.net/2020/11/nginx_security/" title="Copy Link" class="link link_yank">
+    <svg class="icon">
+  <use xlink:href="#copy"></use>
+</svg>
+  </a>
+</div>
+
+    
+    <h1 id="基础知识">基础知识</h1>
+<h2 id="常用配置">常用配置</h2>
+<p>顶部配置</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1">#定义 Nginx 运行的用户和用户组</span>
+<span class="ln"> 2</span>user nginx<span class="p">;</span>
+<span class="ln"> 3</span> 
+<span class="ln"> 4</span><span class="c1">#进程文件</span>
+<span class="ln"> 5</span>pid /var/run/nginx.pid<span class="p">;</span>
+<span class="ln"> 6</span> 
+<span class="ln"> 7</span><span class="c1">#错误日志位置和级别，debug、info、notice、warn、error、crit</span>
+<span class="ln"> 8</span>error_log  /var/log/nginx/error.log warn<span class="p">;</span>
+<span class="ln"> 9</span> 
+<span class="ln">10</span><span class="c1">#Nginx worker 的进程数，一般可设置为可用的CPU内核数。</span>
+<span class="ln">11</span>worker_processes 8<span class="p">;</span>
+<span class="ln">12</span> 
+<span class="ln">13</span><span class="c1">#每个 worker 打开文件描述符的最大数量限制。理论值应该是最多打开文件数（系统的值ulimit -n）</span>
+<span class="ln">14</span><span class="c1">#与 nginx 进程数相除，但是 nginx 分配请求并不均匀，所以建议与ulimit -n的值保持一致。</span>
+<span class="ln">15</span>worker_rlimit_nofile 65535<span class="p">;</span>
+</code></pre></div><p>Events 模块</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>events <span class="o">{</span>
+<span class="ln"> 2</span>    <span class="c1">#设置一个worker进程同时打开的最大连接数</span>
+<span class="ln"> 3</span>    worker_connections 2048<span class="p">;</span>
+<span class="ln"> 4</span> 
+<span class="ln"> 5</span>    <span class="c1">#告诉nginx收到一个新连接通知后接受尽可能多的连接</span>
+<span class="ln"> 6</span>    multi_accept on<span class="p">;</span>
+<span class="ln"> 7</span> 
+<span class="ln"> 8</span>    <span class="c1">#设置用于复用客户端线程的轮询方法。如果你使用Linux 2.6+，你应该使用epoll。</span>
+<span class="ln"> 9</span>    <span class="c1"># 如果你使用*BSD，你应该使用kqueue。</span>
+<span class="ln">10</span>    use epoll<span class="p">;</span>
+<span class="ln">11</span><span class="o">}</span>
+</code></pre></div><p>HTTP 模块</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">  1</span>http <span class="o">{</span>
+<span class="ln">  2</span>    <span class="c1">#隐藏 Nginx 的版本号，提高安全性。</span>
+<span class="ln">  3</span>    server_tokens off<span class="p">;</span>
+<span class="ln">  4</span> 
+<span class="ln">  5</span>    <span class="c1">#开启高效文件传输模式，sendfile 指令指定 Nginx 是否调用sendfile 函数来输出文件，</span>
+<span class="ln">  6</span>    <span class="c1">#对于普通应用设为 on，如果用来进行下载等应用磁盘 IO 重负载应用，可设置为 off，以平</span>
+<span class="ln">  7</span>    <span class="c1">#衡磁盘与网络 I/O 处理速度，降低系统的负载。</span>
+<span class="ln">  8</span>    sendfile on<span class="p">;</span>
+<span class="ln">  9</span> 
+<span class="ln"> 10</span>    <span class="c1">#是否开启目录列表访问，默认关闭。</span>
+<span class="ln"> 11</span>    autoindex off<span class="p">;</span>
+<span class="ln"> 12</span> 
+<span class="ln"> 13</span>    <span class="c1">#告诉 Nginx 在一个数据包里发送所有头文件，而不一个接一个的发送</span>
+<span class="ln"> 14</span>    tcp_nopush on<span class="p">;</span>
+<span class="ln"> 15</span> 
+<span class="ln"> 16</span>    <span class="c1">#告诉 Nginx 不要缓存数据，而是一段一段的发送--当需要及时发送数据时，就应该给应用设置</span>
+<span class="ln"> 17</span>    <span class="c1">#这个属性，这样发送一小块数据信息时就不能立即得到返回值。Nginx 默认会始终工作在 tcp </span>
+<span class="ln"> 18</span>    <span class="c1">#nopush 状态下。但是当开启前面的 sendfile on; 时，它的工作特点是 nopush 的最后一</span>
+<span class="ln"> 19</span>    <span class="c1">#个包会自动转转换到 nopush off。为了减小那200ms的延迟，开启 nodelay on; 将其很快</span>
+<span class="ln"> 20</span>    <span class="c1">#传送出去。结论就是 sendfile on; 开启时，tcp_nopush 和 tcp_nodelay 都是on 是可以的。</span>
+<span class="ln"> 21</span>    tcp_nodelay on<span class="p">;</span>
+<span class="ln"> 22</span> 
+<span class="ln"> 23</span>    <span class="c1">#日志格式设定</span>
+<span class="ln"> 24</span>    log_format  main  <span class="s1">&#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;</span>
+<span class="ln"> 25</span>    <span class="s1">&#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;</span>
+<span class="ln"> 26</span>    <span class="s1">&#39;&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34;&#39;</span><span class="p">;</span>
+<span class="ln"> 27</span>    <span class="c1">#定义访问日志，设置为 off 可以关闭日志，提高性能</span>
+<span class="ln"> 28</span>    access_log /var/log/nginx/access.log main<span class="p">;</span>
+<span class="ln"> 29</span> 
+<span class="ln"> 30</span> 
+<span class="ln"> 31</span>    <span class="c1">#连接超时时间，单位是秒</span>
+<span class="ln"> 32</span>    keepalive_timeout 120<span class="p">;</span>
+<span class="ln"> 33</span> 
+<span class="ln"> 34</span>    <span class="c1">#读取HTTP头部的超时时间，默认值 60。客户端与服务器建立连接后将开始接收HTTP头部，在这个过程中，</span>
+<span class="ln"> 35</span>    <span class="c1">#如果在一个时间间隔（超时时间）内没有读取到客户端发来的字节，则认为超时，并向客户端返回408 </span>
+<span class="ln"> 36</span>    <span class="c1">#(&#34;Request timed out&#34;)响应。</span>
+<span class="ln"> 37</span>    client_header_timeout 60<span class="p">;</span>
+<span class="ln"> 38</span> 
+<span class="ln"> 39</span>    <span class="c1">#默认值 60。与client_header_timeout相似，只是这个超时时间只在读取HTTP包体时才有效。</span>
+<span class="ln"> 40</span>    client_body_timeout 10<span class="p">;</span>
+<span class="ln"> 41</span> 
+<span class="ln"> 42</span>    <span class="c1">#发送响应的超时时间，默认值 60。即Nginx服务器向客户端发送了数据包，但客户端一直没有去接收这个数</span>
+<span class="ln"> 43</span>    <span class="c1">#据包。如果某个连接超过send_timeout定义的超时时间，那么Nginx将会关闭这个连接。</span>
+<span class="ln"> 44</span>    send_timeout 60<span class="p">;</span>
+<span class="ln"> 45</span> 
+<span class="ln"> 46</span>    <span class="c1">#连接超时后将通过向客户端发送RST包来直接重置连接。这个选项打开后，Nginx会在某个连接超时后，不是</span>
+<span class="ln"> 47</span>    <span class="c1">#使用正常情形下的四次握手关闭TCP连接，而是直接向用户发送RST重置包，不再等待用户的应答，直接释放</span>
+<span class="ln"> 48</span>    <span class="c1">#Nginx服务器上关于这个套接字使用的所有缓存（如TCP滑动窗口）。相比正常的关闭方式，它使得服务器避</span>
+<span class="ln"> 49</span>    <span class="c1">#免产生许多处于FIN_WAIT_1、FIN_WAIT_2、TIME_WAIT状态的TCP连接。注意，使用RST重置包关闭连接</span>
+<span class="ln"> 50</span>    <span class="c1">#会带来一些问题，默认情况下不会开启。</span>
+<span class="ln"> 51</span>    reset_timedout_connection off<span class="p">;</span>
+<span class="ln"> 52</span> 
+<span class="ln"> 53</span>    <span class="c1">#要限制连接，必须先有一个容器对连接进行计数，&#34;zone=&#34; 是给它一个名字，可以随便叫，这个名字要跟下</span>
+<span class="ln"> 54</span>    <span class="c1">#面的 limit_conn 一致。$binary_remote_addr 用二进制来储存客户端的地址，1m 可以储存 32000</span>
+<span class="ln"> 55</span>    <span class="c1">#个并发会话。</span>
+<span class="ln"> 56</span>    limit_conn_zone <span class="nv">$binary_remote_addr</span> <span class="nv">zone</span><span class="o">=</span>addr:5m<span class="p">;</span>
+<span class="ln"> 57</span> 
+<span class="ln"> 58</span>    <span class="c1">#给定的key设置最大连接数。这里key是addr，我们设置的值是100，也就是说我们允许每一个IP地址最多同</span>
+<span class="ln"> 59</span>    <span class="c1">#时打开有100个连接。</span>
+<span class="ln"> 60</span>    limit_conn addr 100<span class="p">;</span>
+<span class="ln"> 61</span> 
+<span class="ln"> 62</span>    <span class="c1">#对每个连接限速100k。这如果一个IP允许两个并发连接，那么这个IP就是限速200K。</span>
+<span class="ln"> 63</span>    limit_rate 100k<span class="p">;</span>
+<span class="ln"> 64</span> 
+<span class="ln"> 65</span>    <span class="c1">#include 是一个在当前文件中包含另一个文件内容的指令。这里我们使用它来加载文件扩展名与文件类型映</span>
+<span class="ln"> 66</span>    <span class="c1">#射表。nginx根据映射关系，设置http请求响应头的Content-Type值。当在映射表找不到时，使用nginx.conf</span>
+<span class="ln"> 67</span>    <span class="c1">#中default-type指定的默认值。</span>
+<span class="ln"> 68</span>    include /etc/nginx/mime.types<span class="p">;</span>
+<span class="ln"> 69</span> 
+<span class="ln"> 70</span>    <span class="c1">#设置文件使用的默认的MIME-type</span>
+<span class="ln"> 71</span>    default_type text/html<span class="p">;</span>
+<span class="ln"> 72</span> 
+<span class="ln"> 73</span>    <span class="c1">#默认编码</span>
+<span class="ln"> 74</span>    charset UTF-8<span class="p">;</span>
+<span class="ln"> 75</span> 
+<span class="ln"> 76</span>    <span class="c1">#该模块可以读取预先压缩的gz文件，这样可以减少每次请求进行gzip压缩的CPU资源消耗。该模块启用后，</span>
+<span class="ln"> 77</span>    <span class="c1">#nginx首先检查是否存在请求静态文件的gz结尾的文件，如果有则直接返回该gz文件内容。</span>
+<span class="ln"> 78</span>    gzip_static off<span class="p">;</span> 
+<span class="ln"> 79</span> 
+<span class="ln"> 80</span>    <span class="c1">#开启 gzip 压缩。</span>
+<span class="ln"> 81</span>    gzip on<span class="p">;</span>
+<span class="ln"> 82</span> 
+<span class="ln"> 83</span>    <span class="c1"># 禁用客户端为 IE6 时的 gzip功能。</span>
+<span class="ln"> 84</span>    gzip_disable <span class="s2">&#34;msie6&#34;</span><span class="p">;</span>
+<span class="ln"> 85</span> 
+<span class="ln"> 86</span>    <span class="c1">#Nginx做为反向代理的时候启用。可选值：off|expired|no-cache|no-sotre|private|no_last_modified|no_etag|auth|any</span>
+<span class="ln"> 87</span>    gzip_proxied any<span class="p">;</span>
+<span class="ln"> 88</span> 
+<span class="ln"> 89</span>    <span class="c1">#设置允许压缩的页面最小字节数，页面字节数从header头中的Content-Length中进行获取。</span>
+<span class="ln"> 90</span>    <span class="c1">#建议设置成大于1k的字节数，小于1k可能会越压越大。</span>
+<span class="ln"> 91</span>    gzip_min_length 1024<span class="p">;</span>
+<span class="ln"> 92</span> 
+<span class="ln"> 93</span>    <span class="c1">#设置数据的压缩等级。这个等级可以是1-9之间的任意数值，9是最慢但是压缩比最大的。</span>
+<span class="ln"> 94</span>    gzip_comp_level 5<span class="p">;</span>
+<span class="ln"> 95</span> 
+<span class="ln"> 96</span>    <span class="c1">#设置系统获取几个单位的缓存用于存储gzip的压缩结果数据流。 例如 4 4k 代表以4k为单位，</span>
+<span class="ln"> 97</span>    <span class="c1">#按照原始数据大小以4k为单位的4倍申请内存。如果没有设置，默认值是申请跟原始数据相同大小的内存空间</span>
+<span class="ln"> 98</span>    <span class="c1">#去存储gzip压缩结果。</span>
+<span class="ln"> 99</span>    gzip_buffers <span class="m">4</span> 16k<span class="p">;</span>
+<span class="ln">100</span> 
+<span class="ln">101</span>    <span class="c1">#设置需要压缩的数据格式。Nginx默认只对text/html进行压缩。</span>
+<span class="ln">102</span>    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript<span class="p">;</span>
+<span class="ln">103</span> 
+<span class="ln">104</span>    <span class="c1">#为打开文件指定缓存，默认是没有启用的，max 指定缓存数量，建议和打开文件数一致，inactive</span>
+<span class="ln">105</span>    <span class="c1">#是指经过多长时间文件没被请求后删除缓存。</span>
+<span class="ln">106</span>    open_file_cache <span class="nv">max</span><span class="o">=</span><span class="m">65535</span> <span class="nv">inactive</span><span class="o">=</span>30s<span class="p">;</span>
+<span class="ln">107</span> 
+<span class="ln">108</span>    <span class="c1">#多长时间检查一次缓存的有效信息</span>
+<span class="ln">109</span>    open_file_cache_valid 30s<span class="p">;</span>
+<span class="ln">110</span> 
+<span class="ln">111</span>    <span class="c1">#open_file_cache指令中的inactive参数时间内文件的最少使用次数，如果超过这个数字，文件描述符一</span>
+<span class="ln">112</span>    <span class="c1">#直是在缓存中打开的。出现 Last-Modified 不变的情况，就是因为当nginx对一个静态文件缓存后，如果</span>
+<span class="ln">113</span>    <span class="c1">#30s内还在访问它，那么它的缓存就一直存在，直到30s内你不访问了为止。</span>
+<span class="ln">114</span>    open_file_cache_min_uses 2<span class="p">;</span>
+<span class="ln">115</span>    <span class="c1">#是否记录cache错误</span>
+<span class="ln">116</span>    open_file_cache_errors on<span class="p">;</span>
+<span class="ln">117</span> 
+<span class="ln">118</span>    include /etc/nginx/conf.d/*.conf<span class="p">;</span>
+<span class="ln">119</span>    include /etc/nginx/sites-enabled/*<span class="p">;</span>
+<span class="ln">120</span><span class="o">}</span>
+</code></pre></div><p>SERVER 模块</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>server <span class="o">{</span>
+<span class="ln"> 2</span>    <span class="c1">#监听端口，nginx 会根据请求的 HOST 来决定使用哪个 SERVER 段的配置。如果没有匹配的 server_name，</span>
+<span class="ln"> 3</span>    <span class="c1">#则默认使用配置文件中第一个。加上 default_server 则可以以指定没有匹配时的默认规则。</span>
+<span class="ln"> 4</span>    <span class="c1">#listen 80;</span>
+<span class="ln"> 5</span>    listen <span class="m">80</span> default_server<span class="p">;</span>
+<span class="ln"> 6</span> 
+<span class="ln"> 7</span>    <span class="c1">#域名可以有多个，用空格隔开</span>
+<span class="ln"> 8</span>    server_name www.test.com test.com<span class="p">;</span>
+<span class="ln"> 9</span>    root /user/share/nginx/html/test<span class="p">;</span>
+<span class="ln">10</span> 
+<span class="ln">11</span>    <span class="c1">#404页面配置</span>
+<span class="ln">12</span>    error_page   <span class="m">404</span>   /404.html<span class="p">;</span>
+<span class="ln">13</span> 
+<span class="ln">14</span>    <span class="c1">#配置 ssl，有需要时开启。</span>
+<span class="ln">15</span>    ssl on<span class="p">;</span>
+<span class="ln">16</span>    ssl_certificate /etc/nginx/ssl/server.crt<span class="p">;</span>
+<span class="ln">17</span>    ssl_certificate_key /etc/nginx/ssl/server.key<span class="p">;</span>
+<span class="ln">18</span> 
+<span class="ln">19</span>    location / <span class="o">{</span>
+<span class="ln">20</span>        index   index.html index.php<span class="p">;</span>
+<span class="ln">21</span>    <span class="o">}</span>
+<span class="ln">22</span> 
+<span class="ln">23</span>    <span class="c1">#图片缓存时间设置</span>
+<span class="ln">24</span>    location ~ .*.<span class="o">(</span>gif<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>png<span class="p">|</span>bmp<span class="p">|</span>swf<span class="o">)</span>$ <span class="o">{</span>
+<span class="ln">25</span>        expires 10d<span class="p">;</span>
+<span class="ln">26</span>    <span class="o">}</span>
+<span class="ln">27</span> 
+<span class="ln">28</span>    <span class="c1">#JS和CSS缓存时间设置</span>
+<span class="ln">29</span>    location ~ .*.<span class="o">(</span>js<span class="p">|</span>css<span class="o">)</span>?$ <span class="o">{</span>
+<span class="ln">30</span>        expires 1h<span class="p">;</span>
+<span class="ln">31</span>    <span class="o">}</span>
+<span class="ln">32</span> 
+<span class="ln">33</span>    location ~ <span class="o">[</span>^/<span class="o">]</span><span class="se">\.</span>php<span class="o">(</span>/<span class="p">|</span>$<span class="o">)</span> <span class="o">{</span>
+<span class="ln">34</span>        fastcgi_index   index.php<span class="p">;</span>
+<span class="ln">35</span>        <span class="c1">#开启 PATH_INFO 支持，作用就是把参数按照给定的正则表达式分割成 $fastcgi_script_name 和 $fastcgi_path_info。</span>
+<span class="ln">36</span>        <span class="c1">#例如：请求 index.php/id/1 不加此行配置时，fastcgi_script_name 是 /index.php/id/1，fastcgi_path_info 是空。</span>
+<span class="ln">37</span>        <span class="c1">#加上之后，fastcgi_script_name 是 index.php，fastcgi_path_info 是 /id/1</span>
+<span class="ln">38</span>        fastcgi_split_path_info ^<span class="o">(</span>.+<span class="se">\.</span>php<span class="o">)(</span>.*<span class="o">)</span>$<span class="p">;</span>
+<span class="ln">39</span> 
+<span class="ln">40</span>        <span class="c1">#此值即是 PHP 中 $_SERVER[&#39;SCRIPT_FILENAME&#39;] 的值</span>
+<span class="ln">41</span>        fastcgi_param   SCRIPT_FILENAME <span class="nv">$document_root$fastcgi_script_name</span><span class="p">;</span>
+<span class="ln">42</span>        fastcgi_param   PATH_INFO               <span class="nv">$fastcgi_path_info</span><span class="p">;</span>
+<span class="ln">43</span>        fastcgi_param   PATH_TRANSLATED <span class="nv">$document_root$fastcgi_path_info</span><span class="p">;</span>
+<span class="ln">44</span> 
+<span class="ln">45</span>        <span class="c1">#指定FastCGI服务器监听端口与地址。须和 PHP-FPM 的设置相同。</span>
+<span class="ln">46</span>        <span class="c1">#fastcgi_pass   127.0.0.1:9000;</span>
+<span class="ln">47</span>        fastcgi_pass    unix:/var/run/php5-fpm.sock<span class="p">;</span>
+<span class="ln">48</span>        include fastcgi_params<span class="p">;</span>
+<span class="ln">49</span>    <span class="o">}</span>
+<span class="ln">50</span><span class="o">}</span>
+</code></pre></div><h1 id="设置">设置</h1>
+<h2 id="通过分区挂载允许最少特权">通过分区挂载允许最少特权</h2>
+<p>服务器上的网页/html/php文件单独分区。例如，新建一个分区/dev/sda5(第一逻辑分区)，并且挂载在/nginx。确保 /nginx是以noexec, nodev and nosetuid的权限挂载。比如，下面是一个/etc/fstab的挂载/nginx的信息：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="nv">LABEL</span><span class="o">=</span>/nginx /nginx ext3 defaults,nosuid,noexec,nodev <span class="m">1</span> <span class="m">2</span>
+</code></pre></div><p>注意：需要使用fdisk和mkfs.ext3命令创建一个新分区。</p>
+<h2 id="配置etcsysctlconf强化linux安全">配置/etc/sysctl.conf强化Linux安全</h2>
+<p>可以通过编辑/etc/sysctl.conf来控制和配置Linux内核、网络设置。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1"># Avoid a smurf attack</span>
+<span class="ln"> 2</span>net.ipv4.icmp_echo_ignore_broadcasts <span class="o">=</span> <span class="m">1</span>
+<span class="ln"> 3</span><span class="c1"># Turn on protection for bad icmp error messages</span>
+<span class="ln"> 4</span>net.ipv4.icmp_ignore_bogus_error_responses <span class="o">=</span> <span class="m">1</span>
+<span class="ln"> 5</span><span class="c1"># Turn on syncookies for SYN flood attack protection</span>
+<span class="ln"> 6</span>net.ipv4.tcp_syncookies <span class="o">=</span> <span class="m">1</span>
+<span class="ln"> 7</span><span class="c1"># Turn on and log spoofed, source routed, and redirect packets</span>
+<span class="ln"> 8</span>net.ipv4.conf.all.log_martians <span class="o">=</span> <span class="m">1</span>
+<span class="ln"> 9</span>net.ipv4.conf.default.log_martians <span class="o">=</span> <span class="m">1</span>
+<span class="ln">10</span><span class="c1"># No source routed packets here</span>
+<span class="ln">11</span>net.ipv4.conf.all.accept_source_route <span class="o">=</span> <span class="m">0</span>
+<span class="ln">12</span>net.ipv4.conf.default.accept_source_route <span class="o">=</span> <span class="m">0</span>
+<span class="ln">13</span><span class="c1"># Turn on reverse path filtering</span>
+<span class="ln">14</span>net.ipv4.conf.all.rp_filter <span class="o">=</span> <span class="m">1</span>
+<span class="ln">15</span>net.ipv4.conf.default.rp_filter <span class="o">=</span> <span class="m">1</span>
+<span class="ln">16</span><span class="c1"># Make sure no one can alter the routing tables</span>
+<span class="ln">17</span>net.ipv4.conf.all.accept_redirects <span class="o">=</span> <span class="m">0</span>
+<span class="ln">18</span>net.ipv4.conf.default.accept_redirects <span class="o">=</span> <span class="m">0</span>
+<span class="ln">19</span>net.ipv4.conf.all.secure_redirects <span class="o">=</span> <span class="m">0</span>
+<span class="ln">20</span>net.ipv4.conf.default.secure_redirects <span class="o">=</span> <span class="m">0</span>
+<span class="ln">21</span><span class="c1"># Don’t act as a router</span>
+<span class="ln">22</span>net.ipv4.ip_forward <span class="o">=</span> <span class="m">0</span>
+<span class="ln">23</span>net.ipv4.conf.all.send_redirects <span class="o">=</span> <span class="m">0</span>
+<span class="ln">24</span>net.ipv4.conf.default.send_redirects <span class="o">=</span> <span class="m">0</span>
+<span class="ln">25</span><span class="c1"># Turn on execshild</span>
+<span class="ln">26</span>kernel.exec-shield <span class="o">=</span> <span class="m">1</span>
+<span class="ln">27</span>kernel.randomize_va_space <span class="o">=</span> <span class="m">1</span>
+<span class="ln">28</span><span class="c1"># Tuen IPv6</span>
+<span class="ln">29</span>net.ipv6.conf.default.router_solicitations <span class="o">=</span> <span class="m">0</span>
+<span class="ln">30</span>net.ipv6.conf.default.accept_ra_rtr_pref <span class="o">=</span> <span class="m">0</span>
+<span class="ln">31</span>net.ipv6.conf.default.accept_ra_pinfo <span class="o">=</span> <span class="m">0</span>
+<span class="ln">32</span>net.ipv6.conf.default.accept_ra_defrtr <span class="o">=</span> <span class="m">0</span>
+<span class="ln">33</span>net.ipv6.conf.default.autoconf <span class="o">=</span> <span class="m">0</span>
+<span class="ln">34</span>net.ipv6.conf.default.dad_transmits <span class="o">=</span> <span class="m">0</span>
+<span class="ln">35</span>net.ipv6.conf.default.max_addresses <span class="o">=</span> <span class="m">1</span>
+<span class="ln">36</span><span class="c1"># Optimization for port usefor LBs</span>
+<span class="ln">37</span><span class="c1"># Increase system file descriptor limit</span>
+<span class="ln">38</span>fs.file-max <span class="o">=</span> <span class="m">65535</span>
+<span class="ln">39</span><span class="c1"># Allow for more PIDs (to reduce rollover problems); may break some programs 32768</span>
+<span class="ln">40</span>kernel.pid_max <span class="o">=</span> <span class="m">65536</span>
+<span class="ln">41</span><span class="c1"># Increase system IP port limits</span>
+<span class="ln">42</span>net.ipv4.ip_local_port_range <span class="o">=</span> <span class="m">2000</span> <span class="m">65000</span>
+<span class="ln">43</span><span class="c1"># Increase TCP max buffer size setable using setsockopt()</span>
+<span class="ln">44</span>net.ipv4.tcp_rmem <span class="o">=</span> <span class="m">4096</span> <span class="m">87380</span> <span class="m">8388608</span>
+<span class="ln">45</span>net.ipv4.tcp_wmem <span class="o">=</span> <span class="m">4096</span> <span class="m">87380</span> <span class="m">8388608</span>
+<span class="ln">46</span><span class="c1"># Increase Linux auto tuning TCP buffer limits</span>
+<span class="ln">47</span><span class="c1"># min, default, and max number of bytes to use</span>
+<span class="ln">48</span><span class="c1"># set max to at least 4MB, or higher if you use very high BDP paths</span>
+<span class="ln">49</span><span class="c1"># Tcp Windows etc</span>
+<span class="ln">50</span>net.core.rmem_max <span class="o">=</span> <span class="m">8388608</span>
+<span class="ln">51</span>net.core.wmem_max <span class="o">=</span> <span class="m">8388608</span>
+<span class="ln">52</span>net.core.netdev_max_backlog <span class="o">=</span> <span class="m">5000</span>
+<span class="ln">53</span>net.ipv4.tcp_window_scaling <span class="o">=</span> <span class="m">1</span>
+</code></pre></div><h2 id="控制缓冲区溢出攻击">控制缓冲区溢出攻击</h2>
+<p>编辑nginx.conf，为所有客户端设置缓冲区的大小限制。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">##Start: Size Limits &amp; Buffer Overflows ##    //server上下文</span>
+<span class="ln">2</span>
+<span class="ln">3</span>client_body_buffer_size 1K<span class="p">;</span>
+<span class="ln">4</span>client_header_buffer_size 1k<span class="p">;</span>
+<span class="ln">5</span>client_max_body_size 1k<span class="p">;</span>
+<span class="ln">6</span>large_client_header_buffers <span class="m">2</span> 1k<span class="p">;</span>
+<span class="ln">7</span>
+<span class="ln">8</span><span class="c1">##END:Size Limits &amp; Buffer Overflows ##</span>
+</code></pre></div><p>说明</p>
+<ol>
+<li>client_body_buffer_size 1k-（默认8k或16k）这个指令可以指定连接请求实体的缓冲区大小。如果连接请求超过缓存区指定的值，那么这些请求实体的整体或部分将尝试写入一个临时文件。</li>
+<li>client_header_buffer_size 1k-指令指定客户端请求头部的缓冲区大小。绝大多数情况下一个请求头不会大于1k，不过如果有来自于wap客户端的较大的cookie它可能会大于 1k，Nginx将分配给它一个更大的缓冲区，这个值可以在large_client_header_buffers里面设置。</li>
+<li>client_max_body_size 1k-指令指定允许客户端连接的最大请求实体大小，它出现在请求头部的Content-Length字段。
+如果请求大于指定的值，客户端将收到一个”Request Entity Too Large” (413)错误。记住，浏览器并不知道怎样显示这个错误。</li>
+<li>large_client_header_buffers-指定客户端一些比较大的请求头使用的缓冲区数量和大小。请求字段不能大于一个缓冲区大小，如果客户端发送一个比较大的头，nginx将返回”Request URI too large” (414)
+同样，请求的头部最长字段不能大于一个缓冲区，否则服务器将返回”Bad request” (400)。缓冲区只在需求时分开。默认一个缓冲区大小为操作系统中分页文件大小，通常是4k或8k，如果一个连接请求最终将状态转换为keep- alive，它所占用的缓冲区将被释放。</li>
+</ol>
+<p>还需要控制超时来提高服务器性能并与客户端断开连接。按照如下编辑：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">## Start: Timeouts ##</span>
+<span class="ln">2</span>client_body_timeout 10<span class="p">;</span>
+<span class="ln">3</span>client_header_timeout 10<span class="p">;</span>
+<span class="ln">4</span>keepalive_timeout <span class="m">5</span> 5<span class="p">;</span>
+<span class="ln">5</span>send_timeout 10<span class="p">;</span>
+<span class="ln">6</span><span class="c1">## End: Timeouts ##</span>
+</code></pre></div><p>说明</p>
+<ol>
+<li>client_body_timeout 10;-指令指定读取请求实体的超时时间。这里的超时是指一个请求实体没有进入读取步骤，如果连接超过这个时间而客户端没有任何响应，Nginx将返回一个”Request time out” (408)错误。</li>
+<li>client_header_timeout 10;-指令指定读取客户端请求头标题的超时时间。这里的超时是指一个请求头没有进入读取步骤，如果连接超过这个时间而客户端没有任何响应，Nginx将返回一个”Request time out” (408)错误。</li>
+<li>keepalive_timeout 5 5; – 参数的第一个值指定了客户端与服务器长连接的超时时间，超过这个时间，服务器将关闭连接。参数的第二个值（可选）指定了应答头中Keep-Alive: timeout=time的time值，这个值可以使一些浏览器知道什么时候关闭连接，以便服务器不用重复关闭，如果不指定这个参数，nginx不会在应 答头中发送Keep-Alive信息。（但这并不是指怎样将一个连接“Keep-Alive”）参数的这两个值可以不相同。</li>
+<li>send_timeout 10; 指令指定了发送给客户端应答后的超时时间，Timeout是指没有进入完整established状态，只完成了两次握手，如果超过这个时间客户端没有任何响应，nginx将关闭连接</li>
+</ol>
+<h2 id="控制并发连接">控制并发连接</h2>
+<p>可以使用NginxHttpLimitZone模块来限制指定的会话或者一个IP地址的特殊情况下的并发连接。</p>
+<p>编辑nginx.conf, 每个远程IP地址的客户端同时打开连接不能超过5个:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1">### Directive describes the zone,in which the session states are stored i.e. stored in slimits. ###</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="c1">### 1m can handle 32000 sessions with 32 bytes/session,set to 5m x 32000 session###</span>
+<span class="ln"> 4</span>
+<span class="ln"> 5</span>limit_zone slimits <span class="nv">$binary_remote_addr</span> 5m<span class="p">;</span>
+<span class="ln"> 6</span>
+<span class="ln"> 7</span><span class="c1">### Control maximum number of simultaneous connections for one session i.e.###</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span><span class="c1">### restricts the amount of connections from a single ip address ###</span>
+<span class="ln">10</span>
+<span class="ln">11</span>limit_conn slimits 5<span class="p">;</span>
+<span class="ln">12</span>
+</code></pre></div><h2 id="只允许域名的访问">只允许域名的访问</h2>
+<p>可以逃过ip扫描</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">## Only requests to our Host are allowed i.e. xxx.in,images.xxx.in and www.xxx.in</span>
+<span class="ln">2</span>
+<span class="ln">3</span><span class="k">if</span><span class="o">(</span><span class="nv">$host</span> !~ ^<span class="o">(</span>xxx.in<span class="p">|</span>www.xxx.in<span class="p">|</span>images.xxx.in<span class="o">)</span>$<span class="o">)</span> <span class="o">{</span>
+<span class="ln">4</span>    <span class="c1"># 444 = Connection closed without response</span>
+<span class="ln">5</span>    retrun 444<span class="p">;</span>
+<span class="ln">6</span><span class="o">}</span>
+</code></pre></div><p>或者</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="k">if</span> <span class="o">(</span> <span class="nv">$host</span> !~* <span class="s1">&#39;abc.com&#39;</span> <span class="o">)</span> <span class="o">{</span>  
+<span class="ln">2</span>    <span class="k">return</span> 403<span class="p">;</span>  
+<span class="ln">3</span><span class="o">}</span>  
+</code></pre></div><h2 id="url-参数过滤敏感字">url 参数过滤敏感字</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="k">if</span> <span class="o">(</span><span class="nv">$query_string</span> ~* <span class="s2">&#34;union.*select.*\(&#34;</span><span class="o">)</span> <span class="o">{</span>   
+<span class="ln">2</span>    rewrite ^/<span class="o">(</span>.*<span class="o">)</span>$  <span class="nv">$host</span>  permanent<span class="p">;</span>  
+<span class="ln">3</span><span class="o">}</span>   
+<span class="ln">4</span>
+<span class="ln">5</span><span class="k">if</span> <span class="o">(</span><span class="nv">$query_string</span> ~* <span class="s2">&#34;concat.*\(&#34;</span><span class="o">)</span> <span class="o">{</span>   
+<span class="ln">6</span>    rewrite ^/<span class="o">(</span>.*<span class="o">)</span>$  <span class="nv">$host</span>  permanent<span class="p">;</span>  
+<span class="ln">7</span><span class="o">}</span>  
+</code></pre></div><h2 id="限制可用的请求方法">限制可用的请求方法</h2>
+<p>下面的指令将过滤只允许GET,HEAD和POST方法：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">##Only allow these request methods##</span>
+<span class="ln">2</span>
+<span class="ln">3</span><span class="k">if</span><span class="o">(</span><span class="nv">$request_method</span> !~ ^<span class="o">(</span>GET<span class="p">|</span>HEAD<span class="p">|</span>POST<span class="o">)</span>$<span class="o">)</span> <span class="o">{</span>
+<span class="ln">4</span>    retrun 444<span class="p">;</span>
+<span class="ln">5</span><span class="o">}</span>
+</code></pre></div><h2 id="拒绝一些user-agents">拒绝一些User-Agents</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1">##Block download agents ##</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="k">if</span> <span class="o">(</span><span class="nv">$http_user_agent</span> ~* LWP::Simple<span class="p">|</span>BBBike<span class="p">|</span>wget<span class="o">){</span>
+<span class="ln"> 4</span>
+<span class="ln"> 5</span>retrun 403<span class="p">;</span>
+<span class="ln"> 6</span>
+<span class="ln"> 7</span><span class="o">}</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span><span class="c1">##Block some robots ##</span>
+<span class="ln">10</span><span class="c1"># 阻止Soso和有道的机器人：</span>
+<span class="ln">11</span><span class="k">if</span> <span class="o">(</span><span class="nv">$http_user_agent</span> ~* Sosospider<span class="p">|</span>Yodaobot<span class="o">){</span>
+<span class="ln">12</span>    retrun 403<span class="p">;</span>
+<span class="ln">13</span><span class="o">}</span>
+</code></pre></div><p>为了更好的维护，最好创建一个文件，包含不期望的user agent列表。例如/etc/nginx/blockuseragents.rules包含如下内容：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>map <span class="nv">$http_user_agent</span> <span class="nv">$blockedagent</span> <span class="o">{</span>
+<span class="ln">2</span>    default 0<span class="p">;</span>
+<span class="ln">3</span>    ~*malicious 1<span class="p">;</span>
+<span class="ln">4</span>    ~*bot 1<span class="p">;</span>
+<span class="ln">5</span>    ~*backdoor 1<span class="p">;</span>
+<span class="ln">6</span>    ~*crawler 1<span class="p">;</span>
+<span class="ln">7</span>    ~*bandit 1<span class="p">;</span>
+<span class="ln">8</span><span class="o">}</span>
+</code></pre></div><p>然后将如下语句放入配置文件的server模块内,并加入if语句设置阻止后进入的页面：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>include /etc/nginx/blockuseragents.rules<span class="p">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span>server <span class="o">{</span>
+<span class="ln"> 4</span>    <span class="k">if</span> <span class="o">(</span><span class="nv">$blockedagent</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 5</span>        <span class="k">return</span> 403<span class="p">;</span>
+<span class="ln"> 6</span>    <span class="o">}</span>
+<span class="ln"> 7</span>
+<span class="ln"> 8</span>    listen  192.168.0.12:8080<span class="p">;</span>
+<span class="ln"> 9</span>    ...
+<span class="ln">10</span><span class="o">}</span>
+</code></pre></div><h2 id="目录限制ip访问">目录限制IP访问</h2>
+<p>可以对指定的目录设置访问权限。所有的网站目录应该一一配置，只允许必须的目录访问权限。</p>
+<p>可以通过IP地址来限制访问目录/admin/:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>location /docs/ <span class="o">{</span>
+<span class="ln"> 2</span>  <span class="c1">##block one workstation</span>
+<span class="ln"> 3</span>
+<span class="ln"> 4</span>  deny 192.168.1.1<span class="p">;</span>
+<span class="ln"> 5</span>
+<span class="ln"> 6</span>  <span class="c1">## allow anyone in 192.168.1.0/24</span>
+<span class="ln"> 7</span>  allow 192.168.1.0/24<span class="p">;</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span>  <span class="c1">##drop rest of the world</span>
+<span class="ln">10</span>
+<span class="ln">11</span>  deny all<span class="p">;</span>
+<span class="ln">12</span>
+<span class="ln">13</span><span class="o">}</span>
+</code></pre></div><p>更多的时候客户端请求会经过层层代理，我们需要通过$http_x_forwarded_for来进行限制，可以这样写：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="nb">set</span> <span class="nv">$allow</span> false<span class="p">;</span>
+<span class="ln">2</span><span class="k">if</span> <span class="o">(</span><span class="nv">$http_x_forwarded_for</span> <span class="o">=</span> <span class="s2">&#34;211.144.204.2&#34;</span><span class="o">)</span> <span class="o">{</span> <span class="nb">set</span> <span class="nv">$allow</span> true<span class="p">;</span> <span class="o">}</span>
+<span class="ln">3</span><span class="k">if</span> <span class="o">(</span><span class="nv">$http_x_forwarded_for</span> ~ <span class="s2">&#34;108.2.66.[89]&#34;</span><span class="o">)</span> <span class="o">{</span> <span class="nb">set</span> <span class="nv">$allow</span> true<span class="p">;</span> <span class="o">}</span>
+<span class="ln">4</span><span class="k">if</span> <span class="o">(</span><span class="nv">$allow</span> <span class="o">=</span> <span class="nb">false</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> 404<span class="p">;</span> <span class="o">}</span>
+</code></pre></div><h2 id="通过密码保护目录">通过密码保护目录</h2>
+<p>首先创建密码文件并增加“user”用户：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>mkdir /usr/local/nginx/conf/.htpasswd/
+<span class="ln">2</span>
+<span class="ln">3</span>htpasswd -c /usr/local/nginx/conf/.htpasswd/passwd user
+</code></pre></div><p>编辑nginx.conf,加入需要保护的目录：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">###Password Protect /personal-images/ and /delta/ directories###</span>
+<span class="ln">2</span>
+<span class="ln">3</span>location ~ /<span class="o">(</span>personal-images/./delta/.<span class="o">)</span> <span class="o">{</span>
+<span class="ln">4</span>    auth_basic <span class="s2">&#34;Restricted&#34;</span><span class="p">;</span>
+<span class="ln">5</span>    auth_basic_user_file /usr/local/nginx/conf/.htpasswd/passwd<span class="p">;</span>
+<span class="ln">6</span>
+<span class="ln">7</span><span class="o">}</span>
+</code></pre></div><p>密码文件生成后，也可以用以下的命令来增加允许访问的用户：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>htpasswd -s /usr/local/nginx/conf/.htpasswd/passwd userName
+</code></pre></div><h2 id="如何防止图片盗链">如何防止图片盗链</h2>
+<p>如果有人直接用你网站的图片地址来显示在他的网站上，会造成你需要支付额外的宽带费用。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1"># Stop deep linking or hot linking</span>
+<span class="ln">2</span>location /images/ <span class="o">{</span>
+<span class="ln">3</span>    valid_referers none blocked www.example.com example.com<span class="p">;</span>
+<span class="ln">4</span>    <span class="k">if</span> <span class="o">(</span><span class="nv">$invalid_referer</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">5</span>        <span class="k">return</span> 403<span class="p">;</span>
+<span class="ln">6</span>    <span class="o">}</span>
+<span class="ln">7</span><span class="o">}</span>
+</code></pre></div><p>重定向并显示指定图片</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>location /images/ <span class="o">{</span>
+<span class="ln">2</span>    valid_referers blocked www.example.com example.com<span class="p">;</span>
+<span class="ln">3</span>    <span class="k">if</span> <span class="o">(</span><span class="nv">$invalid_referer</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">4</span>        rewrite ^/images/uploads.*.<span class="o">(</span>gif<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>png<span class="o">)</span>$ http://www.examples.com/banned.jpg last
+<span class="ln">5</span>    <span class="o">}</span>
+<span class="ln">6</span><span class="o">}</span>
+</code></pre></div><h2 id="nginx-ssl配置">Nginx SSL配置</h2>
+<p>编辑nginx.conf并更新：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>server<span class="o">{</span>
+<span class="ln"> 2</span>    server_name example.com<span class="p">;</span>
+<span class="ln"> 3</span>
+<span class="ln"> 4</span>    listen 443<span class="p">;</span>
+<span class="ln"> 5</span>
+<span class="ln"> 6</span>    ssl on<span class="p">;</span>
+<span class="ln"> 7</span>    ssl_certificate /user/local/nginx/conf/server.crt<span class="p">;</span>
+<span class="ln"> 8</span>    ssl_certificate_key /usr/local/nginx/conf/server.key<span class="p">;</span>
+<span class="ln"> 9</span>    access_log /usr/local/nginx/logs/ssl.access.log<span class="p">;</span>
+<span class="ln">10</span>    error_log /usr/local/nginx/logs/ssl.error.log<span class="p">;</span>
+<span class="ln">11</span><span class="o">}</span>
+</code></pre></div><h2 id="在防火墙级限制每个ip的连接数">在防火墙级限制每个IP的连接数</h2>
+<p>网络服务器必须监视连接和每秒连接限制。PF和Iptales都能够在进入你的nginx服务器之前阻止最终用户的访问。
+Linux Iptables:限制每次Nginx连接数</p>
+<p>下面的例子会阻止来自一个IP的60秒钟内超过15个连接端口80的连接数。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>/sbin/iptables -A INPUT -p tcp –dport <span class="m">80</span> -i eth0 -m state –state NEW -m recent –set
+<span class="ln">2</span>/sbin/iptables -A INPUT -p tcp –dport <span class="m">80</span> -i eth0 -m state –state NEW -m recent –update –seconds <span class="m">60</span> –hitcount <span class="m">15</span> -j DROP
+<span class="ln">3</span>service iptables save
+</code></pre></div><p>请根据具体情况来设置限制的连接数。</p>
+<h2 id="配置操作系统保护web服务器">配置操作系统保护Web服务器</h2>
+<p>Nginx以用户nginx运行。但是根目录（/nginx或者/usr /local/nginx/html）不应该设置属于用户nginx或对用户nginx可写。</p>
+<p>找出错误权限的文件可以使用如下命令：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>find /nginx -user nginx
+<span class="ln">2</span>find /usr/local/nginx/html -user nginx
+</code></pre></div><p>确保你更所有权为root或其它用户，一个典型的权限设置 /usr/local/nginx/html/</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>ls -l /usr/local/nginx/html/
+</code></pre></div><p>示例输出：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>-rw-r–r– <span class="m">1</span> root root <span class="m">925</span> Jan <span class="m">3</span> 00:50 error4xx.html
+<span class="ln">2</span>-rw-r–r– <span class="m">1</span> root root <span class="m">52</span> Jan <span class="m">3</span> 10:00 error5xx.html
+<span class="ln">3</span>-rw-r–r– <span class="m">1</span> root root <span class="m">134</span> Jan <span class="m">3</span> 00:52 index.html
+</code></pre></div><p>你必须删除由vi或其它文本编辑器创建的备份文件：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>find /nginx -name ‘.?’ -not -name .ht -or -name ‘~’ -or -name ‘.bak’ -or -name ‘.old*’
+<span class="ln">2</span>find /usr/local/nginx/html/ -name ‘.?’ -not -name .ht -or -name ‘~’ -or -name ‘.bak’ -or -name ‘.old*’
+</code></pre></div><p>通过find命令的-delete选项来删除这些文件。</p>
+<h2 id="限制nginx连接传出">限制Nginx连接传出</h2>
+<p>黑客会使用工具如wget下载你服务器本地的文件。使用Iptables从nginx用户来阻止传出连接。ipt_owner模块试图匹配本地产生的数据包的创建者。下面的例子中只允许user用户在外面使用80连接。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>/sbin/iptables -A OUTPUT -o eth0 -m owner –uid-owner vivek -p tcp –dport <span class="m">80</span> -m state –state NEW,ESTABLISHED -j ACCEPT
+</code></pre></div><h2 id="根据用户的真实-ip-做连接限制">根据用户的真实 IP 做连接限制</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1">## 这里取得原始用户的IP地址</span>
+<span class="ln"> 2</span>map <span class="nv">$http_x_forwarded_for</span>  <span class="nv">$clientRealIp</span> <span class="o">{</span>
+<span class="ln"> 3</span>    <span class="s2">&#34;&#34;</span>  <span class="nv">$remote_addr</span><span class="p">;</span>
+<span class="ln"> 4</span>    ~^<span class="o">(</span>?P&lt;firstAddr&gt;<span class="o">[</span>0-9<span class="se">\.</span><span class="o">]</span>+<span class="o">)</span>,?.*$    <span class="nv">$firstAddr</span><span class="p">;</span>
+<span class="ln"> 5</span><span class="o">}</span>
+<span class="ln"> 6</span> 
+<span class="ln"> 7</span><span class="c1">## 针对原始用户 IP 地址做限制</span>
+<span class="ln"> 8</span>limit_conn_zone <span class="nv">$clientRealIp</span> <span class="nv">zone</span><span class="o">=</span>TotalConnLimitZone:20m <span class="p">;</span>
+<span class="ln"> 9</span>limit_conn  TotalConnLimitZone  50<span class="p">;</span>
+<span class="ln">10</span>limit_conn_log_level notice<span class="p">;</span>
+<span class="ln">11</span> 
+<span class="ln">12</span><span class="c1">## 针对原始用户 IP 地址做限制</span>
+<span class="ln">13</span>limit_req_zone <span class="nv">$clientRealIp</span> <span class="nv">zone</span><span class="o">=</span>ConnLimitZone:20m  <span class="nv">rate</span><span class="o">=</span>10r/s<span class="p">;</span>
+<span class="ln">14</span><span class="c1">#limit_req zone=ConnLimitZone burst=10 nodelay;</span>
+<span class="ln">15</span>limit_req_log_level notice<span class="p">;</span>
+<span class="ln">16</span> 
+<span class="ln">17</span><span class="c1">## 具体服务器配置</span>
+<span class="ln">18</span>server <span class="o">{</span>
+<span class="ln">19</span>    listen   80<span class="p">;</span>
+<span class="ln">20</span>    location ~ <span class="se">\.</span>php$ <span class="o">{</span>
+<span class="ln">21</span>        <span class="c1">## 最多 5 个排队， 由于每秒处理 10 个请求 + 5个排队，你一秒最多发送 15 个请求过来，再多就直接返回 503 错误给你了</span>
+<span class="ln">22</span>        limit_req <span class="nv">zone</span><span class="o">=</span>ConnLimitZone <span class="nv">burst</span><span class="o">=</span><span class="m">5</span> nodelay<span class="p">;</span>
+<span class="ln">23</span> 
+<span class="ln">24</span>        fastcgi_pass   127.0.0.1:9000<span class="p">;</span>
+<span class="ln">25</span>        fastcgi_index  index.php<span class="p">;</span>
+<span class="ln">26</span>        include fastcgi_params<span class="p">;</span>
+<span class="ln">27</span>    <span class="o">}</span>  
+<span class="ln">28</span> 
+<span class="ln">29</span><span class="o">}</span>
+</code></pre></div><h2 id="经过多层cdn之后取得原始用户的ip地址">经过多层CDN之后取得原始用户的IP地址</h2>
+<p>通过 map 指令，我们为 nginx 创建了一个变量 $clientRealIp ，这个就是 原始用户的真实 IP 地址，不论用户是直接访问，还是通过一串 CDN 之后的访问，我们都能取得正确的原始IP地址</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>map <span class="nv">$http_x_forwarded_for</span>  <span class="nv">$clientRealIp</span> <span class="o">{</span>
+<span class="ln">2</span>        <span class="c1">## 没有通过代理，直接用 remote_addr</span>
+<span class="ln">3</span>    <span class="s2">&#34;&#34;</span>  <span class="nv">$remote_addr</span><span class="p">;</span> 
+<span class="ln">4</span>        <span class="c1">## 用正则匹配，从 x_forwarded_for 中取得用户的原始IP</span>
+<span class="ln">5</span>        <span class="c1">## 例如   X-Forwarded-For: 202.123.123.11, 208.22.22.234, 192.168.2.100,...</span>
+<span class="ln">6</span>        <span class="c1">## 这里第一个 202.123.123.11 是用户的真实 IP，后面其它都是经过的 CDN 服务器</span>
+<span class="ln">7</span>    ~^<span class="o">(</span>?P&lt;firstAddr&gt;<span class="o">[</span>0-9<span class="se">\.</span><span class="o">]</span>+<span class="o">)</span>,?.*$    <span class="nv">$firstAddr</span><span class="p">;</span>
+<span class="ln">8</span><span class="o">}</span>
+<span class="ln">9</span>
+</code></pre></div><h2 id="隐藏版本信息">隐藏版本信息</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>server_tokens   off<span class="p">;</span>
+<span class="ln">2</span>proxy_hide_header        X-Powered-By<span class="p">;</span>
+</code></pre></div><h2 id="禁用扩展名">禁用扩展名</h2>
+<p>location ~* .(txt|doc|sql|gz|svn|git)$ {
+deny all;
+}</p>
+<h2 id="重定向http请求到https">重定向HTTP请求到HTTPS</h2>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>server {
+<span class="ln">2</span>    ...
+<span class="ln">3</span>    return 301  https://$server_name$request_uri;
+<span class="ln">4</span>    ...
+<span class="ln">5</span>}
+</code></pre></div><h2 id="防止xss攻击">防止XSS攻击</h2>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>add_header X-Frame-Options &#34;SAMEORIGIN&#34;;
+<span class="ln">2</span>add_header X-XSS-Protection &#34;1; mode=block&#34;;
+<span class="ln">3</span>add_header X-Content-Type-Options &#34;nosniff&#34;;
+</code></pre></div><ul>
+<li><code>X-Frame-Options</code>： 响应头表示是否允许浏览器加载frame等属性，有三个配置DENY禁止任何网页被嵌入,SAMEORIGIN`只允许本网站的嵌套,ALLOW-FROM允许指定地址的嵌套</li>
+<li><code>X-XSS-Protection</code>： 表示启用XSS过滤（禁用过滤为X-XSS-Protection: 0），mode=block表示若检查到XSS攻击则停止渲染页面</li>
+<li><code>X-Content-Type-Options</code>： 响应头用来指定浏览器对未指定或错误指定Content-Type资源真正类型的猜测行为，nosniff 表示不允许任何猜测</li>
+</ul>
+<p>在通常的请求响应中，浏览器会根据Content-Type来分辨响应的类型，但当响应类型未指定或错误指定时，浏览会尝试启用MIME-sniffing来猜测资源的响应类型，这是非常危险的</p>
+<p>例如一个.jpg的图片文件被恶意嵌入了可执行的js代码，在开启资源类型猜测的情况下，浏览器将执行嵌入的js代码，可能会有意想不到的后果</p>
+<h2 id="目录只读">目录只读</h2>
+<p>如果没有上传需求，完全可以把网站根目录弄成只读的，加固安全。</p>
+<p>做了一点小动作，给网站根目录搞了一个只读的挂载点。这里假设网站根目录为/var/www/html</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>mkdir -p /data  
+<span class="ln">2</span>mkdir -p /var/www/html  
+<span class="ln">3</span>mount --bind /data /var/www/html  
+<span class="ln">4</span>mount -o remount,ro --bind /data /var/www/html  
+</code></pre></div><p>网站内容实际位于/data，网站内容更新就往/data里更新，目录/var/www/html无法执行任何写操作，否则会报错“Read-only file system”，极大程度上可以防止提权篡改。</p>
+<hr>
+<p>参考链接：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/RiwellAckerman/p/11273705.html">https://www.cnblogs.com/RiwellAckerman/p/11273705.html</a></li>
+<li><a href="https://www.hack520.com/456.html">https://www.hack520.com/456.html</a></li>
+<li><a href="https://www.cnblogs.com/chenpingzhao/p/5785416.html">https://www.cnblogs.com/chenpingzhao/p/5785416.html</a></li>
+<li><a href="https://blog.csdn.net/qidakui_123/article/details/106036299">https://blog.csdn.net/qidakui_123/article/details/106036299</a></li>
+<li><a href="https://blog.51cto.com/hobowizard/1895269">https://blog.51cto.com/hobowizard/1895269</a></li>
+</ul>
+
+    
+      
+    
+  </article>
+<aside class="sidebar">
+  <section class="sidebar_inner">
+    <h2>Paul Zeng</h2>
+    <div>
+      架构师、团队主管、体育节目爱好者 @Shanghai
+    </div>
+    <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
+    <h2 class="mt-4">最新文章</h2>
+    <ul class="flex-column">
+      <li>
+        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/08/manjaro_debtap/" class="nav-link">Manjaro安装deb包</a>
+      </li>
+    </ul>
+    <div>
+      <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
+      <nav class="tags_nav">
+        <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
+          LINUX
+          <span class="button_tally">9</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
+          POSTGRES
+          <span class="button_tally">9</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/%E5%A1%AB%E5%9D%91%E4%B9%8B%E6%97%85/' class="post_tag button button_translucent">
+          填坑之旅
+          <span class="button_tally">8</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
+          MANJARO
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
+          MAC
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/%E7%AE%97%E6%B3%95/' class="post_tag button button_translucent">
+          算法
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
+          DOCKER
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/nginx/' class="post_tag button button_translucent">
+          NGINX
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/nodejs/' class="post_tag button button_translucent">
+          NODEJS
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/terraform/' class="post_tag button button_translucent">
+          TERRAFORM
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/zookeeper/' class="post_tag button button_translucent">
+          ZOOKEEPER
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/chrome/' class="post_tag button button_translucent">
+          CHROME
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/elastic-search/' class="post_tag button button_translucent">
+          ELASTIC-SEARCH
+          <span class="button_tally">1</span>
+        </a>
+        
+        
+        <br>
+        <div class="post_tags_toggle button">所有分类</div>
+        <div class="post_tags">
+          <div class="tags_list">
+            
+            <a href='https://www.zengxi.net/categories/chrome/' class=" post_tag button button_translucent" data-position=1>CHROME<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=2>DOCKER<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/elastic-search/' class=" post_tag button button_translucent" data-position=1>ELASTIC-SEARCH<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/hibernate/' class=" post_tag button button_translucent" data-position=1>HIBERNATE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=2>JAVA<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/linux/' class=" post_tag button button_translucent" data-position=9>LINUX<span class="button_tally">9</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/mac/' class=" post_tag button button_translucent" data-position=3>MAC<span class="button_tally">3</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=4>MANJARO<span class="button_tally">4</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/minio/' class=" post_tag button button_translucent" data-position=1>MINIO<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/nginx/' class=" post_tag button button_translucent" data-position=2>NGINX<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/nodejs/' class=" post_tag button button_translucent" data-position=2>NODEJS<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/postgres/' class=" post_tag button button_translucent" data-position=9>POSTGRES<span class="button_tally">9</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/redis/' class=" post_tag button button_translucent" data-position=1>REDIS<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/terraform/' class=" post_tag button button_translucent" data-position=2>TERRAFORM<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/ubuntu/' class=" post_tag button button_translucent" data-position=1>UBUNTU<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E5%A1%AB%E5%9D%91%E4%B9%8B%E6%97%85/' class=" post_tag button button_translucent" data-position=8>填坑之旅<span class="button_tally">8</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E7%AE%97%E6%B3%95/' class=" post_tag button button_translucent" data-position=3>算法<span class="button_tally">3</span>
+            </a>
+            
+            <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
+            </div>
+            <span class="tags_hide"><svg class="icon">
+            <use xlink:href="#closeme"></use>
+          </svg></span>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div>
+      <h2 class="mt-4 taxonomy" id="tags-section">标签</h2>
+      <nav class="tags_nav">
+        <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
+          POSTGRES
+          <span class="button_tally">9</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
+          LINUX
+          <span class="button_tally">5</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
+          MANJARO
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/nginx/' class="post_tag button button_translucent">
+          NGINX
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
+          SHELL
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
+          DOCKER
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class="post_tag button button_translucent">
+          排序
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/' class="post_tag button button_translucent">
+          算法
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/chrome/' class="post_tag button button_translucent">
+          CHROME
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/grep/' class="post_tag button button_translucent">
+          GREP
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/nodejs/' class="post_tag button button_translucent">
+          NODEJS
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/pglogical/' class="post_tag button button_translucent">
+          PGLOGICAL
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/quartz/' class="post_tag button button_translucent">
+          QUARTZ
+          <span class="button_tally">2</span>
+        </a>
+        
+        
+        <br>
+        <div class="post_tags_toggle button">所有标签</div>
+        <div class="post_tags">
+          <div class="tags_list">
+            
+            <a href='https://www.zengxi.net/tags/alpine/' class=" post_tag button button_translucent" data-position=1>ALPINE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/chrome/' class=" post_tag button button_translucent" data-position=2>CHROME<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/cloudflare/' class=" post_tag button button_translucent" data-position=1>CLOUDFLARE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/cluster/' class=" post_tag button button_translucent" data-position=1>CLUSTER<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/criteria-builder/' class=" post_tag button button_translucent" data-position=1>CRITERIA-BUILDER<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/date/' class=" post_tag button button_translucent" data-position=1>DATE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/declare/' class=" post_tag button button_translucent" data-position=1>DECLARE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=3>DOCKER<span class="button_tally">3</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/elastic-search/' class=" post_tag button button_translucent" data-position=1>ELASTIC-SEARCH<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/excel/' class=" post_tag button button_translucent" data-position=1>EXCEL<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/frp/' class=" post_tag button button_translucent" data-position=1>FRP<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/gitbook/' class=" post_tag button button_translucent" data-position=1>GITBOOK<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/grep/' class=" post_tag button button_translucent" data-position=2>GREP<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/hibernate/' class=" post_tag button button_translucent" data-position=1>HIBERNATE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/inputstream/' class=" post_tag button button_translucent" data-position=1>INPUTSTREAM<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=3>JAVA<span class="button_tally">3</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/jconsole/' class=" post_tag button button_translucent" data-position=1>JCONSOLE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/jetty/' class=" post_tag button button_translucent" data-position=1>JETTY<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/jmx/' class=" post_tag button button_translucent" data-position=1>JMX<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/jvisualvm/' class=" post_tag button button_translucent" data-position=1>JVISUALVM<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/kcp/' class=" post_tag button button_translucent" data-position=1>KCP<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/linux/' class=" post_tag button button_translucent" data-position=5>LINUX<span class="button_tally">5</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/locale/' class=" post_tag button button_translucent" data-position=1>LOCALE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/mac/' class=" post_tag button button_translucent" data-position=1>MAC<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=4>MANJARO<span class="button_tally">4</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/migration/' class=" post_tag button button_translucent" data-position=1>MIGRATION<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/minio/' class=" post_tag button button_translucent" data-position=1>MINIO<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/nas/' class=" post_tag button button_translucent" data-position=1>NAS<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/nginx/' class=" post_tag button button_translucent" data-position=4>NGINX<span class="button_tally">4</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/nodejs/' class=" post_tag button button_translucent" data-position=2>NODEJS<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/pglogical/' class=" post_tag button button_translucent" data-position=2>PGLOGICAL<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/postgres/' class=" post_tag button button_translucent" data-position=9>POSTGRES<span class="button_tally">9</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/quartz/' class=" post_tag button button_translucent" data-position=2>QUARTZ<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/redis/' class=" post_tag button button_translucent" data-position=1>REDIS<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/rsyslog/' class=" post_tag button button_translucent" data-position=1>RSYSLOG<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/schema/' class=" post_tag button button_translucent" data-position=1>SCHEMA<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/security/' class=" post_tag button button_translucent" data-position=1>SECURITY<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/serialize/' class=" post_tag button button_translucent" data-position=1>SERIALIZE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/session/' class=" post_tag button button_translucent" data-position=1>SESSION<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/shell/' class=" post_tag button button_translucent" data-position=4>SHELL<span class="button_tally">4</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/spring/' class=" post_tag button button_translucent" data-position=1>SPRING<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/ssh/' class=" post_tag button button_translucent" data-position=1>SSH<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/ssl/' class=" post_tag button button_translucent" data-position=1>SSL<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/terraform/' class=" post_tag button button_translucent" data-position=2>TERRAFORM<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/ubuntu/' class=" post_tag button button_translucent" data-position=2>UBUNTU<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/unix/' class=" post_tag button button_translucent" data-position=2>UNIX<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/vmware/' class=" post_tag button button_translucent" data-position=1>VMWARE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/wal-e/' class=" post_tag button button_translucent" data-position=1>WAL-E<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/wifi/' class=" post_tag button button_translucent" data-position=1>WIFI<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=3>排序<span class="button_tally">3</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85/' class=" post_tag button button_translucent" data-position=1>生产事故<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/' class=" post_tag button button_translucent" data-position=3>算法<span class="button_tally">3</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BF%9C%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>远程<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=2>阿里云<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
+            </a>
+            
+            <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
+            </div>
+            <span class="tags_hide"><svg class="icon">
+            <use xlink:href="#closeme"></use>
+          </svg></span>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </section>
+</aside>
+
+</div>
+    </main><svg width="0" height="0" class="hidden">
+  <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
+    <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.001 18.001" id="twitter">
+    <path d="M15.891 4.013c.808-.496 1.343-1.173 1.605-2.034a8.68 8.68 0 0 1-2.351.861c-.703-.756-1.593-1.14-2.66-1.14-1.043 0-1.924.366-2.643 1.078a3.56 3.56 0 0 0-1.076 2.605c0 .309.039.585.117.819-3.076-.105-5.622-1.381-7.628-3.837-.34.601-.51 1.213-.51 1.846 0 1.301.549 2.332 1.645 3.089-.625-.053-1.176-.211-1.645-.47 0 .929.273 1.705.82 2.388a3.623 3.623 0 0 0 2.115 1.291c-.312.08-.641.118-.979.118-.312 0-.533-.026-.664-.083.23.757.664 1.371 1.291 1.841a3.652 3.652 0 0 0 2.152.743C4.148 14.173 2.625 14.69.902 14.69c-.422 0-.721-.006-.902-.038 1.697 1.102 3.586 1.649 5.676 1.649 2.139 0 4.029-.542 5.674-1.626 1.645-1.078 2.859-2.408 3.639-3.974a10.77 10.77 0 0 0 1.172-4.892v-.468a7.788 7.788 0 0 0 1.84-1.921 8.142 8.142 0 0 1-2.11.593z"
+      ></path>
+  </symbol>
+  <symbol aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="mail">
+    <path  d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="calendar">
+    <path d="M452 40h-24V0h-40v40H124V0H84v40H60C26.916 40 0 66.916 0 100v352c0 33.084 26.916 60 60 60h392c33.084 0 60-26.916 60-60V100c0-33.084-26.916-60-60-60zm20 412c0 11.028-8.972 20-20 20H60c-11.028 0-20-8.972-20-20V188h432v264zm0-304H40v-48c0-11.028 8.972-20 20-20h24v40h40V80h264v40h40V80h24c11.028 0 20 8.972 20 20v48z"></path>
+    <path d="M76 230h40v40H76zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zM76 310h40v40H76zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zM76 390h40v40H76zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zm80-80h40v40h-40z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="github">
+    <path d="M255.968 5.329C114.624 5.329 0 120.401 0 262.353c0 113.536 73.344 209.856 175.104 243.872 12.8 2.368 17.472-5.568 17.472-12.384 0-6.112-.224-22.272-.352-43.712-71.2 15.52-86.24-34.464-86.24-34.464-11.616-29.696-28.416-37.6-28.416-37.6-23.264-15.936 1.728-15.616 1.728-15.616 25.696 1.824 39.2 26.496 39.2 26.496 22.848 39.264 59.936 27.936 74.528 21.344 2.304-16.608 8.928-27.936 16.256-34.368-56.832-6.496-116.608-28.544-116.608-127.008 0-28.064 9.984-51.008 26.368-68.992-2.656-6.496-11.424-32.64 2.496-68 0 0 21.504-6.912 70.4 26.336 20.416-5.696 42.304-8.544 64.096-8.64 21.728.128 43.648 2.944 64.096 8.672 48.864-33.248 70.336-26.336 70.336-26.336 13.952 35.392 5.184 61.504 2.56 68 16.416 17.984 26.304 40.928 26.304 68.992 0 98.72-59.84 120.448-116.864 126.816 9.184 7.936 17.376 23.616 17.376 47.584 0 34.368-.32 62.08-.32 70.496 0 6.88 4.608 14.88 17.6 12.352C438.72 472.145 512 375.857 512 262.353 512 120.401 397.376 5.329 255.968 5.329z"></path>
+  </symbol>
+  <symbol viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="rss">
+    <circle cx="3.429" cy="20.571" r="3.429"></circle>
+    <path d="M11.429 24h4.57C15.999 15.179 8.821 8.001 0 8v4.572c6.302.001 11.429 5.126 11.429 11.428z"></path>
+    <path d="M24 24C24 10.766 13.234 0 0 0v4.571c10.714 0 19.43 8.714 19.43 19.429z"></path>
+  </symbol>
+  <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="linkedin">
+    <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h362c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zM181 406h-60V196h60zm0-240h-60v-60h60zm210 240h-60V286c0-16.54-13.46-30-30-30s-30 13.46-30 30v120h-60V196h60v11.309C286.719 202.422 296.93 196 316 196c40.691.043 75 36.547 75 79.688zm0 0"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" id="arrow">
+    <path d="M604.501 440.509L325.398 134.956c-5.331-5.357-12.423-7.627-19.386-7.27-6.989-.357-14.056 1.913-19.387 7.27L7.499 440.509c-9.999 10.024-9.999 26.298 0 36.323s26.223 10.024 36.222 0l262.293-287.164L568.28 476.832c9.999 10.024 26.222 10.024 36.221 0 9.999-10.023 9.999-26.298 0-36.323z"></path>
+  </symbol>
+  <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="carly">
+    <path d="M504.971 239.029L448 182.059V84c0-46.317-37.682-84-84-84h-44c-13.255 0-24 10.745-24 24s10.745 24 24 24h44c19.851 0 36 16.149 36 36v108c0 6.365 2.529 12.47 7.029 16.971L454.059 256l-47.029 47.029A24.002 24.002 0 0 0 400 320v108c0 19.851-16.149 36-36 36h-44c-13.255 0-24 10.745-24 24s10.745 24 24 24h44c46.318 0 84-37.683 84-84v-98.059l56.971-56.971c9.372-9.372 9.372-24.568 0-33.941zM112 192V84c0-19.851 16.149-36 36-36h44c13.255 0 24-10.745 24-24S205.255 0 192 0h-44c-46.318 0-84 37.683-84 84v98.059l-56.971 56.97c-9.373 9.373-9.373 24.568 0 33.941L64 329.941V428c0 46.317 37.682 84 84 84h44c13.255 0 24-10.745 24-24s-10.745-24-24-24h-44c-19.851 0-36-16.149-36-36V320c0-6.365-2.529-12.47-7.029-16.971L57.941 256l47.029-47.029A24.002 24.002 0 0 0 112 192z"></path>
+  </symbol>
+  <symbol viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="copy">
+    <path d="M23 2.75A2.75 2.75 0 0 0 20.25 0H8.75A2.75 2.75 0 0 0 6 2.75v13.5A2.75 2.75 0 0 0 8.75 19h11.5A2.75 2.75 0 0 0 23 16.25zM18.25 14.5h-7.5a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5zm0-3h-7.5a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5zm0-3h-7.5a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5z"></path>
+    <path d="M8.75 20.5a4.255 4.255 0 0 1-4.25-4.25V2.75c0-.086.02-.166.025-.25H3.75A2.752 2.752 0 0 0 1 5.25v16A2.752 2.752 0 0 0 3.75 24h12a2.752 2.752 0 0 0 2.75-2.75v-.75z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.001 512.001" id="closeme">
+    <path d="M284.286 256.002L506.143 34.144c7.811-7.811 7.811-20.475 0-28.285-7.811-7.81-20.475-7.811-28.285 0L256 227.717 34.143 5.859c-7.811-7.811-20.475-7.811-28.285 0-7.81 7.811-7.811 20.475 0 28.285l221.857 221.857L5.858 477.859c-7.811 7.811-7.811 20.475 0 28.285a19.938 19.938 0 0 0 14.143 5.857 19.94 19.94 0 0 0 14.143-5.857L256 284.287l221.857 221.857c3.905 3.905 9.024 5.857 14.143 5.857s10.237-1.952 14.143-5.857c7.811-7.811 7.811-20.475 0-28.285L284.286 256.002z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="open-menu">
+    <path d="M492 236H20c-11.046 0-20 8.954-20 20s8.954 20 20 20h472c11.046 0 20-8.954 20-20s-8.954-20-20-20zm0-160H20C8.954 76 0 84.954 0 96s8.954 20 20 20h472c11.046 0 20-8.954 20-20s-8.954-20-20-20zm0 320H20c-11.046 0-20 8.954-20 20s8.954 20 20 20h472c11.046 0 20-8.954 20-20s-8.954-20-20-20z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="instagram">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id=youtube>
+    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+  </symbol>
+</svg>
+
+<footer class="footer">
+  <div class="footer_inner wrap pale">
+    <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2020</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+  <svg class="icon">
+  <use xlink:href="#arrow"></use>
+</svg>
+</a>
+
+  </div>
+</footer>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.8247567be6f4dd123beccbeea5c7a9195169f206ea800a9ee95147c14e6a77ebc43c7dda9eefc04bbcb16d328234c5be2fa40712cef55a1543065206b2943a15.js" integrity="sha512-gkdWe&#43;b03RI77MvupcepGVFp8gbqgAqe6VFHwU5qd&#43;vEPH3anu/AS7yxbTKCNMW&#43;L6QHEs71WhVDBlIGspQ6FQ==" crossorigin="anonymous"></script>
+    
+  </body>
+</html>

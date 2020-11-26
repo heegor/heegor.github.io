@@ -9,10 +9,10 @@
     <lastBuildDate>Mon, 01 Jun 2020 13:44:01 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>用string adapter来解决系统接口对接中发现的空值验证问题</title>
-      <link>https://www.zengxi.net/posts/2020/06/string_adapter/</link>
+      <link>https://www.zengxi.net/2020/06/string_adapter/</link>
       <pubDate>Mon, 01 Jun 2020 13:44:01 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/06/string_adapter/</guid>
+      <guid>https://www.zengxi.net/2020/06/string_adapter/</guid>
       <description>客户用的是很旧版本的ERP系统，在与客户系统做接口对接的时候发现了一个问题。假设接口请求需要的body是xml格式的，共有三个字段：name, mobile, email。由于客户ERP系统比较老，如果某个字段没有值，传的是空字符串，而不是将该字段在请求消息体中隐藏。客户发的请求类似下面的例子：
 1&amp;lt;xml&amp;gt; 2 &amp;lt;name&amp;gt;John&amp;lt;/name&amp;gt; 3 &amp;lt;mobile&amp;gt;13800138000&amp;lt;/mobile&amp;gt; 4 &amp;lt;email&amp;gt;&amp;lt;/email&amp;gt; 5&amp;lt;/xml&amp;gt; 由于历史遗留问题，我方系统里在字段上面加了 javax.validation.constraints.Pattern 注解使用正则表达式来对传入的请求值做验证。当传入值为空字符串的时候，正则表达式验证就无法通过。
 与客户做过沟通，对于空值的字段，他们也没有办法在请求中隐藏字段，只能传空字符串。那就只能在我方系统这边看看是否可以通过修改代码来解决。一种方案是修改正则表达式，来兼容空字符串，但是由于这些都是传统代码，不确定把空字符串设置在这个字段上面会对后面的处理会有什么影响。如果有更合适的、代价更小的方案，那么就最好不选择这种。
@@ -21,10 +21,10 @@
     
     <item>
       <title>通过SSH和JMX远程监控Java服务</title>
-      <link>https://www.zengxi.net/posts/2018/06/connect-remote-jmx-with-ssh/</link>
+      <link>https://www.zengxi.net/2018/06/connect-remote-jmx-with-ssh/</link>
       <pubDate>Thu, 28 Jun 2018 09:26:06 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/connect-remote-jmx-with-ssh/</guid>
+      <guid>https://www.zengxi.net/2018/06/connect-remote-jmx-with-ssh/</guid>
       <description>在日常工作中，可以使用一些监控数据的图形展示工具（比如Grafana等）来查看服务器上面JVM的使用情况，比如内存或者CPU的占用情况。但是，在需要解决实际问题的时候，比如CPU或者内存占用过高，还是需要连接到远程的服务器，查看JVM的具体运行情况来分析问题产生的原因。
 通常情况下，我们是通过开启远程服务器上的JMX，使用JVisualVM或JConsole客户端，远程连接到服务器上。然而，在实际的生产环境中，Java应用服务器并没有直接暴露在公网，必须通过跳板机来连接。
 网上查了一些资料，多数比较麻烦，有些还需要借助第三方工具。后来找到一个简便的方法，在使用JVisualVM或JConsole客户端的时候，通过指定socks代理的方式来连接远程服务器。下面是具体的步骤。
@@ -41,10 +41,10 @@ Java应用开启JMX 在应用启动命令里面添加下面的参数。指定JMX
     
     <item>
       <title>实现InputStream的序列化</title>
-      <link>https://www.zengxi.net/posts/2018/06/inputstream-serialize/</link>
+      <link>https://www.zengxi.net/2018/06/inputstream-serialize/</link>
       <pubDate>Tue, 12 Jun 2018 10:57:35 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/inputstream-serialize/</guid>
+      <guid>https://www.zengxi.net/2018/06/inputstream-serialize/</guid>
       <description>InputStream本身是不支持序列化的，但是在实际开发的过程中有时会需要将输入流通过socket传输，比如RMI的远程调用。
 在Serializable的Java文档文档中有下面的描述：
  Classes that require special handling during the serialization and deserialization process must implement special methods with these exact signatures:

@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 27 Oct 2020 08:23:45 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/postgres/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ubuntu安装Postgres</title>
-      <link>https://www.zengxi.net/posts/2020/10/ubuntu_install_postgresql/</link>
+      <link>https://www.zengxi.net/2020/10/ubuntu_install_postgresql/</link>
       <pubDate>Tue, 27 Oct 2020 08:23:45 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/10/ubuntu_install_postgresql/</guid>
+      <guid>https://www.zengxi.net/2020/10/ubuntu_install_postgresql/</guid>
       <description>ubuntu自带的软件仓库可能没有最新的postgres，这就需要自己手动添加安装源，再安装
 1# 添加安装源 2sudo sh -c &amp;#39;echo &amp;#34;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&amp;#34; &amp;gt; /etc/apt/sources.list.d/pgdg.list&amp;#39; 3 4# 导入key 5wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - 6 7# 更新软件列表 8sudo apt-get update 9 10# 查找相关的软件包 11sudo apt-cache search postgres 12 13# 安装 14sudo apt install &amp;lt;对应的软件名称&amp;gt;  参考：
  https://www.postgresql.org/download/linux/ubuntu/  </description>
@@ -20,10 +20,10 @@
     
     <item>
       <title>Postgres启动时遇到只读文件系统的错误</title>
-      <link>https://www.zengxi.net/posts/2020/09/postgres_startup_readonly_file_error/</link>
+      <link>https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/</link>
       <pubDate>Sun, 20 Sep 2020 20:23:45 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/09/postgres_startup_readonly_file_error/</guid>
+      <guid>https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/</guid>
       <description>问题与解决方法 公司内部私有云由于断电，机器没有正常关机，结果导致 Postgres 服务器启动时，报错
 12020-09-09 07:22:15.296 UTC [3876] FATAL: could not remove old lock file &amp;#34;postmaster.pid&amp;#34;: Read-only file system 22020-09-09 07:22:15.296 UTC [3876] HINT: The file seems accidentally left over, but it could not be removed. Please remove the file by hand and try again. 3pg_ctl: could not start server 尝试执行下面命令去重新挂载磁盘目录
 1mount -o remount -w /var/lib/postgresql/ 但是报错
@@ -33,10 +33,10 @@
     
     <item>
       <title>转: postgresql 查看单个表大小</title>
-      <link>https://www.zengxi.net/posts/2020/06/pg_check_table_size/</link>
+      <link>https://www.zengxi.net/2020/06/pg_check_table_size/</link>
       <pubDate>Mon, 15 Jun 2020 10:35:08 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/06/pg_check_table_size/</guid>
+      <guid>https://www.zengxi.net/2020/06/pg_check_table_size/</guid>
       <description>原文链接：https://blog.csdn.net/kmust20093211/article/details/47616345
 方法一 ，查某个表
 1select pg_size_pretty(pg_relation_size(&amp;#39;table_name&amp;#39;)); 方法二 ，查出所有表并按大小排序
@@ -46,10 +46,10 @@
     
     <item>
       <title>postgres增量备份工具：wal-e</title>
-      <link>https://www.zengxi.net/posts/2020/06/pg_wale_continuous_archiving/</link>
+      <link>https://www.zengxi.net/2020/06/pg_wale_continuous_archiving/</link>
       <pubDate>Tue, 09 Jun 2020 12:31:50 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/06/pg_wale_continuous_archiving/</guid>
+      <guid>https://www.zengxi.net/2020/06/pg_wale_continuous_archiving/</guid>
       <description>wal-e这个工具可以用来给postgres数据库做基础备份与增量备份，这个对数据库容灾很有帮助。目前它支持将备份存储到AWS S3，Azure Blob Store与Google Storage等。
 一些基本概念 Base Backup 也称为热备份，它不会中断PostgreSQL中任何事务。一旦启动了basebackup，它将等待一个checkpoint。如果到达了checkpoint，那么它将把整个数据目录复制到一个文件中。这些备份将会是replication或POINT IN TIME恢复的起点。通常，basebackup是不一致的，可能包含已经损坏的数据。这时，就需要用到WAL文件
 WAL 通过WAL文件可以获得数据库内所有数据的变更。这些变更首先写入WAL文件，然后再对数据库进行实际性地写入 。因此被称作Write Ahead Log。
@@ -63,10 +63,10 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
     
     <item>
       <title>Postgres关闭某个数据库关联的session</title>
-      <link>https://www.zengxi.net/posts/2020/04/pg_close_session_remove_db/</link>
+      <link>https://www.zengxi.net/2020/04/pg_close_session_remove_db/</link>
       <pubDate>Thu, 23 Apr 2020 10:10:07 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/04/pg_close_session_remove_db/</guid>
+      <guid>https://www.zengxi.net/2020/04/pg_close_session_remove_db/</guid>
       <description>Postgres删除数据库的时候，报错：有其他用户正在使用该数据库，无法删除。这时，需要关闭这个数据库的相关的连接，然后再删除数据库
 可以执行下面的命令来关闭连接：
 1 SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname=&amp;#39;要删除的数据库名称&amp;#39; AND pid&amp;lt;&amp;gt;pg_backend_pid(); </description>
@@ -74,10 +74,10 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
     
     <item>
       <title>转: Postgres数据库DBA常用命令</title>
-      <link>https://www.zengxi.net/posts/2020/01/postgres-frequently-used-commands/</link>
+      <link>https://www.zengxi.net/2020/01/postgres-frequently-used-commands/</link>
       <pubDate>Mon, 27 Jan 2020 21:22:07 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/01/postgres-frequently-used-commands/</guid>
+      <guid>https://www.zengxi.net/2020/01/postgres-frequently-used-commands/</guid>
       <description>原作者：廖学强 原文链接：点击这里   查看帮助命令
 1DB=# help --总的帮助 2 3DB=# \h --SQL commands级的帮助 4 5DB=# \? --psql commands级的帮助 按列显示，类似mysql的\G
 1DB=# \x 2 3Expanded display is on. 查看DB安装目录(最好root用户执行)
@@ -90,10 +90,10 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
     
     <item>
       <title>重建基于pglogical逻辑复制的从库</title>
-      <link>https://www.zengxi.net/posts/2019/12/pg-recreate-pglogical-slave/</link>
+      <link>https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/</link>
       <pubDate>Fri, 06 Dec 2019 21:48:18 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2019/12/pg-recreate-pglogical-slave/</guid>
+      <guid>https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/</guid>
       <description>《Postgres 9.x 升级至 10.x》一文中提到了使用pglogical逻辑复制升级。基于这种方式的升级有个缺点，就是主库的DDL发生改变的话，那么从库的复制就会有影响，可能需要重建从库来解决。
 重建从库的步骤与之前创建逻辑复制有点类似，但是由于之前已经做过一些操作，所以相比之下，少了一些步骤。
 从库中删除数据库，再创建一个空的数据库 由于表结构的改变，原先的数据都不能用了，需要重新同步。创建新的空数据库是最快的方式
@@ -104,10 +104,10 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
     
     <item>
       <title>Postgres 9.x 升级至 10.x</title>
-      <link>https://www.zengxi.net/posts/2019/12/pg-upgrade-version/</link>
+      <link>https://www.zengxi.net/2019/12/pg-upgrade-version/</link>
       <pubDate>Sun, 01 Dec 2019 21:31:18 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2019/12/pg-upgrade-version/</guid>
+      <guid>https://www.zengxi.net/2019/12/pg-upgrade-version/</guid>
       <description>目前主要有两种升级方式，它们分别使用于不同的场景。
    升级方式 优点 缺点     pglogical逻辑复制升级 停机时间短 需提前准备从库，并搭建replication，在replication期间，需考虑DDL语句带来的影响。   pg_upgrade升级 不需要提前准备replication 升级完成后需检查index是否正常，并执行vacuum analyze，对于数据量较大的库，这可能耗时较长    逻辑复制升级 前提条件 所有表都必须有主键 可以用下面的语句来检查
 1SELECT table_name 2 FROM information_schema.tables 3 WHERE (table_catalog, table_schema, table_name) NOT IN 4 (SELECT table_catalog, table_schema, table_name 5 FROM information_schema.table_constraints 6 WHERE constraint_type = &amp;#39;PRIMARY KEY&amp;#39;) 7 AND table_schema IN (&amp;#39;myschema&amp;#39;) super user无密码访问provider和subscriber 修改配置文件
@@ -116,10 +116,10 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
     
     <item>
       <title>设置Postgres数据库的默认schema</title>
-      <link>https://www.zengxi.net/posts/2018/06/set-postgres-default-schema/</link>
+      <link>https://www.zengxi.net/2018/06/set-postgres-default-schema/</link>
       <pubDate>Fri, 15 Jun 2018 10:26:05 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/06/set-postgres-default-schema/</guid>
+      <guid>https://www.zengxi.net/2018/06/set-postgres-default-schema/</guid>
       <description>查看当前的schema
 1SHOW search_path; 设置默认schema，仅对当前连接有效
 1SET search_path TO your_schema; 设置默认schema，数据库级别，修改之后的所有连接都有效

@@ -130,7 +130,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/01/postgres-frequently-used-commands/">转: Postgres数据库DBA常用命令</a>
+        <a href="https://www.zengxi.net/2020/01/postgres-frequently-used-commands/">转: Postgres数据库DBA常用命令</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -151,7 +151,7 @@
 1find / -name initdb 查看有多少DB实例在运行(最好root用户执行)
 1find / -name postgresql.conf 查看DB版本
 1cat $PGDATA/PG_VERSION 2 3psql --version 4 5DB=# show …</p>
-          <a href="https://www.zengxi.net/posts/2020/01/postgres-frequently-used-commands/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/01/postgres-frequently-used-commands/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -161,7 +161,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/01/manage-distribution-session-by-id/">根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</a>
+        <a href="https://www.zengxi.net/2020/01/manage-distribution-session-by-id/">根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -180,7 +180,7 @@
         <div>
           <p class="pale">背景 由于历史原因，原先的界面是用vaadin框架来实现。但是这个框架不适合互联网的分布式系统，正在逐步用目前主流的前端框架重写各个模块，把旧的vaadin页面替换掉。在替换过程中，新老界面并存。
 vaadin界面的servlet，每次都会判断请求中的session id值，如果在服务器中找不到对应这个id的session，就会重新生成一个。由于session id是在新界面登录的时候生成的，当点击链接从新界面跳转到vaadin界面的时候，vaadin服务会发现没有这个session id，就会重新生成一个新的session。换句话说，新老界面会有各自的session id。当然，分布式系统本来就有这个问题，可以采用分布 …</p>
-          <a href="https://www.zengxi.net/posts/2020/01/manage-distribution-session-by-id/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/01/manage-distribution-session-by-id/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -190,7 +190,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/01/mac-check-nearby-wifi-channel/">Mac 检查附近wifi所使用的信道</a>
+        <a href="https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/">Mac 检查附近wifi所使用的信道</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -208,7 +208,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <p class="pale">信道，也称作通道或频段，是以无线信号作为传输载体的数据信号传送通道。2.4G频段的工作频率为2.4-2.4835GHz，这83.5MHz频带划分为13个信道，各信道中心频率相差5MHz，向上向下分别扩展11MHz，信道带宽22MHz。中国采用欧洲/ETSI标准，使用1-13信道。
 相近无线路由器采用相同或重叠信道会形成信道竞争关系，相互影响无线链路质量，为了有效避免信道重叠造成的相互干扰，相近无线路由器应选择互不重叠的信道工作。
 早期无线路由器出厂时预设相同的信道（大多为6），因用户很少会修改信道，从而导致相互影响的情况。随着无线应用的迅速普及，无线路由器增加了信道自动选择功能，在设备启动时检测周围无线信道分布情况，选择最佳信道工 …</p>
-          <a href="https://www.zengxi.net/posts/2020/01/mac-check-nearby-wifi-channel/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -218,7 +218,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/01/mac-shell-support-map/">Mac下shell命令支持map</a>
+        <a href="https://www.zengxi.net/2020/01/mac-shell-support-map/">Mac下shell命令支持map</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -238,7 +238,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <p class="pale">Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：
 1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持，需要升级至4.x以上的版本
 1# 安装最新版本的bash 2brew install bash 3 4# 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash 5# 需要把新版本的shell添加至信任列表中 6sudo bash -c &#39;echo …</p>
-          <a href="https://www.zengxi.net/posts/2020/01/mac-shell-support-map/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/01/mac-shell-support-map/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -248,7 +248,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/01/quartz-job-issue-improvement/">Quartz job使用过程中的发现问题与改进</a>
+        <a href="https://www.zengxi.net/2020/01/quartz-job-issue-improvement/">Quartz job使用过程中的发现问题与改进</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -266,7 +266,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <p class="pale">遇到的问题与原因分析 生产环境中遇到的问题：
  服务在启动过程中，不时地卡住，后来发生的越来越频繁。看日志分析，卡在初始化quartz job store的时候 服务在运行过程中，不时地出现定时任务不被触发的情况  通过分析，得知问题产生的原因：
  目前代码中用的是Quartz scheduler 1.8.3版本，定时框架采用的是行锁，通过执行下面的SQL来锁住特定的记录。在分布式的系统的情况下，节点越多越容易发生锁等待，甚至死锁。Quartz scheduler 的 2.x 版本做了改进，在QRTZ_LOCKS表中多加了一个字段 SCHED_NAME。这有一个好处就是，可以给不同的应用分配不同的scheduler name，这样定 …</p>
-          <a href="https://www.zengxi.net/posts/2020/01/quartz-job-issue-improvement/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/01/quartz-job-issue-improvement/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -276,7 +276,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2019/12/incident-caused-by-app/">复盘 - 手机app上一行代码导致的生产事故</a>
+        <a href="https://www.zengxi.net/2019/12/incident-caused-by-app/">复盘 - 手机app上一行代码导致的生产事故</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -296,7 +296,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <p class="pale">过程 由于一些历史原因，以及与原先代码的兼容性，临时文件存储在minio中。
 某天，生产环境突发事故，minio集群的CPU与内存爆了，只能重启集群。过了十来分钟，很多服务都不可用，健康检查都不通过。日志中的错误信息显示，这些服务都是数据库拿不到连接。需要事先处理数据库连接的问题，于是连接到数据库查死锁，终止导致死锁的sql进程，再重启来恢复这些服务。
 由于前不久minio集群挂掉，很容易就想到是由于minio的原因。其他服务通过RPC调用一个文件存储服务来操作minio中的数据，当minio集群挂掉的时候，文件存储服务访问minio一直想访问minio直到超时。在这个期间，其他服务如果有事务调用文件存储服务来操作minio中文件， …</p>
-          <a href="https://www.zengxi.net/posts/2019/12/incident-caused-by-app/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2019/12/incident-caused-by-app/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -306,7 +306,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2019/12/pg-recreate-pglogical-slave/">重建基于pglogical逻辑复制的从库</a>
+        <a href="https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/">重建基于pglogical逻辑复制的从库</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -330,7 +330,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
 从库中删除数据库，再创建一个空的数据库 由于表结构的改变，原先的数据都不能用了，需要重新同步。创建新的空数据库是最快的方式
 从库中导入最新的表结构 在 provider 上导出结构数据
 1sudo -iu postgres pg_dumpall --schema-only -f dump.sql 在 subscriber 上导入结构 …</p>
-          <a href="https://www.zengxi.net/posts/2019/12/pg-recreate-pglogical-slave/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -340,7 +340,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2019/12/pg-upgrade-version/">Postgres 9.x 升级至 10.x</a>
+        <a href="https://www.zengxi.net/2019/12/pg-upgrade-version/">Postgres 9.x 升级至 10.x</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -362,7 +362,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <p class="pale">目前主要有两种升级方式，它们分别使用于不同的场景。
    升级方式 优点 缺点     pglogical逻辑复制升级 停机时间短 需提前准备从库，并搭建replication，在replication期间，需考虑DDL语句带来的影响。   pg_upgrade升级 不需要提前准备replication 升级完成后需检查index是否正常，并执行vacuum analyze，对于数据量较大的库，这可能耗时较长    逻辑复制升级 前提条件 所有表都必须有主键 可以用下面的语句来检查
 1SELECT table_name 2 FROM information_schema.tables 3 WHERE (table_catalog, …</p>
-          <a href="https://www.zengxi.net/posts/2019/12/pg-upgrade-version/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2019/12/pg-upgrade-version/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -372,7 +372,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2018/12/hibernate-criteria-builder-time-range/">Hibernate中用criteria builder处理日期与时间分开的字段</a>
+        <a href="https://www.zengxi.net/2018/12/hibernate-criteria-builder-time-range/">Hibernate中用criteria builder处理日期与时间分开的字段</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -391,7 +391,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         <div>
           <p class="pale">现有系统中原先在设计数据库字段的时候，把日期与时间分别存入两个不同的字段，但是这两个字段在数据库中都是以timestamp类型来保存。这样的话，如果需要在where条件中把这两个字段与某个特定的时间做比较，则需要分别截取有效的信息。对于日期字段仅仅取出日期的值，把时间舍弃；对于时间字段仅仅取出时间的值，把日期舍弃。
 举个例子，假设数据库中有两个字段：returnSlaDate存的是物品归还截止日期，returnSlaTime存的是物品归还截止时间。实际在保存的时候，数据库中returnSlaDate字段的值可能会是 2018-12-31 00:00:00 ，其中 00:00:00 是没有用的，在与特定时间做比较的时候，需要舍 …</p>
-          <a href="https://www.zengxi.net/posts/2018/12/hibernate-criteria-builder-time-range/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2018/12/hibernate-criteria-builder-time-range/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -401,7 +401,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2018/12/excel-trouble-shooting-zip-file/">记一次打开Excel文件错误的排查</a>
+        <a href="https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/">记一次打开Excel文件错误的排查</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -419,7 +419,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <p class="pale">在生产环境中，某个结果集导出的excel文件用Microsoft Excel无法打开，看到如下错误：
 最开始怀疑是在生成文件的时候，文件损坏掉了，但是重新生成多次，得到的结果都是一样的。在相同的界面，导出其他结果集所生成的文件却都是可以成功打开的，这样就可以排除代码功能方面的问题。如果和代码无关，那么就可能和数据有关系。根据出错提示给出的文件地址“C:\Users\ZHANGZ~1\AppData\Local\Temp\error083200_01.xml”, 打开该临时文件，可以看到下面的信息
 1&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; …</p>
-          <a href="https://www.zengxi.net/posts/2018/12/excel-trouble-shooting-zip-file/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -472,28 +472,28 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
+        <a href="https://www.zengxi.net/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
+        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
+        <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
+        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
+        <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
+        <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
+        <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
+        <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
       </li>
     </ul>
     <div>

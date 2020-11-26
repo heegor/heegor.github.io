@@ -9,10 +9,10 @@
     <lastBuildDate>Thu, 19 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/elastic-search/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Elastic Search vm.max_map_count too low 错误</title>
-      <link>https://www.zengxi.net/posts/2020/11/es_max_map_count_error/</link>
+      <link>https://www.zengxi.net/2020/11/es_max_map_count_error/</link>
       <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/11/es_max_map_count_error/</guid>
+      <guid>https://www.zengxi.net/2020/11/es_max_map_count_error/</guid>
       <description>在启动elastic search的时候，在启动日志看到下面的错误提示
 1Max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144] 解决这个问题，有两个办法：
  临时的，仅当前会话窗口有效 执行下面命令  1sysctl -w vm.max_map_count=262144 然后启动elastic search

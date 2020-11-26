@@ -125,7 +125,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/07/terraform_aliyun_ecs_ssh_key/">terraform中阿里云ECS ssh key变化问题</a>
+        <a href="https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/">terraform中阿里云ECS ssh key变化问题</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -145,7 +145,7 @@
           <p class="pale">目前的terraform脚本中，在新建阿里云ECS的时候，会通过 user_data 属性值来设定初始的ssh key。但是这个就存在一个隐患，如果将来想要改变初始的ssh key，再用terraform来推机器的时候，terraform发现user_data属性值发生变化，会删除现有的ECS并重建。
 解决的方法是，修改ECS的lifecycle，将user_data添加到忽略列表中。这样terraform就可以忽略掉该属性值的变化。
 1{ 2 resource &#34;alicloud_instance&#34; &#34;test_instance&#34; { 3 ... 4 5 lifecycle { 6 …</p>
-          <a href="https://www.zengxi.net/posts/2020/07/terraform_aliyun_ecs_ssh_key/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -155,7 +155,7 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/posts/2020/07/terraform_state_consistent/">解决terraform与远程云服务器资源状态不一致的问题</a>
+        <a href="https://www.zengxi.net/2020/07/terraform_state_consistent/">解决terraform与远程云服务器资源状态不一致的问题</a>
       </h3>
       <div class="post_meta">
   <svg class="icon">
@@ -176,7 +176,7 @@
 解决方案 要想解决这个问题，可以利用 terraform import 命令。也就是重新导入云资源的实例，然后同步成最新的信息。
 下面以阿里云ECS为例子。
 (1)删除 state …</p>
-          <a href="https://www.zengxi.net/posts/2020/07/terraform_state_consistent/" class="excerpt_more button">阅读更多</a>
+          <a href="https://www.zengxi.net/2020/07/terraform_state_consistent/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -197,28 +197,28 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
+        <a href="https://www.zengxi.net/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
+        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
+        <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
+        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
+        <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
+        <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
+        <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/posts/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
+        <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
       </li>
     </ul>
     <div>

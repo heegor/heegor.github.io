@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 14 Jul 2020 22:03:51 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/categories/%E5%A1%AB%E5%9D%91%E4%B9%8B%E6%97%85/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>jetty临时目录下的资源文件被删导致js等资源找不到</title>
-      <link>https://www.zengxi.net/posts/2020/07/jetty_tmp_dir/</link>
+      <link>https://www.zengxi.net/2020/07/jetty_tmp_dir/</link>
       <pubDate>Tue, 14 Jul 2020 22:03:51 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/07/jetty_tmp_dir/</guid>
+      <guid>https://www.zengxi.net/2020/07/jetty_tmp_dir/</guid>
       <description>生产环境上jetty运行一段时间后，在打开某个网页的时候发现有js、css文件找不到，但是重启之后问题会解决。后来发现是设定了tmpwatch后台任务，定时会清理一次系统的tmp目录。
 默认情况下，如果没有指定jetty的临时目录，默认会使用系统的临时目录。解决方案就是，修改jetty的临时文件存放目录，不要放在 /tmp 目录下面。主要有下面几个方法：
  设置basetempdir值  1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Call name=&amp;#34;setAttribute&amp;#34;&amp;gt; 7 &amp;lt;Arg&amp;gt;org.eclipse.jetty.webapp.basetempdir&amp;lt;/Arg&amp;gt; 8 &amp;lt;Arg&amp;gt;/home/my/foo&amp;lt;/Arg&amp;gt; 9 &amp;lt;/Call&amp;gt; 10&amp;lt;/Configure&amp;gt;  设置tempDirectory值  1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Set name=&amp;#34;tempDirectory&amp;#34;&amp;gt;/some/dir/foo&amp;lt;/Set&amp;gt; 7&amp;lt;/Configure&amp;gt;  设置 javax.servlet.context.tempdir 属性  1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Call name=&amp;#34;setAttribute&amp;#34;&amp;gt; 7 &amp;lt;Arg&amp;gt;javax.servlet.context.tempdir&amp;lt;/Arg&amp;gt; 8 &amp;lt;Arg&amp;gt;/some/dir/foo&amp;lt;/Arg&amp;gt; 9 &amp;lt;/Call&amp;gt; 10 11&amp;lt;/Configure&amp;gt;  在启动参数里面修改  1java -jar .</description>
@@ -20,10 +20,10 @@
     
     <item>
       <title>rsyslog内存占用高导致服务不可用</title>
-      <link>https://www.zengxi.net/posts/2020/06/rsyslog_high_memory_usage/</link>
+      <link>https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/</link>
       <pubDate>Mon, 22 Jun 2020 09:29:31 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/06/rsyslog_high_memory_usage/</guid>
+      <guid>https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/</guid>
       <description>这几天生产环境中某个服务内存不时地被撑爆，原先以为是应用的问题，但是近来没有上过新的代码。该服务的总内存是8G，启动参数关于内存的配置大致是：-Xmx=6.4G，-Xms=4G 左右。看了Grafana上面的监控记录，JVM 老年代使用最多也就到4G左右，在GC的日志中发现也仅仅用到4G左右，并没有到达最高的内存值。这两个结果可以看出来，应该不是应用程序导致内存占用过大。
 后来用top命令看了一下，发现rsyslog进程使用了将近40%的内存。再查一下日志文件，发现一些日志文件大小都达到2G以上。
 rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程，不应该占用那么内存，即使它同步延迟较大甚至不工作，也不应该影响到应用程序的正常运行。那么，我们可以通过限制它的内存使用率来解决这个问题。
@@ -35,10 +35,10 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
     
     <item>
       <title>用string adapter来解决系统接口对接中发现的空值验证问题</title>
-      <link>https://www.zengxi.net/posts/2020/06/string_adapter/</link>
+      <link>https://www.zengxi.net/2020/06/string_adapter/</link>
       <pubDate>Mon, 01 Jun 2020 13:44:01 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/06/string_adapter/</guid>
+      <guid>https://www.zengxi.net/2020/06/string_adapter/</guid>
       <description>客户用的是很旧版本的ERP系统，在与客户系统做接口对接的时候发现了一个问题。假设接口请求需要的body是xml格式的，共有三个字段：name, mobile, email。由于客户ERP系统比较老，如果某个字段没有值，传的是空字符串，而不是将该字段在请求消息体中隐藏。客户发的请求类似下面的例子：
 1&amp;lt;xml&amp;gt; 2 &amp;lt;name&amp;gt;John&amp;lt;/name&amp;gt; 3 &amp;lt;mobile&amp;gt;13800138000&amp;lt;/mobile&amp;gt; 4 &amp;lt;email&amp;gt;&amp;lt;/email&amp;gt; 5&amp;lt;/xml&amp;gt; 由于历史遗留问题，我方系统里在字段上面加了 javax.validation.constraints.Pattern 注解使用正则表达式来对传入的请求值做验证。当传入值为空字符串的时候，正则表达式验证就无法通过。
 与客户做过沟通，对于空值的字段，他们也没有办法在请求中隐藏字段，只能传空字符串。那就只能在我方系统这边看看是否可以通过修改代码来解决。一种方案是修改正则表达式，来兼容空字符串，但是由于这些都是传统代码，不确定把空字符串设置在这个字段上面会对后面的处理会有什么影响。如果有更合适的、代价更小的方案，那么就最好不选择这种。
@@ -47,10 +47,10 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
     
     <item>
       <title>Spring Quartz 指定Scheduler Name</title>
-      <link>https://www.zengxi.net/posts/2020/05/spring_quartz_customize_scheduler_name/</link>
+      <link>https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/</link>
       <pubDate>Sun, 31 May 2020 15:43:31 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/05/spring_quartz_customize_scheduler_name/</guid>
+      <guid>https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/</guid>
       <description>当前项目使用quartz与spring来做基于数据库的集群化任务调度，但是在实际使用过程发现同一个scheduler中，不同group之间任务调度可能会相互跑串。当前项目中使用的 quartz-scheduler 版本 2.3.1， spring 版本 3.2.18.RELEASE。
 举个例子，配置是这样的, 下面示例中隐去不重要的配置
 1&amp;lt;bean id=&amp;#34;my-cluster-scheduler&amp;#34; 2 class=&amp;#34;org.springframework.scheduling.quartz.SchedulerFactoryBean&amp;#34; 3 lazy-init=&amp;#34;false&amp;#34;&amp;gt; 4 ... 5 &amp;lt;property name=&amp;#34;quartzProperties&amp;#34;&amp;gt; 6 &amp;lt;props&amp;gt; 7 &amp;lt;prop key=&amp;#34;org.quartz.jobStore.isClustered&amp;#34;&amp;gt;true&amp;lt;/prop&amp;gt; 8 &amp;lt;prop key=&amp;#34;org.quartz.jobStore.class&amp;#34;&amp;gt;org.quartz.impl.jdbcjobstore.JobStoreCMT&amp;lt;/prop&amp;gt; 9 &amp;lt;/props&amp;gt; 10 ... 11 &amp;lt;/property&amp;gt; 12 &amp;lt;property name=&amp;#34;jobDetails&amp;#34;&amp;gt; 13 &amp;lt;list&amp;gt; 14 &amp;lt;ref bean=&amp;#34;myTestJobDetailBean&amp;#34;/&amp;gt; 15 &amp;lt;/list&amp;gt; 16 &amp;lt;/property&amp;gt; 17 &amp;lt;property name=&amp;#34;triggers&amp;#34;&amp;gt; 18 &amp;lt;list&amp;gt; 19 &amp;lt;ref bean=&amp;#34;myTestJobTrigger&amp;#34;/&amp;gt; 20 &amp;lt;/list&amp;gt; 21 &amp;lt;/property&amp;gt; 22&amp;lt;/bean&amp;gt; 23 24&amp;lt;bean id=&amp;#34;myTestJobTrigger&amp;#34; class=&amp;#34;org.springframework.scheduling.quartz.CronTriggerFactoryBean&amp;#34;&amp;gt; 25 &amp;lt;property name=&amp;#34;jobDetail&amp;#34; ref=&amp;#34;myTestJobDetailBean&amp;#34;/&amp;gt; 26 &amp;lt;property name=&amp;#34;cronExpression&amp;#34; value=&amp;#34;${my.</description>
@@ -58,10 +58,10 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
     
     <item>
       <title>根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</title>
-      <link>https://www.zengxi.net/posts/2020/01/manage-distribution-session-by-id/</link>
+      <link>https://www.zengxi.net/2020/01/manage-distribution-session-by-id/</link>
       <pubDate>Sun, 26 Jan 2020 16:21:39 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/01/manage-distribution-session-by-id/</guid>
+      <guid>https://www.zengxi.net/2020/01/manage-distribution-session-by-id/</guid>
       <description>背景 由于历史原因，原先的界面是用vaadin框架来实现。但是这个框架不适合互联网的分布式系统，正在逐步用目前主流的前端框架重写各个模块，把旧的vaadin页面替换掉。在替换过程中，新老界面并存。
 vaadin界面的servlet，每次都会判断请求中的session id值，如果在服务器中找不到对应这个id的session，就会重新生成一个。由于session id是在新界面登录的时候生成的，当点击链接从新界面跳转到vaadin界面的时候，vaadin服务会发现没有这个session id，就会重新生成一个新的session。换句话说，新老界面会有各自的session id。当然，分布式系统本来就有这个问题，可以采用分布式session的来解决。
 原先开发人员的解决方案是:
@@ -74,10 +74,10 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     
     <item>
       <title>Quartz job使用过程中的发现问题与改进</title>
-      <link>https://www.zengxi.net/posts/2020/01/quartz-job-issue-improvement/</link>
+      <link>https://www.zengxi.net/2020/01/quartz-job-issue-improvement/</link>
       <pubDate>Sun, 05 Jan 2020 18:22:24 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2020/01/quartz-job-issue-improvement/</guid>
+      <guid>https://www.zengxi.net/2020/01/quartz-job-issue-improvement/</guid>
       <description>遇到的问题与原因分析 生产环境中遇到的问题：
  服务在启动过程中，不时地卡住，后来发生的越来越频繁。看日志分析，卡在初始化quartz job store的时候 服务在运行过程中，不时地出现定时任务不被触发的情况  通过分析，得知问题产生的原因：
  目前代码中用的是Quartz scheduler 1.8.3版本，定时框架采用的是行锁，通过执行下面的SQL来锁住特定的记录。在分布式的系统的情况下，节点越多越容易发生锁等待，甚至死锁。Quartz scheduler 的 2.x 版本做了改进，在QRTZ_LOCKS表中多加了一个字段 SCHED_NAME。这有一个好处就是，可以给不同的应用分配不同的scheduler name，这样定时框架在调度的时候，不同的应用分别去尝试锁定不同的行，而不像之前锁的时同一个行，避免死锁的发生。  1SELECT * FROM QRTZ_LOCKS WHERE LOCK_NAME = $1 FOR UPDATE;  org.quartz.threadPool.threadCount 值设置太小。Quartz scheduler的线程池大小不足，这个也有可能导致定时任务在排队，无法被触发。  另外，在研究现有代码过程中，还发现另外3个问题：
@@ -87,10 +87,10 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     
     <item>
       <title>复盘 - 手机app上一行代码导致的生产事故</title>
-      <link>https://www.zengxi.net/posts/2019/12/incident-caused-by-app/</link>
+      <link>https://www.zengxi.net/2019/12/incident-caused-by-app/</link>
       <pubDate>Tue, 10 Dec 2019 23:46:11 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2019/12/incident-caused-by-app/</guid>
+      <guid>https://www.zengxi.net/2019/12/incident-caused-by-app/</guid>
       <description>过程 由于一些历史原因，以及与原先代码的兼容性，临时文件存储在minio中。
 某天，生产环境突发事故，minio集群的CPU与内存爆了，只能重启集群。过了十来分钟，很多服务都不可用，健康检查都不通过。日志中的错误信息显示，这些服务都是数据库拿不到连接。需要事先处理数据库连接的问题，于是连接到数据库查死锁，终止导致死锁的sql进程，再重启来恢复这些服务。
 由于前不久minio集群挂掉，很容易就想到是由于minio的原因。其他服务通过RPC调用一个文件存储服务来操作minio中的数据，当minio集群挂掉的时候，文件存储服务访问minio一直想访问minio直到超时。在这个期间，其他服务如果有事务调用文件存储服务来操作minio中文件，那么这个事务就不会被提交，一会占着数据库连接。
@@ -104,10 +104,10 @@ minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉
     
     <item>
       <title>记一次打开Excel文件错误的排查</title>
-      <link>https://www.zengxi.net/posts/2018/12/excel-trouble-shooting-zip-file/</link>
+      <link>https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/</link>
       <pubDate>Wed, 05 Dec 2018 17:56:09 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2018/12/excel-trouble-shooting-zip-file/</guid>
+      <guid>https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/</guid>
       <description>在生产环境中，某个结果集导出的excel文件用Microsoft Excel无法打开，看到如下错误：
 最开始怀疑是在生成文件的时候，文件损坏掉了，但是重新生成多次，得到的结果都是一样的。在相同的界面，导出其他结果集所生成的文件却都是可以成功打开的，这样就可以排除代码功能方面的问题。如果和代码无关，那么就可能和数据有关系。根据出错提示给出的文件地址“C:\Users\ZHANGZ~1\AppData\Local\Temp\error083200_01.xml”, 打开该临时文件，可以看到下面的信息
 1&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; standalone=&amp;#34;true&amp;#34;?&amp;gt; 2@namespace html url(http://www.w3.org/1999/xhtml); :root { font:small Verdana; font-weight: bold; padding: 2em; padding-left:4em; } * { display: block; padding-left: 2em; } html|style { display: none; } html|span, html|a { display: inline; padding: 0; font-weight: normal; text-decoration: none; } html|span.block { display: block; } *[html|hidden], span.block[html|hidden] { display: none; } .expand { display: block; } .expand:before { content: &amp;#39;+&amp;#39;; color: red; position: absolute; left: -1em; } .</description>

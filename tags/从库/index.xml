@@ -9,10 +9,10 @@
     <lastBuildDate>Fri, 06 Dec 2019 21:48:18 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>重建基于pglogical逻辑复制的从库</title>
-      <link>https://www.zengxi.net/posts/2019/12/pg-recreate-pglogical-slave/</link>
+      <link>https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/</link>
       <pubDate>Fri, 06 Dec 2019 21:48:18 +0000</pubDate>
       
-      <guid>https://www.zengxi.net/posts/2019/12/pg-recreate-pglogical-slave/</guid>
+      <guid>https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/</guid>
       <description>《Postgres 9.x 升级至 10.x》一文中提到了使用pglogical逻辑复制升级。基于这种方式的升级有个缺点，就是主库的DDL发生改变的话，那么从库的复制就会有影响，可能需要重建从库来解决。
 重建从库的步骤与之前创建逻辑复制有点类似，但是由于之前已经做过一些操作，所以相比之下，少了一些步骤。
 从库中删除数据库，再创建一个空的数据库 由于表结构的改变，原先的数据都不能用了，需要重新同步。创建新的空数据库是最快的方式
