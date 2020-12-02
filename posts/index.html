@@ -125,6 +125,37 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/">Kubernetes in Action笔记 - (1) 容器技术介绍</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 2, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+    <a href='https://www.zengxi.net/tags/container' class="post_tag button button_translucent">container
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">容器允许你在同一台机器上运行多个服务, 不仅提供不同的环境给每个服务, 而且将它们互相隔离。
+容器与虚拟机比较 轻量级 和虚拟机比较, 容器更加轻量级, 它允许在相同的硬件上运行更多数量的组件。主要是因为每个虚拟机需要运行自己的一组系统进程, 这就产生了除组件进程消耗以外的额外计算资源损耗。而一个容器仅仅是运行在宿主机上被隔离的单个进程, 仅消耗应用容器消耗的资源, 不会有其他进程的开销。
+虚拟化 多个容器则会完全执行运行在宿主机上的同一个内核的系统调用, 此内核是唯一一个在宿主机操作系统上执行指令的内核。 CPU也不需要做任何对虚拟机能做那样的虚拟化。
+隔离性 虚拟机的主要好处是它们提供完全隔离的环境, 因为每个虚拟机运行在它自己 …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/11/nginx_security/">Nginx服务器安全加固</a>
       </h3>
       <div class="post_meta">
@@ -386,35 +417,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/08/linux_auto_set_brightness/">Manjaro笔记本启动时自动设置屏幕亮度</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Aug 10, 2020</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">笔记本在manjaro在启动的时候，屏幕可能会默认设置为最大亮度。可以通过设置开机启动脚本，来设置启动时候的亮度。
-1. 创建一个启动service脚本 执行下面的命令
-1sudo vim /etc/systemd/system/rc-local.service 输入下面的内容
-1[Unit] 2Description=&#34;/etc/rc.local Compatibility&#34; 3 4[Service] 5Type=oneshot 6ExecStart=/etc/rc.local start 7TimeoutSec=0 8StandardInput=tty 9RemainAfterExit=yes …</p>
-          <a href="https://www.zengxi.net/2020/08/linux_auto_set_brightness/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -459,6 +461,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/" class="nav-link">Kubernetes in Action笔记 - (1) 容器技术介绍</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
       </li>
       <li>
@@ -478,9 +483,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
       </li>
     </ul>
     <div>
@@ -582,6 +584,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=1>KUBERNETES<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/categories/linux/' class=" post_tag button button_translucent" data-position=9>LINUX<span class="button_tally">9</span>
             </a>
             
@@ -640,6 +646,17 @@
           </svg></span>
           </div>
         </div>
+      </nav>
+    </div>
+    <div>
+      <h2 class="mt-4 taxonomy" id="series-section">专栏</h2>
+      <nav class="tags_nav">
+        <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
+          KUBERNETES-IN-ACTION笔记
+          <span class="button_tally">1</span>
+        </a>
+        
+        
       </nav>
     </div>
     <div>
@@ -737,6 +754,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/container/' class=" post_tag button button_translucent" data-position=1>CONTAINER<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/criteria-builder/' class=" post_tag button button_translucent" data-position=1>CRITERIA-BUILDER<span class="button_tally">1</span>
             </a>
             
@@ -802,6 +823,10 @@
             
             
             <a href='https://www.zengxi.net/tags/kcp/' class=" post_tag button button_translucent" data-position=1>KCP<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=1>KUBERNETES<span class="button_tally">1</span>
             </a>
             
             

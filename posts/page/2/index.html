@@ -125,6 +125,35 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/08/linux_auto_set_brightness/">Manjaro笔记本启动时自动设置屏幕亮度</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Aug 10, 2020</span>
+    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">笔记本在manjaro在启动的时候，屏幕可能会默认设置为最大亮度。可以通过设置开机启动脚本，来设置启动时候的亮度。
+1. 创建一个启动service脚本 执行下面的命令
+1sudo vim /etc/systemd/system/rc-local.service 输入下面的内容
+1[Unit] 2Description=&#34;/etc/rc.local Compatibility&#34; 3 4[Service] 5Type=oneshot 6ExecStart=/etc/rc.local start 7TimeoutSec=0 8StandardInput=tty 9RemainAfterExit=yes …</p>
+          <a href="https://www.zengxi.net/2020/08/linux_auto_set_brightness/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/08/gitbook_installation_error/">gitbook因为nodejs版本不匹配导致安装报错</a>
       </h3>
       <div class="post_meta">
@@ -386,34 +415,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/">rsyslog内存占用高导致服务不可用</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 22, 2020</span>
-    <a href='https://www.zengxi.net/tags/rsyslog' class="post_tag button button_translucent">rsyslog
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">这几天生产环境中某个服务内存不时地被撑爆，原先以为是应用的问题，但是近来没有上过新的代码。该服务的总内存是8G，启动参数关于内存的配置大致是：-Xmx=6.4G，-Xms=4G 左右。看了Grafana上面的监控记录，JVM 老年代使用最多也就到4G左右，在GC的日志中发现也仅仅用到4G左右，并没有到达最高的内存值。这两个结果可以看出来，应该不是应用程序导致内存占用过大。
-后来用top命令看了一下，发现rsyslog进程使用了将近40%的内存。再查一下日志文件，发现一些日志文件大小都达到2G以上。
-rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程，不应该占用那么内存，即使它同步延迟较大甚至不工作，也不应该影响到应用程序 …</p>
-          <a href="https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -458,6 +459,9 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/" class="nav-link">Kubernetes in Action笔记 - (1) 容器技术介绍</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
       </li>
       <li>
@@ -477,9 +481,6 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/" class="nav-link">Postgres启动时遇到只读文件系统的错误</a>
       </li>
     </ul>
     <div>
@@ -581,6 +582,10 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
             </a>
             
             
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=1>KUBERNETES<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/categories/linux/' class=" post_tag button button_translucent" data-position=9>LINUX<span class="button_tally">9</span>
             </a>
             
@@ -639,6 +644,17 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
           </svg></span>
           </div>
         </div>
+      </nav>
+    </div>
+    <div>
+      <h2 class="mt-4 taxonomy" id="series-section">专栏</h2>
+      <nav class="tags_nav">
+        <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
+          KUBERNETES-IN-ACTION笔记
+          <span class="button_tally">1</span>
+        </a>
+        
+        
       </nav>
     </div>
     <div>
@@ -736,6 +752,10 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/container/' class=" post_tag button button_translucent" data-position=1>CONTAINER<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/criteria-builder/' class=" post_tag button button_translucent" data-position=1>CRITERIA-BUILDER<span class="button_tally">1</span>
             </a>
             
@@ -801,6 +821,10 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
             
             
             <a href='https://www.zengxi.net/tags/kcp/' class=" post_tag button button_translucent" data-position=1>KCP<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=1>KUBERNETES<span class="button_tally">1</span>
             </a>
             
             
