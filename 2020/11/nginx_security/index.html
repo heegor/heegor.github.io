@@ -4,7 +4,7 @@
   <head>
 <title>Nginx服务器安全加固 | 保罗札记</title>
 <meta charset="utf-8">
-<meta name="generator" content="Hugo 0.78.1" />
+<meta name="generator" content="Hugo 0.78.2" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script>
@@ -161,8 +161,45 @@
 </div>
 
     
-    <h1 id="基础知识">基础知识</h1>
-<h2 id="常用配置">常用配置</h2>
+    
+    <h2>文章目录</h2>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础知识">基础知识</a>
+      <ul>
+        <li><a href="#常用配置">常用配置</a></li>
+      </ul>
+    </li>
+    <li><a href="#设置">设置</a>
+      <ul>
+        <li><a href="#通过分区挂载允许最少特权">通过分区挂载允许最少特权</a></li>
+        <li><a href="#配置etcsysctlconf强化linux安全">配置/etc/sysctl.conf强化Linux安全</a></li>
+        <li><a href="#控制缓冲区溢出攻击">控制缓冲区溢出攻击</a></li>
+        <li><a href="#控制并发连接">控制并发连接</a></li>
+        <li><a href="#只允许域名的访问">只允许域名的访问</a></li>
+        <li><a href="#url-参数过滤敏感字">url 参数过滤敏感字</a></li>
+        <li><a href="#限制可用的请求方法">限制可用的请求方法</a></li>
+        <li><a href="#拒绝一些user-agents">拒绝一些User-Agents</a></li>
+        <li><a href="#目录限制ip访问">目录限制IP访问</a></li>
+        <li><a href="#通过密码保护目录">通过密码保护目录</a></li>
+        <li><a href="#如何防止图片盗链">如何防止图片盗链</a></li>
+        <li><a href="#nginx-ssl配置">Nginx SSL配置</a></li>
+        <li><a href="#在防火墙级限制每个ip的连接数">在防火墙级限制每个IP的连接数</a></li>
+        <li><a href="#配置操作系统保护web服务器">配置操作系统保护Web服务器</a></li>
+        <li><a href="#限制nginx连接传出">限制Nginx连接传出</a></li>
+        <li><a href="#根据用户的真实-ip-做连接限制">根据用户的真实 IP 做连接限制</a></li>
+        <li><a href="#经过多层cdn之后取得原始用户的ip地址">经过多层CDN之后取得原始用户的IP地址</a></li>
+        <li><a href="#隐藏版本信息">隐藏版本信息</a></li>
+        <li><a href="#禁用扩展名">禁用扩展名</a></li>
+        <li><a href="#重定向http请求到https">重定向HTTP请求到HTTPS</a></li>
+        <li><a href="#防止xss攻击">防止XSS攻击</a></li>
+        <li><a href="#目录只读">目录只读</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    <h2 id="基础知识">基础知识</h2>
+<h3 id="常用配置">常用配置</h3>
 <p>顶部配置</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1">#定义 Nginx 运行的用户和用户组</span>
 <span class="ln"> 2</span>user nginx<span class="p">;</span>
@@ -363,12 +400,12 @@
 <span class="ln">48</span>        include fastcgi_params<span class="p">;</span>
 <span class="ln">49</span>    <span class="o">}</span>
 <span class="ln">50</span><span class="o">}</span>
-</code></pre></div><h1 id="设置">设置</h1>
-<h2 id="通过分区挂载允许最少特权">通过分区挂载允许最少特权</h2>
+</code></pre></div><h2 id="设置">设置</h2>
+<h3 id="通过分区挂载允许最少特权">通过分区挂载允许最少特权</h3>
 <p>服务器上的网页/html/php文件单独分区。例如，新建一个分区/dev/sda5(第一逻辑分区)，并且挂载在/nginx。确保 /nginx是以noexec, nodev and nosetuid的权限挂载。比如，下面是一个/etc/fstab的挂载/nginx的信息：</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="nv">LABEL</span><span class="o">=</span>/nginx /nginx ext3 defaults,nosuid,noexec,nodev <span class="m">1</span> <span class="m">2</span>
 </code></pre></div><p>注意：需要使用fdisk和mkfs.ext3命令创建一个新分区。</p>
-<h2 id="配置etcsysctlconf强化linux安全">配置/etc/sysctl.conf强化Linux安全</h2>
+<h3 id="配置etcsysctlconf强化linux安全">配置/etc/sysctl.conf强化Linux安全</h3>
 <p>可以通过编辑/etc/sysctl.conf来控制和配置Linux内核、网络设置。</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1"># Avoid a smurf attack</span>
 <span class="ln"> 2</span>net.ipv4.icmp_echo_ignore_broadcasts <span class="o">=</span> <span class="m">1</span>
@@ -423,7 +460,7 @@
 <span class="ln">51</span>net.core.wmem_max <span class="o">=</span> <span class="m">8388608</span>
 <span class="ln">52</span>net.core.netdev_max_backlog <span class="o">=</span> <span class="m">5000</span>
 <span class="ln">53</span>net.ipv4.tcp_window_scaling <span class="o">=</span> <span class="m">1</span>
-</code></pre></div><h2 id="控制缓冲区溢出攻击">控制缓冲区溢出攻击</h2>
+</code></pre></div><h3 id="控制缓冲区溢出攻击">控制缓冲区溢出攻击</h3>
 <p>编辑nginx.conf，为所有客户端设置缓冲区的大小限制。</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">##Start: Size Limits &amp; Buffer Overflows ##    //server上下文</span>
 <span class="ln">2</span>
@@ -456,22 +493,18 @@
 <li>keepalive_timeout 5 5; – 参数的第一个值指定了客户端与服务器长连接的超时时间，超过这个时间，服务器将关闭连接。参数的第二个值（可选）指定了应答头中Keep-Alive: timeout=time的time值，这个值可以使一些浏览器知道什么时候关闭连接，以便服务器不用重复关闭，如果不指定这个参数，nginx不会在应 答头中发送Keep-Alive信息。（但这并不是指怎样将一个连接“Keep-Alive”）参数的这两个值可以不相同。</li>
 <li>send_timeout 10; 指令指定了发送给客户端应答后的超时时间，Timeout是指没有进入完整established状态，只完成了两次握手，如果超过这个时间客户端没有任何响应，nginx将关闭连接</li>
 </ol>
-<h2 id="控制并发连接">控制并发连接</h2>
+<h3 id="控制并发连接">控制并发连接</h3>
 <p>可以使用NginxHttpLimitZone模块来限制指定的会话或者一个IP地址的特殊情况下的并发连接。</p>
 <p>编辑nginx.conf, 每个远程IP地址的客户端同时打开连接不能超过5个:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1">### Directive describes the zone,in which the session states are stored i.e. stored in slimits. ###</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span><span class="c1">### 1m can handle 32000 sessions with 32 bytes/session,set to 5m x 32000 session###</span>
-<span class="ln"> 4</span>
-<span class="ln"> 5</span>limit_zone slimits <span class="nv">$binary_remote_addr</span> 5m<span class="p">;</span>
-<span class="ln"> 6</span>
-<span class="ln"> 7</span><span class="c1">### Control maximum number of simultaneous connections for one session i.e.###</span>
-<span class="ln"> 8</span>
-<span class="ln"> 9</span><span class="c1">### restricts the amount of connections from a single ip address ###</span>
-<span class="ln">10</span>
-<span class="ln">11</span>limit_conn slimits 5<span class="p">;</span>
-<span class="ln">12</span>
-</code></pre></div><h2 id="只允许域名的访问">只允许域名的访问</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">### Directive describes the zone,in which the session states are stored i.e. stored in slimits. ###</span>
+<span class="ln">2</span><span class="c1">### 1m can handle 32000 sessions with 32 bytes/session,set to 5m x 32000 session###</span>
+<span class="ln">3</span>limit_conn_zone <span class="nv">$binary_remote_addr</span> <span class="nv">zone</span><span class="o">=</span>slimits:5m<span class="p">;</span>
+<span class="ln">4</span>
+<span class="ln">5</span><span class="c1">### Control maximum number of simultaneous connections for one session i.e.###</span>
+<span class="ln">6</span><span class="c1">### restricts the amount of connections from a single ip address ###</span>
+<span class="ln">7</span>limit_conn slimits 5<span class="p">;</span>
+<span class="ln">8</span>
+</code></pre></div><h3 id="只允许域名的访问">只允许域名的访问</h3>
 <p>可以逃过ip扫描</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">## Only requests to our Host are allowed i.e. xxx.in,images.xxx.in and www.xxx.in</span>
 <span class="ln">2</span>
@@ -483,7 +516,7 @@
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="k">if</span> <span class="o">(</span> <span class="nv">$host</span> !~* <span class="s1">&#39;abc.com&#39;</span> <span class="o">)</span> <span class="o">{</span>  
 <span class="ln">2</span>    <span class="k">return</span> 403<span class="p">;</span>  
 <span class="ln">3</span><span class="o">}</span>  
-</code></pre></div><h2 id="url-参数过滤敏感字">url 参数过滤敏感字</h2>
+</code></pre></div><h3 id="url-参数过滤敏感字">url 参数过滤敏感字</h3>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="k">if</span> <span class="o">(</span><span class="nv">$query_string</span> ~* <span class="s2">&#34;union.*select.*\(&#34;</span><span class="o">)</span> <span class="o">{</span>   
 <span class="ln">2</span>    rewrite ^/<span class="o">(</span>.*<span class="o">)</span>$  <span class="nv">$host</span>  permanent<span class="p">;</span>  
 <span class="ln">3</span><span class="o">}</span>   
@@ -491,14 +524,14 @@
 <span class="ln">5</span><span class="k">if</span> <span class="o">(</span><span class="nv">$query_string</span> ~* <span class="s2">&#34;concat.*\(&#34;</span><span class="o">)</span> <span class="o">{</span>   
 <span class="ln">6</span>    rewrite ^/<span class="o">(</span>.*<span class="o">)</span>$  <span class="nv">$host</span>  permanent<span class="p">;</span>  
 <span class="ln">7</span><span class="o">}</span>  
-</code></pre></div><h2 id="限制可用的请求方法">限制可用的请求方法</h2>
+</code></pre></div><h3 id="限制可用的请求方法">限制可用的请求方法</h3>
 <p>下面的指令将过滤只允许GET,HEAD和POST方法：</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">##Only allow these request methods##</span>
 <span class="ln">2</span>
 <span class="ln">3</span><span class="k">if</span><span class="o">(</span><span class="nv">$request_method</span> !~ ^<span class="o">(</span>GET<span class="p">|</span>HEAD<span class="p">|</span>POST<span class="o">)</span>$<span class="o">)</span> <span class="o">{</span>
 <span class="ln">4</span>    retrun 444<span class="p">;</span>
 <span class="ln">5</span><span class="o">}</span>
-</code></pre></div><h2 id="拒绝一些user-agents">拒绝一些User-Agents</h2>
+</code></pre></div><h3 id="拒绝一些user-agents">拒绝一些User-Agents</h3>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1">##Block download agents ##</span>
 <span class="ln"> 2</span>
 <span class="ln"> 3</span><span class="k">if</span> <span class="o">(</span><span class="nv">$http_user_agent</span> ~* LWP::Simple<span class="p">|</span>BBBike<span class="p">|</span>wget<span class="o">){</span>
@@ -532,7 +565,7 @@
 <span class="ln"> 8</span>    listen  192.168.0.12:8080<span class="p">;</span>
 <span class="ln"> 9</span>    ...
 <span class="ln">10</span><span class="o">}</span>
-</code></pre></div><h2 id="目录限制ip访问">目录限制IP访问</h2>
+</code></pre></div><h3 id="目录限制ip访问">目录限制IP访问</h3>
 <p>可以对指定的目录设置访问权限。所有的网站目录应该一一配置，只允许必须的目录访问权限。</p>
 <p>可以通过IP地址来限制访问目录/admin/:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>location /docs/ <span class="o">{</span>
@@ -553,7 +586,7 @@
 <span class="ln">2</span><span class="k">if</span> <span class="o">(</span><span class="nv">$http_x_forwarded_for</span> <span class="o">=</span> <span class="s2">&#34;211.144.204.2&#34;</span><span class="o">)</span> <span class="o">{</span> <span class="nb">set</span> <span class="nv">$allow</span> true<span class="p">;</span> <span class="o">}</span>
 <span class="ln">3</span><span class="k">if</span> <span class="o">(</span><span class="nv">$http_x_forwarded_for</span> ~ <span class="s2">&#34;108.2.66.[89]&#34;</span><span class="o">)</span> <span class="o">{</span> <span class="nb">set</span> <span class="nv">$allow</span> true<span class="p">;</span> <span class="o">}</span>
 <span class="ln">4</span><span class="k">if</span> <span class="o">(</span><span class="nv">$allow</span> <span class="o">=</span> <span class="nb">false</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> 404<span class="p">;</span> <span class="o">}</span>
-</code></pre></div><h2 id="通过密码保护目录">通过密码保护目录</h2>
+</code></pre></div><h3 id="通过密码保护目录">通过密码保护目录</h3>
 <p>首先创建密码文件并增加“user”用户：</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>mkdir /usr/local/nginx/conf/.htpasswd/
 <span class="ln">2</span>
@@ -568,7 +601,7 @@
 <span class="ln">7</span><span class="o">}</span>
 </code></pre></div><p>密码文件生成后，也可以用以下的命令来增加允许访问的用户：</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>htpasswd -s /usr/local/nginx/conf/.htpasswd/passwd userName
-</code></pre></div><h2 id="如何防止图片盗链">如何防止图片盗链</h2>
+</code></pre></div><h3 id="如何防止图片盗链">如何防止图片盗链</h3>
 <p>如果有人直接用你网站的图片地址来显示在他的网站上，会造成你需要支付额外的宽带费用。</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1"># Stop deep linking or hot linking</span>
 <span class="ln">2</span>location /images/ <span class="o">{</span>
@@ -584,7 +617,7 @@
 <span class="ln">4</span>        rewrite ^/images/uploads.*.<span class="o">(</span>gif<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>png<span class="o">)</span>$ http://www.examples.com/banned.jpg last
 <span class="ln">5</span>    <span class="o">}</span>
 <span class="ln">6</span><span class="o">}</span>
-</code></pre></div><h2 id="nginx-ssl配置">Nginx SSL配置</h2>
+</code></pre></div><h3 id="nginx-ssl配置">Nginx SSL配置</h3>
 <p>编辑nginx.conf并更新：</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>server<span class="o">{</span>
 <span class="ln"> 2</span>    server_name example.com<span class="p">;</span>
@@ -597,7 +630,7 @@
 <span class="ln"> 9</span>    access_log /usr/local/nginx/logs/ssl.access.log<span class="p">;</span>
 <span class="ln">10</span>    error_log /usr/local/nginx/logs/ssl.error.log<span class="p">;</span>
 <span class="ln">11</span><span class="o">}</span>
-</code></pre></div><h2 id="在防火墙级限制每个ip的连接数">在防火墙级限制每个IP的连接数</h2>
+</code></pre></div><h3 id="在防火墙级限制每个ip的连接数">在防火墙级限制每个IP的连接数</h3>
 <p>网络服务器必须监视连接和每秒连接限制。PF和Iptales都能够在进入你的nginx服务器之前阻止最终用户的访问。
 Linux Iptables:限制每次Nginx连接数</p>
 <p>下面的例子会阻止来自一个IP的60秒钟内超过15个连接端口80的连接数。</p>
@@ -605,7 +638,7 @@ Linux Iptables:限制每次Nginx连接数</p>
 <span class="ln">2</span>/sbin/iptables -A INPUT -p tcp –dport <span class="m">80</span> -i eth0 -m state –state NEW -m recent –update –seconds <span class="m">60</span> –hitcount <span class="m">15</span> -j DROP
 <span class="ln">3</span>service iptables save
 </code></pre></div><p>请根据具体情况来设置限制的连接数。</p>
-<h2 id="配置操作系统保护web服务器">配置操作系统保护Web服务器</h2>
+<h3 id="配置操作系统保护web服务器">配置操作系统保护Web服务器</h3>
 <p>Nginx以用户nginx运行。但是根目录（/nginx或者/usr /local/nginx/html）不应该设置属于用户nginx或对用户nginx可写。</p>
 <p>找出错误权限的文件可以使用如下命令：</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>find /nginx -user nginx
@@ -620,10 +653,10 @@ Linux Iptables:限制每次Nginx连接数</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>find /nginx -name ‘.?’ -not -name .ht -or -name ‘~’ -or -name ‘.bak’ -or -name ‘.old*’
 <span class="ln">2</span>find /usr/local/nginx/html/ -name ‘.?’ -not -name .ht -or -name ‘~’ -or -name ‘.bak’ -or -name ‘.old*’
 </code></pre></div><p>通过find命令的-delete选项来删除这些文件。</p>
-<h2 id="限制nginx连接传出">限制Nginx连接传出</h2>
+<h3 id="限制nginx连接传出">限制Nginx连接传出</h3>
 <p>黑客会使用工具如wget下载你服务器本地的文件。使用Iptables从nginx用户来阻止传出连接。ipt_owner模块试图匹配本地产生的数据包的创建者。下面的例子中只允许user用户在外面使用80连接。</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>/sbin/iptables -A OUTPUT -o eth0 -m owner –uid-owner vivek -p tcp –dport <span class="m">80</span> -m state –state NEW,ESTABLISHED -j ACCEPT
-</code></pre></div><h2 id="根据用户的真实-ip-做连接限制">根据用户的真实 IP 做连接限制</h2>
+</code></pre></div><h3 id="根据用户的真实-ip-做连接限制">根据用户的真实 IP 做连接限制</h3>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1">## 这里取得原始用户的IP地址</span>
 <span class="ln"> 2</span>map <span class="nv">$http_x_forwarded_for</span>  <span class="nv">$clientRealIp</span> <span class="o">{</span>
 <span class="ln"> 3</span>    <span class="s2">&#34;&#34;</span>  <span class="nv">$remote_addr</span><span class="p">;</span>
@@ -653,7 +686,7 @@ Linux Iptables:限制每次Nginx连接数</p>
 <span class="ln">27</span>    <span class="o">}</span>  
 <span class="ln">28</span> 
 <span class="ln">29</span><span class="o">}</span>
-</code></pre></div><h2 id="经过多层cdn之后取得原始用户的ip地址">经过多层CDN之后取得原始用户的IP地址</h2>
+</code></pre></div><h3 id="经过多层cdn之后取得原始用户的ip地址">经过多层CDN之后取得原始用户的IP地址</h3>
 <p>通过 map 指令，我们为 nginx 创建了一个变量 $clientRealIp ，这个就是 原始用户的真实 IP 地址，不论用户是直接访问，还是通过一串 CDN 之后的访问，我们都能取得正确的原始IP地址</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>map <span class="nv">$http_x_forwarded_for</span>  <span class="nv">$clientRealIp</span> <span class="o">{</span>
 <span class="ln">2</span>        <span class="c1">## 没有通过代理，直接用 remote_addr</span>
@@ -664,23 +697,23 @@ Linux Iptables:限制每次Nginx连接数</p>
 <span class="ln">7</span>    ~^<span class="o">(</span>?P&lt;firstAddr&gt;<span class="o">[</span>0-9<span class="se">\.</span><span class="o">]</span>+<span class="o">)</span>,?.*$    <span class="nv">$firstAddr</span><span class="p">;</span>
 <span class="ln">8</span><span class="o">}</span>
 <span class="ln">9</span>
-</code></pre></div><h2 id="隐藏版本信息">隐藏版本信息</h2>
+</code></pre></div><h3 id="隐藏版本信息">隐藏版本信息</h3>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>server_tokens   off<span class="p">;</span>
 <span class="ln">2</span>proxy_hide_header        X-Powered-By<span class="p">;</span>
-</code></pre></div><h2 id="禁用扩展名">禁用扩展名</h2>
-<p>location ~* .(txt|doc|sql|gz|svn|git)$ {
-deny all;
-}</p>
-<h2 id="重定向http请求到https">重定向HTTP请求到HTTPS</h2>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>server {
+</code></pre></div><h3 id="禁用扩展名">禁用扩展名</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>location ~* .<span class="o">(</span>txt<span class="p">|</span>doc<span class="p">|</span>sql<span class="p">|</span>gz<span class="p">|</span>svn<span class="p">|</span>git<span class="o">)</span>$ <span class="o">{</span>
+<span class="ln">2</span>   deny all<span class="p">;</span>
+<span class="ln">3</span><span class="o">}</span>
+</code></pre></div><h3 id="重定向http请求到https">重定向HTTP请求到HTTPS</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>server <span class="o">{</span>
 <span class="ln">2</span>    ...
-<span class="ln">3</span>    return 301  https://$server_name$request_uri;
+<span class="ln">3</span>    <span class="k">return</span> <span class="m">301</span>  https://<span class="nv">$server_name$request_uri</span><span class="p">;</span>
 <span class="ln">4</span>    ...
-<span class="ln">5</span>}
-</code></pre></div><h2 id="防止xss攻击">防止XSS攻击</h2>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>add_header X-Frame-Options &#34;SAMEORIGIN&#34;;
-<span class="ln">2</span>add_header X-XSS-Protection &#34;1; mode=block&#34;;
-<span class="ln">3</span>add_header X-Content-Type-Options &#34;nosniff&#34;;
+<span class="ln">5</span><span class="o">}</span>
+</code></pre></div><h3 id="防止xss攻击">防止XSS攻击</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>add_header X-Frame-Options <span class="s2">&#34;SAMEORIGIN&#34;</span><span class="p">;</span>
+<span class="ln">2</span>add_header X-XSS-Protection <span class="s2">&#34;1; mode=block&#34;</span><span class="p">;</span>
+<span class="ln">3</span>add_header X-Content-Type-Options <span class="s2">&#34;nosniff&#34;</span><span class="p">;</span>
 </code></pre></div><ul>
 <li><code>X-Frame-Options</code>： 响应头表示是否允许浏览器加载frame等属性，有三个配置DENY禁止任何网页被嵌入,SAMEORIGIN`只允许本网站的嵌套,ALLOW-FROM允许指定地址的嵌套</li>
 <li><code>X-XSS-Protection</code>： 表示启用XSS过滤（禁用过滤为X-XSS-Protection: 0），mode=block表示若检查到XSS攻击则停止渲染页面</li>
@@ -688,7 +721,7 @@ deny all;
 </ul>
 <p>在通常的请求响应中，浏览器会根据Content-Type来分辨响应的类型，但当响应类型未指定或错误指定时，浏览会尝试启用MIME-sniffing来猜测资源的响应类型，这是非常危险的</p>
 <p>例如一个.jpg的图片文件被恶意嵌入了可执行的js代码，在开启资源类型猜测的情况下，浏览器将执行嵌入的js代码，可能会有意想不到的后果</p>
-<h2 id="目录只读">目录只读</h2>
+<h3 id="目录只读">目录只读</h3>
 <p>如果没有上传需求，完全可以把网站根目录弄成只读的，加固安全。</p>
 <p>做了一点小动作，给网站根目录搞了一个只读的挂载点。这里假设网站根目录为/var/www/html</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>mkdir -p /data  
