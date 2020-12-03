@@ -4,7 +4,6 @@
   <head>
 <title>Posts | 保罗札记</title>
 <meta charset="utf-8">
-<meta name="generator" content="Hugo 0.78.2" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script>
@@ -80,6 +79,13 @@
     <a href="https://www.zengxi.net/" class="nav_item">首页 </a>
   </div>
   <div class="nav_parent">
+    <a href="https://www.zengxi.net/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
+    <div class="nav_sub">
+      <span class="nav_child"></span>
+        <a href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/" class="nav_child nav_item">Kubernetes in Action笔记</a>
+    </div>
+  </div>
+  <div class="nav_parent">
     <a href="https://www.zengxi.net/about/" class="nav_item">关于 </a>
   </div>
       
@@ -121,6 +127,35 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2018/12/hibernate-criteria-builder-time-range/">Hibernate中用criteria builder处理日期与时间分开的字段</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 6, 2018</span>
+    <a href='https://www.zengxi.net/tags/hibernate' class="post_tag button button_translucent">hibernate
+    </a>
+    <a href='https://www.zengxi.net/tags/criteria-builder' class="post_tag button button_translucent">criteria builder
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">现有系统中原先在设计数据库字段的时候，把日期与时间分别存入两个不同的字段，但是这两个字段在数据库中都是以timestamp类型来保存。这样的话，如果需要在where条件中把这两个字段与某个特定的时间做比较，则需要分别截取有效的信息。对于日期字段仅仅取出日期的值，把时间舍弃；对于时间字段仅仅取出时间的值，把日期舍弃。
+举个例子，假设数据库中有两个字段：returnSlaDate存的是物品归还截止日期，returnSlaTime存的是物品归还截止时间。实际在保存的时候，数据库中returnSlaDate字段的值可能会是 2018-12-31 00:00:00 ，其中 00:00:00 是没有用的，在与特定时间做比较的时候，需要舍 …</p>
+          <a href="https://www.zengxi.net/2018/12/hibernate-criteria-builder-time-range/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -423,38 +458,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/06/simple-selection-sort/">排序算法 - （简单）选择排序 (Selection Sort）</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 20, 2018</span>
-    <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95' class="post_tag button button_translucent">算法
-    </a>
-    <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F' class="post_tag button button_translucent">排序
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">基本思路 假设按照从小到大排列，总共有n个元素
- 第一轮，找出数组中最小的元素，与第一个元素交换 第二轮，找出剩余元素中最小的元素，与第二个元素交换 第三轮，找出剩余元素中最小的元素，与第三个元素交换 如此重复上述步骤，直至处理完所有元素  性能 时间复杂度：O(n2)
-空间复杂度：O(1)
-示例代码 更多详情可点击链接参考示例代码
-1private static int[] selectionSort(int[] unsortedArray) { 2 int minIndex; 3 for (int round = 0; round &lt; unsortedArray.length; round ++) { 4 // …</p>
-          <a href="https://www.zengxi.net/2018/06/simple-selection-sort/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -502,6 +505,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="nav-link">Kubernetes in Action笔记 - (2) k8s集群架构</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/" class="nav-link">Kubernetes in Action笔记 - (1) 容器技术介绍</a>
       </li>
       <li>
@@ -521,9 +527,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
       </li>
     </ul>
     <div>
@@ -569,6 +572,11 @@
           <span class="button_tally">2</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">2</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/nginx/' class="post_tag button button_translucent">
           NGINX
           <span class="button_tally">2</span>
@@ -591,11 +599,6 @@
         
         <a href='https://www.zengxi.net/categories/chrome/' class="post_tag button button_translucent">
           CHROME
-          <span class="button_tally">1</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/elastic-search/' class="post_tag button button_translucent">
-          ELASTIC-SEARCH
           <span class="button_tally">1</span>
         </a>
         
@@ -625,7 +628,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=1>KUBERNETES<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=2>KUBERNETES<span class="button_tally">2</span>
             </a>
             
             
@@ -694,7 +697,7 @@
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">1</span>
+          <span class="button_tally">2</span>
         </a>
         
         
@@ -758,6 +761,11 @@
           <span class="button_tally">2</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">2</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/nodejs/' class="post_tag button button_translucent">
           NODEJS
           <span class="button_tally">2</span>
@@ -765,11 +773,6 @@
         
         <a href='https://www.zengxi.net/tags/pglogical/' class="post_tag button button_translucent">
           PGLOGICAL
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/quartz/' class="post_tag button button_translucent">
-          QUARTZ
           <span class="button_tally">2</span>
         </a>
         
@@ -867,7 +870,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=1>KUBERNETES<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=2>KUBERNETES<span class="button_tally">2</span>
             </a>
             
             

@@ -1,8 +1,8 @@
 
 <!DOCTYPE html>
-<html lang="zh-cn" data-figures="">
+<html lang="zh-cn" data-figures="" class="page">
   <head>
-<title>manjaro | 保罗札记</title>
+<title>Kubernetes in Action笔记 - (2) k8s集群架构 | 保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,13 +19,17 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="">
+<meta name="description" content="集群架构 k8s集群由很多节点组成，被分成两种类型：Master节点与Node节点。
+Master节点 承载着控制和管理整个集群系统的 Control Panel。包含下面组件：
+ API Server  一个api服务器，所有外部与k8s集群的交互都需要经过它 可水平扩展   Scheduler  将pod调度到具体 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="manjaro" />
-<meta property="og:url" content="https://www.zengxi.net/tags/manjaro/" />
-<meta property="og:title" content="manjaro" />
-<meta property="og:description" content="" />
+<meta name="twitter:title" content="Kubernetes in Action笔记 - (2) k8s集群架构" />
+<meta property="og:url" content="https://www.zengxi.net/2020/12/k8s_cluster_structure/" />
+<meta property="og:title" content="Kubernetes in Action笔记 - (2) k8s集群架构" />
+<meta property="og:description" content="集群架构 k8s集群由很多节点组成，被分成两种类型：Master节点与Node节点。
+Master节点 承载着控制和管理整个集群系统的 Control Panel。包含下面组件：
+ API Server  一个api服务器，所有外部与k8s集群的交互都需要经过它 可水平扩展   Scheduler  将pod调度到具体 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -34,7 +38,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://www.zengxi.net/tags/manjaro/">
+<link rel="canonical" href="https://www.zengxi.net/2020/12/k8s_cluster_structure/">
 
     
 
@@ -124,131 +128,142 @@
 </header>
 
     <main>
-
+  
 <div class="grid-inverse wrap content">
-  <ul class="posts" id="posts">
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/08/manjaro_debtap/">Manjaro安装deb包</a>
-      </h3>
-      <div class="post_meta">
+  <article class="post_content">
+    <h1 class="post_title">Kubernetes in Action笔记 - (2) k8s集群架构</h1><div class="post_meta">
   <svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg>
   <span class="post_date">
-    Aug 13, 2020</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
+    Dec 3, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
     </a>
 </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">安装debtap
-1yay -S debtap 替换源，解决国内debtap同步仓库执行超慢的问题。打开 /usr/bin/debtap，更换 debtap 内容：
- 将 http://ftp.debian.org/debian/dists 替换成 https://mirrors.ustc.edu.cn/debian/dists 将 http://archive.ubuntu.com/ubuntu/dists 替换成 https://mirrors.ustc.edu.cn/ubuntu/dists  升级debtap数据库
-1sudo debtap -u 转换deb包。注意： 转换过程中会提示输入包名，以及license。包名随 …</p>
-          <a href="https://www.zengxi.net/2020/08/manjaro_debtap/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/08/linux_auto_set_brightness/">Manjaro笔记本启动时自动设置屏幕亮度</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+    
+<div class="post_share">
+  分享到:
+  <a href="https://twitter.com/intent/tweet?text=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%282%29%20k8s%e9%9b%86%e7%be%a4%e6%9e%b6%e6%9e%84&url=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_cluster_structure%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#twitter"></use>
 </svg>
-  <span class="post_date">
-    Aug 10, 2020</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">笔记本在manjaro在启动的时候，屏幕可能会默认设置为最大亮度。可以通过设置开机启动脚本，来设置启动时候的亮度。
-1. 创建一个启动service脚本 执行下面的命令
-1sudo vim /etc/systemd/system/rc-local.service 输入下面的内容
-1[Unit] 2Description=&#34;/etc/rc.local Compatibility&#34; 3 4[Service] 5Type=oneshot 6ExecStart=/etc/rc.local start 7TimeoutSec=0 8StandardInput=tty 9RemainAfterExit=yes …</p>
-          <a href="https://www.zengxi.net/2020/08/linux_auto_set_brightness/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/05/manjaro_install_vmware/">Manjaro安装VMware Workstation</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+  </a>
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_cluster_structure%2f&t=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%282%29%20k8s%e9%9b%86%e7%be%a4%e6%9e%b6%e6%9e%84" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#facebook"></use>
 </svg>
-  <span class="post_date">
-    May 26, 2020</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
-    </a>
-    <a href='https://www.zengxi.net/tags/vmware' class="post_tag button button_translucent">vmware
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">安装VMware workstation
-1yay -S vmware-workstation 启动时候如果报错：Please make sure that the kernel module `vmmon’ is loaded. 则需要重新安装一下linux-headers，加载一下vmmon模块
-1# 先查看内核。返回值版本号格式为: A.B.C-D-MANJARO。示例： 5.2.8-1-MANJARO， 2uname -r 3 4# 安装 linux-headers。根据上面的内核版本来选择安装包，安装包名字为：linuxAB-headers 5sudo pacman -S linux52-headers 6 7# 加 …</p>
-          <a href="https://www.zengxi.net/2020/05/manjaro_install_vmware/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/">Manjaro设置chrome为默认浏览器</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+  </a>
+  <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="分享到 LinkedIn" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#linkedin"></use>
 </svg>
-  <span class="post_date">
-    May 25, 2020</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
-    </a>
-    <a href='https://www.zengxi.net/tags/chrome' class="post_tag button button_translucent">chrome
-    </a>
+  </a>
+  <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" title="Copy Link" class="link link_yank">
+    <svg class="icon">
+  <use xlink:href="#copy"></use>
+</svg>
+  </a>
 </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">安装完 Manjaro，一般会自带 Firefox浏览器。如果自己想再安装 chrome，并且设置成默认浏览器，则需要两个步骤：
- 在 Default Applications 中选择 Chrome 为默认的浏览器。除了这一步还不够，打开 chrome 依然有提示说“chrome 不是默认浏览器”，这就需要下面的第二步来解决。 在 File Association 中找到 html 项， 选择使用 Chrome 打开该类型的文件。  </p>
-          <a href="https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-    <li>
-
-
+    
+    
+    <h2>文章目录</h2>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#集群架构">集群架构</a>
+      <ul>
+        <li><a href="#master节点">Master节点</a></li>
+        <li><a href="#node-节点">Node 节点</a></li>
+      </ul>
+    </li>
+    <li><a href="#使用kubernetes的好处">使用Kubernetes的好处</a>
+      <ul>
+        <li><a href="#简化应用程序部署">简化应用程序部署</a></li>
+        <li><a href="#更好地利用硬件">更好地利用硬件</a></li>
+        <li><a href="#健康检查和自修复">健康检查和自修复</a></li>
+        <li><a href="#自动扩容">自动扩容</a></li>
+      </ul>
     </li>
   </ul>
+</nav>
+    <h2 id="集群架构">集群架构</h2>
+<p>k8s集群由很多节点组成，被分成两种类型：Master节点与Node节点。</p>
+<h3 id="master节点">Master节点</h3>
+<p>承载着控制和管理整个集群系统的 Control Panel。包含下面组件：</p>
+<ul>
+<li>API Server
+<ul>
+<li>一个api服务器，所有外部与k8s集群的交互都需要经过它</li>
+<li>可水平扩展</li>
+</ul>
+</li>
+<li>Scheduler
+<ul>
+<li>将pod调度到具体的Node节点上</li>
+<li>一个master集群中只会有一个节点处于激活状态，由etcd选举产生</li>
+</ul>
+</li>
+<li>Control Manager
+<ul>
+<li>执行集群级别的功能，通过apiserver监控集群状态做出相应的处理，如复制组件、持续跟踪工作节点 、处理节点失败等</li>
+<li>一个master集群中只会有一个节点处于激活状态，由etcd选举产生</li>
+</ul>
+</li>
+<li>etcd
+<ul>
+<li>一个可靠的分布式数据存储,它能持久化存储集群配置</li>
+</ul>
+</li>
+</ul>
+<p>k8s依赖etcd所以不存在数据一致性的问题（把数据一致性压到了etcd上），所以k8s master不需要采取投票的机制来进行选举，而只需节点健康就可以成为leader。所以这边master并不要求奇数，偶数也是可以的。那么master高可用至少需要2个节点，失败容忍度是(n/0)+1，也就是只要有一个是健康的k8s master集群就属于可用状态。（这边需要注意的是master依赖etcd，如果etcd不可用那么master也将不可用）</p>
+<p>etcd的失败容忍度：最小可用节点数：(n/2)+1</p>
+<h3 id="node-节点">Node 节点</h3>
+<p>无高可用一说。</p>
+<p>主要的几个组件：</p>
+<ul>
+<li>Container Runtime
+<ul>
+<li>每个节点都需要一个容器运行时来执行容器，比如Docker。非pod启动。</li>
+</ul>
+</li>
+<li>kubelet
+<ul>
+<li>用于执行API server下达的命令，也可以重启启动失败的pod。</li>
+</ul>
+</li>
+<li>kube-proxy (Kubernetes Service Proxy)
+<ul>
+<li>通过修改iptables来达到网络代理、负载均衡的效果</li>
+</ul>
+</li>
+</ul>
+<h2 id="使用kubernetes的好处">使用Kubernetes的好处</h2>
+<h3 id="简化应用程序部署">简化应用程序部署</h3>
+<p>由于k8s将其所有工作节点公开为一个部署平台, 因此应用程序开发人员可以直接部署应用程序,不需要了解组成集群的服务器。</p>
+<p>开发人员通常不关心应用程序运行在哪个服务器上,只要服务器能够为应用程序提供足够的系统资源即可。</p>
+<p>有时开发人员需要指定应用程序应该运行在哪种硬件上，比如SSD，那只需要告诉k8s只在具有 SSD 的节点中进行选择即可。</p>
+<h3 id="更好地利用硬件">更好地利用硬件</h3>
+<p>将应用程序与基础设施分离开来， k8s根据资源需求描述和每个节点上的可用资源选择最合适的节点</p>
+<p>通过使用容器,不再用把这个应用绑定到一个特定的集群节点,而允许应用程序在任何时候都在集群中自由迁移。让节点的硬件资源得到尽可能好的利用。</p>
+<h3 id="健康检查和自修复">健康检查和自修复</h3>
+<p>k8s 监控应用程序组件和它们运行的节点,并在节点出现故障时自动将它们重新调度到其他节点。这使运维团队不必手动迁移应用程序组件,并允许团队立即专注于修复节点本身, 并将其修好送回到可用的硬件资源池中, 而不是将重点放在重新定位应用程序上。</p>
+<h3 id="自动扩容">自动扩容</h3>
+<p>可以让k8s监视每个应用程序使用的资源, 自动调整每个应用程序的运行实例数量。这意味着运维团队不需要不断地监控单个应用程序的负载</p>
+<hr>
+<p>图书资料：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30418855/">https://book.douban.com/subject/30418855/</a></li>
+</ul>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/ants/p/11489598.html">https://www.cnblogs.com/ants/p/11489598.html</a></li>
+</ul>
+
+    
+      
+    
+  </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <h2>Paul Zeng</h2>
@@ -258,9 +273,6 @@
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="nav-link">Kubernetes in Action笔记 - (2) k8s集群架构</a>
-      </li>
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/" class="nav-link">Kubernetes in Action笔记 - (1) 容器技术介绍</a>
       </li>
@@ -281,6 +293,9 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
       </li>
     </ul>
     <div>
@@ -828,8 +843,6 @@
 </aside>
 
 </div>
-
-
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>

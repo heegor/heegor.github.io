@@ -4,7 +4,7 @@
   
   <url>
     <loc>https://www.zengxi.net/</loc>
-    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -19,7 +19,7 @@
   
   <url>
     <loc>https://www.zengxi.net/categories/</loc>
-    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -33,38 +33,33 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/tags/container/</loc>
-    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.zengxi.net/tags/kubernetes/</loc>
-    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/categories/kubernetes/</loc>
-    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/2020/12/k8s_container_tech_intro/</loc>
-    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <loc>https://www.zengxi.net/2020/12/k8s_cluster_structure/</loc>
+    <lastmod>2020-12-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/posts/</loc>
-    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/series/</loc>
-    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -79,7 +74,7 @@
   
   <url>
     <loc>https://www.zengxi.net/tags/</loc>
-    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -90,6 +85,16 @@
                 hreflang="zh-cn"
                 href="https://www.zengxi.net/tags/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/tags/container/</loc>
+    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/2020/12/k8s_container_tech_intro/</loc>
+    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>

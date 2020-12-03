@@ -4,7 +4,6 @@
   <head>
 <title>Posts | 保罗札记</title>
 <meta charset="utf-8">
-<meta name="generator" content="Hugo 0.78.2" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script>
@@ -80,6 +79,13 @@
     <a href="https://www.zengxi.net/" class="nav_item">首页 </a>
   </div>
   <div class="nav_parent">
+    <a href="https://www.zengxi.net/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
+    <div class="nav_sub">
+      <span class="nav_child"></span>
+        <a href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/" class="nav_child nav_item">Kubernetes in Action笔记</a>
+    </div>
+  </div>
+  <div class="nav_parent">
     <a href="https://www.zengxi.net/about/" class="nav_item">关于 </a>
   </div>
       
@@ -121,6 +127,39 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/">Linux下面使用dd命令烧录U盘并查看执行进度</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 13, 2020</span>
+    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">烧录U盘 先用fdisk来查看U盘的盘符
+1sudo fdisk -l 再用dd命令来写数据到U盘
+1sudo dd if=/home/paul/Downloads/test.iso of=/dev/sdc bs=1M count=10000 查看执行进度 假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命令行窗口，执行下面的命令，注意命令上面可能需要加上sudo
+方法一：
+1watch -n 5 pkill -USR1 ^dd$ 方法二：
+1watch -n 5 killall -USR1 dd 方法三：
+1while killall -USR1 dd; do sleep 5; done 方法四：
+1while (ps …</p>
+          <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -383,35 +422,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/04/docker-hub-mirror/">Docker Hub国内镜像加速</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Apr 22, 2020</span>
-    <a href='https://www.zengxi.net/tags/docker' class="post_tag button button_translucent">docker
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">国内访问Docker Hub速度比较感人，这个时候需要配置国内的镜像，来加速下载。由于镜像服务可能出现宕机，建议同时配置多个镜像。
-Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json，写入如下内容
-1{ 2 &#34;registry-mirrors&#34;: [ 3 &#34;https://hub-mirror.c.163.com&#34;, 4 &#34;https://registry.docker-cn.com&#34; 5 ] 6} 重启服务
-1sudo systemctl daemon-reload 2sudo systemctl …</p>
-          <a href="https://www.zengxi.net/2020/04/docker-hub-mirror/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -459,6 +469,9 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="nav-link">Kubernetes in Action笔记 - (2) k8s集群架构</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/" class="nav-link">Kubernetes in Action笔记 - (1) 容器技术介绍</a>
       </li>
       <li>
@@ -478,9 +491,6 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="nav-link">利用n来切换Nodejs版本</a>
       </li>
     </ul>
     <div>
@@ -526,6 +536,11 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
           <span class="button_tally">2</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">2</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/nginx/' class="post_tag button button_translucent">
           NGINX
           <span class="button_tally">2</span>
@@ -548,11 +563,6 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
         
         <a href='https://www.zengxi.net/categories/chrome/' class="post_tag button button_translucent">
           CHROME
-          <span class="button_tally">1</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/elastic-search/' class="post_tag button button_translucent">
-          ELASTIC-SEARCH
           <span class="button_tally">1</span>
         </a>
         
@@ -582,7 +592,7 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=1>KUBERNETES<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=2>KUBERNETES<span class="button_tally">2</span>
             </a>
             
             
@@ -651,7 +661,7 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">1</span>
+          <span class="button_tally">2</span>
         </a>
         
         
@@ -715,6 +725,11 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
           <span class="button_tally">2</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">2</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/nodejs/' class="post_tag button button_translucent">
           NODEJS
           <span class="button_tally">2</span>
@@ -722,11 +737,6 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
         
         <a href='https://www.zengxi.net/tags/pglogical/' class="post_tag button button_translucent">
           PGLOGICAL
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/quartz/' class="post_tag button button_translucent">
-          QUARTZ
           <span class="button_tally">2</span>
         </a>
         
@@ -824,7 +834,7 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=1>KUBERNETES<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=2>KUBERNETES<span class="button_tally">2</span>
             </a>
             
             
