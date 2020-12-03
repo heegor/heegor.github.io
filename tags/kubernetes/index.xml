@@ -6,11 +6,29 @@
     <description>Recent content in kubernetes on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 03 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Dec 2020 23:30:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes in Action笔记 - (3) Pod介绍</title>
+      <link>https://www.zengxi.net/2020/12/k8s_pod_intro/</link>
+      <pubDate>Thu, 03 Dec 2020 23:30:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2020/12/k8s_pod_intro/</guid>
+      <description>什么是Pod Pod是k8s的基本构建模块，包含一个或者多个容器。一个Pod中的所有容器都运行在同—个节点上，绝不跨越两个节点
+为何需要Pod 多个容器比单个容器中包含多个进程要好 想象一个由多个进程组成的应用程序, 无论是通过ipc (进程间通信)还是本地存储文件进行通信, 都要求它们运行于同一 台机器上。 在k8s中, 我们经常在容器中运行进程, 由于每一个容器都非常像一台独立的机器, 此时你可能认为在单个容器中运行多个进程是合乎逻辑的, 然而在实践中这种做法并不合理。
+容器被设计为每个容器只运行一个进程(除非进程本身产生子进程)。如果在单个容器中运行多个不相关的进程, 那么保持所有进程运行、 管理它们的日志等将会是我们的责任。例如, 我们需要包含一种在进程崩溃时能够自动重启的机制。同时这些进程都将记录到相同的标准输出中, 而此时我们将很难确定每个进程分别记录了什么。
+综上所述, 我们需要让每个进程运行于自己的容器中, 而这就是Docker和k8s期望使用的方式。
+引入Pod 由于不能将多个进程聚集在一个单独的容器中, 我们需要另一种更高级的结构来将容器绑定在一起,并将它们作为一个单元进行管理,这就是 Pod 背后的根本原理。
+在包含容器的 Pod 下,我们可以同时运行一些密切相关的进程,并为它们提供几乎相同的环境, 此时这些进程就好像全部运行于单个容器中一样, 同时又保持着一定的隔离。这样一来, 我们便能全面地利用容器所提供的特性, 同时对这些进程来说它们就像运行在一起一 样, 实现两全其美。
+Pod的一些特征 同一Pod中容器之间的部分隔离 Pod内部的容器共享部分资源（不是全部），没有完全隔离。这些容器共享相同的 Linux 命名空间, 而不是每个容器都有自己的一组命名空间。比如，它们有相同的 network 和 UTS 命名空间，所以它们都共享相同的主机名和网络接口。
+但当涉及文件系统时, 情况就有所不同。 由于大多数容器的文件系统来自容器镜像, 因此默认情况下, 每个容器的文件系统与其他容器完全隔离。但是，可以使用名为 Volume 的 k8s 资源来共享文件目录。
+Pod内部容器共享相同的IP和端口空间 由于一个pod中的容器运行于相同的 Network 命名空间中, 因此它们共享相同的 IP 地址和端口空间。这意味着在同一 pod 中的容器运行的多个进程需要注意不能绑定到相同的端口号, 否则会导致端口冲突, 但这只涉及同一pod 中的容器。
+由于每个 pod 都有独立的端口空间, 对于不同 pod 中的容器来说则永远不会遇到端口冲突。</description>
+    </item>
+    
     <item>
       <title>Kubernetes in Action笔记 - (2) k8s集群架构</title>
       <link>https://www.zengxi.net/2020/12/k8s_cluster_structure/</link>
-      <pubDate>Thu, 03 Dec 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 03 Dec 2020 13:45:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/2020/12/k8s_cluster_structure/</guid>
       <description>集群架构 k8s集群由很多节点组成，被分成两种类型：Master节点与Node节点。

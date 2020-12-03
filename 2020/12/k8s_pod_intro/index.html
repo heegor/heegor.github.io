@@ -1,8 +1,8 @@
 
 <!DOCTYPE html>
-<html lang="zh-cn" data-figures="">
+<html lang="zh-cn" data-figures="" class="page">
   <head>
-<title>serialize | 保罗札记</title>
+<title>Kubernetes in Action笔记 - (3) Pod介绍 | 保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,13 +19,15 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="">
+<meta name="description" content="什么是Pod Pod是k8s的基本构建模块，包含一个或者多个容器。一个Pod中的所有容器都运行在同—个节点上，绝不跨越两个节点
+为何需要Pod 多个容器比单个容器中包含多个进程要好 想象一个由多个进程组成的应用程序, 无论是通过ipc (进程间通信)还是本地存储文件进行通信, 都要求它们运行于同一 台机器上。 在k8s …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="serialize" />
-<meta property="og:url" content="https://www.zengxi.net/tags/serialize/" />
-<meta property="og:title" content="serialize" />
-<meta property="og:description" content="" />
+<meta name="twitter:title" content="Kubernetes in Action笔记 - (3) Pod介绍" />
+<meta property="og:url" content="https://www.zengxi.net/2020/12/k8s_pod_intro/" />
+<meta property="og:title" content="Kubernetes in Action笔记 - (3) Pod介绍" />
+<meta property="og:description" content="什么是Pod Pod是k8s的基本构建模块，包含一个或者多个容器。一个Pod中的所有容器都运行在同—个节点上，绝不跨越两个节点
+为何需要Pod 多个容器比单个容器中包含多个进程要好 想象一个由多个进程组成的应用程序, 无论是通过ipc (进程间通信)还是本地存储文件进行通信, 都要求它们运行于同一 台机器上。 在k8s …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -34,7 +36,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://www.zengxi.net/tags/serialize/">
+<link rel="canonical" href="https://www.zengxi.net/2020/12/k8s_pod_intro/">
 
     
 
@@ -112,49 +114,110 @@
 </header>
 
     <main>
-
+  
 <div class="grid-inverse wrap content">
-  <ul class="posts" id="posts">
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/06/inputstream-serialize/">实现InputStream的序列化</a>
-      </h3>
-      <div class="post_meta">
+  <article class="post_content">
+    <h1 class="post_title">Kubernetes in Action笔记 - (3) Pod介绍</h1><div class="post_meta">
   <svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg>
   <span class="post_date">
-    Jun 12, 2018</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/inputstream' class="post_tag button button_translucent">inputstream
-    </a>
-    <a href='https://www.zengxi.net/tags/serialize' class="post_tag button button_translucent">serialize
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96' class="post_tag button button_translucent">序列化
+    Dec 3, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
     </a>
 </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">InputStream本身是不支持序列化的，但是在实际开发的过程中有时会需要将输入流通过socket传输，比如RMI的远程调用。
-在Serializable的Java文档文档中有下面的描述：
- Classes that require special handling during the serialization and deserialization process must implement special methods with these exact signatures:
- private void writeObject(java.io.ObjectOutputStream out) throws …</p>
-          <a href="https://www.zengxi.net/2018/06/inputstream-serialize/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
+    
+<div class="post_share">
+  分享到:
+  <a href="https://twitter.com/intent/tweet?text=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%283%29%20Pod%e4%bb%8b%e7%bb%8d&url=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_pod_intro%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#twitter"></use>
+</svg>
+  </a>
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_pod_intro%2f&t=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%283%29%20Pod%e4%bb%8b%e7%bb%8d" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#facebook"></use>
+</svg>
+  </a>
+  <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="分享到 LinkedIn" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#linkedin"></use>
+</svg>
+  </a>
+  <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/" title="Copy Link" class="link link_yank">
+    <svg class="icon">
+  <use xlink:href="#copy"></use>
+</svg>
+  </a>
+</div>
 
-    <li>
-
-
+    
+    
+    <h2>文章目录</h2>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是pod">什么是Pod</a></li>
+    <li><a href="#为何需要pod">为何需要Pod</a>
+      <ul>
+        <li><a href="#多个容器比单个容器中包含多个进程要好">多个容器比单个容器中包含多个进程要好</a></li>
+        <li><a href="#引入pod">引入Pod</a></li>
+      </ul>
     </li>
+    <li><a href="#pod的一些特征">Pod的一些特征</a>
+      <ul>
+        <li><a href="#同一pod中容器之间的部分隔离">同一Pod中容器之间的部分隔离</a></li>
+        <li><a href="#pod内部容器共享相同的ip和端口空间">Pod内部容器共享相同的IP和端口空间</a></li>
+        <li><a href="#平坦的pod之间网络">平坦的Pod之间网络</a></li>
+      </ul>
+    </li>
+    <li><a href="#通过pod合理管理容器">通过Pod合理管理容器</a></li>
   </ul>
+</nav>
+    <h2 id="什么是pod">什么是Pod</h2>
+<p>Pod是k8s的基本构建模块，包含一个或者多个容器。一个Pod中的所有容器都运行在同—个节点上，绝不跨越两个节点</p>
+<h2 id="为何需要pod">为何需要Pod</h2>
+<h3 id="多个容器比单个容器中包含多个进程要好">多个容器比单个容器中包含多个进程要好</h3>
+<p>想象一个由多个进程组成的应用程序, 无论是通过ipc (进程间通信)还是本地存储文件进行通信, 都要求它们运行于同一 台机器上。 在k8s中, 我们经常在容器中运行进程, 由于每一个容器都非常像一台独立的机器, 此时你可能认为在单个容器中运行多个进程是合乎逻辑的, 然而在实践中这种做法并不合理。</p>
+<p>容器被设计为每个容器只运行一个进程(除非进程本身产生子进程)。如果在单个容器中运行多个不相关的进程, 那么保持所有进程运行、 管理它们的日志等将会是我们的责任。例如, 我们需要包含一种在进程崩溃时能够自动重启的机制。同时这些进程都将记录到相同的标准输出中, 而此时我们将很难确定每个进程分别记录了什么。</p>
+<p>综上所述, 我们需要让每个进程运行于自己的容器中, 而这就是Docker和k8s期望使用的方式。</p>
+<h3 id="引入pod">引入Pod</h3>
+<p>由于不能将多个进程聚集在一个单独的容器中, 我们需要另一种更高级的结构来将容器绑定在一起,并将它们作为一个单元进行管理,这就是 Pod 背后的根本原理。</p>
+<p>在包含容器的 Pod 下,我们可以同时运行一些密切相关的进程,并为它们提供几乎相同的环境, 此时这些进程就好像全部运行于单个容器中一样, 同时又保持着一定的隔离。这样一来, 我们便能全面地利用容器所提供的特性, 同时对这些进程来说它们就像运行在一起一 样, 实现两全其美。</p>
+<h2 id="pod的一些特征">Pod的一些特征</h2>
+<h3 id="同一pod中容器之间的部分隔离">同一Pod中容器之间的部分隔离</h3>
+<p>Pod内部的容器共享部分资源（不是全部），没有完全隔离。这些容器共享相同的 Linux 命名空间, 而不是每个容器都有自己的一组命名空间。比如，它们有相同的 network 和 UTS 命名空间，所以它们都共享相同的主机名和网络接口。</p>
+<p>但当涉及文件系统时, 情况就有所不同。 由于大多数容器的文件系统来自容器镜像, 因此默认情况下, 每个容器的文件系统与其他容器完全隔离。但是，可以使用名为 Volume 的 k8s 资源来共享文件目录。</p>
+<h3 id="pod内部容器共享相同的ip和端口空间">Pod内部容器共享相同的IP和端口空间</h3>
+<p>由于一个pod中的容器运行于相同的 Network 命名空间中, 因此它们共享相同的 IP 地址和端口空间。这意味着在同一 pod 中的容器运行的多个进程需要注意不能绑定到相同的端口号, 否则会导致端口冲突, 但这只涉及同一pod 中的容器。</p>
+<p>由于每个 pod 都有独立的端口空间, 对于不同 pod 中的容器来说则永远不会遇到端口冲突。</p>
+<p>此外, 一个pod 中的所有容器也都具有相同的 loopback网络接口, 因此容器可以通过 localhost 与同一 pod 中的其他容器进行通信。</p>
+<h3 id="平坦的pod之间网络">平坦的Pod之间网络</h3>
+<p>k8s 集群中的所有 pod 都在同一个共享网络地址空间中, 这意味着每个 pod 都可以通过其他 pod 的 IP 地址来实现相互访问。 换句话说, 这也表示它们之间没有 NAT (网络地址转换) 网关。 当两个 pod 彼此之间发送网络数据包时, 它们都会将对方的实际 IP 地址看作数据包中的源 IP 。</p>
+<p>不论是将两个 pod 安排在相同或是不同的工作节点上, 同时不管实际节点间的网络拓扑结构如何, 这些 pod 内的容器都能够像在无 NAT 的平坦网络中一样相互通信</p>
+<h2 id="通过pod合理管理容器">通过Pod合理管理容器</h2>
+<ul>
+<li>应该将多层应用分散到多个 pod 中。比如前后端应用要分别在不同的pod中</li>
+<li>基于扩缩容考虑而分割到多个 pod 中。不应该将应用程序都放到单一pod 中的原因就是扩缩容。 pod 也是扩缩
+容的基本单位, 如果两个应用的扩缩容需求不一致，那肯定是要放在不同的pod中</li>
+</ul>
+<p>将多个容器添加到单个 pod 的主要原因是应用可能由一个主进程和一个或多个辅助进程组成。比如一个是主业务服务容器，另外一个是sidecar容器。sidecar 容器的例子包括日志轮转器和收集器、数据处理器、通信适配器等。</p>
+<p>基本上, 总是应该倾向于在单独的pod 中运行容器, 除非有特定的原因要求它们是同一 pod 的一部分。当决定是将两个容器放入一个 pod 还是两个单独的 pod 时, 需要考虑以下问题:</p>
+<ul>
+<li>它们需要一起运行还是可以在不同的主机上运行?</li>
+<li>它们代表的是一个 体还是相互独立的组件?</li>
+<li>它们必须一起进行扩缩容还是可以分别进行?</li>
+</ul>
+<hr>
+<p>图书资料：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30418855/">https://book.douban.com/subject/30418855/</a></li>
+</ul>
+
+    
+      
+    
+  </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <h2>Paul Zeng</h2>
@@ -164,9 +227,6 @@
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/" class="nav-link">Kubernetes in Action笔记 - (3) Pod介绍</a>
-      </li>
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="nav-link">Kubernetes in Action笔记 - (2) k8s集群架构</a>
       </li>
@@ -187,6 +247,9 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
       </li>
     </ul>
     <div>
@@ -734,8 +797,6 @@
 </aside>
 
 </div>
-
-
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>

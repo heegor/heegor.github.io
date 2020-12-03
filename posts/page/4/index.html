@@ -89,18 +89,6 @@
     <a href="https://www.zengxi.net/about/" class="nav_item">关于 </a>
   </div>
       
-      <div class="nav_parent">
-        <a href="#" class="nav_item"></a>
-        <div class="nav_sub">
-          <span class="nav_child"></span>
-          
-          <a href="https://www.zengxi.net/" class="nav_child nav_item">简体中文</a>
-          
-          <a href="https://www.zengxi.net/en/" class="nav_child nav_item"></a>
-          
-        </div>
-      </div>
-      
 <div class='follow'>
   <a href="https://github.com/heegor">
     <svg class="icon">
@@ -127,6 +115,34 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/04/pg_close_session_remove_db/">Postgres关闭某个数据库关联的session</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Apr 23, 2020</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">Postgres删除数据库的时候，报错：有其他用户正在使用该数据库，无法删除。这时，需要关闭这个数据库的相关的连接，然后再删除数据库
+可以执行下面的命令来关闭连接：
+1 SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname=&#39;要删除的数据库名称&#39; AND pid&lt;&gt;pg_backend_pid(); </p>
+          <a href="https://www.zengxi.net/2020/04/pg_close_session_remove_db/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -397,38 +413,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2019/12/pg-upgrade-version/">Postgres 9.x 升级至 10.x</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 1, 2019</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7' class="post_tag button button_translucent">升级
-    </a>
-    <a href='https://www.zengxi.net/tags/pglogical' class="post_tag button button_translucent">pglogical
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">目前主要有两种升级方式，它们分别使用于不同的场景。
-   升级方式 优点 缺点     pglogical逻辑复制升级 停机时间短 需提前准备从库，并搭建replication，在replication期间，需考虑DDL语句带来的影响。   pg_upgrade升级 不需要提前准备replication 升级完成后需检查index是否正常，并执行vacuum analyze，对于数据量较大的库，这可能耗时较长    逻辑复制升级 前提条件 所有表都必须有主键 可以用下面的语句来检查
-1SELECT table_name 2 FROM information_schema.tables 3 WHERE (table_catalog, …</p>
-          <a href="https://www.zengxi.net/2019/12/pg-upgrade-version/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -476,6 +460,9 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/" class="nav-link">Kubernetes in Action笔记 - (3) Pod介绍</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="nav-link">Kubernetes in Action笔记 - (2) k8s集群架构</a>
       </li>
       <li>
@@ -495,9 +482,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
       </li>
     </ul>
     <div>
@@ -523,6 +507,11 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <span class="button_tally">4</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
           MAC
           <span class="button_tally">3</span>
@@ -540,11 +529,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
           <span class="button_tally">2</span>
         </a>
         
@@ -599,7 +583,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=2>KUBERNETES<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=3>KUBERNETES<span class="button_tally">3</span>
             </a>
             
             
@@ -668,7 +652,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">2</span>
+          <span class="button_tally">3</span>
         </a>
         
         
@@ -712,6 +696,11 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <span class="button_tally">3</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class="post_tag button button_translucent">
           排序
           <span class="button_tally">3</span>
@@ -729,11 +718,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/tags/grep/' class="post_tag button button_translucent">
           GREP
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
           <span class="button_tally">2</span>
         </a>
         
@@ -841,7 +825,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=2>KUBERNETES<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=3>KUBERNETES<span class="button_tally">3</span>
             </a>
             
             

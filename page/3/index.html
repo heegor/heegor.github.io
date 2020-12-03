@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="">
   <head>
-	<meta name="generator" content="Hugo 0.78.2" />
+	<meta name="generator" content="Hugo 0.79.0" />
 <title>保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -19,8 +19,6 @@
 
   
 <meta property="og:locale" content="zh-cn" />
-
-<meta property="og:locale:alternate" content="en" />
 
 <meta property="og:type" content="website">
 <meta name="description" content="A theme based on VMware&#39;s Clarity Design System for publishing technical blogs with Hugo.">
@@ -93,18 +91,6 @@
     <a href="https://www.zengxi.net/about/" class="nav_item">关于 </a>
   </div>
       
-      <div class="nav_parent">
-        <a href="#" class="nav_item"></a>
-        <div class="nav_sub">
-          <span class="nav_child"></span>
-          
-          <a href="https://www.zengxi.net/" class="nav_child nav_item">简体中文</a>
-          
-          <a href="https://www.zengxi.net/en/" class="nav_child nav_item"></a>
-          
-        </div>
-      </div>
-      
 <div class='follow'>
   <a href="https://github.com/heegor">
     <svg class="icon">
@@ -133,6 +119,34 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/07/jetty_tmp_dir/">jetty临时目录下的资源文件被删导致js等资源找不到</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 14, 2020</span>
+    <a href='https://www.zengxi.net/tags/jetty' class="post_tag button button_translucent">jetty
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">生产环境上jetty运行一段时间后，在打开某个网页的时候发现有js、css文件找不到，但是重启之后问题会解决。后来发现是设定了tmpwatch后台任务，定时会清理一次系统的tmp目录。
+默认情况下，如果没有指定jetty的临时目录，默认会使用系统的临时目录。解决方案就是，修改jetty的临时文件存放目录，不要放在 /tmp 目录下面。主要有下面几个方法：
+ 设置basetempdir值  1&lt;Configure class=&#34;org.eclipse.jetty.webapp.WebAppContext&#34;&gt; 2 3 &lt;Set …</p>
+          <a href="https://www.zengxi.net/2020/07/jetty_tmp_dir/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -400,34 +414,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/04/pg_close_session_remove_db/">Postgres关闭某个数据库关联的session</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Apr 23, 2020</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">Postgres删除数据库的时候，报错：有其他用户正在使用该数据库，无法删除。这时，需要关闭这个数据库的相关的连接，然后再删除数据库
-可以执行下面的命令来关闭连接：
-1 SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname=&#39;要删除的数据库名称&#39; AND pid&lt;&gt;pg_backend_pid(); </p>
-          <a href="https://www.zengxi.net/2020/04/pg_close_session_remove_db/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -475,6 +461,9 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/" class="nav-link">Kubernetes in Action笔记 - (3) Pod介绍</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="nav-link">Kubernetes in Action笔记 - (2) k8s集群架构</a>
       </li>
       <li>
@@ -494,9 +483,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="nav-link">Ubuntu安装Postgres</a>
       </li>
     </ul>
     <div>
@@ -522,6 +508,11 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
           <span class="button_tally">4</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
           MAC
           <span class="button_tally">3</span>
@@ -539,11 +530,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
         
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
           <span class="button_tally">2</span>
         </a>
         
@@ -598,7 +584,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=2>KUBERNETES<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=3>KUBERNETES<span class="button_tally">3</span>
             </a>
             
             
@@ -667,7 +653,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">2</span>
+          <span class="button_tally">3</span>
         </a>
         
         
@@ -711,6 +697,11 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
           <span class="button_tally">3</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class="post_tag button button_translucent">
           排序
           <span class="button_tally">3</span>
@@ -728,11 +719,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
         
         <a href='https://www.zengxi.net/tags/grep/' class="post_tag button button_translucent">
           GREP
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
           <span class="button_tally">2</span>
         </a>
         
@@ -840,7 +826,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=2>KUBERNETES<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=3>KUBERNETES<span class="button_tally">3</span>
             </a>
             
             
