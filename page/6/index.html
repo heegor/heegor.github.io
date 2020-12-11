@@ -123,6 +123,79 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2018/06/connect-remote-jmx-with-ssh/">通过SSH和JMX远程监控Java服务</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 28, 2018</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/jmx' class="post_tag button button_translucent">jmx
+    </a>
+    <a href='https://www.zengxi.net/tags/ssh' class="post_tag button button_translucent">ssh
+    </a>
+    <a href='https://www.zengxi.net/tags/%E8%BF%9C%E7%A8%8B' class="post_tag button button_translucent">远程
+    </a>
+    <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7' class="post_tag button button_translucent">监控
+    </a>
+    <a href='https://www.zengxi.net/tags/jvisualvm' class="post_tag button button_translucent">jvisualvm
+    </a>
+    <a href='https://www.zengxi.net/tags/jconsole' class="post_tag button button_translucent">jconsole
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在日常工作中，可以使用一些监控数据的图形展示工具（比如Grafana等）来查看服务器上面JVM的使用情况，比如内存或者CPU的占用情况。但是，在需要解决实际问题的时候，比如CPU或者内存占用过高，还是需要连接到远程的服务器，查看JVM的具体运行情况来分析问题产生的原因。
+通常情况下，我们是通过开启远程服务器上的JMX，使用JVisualVM或JConsole客户端，远程连接到服务器上。然而，在实际的生产环境中，Java应用服务器并没有直接暴露在公网，必须通过跳板机来连接。
+网上查了一些资料，多数比较麻烦，有些还需要借助第三方工具。后来找到一个简便的方法，在使用JVisualVM或JConsole客户端的时候，通过指定socks代理的 …</p>
+          <a href="https://www.zengxi.net/2018/06/connect-remote-jmx-with-ssh/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2018/06/redis-data-migration/">使用redis-cli与AOF迁移数据</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 27, 2018</span>
+    <a href='https://www.zengxi.net/tags/redis' class="post_tag button button_translucent">redis
+    </a>
+    <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB' class="post_tag button button_translucent">数据迁移
+    </a>
+    <a href='https://www.zengxi.net/tags/migration' class="post_tag button button_translucent">migration
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">把一台Redis上的数据，迁移到另外一台Redis服务器上，有很多种方式。其中一个简便的方法是，利用Redis自带的命令行工具redis-cli，实现数据的无缝迁移。
+在旧的Redis服务器上开启AOF 执行下面的命令，检查AOF是否开启。返回yes表示开启，no表示关闭
+1redis-cli -h old_redis_ip -p old_redis_port config get appendonly 如果未开启，执行下面的命令开启AOF
+1redis-cli -h old_redis_ip -p old_redis_port config set appendonly yes 复制AOF文件 默认生成的AOF文件名 …</p>
+          <a href="https://www.zengxi.net/2018/06/redis-data-migration/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2018/06/ubuntu-screenshot-shortcut/">Ubuntu 16.04系统自带截屏工具快捷键</a>
       </h3>
       <div class="post_meta">
@@ -359,6 +432,12 @@ grep的帮助文档中有这几个参数：
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/" class="nav-link">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/" class="nav-link">Kubernetes in Action笔记 - (4) 标签、注解与命名空间</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/" class="nav-link">Kubernetes in Action笔记 - (3) Pod介绍</a>
       </li>
       <li>
@@ -375,12 +454,6 @@ grep的帮助文档中有这几个参数：
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
       </li>
     </ul>
     <div>
@@ -401,14 +474,14 @@ grep的帮助文档中有这几个参数：
           <span class="button_tally">8</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">5</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
           MANJARO
           <span class="button_tally">4</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
-          <span class="button_tally">3</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
@@ -482,7 +555,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=3>KUBERNETES<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=5>KUBERNETES<span class="button_tally">5</span>
             </a>
             
             
@@ -551,7 +624,7 @@ grep的帮助文档中有这几个参数：
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">3</span>
+          <span class="button_tally">5</span>
         </a>
         
         
@@ -563,6 +636,11 @@ grep的帮助文档中有这几个参数：
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
           POSTGRES
           <span class="button_tally">9</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -592,11 +670,6 @@ grep的帮助文档中有这几个参数：
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">3</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
           <span class="button_tally">3</span>
         </a>
         
@@ -724,7 +797,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=3>KUBERNETES<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=5>KUBERNETES<span class="button_tally">5</span>
             </a>
             
             

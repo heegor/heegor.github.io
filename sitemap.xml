@@ -4,46 +4,56 @@
   
   <url>
     <loc>https://www.zengxi.net/</loc>
-    <lastmod>2020-12-03T23:30:00+08:00</lastmod>
+    <lastmod>2020-12-11T12:30:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/categories/</loc>
-    <lastmod>2020-12-03T23:30:00+08:00</lastmod>
+    <lastmod>2020-12-11T12:30:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/tags/kubernetes/</loc>
-    <lastmod>2020-12-03T23:30:00+08:00</lastmod>
+    <lastmod>2020-12-11T12:30:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/categories/kubernetes/</loc>
-    <lastmod>2020-12-03T23:30:00+08:00</lastmod>
+    <lastmod>2020-12-11T12:30:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2020-12-03T23:30:00+08:00</lastmod>
+    <lastmod>2020-12-11T12:30:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/2020/12/k8s_pod_intro/</loc>
-    <lastmod>2020-12-03T23:30:00+08:00</lastmod>
+    <loc>https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/</loc>
+    <lastmod>2020-12-11T12:30:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/posts/</loc>
-    <lastmod>2020-12-03T23:30:00+08:00</lastmod>
+    <lastmod>2020-12-11T12:30:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/series/</loc>
-    <lastmod>2020-12-03T23:30:00+08:00</lastmod>
+    <lastmod>2020-12-11T12:30:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/tags/</loc>
+    <lastmod>2020-12-11T12:30:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/</loc>
+    <lastmod>2020-12-10T22:04:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/2020/12/k8s_pod_intro/</loc>
     <lastmod>2020-12-03T23:30:00+08:00</lastmod>
   </url>
   

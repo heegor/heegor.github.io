@@ -1,8 +1,8 @@
 
 <!DOCTYPE html>
-<html lang="zh-cn" data-figures="">
+<html lang="zh-cn" data-figures="" class="page">
   <head>
-<title>unix | 保罗札记</title>
+<title>Kubernetes in Action笔记 - (4) 标签、注解与命名空间 | 保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,13 +19,17 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="">
+<meta name="description" content="标签 什么是标签 标签是可以附加到资源的任意键值对。通过标签选择器，可以筛选出具有该确切标签的资源。
+使用标签和选择器来约束pod调度 默认情况下，Pod基本上是随机地调度到任意Node节点的。但是某些情况下，想要调度到特定的Node节点，比如SSD硬盘的节点。这个时候，可以通过节点标签和节点标签选择器完成。
+1# 这 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="unix" />
-<meta property="og:url" content="https://www.zengxi.net/tags/unix/" />
-<meta property="og:title" content="unix" />
-<meta property="og:description" content="" />
+<meta name="twitter:title" content="Kubernetes in Action笔记 - (4) 标签、注解与命名空间" />
+<meta property="og:url" content="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/" />
+<meta property="og:title" content="Kubernetes in Action笔记 - (4) 标签、注解与命名空间" />
+<meta property="og:description" content="标签 什么是标签 标签是可以附加到资源的任意键值对。通过标签选择器，可以筛选出具有该确切标签的资源。
+使用标签和选择器来约束pod调度 默认情况下，Pod基本上是随机地调度到任意Node节点的。但是某些情况下，想要调度到特定的Node节点，比如SSD硬盘的节点。这个时候，可以通过节点标签和节点标签选择器完成。
+1# 这 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -34,7 +38,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://www.zengxi.net/tags/unix/">
+<link rel="canonical" href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/">
 
     
 
@@ -112,91 +116,115 @@
 </header>
 
     <main>
-
+  
 <div class="grid-inverse wrap content">
-  <ul class="posts" id="posts">
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/07/force-date-use-locale/">date命令按指定locale所对应的日期格式输出</a>
-      </h3>
-      <div class="post_meta">
+  <article class="post_content">
+    <h1 class="post_title">Kubernetes in Action笔记 - (4) 标签、注解与命名空间</h1><div class="post_meta">
   <svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg>
   <span class="post_date">
-    Jul 4, 2018</span>
-    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
-    </a>
-    <a href='https://www.zengxi.net/tags/unix' class="post_tag button button_translucent">unix
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4' class="post_tag button button_translucent">命令
-    </a>
-    <a href='https://www.zengxi.net/tags/shell' class="post_tag button button_translucent">shell
-    </a>
-    <a href='https://www.zengxi.net/tags/date' class="post_tag button button_translucent">date
-    </a>
-    <a href='https://www.zengxi.net/tags/locale' class="post_tag button button_translucent">locale
+    Dec 10, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
     </a>
 </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。
-比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出
-1date +%a 下面是locale为zh_CN的输出：
- 三  下面是locale为en_US的输出：
- Wed  如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值
-首先我们可以运行 …</p>
-          <a href="https://www.zengxi.net/2018/07/force-date-use-locale/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/06/grep-cmd-display-lines/">如何控制grep命令显示在相关文本前后的行数</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+    
+<div class="post_share">
+  分享到:
+  <a href="https://twitter.com/intent/tweet?text=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%284%29%20%e6%a0%87%e7%ad%be%e3%80%81%e6%b3%a8%e8%a7%a3%e4%b8%8e%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4&url=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_label_annotation_namespace%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#twitter"></use>
 </svg>
-  <span class="post_date">
-    Jun 19, 2018</span>
-    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
-    </a>
-    <a href='https://www.zengxi.net/tags/unix' class="post_tag button button_translucent">unix
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4' class="post_tag button button_translucent">命令
-    </a>
-    <a href='https://www.zengxi.net/tags/grep' class="post_tag button button_translucent">grep
-    </a>
+  </a>
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_label_annotation_namespace%2f&t=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%284%29%20%e6%a0%87%e7%ad%be%e3%80%81%e6%b3%a8%e8%a7%a3%e4%b8%8e%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#facebook"></use>
+</svg>
+  </a>
+  <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="分享到 LinkedIn" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#linkedin"></use>
+</svg>
+  </a>
+  <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/" title="Copy Link" class="link link_yank">
+    <svg class="icon">
+  <use xlink:href="#copy"></use>
+</svg>
+  </a>
 </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在Linux/Unix系统中使用grep命令的时候，有时候我们想要把匹配文本的前后几行的信息也同时显示出来。这可以通过设置一些参数来达到目的。
-grep的帮助文档中有这几个参数：
- -A num, --after-context=num Print num lines of trailing context after each match.
--B num, --before-context=num Print num lines of leading context before each match.
--C num, --context=num Print num lines of leading and trailing …</p>
-          <a href="https://www.zengxi.net/2018/06/grep-cmd-display-lines/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-    <li>
-
-
+    
+    
+    <h2>文章目录</h2>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#标签">标签</a>
+      <ul>
+        <li><a href="#什么是标签">什么是标签</a></li>
+        <li><a href="#使用标签和选择器来约束pod调度">使用标签和选择器来约束pod调度</a></li>
+      </ul>
+    </li>
+    <li><a href="#注解">注解</a></li>
+    <li><a href="#命名空间">命名空间</a>
+      <ul>
+        <li><a href="#作用">作用</a></li>
+        <li><a href="#创建命名空间及其资源">创建命名空间及其资源</a></li>
+        <li><a href="#命名空间的切换">命名空间的切换</a></li>
+        <li><a href="#命名空间的隔离性">命名空间的隔离性</a></li>
+      </ul>
     </li>
   </ul>
+</nav>
+    <h2 id="标签">标签</h2>
+<h3 id="什么是标签">什么是标签</h3>
+<p>标签是可以附加到资源的任意键值对。通过标签选择器，可以筛选出具有该确切标签的资源。</p>
+<h3 id="使用标签和选择器来约束pod调度">使用标签和选择器来约束pod调度</h3>
+<p>默认情况下，Pod基本上是随机地调度到任意Node节点的。但是某些情况下，想要调度到特定的Node节点，比如SSD硬盘的节点。这个时候，可以通过节点标签和节点标签选择器完成。</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="c"># 这个例子中通过nodeSelector选择部署到gpu=true的节点</span><span class="w">
+</span><span class="ln"> 2</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
+</span><span class="ln"> 3</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span><span class="ln"> 4</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 5</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia-gpu</span><span class="w">
+</span><span class="ln"> 6</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">  </span><span class="nt">nodeSelector</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">    </span><span class="l">gpu=true</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="ln">10</span><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">luksa/kubia</span><span class="w">
+</span><span class="ln">11</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
+</span></code></pre></div><h2 id="注解">注解</h2>
+<p>除标签外,pod和其他对象还可以包含注解。注解也是键值对, 但与标签不同, 注解并不是为了保存标识信息而存在的。</p>
+<p>使用注解可以为每个pod或其他API对象添加说明,以便每个使用该集群的人都可以快速查找有关每个单独对象的信息。</p>
+<h2 id="命名空间">命名空间</h2>
+<h3 id="作用">作用</h3>
+<p>k8s的命名空间简单地为对象名称提供了一个作用域。这样就可以将包含大量组件的复杂系统拆分为更小的不同组，这些不同组也可以用于在多租户环境中分配资源，将资源分配为生产、开发和 QA 环境,或者以其他任何你需要的方式分配资源。资源名称只需在命名空间内保持唯一即可，因此两个不同的命名空间可以包含同名的资源。</p>
+<h3 id="创建命名空间及其资源">创建命名空间及其资源</h3>
+<p>可以使用yaml文件来创建命名空间</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
+</span><span class="ln">2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Namespace</span><span class="w">
+</span><span class="ln">3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln">4</span><span class="w">  </span><span class="l">name：custom-namespace</span><span class="w">
+</span></code></pre></div><p>或者使用命令来创建命名空间</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl create namespace custom-namespace
+</code></pre></div><p>想要在创建的命名空间中创建资源, 可以选择在 metadata 宇段中添加一个 <code>namespace: custom-namespace</code> 属性,也可以在使用 kubectl create命令创建资源时指定命名空间:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl create -f kubia-manual.yaml -n custom-namespace
+</code></pre></div><h3 id="命名空间的切换">命名空间的切换</h3>
+<p>如果不指定命名空间, kubectl 将在当前上下文中配置的默认命名空间中执行操作。而当前上下文的命名空间和当前上下文本身都可以通过 kubectl config 命令进行更改。如果想要对其他命名空间中的对象进行操作, 需要给 kubectl 命令传递-- namespace (或 -n) 选项。</p>
+<p>要想快速切换到不同的命名空间, 可以设置以下别名，然后,可以使用 <code>kcd some-namespace</code> 在命名空间之间进行切换 。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="nb">alias</span> <span class="nv">kcd</span> <span class="o">=</span>’kubectl config <span class="nb">set</span> context <span class="k">$(</span>kubectl config current-context<span class="k">)</span> -- namespace’
+</code></pre></div><h3 id="命名空间的隔离性">命名空间的隔离性</h3>
+<p>尽管命名空间将对象分隔到不同的组,只允许你对属于特定命名空间的对象进行操作, 但实际上命名空间之间并不提供对正在运行的对象的任何隔离 。</p>
+<p>例如,你可能会认为当不同的用户在不同的命名空间中部署 pod 时,这些 pod 应该彼此隔离,并且无法通信,但事实却并非如此。命名空间之间是否提供网络隔离取决于 Kubemetes 所使用的网络解决方案。</p>
+<hr>
+<p>图书资料：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30418855/">https://book.douban.com/subject/30418855/</a></li>
+</ul>
+
+    
+      
+    
+  </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <h2>Paul Zeng</h2>
@@ -208,9 +236,6 @@ grep的帮助文档中有这几个参数：
     <ul class="flex-column">
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/" class="nav-link">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/" class="nav-link">Kubernetes in Action笔记 - (4) 标签、注解与命名空间</a>
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/" class="nav-link">Kubernetes in Action笔记 - (3) Pod介绍</a>
@@ -229,6 +254,9 @@ grep的帮助文档中有这几个参数：
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
       </li>
     </ul>
     <div>
@@ -776,8 +804,6 @@ grep的帮助文档中有这几个参数：
 </aside>
 
 </div>
-
-
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>

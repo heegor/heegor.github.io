@@ -119,6 +119,65 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/">Ubuntu安装Postgres</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Oct 27, 2020</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+    <a href='https://www.zengxi.net/tags/ubuntu' class="post_tag button button_translucent">ubuntu
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">ubuntu自带的软件仓库可能没有最新的postgres，这就需要自己手动添加安装源，再安装
+1# 添加安装源 2sudo sh -c &#39;echo &#34;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&#34; &gt; /etc/apt/sources.list.d/pgdg.list&#39; 3 4# 导入key 5wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - 6 7# …</p>
+          <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/">利用n来切换Nodejs版本</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Oct 20, 2020</span>
+    <a href='https://www.zengxi.net/tags/nodejs' class="post_tag button button_translucent">nodejs
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">安装n
+1sudo npm install n -g 安装完后，可以使用命令 sudo n &lt;NODEJS 版本号&gt; 来安装对应的nodejs版本
+需要切换版本时，执行下面的命令。然后用键盘上面的上下方向键即可切换
+1sudo n 切换完后，执行下面命令来验证当前版本号
+1node -v </p>
+          <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/">Postgres启动时遇到只读文件系统的错误</a>
       </h3>
       <div class="post_meta">
@@ -345,65 +404,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/grep_binary_file_match/">grep 返回 Binary file (standard input) matches</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 20, 2020</span>
-    <a href='https://www.zengxi.net/tags/grep' class="post_tag button button_translucent">grep
-    </a>
-    <a href='https://www.zengxi.net/tags/shell' class="post_tag button button_translucent">shell
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">grep &quot;keyword&quot; xxx.log时输出: Binary file (standard input) matches
-这个是因为grep命令认为它是一个二进制文件。解决方案是，加上一个参数 -a：
-1grep -a &#34;keyword&#34; xxx.log 该参数的解释：
-1-a, --text equivalent to --binary-files=text </p>
-          <a href="https://www.zengxi.net/2020/07/grep_binary_file_match/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/">清除chrome中 HTTPS 证书缓存</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 15, 2020</span>
-    <a href='https://www.zengxi.net/tags/chrome' class="post_tag button button_translucent">chrome
-    </a>
-    <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6' class="post_tag button button_translucent">证书
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在地址栏输入 chrome://net-internals/#hsts ， 找到 “Delete domain security policies”， 输入对应的域名，点击 Delete 按钮</p>
-          <a href="https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -448,6 +448,12 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/" class="nav-link">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/" class="nav-link">Kubernetes in Action笔记 - (4) 标签、注解与命名空间</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/" class="nav-link">Kubernetes in Action笔记 - (3) Pod介绍</a>
       </li>
       <li>
@@ -464,12 +470,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="nav-link">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="nav-link">Linux查看某个端口是否被占用</a>
       </li>
     </ul>
     <div>
@@ -490,14 +490,14 @@
           <span class="button_tally">8</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">5</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
           MANJARO
           <span class="button_tally">4</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
-          <span class="button_tally">3</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
@@ -571,7 +571,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=3>KUBERNETES<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=5>KUBERNETES<span class="button_tally">5</span>
             </a>
             
             
@@ -640,7 +640,7 @@
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">3</span>
+          <span class="button_tally">5</span>
         </a>
         
         
@@ -652,6 +652,11 @@
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
           POSTGRES
           <span class="button_tally">9</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -681,11 +686,6 @@
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">3</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
           <span class="button_tally">3</span>
         </a>
         
@@ -813,7 +813,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=3>KUBERNETES<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=5>KUBERNETES<span class="button_tally">5</span>
             </a>
             
             
