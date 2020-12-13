@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="" class="page">
   <head>
-<title>Mac下shell命令支持map | 保罗札记</title>
+<title>Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet | 保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,15 +19,17 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：
-1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持， …">
+<meta name="description" content="托管的Pod 如果是直接创建Pod，当节点失效，这个Pod就会丢失。
+如果是通过ReplicationController或者Deployment等资源来创建的，那就属于托管的资源。k8s集群会管理并检测它的运行状态，当一些意外情况发生的，k8s会自动采取应对措施。
+ReplicationController …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="Mac下shell命令支持map" />
-<meta property="og:url" content="https://www.zengxi.net/2020/01/mac-shell-support-map/" />
-<meta property="og:title" content="Mac下shell命令支持map" />
-<meta property="og:description" content="Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：
-1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持， …" />
+<meta name="twitter:title" content="Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet" />
+<meta property="og:url" content="https://www.zengxi.net/2020/12/k8s_replctl_replset/" />
+<meta property="og:title" content="Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet" />
+<meta property="og:description" content="托管的Pod 如果是直接创建Pod，当节点失效，这个Pod就会丢失。
+如果是通过ReplicationController或者Deployment等资源来创建的，那就属于托管的资源。k8s集群会管理并检测它的运行状态，当一些意外情况发生的，k8s会自动采取应对措施。
+ReplicationController …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -36,7 +38,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://www.zengxi.net/2020/01/mac-shell-support-map/">
+<link rel="canonical" href="https://www.zengxi.net/2020/12/k8s_replctl_replset/">
 
     
 
@@ -117,27 +119,25 @@
   
 <div class="grid-inverse wrap content">
   <article class="post_content">
-    <h1 class="post_title">Mac下shell命令支持map</h1><div class="post_meta">
+    <h1 class="post_title">Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</h1><div class="post_meta">
   <svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg>
   <span class="post_date">
-    Jan 19, 2020</span>
-    <a href='https://www.zengxi.net/tags/shell' class="post_tag button button_translucent">shell
-    </a>
-    <a href='https://www.zengxi.net/tags/declare' class="post_tag button button_translucent">declare
+    Dec 13, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
     </a>
 </div>
 
     
 <div class="post_share">
   分享到:
-  <a href="https://twitter.com/intent/tweet?text=Mac%e4%b8%8bshell%e5%91%bd%e4%bb%a4%e6%94%af%e6%8c%81map&url=https%3a%2f%2fwww.zengxi.net%2f2020%2f01%2fmac-shell-support-map%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+  <a href="https://twitter.com/intent/tweet?text=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%286%29%20ReplicationController%e5%92%8cReplicationSet&url=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_replctl_replset%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
     <svg class="icon">
   <use xlink:href="#twitter"></use>
 </svg>
   </a>
-  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2020%2f01%2fmac-shell-support-map%2f&t=Mac%e4%b8%8bshell%e5%91%bd%e4%bb%a4%e6%94%af%e6%8c%81map" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_replctl_replset%2f&t=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%286%29%20ReplicationController%e5%92%8cReplicationSet" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
     <svg class="icon">
   <use xlink:href="#facebook"></use>
 </svg>
@@ -147,7 +147,7 @@
   <use xlink:href="#linkedin"></use>
 </svg>
   </a>
-  <a href="https://www.zengxi.net/2020/01/mac-shell-support-map/" title="Copy Link" class="link link_yank">
+  <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/" title="Copy Link" class="link link_yank">
     <svg class="icon">
   <use xlink:href="#copy"></use>
 </svg>
@@ -155,28 +155,105 @@
 </div>
 
     
-    <p>Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>declare: -A: invalid option
-<span class="ln">2</span>declare: usage: <span class="nb">declare</span> <span class="o">[</span>-afFirtx<span class="o">]</span> <span class="o">[</span>-p<span class="o">]</span> <span class="o">[</span>name<span class="o">[=</span>value<span class="o">]</span> ...<span class="o">]</span>
-</code></pre></div><p>这个参数从bash 4.x开始支持，需要升级至4.x以上的版本</p>
-<!-- more -->
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="c1"># 安装最新版本的bash</span>
-<span class="ln">2</span>brew install bash
-<span class="ln">3</span>
-<span class="ln">4</span><span class="c1"># 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash</span>
-<span class="ln">5</span><span class="c1"># 需要把新版本的shell添加至信任列表中</span>
-<span class="ln">6</span>sudo bash -c <span class="s1">&#39;echo /usr/local/bin/bash &gt;&gt; /etc/shells&#39;</span>
-<span class="ln">7</span>
-<span class="ln">8</span><span class="c1"># 如果需要的话，修改默认shell为新版本的bash</span>
-<span class="ln">9</span>chsh -s /usr/local/bin/bash
-</code></pre></div><p>需要注意的是，升级完之后，如果shell脚本需要用新版本的bash来执行，必须在相关的shell脚本开头的部分，将 #!/bin/bash 替换成 #!/usr/local/bin/bash， 否则还是用旧版本的bash来执行。</p>
-<p>那为什么不执行类似下面的命令，删除原先的bash，并给新版本的bash建立一个链接呢？这个是由于MacOS有系统完整性保护机制（System Integrity Protection，SIP），它会阻止所有用户（包括root）修改 /bin 下面目录的内容。当然，也有办法绕过这保护机制，嫌麻烦的话，就不要去动它了。</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>sudo rm /bin/bash
-<span class="ln">2</span>sudo ln -s /usr/local/bin/bash /bin/bash
-</code></pre></div><hr>
-<p>参考文章：</p>
+    
+    <h2>文章目录</h2>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#托管的pod">托管的Pod</a></li>
+    <li><a href="#replicationcontroller">ReplicationController</a></li>
+    <li><a href="#replicaset">ReplicaSet</a></li>
+  </ul>
+</nav>
+    <h2 id="托管的pod">托管的Pod</h2>
+<p>如果是直接创建Pod，当节点失效，这个Pod就会丢失。</p>
+<p>如果是通过ReplicationController或者Deployment等资源来创建的，那就属于托管的资源。k8s集群会管理并检测它的运行状态，当一些意外情况发生的，k8s会自动采取应对措施。</p>
+<h2 id="replicationcontroller">ReplicationController</h2>
+<p>ReplicationController是一种k8s资源，会持续监控正在运行的pod列表, 并保证相应类型的pod的数目与期望相符。</p>
+<p>一个ReplicationController有三个主要部分：</p>
 <ul>
-<li><a href="https://itnext.io/upgrading-bash-on-macos-7138bd1066ba">https://itnext.io/upgrading-bash-on-macos-7138bd1066ba</a></li>
+<li>label selector (标签选择器), 用于确定ReplicationController作用域中有哪些pod</li>
+<li>replica count (副本个数), 指定应运行的pod 数量</li>
+<li>pod template (pod模板), 用于创建新的pod 副本</li>
+</ul>
+<p>使用 ReplicationController 的好处:</p>
+<ul>
+<li>确保一个 pod (或多个 pod 副本)持续运行, 方法是在现有 pod 丢失时启动一个新 pod 。</li>
+<li>集群节点发生故障时, 它将为故障节点上运行的所有 pod (即受ReplicationController 控制的节点上的那些 pod) 创建替代副本。</li>
+<li>它能轻松实现 pod 的水平伸缩，手动和自动都可以</li>
+</ul>
+<p>创建一个ReplicationController</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
+</span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Replicationcontroller</span><span class="w">
+</span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
+</span><span class="ln"> 5</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w"> 
+</span><span class="ln"> 8</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span><span class="ln">10</span><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln">11</span><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="ln">12</span><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
+</span><span class="ln">13</span><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln">14</span><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="ln">15</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
+</span><span class="ln">16</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">luksa/kubia</span><span class="w">
+</span><span class="ln">17</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="ln">18</span><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">8080</span><span class="w">
+</span></code></pre></div><p>通过kubectl get命令显示的关于ReplicationController的信息</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl get rc
+<span class="ln">2</span>
+<span class="ln">3</span>kubectl  get replicationcontroller
+</code></pre></div><p>通过kubectl describe查看附加信息</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>kubectl describe rc kubia
+</code></pre></div><p>通过更改pod的标签, 可以将它从ReplicationController的作用域中添加或删除，甚至移动到另外一个ReplicationController</p>
+<p>ReplicationController 的 pod 模板可以随时修改，但是只会影响后面新建的 Pod。如果需要修改旧的Pod，要将Pod删除，ReplicationController会自动根据新的模板创建Pod来替代。</p>
+<p>通过修改replicas字段，可以实现水平缩放pod</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl scale rc kubia --replicas<span class="o">=</span>lO
+</code></pre></div><p>也可以通过下面命令打开编辑器直接修改声明</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl edit rc kubia
+</code></pre></div><p>通过 kubectl delete 删除 ReplicationController 时, pod 也会被删除</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl delete rc kubia
+</code></pre></div><p>但是由于由 ReplicationController 创建的 pod 不是 ReplicationController 的组成部分, 只是由其进行管理, 因此可以只删除 ReplicationController 并保待 pod 运行。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span> kubectl delete rc kubia --cascade<span class="o">=</span><span class="nb">false</span>
+</code></pre></div><h2 id="replicaset">ReplicaSet</h2>
+<p>它是新一代的ReplicationController, ReplicationController会被弃用。ReplicaSet 的行为与 ReplicationController 完全相同, 但 pod 选择器的表达能力
+更强。</p>
+<p>通常不会直接创建ReplicaSet, 而是在创建更高层级的 Deployment 资源时自动创建。</p>
+<p><font color="red">注意：ReplicaSet不是v1 API的一部分，因此需要确保在创建资源时指定正确的apiVersion</font></p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="c"># 与ReplicationController的定义基本相同，唯一的区别在选择器中。</span><span class="w">
+</span><span class="ln"> 2</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1beta2</span><span class="w">
+</span><span class="ln"> 3</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ReplicaSet</span><span class="w">
+</span><span class="ln"> 4</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 5</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
+</span><span class="ln"> 6</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span><span class="ln">10</span><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
+</span><span class="ln">11</span><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span><span class="ln">12</span><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln">13</span><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="ln">14</span><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
+</span><span class="ln">15</span><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln">16</span><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="ln">17</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
+</span><span class="ln">18</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">luksa/kubia</span><span class="w">
+</span><span class="ln">19</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="ln">20</span><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">8080</span><span class="w">
+</span></code></pre></div><p>除了matchLabels之外，还支持matchExpressions表达式。operator支持4中运算符：In, NotIn, Exists, DoesNotExist</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="ln">2</span><span class="w">  </span><span class="nt">matchExpression</span><span class="p">:</span><span class="w">
+</span><span class="ln">3</span><span class="w">    </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">app</span><span class="w">
+</span><span class="ln">4</span><span class="w">      </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">In</span><span class="w">
+</span><span class="ln">5</span><span class="w">      </span><span class="nt">values</span><span class="p">:</span><span class="w">
+</span><span class="ln">6</span><span class="w">        </span>- <span class="l">kubia</span><span class="w">
+</span></code></pre></div><p>删除ReplicaSet会删除所有的pod</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl delete rs kubia
+</code></pre></div><hr>
+<p>图书资料：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30418855/">https://book.douban.com/subject/30418855/</a></li>
 </ul>
 
     
@@ -196,9 +273,6 @@
         <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/" class="nav-link">Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob</a>
       </li>
       <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/" class="nav-link">Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</a>
-      </li>
-      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/" class="nav-link">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
       </li>
       <li>
@@ -215,6 +289,9 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
       </li>
     </ul>
     <div>

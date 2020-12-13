@@ -6,7 +6,44 @@
     <description>Recent content in Posts on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 11 Dec 2020 12:30:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Dec 2020 19:52:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob</title>
+      <link>https://www.zengxi.net/2020/12/k8s_daemonset_job/</link>
+      <pubDate>Sun, 13 Dec 2020 19:52:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2020/12/k8s_daemonset_job/</guid>
+      <description>DaemonSet DaemonSet 用于确保一个pod匹配它的选择器并在每个节点上运行。因此，它并没有期望的副本数的概念。
+如果节点下线, DaemonSet不会在其他地方重新创建pod。 但是, 当将一个新节 点添加到集群中时, DaemonSet会立刻部署一个新的pod实例。
+使用场景的例子：
+ pod执行系统级别的与基础结构相关的操作。例如, 希望在每个节点上运行日志收集器和资源监控器。 另一个典型的例子是Kubemetes 自己的kube-proxy进程, 它需要运行在所有节点上才能使服务工作  可以通过 pod 模板中的 nodeSelector 属性让 DaemonSet 只在特定的节点上运行 pod。
+1apiVersion:apps/vlbeta22kind:DaemonSet3metadata:4name:ssd-monitor5spec:6selector:7matchLabels:8app:ssd-monitor9template:10metadata:11labels:12app:ssd-monitor13spec:14# pod模板包含 会选择有disk=ssd标签的节点个节点选择器,15nodeSelector:16disk:ssd 17containers:18- name:main19image:luksa/ssd-monitorJob Job允许运行一种 pod, 该 pod 在内部进程成功结束时, 不重启容器。
+在发生节点故障时,该节点上由 Job 管理的 pod 将按照 ReplicationSet 的 pod 的方式,重新安排到其他节点。 如果进程本身异常退出(进程返回错误退出代码时), 可以将 Job 配置为重新启动容器。
+Job 对于临时任务很有用, 关键是任务要以正确的方式结束。需要明确地将重启策略设置为OnFa辽ure或Never，防止容器在完成任务时重新启动
+1apiVersion:batch/vl2kind:Job3metadata:4name:batch-job5spec:6template:7metadata:8labels:9app:batch-job10spec:11# Job 不能使用Always作为默认的重启策略12restartPolicy:OnFailure13containers:14- name:main15image:luksa/ssd-monitor作业可以配置为创建多个pod实例, 以并行或串行方式运行它们。这是通过在Job配置中设置 completions和paralletism属性来完成的。
+如果需要一个Job顺序运行多次，则可以将completions设为希望运行的次数。Job将一个接一个地运行五个pod。它最初创建一个pod, 当pod的容器运行完成时,它创建第二个pod, 以此类推，直到五个pod成功完成。如果其中 一 个pod发生故障，工作会创建 一个新的pod, 所以Job总共可以创建五个以上的pod。
+1apiVersion:batch/vl2kind:Job3metadata:4name:multi-completion-batch-job5spec:6completions:57template:8...通过paralletism Job配置属性,指定允许多少个pod并行执行
+1apiVersion:batch/vl2kind:Job3metadata:4name:multi-completion-batch-job5spec:6completions:57paralletism:28template:9...可以在 Job 运行时更改 Job 的 parallelism 属性</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</title>
+      <link>https://www.zengxi.net/2020/12/k8s_replctl_replset/</link>
+      <pubDate>Sun, 13 Dec 2020 10:16:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2020/12/k8s_replctl_replset/</guid>
+      <description>托管的Pod 如果是直接创建Pod，当节点失效，这个Pod就会丢失。
+如果是通过ReplicationController或者Deployment等资源来创建的，那就属于托管的资源。k8s集群会管理并检测它的运行状态，当一些意外情况发生的，k8s会自动采取应对措施。
+ReplicationController ReplicationController是一种k8s资源，会持续监控正在运行的pod列表, 并保证相应类型的pod的数目与期望相符。
+一个ReplicationController有三个主要部分：
+ label selector (标签选择器), 用于确定ReplicationController作用域中有哪些pod replica count (副本个数), 指定应运行的pod 数量 pod template (pod模板), 用于创建新的pod 副本  使用 ReplicationController 的好处:
+ 确保一个 pod (或多个 pod 副本)持续运行, 方法是在现有 pod 丢失时启动一个新 pod 。 集群节点发生故障时, 它将为故障节点上运行的所有 pod (即受ReplicationController 控制的节点上的那些 pod) 创建替代副本。 它能轻松实现 pod 的水平伸缩，手动和自动都可以  创建一个ReplicationController
+1apiVersion:vl2kind:Replicationcontroller3metadata:4name:kubia5spec:6replicas:37selector:8app:kubia9template:10metadata:11labels:12app:kubia13spec:14containers:15- name:kubia16image:luksa/kubia17ports:18- containerPort:8080通过kubectl get命令显示的关于ReplicationController的信息
+1kubectl get rc 2 3kubectl get replicationcontroller 通过kubectl describe查看附加信息
+1kubectl describe rc kubia 通过更改pod的标签, 可以将它从ReplicationController的作用域中添加或删除，甚至移动到另外一个ReplicationController
+ReplicationController 的 pod 模板可以随时修改，但是只会影响后面新建的 Pod。如果需要修改旧的Pod，要将Pod删除，ReplicationController会自动根据新的模板创建Pod来替代。</description>
+    </item>
+    
     <item>
       <title>Kubernetes in Action笔记 - (5) Pod的生命周期与探针</title>
       <link>https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/</link>

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="" class="page">
   <head>
-<title>Mac下shell命令支持map | 保罗札记</title>
+<title>Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob | 保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,15 +19,19 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：
-1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持， …">
+<meta name="description" content="DaemonSet DaemonSet 用于确保一个pod匹配它的选择器并在每个节点上运行。因此，它并没有期望的副本数的概念。
+如果节点下线, DaemonSet不会在其他地方重新创建pod。 但是, 当将一个新节 点添加到集群中时, DaemonSet会立刻部署一个新的pod实例。
+使用场景的例子：
+ pod执行系统 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="Mac下shell命令支持map" />
-<meta property="og:url" content="https://www.zengxi.net/2020/01/mac-shell-support-map/" />
-<meta property="og:title" content="Mac下shell命令支持map" />
-<meta property="og:description" content="Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：
-1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持， …" />
+<meta name="twitter:title" content="Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob" />
+<meta property="og:url" content="https://www.zengxi.net/2020/12/k8s_daemonset_job/" />
+<meta property="og:title" content="Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob" />
+<meta property="og:description" content="DaemonSet DaemonSet 用于确保一个pod匹配它的选择器并在每个节点上运行。因此，它并没有期望的副本数的概念。
+如果节点下线, DaemonSet不会在其他地方重新创建pod。 但是, 当将一个新节 点添加到集群中时, DaemonSet会立刻部署一个新的pod实例。
+使用场景的例子：
+ pod执行系统 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -36,7 +40,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://www.zengxi.net/2020/01/mac-shell-support-map/">
+<link rel="canonical" href="https://www.zengxi.net/2020/12/k8s_daemonset_job/">
 
     
 
@@ -117,27 +121,25 @@
   
 <div class="grid-inverse wrap content">
   <article class="post_content">
-    <h1 class="post_title">Mac下shell命令支持map</h1><div class="post_meta">
+    <h1 class="post_title">Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob</h1><div class="post_meta">
   <svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg>
   <span class="post_date">
-    Jan 19, 2020</span>
-    <a href='https://www.zengxi.net/tags/shell' class="post_tag button button_translucent">shell
-    </a>
-    <a href='https://www.zengxi.net/tags/declare' class="post_tag button button_translucent">declare
+    Dec 13, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
     </a>
 </div>
 
     
 <div class="post_share">
   分享到:
-  <a href="https://twitter.com/intent/tweet?text=Mac%e4%b8%8bshell%e5%91%bd%e4%bb%a4%e6%94%af%e6%8c%81map&url=https%3a%2f%2fwww.zengxi.net%2f2020%2f01%2fmac-shell-support-map%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+  <a href="https://twitter.com/intent/tweet?text=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%287%29%20DaemonSet%e3%80%81Job%e5%92%8cCronJob&url=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_daemonset_job%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
     <svg class="icon">
   <use xlink:href="#twitter"></use>
 </svg>
   </a>
-  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2020%2f01%2fmac-shell-support-map%2f&t=Mac%e4%b8%8bshell%e5%91%bd%e4%bb%a4%e6%94%af%e6%8c%81map" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_daemonset_job%2f&t=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%287%29%20DaemonSet%e3%80%81Job%e5%92%8cCronJob" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
     <svg class="icon">
   <use xlink:href="#facebook"></use>
 </svg>
@@ -147,7 +149,7 @@
   <use xlink:href="#linkedin"></use>
 </svg>
   </a>
-  <a href="https://www.zengxi.net/2020/01/mac-shell-support-map/" title="Copy Link" class="link link_yank">
+  <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/" title="Copy Link" class="link link_yank">
     <svg class="icon">
   <use xlink:href="#copy"></use>
 </svg>
@@ -155,28 +157,110 @@
 </div>
 
     
-    <p>Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>declare: -A: invalid option
-<span class="ln">2</span>declare: usage: <span class="nb">declare</span> <span class="o">[</span>-afFirtx<span class="o">]</span> <span class="o">[</span>-p<span class="o">]</span> <span class="o">[</span>name<span class="o">[=</span>value<span class="o">]</span> ...<span class="o">]</span>
-</code></pre></div><p>这个参数从bash 4.x开始支持，需要升级至4.x以上的版本</p>
-<!-- more -->
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="c1"># 安装最新版本的bash</span>
-<span class="ln">2</span>brew install bash
-<span class="ln">3</span>
-<span class="ln">4</span><span class="c1"># 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash</span>
-<span class="ln">5</span><span class="c1"># 需要把新版本的shell添加至信任列表中</span>
-<span class="ln">6</span>sudo bash -c <span class="s1">&#39;echo /usr/local/bin/bash &gt;&gt; /etc/shells&#39;</span>
-<span class="ln">7</span>
-<span class="ln">8</span><span class="c1"># 如果需要的话，修改默认shell为新版本的bash</span>
-<span class="ln">9</span>chsh -s /usr/local/bin/bash
-</code></pre></div><p>需要注意的是，升级完之后，如果shell脚本需要用新版本的bash来执行，必须在相关的shell脚本开头的部分，将 #!/bin/bash 替换成 #!/usr/local/bin/bash， 否则还是用旧版本的bash来执行。</p>
-<p>那为什么不执行类似下面的命令，删除原先的bash，并给新版本的bash建立一个链接呢？这个是由于MacOS有系统完整性保护机制（System Integrity Protection，SIP），它会阻止所有用户（包括root）修改 /bin 下面目录的内容。当然，也有办法绕过这保护机制，嫌麻烦的话，就不要去动它了。</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>sudo rm /bin/bash
-<span class="ln">2</span>sudo ln -s /usr/local/bin/bash /bin/bash
-</code></pre></div><hr>
-<p>参考文章：</p>
+    
+    <h2>文章目录</h2>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#daemonset">DaemonSet</a></li>
+    <li><a href="#job">Job</a></li>
+    <li><a href="#cronjob">CronJob</a></li>
+  </ul>
+</nav>
+    <h2 id="daemonset">DaemonSet</h2>
+<p>DaemonSet 用于确保一个pod匹配它的选择器并在<font color="red">每个节点</font>上运行。因此，它并没有期望的副本数的概念。</p>
+<p>如果节点下线, DaemonSet不会在其他地方重新创建pod。 但是, 当将一个新节 点添加到集群中时, DaemonSet会立刻部署一个新的pod实例。</p>
+<p>使用场景的例子：</p>
 <ul>
-<li><a href="https://itnext.io/upgrading-bash-on-macos-7138bd1066ba">https://itnext.io/upgrading-bash-on-macos-7138bd1066ba</a></li>
+<li>pod执行系统级别的与基础结构相关的操作。例如, 希望在每个节点上运行日志收集器和资源监控器。</li>
+<li>另一个典型的例子是Kubemetes 自己的kube-proxy进程, 它需要运行在所有节点上才能使服务工作</li>
+</ul>
+<p>可以通过 pod 模板中的 nodeSelector 属性让 DaemonSet 只在特定的节点上运行 pod。</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/vlbeta2</span><span class="w">
+</span><span class="ln"> 2</span><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">DaemonSet</span><span class="w">
+</span><span class="ln"> 3</span><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> 
+</span><span class="ln"> 4</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ssd-monitor</span><span class="w">
+</span><span class="ln"> 5</span><span class="w">  </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">    </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">      </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">ssd-monitor</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">    </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span><span class="ln">10</span><span class="w">      </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln">11</span><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="ln">12</span><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">ssd-monitor</span><span class="w">
+</span><span class="ln">13</span><span class="w">      </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln">14</span><span class="w">        </span><span class="c"># pod模板包含 会选择有disk=ssd标签的节点个节点选择器,</span><span class="w">
+</span><span class="ln">15</span><span class="w">        </span><span class="nt">nodeSelector</span><span class="p">:</span><span class="w">
+</span><span class="ln">16</span><span class="w">          </span><span class="nt">disk</span><span class="p">:</span><span class="w"> </span><span class="l">ssd </span><span class="w">
+</span><span class="ln">17</span><span class="w">        </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="ln">18</span><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">main</span><span class="w">
+</span><span class="ln">19</span><span class="w">            </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">luksa/ssd-monitor</span><span class="w">
+</span></code></pre></div><h2 id="job">Job</h2>
+<p>Job允许运行一种 pod, 该 pod 在内部进程成功结束时, 不重启容器。</p>
+<p>在发生节点故障时,该节点上由 Job 管理的 pod 将按照 ReplicationSet 的 pod 的方式,重新安排到其他节点。 如果进程本身异常退出(进程返回错误退出代码时), 可以将 Job 配置为重新启动容器。</p>
+<p>Job 对于临时任务很有用, 关键是任务要以正确的方式结束。需要明确地将重启策略设置为OnFa辽ure或Never，防止容器在完成任务时重新启动</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/vl</span><span class="w">
+</span><span class="ln"> 2</span><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Job</span><span class="w">
+</span><span class="ln"> 3</span><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> 
+</span><span class="ln"> 4</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">batch-job</span><span class="w">
+</span><span class="ln"> 5</span><span class="w">  </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">    </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">      </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">batch-job</span><span class="w">
+</span><span class="ln">10</span><span class="w">      </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln">11</span><span class="w">        </span><span class="c"># Job 不能使用Always作为默认的重启策略</span><span class="w">
+</span><span class="ln">12</span><span class="w">        </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">OnFailure</span><span class="w">
+</span><span class="ln">13</span><span class="w">        </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="ln">14</span><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">main</span><span class="w">
+</span><span class="ln">15</span><span class="w">            </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">luksa/ssd-monitor</span><span class="w">
+</span></code></pre></div><p>作业可以配置为创建多个pod实例, 以并行或串行方式运行它们。这是通过在Job配置中设置 completions和paralletism属性来完成的。</p>
+<p>如果需要一个Job顺序运行多次，则可以将completions设为希望运行的次数。Job将一个接一个地运行五个pod。它最初创建一个pod, 当pod的容器运行完成时,它创建第二个pod, 以此类推，直到五个pod成功完成。如果其中 一 个pod发生故障，工作会创建 一个新的pod, 所以Job总共可以创建五个以上的pod。</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/vl</span><span class="w">
+</span><span class="ln">2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Job</span><span class="w">
+</span><span class="ln">3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln">4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">multi-completion-batch-job</span><span class="w">
+</span><span class="ln">5</span><span class="w">  </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln">6</span><span class="w">    </span><span class="nt">completions</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span><span class="ln">7</span><span class="w">    </span><span class="nt">template</span><span class="p">:</span><span class="w"> 
+</span><span class="ln">8</span><span class="w">      </span><span class="l">...</span><span class="w">
+</span></code></pre></div><p>通过paralletism Job配置属性,指定允许多少个pod并行执行</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/vl</span><span class="w">
+</span><span class="ln">2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Job</span><span class="w">
+</span><span class="ln">3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln">4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">multi-completion-batch-job</span><span class="w">
+</span><span class="ln">5</span><span class="w">  </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln">6</span><span class="w">    </span><span class="nt">completions</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span><span class="ln">7</span><span class="w">    </span><span class="nt">paralletism</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="ln">8</span><span class="w">    </span><span class="nt">template</span><span class="p">:</span><span class="w"> 
+</span><span class="ln">9</span><span class="w">      </span><span class="l">...</span><span class="w">
+</span></code></pre></div><p>可以在 Job 运行时更改 Job 的 parallelism 属性</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>kubectl scale job multi-completion-ba七ch-job --replicas 3
+</code></pre></div><p>通过在 pod 配置中设置 activeDeadlineSeconds 属性，可以限制 pod的时间。如果 pod 运行时间超过此时间, 系统将尝试终止 pod, 并将 Job 标记为失败。通过指定 Job manifest 中的 spec.backoff巨m辽字段, 可以配置 Job 在被标记为失败之前可以重试的次数。 如果没有明确指定它, 则默认为6。</p>
+<h2 id="cronjob">CronJob</h2>
+<p>cron 任务通过创建 CronJob 资源进行配置。它可以通过配置项中的 jobTemplate 属性创建任务资源。</p>
+<p>计划任务的运行方式：在计划的时间内,CronJob资源 会创建 Job资源,然后Job创建pod。</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/vlbeta</span><span class="w">
+</span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">CronJob</span><span class="w">
+</span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="l">cron-job-run-every-fifteen-minutes</span><span class="w">
+</span><span class="ln"> 4</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 5</span><span class="w">  </span><span class="nt">schedule</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;0,15,30,45 * * * *&#34;</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">  </span><span class="nt">jobTemplate</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">      </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">        </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln">10</span><span class="w">          </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="ln">11</span><span class="w">            </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">periodic-batch-job</span><span class="w">
+</span><span class="ln">12</span><span class="w">        </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln">13</span><span class="w">          </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">OnFailure</span><span class="w">
+</span><span class="ln">14</span><span class="w">          </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="ln">15</span><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">main</span><span class="w">
+</span><span class="ln">16</span><span class="w">            </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">luksa/batch-job</span><span class="w">
+</span></code></pre></div><p>startingDeadlineSeconds字段来指定截止日期。当Job或pod创建并运行得相对较晚的时候，任务将不会运行,并将显示为Failed。</p>
+<p>在正常 情况下,CronJob总是为计划中配置的每个执行创建一个 Job, 但可能会同时创建两个Job, 或者根本没有创建。为了解决第一个问题,任务应该是幂等的(多次而不是一次运行不会得到不希望的结果)。对于第二个问题,请确保下一个任务运行完成本应该由上一次的(错过的)运行完成的任何工作。</p>
+<hr>
+<p>图书资料：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30418855/">https://book.douban.com/subject/30418855/</a></li>
 </ul>
 
     
@@ -192,9 +276,6 @@
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/" class="nav-link">Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob</a>
-      </li>
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/" class="nav-link">Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</a>
       </li>
@@ -215,6 +296,9 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
       </li>
     </ul>
     <div>

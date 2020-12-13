@@ -123,6 +123,65 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/">Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 13, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">DaemonSet DaemonSet 用于确保一个pod匹配它的选择器并在每个节点上运行。因此，它并没有期望的副本数的概念。
+如果节点下线, DaemonSet不会在其他地方重新创建pod。 但是, 当将一个新节 点添加到集群中时, DaemonSet会立刻部署一个新的pod实例。
+使用场景的例子：
+ pod执行系统级别的与基础结构相关的操作。例如, 希望在每个节点上运行日志收集器和资源监控器。 另一个典型的例子是Kubemetes 自己的kube-proxy进程, 它需要运行在所有节点上才能使服务工作  可以通过 pod 模板中的 nodeSelector 属性让 DaemonSet 只在特定的节点上运行 pod。 …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/">Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 13, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">托管的Pod 如果是直接创建Pod，当节点失效，这个Pod就会丢失。
+如果是通过ReplicationController或者Deployment等资源来创建的，那就属于托管的资源。k8s集群会管理并检测它的运行状态，当一些意外情况发生的，k8s会自动采取应对措施。
+ReplicationController ReplicationController是一种k8s资源，会持续监控正在运行的pod列表, 并保证相应类型的pod的数目与期望相符。
+一个ReplicationController有三个主要部分：
+ label selector (标签选择器), 用于确定ReplicationController作用域中有哪些pod …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
       </h3>
       <div class="post_meta">
@@ -357,61 +416,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Nov 13, 2020</span>
-    <a href='https://www.zengxi.net/tags/cloudflare' class="post_tag button button_translucent">cloudflare
-    </a>
-    <a href='https://www.zengxi.net/tags/ssl' class="post_tag button button_translucent">ssl
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">笔者使用Cloudflare做DNS，同时使用Cloudflare的SSL证书服务。整个链路如下图:
-1|----------| |-----------| |---------------| 2| Brower | ------&gt; | Cloudfare | ------&gt; | Origin Server | 3|----------| |-----------| |---------------| 4 笔者想要做整个链路的https，但是在配置完之后，打开页面是看到522的错误。这个错误表示连接上源站点，但是请求超时。可以参考这个页面来找到可能的原因： …</p>
-          <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/">Linux查看某个端口是否被占用</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Nov 9, 2020</span>
-    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale"> 使用lsof  1lsof -i 2 3lsof -i:80 使用netstat  1netstat -anp | grep 80 </p>
-          <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -456,6 +460,12 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/" class="nav-link">Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/" class="nav-link">Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/" class="nav-link">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
       </li>
       <li>
@@ -472,12 +482,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/11/nginx_security/" class="nav-link">Nginx服务器安全加固</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="nav-link">Elastic Search vm.max_map_count too low 错误</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
       </li>
     </ul>
     <div>
@@ -500,7 +504,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
         
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">5</span>
+          <span class="button_tally">7</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -579,7 +583,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=5>KUBERNETES<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=7>KUBERNETES<span class="button_tally">7</span>
             </a>
             
             
@@ -648,7 +652,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">5</span>
+          <span class="button_tally">7</span>
         </a>
         
         
@@ -664,7 +668,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
         
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">5</span>
+          <span class="button_tally">7</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -821,7 +825,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=5>KUBERNETES<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=7>KUBERNETES<span class="button_tally">7</span>
             </a>
             
             
