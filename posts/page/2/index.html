@@ -119,6 +119,37 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/">Elastic Search vm.max_map_count too low 错误</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Nov 19, 2020</span>
+    <a href='https://www.zengxi.net/tags/elastic-search' class="post_tag button button_translucent">elastic search
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在启动elastic search的时候，在启动日志看到下面的错误提示
+1Max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144] 解决这个问题，有两个办法：
+ 临时的，仅当前会话窗口有效 执行下面命令  1sysctl -w vm.max_map_count=262144 然后启动elastic search
+永久生效  编辑/etc/sysctl.conf, 添加或者修改下面参数：
+1vm.max_map_count=262144 重启系统，或者执行下面命令加载参数：
+1sysctl --system </p>
+          <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/">利用frp与nginx实现公网访问NAS</a>
       </h3>
       <div class="post_meta">
@@ -378,33 +409,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/zookeeper_purge_file/">zookeeper服务器文件清理</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 29, 2020</span>
-    <a href='https://www.zengxi.net/tags/zookeeper' class="post_tag button button_translucent">zookeeper
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">zookeeper主要存放了三类文件，他们都可以在配置文件中指定存储路径：
- snapshot： 内存数据的快照，配置项为dataDir 事务日志：所有与修改数据相关的操作记录，配置项为dataLogDir。在没有dataLogDir配置项的时候，zookeeper默认将事务日志文件和快照日志文件都存储在dataDir对应的目录下。 log4j日志：记录zookeeper集群服务器运行日志。日志的配置地址在conf/目录下的log4j.properties文件中，该文件中有一个配置项为&quot;zookeeper.log.dir=.&quot;  正常运行过程中，zookeeper会不断地把快照数据和日志输出到这些目录。如果没有专 …</p>
-          <a href="https://www.zengxi.net/2020/07/zookeeper_purge_file/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -449,6 +453,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="nav-link">Kubernetes in Action笔记 - (9) 卷</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_service/" class="nav-link">Kubernetes in Action笔记 - (8) 服务、Endpoint、Ingress</a>
       </li>
       <li>
@@ -469,13 +476,15 @@
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="nav-link">Kubernetes in Action笔记 - (2) k8s集群架构</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/" class="nav-link">Kubernetes in Action笔记 - (1) 容器技术介绍</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
+        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">9</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
           LINUX
           <span class="button_tally">9</span>
@@ -484,11 +493,6 @@
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
           POSTGRES
           <span class="button_tally">9</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
-          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/%E5%A1%AB%E5%9D%91%E4%B9%8B%E6%97%85/' class="post_tag button button_translucent">
@@ -572,7 +576,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=8>KUBERNETES<span class="button_tally">8</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=9>KUBERNETES<span class="button_tally">9</span>
             </a>
             
             
@@ -641,7 +645,7 @@
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">8</span>
+          <span class="button_tally">9</span>
         </a>
         
         
@@ -650,14 +654,14 @@
     <div>
       <h2 class="mt-4 taxonomy" id="tags-section">标签</h2>
       <nav class="tags_nav">
-        <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
-          POSTGRES
+        <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
           <span class="button_tally">9</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
-          <span class="button_tally">8</span>
+        <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
+          POSTGRES
+          <span class="button_tally">9</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -814,7 +818,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=8>KUBERNETES<span class="button_tally">8</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=9>KUBERNETES<span class="button_tally">9</span>
             </a>
             
             

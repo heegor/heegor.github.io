@@ -123,6 +123,35 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/01/manage-distribution-session-by-id/">根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 26, 2020</span>
+    <a href='https://www.zengxi.net/tags/session' class="post_tag button button_translucent">session
+    </a>
+    <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F' class="post_tag button button_translucent">分布式
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">背景 由于历史原因，原先的界面是用vaadin框架来实现。但是这个框架不适合互联网的分布式系统，正在逐步用目前主流的前端框架重写各个模块，把旧的vaadin页面替换掉。在替换过程中，新老界面并存。
+vaadin界面的servlet，每次都会判断请求中的session id值，如果在服务器中找不到对应这个id的session，就会重新生成一个。由于session id是在新界面登录的时候生成的，当点击链接从新界面跳转到vaadin界面的时候，vaadin服务会发现没有这个session id，就会重新生成一个新的session。换句话说，新老界面会有各自的session id。当然，分布式系统本来就有这个问题，可以采用分布 …</p>
+          <a href="https://www.zengxi.net/2020/01/manage-distribution-session-by-id/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/">Mac 检查附近wifi所使用的信道</a>
       </h3>
       <div class="post_meta">
@@ -387,40 +416,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/07/shell-translate-character/">shell中用tr命令转换字符大小写</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 25, 2018</span>
-    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
-    </a>
-    <a href='https://www.zengxi.net/tags/shell' class="post_tag button button_translucent">shell
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在写shell脚本的时候，可能需要将特定的英文字符转换大小写。可以借助tr命令来实现这个功能。
-（1）tr的下面这个命令表示把string1替换成string2
- tr string1 string2  运行下面的命令
-1echo &#39;this is a pen&#39; | tr &#39;a&#39; &#39;A&#39; 可以看到输出结果中把a换成了A
- this is A pen  （2）同时，tr命令也支持指定一个字符的范围，在这个范围内分别作替换
- tr 'c1-c2' 'c3-c4'  比如，如果只需要把从a到h的字符，替换成大写，那么可以用下面的命令
-1tr &#39;a-h&#39; …</p>
-          <a href="https://www.zengxi.net/2018/07/shell-translate-character/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -471,6 +466,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="nav-link">Kubernetes in Action笔记 - (9) 卷</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_service/" class="nav-link">Kubernetes in Action笔记 - (8) 服务、Endpoint、Ingress</a>
       </li>
       <li>
@@ -491,13 +489,15 @@
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="nav-link">Kubernetes in Action笔记 - (2) k8s集群架构</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/" class="nav-link">Kubernetes in Action笔记 - (1) 容器技术介绍</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
+        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">9</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
           LINUX
           <span class="button_tally">9</span>
@@ -506,11 +506,6 @@
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
           POSTGRES
           <span class="button_tally">9</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
-          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/%E5%A1%AB%E5%9D%91%E4%B9%8B%E6%97%85/' class="post_tag button button_translucent">
@@ -594,7 +589,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=8>KUBERNETES<span class="button_tally">8</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=9>KUBERNETES<span class="button_tally">9</span>
             </a>
             
             
@@ -663,7 +658,7 @@
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">8</span>
+          <span class="button_tally">9</span>
         </a>
         
         
@@ -672,14 +667,14 @@
     <div>
       <h2 class="mt-4 taxonomy" id="tags-section">标签</h2>
       <nav class="tags_nav">
-        <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
-          POSTGRES
+        <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
           <span class="button_tally">9</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
-          <span class="button_tally">8</span>
+        <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
+          POSTGRES
+          <span class="button_tally">9</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -836,7 +831,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=8>KUBERNETES<span class="button_tally">8</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=9>KUBERNETES<span class="button_tally">9</span>
             </a>
             
             

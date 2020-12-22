@@ -6,7 +6,22 @@
     <description>Recent content in kubernetes on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Sun, 20 Dec 2020 21:17:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Dec 2020 22:16:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes in Action笔记 - (9) 卷</title>
+      <link>https://www.zengxi.net/2020/12/k8s_volume/</link>
+      <pubDate>Tue, 22 Dec 2020 22:16:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2020/12/k8s_volume/</guid>
+      <description>卷 卷是 pod 的一个组成部分，不是独立的 Kubernetes 对象, 不能单独创建或删除。 pod 中的所有容器都可以使用卷, 但必须先将它挂载在每个需要访问它的容器中。
+卷类型 主要类型：
+ emptyDir:用于存储临时数据的简单空目录。 hostPath: 用于将目录从工作节点的文件系统挂载到pod中 gitRepo: 通过检出Git仓库的内容来初始化的卷 nfs: 挂载到pod中的NFS共享卷 用于挂载云服务商提供的特定存储类型。比如，gcePersistentDi sk (Google 高效能型存储磁盘卷)、 awsElasticBlockStore (AmazonWeb 服务弹性块存储卷)、 azureDisk (Microsoft Azure 磁盘卷) 用于挂载其他类型的网络存储。比如，cinder、cephfs、iscsi、flocker、glusterfs、quobyte、rbd、flexVolume、vsphere-Volume、photonPersistentDisk 、scaleIO configMap、secret、downwardAPI 一一用于将 k8s 部分资源和集群信息公开给 pod 的特殊类型的卷 persistentVolumeClaim：一种使用预置或者动态配置的持久存储类型  emptyDir 卷从一个空目录开始,运行在 pod 内的应用程序可以写入它需要的任何文件。当删除 pod 时,卷的内容就会丢失。
+一个 emptyDir 卷对于在同一个 pod 中运行的容器之间共享文件特别有用。但是它也可以被单个容器用于将数据临时写入磁盘。
+下面是个例子
+1apiVersion:vl2kind:Pod3metadata:4name :fortune5spec:6containers:7- image:luksa/fortune8name:html-generator9volumeMounts:10- name:html11mountPath:/var/html/docs12- image:nginx:alpine13name:web-server14volumeMounts :15- name:html16mountPath:/usr/share/nginx/html17readOnly:true18ports:19- containerPort:8020protocol:TCP21volumes:22- name:html23emptyDir:{}medium属性可以指定存储介质。比如内存
+1volumes:2name:html3emptyDir:4medium:Memory使用 Git 仓库作为存储卷 gitRepo 卷基本上也是 一 个 emptyDir 卷,它通过克隆 Git 仓库并在 pod 启动时(但在创建容器之前) 检出特定版本来填充数据</description>
+    </item>
+    
     <item>
       <title>Kubernetes in Action笔记 - (8) 服务、Endpoint、Ingress</title>
       <link>https://www.zengxi.net/2020/12/k8s_service/</link>

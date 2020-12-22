@@ -1,9 +1,8 @@
 
 <!DOCTYPE html>
-<html lang="zh-cn" data-figures="">
+<html lang="zh-cn" data-figures="" class="page">
   <head>
-	<meta name="generator" content="Hugo 0.79.0" />
-<title>保罗札记</title>
+<title>Kubernetes in Action笔记 - (9) 卷 | 保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,17 +16,20 @@
   })();
 </script>
 
-  
 <meta property="og:locale" content="zh-cn" />
 
-<meta property="og:type" content="website">
-<meta name="description" content="A theme based on VMware&#39;s Clarity Design System for publishing technical blogs with Hugo.">
+<meta property="og:type" content="article">
+<meta name="description" content="卷 卷是 pod 的一个组成部分，不是独立的 Kubernetes 对象, 不能单独创建或删除。 pod 中的所有容器都可以使用卷, 但必须先将它挂载在每个需要访问它的容器中。
+卷类型 主要类型：
+ emptyDir:用于存储临时数据的简单空目录。 hostPath: 用于将目录从工作节点的文件系统挂载到pod …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="" />
-<meta property="og:url" content="https://www.zengxi.net/" />
-<meta property="og:title" content="" />
-<meta property="og:description" content="A theme based on VMware&#39;s Clarity Design System for publishing technical blogs with Hugo." />
+<meta name="twitter:title" content="Kubernetes in Action笔记 - (9) 卷" />
+<meta property="og:url" content="https://www.zengxi.net/2020/12/k8s_volume/" />
+<meta property="og:title" content="Kubernetes in Action笔记 - (9) 卷" />
+<meta property="og:description" content="卷 卷是 pod 的一个组成部分，不是独立的 Kubernetes 对象, 不能单独创建或删除。 pod 中的所有容器都可以使用卷, 但必须先将它挂载在每个需要访问它的容器中。
+卷类型 主要类型：
+ emptyDir:用于存储临时数据的简单空目录。 hostPath: 用于将目录从工作节点的文件系统挂载到pod …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -36,7 +38,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://www.zengxi.net/">
+<link rel="canonical" href="https://www.zengxi.net/2020/12/k8s_volume/">
 
     
 
@@ -77,10 +79,10 @@
       
         
 
-  <div class="nav_parent nav_active">
+  <div class="nav_parent">
     <a href="https://www.zengxi.net/" class="nav_item">首页 </a>
   </div>
-  <div class="nav_parent nav_active">
+  <div class="nav_parent">
     <a href="https://www.zengxi.net/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
@@ -114,341 +116,144 @@
 </header>
 
     <main>
-
   
-
 <div class="grid-inverse wrap content">
-  <ul class="posts" id="posts">
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/zookeeper_purge_file/">zookeeper服务器文件清理</a>
-      </h3>
-      <div class="post_meta">
+  <article class="post_content">
+    <h1 class="post_title">Kubernetes in Action笔记 - (9) 卷</h1><div class="post_meta">
   <svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg>
   <span class="post_date">
-    Jul 29, 2020</span>
-    <a href='https://www.zengxi.net/tags/zookeeper' class="post_tag button button_translucent">zookeeper
+    Dec 22, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
     </a>
 </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">zookeeper主要存放了三类文件，他们都可以在配置文件中指定存储路径：
- snapshot： 内存数据的快照，配置项为dataDir 事务日志：所有与修改数据相关的操作记录，配置项为dataLogDir。在没有dataLogDir配置项的时候，zookeeper默认将事务日志文件和快照日志文件都存储在dataDir对应的目录下。 log4j日志：记录zookeeper集群服务器运行日志。日志的配置地址在conf/目录下的log4j.properties文件中，该文件中有一个配置项为&quot;zookeeper.log.dir=.&quot;  正常运行过程中，zookeeper会不断地把快照数据和日志输出到这些目录。如果没有专 …</p>
-          <a href="https://www.zengxi.net/2020/07/zookeeper_purge_file/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/check_zookeeper_version/">查看zookeeper版本</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+    
+<div class="post_share">
+  分享到:
+  <a href="https://twitter.com/intent/tweet?text=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%289%29%20%e5%8d%b7&url=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_volume%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#twitter"></use>
 </svg>
-  <span class="post_date">
-    Jul 28, 2020</span>
-    <a href='https://www.zengxi.net/tags/zookeeper' class="post_tag button button_translucent">zookeeper
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在控制台下面命令
-1echo stat|nc localhost 2181 返回结果示例
-1Zookeeper version: 3.4.8-1--1, built on Fri, 26 Feb 2016 14:51:43 +0100 2Clients: 3 /10.30.1.186:33824[1](queued=0,recved=203121,sent=203148) 4 /10.30.1.116:39374[1](queued=0,recved=56774,sent=56790) 5 /10.30.1.171:37240[1](queued=0,recved=20793,sent=20793) 6 7Latency …</p>
-          <a href="https://www.zengxi.net/2020/07/check_zookeeper_version/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/">terraform中阿里云ECS ssh key变化问题</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+  </a>
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_volume%2f&t=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%289%29%20%e5%8d%b7" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#facebook"></use>
 </svg>
-  <span class="post_date">
-    Jul 23, 2020</span>
-    <a href='https://www.zengxi.net/tags/terraform' class="post_tag button button_translucent">terraform
-    </a>
-    <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91' class="post_tag button button_translucent">阿里云
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">目前的terraform脚本中，在新建阿里云ECS的时候，会通过 user_data 属性值来设定初始的ssh key。但是这个就存在一个隐患，如果将来想要改变初始的ssh key，再用terraform来推机器的时候，terraform发现user_data属性值发生变化，会删除现有的ECS并重建。
-解决的方法是，修改ECS的lifecycle，将user_data添加到忽略列表中。这样terraform就可以忽略掉该属性值的变化。
-1{ 2 resource &#34;alicloud_instance&#34; &#34;test_instance&#34; { 3 ... 4 5 lifecycle { 6 …</p>
-          <a href="https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/terraform_state_consistent/">解决terraform与远程云服务器资源状态不一致的问题</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+  </a>
+  <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="分享到 LinkedIn" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#linkedin"></use>
 </svg>
-  <span class="post_date">
-    Jul 22, 2020</span>
-    <a href='https://www.zengxi.net/tags/terraform' class="post_tag button button_translucent">terraform
-    </a>
-    <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91' class="post_tag button button_translucent">阿里云
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">概述 在运维过程中遇到了下面的情况：长期使用terraform管理资源，但是通过terraform以外的工具对云资源做过属性变更（比如通过网页上的控制台对云资源做属性变更）。此时，云资源的属性与terraform state的信息已经不一致，跑terraform plan就会发现，它会删除现有的，然后重建一个。但是这个是我们不希望看到的，我们希望可以保留原有实例并且把本地的terraform state更新成最新的属性。
-解决方案 要想解决这个问题，可以利用 terraform import 命令。也就是重新导入云资源的实例，然后同步成最新的信息。
-下面以阿里云ECS为例子。
-(1)删除 state …</p>
-          <a href="https://www.zengxi.net/2020/07/terraform_state_consistent/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/grep_binary_file_match/">grep 返回 Binary file (standard input) matches</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+  </a>
+  <a href="https://www.zengxi.net/2020/12/k8s_volume/" title="Copy Link" class="link link_yank">
+    <svg class="icon">
+  <use xlink:href="#copy"></use>
 </svg>
-  <span class="post_date">
-    Jul 20, 2020</span>
-    <a href='https://www.zengxi.net/tags/grep' class="post_tag button button_translucent">grep
-    </a>
-    <a href='https://www.zengxi.net/tags/shell' class="post_tag button button_translucent">shell
-    </a>
+  </a>
 </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">grep &quot;keyword&quot; xxx.log时输出: Binary file (standard input) matches
-这个是因为grep命令认为它是一个二进制文件。解决方案是，加上一个参数 -a：
-1grep -a &#34;keyword&#34; xxx.log 该参数的解释：
-1-a, --text equivalent to --binary-files=text </p>
-          <a href="https://www.zengxi.net/2020/07/grep_binary_file_match/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/">清除chrome中 HTTPS 证书缓存</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 15, 2020</span>
-    <a href='https://www.zengxi.net/tags/chrome' class="post_tag button button_translucent">chrome
-    </a>
-    <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6' class="post_tag button button_translucent">证书
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在地址栏输入 chrome://net-internals/#hsts ， 找到 “Delete domain security policies”， 输入对应的域名，点击 Delete 按钮</p>
-          <a href="https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/jetty_tmp_dir/">jetty临时目录下的资源文件被删导致js等资源找不到</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 14, 2020</span>
-    <a href='https://www.zengxi.net/tags/jetty' class="post_tag button button_translucent">jetty
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">生产环境上jetty运行一段时间后，在打开某个网页的时候发现有js、css文件找不到，但是重启之后问题会解决。后来发现是设定了tmpwatch后台任务，定时会清理一次系统的tmp目录。
-默认情况下，如果没有指定jetty的临时目录，默认会使用系统的临时目录。解决方案就是，修改jetty的临时文件存放目录，不要放在 /tmp 目录下面。主要有下面几个方法：
- 设置basetempdir值  1&lt;Configure class=&#34;org.eclipse.jetty.webapp.WebAppContext&#34;&gt; 2 3 &lt;Set …</p>
-          <a href="https://www.zengxi.net/2020/07/jetty_tmp_dir/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/">Linux下面使用dd命令烧录U盘并查看执行进度</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 13, 2020</span>
-    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">烧录U盘 先用fdisk来查看U盘的盘符
-1sudo fdisk -l 再用dd命令来写数据到U盘
-1sudo dd if=/home/paul/Downloads/test.iso of=/dev/sdc bs=1M count=10000 查看执行进度 假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命令行窗口，执行下面的命令，注意命令上面可能需要加上sudo
-方法一：
-1watch -n 5 pkill -USR1 ^dd$ 方法二：
-1watch -n 5 killall -USR1 dd 方法三：
-1while killall -USR1 dd; do sleep 5; done 方法四：
-1while (ps …</p>
-          <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/">rsyslog内存占用高导致服务不可用</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 22, 2020</span>
-    <a href='https://www.zengxi.net/tags/rsyslog' class="post_tag button button_translucent">rsyslog
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">这几天生产环境中某个服务内存不时地被撑爆，原先以为是应用的问题，但是近来没有上过新的代码。该服务的总内存是8G，启动参数关于内存的配置大致是：-Xmx=6.4G，-Xms=4G 左右。看了Grafana上面的监控记录，JVM 老年代使用最多也就到4G左右，在GC的日志中发现也仅仅用到4G左右，并没有到达最高的内存值。这两个结果可以看出来，应该不是应用程序导致内存占用过大。
-后来用top命令看了一下，发现rsyslog进程使用了将近40%的内存。再查一下日志文件，发现一些日志文件大小都达到2G以上。
-rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程，不应该占用那么内存，即使它同步延迟较大甚至不工作，也不应该影响到应用程序 …</p>
-          <a href="https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/06/pg_check_table_size/">转: postgresql 查看单个表大小</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 15, 2020</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">原文链接：https://blog.csdn.net/kmust20093211/article/details/47616345
-方法一 ，查某个表
-1select pg_size_pretty(pg_relation_size(&#39;table_name&#39;)); 方法二 ，查出所有表并按大小排序
-1SELECT 2table_schema || &#39;.&#39; || table_name 3AS table_full_name, pg_size_pretty(pg_total_relation_size(&#39;&#34;&#39; ||table_schema || …</p>
-          <a href="https://www.zengxi.net/2020/06/pg_check_table_size/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-    <li>
-<ul class="pagination">
-  <li class="page-item">
-    <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
-  </li>
-  <li class="page-item">
-    <a href="/page/2/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/">1</a>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/page/2/">2</a>
-  </li>
-  <li class="page-item active">
-    <a class="page-link" href="/page/3/">3</a>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/page/4/">4</a>
-  </li>
-  <li class="page-item disabled">
-    <span aria-hidden="true">&nbsp;&hellip;&nbsp;</span>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/page/7/">7</a>
-  </li>
-  <li class="page-item">
-    <a href="/page/4/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-  </li>
-  <li class="page-item">
-    <a href="/page/7/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
-  </li>
-</ul>
-
-
+    
+    
+    <h2>文章目录</h2>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#卷">卷</a></li>
+    <li><a href="#卷类型">卷类型</a>
+      <ul>
+        <li><a href="#emptydir">emptyDir</a></li>
+        <li><a href="#使用-git-仓库作为存储卷">使用 Git 仓库作为存储卷</a></li>
+        <li><a href="#hostpath卷">hostPath卷</a></li>
+        <li><a href="#使用持久化卷">使用持久化卷</a></li>
+        <li><a href="#持久卷和持久卷声明">持久卷和持久卷声明</a></li>
+      </ul>
     </li>
   </ul>
+</nav>
+    <h2 id="卷">卷</h2>
+<p>卷是 pod 的一个组成部分，不是独立的 Kubernetes 对象, 不能单独创建或删除。 pod 中的所有容器都可以使用卷, 但必须先将它挂载在每个需要访问它的容器中。</p>
+<h2 id="卷类型">卷类型</h2>
+<p>主要类型：</p>
+<ul>
+<li>emptyDir:用于存储临时数据的简单空目录。</li>
+<li>hostPath: 用于将目录从工作节点的文件系统挂载到pod中</li>
+<li>gitRepo: 通过检出Git仓库的内容来初始化的卷</li>
+<li>nfs: 挂载到pod中的NFS共享卷</li>
+<li>用于挂载云服务商提供的特定存储类型。比如，gcePersistentDi sk (Google 高效能型存储磁盘卷)、 awsElasticBlockStore (AmazonWeb 服务弹性块存储卷)、 azureDisk (Microsoft Azure 磁盘卷)</li>
+<li>用于挂载其他类型的网络存储。比如，cinder、cephfs、iscsi、flocker、glusterfs、quobyte、rbd、flexVolume、vsphere-Volume、photonPersistentDisk 、scaleIO</li>
+<li>configMap、secret、downwardAPI 一一用于将 k8s 部分资源和集群信息公开给 pod 的特殊类型的卷</li>
+<li>persistentVolumeClaim：一种使用预置或者动态配置的持久存储类型</li>
+</ul>
+<h3 id="emptydir">emptyDir</h3>
+<p>卷从一个空目录开始,运行在 pod 内的应用程序可以写入它需要的任何文件。当删除 pod 时,卷的内容就会丢失。</p>
+<p>一个 emptyDir 卷对于在同一个 pod 中运行的容器之间共享文件特别有用。但是它也可以被单个容器用于将数据临时写入磁盘。</p>
+<p>下面是个例子</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
+</span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name </span><span class="p">:</span><span class="w"> </span><span class="l">fortune</span><span class="w">
+</span><span class="ln"> 5</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">luksa/fortune</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">html-generator</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">    </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span><span class="ln">10</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">html</span><span class="w">
+</span><span class="ln">11</span><span class="w">      </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/var/html/docs</span><span class="w">
+</span><span class="ln">12</span><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx:alpine</span><span class="w">
+</span><span class="ln">13</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">web-server</span><span class="w">
+</span><span class="ln">14</span><span class="w">    </span><span class="nt">volumeMounts </span><span class="p">:</span><span class="w">
+</span><span class="ln">15</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">html</span><span class="w">
+</span><span class="ln">16</span><span class="w">      </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/usr/share/nginx/html</span><span class="w">
+</span><span class="ln">17</span><span class="w">      </span><span class="nt">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="ln">18</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="ln">19</span><span class="w">    </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span><span class="ln">20</span><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span><span class="ln">21</span><span class="w">  </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="ln">22</span><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">html</span><span class="w">
+</span><span class="ln">23</span><span class="w">    </span><span class="nt">emptyDir</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></code></pre></div><p>medium属性可以指定存储介质。比如内存</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="ln">2</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">html</span><span class="w">
+</span><span class="ln">3</span><span class="w">  </span><span class="nt">emptyDir</span><span class="p">:</span><span class="w">
+</span><span class="ln">4</span><span class="w">    </span><span class="nt">medium</span><span class="p">:</span><span class="w"> </span><span class="l">Memory</span><span class="w">
+</span></code></pre></div><h3 id="使用-git-仓库作为存储卷">使用 Git 仓库作为存储卷</h3>
+<p>gitRepo 卷基本上也是 一 个 emptyDir 卷,它通过克隆 Git 仓库并在 pod 启动时(但在创建容器之前) 检出特定版本来填充数据</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="ln">2</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">html</span><span class="w">
+</span><span class="ln">3</span><span class="w">  </span><span class="nt">gitRepo</span><span class="p">:</span><span class="w">
+</span><span class="ln">4</span><span class="w">    </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l">https://github.com/luksa/kubia-website-example.git</span><span class="w">
+</span><span class="ln">5</span><span class="w">    </span><span class="nt">revision</span><span class="p">:</span><span class="w"> </span><span class="l">master</span><span class="w">
+</span><span class="ln">6</span><span class="w">    </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="l">.</span><span class="w">
+</span></code></pre></div><p>但是它并未与git仓库保持同步，如果git仓库有任何更新，这些更新不会反映到挂载的卷中。可以通过删除并重建pod来获得最新的git代码，或者运行一个附加进程来使卷与 Git 仓库保持同步。</p>
+<p>Git 同步进程不应该运行在主容器中，而应该是在另外一个容器: sidecar container。这种容器增加了对 pod 主容器的操作。在Docker Hub中搜索 &quot;git syc&quot;, 可以看到很多可以实现git仓库同步的容器镜像</p>
+<h3 id="hostpath卷">hostPath卷</h3>
+<p>大多数 pod 应该忽略它们的主机节点, 因此它们不应该访问节点文件系统上的任何文件。但是某些系统级别的 pod(切记, 这些通常由 DaemonSet 管理)确实需要读取节点的文件或使用节点文件系统来访问节点设备。</p>
+<p>它是持久性存储，Pod删除时候，hostPath 卷的内容则不会被删除。</p>
+<p>如果你正在考虑使用 hostPath 卷作为存储数据库数据的目录, 请重新考虑。因为卷的内容存储在特定节点的文件系统中, 所以当数据库 pod 被重新安排在另一个节点时, 会找不到数据。这解释了为什么对常规 pod 使用 hostPath 卷不是一个好主意, 因为这会使 pod 对预定规划的节点很敏感。</p>
+<h3 id="使用持久化卷">使用持久化卷</h3>
+<p>当运行在一个 pod 中的应用程序需要将数据保存到磁盘上, 并且即使该 pod 重新调度到另一个节点时也要求具有相同的数据可用，这就必须将其存储在某种类型的网络存储 (NAS) 中。比如 Google Kubernetes Engine的GCE持久磁盘、AWS的awsElasticBlockStore、NFS等等</p>
+<h3 id="持久卷和持久卷声明">持久卷和持久卷声明</h3>
+<p>为了使应用能够正常请求存储资源, 同时避免处理基础设施细节, 引入了两个新的资源, 分别是待久卷和持久卷声明。这样，开发人员不需要知道底层使用的是哪种存储技术, 同理他们也不需要了解应该使用哪些类型的物理服务器来运行pod, 与基础设施相关的交互是集群管理员独有的控制领域。当开发入员需要一定数量的持久化存储来进行应用时, 可以向 k8s 请求,就像在创建 pod 时可以请求 CPU、 内存和其他资源一样。</p>
+<p>由集群管理员设置底层存储, 然后通过 Kubernetes API 服务器创建持久卷并注册。在创建持久卷时, 管理员可以指定其大小和所支持的访问模式。当集群用户需要在其 pod 中使用持久 化存储时, 他们首先创建持久卷声明(PersistentVolumeClaim, 简称 PVC) 清单, 指定所需要的最低容量要求和访问模式, 然后用户将待久卷声明清单提交给 Kubernetes API 服务器, Kubernetes 将找到可匹配的持久卷并将其绑定到持久卷声明。持久卷声明可以当作 pod 中的一个卷来使用, 其他用户不能使用相同的持久卷,除非先通过删除持久卷声明绑定来释放。</p>
+<p>通过 persistentVolumeReclaimPolicy 属性设置存储卷回收策略：</p>
+<ul>
+<li>Retain: 在持久卷从持久卷声明中释放后仍然能保留它的卷和数据内容。</li>
+<li>Recycle: 删除卷的内容并使卷可用于再次声明,通过这种方式,持久卷可以被不同的持久卷声明和 pod 反复使用</li>
+<li>Delete: 策略删除底层存储</li>
+</ul>
+<p>另外，集群管理员也可以创建一个持久卷配置,并定义一个或多个 StorageClass 对象,从而让用户选择他们想要的持久卷类型而不仅仅只是创建持久卷。用户可以在其持久卷声明中引用 StorageClass，而配置程序在配置持久存储时将采用这一点。可以指定默认的StorageClass，未指定StorageClass时就用默认的。</p>
+<p>StorageClasses 的好处在于,声明是通过名称引用它们的。因此,只要 StorageClass名称在所有这些名称中相同, PVC 定义便可跨不同集群移植</p>
+<hr>
+<p>图书资料：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30418855/">https://book.douban.com/subject/30418855/</a></li>
+</ul>
+
+    
+      
+    
+  </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <h2>Paul Zeng</h2>
@@ -458,9 +263,6 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="nav-link">Kubernetes in Action笔记 - (9) 卷</a>
-      </li>
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_service/" class="nav-link">Kubernetes in Action笔记 - (8) 服务、Endpoint、Ingress</a>
       </li>
@@ -481,6 +283,9 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="nav-link">Kubernetes in Action笔记 - (2) k8s集群架构</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/" class="nav-link">Kubernetes in Action笔记 - (1) 容器技术介绍</a>
       </li>
     </ul>
     <div>
@@ -1028,8 +833,6 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
 </aside>
 
 </div>
-
-
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>
