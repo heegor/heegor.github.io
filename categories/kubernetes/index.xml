@@ -6,7 +6,22 @@
     <description>Recent content in kubernetes on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 22 Dec 2020 22:16:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Dec 2020 16:14:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes in Action笔记 - (10) 使用ConfigMap与Secret传递应用配置</title>
+      <link>https://www.zengxi.net/2020/12/k8s_config_map_secret/</link>
+      <pubDate>Fri, 25 Dec 2020 16:14:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2020/12/k8s_config_map_secret/</guid>
+      <description>向容器传递应用程序的配置参数 方法：
+ 向容器传递命令行参数 为每个容器设置自定义环境变量 通过特殊类型的卷将配置文件挂载到容器中  向容器传递命令行参数 在Docker中定义命令与参数 容器中运行的完整指令由两部分组成:命令与参数。Dockerfile中的两种指令分别定义命令与参数这两个部分：
+ ENTRYPOINT: 定义容器启动时被调用的可执行程序 CMD: 指定传递给ENTRYPOINT的参数。  尽管可以直接使用CMD指令指定镜像运行时想要执行的命令, 正确的做法依旧 是借助ENTRYPOINT指令, 仅仅用CMD指定所需的默认参数。 这样, 镜像可以直 接运行, 无须添加任何参数
+1docker run &amp;lt;image&amp;gt; 或者是添加一些参数, 覆盖Dockerile中任何由CMD指定的默认参数值:
+1docker run &amp;lt;image&amp;gt; &amp;lt;arguments&amp;gt; shell与exec的区别 上述两条指令均支持以下两种形式。两者的区别在于指定的命令是否是在shell中被调用。
+ shell形式。如ENTRYPOINT node app.js。 exec形式。如ENTRYPOINT [&amp;quot;node&amp;quot;, &amp;quot;app.js&amp;quot;]。  下面用例子来看他们的区别
+1# exec形式 2# 从返回的进程列表看出:这里是直接运行node进程,而并非在shell中执行。 3$ docker exec 4675d ps x 4PID TTY STAT TIME COMMAND 51 ? Ssl 0:00 node app.Js 612 ? Rs 0:00 ps x 7 8# shell形式 9# 可以看出,主进程(PID 1)是shell进程而非node进程,node进程(PID 7)于shell中启动。  10$ docker exec -it e4bad ps x 11PID TTY STAT TIME COMMAND 121 ?</description>
+    </item>
+    
     <item>
       <title>Kubernetes in Action笔记 - (9) 卷</title>
       <link>https://www.zengxi.net/2020/12/k8s_volume/</link>

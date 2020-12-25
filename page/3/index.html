@@ -123,6 +123,35 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/08/gitbook_installation_error/">gitbook因为nodejs版本不匹配导致安装报错</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Aug 1, 2020</span>
+    <a href='https://www.zengxi.net/tags/nodejs' class="post_tag button button_translucent">nodejs
+    </a>
+    <a href='https://www.zengxi.net/tags/gitbook' class="post_tag button button_translucent">gitbook
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">如果nodejs使用的不是10.x版本，就会报错
+1Installing GitBook 3.2.3 2/usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287 3 if (cb) cb.apply(this, arguments) 4 ^ 5 6TypeError: cb.apply is not a function 7 at …</p>
+          <a href="https://www.zengxi.net/2020/08/gitbook_installation_error/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/07/zookeeper_purge_file/">zookeeper服务器文件清理</a>
       </h3>
       <div class="post_meta">
@@ -383,35 +412,6 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/06/pg_check_table_size/">转: postgresql 查看单个表大小</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 15, 2020</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">原文链接：https://blog.csdn.net/kmust20093211/article/details/47616345
-方法一 ，查某个表
-1select pg_size_pretty(pg_relation_size(&#39;table_name&#39;)); 方法二 ，查出所有表并按大小排序
-1SELECT 2table_schema || &#39;.&#39; || table_name 3AS table_full_name, pg_size_pretty(pg_total_relation_size(&#39;&#34;&#39; ||table_schema || …</p>
-          <a href="https://www.zengxi.net/2020/06/pg_check_table_size/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -459,6 +459,9 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_config_map_secret/" class="nav-link">Kubernetes in Action笔记 - (10) 使用ConfigMap与Secret传递应用配置</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="nav-link">Kubernetes in Action笔记 - (9) 卷</a>
       </li>
       <li>
@@ -479,16 +482,13 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/" class="nav-link">Kubernetes in Action笔记 - (3) Pod介绍</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="nav-link">Kubernetes in Action笔记 - (2) k8s集群架构</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">9</span>
+          <span class="button_tally">10</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
@@ -582,7 +582,7 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=9>KUBERNETES<span class="button_tally">9</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=10>KUBERNETES<span class="button_tally">10</span>
             </a>
             
             
@@ -651,7 +651,7 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">9</span>
+          <span class="button_tally">10</span>
         </a>
         
         
@@ -662,7 +662,7 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">9</span>
+          <span class="button_tally">10</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -752,6 +752,10 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/configmap/' class=" post_tag button button_translucent" data-position=1>CONFIGMAP<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/container/' class=" post_tag button button_translucent" data-position=1>CONTAINER<span class="button_tally">1</span>
             </a>
             
@@ -824,7 +828,7 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=9>KUBERNETES<span class="button_tally">9</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=10>KUBERNETES<span class="button_tally">10</span>
             </a>
             
             
@@ -885,6 +889,10 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
             
             
             <a href='https://www.zengxi.net/tags/schema/' class=" post_tag button button_translucent" data-position=1>SCHEMA<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/secret/' class=" post_tag button button_translucent" data-position=1>SECRET<span class="button_tally">1</span>
             </a>
             
             

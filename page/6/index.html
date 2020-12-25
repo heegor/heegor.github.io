@@ -123,6 +123,35 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2018/11/nginx-setting-for-long-polling/">配置Nginx支持长轮询</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Nov 21, 2018</span>
+    <a href='https://www.zengxi.net/tags/nginx' class="post_tag button button_translucent">nginx
+    </a>
+    <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2' class="post_tag button button_translucent">轮询
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">对于需要用到长轮询的web项目，可以在Nginx做一些配置来支持请求转发。分别在http与server块中加入下面的配置：
+1http { 2 map $http_upgrade $connection_upgrade { 3 default upgrade; 4 &#39;&#39; close; 5 } 6} 7 8server { 9 location /your-api-url/ { 10 proxy_pass http://127.0.0.1:9000/your-api-url/; 11 proxy_http_version 1.1; 12 proxy_set_header Upgrade $http_upgrade; …</p>
+          <a href="https://www.zengxi.net/2018/11/nginx-setting-for-long-polling/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2018/07/shell-translate-character/">shell中用tr命令转换字符大小写</a>
       </h3>
       <div class="post_meta">
@@ -432,36 +461,6 @@ grep的帮助文档中有这几个参数：
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/06/bubble-sort/">排序算法 - 冒泡排序(Bubble Sort)</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 17, 2018</span>
-    <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95' class="post_tag button button_translucent">算法
-    </a>
-    <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F' class="post_tag button button_translucent">排序
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">算法思路 基本思路 假设按照从小到大排列，总共有n个元素
- 从第一个元素开始至第n-1个元素，依次比较当前元素与它后面相邻元素的大小，如果前面一个比后面一个大，交换两个元素的位置。第一遍处理之后，最后一个元素就是当前循环中最大的一个。 重复上面的步骤，第二遍处理第一至第n-2个元素，第三遍处理第一至第n-3个元素……直到仅剩一个元素。  改进后的思路 上面的基本思路中需要进行n-1轮的比较。但是存在一种可能，在其中的某一轮之后，该数组就已经是有序的了，也就意味着后面就不需要再进行额外的比较和交换。可以设置一个标志位，用来表示当前这一轮是否存在元素交换，如果没有的话，就结束整个排序过程
-性能 时间复杂度：最好的情况O(n),最差的情 …</p>
-          <a href="https://www.zengxi.net/2018/06/bubble-sort/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -512,6 +511,9 @@ grep的帮助文档中有这几个参数：
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_config_map_secret/" class="nav-link">Kubernetes in Action笔记 - (10) 使用ConfigMap与Secret传递应用配置</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="nav-link">Kubernetes in Action笔记 - (9) 卷</a>
       </li>
       <li>
@@ -532,16 +534,13 @@ grep的帮助文档中有这几个参数：
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/" class="nav-link">Kubernetes in Action笔记 - (3) Pod介绍</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="nav-link">Kubernetes in Action笔记 - (2) k8s集群架构</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">9</span>
+          <span class="button_tally">10</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
@@ -635,7 +634,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=9>KUBERNETES<span class="button_tally">9</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=10>KUBERNETES<span class="button_tally">10</span>
             </a>
             
             
@@ -704,7 +703,7 @@ grep的帮助文档中有这几个参数：
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">9</span>
+          <span class="button_tally">10</span>
         </a>
         
         
@@ -715,7 +714,7 @@ grep的帮助文档中有这几个参数：
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">9</span>
+          <span class="button_tally">10</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -805,6 +804,10 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/configmap/' class=" post_tag button button_translucent" data-position=1>CONFIGMAP<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/container/' class=" post_tag button button_translucent" data-position=1>CONTAINER<span class="button_tally">1</span>
             </a>
             
@@ -877,7 +880,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=9>KUBERNETES<span class="button_tally">9</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=10>KUBERNETES<span class="button_tally">10</span>
             </a>
             
             
@@ -938,6 +941,10 @@ grep的帮助文档中有这几个参数：
             
             
             <a href='https://www.zengxi.net/tags/schema/' class=" post_tag button button_translucent" data-position=1>SCHEMA<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/secret/' class=" post_tag button button_translucent" data-position=1>SECRET<span class="button_tally">1</span>
             </a>
             
             
