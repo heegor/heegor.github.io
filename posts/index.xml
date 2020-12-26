@@ -6,7 +6,21 @@
     <description>Recent content in Posts on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 25 Dec 2020 16:14:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 26 Dec 2020 14:53:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源</title>
+      <link>https://www.zengxi.net/2020/12/k8s_pod_meta_data/</link>
+      <pubDate>Sat, 26 Dec 2020 14:53:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2020/12/k8s_pod_meta_data/</guid>
+      <description>通过Downward API传递元数据 对于pod调度、运行前预设的数据，可以通过环境变量或者configMap和secret卷向应用传递配置数据。但是对于那些不能预先知道的数据, 比如pod的IP、 主机名或者是通过ReplicaSet等控制生成的pod名称，该如何获取呢？这种类型的数据，可以通过使用Kubernetes Downward API解决。
+Downward API可以给在pod中运行的进程暴露pod的元数据。目前可以给容器传递以下数据:
+ pod的名称 pod的IP pod所在的命名空间 pod运行节点的名称 pod运行所归属的服务账户的名称 每个容器请求的CPU和内存的使用量 每个容器可以使用的CPU和内存的限制 pod的标签 pod的注解  通过环境变量暴露元数据 1env:2- name:POD_NAME3# 引用pod manifest中的元数据名称字段,而不是设定一个具体的值4valueFrom:5fieldRef:6fieldPath:metadata.name7- name:POD_NAMESPACE8valueFrom:9fieldRef:10fieldPath:metadata.namespace11- name:POD_IP12valueFrom:13fieldRef:14fieldPath:status.podIP15- name:NODE_NAME16valueFrom:17fieldRef:18fieldPath:spec.nodeName19- name:SERVICE_ACCOUNT20valueFrom:21fieldRef:22fieldPath:spec.serviceAccountName23- name:CONTAINER_CPU_REQUEST_MILLICORES24valueFrom:25# 容器请求的CPU和内存使用量是使用resourceFieldRef字段而不是feildRef字段26resourceFieldRef:27resource:requests.cpu28divisor:1m # 对于资源相关字段，定义一个基数单位，从而生成每一部分的值29- name:CONTAINER MEMORY LIMIT KIBIBYTES30valueFrom:31resourceFieldRef:32resource:limits.memory33divisor:1Ki34对于暴露资源请 和使用限制的环境变量, 我们会设定一个基数单位。实际的资源请求值和限制值除以这个基数单位, 所得的结果通过环境变量暴露出去。在上面的例子中, 我们设定 CPU 请求的基数为1m (即1 millicore, 也就是千分之一核CPU)。当我们设置资源请求为15m时, 环境变量CONTAINER_CPU_REQUEST_MILLICORES的值就是15
+在完成创建pod后, 我们可以使用kubectl exec命令来查看容器中的所有环境变量
+1kubectl exec downward env 通过卷传递元数据 可以定义一个downwardAPI卷，并以文件的方式挂载在容器中。
+1apiVersion:v12kind:Pod3metadata:4# 后面会添加定义，通过downwardAPI卷来暴露这些标签5name:downward6labels:7foo:bar8annotations:9key1:value110key2:|11multi 12line 13value14spec:15containers:16- name:main17image:busybox18command:[&amp;#34;sleep&amp;#34;,&amp;#34;9999999&amp;#34;]19resources:20requests:21cpu:15m22memory:l00Ki23limits:24cpu:100m25memory:4Mi26volumeMounts:27# 挂载卷28- name:downward29mountPath:/etc/downward30volumes:31# 定义一个名字为downward的downwardAPI卷32- name:downward33downwardAPI:34items:35# Pod名称（来自manifest文件中的metadata.name字段）将被写入podName这个文件36- path:&amp;#34;podName&amp;#34;37fieldRef:38fieldPath:metadata.name39- path:&amp;#34;podNamespace&amp;#34;40fieldRef:41fieldPath:metadata.namespace42- path:&amp;#34;labels&amp;#34;43fieldRef:44fieldPath:metadata.labels45- path:&amp;#34;annotations&amp;#34;46fieldRef:47fieldPath:metadata.annotations48- path:&amp;#34;containerCpuRequestMilliCores&amp;#34;49resourceFieldRef:50containerName:main51resource:requests.</description>
+    </item>
+    
     <item>
       <title>Kubernetes in Action笔记 - (10) 使用ConfigMap与Secret传递应用配置</title>
       <link>https://www.zengxi.net/2020/12/k8s_config_map_secret/</link>
