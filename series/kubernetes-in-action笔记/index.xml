@@ -6,7 +6,25 @@
     <description>Recent content in Kubernetes in Action笔记 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Sat, 26 Dec 2020 14:53:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 27 Dec 2020 23:08:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes in Action笔记 - (12) Deployment</title>
+      <link>https://www.zengxi.net/2020/12/k8s_deployment/</link>
+      <pubDate>Sun, 27 Dec 2020 23:08:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2020/12/k8s_deployment/</guid>
+      <description>Deployment是一种更高阶资源, 用于部署应用程序并以声明的方式升级应用。
+在使用 Deployment 时, 实际的 pod是由 Deployment 的 Replicaset 创建和管理的, 而不是由 Deployment 直接创建和管理的。
+在升级应用过程中，部署新版本的应用时，会创建新的Replicaset用于管理版本的pod。升级过程中的某个时刻，就会存在新旧两个版本的Replicaset。因此，需要引入Deployment来协调。
+与Replicaset类似，Deployment也是由标签选择器、期望副数和pod模板组成的。此外,它还包含另一个字段，用于指定一 个部署策略，表示在修改Deployment资源时应该如何执行更新。
+创建Deployment 1appVersion:apps/v1beta12kind:Deployment 3metadata:4name:kubia5spec:6replicas:37template:8metadata:9name:kubia10labels:11app:kubia12spec:13containers:14- image:luksa/kubia:vl15name:nodejs创建一个Deployment
+1# 确保在创建时使用了 --record 选项。 这个选项会记录历史版本号, 在之后的操作中非常有用 2kubectl create -f kubia-deployment-v1.yaml --record 查看 Deployment 的详细信息
+1kubectl get deployment 2 3kubectl describe de­ployment 查看部署状态
+1 kubectl rollout status deployment kubia 升级deployment 只需修改 Deployment 资源中定义的 pod 模板, k8s 会自动将实际的系统状态收敛为资源中定义的状态
+不同的 Deployment 升级策略：
+ RollingUpdate：执行滚动更新，默认值。如果应用能够支持多个版本同时对外提供服务, 则推荐使用这个策略来升级应用 Recreate：一次性删除所有旧版本的 pod, 然后创建新的 pod。如果应用程序不支持多个版本同时对外提供服务, 需要在启动新版本之前完全停用旧版本, 那么需要使用这种策略。但是会导致应用程序出现短暂的不可用。  下面是修改 Deployment 或其他资源的不同方式。这些方式在操作 Deployment 资源时效果都是一样的。 它们无非就是修改Deployment 的规格定义, 修改后会触发滚动升级过程。</description>
+    </item>
+    
     <item>
       <title>Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源</title>
       <link>https://www.zengxi.net/2020/12/k8s_pod_meta_data/</link>

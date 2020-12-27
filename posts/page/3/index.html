@@ -119,6 +119,35 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/08/manjaro_debtap/">Manjaro安装deb包</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Aug 13, 2020</span>
+    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">安装debtap
+1yay -S debtap 替换源，解决国内debtap同步仓库执行超慢的问题。打开 /usr/bin/debtap，更换 debtap 内容：
+ 将 http://ftp.debian.org/debian/dists 替换成 https://mirrors.ustc.edu.cn/debian/dists 将 http://archive.ubuntu.com/ubuntu/dists 替换成 https://mirrors.ustc.edu.cn/ubuntu/dists  升级debtap数据库
+1sudo debtap -u 转换deb包。注意： 转换过程中会提示输入包名，以及license。包名随 …</p>
+          <a href="https://www.zengxi.net/2020/08/manjaro_debtap/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/08/linux_auto_set_brightness/">Manjaro笔记本启动时自动设置屏幕亮度</a>
       </h3>
       <div class="post_meta">
@@ -376,39 +405,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/">Linux下面使用dd命令烧录U盘并查看执行进度</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 13, 2020</span>
-    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">烧录U盘 先用fdisk来查看U盘的盘符
-1sudo fdisk -l 再用dd命令来写数据到U盘
-1sudo dd if=/home/paul/Downloads/test.iso of=/dev/sdc bs=1M count=10000 查看执行进度 假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命令行窗口，执行下面的命令，注意命令上面可能需要加上sudo
-方法一：
-1watch -n 5 pkill -USR1 ^dd$ 方法二：
-1watch -n 5 killall -USR1 dd 方法三：
-1while killall -USR1 dd; do sleep 5; done 方法四：
-1while (ps …</p>
-          <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -456,6 +452,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_deployment/" class="nav-link">Kubernetes in Action笔记 - (12) Deployment</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_pod_meta_data/" class="nav-link">Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源</a>
       </li>
       <li>
@@ -476,16 +475,13 @@
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/" class="nav-link">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/" class="nav-link">Kubernetes in Action笔记 - (4) 标签、注解与命名空间</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">11</span>
+          <span class="button_tally">12</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
@@ -579,7 +575,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=11>KUBERNETES<span class="button_tally">11</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=12>KUBERNETES<span class="button_tally">12</span>
             </a>
             
             
@@ -648,7 +644,7 @@
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">11</span>
+          <span class="button_tally">12</span>
         </a>
         
         
@@ -659,7 +655,7 @@
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">11</span>
+          <span class="button_tally">12</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -825,7 +821,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=11>KUBERNETES<span class="button_tally">11</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=12>KUBERNETES<span class="button_tally">12</span>
             </a>
             
             

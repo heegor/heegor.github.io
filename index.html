@@ -123,6 +123,35 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_deployment/">Kubernetes in Action笔记 - (12) Deployment</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 27, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">Deployment是一种更高阶资源, 用于部署应用程序并以声明的方式升级应用。
+在使用 Deployment 时, 实际的 pod是由 Deployment 的 Replicaset 创建和管理的, 而不是由 Deployment 直接创建和管理的。
+在升级应用过程中，部署新版本的应用时，会创建新的Replicaset用于管理版本的pod。升级过程中的某个时刻，就会存在新旧两个版本的Replicaset。因此，需要引入Deployment来协调。
+与Replicaset类似，Deployment也是由标签选择器、期望副数和pod模板组成的。此外,它还包含另一个字段，用于指定一 个部署策略，表示在修改Deployment资源时应该如 …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_deployment/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/12/k8s_pod_meta_data/">Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源</a>
       </h3>
       <div class="post_meta">
@@ -379,34 +408,6 @@ phase有以下几种值：
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/">Kubernetes in Action笔记 - (2) k8s集群架构</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 3, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">集群架构 k8s集群由很多节点组成，被分成两种类型：Master节点与Node节点。
-Master节点 承载着控制和管理整个集群系统的 Control Panel。包含下面组件：
- API Server  一个api服务器，所有外部与k8s集群的交互都需要经过它 可水平扩展   Scheduler  将pod调度到具体的Node节点上 一个master集群中只会有一个节点处于激活状态，由etcd选举产生   Control Manager  执行集群级别的功能，通过apiserver监控集群状态做出相应的处理，如复制组件、持续跟踪工作节点 、处理节点失败等 一个master集群中只会有一个节点处于激活状态，由etcd …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -451,6 +452,9 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_deployment/" class="nav-link">Kubernetes in Action笔记 - (12) Deployment</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_pod_meta_data/" class="nav-link">Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源</a>
       </li>
       <li>
@@ -471,16 +475,13 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/" class="nav-link">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/" class="nav-link">Kubernetes in Action笔记 - (4) 标签、注解与命名空间</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">11</span>
+          <span class="button_tally">12</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
@@ -574,7 +575,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=11>KUBERNETES<span class="button_tally">11</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=12>KUBERNETES<span class="button_tally">12</span>
             </a>
             
             
@@ -643,7 +644,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">11</span>
+          <span class="button_tally">12</span>
         </a>
         
         
@@ -654,7 +655,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">11</span>
+          <span class="button_tally">12</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -820,7 +821,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=11>KUBERNETES<span class="button_tally">11</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=12>KUBERNETES<span class="button_tally">12</span>
             </a>
             
             
