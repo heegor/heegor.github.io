@@ -119,6 +119,40 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/">重建基于pglogical逻辑复制的从库</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 6, 2019</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+    <a href='https://www.zengxi.net/tags/pglogical' class="post_tag button button_translucent">pglogical
+    </a>
+    <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93' class="post_tag button button_translucent">从库
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">《Postgres 9.x 升级至 10.x》一文中提到了使用pglogical逻辑复制升级。基于这种方式的升级有个缺点，就是主库的DDL发生改变的话，那么从库的复制就会有影响，可能需要重建从库来解决。
+重建从库的步骤与之前创建逻辑复制有点类似，但是由于之前已经做过一些操作，所以相比之下，少了一些步骤。
+从库中删除数据库，再创建一个空的数据库 由于表结构的改变，原先的数据都不能用了，需要重新同步。创建新的空数据库是最快的方式
+从库中导入最新的表结构 在 provider 上导出结构数据
+1sudo -iu postgres pg_dumpall --schema-only -f dump.sql 在 subscriber 上导入结构 …</p>
+          <a href="https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2019/12/pg-upgrade-version/">Postgres 9.x 升级至 10.x</a>
       </h3>
       <div class="post_meta">
@@ -416,39 +450,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/06/redis-data-migration/">使用redis-cli与AOF迁移数据</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 27, 2018</span>
-    <a href='https://www.zengxi.net/tags/redis' class="post_tag button button_translucent">redis
-    </a>
-    <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB' class="post_tag button button_translucent">数据迁移
-    </a>
-    <a href='https://www.zengxi.net/tags/migration' class="post_tag button button_translucent">migration
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">把一台Redis上的数据，迁移到另外一台Redis服务器上，有很多种方式。其中一个简便的方法是，利用Redis自带的命令行工具redis-cli，实现数据的无缝迁移。
-在旧的Redis服务器上开启AOF 执行下面的命令，检查AOF是否开启。返回yes表示开启，no表示关闭
-1redis-cli -h old_redis_ip -p old_redis_port config get appendonly 如果未开启，执行下面的命令开启AOF
-1redis-cli -h old_redis_ip -p old_redis_port config set appendonly yes 复制AOF文件 默认生成的AOF文件名 …</p>
-          <a href="https://www.zengxi.net/2018/06/redis-data-migration/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -499,6 +500,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_api_server_security/" class="nav-link">Kubernetes in Action笔记 - (14) API Server服务器的安全防护</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="nav-link">Kubernetes in Action笔记 - (13) Statefulset</a>
       </li>
       <li>
@@ -519,16 +523,13 @@
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/" class="nav-link">Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/" class="nav-link">Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
@@ -622,7 +623,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=13>KUBERNETES<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=14>KUBERNETES<span class="button_tally">14</span>
             </a>
             
             
@@ -691,7 +692,7 @@
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         
@@ -702,7 +703,7 @@
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -868,7 +869,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=13>KUBERNETES<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=14>KUBERNETES<span class="button_tally">14</span>
             </a>
             
             

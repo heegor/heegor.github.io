@@ -123,6 +123,34 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/">清除chrome中 HTTPS 证书缓存</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 15, 2020</span>
+    <a href='https://www.zengxi.net/tags/chrome' class="post_tag button button_translucent">chrome
+    </a>
+    <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6' class="post_tag button button_translucent">证书
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在地址栏输入 chrome://net-internals/#hsts ， 找到 “Delete domain security policies”， 输入对应的域名，点击 Delete 按钮</p>
+          <a href="https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/07/jetty_tmp_dir/">jetty临时目录下的资源文件被删导致js等资源找不到</a>
       </h3>
       <div class="post_meta">
@@ -383,37 +411,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/05/mac_write_iso_into_udisk/">MacOS中通过ISO镜像制作U盘安装盘</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    May 21, 2020</span>
-    <a href='https://www.zengxi.net/tags/mac' class="post_tag button button_translucent">mac
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">使用MacOS自带的dd命令，就可以将ISO镜像写入到U盘。这就可以利用这个命令来制作安装windows，Linux等系统用U盘
-通过下面的命令，找出U盘挂载的路径
-1diskutil list 将U盘取消挂载，在下面命令中将N替换为所对应的挂载盘：
-1diskutil unmountDisk /dev/disk[N] 将内容写入U盘。下面的命令中 rdisk 的 r 可以加快写入速度
-1sudo dd if=iso路径 of=/dev/rdisk[N] bs=1m 弹出磁盘
-1diskutil eject /dev/disk[N] </p>
-          <a href="https://www.zengxi.net/2020/05/mac_write_iso_into_udisk/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -464,6 +461,9 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_api_server_security/" class="nav-link">Kubernetes in Action笔记 - (14) API Server服务器的安全防护</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="nav-link">Kubernetes in Action笔记 - (13) Statefulset</a>
       </li>
       <li>
@@ -484,16 +484,13 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/" class="nav-link">Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/" class="nav-link">Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
@@ -587,7 +584,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=13>KUBERNETES<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=14>KUBERNETES<span class="button_tally">14</span>
             </a>
             
             
@@ -656,7 +653,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         
@@ -667,7 +664,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -833,7 +830,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=13>KUBERNETES<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=14>KUBERNETES<span class="button_tally">14</span>
             </a>
             
             
