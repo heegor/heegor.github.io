@@ -123,6 +123,34 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/">Kubernetes in Action笔记 - (3) Pod介绍</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 3, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">什么是Pod Pod是k8s的基本构建模块，包含一个或者多个容器。一个Pod中的所有容器都运行在同—个节点上，绝不跨越两个节点
+为何需要Pod 多个容器比单个容器中包含多个进程要好 想象一个由多个进程组成的应用程序, 无论是通过ipc (进程间通信)还是本地存储文件进行通信, 都要求它们运行于同一 台机器上。 在k8s中, 我们经常在容器中运行进程, 由于每一个容器都非常像一台独立的机器, 此时你可能认为在单个容器中运行多个进程是合乎逻辑的, 然而在实践中这种做法并不合理。
+容器被设计为每个容器只运行一个进程(除非进程本身产生子进程)。如果在单个容器中运行多个不相关的进程, 那么保持所有进程运行、 管理它们的日志等将会是我们的责任。 …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/">Kubernetes in Action笔记 - (2) k8s集群架构</a>
       </h3>
       <div class="post_meta">
@@ -387,33 +415,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/">Postgres启动时遇到只读文件系统的错误</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Sep 20, 2020</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">问题与解决方法 公司内部私有云由于断电，机器没有正常关机，结果导致 Postgres 服务器启动时，报错
-12020-09-09 07:22:15.296 UTC [3876] FATAL: could not remove old lock file &#34;postmaster.pid&#34;: Read-only file system 22020-09-09 07:22:15.296 UTC [3876] HINT: The file seems accidentally left over, but it could not be removed. Please remove the file by hand and …</p>
-          <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -458,6 +459,9 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="nav-link">Kubernetes in Action笔记 - (13) Statefulset</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_deployment/" class="nav-link">Kubernetes in Action笔记 - (12) Deployment</a>
       </li>
       <li>
@@ -478,16 +482,13 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/" class="nav-link">Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/" class="nav-link">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">12</span>
+          <span class="button_tally">13</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
@@ -581,7 +582,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=12>KUBERNETES<span class="button_tally">12</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=13>KUBERNETES<span class="button_tally">13</span>
             </a>
             
             
@@ -650,7 +651,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">12</span>
+          <span class="button_tally">13</span>
         </a>
         
         
@@ -661,7 +662,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">12</span>
+          <span class="button_tally">13</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -827,7 +828,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=12>KUBERNETES<span class="button_tally">12</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=13>KUBERNETES<span class="button_tally">13</span>
             </a>
             
             

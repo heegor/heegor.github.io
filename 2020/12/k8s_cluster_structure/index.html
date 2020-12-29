@@ -163,6 +163,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <ul>
         <li><a href="#master节点">Master节点</a></li>
         <li><a href="#node-节点">Node 节点</a></li>
+        <li><a href="#组件之间的通讯">组件之间的通讯</a></li>
       </ul>
     </li>
     <li><a href="#使用kubernetes的好处">使用Kubernetes的好处</a>
@@ -200,12 +201,12 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
 </li>
 <li>etcd
 <ul>
-<li>一个可靠的分布式数据存储,它能持久化存储集群配置</li>
+<li>一个可靠的分布式数据存储,它能持久化存储集群配置。使用RAFT算法</li>
 </ul>
 </li>
 </ul>
 <p>k8s依赖etcd所以不存在数据一致性的问题（把数据一致性压到了etcd上），所以k8s master不需要采取投票的机制来进行选举，而只需节点健康就可以成为leader。所以这边master并不要求奇数，偶数也是可以的。那么master高可用至少需要2个节点，失败容忍度是(n/0)+1，也就是只要有一个是健康的k8s master集群就属于可用状态。（这边需要注意的是master依赖etcd，如果etcd不可用那么master也将不可用）</p>
-<p>etcd的失败容忍度：最小可用节点数：(n/2)+1</p>
+<p>etcd的失败容忍度：最小可用节点数：(n/2)+1。通常是奇数节点，防止脑裂</p>
 <h3 id="node-节点">Node 节点</h3>
 <p>无高可用一说。</p>
 <p>主要的几个组件：</p>
@@ -226,6 +227,9 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
 </ul>
 </li>
 </ul>
+<h3 id="组件之间的通讯">组件之间的通讯</h3>
+<p>系统组件间只能通过API服务器通信，它们之间不会直接通信。</p>
+<p>唯一能直接和etcd通信的是 k8s 的API服务器。所有其他组件通过API服务器间接地读取、写入数据到etcd。这带来一些好处，其中之一就是增强乐观锁系统、验证系统的健壮性;并且,通过把实际存储机制从其他组件抽离,未来替换起来也更容易</p>
 <h2 id="使用kubernetes的好处">使用Kubernetes的好处</h2>
 <h3 id="简化应用程序部署">简化应用程序部署</h3>
 <p>由于k8s将其所有工作节点公开为一个部署平台, 因此应用程序开发人员可以直接部署应用程序,不需要了解组成集群的服务器。</p>
@@ -262,6 +266,9 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="nav-link">Kubernetes in Action笔记 - (13) Statefulset</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_deployment/" class="nav-link">Kubernetes in Action笔记 - (12) Deployment</a>
       </li>
       <li>
@@ -282,16 +289,13 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/" class="nav-link">Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/" class="nav-link">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">12</span>
+          <span class="button_tally">13</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
@@ -385,7 +389,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=12>KUBERNETES<span class="button_tally">12</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=13>KUBERNETES<span class="button_tally">13</span>
             </a>
             
             
@@ -454,7 +458,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">12</span>
+          <span class="button_tally">13</span>
         </a>
         
         
@@ -465,7 +469,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">12</span>
+          <span class="button_tally">13</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -631,7 +635,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=12>KUBERNETES<span class="button_tally">12</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=13>KUBERNETES<span class="button_tally">13</span>
             </a>
             
             

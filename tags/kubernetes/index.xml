@@ -6,7 +6,29 @@
     <description>Recent content in kubernetes on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Sun, 27 Dec 2020 23:08:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Dec 2020 13:43:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes in Action笔记 - (13) Statefulset</title>
+      <link>https://www.zengxi.net/2020/12/k8s_statefulset/</link>
+      <pubDate>Tue, 29 Dec 2020 13:43:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2020/12/k8s_statefulset/</guid>
+      <description>了解Statefulset 与ReplicaSet比较 Statefulset 保证了pod在重新调度后保留它们的标识和状态。
+与ReplicaSet类似, Statefulset 也是依据Statefulset 的pod模板创建的，也会指定期望的副本个数。
+不同的是, Statefulset创建的pod副本并不是完全一样的。每个pod都可以拥有一组独立的数据卷(持久化状态)。pod的名字都是规律的(固定的), 而不是每个新pod都随机获取一个名字。
+提供稳定的网络标识 一个Statefulset创建的每个pod都有一个从零开始的顺序索引, 这个会体现在pod的名称和主机名上, 同样还会体现在pod对应的固定存储上。
+与普通的pod不一样的是, 有状态的pod有时候需要通过其主机名来定位。无状态Pod都是一样的，所以访问的时候随便选择一个都可以；而有状态的pod是彼此不同的，通常希望操作的是其中特定的一个。
+一个Statefulset 通常要求创建一个用来记录每个pod网络标记的headless Service。通过这个Service, 每个pod将拥有独立的DNS记录, 这样集群里它的伙伴或者客户端可以通过主机名方便地找到它。比如说, 一个属于default命名空间, 名为foo的控制服务, 它的一个pod名称为A-0, 那么可以通过下面的完整域名来访问它 : a-0.foo.default.svc.cluster.local
+扩缩容 Statefulset 扩容一个Statefulset会使用下一个还没用到的顺序索引值创建一个新的pod实例。比如, 要把一个Statefulset从两个实例扩容到三个实例, 那么新实例的索引值就会是2 (现有实例使用的索引值为0和1)。
+缩容一个Statefulset将会最先删除最高索引值的实例，所以缩容的结果是可预知的。作为对比, ReplicaSet 的缩容操作则不同,不知道哪个实例会被删除, 也不能指定先删除哪个实例
+因为 Statefulset 缩容任何时候只会操作一个pod实例，所以有状态应用的缩容相对比较慢。举例来说, 一个分布式存储应用若同时下线多个节点, 则可能导致其数据丢失。比如说一个数据项副本数设置为2的数据存储应用,若同时有两个节点下线,一份数据如果它正好保存在这两个节点上记录就会丢失。若缩容是线性的, 则分布式存储应用就有时间把丢失的副本复制到其他节点,保证数据不会丢失。基于以上原因, Statefulset 在有实例不健康的情况下是不允许做缩容操作的 。若一个实例是不健康的, 而这时再缩容一个实例的话, 也就意味着你实际上同时失去了两个集群成员 。
+为每个有状态实例提供稳定的专属存储 有状态的pod的存储必须是持久的,并且与pod解耦。必须设置成手动释放，否则数据丢失。
+持久卷声明与持久卷是一对一的关系,所以每个Statefulset的 pod 都需要关联到不同的持久卷声明, 与独自的持久卷相对应。
+缩容 Statefulset 时会保留持久卷声明, 所以在随后的扩容操作中, 新的pod实例会使用绑定在持久卷上的相同声明和其上的数据
+Statefulset 的 at-most-one 的语义 一个 Statefulset 必须保证有状态的pod实例的αt-most-one语义。也就是说一个Statefulset必须在准确确认一个pod不再运行后,才会去创建它的替换pod
+在 Statefulset 中发现伙伴节点 一个Statefulset中的成员需要很容易地找到其他的所有成员。当然它可以通过与API服务器通信来获取, 但是K8s的一个目标是设计功能来帮助应用完全感觉不到k8s的存在。因此让应用与API服务器通信的设计是不允许的</description>
+    </item>
+    
     <item>
       <title>Kubernetes in Action笔记 - (12) Deployment</title>
       <link>https://www.zengxi.net/2020/12/k8s_deployment/</link>
@@ -178,13 +200,13 @@ Pod内部容器共享相同的IP和端口空间 由于一个pod中的容器运�
       <guid>https://www.zengxi.net/2020/12/k8s_cluster_structure/</guid>
       <description>集群架构 k8s集群由很多节点组成，被分成两种类型：Master节点与Node节点。
 Master节点 承载着控制和管理整个集群系统的 Control Panel。包含下面组件：
- API Server  一个api服务器，所有外部与k8s集群的交互都需要经过它 可水平扩展   Scheduler  将pod调度到具体的Node节点上 一个master集群中只会有一个节点处于激活状态，由etcd选举产生   Control Manager  执行集群级别的功能，通过apiserver监控集群状态做出相应的处理，如复制组件、持续跟踪工作节点 、处理节点失败等 一个master集群中只会有一个节点处于激活状态，由etcd选举产生   etcd  一个可靠的分布式数据存储,它能持久化存储集群配置    k8s依赖etcd所以不存在数据一致性的问题（把数据一致性压到了etcd上），所以k8s master不需要采取投票的机制来进行选举，而只需节点健康就可以成为leader。所以这边master并不要求奇数，偶数也是可以的。那么master高可用至少需要2个节点，失败容忍度是(n/0)+1，也就是只要有一个是健康的k8s master集群就属于可用状态。（这边需要注意的是master依赖etcd，如果etcd不可用那么master也将不可用）
-etcd的失败容忍度：最小可用节点数：(n/2)+1
+ API Server  一个api服务器，所有外部与k8s集群的交互都需要经过它 可水平扩展   Scheduler  将pod调度到具体的Node节点上 一个master集群中只会有一个节点处于激活状态，由etcd选举产生   Control Manager  执行集群级别的功能，通过apiserver监控集群状态做出相应的处理，如复制组件、持续跟踪工作节点 、处理节点失败等 一个master集群中只会有一个节点处于激活状态，由etcd选举产生   etcd  一个可靠的分布式数据存储,它能持久化存储集群配置。使用RAFT算法    k8s依赖etcd所以不存在数据一致性的问题（把数据一致性压到了etcd上），所以k8s master不需要采取投票的机制来进行选举，而只需节点健康就可以成为leader。所以这边master并不要求奇数，偶数也是可以的。那么master高可用至少需要2个节点，失败容忍度是(n/0)+1，也就是只要有一个是健康的k8s master集群就属于可用状态。（这边需要注意的是master依赖etcd，如果etcd不可用那么master也将不可用）
+etcd的失败容忍度：最小可用节点数：(n/2)+1。通常是奇数节点，防止脑裂
 Node 节点 无高可用一说。
 主要的几个组件：
- Container Runtime  每个节点都需要一个容器运行时来执行容器，比如Docker。非pod启动。   kubelet  用于执行API server下达的命令，也可以重启启动失败的pod。   kube-proxy (Kubernetes Service Proxy)  通过修改iptables来达到网络代理、负载均衡的效果    使用Kubernetes的好处 简化应用程序部署 由于k8s将其所有工作节点公开为一个部署平台, 因此应用程序开发人员可以直接部署应用程序,不需要了解组成集群的服务器。
-开发人员通常不关心应用程序运行在哪个服务器上,只要服务器能够为应用程序提供足够的系统资源即可。
-有时开发人员需要指定应用程序应该运行在哪种硬件上，比如SSD，那只需要告诉k8s只在具有 SSD 的节点中进行选择即可。</description>
+ Container Runtime  每个节点都需要一个容器运行时来执行容器，比如Docker。非pod启动。   kubelet  用于执行API server下达的命令，也可以重启启动失败的pod。   kube-proxy (Kubernetes Service Proxy)  通过修改iptables来达到网络代理、负载均衡的效果    组件之间的通讯 系统组件间只能通过API服务器通信，它们之间不会直接通信。
+唯一能直接和etcd通信的是 k8s 的API服务器。所有其他组件通过API服务器间接地读取、写入数据到etcd。这带来一些好处，其中之一就是增强乐观锁系统、验证系统的健壮性;并且,通过把实际存储机制从其他组件抽离,未来替换起来也更容易
+使用Kubernetes的好处 简化应用程序部署 由于k8s将其所有工作节点公开为一个部署平台, 因此应用程序开发人员可以直接部署应用程序,不需要了解组成集群的服务器。</description>
     </item>
     
     <item>

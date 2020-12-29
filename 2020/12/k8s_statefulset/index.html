@@ -1,9 +1,8 @@
 
 <!DOCTYPE html>
-<html lang="zh-cn" data-figures="">
+<html lang="zh-cn" data-figures="" class="page">
   <head>
-	<meta name="generator" content="Hugo 0.79.0" />
-<title>保罗札记</title>
+<title>Kubernetes in Action笔记 - (13) Statefulset | 保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,17 +16,20 @@
   })();
 </script>
 
-  
 <meta property="og:locale" content="zh-cn" />
 
-<meta property="og:type" content="website">
-<meta name="description" content="A theme based on VMware&#39;s Clarity Design System for publishing technical blogs with Hugo.">
+<meta property="og:type" content="article">
+<meta name="description" content="了解Statefulset 与ReplicaSet比较 Statefulset 保证了pod在重新调度后保留它们的标识和状态。
+与ReplicaSet类似, Statefulset 也是依据Statefulset 的pod模板创建的，也会指定期望的副本个数。
+不同的是, Statefulset创建的pod副本并不是完全 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="" />
-<meta property="og:url" content="https://www.zengxi.net/" />
-<meta property="og:title" content="" />
-<meta property="og:description" content="A theme based on VMware&#39;s Clarity Design System for publishing technical blogs with Hugo." />
+<meta name="twitter:title" content="Kubernetes in Action笔记 - (13) Statefulset" />
+<meta property="og:url" content="https://www.zengxi.net/2020/12/k8s_statefulset/" />
+<meta property="og:title" content="Kubernetes in Action笔记 - (13) Statefulset" />
+<meta property="og:description" content="了解Statefulset 与ReplicaSet比较 Statefulset 保证了pod在重新调度后保留它们的标识和状态。
+与ReplicaSet类似, Statefulset 也是依据Statefulset 的pod模板创建的，也会指定期望的副本个数。
+不同的是, Statefulset创建的pod副本并不是完全 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -36,7 +38,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://www.zengxi.net/">
+<link rel="canonical" href="https://www.zengxi.net/2020/12/k8s_statefulset/">
 
     
 
@@ -77,10 +79,10 @@
       
         
 
-  <div class="nav_parent nav_active">
+  <div class="nav_parent">
     <a href="https://www.zengxi.net/" class="nav_item">首页 </a>
   </div>
-  <div class="nav_parent nav_active">
+  <div class="nav_parent">
     <a href="https://www.zengxi.net/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
@@ -114,18 +116,10 @@
 </header>
 
     <main>
-
   
-
 <div class="grid-inverse wrap content">
-  <ul class="posts" id="posts">
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_statefulset/">Kubernetes in Action笔记 - (13) Statefulset</a>
-      </h3>
-      <div class="post_meta">
+  <article class="post_content">
+    <h1 class="post_title">Kubernetes in Action笔记 - (13) Statefulset</h1><div class="post_meta">
   <svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg>
@@ -135,315 +129,103 @@
     </a>
 </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">了解Statefulset 与ReplicaSet比较 Statefulset 保证了pod在重新调度后保留它们的标识和状态。
-与ReplicaSet类似, Statefulset 也是依据Statefulset 的pod模板创建的，也会指定期望的副本个数。
-不同的是, Statefulset创建的pod副本并不是完全一样的。每个pod都可以拥有一组独立的数据卷(持久化状态)。pod的名字都是规律的(固定的), 而不是每个新pod都随机获取一个名字。
-提供稳定的网络标识 一个Statefulset创建的每个pod都有一个从零开始的顺序索引, 这个会体现在pod的名称和主机名上, 同样还会体现在pod对应的固定存储上。
-与普通的pod …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_deployment/">Kubernetes in Action笔记 - (12) Deployment</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+    
+<div class="post_share">
+  分享到:
+  <a href="https://twitter.com/intent/tweet?text=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%2813%29%20Statefulset&url=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_statefulset%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#twitter"></use>
 </svg>
-  <span class="post_date">
-    Dec 27, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
+  </a>
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_statefulset%2f&t=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%2813%29%20Statefulset" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#facebook"></use>
+</svg>
+  </a>
+  <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="分享到 LinkedIn" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#linkedin"></use>
+</svg>
+  </a>
+  <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" title="Copy Link" class="link link_yank">
+    <svg class="icon">
+  <use xlink:href="#copy"></use>
+</svg>
+  </a>
 </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">Deployment是一种更高阶资源, 用于部署应用程序并以声明的方式升级应用。
-在使用 Deployment 时, 实际的 pod是由 Deployment 的 Replicaset 创建和管理的, 而不是由 Deployment 直接创建和管理的。
-在升级应用过程中，部署新版本的应用时，会创建新的Replicaset用于管理版本的pod。升级过程中的某个时刻，就会存在新旧两个版本的Replicaset。因此，需要引入Deployment来协调。
-与Replicaset类似，Deployment也是由标签选择器、期望副数和pod模板组成的。此外,它还包含另一个字段，用于指定一 个部署策略，表示在修改Deployment资源时应该如 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_deployment/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_pod_meta_data/">Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 26, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">通过Downward API传递元数据 对于pod调度、运行前预设的数据，可以通过环境变量或者configMap和secret卷向应用传递配置数据。但是对于那些不能预先知道的数据, 比如pod的IP、 主机名或者是通过ReplicaSet等控制生成的pod名称，该如何获取呢？这种类型的数据，可以通过使用Kubernetes Downward API解决。
-Downward API可以给在pod中运行的进程暴露pod的元数据。目前可以给容器传递以下数据:
- pod的名称 pod的IP pod所在的命名空间 pod运行节点的名称 pod运行所归属的服务账户的名称 每个容器请求的CPU和内存的使用量 每个容器可以使用的CPU …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_pod_meta_data/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_config_map_secret/">Kubernetes in Action笔记 - (10) 使用ConfigMap与Secret传递应用配置</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 25, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-    <a href='https://www.zengxi.net/tags/configmap' class="post_tag button button_translucent">configmap
-    </a>
-    <a href='https://www.zengxi.net/tags/secret' class="post_tag button button_translucent">secret
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">向容器传递应用程序的配置参数 方法：
- 向容器传递命令行参数 为每个容器设置自定义环境变量 通过特殊类型的卷将配置文件挂载到容器中  向容器传递命令行参数 在Docker中定义命令与参数 容器中运行的完整指令由两部分组成:命令与参数。Dockerfile中的两种指令分别定义命令与参数这两个部分：
- ENTRYPOINT: 定义容器启动时被调用的可执行程序 CMD: 指定传递给ENTRYPOINT的参数。  尽管可以直接使用CMD指令指定镜像运行时想要执行的命令, 正确的做法依旧 是借助ENTRYPOINT指令, 仅仅用CMD指定所需的默认参数。 这样, 镜像可以直 接运行, 无须添加任何参数
-1docker run …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_config_map_secret/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_volume/">Kubernetes in Action笔记 - (9) 卷</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 22, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">卷 卷是 pod 的一个组成部分，不是独立的 Kubernetes 对象, 不能单独创建或删除。 pod 中的所有容器都可以使用卷, 但必须先将它挂载在每个需要访问它的容器中。
-卷类型 主要类型：
- emptyDir:用于存储临时数据的简单空目录。 hostPath: 用于将目录从工作节点的文件系统挂载到pod中 gitRepo: 通过检出Git仓库的内容来初始化的卷 nfs: 挂载到pod中的NFS共享卷 用于挂载云服务商提供的特定存储类型。比如，gcePersistentDi sk (Google 高效能型存储磁盘卷)、 awsElasticBlockStore (AmazonWeb 服务弹性块存储卷)、 azureDisk …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_service/">Kubernetes in Action笔记 - (8) 服务、Endpoint、Ingress</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 20, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">什么是服务 服务是一种为一组功能相同的 pod 提供单 一 不变的接入点的资源。当服务存在时,它的 IP 地址和端口不会改变
-为什么需要服务 pod 的存在是短暂的,一个 pod 可能会在任何时候消失, 或许因为它所在节点发生故障, 或许因为有人删除了 pod, 或者因为 pod 被从一个健康的节点剔除了。 当其中任何一种情况发生时, 消失的 pod 将被ReplicationController 替换为新的 pod。 新的 pod 与替换它的 pod 具有不同的 IP 地址。
-这就是需要服务的地方，解决不断变化的 pod IP 地址的问题, 以及在一个固定的IP和端口对上对外暴露多个 pod。当一个服务被创建时, 它会得到一个静态 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_service/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/">Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 13, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">DaemonSet DaemonSet 用于确保一个pod匹配它的选择器并在每个节点上运行。因此，它并没有期望的副本数的概念。
-如果节点下线, DaemonSet不会在其他地方重新创建pod。 但是, 当将一个新节 点添加到集群中时, DaemonSet会立刻部署一个新的pod实例。
-使用场景的例子：
- pod执行系统级别的与基础结构相关的操作。例如, 希望在每个节点上运行日志收集器和资源监控器。 另一个典型的例子是Kubemetes 自己的kube-proxy进程, 它需要运行在所有节点上才能使服务工作  可以通过 pod 模板中的 nodeSelector 属性让 DaemonSet 只在特定的节点上运行 pod。 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/">Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 13, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">托管的Pod 如果是直接创建Pod，当节点失效，这个Pod就会丢失。
-如果是通过ReplicationController或者Deployment等资源来创建的，那就属于托管的资源。k8s集群会管理并检测它的运行状态，当一些意外情况发生的，k8s会自动采取应对措施。
-ReplicationController ReplicationController是一种k8s资源，会持续监控正在运行的pod列表, 并保证相应类型的pod的数目与期望相符。
-一个ReplicationController有三个主要部分：
- label selector (标签选择器), 用于确定ReplicationController作用域中有哪些pod …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 11, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">Pod生命周期 Pod的phase是Pod生命周期中的简单宏观描述，定义在Pod的PodStatus对象的phase 字段中。
-phase有以下几种值：
-   状态值 说明     挂起（Pending） Pod 已被 Kubernetes 系统接受，但有一个或者多个容器镜像尚未创建。等待时间包括调度 Pod 的时间和通过网络下载镜像的时间。   运行中（Running） 该 Pod 已经绑定到了一个节点上，Pod 中所有的容器都已被创建。至少有一个容器正在运行，或者正处于启动或重启状态。   成功（Succeeded） Pod 中的所有容器都被成功终止，并且不会再重启。   失败（Failed） Pod 中的所有容器都已终止了，并 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/">Kubernetes in Action笔记 - (4) 标签、注解与命名空间</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 10, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">标签 什么是标签 标签是可以附加到资源的任意键值对。通过标签选择器，可以筛选出具有该确切标签的资源。
-使用标签和选择器来约束pod调度 默认情况下，Pod基本上是随机地调度到任意Node节点的。但是某些情况下，想要调度到特定的Node节点，比如SSD硬盘的节点。这个时候，可以通过节点标签和节点标签选择器完成。
-1# 这个例子中通过nodeSelector选择部署到gpu=true的节点2apiVersion:vl3kind:Pod4metadata:5name:kubia-gpu6spec:7nodeSelector:8gpu=true9containers:10- image:luksa/kubia11name:kubia注解 除 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-    <li>
-<ul class="pagination">
-  <li class="page-item">
-    <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
-  </li>
-  <li class="page-item disabled">
-    <a  class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-  </li>
-  <li class="page-item active">
-    <a class="page-link" href="/">1</a>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/page/2/">2</a>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/page/3/">3</a>
-  </li>
-  <li class="page-item disabled">
-    <span aria-hidden="true">&nbsp;&hellip;&nbsp;</span>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/page/7/">7</a>
-  </li>
-  <li class="page-item">
-    <a href="/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-  </li>
-  <li class="page-item">
-    <a href="/page/7/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
-  </li>
-</ul>
-
-
+    
+    
+    <h2>文章目录</h2>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#了解statefulset">了解Statefulset</a>
+      <ul>
+        <li><a href="#与replicaset比较">与ReplicaSet比较</a></li>
+        <li><a href="#提供稳定的网络标识">提供稳定的网络标识</a></li>
+        <li><a href="#扩缩容-statefulset">扩缩容 Statefulset</a></li>
+        <li><a href="#为每个有状态实例提供稳定的专属存储">为每个有状态实例提供稳定的专属存储</a></li>
+        <li><a href="#statefulset-的-at-most-one-的语义">Statefulset 的 at-most-one 的语义</a></li>
+      </ul>
+    </li>
+    <li><a href="#在-statefulset-中发现伙伴节点">在 Statefulset 中发现伙伴节点</a>
+      <ul>
+        <li><a href="#dns中的srv记录">DNS中的SRV记录</a></li>
+      </ul>
     </li>
   </ul>
+</nav>
+    <h2 id="了解statefulset">了解Statefulset</h2>
+<h3 id="与replicaset比较">与ReplicaSet比较</h3>
+<p>Statefulset 保证了pod在重新调度后保留它们的标识和状态。</p>
+<p>与ReplicaSet类似, Statefulset 也是依据Statefulset 的pod模板创建的，也会指定期望的副本个数。</p>
+<p>不同的是, Statefulset创建的pod副本并不是完全一样的。每个pod都可以拥有一组独立的数据卷(持久化状态)。pod的名字都是规律的(固定的), 而不是每个新pod都随机获取一个名字。</p>
+<h3 id="提供稳定的网络标识">提供稳定的网络标识</h3>
+<p>一个Statefulset创建的每个pod都有一个从零开始的顺序索引, 这个会体现在pod的名称和主机名上, 同样还会体现在pod对应的固定存储上。</p>
+<p>与普通的pod不一样的是, 有状态的pod有时候需要通过其主机名来定位。无状态Pod都是一样的，所以访问的时候随便选择一个都可以；而有状态的pod是彼此不同的，通常希望操作的是其中特定的一个。</p>
+<p>一个Statefulset 通常要求创建一个用来记录每个pod网络标记的headless Service。通过这个Service, 每个pod将拥有独立的DNS记录, 这样集群里它的伙伴或者客户端可以通过主机名方便地找到它。比如说, 一个属于default命名空间, 名为foo的控制服务, 它的一个pod名称为A-0, 那么可以通过下面的完整域名来访问它 : a-0.foo.default.svc.cluster.local</p>
+<h3 id="扩缩容-statefulset">扩缩容 Statefulset</h3>
+<p>扩容一个Statefulset会使用下一个还没用到的顺序索引值创建一个新的pod实例。比如, 要把一个Statefulset从两个实例扩容到三个实例, 那么新实例的索引值就会是2 (现有实例使用的索引值为0和1)。</p>
+<p>缩容一个Statefulset将会最先删除最高索引值的实例，所以缩容的结果是可预知的。作为对比, ReplicaSet 的缩容操作则不同,不知道哪个实例会被删除, 也不能指定先删除哪个实例</p>
+<p>因为 Statefulset 缩容任何时候只会操作一个pod实例，所以有状态应用的缩容相对比较慢。举例来说, 一个分布式存储应用若同时下线多个节点, 则可能导致其数据丢失。比如说一个数据项副本数设置为2的数据存储应用,若同时有两个节点下线,一份数据如果它正好保存在这两个节点上记录就会丢失。若缩容是线性的, 则分布式存储应用就有时间把丢失的副本复制到其他节点,保证数据不会丢失。基于以上原因, Statefulset 在有实例不健康的情况下是不允许做缩容操作的 。若一个实例是不健康的, 而这时再缩容一个实例的话, 也就意味着你实际上同时失去了两个集群成员 。</p>
+<h3 id="为每个有状态实例提供稳定的专属存储">为每个有状态实例提供稳定的专属存储</h3>
+<p>有状态的pod的存储必须是持久的,并且与pod解耦。必须设置成手动释放，否则数据丢失。</p>
+<p>持久卷声明与持久卷是一对一的关系,所以每个Statefulset的 pod 都需要关联到不同的持久卷声明, 与独自的持久卷相对应。</p>
+<p>缩容 Statefulset 时会保留持久卷声明, 所以在随后的扩容操作中, 新的pod实例会使用绑定在持久卷上的相同声明和其上的数据</p>
+<h3 id="statefulset-的-at-most-one-的语义">Statefulset 的 at-most-one 的语义</h3>
+<p>一个 Statefulset 必须保证有状态的pod实例的αt-most-one语义。也就是说一个Statefulset必须在准确确认一个pod不再运行后,才会去创建它的替换pod</p>
+<h2 id="在-statefulset-中发现伙伴节点">在 Statefulset 中发现伙伴节点</h2>
+<p>一个Statefulset中的成员需要很容易地找到其他的所有成员。当然它可以通过与API服务器通信来获取, 但是K8s的一个目标是设计功能来帮助应用完全感觉不到k8s的存在。因此让应用与API服务器通信的设计是不允许的</p>
+<h3 id="dns中的srv记录">DNS中的SRV记录</h3>
+<p>SRV记录用来指向提供指定服务的服务器的主机名和端口号。k8s通过一个headless service创建SRV记录来指向pod的主机名。</p>
+<p>可以在一个临时pod里运行DNS查询工具dig命令, 列出有状态pod的SRV记录。下面的命令运行 一个名为srvlo okup的 一 次性pod(--restart=Never),它会关联控制台(-it)并且在终止后立即删除(--rm)。这个pod依据tutum/dnsutils镜像启动单独的容器, 然后运行dig命令</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>$ kubectl run -it srvlookup --image<span class="o">=</span>tutum/dnsutils --rm  --restart<span class="o">=</span>Never -- dig SRV kubia.default.svc.cluster.local
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="p">;</span> <span class="p">;</span> ANSWER SECTION:
+<span class="ln"> 4</span>k.d.s.c.l. <span class="m">30</span> IN SRV
+<span class="ln"> 5</span>k.d. s .c.1 . <span class="m">30</span> IN SRV
+<span class="ln"> 6</span><span class="m">10</span> <span class="m">33</span> O kubia-0.kubia.default.svc.cluster.local.
+<span class="ln"> 7</span><span class="m">10</span> <span class="m">33</span> O kubia-1.kubia.default.svc.cluster.local.
+<span class="ln"> 8</span>
+<span class="ln"> 9</span><span class="p">;</span> <span class="p">;</span> ADDITIONAL SECTION:
+<span class="ln">10</span>kubia-0.kubia.default.svc.cluster.local. <span class="m">30</span> IN A 172.17.0.4
+<span class="ln">11</span>kubia-1.kubia.default.svc.cluster.local. <span class="m">30</span> IN A 172.17.0.6
+</code></pre></div><p>上面的 ANSWER SECTION显示了两条指向后台headless service的 SRV记录。
+同时如ADDITIONAL SECTION所示, 每个pod都拥有独自的一条记录。</p>
+<p>当一个pod要获取一个Statefulset里的其他pod列表时, 需要做的就是触发
+一次SRVDNS查询。例如, 在Node.js中查询命令为:</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="ln">1</span><span class="nx">dns</span><span class="p">.</span><span class="nx">resolveSrv</span><span class="p">(</span><span class="s2">&#34;kubia.default.svc.cluster.local&#34;</span><span class="p">,</span> <span class="nx">callBackFunction</span><span class="p">);</span>
+</code></pre></div><p>注意: 返回的SRV记录顺序是随机的, 因为它们拥有相同的优先级。</p>
+<hr>
+<p>图书资料：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30418855/">https://book.douban.com/subject/30418855/</a></li>
+</ul>
+
+    
+      
+    
+  </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <h2>Paul Zeng</h2>
@@ -453,9 +235,6 @@ phase有以下几种值：
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="nav-link">Kubernetes in Action笔记 - (13) Statefulset</a>
-      </li>
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_deployment/" class="nav-link">Kubernetes in Action笔记 - (12) Deployment</a>
       </li>
@@ -476,6 +255,9 @@ phase有以下几种值：
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/" class="nav-link">Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/" class="nav-link">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
       </li>
     </ul>
     <div>
@@ -1031,8 +813,6 @@ phase有以下几种值：
 </aside>
 
 </div>
-
-
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>
