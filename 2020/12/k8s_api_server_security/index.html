@@ -19,17 +19,15 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="认证机制 API 服务器可以配置一个认证插件列表。列表中的每个插件都可以检查这个请求和尝试确定谁在发送这个请求。当通过认证后，返回用户名、用户 ID 和组信息给 API 服务器，API服务器就会停止调用剩余的认证插件井继续进入授权阶段。
-用户与组 k8s 区分了两种连接到 API 服务器的客户端 :
- 用户（真实的人） …">
+<meta name="description" content="如果攻击者获得了访问API服务器的权限, 他们可以通过在容器镜像中打包自己的代码并在pod中运行来做任何事
+认证机制 API 服务器可以配置一个认证插件列表。列表中的每个插件都可以检查这个请求和尝试确定谁在发送这个请求。当通过认证后，返回用户名、用户 ID 和组信息给 API 服务器，API服务器就会停止调用剩余的认证 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="Kubernetes in Action笔记 - (14) API Server服务器的安全防护" />
 <meta property="og:url" content="https://www.zengxi.net/2020/12/k8s_api_server_security/" />
 <meta property="og:title" content="Kubernetes in Action笔记 - (14) API Server服务器的安全防护" />
-<meta property="og:description" content="认证机制 API 服务器可以配置一个认证插件列表。列表中的每个插件都可以检查这个请求和尝试确定谁在发送这个请求。当通过认证后，返回用户名、用户 ID 和组信息给 API 服务器，API服务器就会停止调用剩余的认证插件井继续进入授权阶段。
-用户与组 k8s 区分了两种连接到 API 服务器的客户端 :
- 用户（真实的人） …" />
+<meta property="og:description" content="如果攻击者获得了访问API服务器的权限, 他们可以通过在容器镜像中打包自己的代码并在pod中运行来做任何事
+认证机制 API 服务器可以配置一个认证插件列表。列表中的每个插件都可以检查这个请求和尝试确定谁在发送这个请求。当通过认证后，返回用户名、用户 ID 和组信息给 API 服务器，API服务器就会停止调用剩余的认证 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -172,7 +170,8 @@
     </li>
   </ul>
 </nav>
-    <h2 id="认证机制">认证机制</h2>
+    <p>如果攻击者获得了访问API服务器的权限, 他们可以通过在容器镜像中打包自己的代码并在pod中运行来做任何事</p>
+<h2 id="认证机制">认证机制</h2>
 <p>API 服务器可以配置一个认证插件列表。列表中的每个插件都可以检查这个请求和尝试确定谁在发送这个请求。当通过认证后，返回用户名、用户 ID 和组信息给 API 服务器，API服务器就会停止调用剩余的认证插件井继续进入授权阶段。</p>
 <h3 id="用户与组">用户与组</h3>
 <p>k8s 区分了两种连接到 API 服务器的客户端 :</p>
@@ -368,6 +367,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/01/k8s_node_security/" class="nav-link">Kubernetes in Action笔记 - (15) 节点与网络安全</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="nav-link">Kubernetes in Action笔记 - (13) Statefulset</a>
       </li>
       <li>
@@ -388,16 +390,13 @@
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/" class="nav-link">Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/" class="nav-link">Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">14</span>
+          <span class="button_tally">15</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
@@ -491,7 +490,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=14>KUBERNETES<span class="button_tally">14</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=15>KUBERNETES<span class="button_tally">15</span>
             </a>
             
             
@@ -560,7 +559,7 @@
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">14</span>
+          <span class="button_tally">15</span>
         </a>
         
         
@@ -571,7 +570,7 @@
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">14</span>
+          <span class="button_tally">15</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -737,7 +736,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=14>KUBERNETES<span class="button_tally">14</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=15>KUBERNETES<span class="button_tally">15</span>
             </a>
             
             
@@ -998,7 +997,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2020</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

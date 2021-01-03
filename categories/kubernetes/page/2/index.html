@@ -119,6 +119,34 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 11, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">Pod生命周期 Pod的phase是Pod生命周期中的简单宏观描述，定义在Pod的PodStatus对象的phase 字段中。
+phase有以下几种值：
+   状态值 说明     挂起（Pending） Pod 已被 Kubernetes 系统接受，但有一个或者多个容器镜像尚未创建。等待时间包括调度 Pod 的时间和通过网络下载镜像的时间。   运行中（Running） 该 Pod 已经绑定到了一个节点上，Pod 中所有的容器都已被创建。至少有一个容器正在运行，或者正处于启动或重启状态。   成功（Succeeded） Pod 中的所有容器都被成功终止，并且不会再重启。   失败（Failed） Pod 中的所有容器都已终止了，并 …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/">Kubernetes in Action笔记 - (4) 标签、注解与命名空间</a>
       </h3>
       <div class="post_meta">
@@ -265,6 +293,9 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/01/k8s_node_security/" class="nav-link">Kubernetes in Action笔记 - (15) 节点与网络安全</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2020/12/k8s_api_server_security/" class="nav-link">Kubernetes in Action笔记 - (14) API Server服务器的安全防护</a>
       </li>
       <li>
@@ -285,16 +316,13 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_service/" class="nav-link">Kubernetes in Action笔记 - (8) 服务、Endpoint、Ingress</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/" class="nav-link">Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">14</span>
+          <span class="button_tally">15</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
@@ -388,7 +416,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=14>KUBERNETES<span class="button_tally">14</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=15>KUBERNETES<span class="button_tally">15</span>
             </a>
             
             
@@ -457,7 +485,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">14</span>
+          <span class="button_tally">15</span>
         </a>
         
         
@@ -468,7 +496,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">14</span>
+          <span class="button_tally">15</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -634,7 +662,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=14>KUBERNETES<span class="button_tally">14</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=15>KUBERNETES<span class="button_tally">15</span>
             </a>
             
             
@@ -897,7 +925,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2020</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>
