@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 03 Jan 2021 19:22:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kubernetes in Action笔记 - (16) 计算资源管理</title>
-      <link>https://www.zengxi.net/2021/01/k8s_computing_resource_management-copy/</link>
+      <link>https://www.zengxi.net/2021/01/k8s_computing_resource_management/</link>
       <pubDate>Sun, 03 Jan 2021 19:22:00 +0800</pubDate>
       
-      <guid>https://www.zengxi.net/2021/01/k8s_computing_resource_management-copy/</guid>
+      <guid>https://www.zengxi.net/2021/01/k8s_computing_resource_management/</guid>
       <description>为pod中的容器申请资源 创建一个pod时,可以指定容器对 CPU 和内存的资源请求量(即requests),以及资源限制量(即limits)。它是针对每个容器单独指定，pod对资源的请求量和限制量是所包含的所有容器的请求量和限制量之和。
 1apiVersion:v12kind:Pod3metadata:4name:requests-pod5spec:6containers:7- image:busybox8command:[&amp;#34;dd&amp;#34;,&amp;#34;if=/dev/zero&amp;#34;,&amp;#34;of=/dev/null&amp;#34;]9name:main10resources:11requests:12cpu:200m # 申请200毫核，即一个CPU核心的1/5时间13memory:10Mi # 申请50MB内存资源requests对调度的影响 资源requests指定了pod对资源需求的最小值。调度器在调度时只考虑那些未分配资源量满足pod需求量的节点。如果节点的未分配资源量小于pod需求量,这时节点没有能力提供pod对资源需求的最小量,因此k8s不会将该pod调度到这个节点。
 调度器在调度时并不关注各类资源在当前时刻的实际使用量,而只关心节点上部署的所有pod的资源申请量之和。尽管现有所有pod的资源实际使用量可能小于它的申请量,但如果使用基于实际资源消耗量的调度算法将打破系统为这些已部署成功的pod提供足够资源的保证。
