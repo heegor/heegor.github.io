@@ -6,7 +6,25 @@
     <description>Recent content in Posts on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Sun, 03 Jan 2021 13:02:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Jan 2021 19:22:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes in Action笔记 - (16) 计算资源管理</title>
+      <link>https://www.zengxi.net/2021/01/k8s_computing_resource_management-copy/</link>
+      <pubDate>Sun, 03 Jan 2021 19:22:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/01/k8s_computing_resource_management-copy/</guid>
+      <description>为pod中的容器申请资源 创建一个pod时,可以指定容器对 CPU 和内存的资源请求量(即requests),以及资源限制量(即limits)。它是针对每个容器单独指定，pod对资源的请求量和限制量是所包含的所有容器的请求量和限制量之和。
+1apiVersion:v12kind:Pod3metadata:4name:requests-pod5spec:6containers:7- image:busybox8command:[&amp;#34;dd&amp;#34;,&amp;#34;if=/dev/zero&amp;#34;,&amp;#34;of=/dev/null&amp;#34;]9name:main10resources:11requests:12cpu:200m # 申请200毫核，即一个CPU核心的1/5时间13memory:10Mi # 申请50MB内存资源requests对调度的影响 资源requests指定了pod对资源需求的最小值。调度器在调度时只考虑那些未分配资源量满足pod需求量的节点。如果节点的未分配资源量小于pod需求量,这时节点没有能力提供pod对资源需求的最小量,因此k8s不会将该pod调度到这个节点。
+调度器在调度时并不关注各类资源在当前时刻的实际使用量,而只关心节点上部署的所有pod的资源申请量之和。尽管现有所有pod的资源实际使用量可能小于它的申请量,但如果使用基于实际资源消耗量的调度算法将打破系统为这些已部署成功的pod提供足够资源的保证。
+调度器如何利用pod requests为其选择最佳节点 调度器首先会对节点列表进行过滤，排除那些不满足需求的节点, 然后根据预先配置的优先级函数对其余节点进行排序。其中有两个基于资源请求量的优先级排序函数:
+ LeastRequestedPriority：优先将pod调度到请求量少的节点上，也就是拥有更多未分配资源的节点 MostRequestedPriority：优先调度到请求量多的节点，拥有更少未分配资源的节点。  它们都只考虑资源请求量, 而不关注实际使用资源量。
+调度器只能配置一种优先级函数。
+配置调度器使用MostRequestedPriority函数, 可以在为每个pod提供足量CPU与内存资源的同时, 确保k8s使用尽可能少的节点。通过使pod紧凑地编排,一些节点可以保持空闲并可随时从集群中移除。
+查看节点资源总量 查看节点资源总量
+1$ kubectl describe nodes 2Name: minikube 3... 4# 节点的资源总量 5Capacity: 6 cpu: 2 7 memory: 2048484Ki 8 pods: 110 9# 可分配给pod的资源量 10Allocatable: 11 cpu: 2 12 memory: 1946084Ki 13 pods: 110 14... 通过kubectl describe node命令的输出结果，可以检查节点已经分配的资源，找出为什么pod没有成功调度
+1kubectl describe node CPU requests对CPU时间分配的影响 CPU requests不仅仅在调度时起作用,它还决定着剩余(未使用) 的CPU时间如何在pod之间分配。假设第一个pod请求了200毫核,另一个请求了1000毫核，那么未使用的CPU将按照1:5的比例来划分给这两个pod。</description>
+    </item>
+    
     <item>
       <title>Kubernetes in Action笔记 - (15) 节点与网络安全</title>
       <link>https://www.zengxi.net/2021/01/k8s_node_security/</link>

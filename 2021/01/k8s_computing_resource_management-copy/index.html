@@ -1,8 +1,8 @@
 
 <!DOCTYPE html>
-<html lang="zh-cn" data-figures="">
+<html lang="zh-cn" data-figures="" class="page">
   <head>
-<title>填坑之旅 | 保罗札记</title>
+<title>Kubernetes in Action笔记 - (16) 计算资源管理 | 保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,13 +19,13 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="">
+<meta name="description" content="为pod中的容器申请资源 创建一个pod时,可以指定容器对 CPU 和内存的资源请求量(即requests),以及资源限制量(即limits)。它是针对每个容器单独指定，pod对资源的请求量和限制量是所包含的所有容器的请求量和限制量之和。 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="填坑之旅" />
-<meta property="og:url" content="https://www.zengxi.net/categories/%E5%A1%AB%E5%9D%91%E4%B9%8B%E6%97%85/" />
-<meta property="og:title" content="填坑之旅" />
-<meta property="og:description" content="" />
+<meta name="twitter:title" content="Kubernetes in Action笔记 - (16) 计算资源管理" />
+<meta property="og:url" content="https://www.zengxi.net/2021/01/k8s_computing_resource_management-copy/" />
+<meta property="og:title" content="Kubernetes in Action笔记 - (16) 计算资源管理" />
+<meta property="og:description" content="为pod中的容器申请资源 创建一个pod时,可以指定容器对 CPU 和内存的资源请求量(即requests),以及资源限制量(即limits)。它是针对每个容器单独指定，pod对资源的请求量和限制量是所包含的所有容器的请求量和限制量之和。 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -34,7 +34,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://www.zengxi.net/categories/%E5%A1%AB%E5%9D%91%E4%B9%8B%E6%97%85/">
+<link rel="canonical" href="https://www.zengxi.net/2021/01/k8s_computing_resource_management-copy/">
 
     
 
@@ -112,242 +112,377 @@
 </header>
 
     <main>
-
+  
 <div class="grid-inverse wrap content">
-  <ul class="posts" id="posts">
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/jetty_tmp_dir/">jetty临时目录下的资源文件被删导致js等资源找不到</a>
-      </h3>
-      <div class="post_meta">
+  <article class="post_content">
+    <h1 class="post_title">Kubernetes in Action笔记 - (16) 计算资源管理</h1><div class="post_meta">
   <svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg>
   <span class="post_date">
-    Jul 14, 2020</span>
-    <a href='https://www.zengxi.net/tags/jetty' class="post_tag button button_translucent">jetty
+    Jan 3, 2021</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
     </a>
 </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">生产环境上jetty运行一段时间后，在打开某个网页的时候发现有js、css文件找不到，但是重启之后问题会解决。后来发现是设定了tmpwatch后台任务，定时会清理一次系统的tmp目录。
-默认情况下，如果没有指定jetty的临时目录，默认会使用系统的临时目录。解决方案就是，修改jetty的临时文件存放目录，不要放在 /tmp 目录下面。主要有下面几个方法：
- 设置basetempdir值  1&lt;Configure class=&#34;org.eclipse.jetty.webapp.WebAppContext&#34;&gt; 2 3 &lt;Set …</p>
-          <a href="https://www.zengxi.net/2020/07/jetty_tmp_dir/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/">rsyslog内存占用高导致服务不可用</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+    
+<div class="post_share">
+  分享到:
+  <a href="https://twitter.com/intent/tweet?text=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%2816%29%20%e8%ae%a1%e7%ae%97%e8%b5%84%e6%ba%90%e7%ae%a1%e7%90%86&url=https%3a%2f%2fwww.zengxi.net%2f2021%2f01%2fk8s_computing_resource_management-copy%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#twitter"></use>
 </svg>
-  <span class="post_date">
-    Jun 22, 2020</span>
-    <a href='https://www.zengxi.net/tags/rsyslog' class="post_tag button button_translucent">rsyslog
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">这几天生产环境中某个服务内存不时地被撑爆，原先以为是应用的问题，但是近来没有上过新的代码。该服务的总内存是8G，启动参数关于内存的配置大致是：-Xmx=6.4G，-Xms=4G 左右。看了Grafana上面的监控记录，JVM 老年代使用最多也就到4G左右，在GC的日志中发现也仅仅用到4G左右，并没有到达最高的内存值。这两个结果可以看出来，应该不是应用程序导致内存占用过大。
-后来用top命令看了一下，发现rsyslog进程使用了将近40%的内存。再查一下日志文件，发现一些日志文件大小都达到2G以上。
-rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程，不应该占用那么内存，即使它同步延迟较大甚至不工作，也不应该影响到应用程序 …</p>
-          <a href="https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/06/string_adapter/">用string adapter来解决系统接口对接中发现的空值验证问题</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+  </a>
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2021%2f01%2fk8s_computing_resource_management-copy%2f&t=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%2816%29%20%e8%ae%a1%e7%ae%97%e8%b5%84%e6%ba%90%e7%ae%a1%e7%90%86" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#facebook"></use>
 </svg>
-  <span class="post_date">
-    Jun 1, 2020</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">客户用的是很旧版本的ERP系统，在与客户系统做接口对接的时候发现了一个问题。假设接口请求需要的body是xml格式的，共有三个字段：name, mobile, email。由于客户ERP系统比较老，如果某个字段没有值，传的是空字符串，而不是将该字段在请求消息体中隐藏。客户发的请求类似下面的例子：
-1&lt;xml&gt; 2 &lt;name&gt;John&lt;/name&gt; 3 &lt;mobile&gt;13800138000&lt;/mobile&gt; 4 &lt;email&gt;&lt;/email&gt; 5&lt;/xml&gt; 由于历史遗留问题， …</p>
-          <a href="https://www.zengxi.net/2020/06/string_adapter/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/">Spring Quartz 指定Scheduler Name</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+  </a>
+  <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="分享到 LinkedIn" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#linkedin"></use>
 </svg>
-  <span class="post_date">
-    May 31, 2020</span>
-    <a href='https://www.zengxi.net/tags/spring' class="post_tag button button_translucent">spring
-    </a>
-    <a href='https://www.zengxi.net/tags/quartz' class="post_tag button button_translucent">quartz
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">当前项目使用quartz与spring来做基于数据库的集群化任务调度，但是在实际使用过程发现同一个scheduler中，不同group之间任务调度可能会相互跑串。当前项目中使用的 quartz-scheduler 版本 2.3.1， spring 版本 3.2.18.RELEASE。
-举个例子，配置是这样的, 下面示例中隐去不重要的配置
-1&lt;bean id=&#34;my-cluster-scheduler&#34; 2 class=&#34;org.springframework.scheduling.quartz.SchedulerFactoryBean&#34; 3 …</p>
-          <a href="https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/01/manage-distribution-session-by-id/">根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+  </a>
+  <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management-copy/" title="Copy Link" class="link link_yank">
+    <svg class="icon">
+  <use xlink:href="#copy"></use>
 </svg>
-  <span class="post_date">
-    Jan 26, 2020</span>
-    <a href='https://www.zengxi.net/tags/session' class="post_tag button button_translucent">session
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F' class="post_tag button button_translucent">分布式
-    </a>
+  </a>
 </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">背景 由于历史原因，原先的界面是用vaadin框架来实现。但是这个框架不适合互联网的分布式系统，正在逐步用目前主流的前端框架重写各个模块，把旧的vaadin页面替换掉。在替换过程中，新老界面并存。
-vaadin界面的servlet，每次都会判断请求中的session id值，如果在服务器中找不到对应这个id的session，就会重新生成一个。由于session id是在新界面登录的时候生成的，当点击链接从新界面跳转到vaadin界面的时候，vaadin服务会发现没有这个session id，就会重新生成一个新的session。换句话说，新老界面会有各自的session id。当然，分布式系统本来就有这个问题，可以采用分布 …</p>
-          <a href="https://www.zengxi.net/2020/01/manage-distribution-session-by-id/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/01/quartz-job-issue-improvement/">Quartz job使用过程中的发现问题与改进</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 5, 2020</span>
-    <a href='https://www.zengxi.net/tags/quartz' class="post_tag button button_translucent">quartz
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">遇到的问题与原因分析 生产环境中遇到的问题：
- 服务在启动过程中，不时地卡住，后来发生的越来越频繁。看日志分析，卡在初始化quartz job store的时候 服务在运行过程中，不时地出现定时任务不被触发的情况  通过分析，得知问题产生的原因：
- 目前代码中用的是Quartz scheduler 1.8.3版本，定时框架采用的是行锁，通过执行下面的SQL来锁住特定的记录。在分布式的系统的情况下，节点越多越容易发生锁等待，甚至死锁。Quartz scheduler 的 2.x 版本做了改进，在QRTZ_LOCKS表中多加了一个字段 SCHED_NAME。这有一个好处就是，可以给不同的应用分配不同的scheduler name，这样定 …</p>
-          <a href="https://www.zengxi.net/2020/01/quartz-job-issue-improvement/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2019/12/incident-caused-by-app/">复盘 - 手机app上一行代码导致的生产事故</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 10, 2019</span>
-    <a href='https://www.zengxi.net/tags/%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85' class="post_tag button button_translucent">生产事故
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98' class="post_tag button button_translucent">复盘
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">过程 由于一些历史原因，以及与原先代码的兼容性，临时文件存储在minio中。
-某天，生产环境突发事故，minio集群的CPU与内存爆了，只能重启集群。过了十来分钟，很多服务都不可用，健康检查都不通过。日志中的错误信息显示，这些服务都是数据库拿不到连接。需要事先处理数据库连接的问题，于是连接到数据库查死锁，终止导致死锁的sql进程，再重启来恢复这些服务。
-由于前不久minio集群挂掉，很容易就想到是由于minio的原因。其他服务通过RPC调用一个文件存储服务来操作minio中的数据，当minio集群挂掉的时候，文件存储服务访问minio一直想访问minio直到超时。在这个期间，其他服务如果有事务调用文件存储服务来操作minio中文件， …</p>
-          <a href="https://www.zengxi.net/2019/12/incident-caused-by-app/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/">记一次打开Excel文件错误的排查</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 5, 2018</span>
-    <a href='https://www.zengxi.net/tags/excel' class="post_tag button button_translucent">excel
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在生产环境中，某个结果集导出的excel文件用Microsoft Excel无法打开，看到如下错误：
-最开始怀疑是在生成文件的时候，文件损坏掉了，但是重新生成多次，得到的结果都是一样的。在相同的界面，导出其他结果集所生成的文件却都是可以成功打开的，这样就可以排除代码功能方面的问题。如果和代码无关，那么就可能和数据有关系。根据出错提示给出的文件地址“C:\Users\ZHANGZ~1\AppData\Local\Temp\error083200_01.xml”, 打开该临时文件，可以看到下面的信息
-1&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; …</p>
-          <a href="https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-    <li>
-
-
+    
+    
+    <h2>文章目录</h2>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#为pod中的容器申请资源">为pod中的容器申请资源</a>
+      <ul>
+        <li><a href="#资源requests对调度的影响">资源requests对调度的影响</a></li>
+        <li><a href="#cpu-requests对cpu时间分配的影响">CPU requests对CPU时间分配的影响</a></li>
+      </ul>
+    </li>
+    <li><a href="#限制容器的可用资源">限制容器的可用资源</a>
+      <ul>
+        <li><a href="#设置容器可使用资源量的硬限制">设置容器可使用资源量的硬限制</a></li>
+        <li><a href="#容器中的应用如何看待limits">容器中的应用如何看待limits</a></li>
+      </ul>
+    </li>
+    <li><a href="#pod-qos等级">pod QoS等级</a>
+      <ul>
+        <li><a href="#定义pod的qos等级">定义pod的QoS等级</a></li>
+        <li><a href="#内存不足时哪个进程会被杀死">内存不足时哪个进程会被杀死</a></li>
+      </ul>
+    </li>
+    <li><a href="#为命名空间中的pod设置默认的requests和limits">为命名空间中的pod设置默认的requests和limits</a></li>
+    <li><a href="#限制命名空间中的可用资源总量">限制命名空间中的可用资源总量</a>
+      <ul>
+        <li><a href="#为cpu和内存创建resourcequota">为CPU和内存创建ResourceQuota</a></li>
+        <li><a href="#为持久化存储指定配额">为持久化存储指定配额</a></li>
+        <li><a href="#限制可创建对象的个数">限制可创建对象的个数</a></li>
+        <li><a href="#为特定的pod状态或者qos等级指定配额">为特定的pod状态或者QoS等级指定配额</a></li>
+      </ul>
+    </li>
+    <li><a href="#监控-pod-的资源使用量">监控 pod 的资源使用量</a>
+      <ul>
+        <li><a href="#收集获取实际资源使用情况">收集、获取实际资源使用情况</a></li>
+        <li><a href="#显示集群节点的cpu和内存使用量">显示集群节点的CPU和内存使用量</a></li>
+        <li><a href="#保存并分析历史资源的使用统计信息">保存并分析历史资源的使用统计信息</a></li>
+      </ul>
     </li>
   </ul>
+</nav>
+    <h2 id="为pod中的容器申请资源">为pod中的容器申请资源</h2>
+<p>创建一个pod时,可以指定容器对 CPU 和内存的资源请求量(即requests),以及资源限制量(即limits)。它是针对每个容器单独指定，pod对资源的请求量和限制量是所包含的所有容器的请求量和限制量之和。</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">requests-pod</span><span class="w">
+</span><span class="ln"> 5</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">busybox</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;dd&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;if=/dev/zero&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;of=/dev/null&#34;</span><span class="p">]</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">main</span><span class="w">
+</span><span class="ln">10</span><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span><span class="ln">11</span><span class="w">      </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span><span class="ln">12</span><span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">200m      </span><span class="w"> </span><span class="c"># 申请200毫核，即一个CPU核心的1/5时间</span><span class="w">
+</span><span class="ln">13</span><span class="w">        </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">10Mi   </span><span class="w"> </span><span class="c"># 申请50MB内存</span><span class="w">
+</span></code></pre></div><h3 id="资源requests对调度的影响">资源requests对调度的影响</h3>
+<p>资源requests指定了pod对资源需求的最小值。调度器在调度时只考虑那些未分配资源量满足pod需求量的节点。如果节点的未分配资源量小于pod需求量,这时节点没有能力提供pod对资源需求的最小量,因此k8s不会将该pod调度到这个节点。</p>
+<p>调度器在调度时并不关注各类资源在当前时刻的实际使用量,而只关心节点上部署的所有pod的资源申请量之和。尽管现有所有pod的资源实际使用量可能小于它的申请量,但如果使用基于实际资源消耗量的调度算法将打破系统为这些已部署成功的pod提供足够资源的保证。</p>
+<h4 id="调度器如何利用pod-requests为其选择最佳节点">调度器如何利用pod requests为其选择最佳节点</h4>
+<p>调度器首先会对节点列表进行过滤，排除那些不满足需求的节点, 然后根据预先配置的优先级函数对其余节点进行排序。其中有两个基于资源请求量的优先级排序函数:</p>
+<ul>
+<li>LeastRequestedPriority：优先将pod调度到请求量少的节点上，也就是拥有更多未分配资源的节点</li>
+<li>MostRequestedPriority：优先调度到请求量多的节点，拥有更少未分配资源的节点。</li>
+</ul>
+<p>它们都只考虑资源请求量, 而不关注实际使用资源量。</p>
+<p>调度器只能配置一种优先级函数。</p>
+<p>配置调度器使用MostRequestedPriority函数, 可以在为每个pod提供足量CPU与内存资源的同时, 确保k8s使用尽可能少的节点。通过使pod紧凑地编排,一些节点可以保持空闲并可随时从集群中移除。</p>
+<h4 id="查看节点资源总量">查看节点资源总量</h4>
+<p>查看节点资源总量</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>$ kubectl describe nodes
+<span class="ln"> 2</span>Name: minikube
+<span class="ln"> 3</span>...
+<span class="ln"> 4</span><span class="c1"># 节点的资源总量</span>
+<span class="ln"> 5</span>Capacity:
+<span class="ln"> 6</span>    cpu: <span class="m">2</span>
+<span class="ln"> 7</span>    memory: 2048484Ki
+<span class="ln"> 8</span>    pods: <span class="m">110</span>
+<span class="ln"> 9</span><span class="c1"># 可分配给pod的资源量</span>
+<span class="ln">10</span>Allocatable:
+<span class="ln">11</span>    cpu: <span class="m">2</span>
+<span class="ln">12</span>    memory: 1946084Ki
+<span class="ln">13</span>    pods: <span class="m">110</span>
+<span class="ln">14</span>...
+</code></pre></div><p>通过kubectl describe node命令的输出结果，可以检查节点已经分配的资源，找出为什么pod没有成功调度</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl describe node
+</code></pre></div><h3 id="cpu-requests对cpu时间分配的影响">CPU requests对CPU时间分配的影响</h3>
+<p>CPU requests不仅仅在调度时起作用,它还决定着剩余(未使用) 的CPU时间如何在pod之间分配。假设第一个pod请求了200毫核,另一个请求了1000毫核，那么未使用的CPU将按照1:5的比例来划分给这两个pod。</p>
+<p>另一方面,如果一个容器能够跑满CPU, 而另一个容器在该时段处于空闲状态,那么前者将可以使用整个CPU时间</p>
+<h2 id="限制容器的可用资源">限制容器的可用资源</h2>
+<h3 id="设置容器可使用资源量的硬限制">设置容器可使用资源量的硬限制</h3>
+<p>CPU是一种可压缩资源,意味着我们可以在不对容器内运行的进程产生不利影响的同时,对其使用量进行限制</p>
+<p>内存是一种不可压缩资源。一旦系统为进程分配了一块内存,这块内存在进程主动释放之前将无法被回收。这就是为什么需要限制容器的最大内存分配量的根本原因。</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="ln">2</span><span class="w"></span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">busybox</span><span class="w">
+</span><span class="ln">3</span><span class="w">  </span><span class="l">...</span><span class="w">
+</span><span class="ln">4</span><span class="w">  </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span><span class="ln">5</span><span class="w">    </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span><span class="ln">6</span><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="ln">7</span><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">10Mi </span><span class="w">
+</span><span class="ln">8</span><span class="w">
+</span><span class="ln">9</span><span class="w"></span><span class="c"># 注意:因为这里没有指定资源requests,它将被设置为与资源limits相同的值 </span><span class="w">
+</span></code></pre></div><p>与资源requests不同的是,资源 limits 不受节点可分配资源量的约束。所有limits的总和允许超过节点资源总量的100%。换句话说,资源limits可以超卖。如果节点资源使用量超过100%,一些容器将被杀掉。</p>
+<p>当为一个容器设置 CPU 限额时,该进程只会分不到比限额更多的 CPU 而己。而内存却有所不同，当进程尝试申请分配比限额更多的内存时会被杀掉。如果 pod 的重启策略为 Always 或 OnFailure ,进程将会立即重启,因此用户可能根本察觉不到它被杀掉。但是如果它继续超限并被杀死, k8s会再次尝试重启,并开始增加下次重启的间隔时间。这种情况下用户会看到 pod 处于CrashLoopBackOff状态。</p>
+<p>CrashLoopBackOff 状态表示 Kubelet 还没有放弃,它意味着在每次崩溃之后,Kubelet 就会增加下次重启之前的间隔时间。 第一次崩渍之后, Kubelet立即重启容器, 如果容器再次崩溃, 会等待10秒钟后再重启。随着不断崩溃,延迟时间也会按照20、40、80、160秒以几何倍数增长,最终收敛在300秒。一旦间隔时间达到300秒, Kubelet将以5分钟为间隔时间对容器进行无限重启,直到容器正常运行或被删除。</p>
+<p>要定位容器crash的原因,可以通过查看pod日志以及<code>kubectl describe pod</code>命令。</p>
+<h3 id="容器中的应用如何看待limits">容器中的应用如何看待limits</h3>
+<h4 id="在容器内看到的始终是节点的内存-而不是容器本身的内存">在容器内看到的始终是节点的内存, 而不是容器本身的内存</h4>
+<p>在容器内看到的始终是节点的内存, 而不是容器本身的内存。即使你为容器设置了最大可用内存的限额, top 命令显示的是运行该容器的节点的内存数量, 而容器无法感知到此限制。</p>
+<p>对于Java程序来说这是个很大的问题，简单的设置 -Xmx 选项并不能解决问题，因为仅仅限制了堆大小,并不管其他 off-heap 内存。在新版本的Java 会考虑到容器 limits 以 缓解这个 问题</p>
+<h4 id="容器内同样可以看到节点所有的-cpu-核">容器内同样可以看到节点所有的 CPU 核</h4>
+<p>与内存完全一样,无论有没有配置 CPU limits, 容器内也会看到节点所有的CPU</p>
+<p>CPU limits 做的只是限制容器使用的 CPU 时间。</p>
+<p>一些程序通过查询系统 CPU 核数来决定启动工作线程的数量。同样在开发环境的笔记本电脑上运行良好,但是部署在拥有更多数量 CPU 的节点上,程序将快速启动大量线程,所有线程都会争夺(可能极其)有限的 CPU 时间。同时每个线程通常都需要额外的内存资源,导致应用的内存用量急剧增加。不要依赖应用程序从系统获取的 CPU 数量, 可能需要使用 Downward API 将
+CPU 限额传递至容器并使用这个值。也可以通过 cgroup 系统直接获取配置的 CPU限制,请查看下面的文件:</p>
+<ul>
+<li>/sys/fs/cgroup/cpu/cpu.cfs_quota_us</li>
+<li>/sys/fs/cgroup/cpu/cpu.cfs_period_us</li>
+</ul>
+<h2 id="pod-qos等级">pod QoS等级</h2>
+<p>当节点无法提供足量内存,哪个容器将被杀掉呢？k8s可能无法做出正确的决策。因此就需要一种方式, 通过这种方式可以指定哪种 pod 在该场景中优先级更高。k8s将pod 划分为3种QoS等级:</p>
+<ul>
+<li>BestEffort (优先级最低)</li>
+<li>Burstable</li>
+<li>Guaranteed (优先级最高)</li>
+</ul>
+<h3 id="定义pod的qos等级">定义pod的QoS等级</h3>
+<p>QoS等级不是通过独立的字段来分配，它来源于pod所包含的容器的资源requests和limits的配置。</p>
+<h4 id="为pod分配besteffort等级">为pod分配BestEffort等级</h4>
+<p>最低优先级的QoS等级是BestEffort。会分配给那些没有(为任何容器)设置任何requests和limits的pod。</p>
+<h4 id="为pod分配guaranteed等级">为pod分配Guaranteed等级</h4>
+<p>与 Burstable 相对的是 Guaranteed 等级,会分配给那些所有资源request和limits 相等的 pod 。对于一个 Guaranteed 级别的pod,有以下几个条件:</p>
+<ul>
+<li>CPU和内存都要设置 requests 和 limits</li>
+<li>每个容器都需要设置资源量</li>
+<li>它们必须相等(每个容器的每种资源的requests和limits必须相等)</li>
+</ul>
+<p>因为如果容器的资源 requests 没有显式设置,默认与limits相同,所以只设置所有资源(pod内每个容器的每种资源)的限制量就可以使pod的QoS等级为Guaranteed。这些 pod 的容器可以使用它所申请的等额资源,但是无法消耗更多的资源(因为它们的limits和requests相等)。</p>
+<h4 id="为pod分配burstable等级">为pod分配Burstable等级</h4>
+<p>Burstable QoS等级介于BestEffort和Guaranteed之间。其他所有的pod都属于这个等级。包括:</p>
+<ul>
+<li>容器的requests和limits不相同的单容器 pod</li>
+<li>至少有一个容器只定义了requests 但没有定义limits的pod</li>
+<li>一个容器的request limits 相等,但是另一个容器不指定requests或limits的pod。</li>
+</ul>
+<p>Burstable pod可以获得它们所申请的等额资源,并可以使用额外的资源(不超过 limits)。</p>
+<h4 id="单容器pod的qos等级">单容器Pod的QOS等级</h4>
+<p>下面的表显示了基于资源requests和limits如何为单个容器Pod定义QoS等级。对于单容器pod,容器的QoS等级也适用于 pod 。</p>
+<table>
+<thead>
+<tr>
+<th>CPU requests vs. limits</th>
+<th>内 存的 requests vs. limits</th>
+<th>容器 的 QoS 等级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>未设置</td>
+<td>未设置</td>
+<td>BestEffort</td>
+</tr>
+<tr>
+<td>未设置</td>
+<td>Requests &lt; Limits</td>
+<td>Burstable</td>
+</tr>
+<tr>
+<td>未设置</td>
+<td>Requests = Limits</td>
+<td>Burstable</td>
+</tr>
+<tr>
+<td>Requests &lt; Limits</td>
+<td>未设置</td>
+<td>Burstable</td>
+</tr>
+<tr>
+<td>Requests &lt; Limits</td>
+<td>Requests &lt; Limits</td>
+<td>Burstable</td>
+</tr>
+<tr>
+<td>Requests&lt; Limits</td>
+<td>Requests = Limits</td>
+<td>Burstable</td>
+</tr>
+<tr>
+<td>Requests = Limits</td>
+<td>Requests = Limits</td>
+<td>Guaranteed</td>
+</tr>
+</tbody>
+</table>
+<p>注意：如果设置了requests而没有设置limits,参考表中requests小于limits那一行。如果设置了limits,requests默认与 limits相等,因此参考request等于limits那一行</p>
+<h4 id="多容器pod的qos等级">多容器Pod的QOS等级</h4>
+<p>对千多容器pod, 如果所有的容器的QoS等级相同, 那么这个等级就是pod的QoS等级。如果至少有一个容器的QoS等级与其他不同,无论这个容器是什么等级, 这个pod的QoS等级都是Burstable等级。</p>
+<p>注意：运行kubectl describe pod以及通过pod的YAML/JSON描述的Status.qosClass字段都可以查看pod的QoS等级。</p>
+<h3 id="内存不足时哪个进程会被杀死">内存不足时哪个进程会被杀死</h3>
+<h4 id="等级不同的情况">等级不同的情况</h4>
+<p>BestEffort等级的pod首先被杀掉, 其次是Burstable pod, 最后是Guaranteed pod。Guaranteedpod只有在系统进程
+需要内存时才会被杀掉。</p>
+<h4 id="等级相同的情况">等级相同的情况</h4>
+<p>每个运行中的进程都有一个称为OutOfMemory (OOM)分数的值。系统通过比较所有运行进程的OOM分数来选择要杀掉的进程。当需要释放内存时, 分数最高的进程将被杀死。</p>
+<p>OOM分数由两个参数计算得出:进程已消耗内存占可用内存的百分比,与一个基于pod QoS等级和容器内存申请量固定的OOM分数调节因子。对于两个属于Burstable等级的单容器的pod, 系统会杀掉内存实际使用量占内存申请量比例更高的pod。</p>
+<h2 id="为命名空间中的pod设置默认的requests和limits">为命名空间中的pod设置默认的requests和limits</h2>
+<p>用户可以通过创建一个LimitRange资源来避免给每个容器分别配置。它不仅允许用户 (为每个命名空间)指定能给容器配置的每种资源的最小和最大限额, 还支持在没有显式指定资源 requests 时为容器设置默认值。</p>
+<p>LimitRange资源中的limits应用千同一个命名空间中每个独立的pod、容器或者其他类型的对象。它并不会限制这个命名空间中所有pod可用资源的总量, 总量是通过ResourceQuota对象指定的</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">LimitRange</span><span class="w">
+</span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example</span><span class="w">
+</span><span class="ln"> 5</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">  </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">  </span><span class="c"># 指定整个pod资源的limits</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">  </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">    </span><span class="c"># 所有容器的CPU与内存请求量之和的最小值</span><span class="w">
+</span><span class="ln">10</span><span class="w">    </span><span class="nt">min</span><span class="p">:</span><span class="w"> 
+</span><span class="ln">11</span><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">50m</span><span class="w">
+</span><span class="ln">12</span><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">5Mi</span><span class="w">
+</span><span class="ln">13</span><span class="w">    </span><span class="c"># 所有容器的CPU与内存请求量之和的最大值</span><span class="w">
+</span><span class="ln">14</span><span class="w">    </span><span class="nt">max</span><span class="p">:</span><span class="w">
+</span><span class="ln">15</span><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="ln">16</span><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">1Gi</span><span class="w">
+</span><span class="ln">17</span><span class="w">  </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Container</span><span class="w">
+</span><span class="ln">18</span><span class="w">    </span><span class="c"># 容器没有指定CPU与内存请求量时设置的默认值</span><span class="w">
+</span><span class="ln">19</span><span class="w">    </span><span class="nt">defaultRequest</span><span class="p">:</span><span class="w">
+</span><span class="ln">20</span><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">100m</span><span class="w">
+</span><span class="ln">21</span><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">10Mi</span><span class="w">
+</span><span class="ln">22</span><span class="w">    </span><span class="c"># 没有指定limits时设置的默认值</span><span class="w">
+</span><span class="ln">23</span><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w">
+</span><span class="ln">24</span><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">200m</span><span class="w">
+</span><span class="ln">25</span><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">100Mi</span><span class="w">
+</span><span class="ln">26</span><span class="w">    </span><span class="c"># 容器CPU和内存的资源request和limits的最小值</span><span class="w">
+</span><span class="ln">27</span><span class="w">    </span><span class="nt">min</span><span class="p">:</span><span class="w"> 
+</span><span class="ln">28</span><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">50m</span><span class="w">
+</span><span class="ln">29</span><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">5Mi</span><span class="w">
+</span><span class="ln">30</span><span class="w">    </span><span class="c"># 容器CPU和内存的资源request和limits的最大值</span><span class="w">
+</span><span class="ln">31</span><span class="w">    </span><span class="nt">max</span><span class="p">:</span><span class="w">
+</span><span class="ln">32</span><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="ln">33</span><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">1Gi</span><span class="w">
+</span><span class="ln">34</span><span class="w">    </span><span class="c"># 每种资源requests与limits的最大比值</span><span class="w">
+</span><span class="ln">35</span><span class="w">    </span><span class="nt">maxLimitRequestRatio</span><span class="p">:</span><span class="w">
+</span><span class="ln">36</span><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w">
+</span><span class="ln">37</span><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span><span class="ln">38</span><span class="w">    </span><span class="c"># 请求PVC存储容量的最大值与最小值</span><span class="w">
+</span><span class="ln">39</span><span class="w">  </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">persistentVolumeClaim</span><span class="w">
+</span><span class="ln">40</span><span class="w">    </span><span class="nt">min</span><span class="p">:</span><span class="w"> 
+</span><span class="ln">41</span><span class="w">      </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">1Gi</span><span class="w">
+</span><span class="ln">42</span><span class="w">    </span><span class="nt">max</span><span class="p">:</span><span class="w">
+</span><span class="ln">43</span><span class="w">      </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">10Gi</span><span class="w">
+</span></code></pre></div><h2 id="限制命名空间中的可用资源总量">限制命名空间中的可用资源总量</h2>
+<p>ResourceQuota的接纳控制插件会检查将要创建的pod是否会引起总资源量超出ResourceQuota。如果那样,创建请求会被拒绝。资源配额只是在pod创建时进行检查,所以ResourceQuota对象仅仅作用于在其后创建的pod，并不影响已经存在的pod。</p>
+<h3 id="为cpu和内存创建resourcequota">为CPU和内存创建ResourceQuota</h3>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ResourceQuota</span><span class="w">
+</span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">cpu-and-memory</span><span class="w">
+</span><span class="ln"> 5</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">  </span><span class="nt">hard</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">    </span><span class="nt">requests.cpu</span><span class="p">:</span><span class="w"> </span><span class="l">400m</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">    </span><span class="nt">requests.memory</span><span class="p">:</span><span class="w"> </span><span class="l">200Mi</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">    </span><span class="nt">limits.cpu</span><span class="p">:</span><span class="w"> </span><span class="l">600m</span><span class="w">
+</span><span class="ln">10</span><span class="w">    </span><span class="nt">limits.memory</span><span class="p">:</span><span class="w"> </span><span class="l">500Mi</span><span class="w">
+</span></code></pre></div><p>与LimitRange一样,ResourceQuota对象应用于它所创建的那个命名空间。</p>
+<p>查看配额和配额使用情况：</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="l">kubectl describe quota</span><span class="w">
+</span></code></pre></div><h3 id="为持久化存储指定配额">为持久化存储指定配额</h3>
+<p>它也可以限制某个命名空间中最多可以声明的持久化存储总量</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ResourceQuota</span><span class="w">
+</span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">storage</span><span class="w">
+</span><span class="ln"> 5</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">  </span><span class="nt">hard</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">    </span><span class="c"># 可声明总存储量</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">    </span><span class="nt">requests.storage</span><span class="p">:</span><span class="w"> </span><span class="l">500Gi</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">    </span><span class="c"># SSD可声明的存储量</span><span class="w">
+</span><span class="ln">10</span><span class="w">    </span><span class="nt">ssd.storageclass.storage.k8s.io/requests.storage</span><span class="p">:</span><span class="w"> </span><span class="l">300Gi</span><span class="w">
+</span><span class="ln">11</span><span class="w">    </span><span class="nt">standard.storageclass.storage.k8s.io/requests.storage</span><span class="p">:</span><span class="w"> </span><span class="l">1Ti</span><span class="w">
+</span></code></pre></div><h3 id="限制可创建对象的个数">限制可创建对象的个数</h3>
+<p>资源配额同样可以限制单个命名空间中的pod、ReplicationController、Service以及其他对象的个数。</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ResourceQuota</span><span class="w">
+</span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">objects</span><span class="w">
+</span><span class="ln"> 5</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">  </span><span class="nt">hard</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">    </span><span class="nt">pods</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">    </span><span class="nt">replicationcontrollers</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">    </span><span class="nt">secrets</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span><span class="ln">10</span><span class="w">    </span><span class="nt">configmaps</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span><span class="ln">11</span><span class="w">    </span><span class="nt">persistentvolumeclaims</span><span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w">
+</span><span class="ln">12</span><span class="w">    </span><span class="nt">services</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span><span class="ln">13</span><span class="w">    </span><span class="nt">services.loadbalancers</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span><span class="ln">14</span><span class="w">    </span><span class="nt">services.nodeports</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span><span class="ln">15</span><span class="w">    </span><span class="nt">ssd.storageclass.storage.k8s.io/persistentvolumeclaims</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span></code></pre></div><h3 id="为特定的pod状态或者qos等级指定配额">为特定的pod状态或者QoS等级指定配额</h3>
+<p>Quota 可以被一组quota scopes限制。目前配额作用范围共有4种:</p>
+<ul>
+<li>BestEffort：应用于 BestEffort QoS 等级</li>
+<li>NotBestEffort： 应用于除了BestEffort之外的 QoS等级，即Burstable和Guaranteed</li>
+<li>Termination：应用于配置了 activeDeadlineSeconds 的 pod</li>
+<li>NotTerminating：应用于那些没有指定activeDeadlineSeconds配置的 pod</li>
+</ul>
+<p>activeDeadlineSeconds属性定义了一个 pod 从开始尝试停止的时间到其被标记为 Failed 然后真正停止
+之前,允许其在节点上继续运行的秒数。</p>
+<p>配额的范围也决定着配额可以限制的内容。BestEffort范围只允许限制pod个数,而其他3种范围除了pod个数,还可以限制 CPU和内存的requests和limits。</p>
+<h2 id="监控-pod-的资源使用量">监控 pod 的资源使用量</h2>
+<p>设置合适的资源requests和limits对充分利用k8s节点资源来说非常重要。如果requests设置得太高,集群节点利用率就会比较低；如果设置得太低,应用就会处于CPU饥饿状态,甚至很容易被OOM Killer杀死。</p>
+<p>可以通过对容器在期望负载下的资源实际使用率进行监控来找到这个最佳配置</p>
+<h3 id="收集获取实际资源使用情况">收集、获取实际资源使用情况</h3>
+<p>Kubelet自身就包含了一个名为cAdvisor的agent,它会收集整个节点和节点上运行的所有单独容器的资源消耗情况。集中统计整个集群的监控信息需要运行一个叫作 Heapster的附加组件。</p>
+<p>Heapster以pod的方式运行在某个节点上,它通过普通的Kubernetes Service暴露服务,使外部可以通过一个稳定的IP地址访问。它从集群中所有的cAdvisor收集数据,然后通过一个单独的地址暴露。</p>
+<h3 id="显示集群节点的cpu和内存使用量">显示集群节点的CPU和内存使用量</h3>
+<p>显示节点的CPU和内存的实际使用量</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl top node
+</code></pre></div><p>显示单独pod的CPU和内存的实际使用量</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl top node --all-namespaces
+</code></pre></div><p>显示容器的CPU和内存的实际使用量</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl top node --container
+</code></pre></div><h3 id="保存并分析历史资源的使用统计信息">保存并分析历史资源的使用统计信息</h3>
+<p>一种方案是，使用 InfluxDB 来存储统计数据, 然后使用Grafana 对数据进行可视化和分析</p>
+<hr>
+<p>图书资料：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30418855/">https://book.douban.com/subject/30418855/</a></li>
+</ul>
+
+    
+      
+    
+  </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <h2>Paul Zeng</h2>
@@ -357,9 +492,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
-      <li>
-        <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management-copy/" class="nav-link">Kubernetes in Action笔记 - (16) 计算资源管理</a>
-      </li>
       <li>
         <a href="https://www.zengxi.net/2021/01/k8s_node_security/" class="nav-link">Kubernetes in Action笔记 - (15) 节点与网络安全</a>
       </li>
@@ -380,6 +512,9 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="nav-link">Kubernetes in Action笔记 - (9) 卷</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_service/" class="nav-link">Kubernetes in Action笔记 - (8) 服务、Endpoint、Ingress</a>
       </li>
     </ul>
     <div>
@@ -935,8 +1070,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
 </aside>
 
 </div>
-
-
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>

@@ -119,6 +119,33 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management-copy/">Kubernetes in Action笔记 - (16) 计算资源管理</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 3, 2021</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">为pod中的容器申请资源 创建一个pod时,可以指定容器对 CPU 和内存的资源请求量(即requests),以及资源限制量(即limits)。它是针对每个容器单独指定，pod对资源的请求量和限制量是所包含的所有容器的请求量和限制量之和。
+1apiVersion:v12kind:Pod3metadata:4name:requests-pod5spec:6containers:7- image:busybox8command:[&#34;dd&#34;,&#34;if=/dev/zero&#34;,&#34;of=/dev/null&#34;]9name:main10resources:11requests:12cpu:200m #  …</p>
+          <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management-copy/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/01/k8s_node_security/">Kubernetes in Action笔记 - (15) 节点与网络安全</a>
       </h3>
       <div class="post_meta">
@@ -378,36 +405,6 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/">Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 13, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">托管的Pod 如果是直接创建Pod，当节点失效，这个Pod就会丢失。
-如果是通过ReplicationController或者Deployment等资源来创建的，那就属于托管的资源。k8s集群会管理并检测它的运行状态，当一些意外情况发生的，k8s会自动采取应对措施。
-ReplicationController ReplicationController是一种k8s资源，会持续监控正在运行的pod列表, 并保证相应类型的pod的数目与期望相符。
-一个ReplicationController有三个主要部分：
- label selector (标签选择器), 用于确定ReplicationController作用域中有哪些pod …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -452,6 +449,9 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management-copy/" class="nav-link">Kubernetes in Action笔记 - (16) 计算资源管理</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/01/k8s_node_security/" class="nav-link">Kubernetes in Action笔记 - (15) 节点与网络安全</a>
       </li>
       <li>
@@ -472,16 +472,13 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="nav-link">Kubernetes in Action笔记 - (9) 卷</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_service/" class="nav-link">Kubernetes in Action笔记 - (8) 服务、Endpoint、Ingress</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">15</span>
+          <span class="button_tally">16</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
@@ -575,7 +572,7 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=15>KUBERNETES<span class="button_tally">15</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=16>KUBERNETES<span class="button_tally">16</span>
             </a>
             
             
@@ -644,7 +641,7 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">15</span>
+          <span class="button_tally">16</span>
         </a>
         
         
@@ -655,7 +652,7 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">15</span>
+          <span class="button_tally">16</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -821,7 +818,7 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=15>KUBERNETES<span class="button_tally">15</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=16>KUBERNETES<span class="button_tally">16</span>
             </a>
             
             
