@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="" class="page">
   <head>
-<title>Manjaro设置chrome为默认浏览器 | 保罗札记</title>
+<title>Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点 | 保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,15 +19,15 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="安装完 Manjaro，一般会自带 Firefox浏览器。如果自己想再安装 chrome，并且设置成默认浏览器，则需要两个步骤：
- 在 Default Applications 中选择 Chrome 为默认的浏览器。除了这一步还不够，打开 chrome 依然有提示说“chrome 不是默认浏览器”，这就需要下面的第二步 …">
+<meta name="description" content="注意：Kubernetes的自动伸缩特性在1.6与1.7版本之间经历了一次重写, 因此网上关于此方面的内容有可能已经过时了。
+pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制器管理的pod副本数量的自动伸缩。它由Horizontal控制器执行, 通过创建一 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="Manjaro设置chrome为默认浏览器" />
-<meta property="og:url" content="https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/" />
-<meta property="og:title" content="Manjaro设置chrome为默认浏览器" />
-<meta property="og:description" content="安装完 Manjaro，一般会自带 Firefox浏览器。如果自己想再安装 chrome，并且设置成默认浏览器，则需要两个步骤：
- 在 Default Applications 中选择 Chrome 为默认的浏览器。除了这一步还不够，打开 chrome 依然有提示说“chrome 不是默认浏览器”，这就需要下面的第二步 …" />
+<meta name="twitter:title" content="Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点" />
+<meta property="og:url" content="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/" />
+<meta property="og:title" content="Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点" />
+<meta property="og:description" content="注意：Kubernetes的自动伸缩特性在1.6与1.7版本之间经历了一次重写, 因此网上关于此方面的内容有可能已经过时了。
+pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制器管理的pod副本数量的自动伸缩。它由Horizontal控制器执行, 通过创建一 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -36,7 +36,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/">
+<link rel="canonical" href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/">
 
     
 
@@ -117,27 +117,25 @@
   
 <div class="grid-inverse wrap content">
   <article class="post_content">
-    <h1 class="post_title">Manjaro设置chrome为默认浏览器</h1><div class="post_meta">
+    <h1 class="post_title">Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</h1><div class="post_meta">
   <svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg>
   <span class="post_date">
-    May 25, 2020</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
-    </a>
-    <a href='https://www.zengxi.net/tags/chrome' class="post_tag button button_translucent">chrome
+    Jan 4, 2021</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
     </a>
 </div>
 
     
 <div class="post_share">
   分享到:
-  <a href="https://twitter.com/intent/tweet?text=Manjaro%e8%ae%be%e7%bd%aechrome%e4%b8%ba%e9%bb%98%e8%ae%a4%e6%b5%8f%e8%a7%88%e5%99%a8&url=https%3a%2f%2fwww.zengxi.net%2f2020%2f05%2fmanjaro_chrome_default_browser%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+  <a href="https://twitter.com/intent/tweet?text=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%2817%29%20%e8%87%aa%e5%8a%a8%e6%a8%aa%e5%90%91%e4%bc%b8%e7%bc%a9pod%e4%b8%8e%e9%9b%86%e7%be%a4%e8%8a%82%e7%82%b9&url=https%3a%2f%2fwww.zengxi.net%2f2021%2f01%2fk8s_pod_auto_scaling%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
     <svg class="icon">
   <use xlink:href="#twitter"></use>
 </svg>
   </a>
-  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2020%2f05%2fmanjaro_chrome_default_browser%2f&t=Manjaro%e8%ae%be%e7%bd%aechrome%e4%b8%ba%e9%bb%98%e8%ae%a4%e6%b5%8f%e8%a7%88%e5%99%a8" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2021%2f01%2fk8s_pod_auto_scaling%2f&t=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%2817%29%20%e8%87%aa%e5%8a%a8%e6%a8%aa%e5%90%91%e4%bc%b8%e7%bc%a9pod%e4%b8%8e%e9%9b%86%e7%be%a4%e8%8a%82%e7%82%b9" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
     <svg class="icon">
   <use xlink:href="#facebook"></use>
 </svg>
@@ -147,7 +145,7 @@
   <use xlink:href="#linkedin"></use>
 </svg>
   </a>
-  <a href="https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/" title="Copy Link" class="link link_yank">
+  <a href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/" title="Copy Link" class="link link_yank">
     <svg class="icon">
   <use xlink:href="#copy"></use>
 </svg>
@@ -155,11 +153,116 @@
 </div>
 
     
-    <p>安装完 Manjaro，一般会自带 Firefox浏览器。如果自己想再安装 chrome，并且设置成默认浏览器，则需要两个步骤：</p>
-<ol>
-<li>在 Default Applications 中选择 Chrome 为默认的浏览器。除了这一步还不够，打开 chrome 依然有提示说“chrome 不是默认浏览器”，这就需要下面的第二步来解决。</li>
-<li>在 File Association 中找到 html 项， 选择使用 Chrome 打开该类型的文件。</li>
-</ol>
+    
+    <h2>文章目录</h2>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#pod的横向自动伸缩">pod的横向自动伸缩</a>
+      <ul>
+        <li><a href="#自动伸缩步骤">自动伸缩步骤</a></li>
+        <li><a href="#基于cpu使用率进行自动伸缩">基于CPU使用率进行自动伸缩</a></li>
+        <li><a href="#基于内存使用进行自动伸缩">基于内存使用进行自动伸缩</a></li>
+        <li><a href="#基于其他自定义度量进行自动伸缩">基于其他自定义度量进行自动伸缩</a></li>
+      </ul>
+    </li>
+    <li><a href="#pod的纵向自动伸缩">pod的纵向自动伸缩</a></li>
+  </ul>
+</nav>
+    <p>注意：Kubernetes的自动伸缩特性在1.6与1.7版本之间经历了一次重写, 因此网上关于此方面的内容有可能已经过时了。</p>
+<h2 id="pod的横向自动伸缩">pod的横向自动伸缩</h2>
+<h3 id="自动伸缩步骤">自动伸缩步骤</h3>
+<p>横向pod自动伸缩是指由控制器管理的pod副本数量的自动伸缩。它由Horizontal控制器执行, 通过创建一个HorizontalpodAutoscaler(HPA)资源来启用和配置Horizontal控制器。该控制器周期性检查pod度量,计算满足HPA资源所配置的目标数值所需的副本数量, 进而调整目标资源(如Deployment、ReplicaSet、 ReplicationController、 StatefulSet等)的replicas字段。</p>
+<p>自动伸缩的过程可以分为三个步骤:</p>
+<ul>
+<li>获取被伸缩资源对象所管理的所有pod度量。</li>
+<li>计算使度量数值到达(或接近)所指定目标数值所需的pod数量。</li>
+<li>更新被伸缩资源的replicas字段。</li>
+</ul>
+<h4 id="获取pod度量">获取pod度量</h4>
+<p>pod与节点度量数据是由运行在每个节点的kubelet之上, 名为cAdvisor的agent采集的;这些数据将由集群级的组件Heapster聚合。</p>
+<p>Autoscaler本身并不负责采集pod度量数据，HPA控制器向Heapster发起REST调用来获取所有pod度量数据。</p>
+<h5 id="关于autoscaler采集度量数据方式的改变">关于Autoscaler采集度量数据方式的改变</h5>
+<p>在Kubernetes 1.6版本之前,HPA直接从Heapster采集度量。在1.8版本中,如果用--horizontal-pod-autoscaler-use-rest-clients=true参数启动ControllerManager, Autoscaler就能通过聚合版的资源度量API拉取度量了。该行为从1.9版本开始将变为默认。核心API服务器本身并不会向外界暴露度量数据。从1.7版本开始,k8s允许注册多个API服务器并使它们对外呈现为单个API服务器。这允许k8s通过这些底层API服务器之一来对外暴露度量数据。</p>
+<p>集群管理员负责选择集群中使用何种度量采集器。通常需要一层简单的转换组件将度量数据以正确的格式暴露在正确的API路径下。</p>
+<h4 id="计算所需的pod数量">计算所需的pod数量</h4>
+<p>一旦Autoscaler获得了它所调整的资源(Deployment、 ReplicaSet、ReplicationController或StatefulSet)所辖pod的全部度量, 它便可以利用这些度量计算出所需的副本数量。它需要计算出一个合适的副本数量, 以使所有副本上度量的平均值尽量接近配置的目标值。该计算的输入是一组pod度量(每个pod可能有多个), 输出则是一个整数(pod副本数量)。</p>
+<h4 id="更新被伸缩资源的副本数">更新被伸缩资源的副本数</h4>
+<p>自动伸缩操作的最后一步是更新被伸缩资源对象(比如ReplicaSet)上的副本数字段, 然后让ReplicaSet控制器负责启动更多pod或者删除多余的pod。</p>
+<p>Autoscaler控制器通过Scale子资源来修改被伸缩资源的replicas字段，这样Autoscaler不必了解它所管理资源的细节。</p>
+<p>目前暴露了Scale子资源的资源有:</p>
+<ul>
+<li>Deployment</li>
+<li>ReplicaSet</li>
+<li>ReplicationController</li>
+<li>StatefulSet</li>
+</ul>
+<h3 id="基于cpu使用率进行自动伸缩">基于CPU使用率进行自动伸缩</h3>
+<p>因为CPU使用通常是不稳定的, 比较靠谱的做法是在CPU被压垮之前就横向扩容。</p>
+<p>注意：一定把目标CPU使用率设置得远远低于100%预留充分空间给突发的流量洪峰。</p>
+<p>Autoscaler对比pod的实际CPU使用与它的请求, 这意味着需要给被伸缩的pod设置CPU请求,不管是直接设置还是通过LimitRange对象间接设置，这样Autoscaler才能确定CPU使用率。</p>
+<h4 id="基于cpu使用率创建hpa">基于CPU使用率创建HPA</h4>
+<p>先创建一个Deployment</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/v1beta1</span><span class="w">
+</span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
+</span><span class="ln"> 5</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> 
+</span><span class="ln"> 9</span><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
+</span><span class="ln">10</span><span class="w">      </span><span class="nt">label</span><span class="p">:</span><span class="w">
+</span><span class="ln">11</span><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
+</span><span class="ln">12</span><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln">13</span><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="ln">14</span><span class="w">      </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">luksa:kubia:v1</span><span class="w">
+</span><span class="ln">15</span><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nodejs</span><span class="w">
+</span><span class="ln">16</span><span class="w">        </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span><span class="ln">17</span><span class="w">          </span><span class="c"># 需要设定CPU请求量</span><span class="w">
+</span><span class="ln">18</span><span class="w">          </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span><span class="ln">19</span><span class="w">            </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">100m</span><span class="w">
+</span></code></pre></div><p>为了给pod启用横向自动伸缩, 需要创建一个HorizontalpodAutoscaler (HPA)对象, 并把它指向该Deployment。</p>
+<p>可以使用<code>kubectl autoscale</code>命令, 这个相对简单点</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl autoscale deployment kubia --cpu-percent<span class="o">=</span><span class="m">30</span> --min<span class="o">=</span><span class="m">1</span> --max<span class="o">=</span><span class="m">5</span>
+</code></pre></div><p>或者使用YAML文件</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">autoscaling/v2beta1</span><span class="w">
+</span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">HorizontalPodAutoscaler</span><span class="w">
+</span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
+</span><span class="ln"> 5</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">  </span><span class="nt">maxReplicas</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">  </span><span class="nt">metrics</span><span class="p">:</span><span class="w"> 
+</span><span class="ln"> 8</span><span class="w">  </span>- <span class="nt">resource</span><span class="p">:</span><span class="w"> 
+</span><span class="ln"> 9</span><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">cpu</span><span class="w">
+</span><span class="ln">10</span><span class="w">      </span><span class="nt">targetAverageUtilization</span><span class="p">:</span><span class="w"> </span><span class="m">30</span><span class="w">
+</span><span class="ln">11</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Resource</span><span class="w">
+</span><span class="ln">12</span><span class="w">  </span><span class="nt">minReplicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="ln">13</span><span class="w">  </span><span class="nt">scaleTargetRef</span><span class="p">:</span><span class="w">
+</span><span class="ln">14</span><span class="w">    </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/v1beta1</span><span class="w">
+</span><span class="ln">15</span><span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span><span class="ln">16</span><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln">17</span><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
+</span></code></pre></div><p>注意：一定要确保自动伸缩的目标是Deployment而不是底层的ReplicaSet。这样才能确保预期的副本数量在应用更新后继续保持(记着Deployment会给每个应用版本创建一个新的ReplicaSet)。手动伸缩也是同样的道理。</p>
+<h4 id="伸缩操作的最大速率">伸缩操作的最大速率</h4>
+<p>Autoscaler 两次扩容操作之间的时间间隔有限制。目前,只有当3分钟内没有任何伸缩操作时才会触发扩容,缩容操作频率更低,为5分钟</p>
+<h3 id="基于内存使用进行自动伸缩">基于内存使用进行自动伸缩</h3>
+<p>基于内存的自动伸缩比基于CPU的困难很多。主要原因在于,扩容之后原有的pod需要有办法释放内存。这只能由应用完成,系统无法代劳。系统所能做的只有杀死并重启应用,希望它能比之前少占用一些内存;但如果应用使用了跟之前一样多的内存,Autoscaler就会扩容、扩容,再扩容,直到达到HPA资源上配置的最大pod数量。显然没有人想要这种行为。</p>
+<p>基于内存使用的自动伸缩在Kubernetes 1.8中得到支持,配置方法与基于CPU的自动伸缩完全相同。</p>
+<h3 id="基于其他自定义度量进行自动伸缩">基于其他自定义度量进行自动伸缩</h3>
+<p>metrics字段允许定义多个度量供使用。HPA支持3种类型的度量：Resource, Pods, Object</p>
+<ul>
+<li>Resource: 基于一个资源度量做出自动伸缩决策。比如上面的CPU，内存</li>
+<li>Pods：用来引用任何其他种类的(包括自定义的)与 pod 直接相关的度量。比如：每秒查询次数,或者消息队列中的消息数量(当消息队列服务运行在pod之中)都属于这种度量</li>
+<li>Object: 用来让Autoscaler基于并非直接与pod关联的度量来进行伸缩。比如, 基于另一个集 群对象(例如Ingress对象）,来伸缩你的pod</li>
+</ul>
+<h2 id="pod的纵向自动伸缩">pod的纵向自动伸缩</h2>
+<p>并不是所有应用都能被横向伸缩。对这些应用而言,唯一的选项是纵向伸缩，也就是给它们更多CPU或内存。</p>
+<p>但是作者在写书的时候，还未实现。</p>
+<hr>
+<p>图书资料：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30418855/">https://book.douban.com/subject/30418855/</a></li>
+</ul>
 
     
       
@@ -174,9 +277,6 @@
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
-      <li>
-        <a href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/" class="nav-link">Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</a>
-      </li>
       <li>
         <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management/" class="nav-link">Kubernetes in Action笔记 - (16) 计算资源管理</a>
       </li>
@@ -197,6 +297,9 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_config_map_secret/" class="nav-link">Kubernetes in Action笔记 - (10) 使用ConfigMap与Secret传递应用配置</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="nav-link">Kubernetes in Action笔记 - (9) 卷</a>
       </li>
     </ul>
     <div>

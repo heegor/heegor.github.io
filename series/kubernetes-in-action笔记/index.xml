@@ -6,7 +6,35 @@
     <description>Recent content in Kubernetes in Action笔记 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Sun, 03 Jan 2021 19:22:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Jan 2021 22:49:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</title>
+      <link>https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/</link>
+      <pubDate>Mon, 04 Jan 2021 22:49:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/</guid>
+      <description>注意：Kubernetes的自动伸缩特性在1.6与1.7版本之间经历了一次重写, 因此网上关于此方面的内容有可能已经过时了。
+pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制器管理的pod副本数量的自动伸缩。它由Horizontal控制器执行, 通过创建一个HorizontalpodAutoscaler(HPA)资源来启用和配置Horizontal控制器。该控制器周期性检查pod度量,计算满足HPA资源所配置的目标数值所需的副本数量, 进而调整目标资源(如Deployment、ReplicaSet、 ReplicationController、 StatefulSet等)的replicas字段。
+自动伸缩的过程可以分为三个步骤:
+ 获取被伸缩资源对象所管理的所有pod度量。 计算使度量数值到达(或接近)所指定目标数值所需的pod数量。 更新被伸缩资源的replicas字段。  获取pod度量 pod与节点度量数据是由运行在每个节点的kubelet之上, 名为cAdvisor的agent采集的;这些数据将由集群级的组件Heapster聚合。
+Autoscaler本身并不负责采集pod度量数据，HPA控制器向Heapster发起REST调用来获取所有pod度量数据。
+关于Autoscaler采集度量数据方式的改变 在Kubernetes 1.6版本之前,HPA直接从Heapster采集度量。在1.8版本中,如果用--horizontal-pod-autoscaler-use-rest-clients=true参数启动ControllerManager, Autoscaler就能通过聚合版的资源度量API拉取度量了。该行为从1.9版本开始将变为默认。核心API服务器本身并不会向外界暴露度量数据。从1.7版本开始,k8s允许注册多个API服务器并使它们对外呈现为单个API服务器。这允许k8s通过这些底层API服务器之一来对外暴露度量数据。
+集群管理员负责选择集群中使用何种度量采集器。通常需要一层简单的转换组件将度量数据以正确的格式暴露在正确的API路径下。
+计算所需的pod数量 一旦Autoscaler获得了它所调整的资源(Deployment、 ReplicaSet、ReplicationController或StatefulSet)所辖pod的全部度量, 它便可以利用这些度量计算出所需的副本数量。它需要计算出一个合适的副本数量, 以使所有副本上度量的平均值尽量接近配置的目标值。该计算的输入是一组pod度量(每个pod可能有多个), 输出则是一个整数(pod副本数量)。
+更新被伸缩资源的副本数 自动伸缩操作的最后一步是更新被伸缩资源对象(比如ReplicaSet)上的副本数字段, 然后让ReplicaSet控制器负责启动更多pod或者删除多余的pod。
+Autoscaler控制器通过Scale子资源来修改被伸缩资源的replicas字段，这样Autoscaler不必了解它所管理资源的细节。
+目前暴露了Scale子资源的资源有:
+ Deployment ReplicaSet ReplicationController StatefulSet  基于CPU使用率进行自动伸缩 因为CPU使用通常是不稳定的, 比较靠谱的做法是在CPU被压垮之前就横向扩容。
+注意：一定把目标CPU使用率设置得远远低于100%预留充分空间给突发的流量洪峰。
+Autoscaler对比pod的实际CPU使用与它的请求, 这意味着需要给被伸缩的pod设置CPU请求,不管是直接设置还是通过LimitRange对象间接设置，这样Autoscaler才能确定CPU使用率。
+基于CPU使用率创建HPA 先创建一个Deployment
+1apiVersion:extensions/v1beta12kind:Deployment3metadata:4name:kubia5spec:6replicas:37template:8metadata:9name:kubia10label:11app:kubia12spec:13containers:14- image:luksa:kubia:v115name:nodejs16resources:17# 需要设定CPU请求量18requests:19cpu:100m为了给pod启用横向自动伸缩, 需要创建一个HorizontalpodAutoscaler (HPA)对象, 并把它指向该Deployment。
+可以使用kubectl autoscale命令, 这个相对简单点
+1kubectl autoscale deployment kubia --cpu-percent=30 --min=1 --max=5 或者使用YAML文件
+1apiVersion:autoscaling/v2beta12kind:HorizontalPodAutoscaler3metadata:4name:kubia5spec:6maxReplicas:57metrics:8- resource:9name:cpu10targetAverageUtilization:3011type:Resource12minReplicas:113scaleTargetRef:14apiVersion:extensions/v1beta115kind:Deployment16metadata:17name:kubia注意：一定要确保自动伸缩的目标是Deployment而不是底层的ReplicaSet。这样才能确保预期的副本数量在应用更新后继续保持(记着Deployment会给每个应用版本创建一个新的ReplicaSet)。手动伸缩也是同样的道理。
+伸缩操作的最大速率 Autoscaler 两次扩容操作之间的时间间隔有限制。目前,只有当3分钟内没有任何伸缩操作时才会触发扩容,缩容操作频率更低,为5分钟</description>
+    </item>
+    
     <item>
       <title>Kubernetes in Action笔记 - (16) 计算资源管理</title>
       <link>https://www.zengxi.net/2021/01/k8s_computing_resource_management/</link>

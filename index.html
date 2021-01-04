@@ -21,13 +21,13 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="website">
-<meta name="description" content="A theme based on VMware&#39;s Clarity Design System for publishing technical blogs with Hugo.">
+<meta name="description" content="Paul Zeng的个人网站与博客">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="" />
 <meta property="og:url" content="https://www.zengxi.net/" />
 <meta property="og:title" content="" />
-<meta property="og:description" content="A theme based on VMware&#39;s Clarity Design System for publishing technical blogs with Hugo." />
+<meta property="og:description" content="Paul Zeng的个人网站与博客" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -119,6 +119,34 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/">Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 4, 2021</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">注意：Kubernetes的自动伸缩特性在1.6与1.7版本之间经历了一次重写, 因此网上关于此方面的内容有可能已经过时了。
+pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制器管理的pod副本数量的自动伸缩。它由Horizontal控制器执行, 通过创建一个HorizontalpodAutoscaler(HPA)资源来启用和配置Horizontal控制器。该控制器周期性检查pod度量,计算满足HPA资源所配置的目标数值所需的副本数量, 进而调整目标资源(如Deployment、ReplicaSet、 ReplicationController、 StatefulSet等)的replicas字段。
+自动伸缩的过程可以分 …</p>
+          <a href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -380,35 +408,6 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/">Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 13, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">DaemonSet DaemonSet 用于确保一个pod匹配它的选择器并在每个节点上运行。因此，它并没有期望的副本数的概念。
-如果节点下线, DaemonSet不会在其他地方重新创建pod。 但是, 当将一个新节 点添加到集群中时, DaemonSet会立刻部署一个新的pod实例。
-使用场景的例子：
- pod执行系统级别的与基础结构相关的操作。例如, 希望在每个节点上运行日志收集器和资源监控器。 另一个典型的例子是Kubemetes 自己的kube-proxy进程, 它需要运行在所有节点上才能使服务工作  可以通过 pod 模板中的 nodeSelector 属性让 DaemonSet 只在特定的节点上运行 pod。 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -453,6 +452,9 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/" class="nav-link">Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management/" class="nav-link">Kubernetes in Action笔记 - (16) 计算资源管理</a>
       </li>
       <li>
@@ -473,16 +475,13 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_config_map_secret/" class="nav-link">Kubernetes in Action笔记 - (10) 使用ConfigMap与Secret传递应用配置</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="nav-link">Kubernetes in Action笔记 - (9) 卷</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">16</span>
+          <span class="button_tally">17</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
@@ -576,7 +575,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=16>KUBERNETES<span class="button_tally">16</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=17>KUBERNETES<span class="button_tally">17</span>
             </a>
             
             
@@ -645,7 +644,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">16</span>
+          <span class="button_tally">17</span>
         </a>
         
         
@@ -656,7 +655,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">16</span>
+          <span class="button_tally">17</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -822,7 +821,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=16>KUBERNETES<span class="button_tally">16</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=17>KUBERNETES<span class="button_tally">17</span>
             </a>
             
             

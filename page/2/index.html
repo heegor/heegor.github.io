@@ -21,13 +21,13 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="website">
-<meta name="description" content="A theme based on VMware&#39;s Clarity Design System for publishing technical blogs with Hugo.">
+<meta name="description" content="Paul Zeng的个人网站与博客">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="" />
 <meta property="og:url" content="https://www.zengxi.net/" />
 <meta property="og:title" content="" />
-<meta property="og:description" content="A theme based on VMware&#39;s Clarity Design System for publishing technical blogs with Hugo." />
+<meta property="og:description" content="Paul Zeng的个人网站与博客" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -119,6 +119,35 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/">Kubernetes in Action笔记 - (7) DaemonSet、Job和CronJob</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 13, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">DaemonSet DaemonSet 用于确保一个pod匹配它的选择器并在每个节点上运行。因此，它并没有期望的副本数的概念。
+如果节点下线, DaemonSet不会在其他地方重新创建pod。 但是, 当将一个新节 点添加到集群中时, DaemonSet会立刻部署一个新的pod实例。
+使用场景的例子：
+ pod执行系统级别的与基础结构相关的操作。例如, 希望在每个节点上运行日志收集器和资源监控器。 另一个典型的例子是Kubemetes 自己的kube-proxy进程, 它需要运行在所有节点上才能使服务工作  可以通过 pod 模板中的 nodeSelector 属性让 DaemonSet 只在特定的节点上运行 pod。 …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_daemonset_job/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -387,35 +416,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Nov 13, 2020</span>
-    <a href='https://www.zengxi.net/tags/cloudflare' class="post_tag button button_translucent">cloudflare
-    </a>
-    <a href='https://www.zengxi.net/tags/ssl' class="post_tag button button_translucent">ssl
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">笔者使用Cloudflare做DNS，同时使用Cloudflare的SSL证书服务。整个链路如下图:
-1|----------| |-----------| |---------------| 2| Brower | ------&gt; | Cloudfare | ------&gt; | Origin Server | 3|----------| |-----------| |---------------| 4 笔者想要做整个链路的https，但是在配置完之后，打开页面是看到522的错误。这个错误表示连接上源站点，但是请求超时。可以参考这个页面来找到可能的原因： …</p>
-          <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -460,6 +460,9 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/" class="nav-link">Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management/" class="nav-link">Kubernetes in Action笔记 - (16) 计算资源管理</a>
       </li>
       <li>
@@ -480,16 +483,13 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_config_map_secret/" class="nav-link">Kubernetes in Action笔记 - (10) 使用ConfigMap与Secret传递应用配置</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="nav-link">Kubernetes in Action笔记 - (9) 卷</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">16</span>
+          <span class="button_tally">17</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
@@ -583,7 +583,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=16>KUBERNETES<span class="button_tally">16</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=17>KUBERNETES<span class="button_tally">17</span>
             </a>
             
             
@@ -652,7 +652,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">16</span>
+          <span class="button_tally">17</span>
         </a>
         
         
@@ -663,7 +663,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">16</span>
+          <span class="button_tally">17</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -829,7 +829,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=16>KUBERNETES<span class="button_tally">16</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=17>KUBERNETES<span class="button_tally">17</span>
             </a>
             
             
