@@ -119,6 +119,36 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/01/k8s_advanced_scheduling/">Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 5, 2021</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">使用污点和容忍度阻止节点调度到特定节点 污点和容忍度 污点是在不修改已有pod信息的前提下,通过在节点上添加污点信息,来拒绝pod在某些节点上的部署。
+只有当一个pod容忍某个节点的污点, 这个pod才能被调度到该节点。
+可以通过kubectl describe node查看节点的污点信息，在返回结果的Taints字段值中；可以通过kubectl describe po查看pod的污点容忍度，在返回结果的Tolerations字段值中。
+每一个污点都可以关联一个效果, 效果包含了以下三种:
+ NoSchedule：表示如果pod没有容忍这些污点, pod则不能被调度到包含这些污点的节点上。 PreferNoSchedule：它 …</p>
+          <a href="https://www.zengxi.net/2021/01/k8s_advanced_scheduling/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/">Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</a>
       </h3>
       <div class="post_meta">
@@ -376,34 +406,6 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_service/">Kubernetes in Action笔记 - (8) 服务、Endpoint、Ingress</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 20, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">什么是服务 服务是一种为一组功能相同的 pod 提供单 一 不变的接入点的资源。当服务存在时,它的 IP 地址和端口不会改变
-为什么需要服务 pod 的存在是短暂的,一个 pod 可能会在任何时候消失, 或许因为它所在节点发生故障, 或许因为有人删除了 pod, 或者因为 pod 被从一个健康的节点剔除了。 当其中任何一种情况发生时, 消失的 pod 将被ReplicationController 替换为新的 pod。 新的 pod 与替换它的 pod 具有不同的 IP 地址。
-这就是需要服务的地方，解决不断变化的 pod IP 地址的问题, 以及在一个固定的IP和端口对上对外暴露多个 pod。当一个服务被创建时, 它会得到一个静态 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_service/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -439,6 +441,9 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/01/k8s_advanced_scheduling/" class="nav-link">Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/" class="nav-link">Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</a>
       </li>
       <li>
@@ -459,16 +464,13 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_pod_meta_data/" class="nav-link">Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_config_map_secret/" class="nav-link">Kubernetes in Action笔记 - (10) 使用ConfigMap与Secret传递应用配置</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">17</span>
+          <span class="button_tally">18</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
@@ -562,7 +564,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=17>KUBERNETES<span class="button_tally">17</span>
+            <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=18>KUBERNETES<span class="button_tally">18</span>
             </a>
             
             
@@ -631,7 +633,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
           KUBERNETES-IN-ACTION笔记
-          <span class="button_tally">17</span>
+          <span class="button_tally">18</span>
         </a>
         
         
@@ -642,7 +644,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
-          <span class="button_tally">17</span>
+          <span class="button_tally">18</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -808,7 +810,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=17>KUBERNETES<span class="button_tally">17</span>
+            <a href='https://www.zengxi.net/tags/kubernetes/' class=" post_tag button button_translucent" data-position=18>KUBERNETES<span class="button_tally">18</span>
             </a>
             
             

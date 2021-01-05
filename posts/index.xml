@@ -6,7 +6,26 @@
     <description>Recent content in Posts on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 04 Jan 2021 22:49:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Jan 2021 23:00:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性</title>
+      <link>https://www.zengxi.net/2021/01/k8s_advanced_scheduling/</link>
+      <pubDate>Tue, 05 Jan 2021 23:00:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/01/k8s_advanced_scheduling/</guid>
+      <description>使用污点和容忍度阻止节点调度到特定节点 污点和容忍度 污点是在不修改已有pod信息的前提下,通过在节点上添加污点信息,来拒绝pod在某些节点上的部署。
+只有当一个pod容忍某个节点的污点, 这个pod才能被调度到该节点。
+可以通过kubectl describe node查看节点的污点信息，在返回结果的Taints字段值中；可以通过kubectl describe po查看pod的污点容忍度，在返回结果的Tolerations字段值中。
+每一个污点都可以关联一个效果, 效果包含了以下三种:
+ NoSchedule：表示如果pod没有容忍这些污点, pod则不能被调度到包含这些污点的节点上。 PreferNoSchedule：它是NoSchedule的一个宽松的版本,表示尽量阻止pod被调度到这个节点上,但是如果没有其他节点可以调度, pod依然会被调度到这个节点上。 NoExecute：不同于NoSchedule以及PreferNoSchedule,后两者只在调度期间起作用, 而NoExecute也会影响正在节点上运行着的pod。如果在一个节点上添加了NoExecute污点,那些在该节点上运行着的pod,如果没有容忍这个NoExecute污点,将会从这个节点去除。  添加污点与容忍度 在节点上添加自定义污点 假设有一个单独的 Kubernetes 集群,上面同时有生产环境和非生产环境的流量。其中最重要的一点是,非生产环境的pod不能运行在生产环境的节点上。可以通过在生产环境的节点上添加污点来满足这个要求:
+1# 这个命令添加了一个taint,其中key为node-type,value为production,效果为NoSchedule 2kubectl taint node nodel.k8s node-type=production:NoSchedule 在pod上添加污点容忍度 1apiVersion:extensions/vlbetal2kind:Deployment3metadata:4name:prod5spec:6replicas:57template:8spec:9tolerations:10# 此处的污点容忍度允许pod被调度到生产环境节点上11- key:node-type12operator:Equal13value:production14effect:NoSchedule污点和污点容忍度的使用场景 节点可以拥有多个污点信息,而pod也可以有多个污点容忍度。
+污点可以只有一个key和一个效果,而不必设置value。污点容忍度可以通过设置Equal操作符Equal操作符来指定匹配的value(默认情况下的操作符)，或者也可以通过设置Exists操作符来匹配污点的key。
+在调度时使用污点和容忍度 污点可以用来组织新pod的调度(使用 NoSchedule效果),或者定义非优先调度的节点(使用PreferNoSchedule效果), 甚至是将已有的pod从当前节点剔除。
+可以用任何觉得合适的方式去设置污点和容忍度。例如,可以将一个集群分成多个部分,只允许开发团队将pod调度到他们特定的节点上。 当部分节点提供了某种特殊硬件, 并且只有部分pod需要使用到这些硬件的时候, 也可以通过设置污点和容忍度的方式来实现。
+配置节点失效之后的pod重新调度最长等待时间 也可以配置一个容忍度, 用于当某个pod运行所在的节点变成unready或者unreachable状态时,k8s可以等待该pod被调度到其他节点的最长等待时间
+1$ kubectl get po prod-350605-lphSh -o yaml 2... 3 tolerations: 4 - effect: NoExecute 5 key: node.alpha.kubernetes.io/notReady 6 operator: Exists 7 tolerationSeconds: 300 8 - effect: NoExecute 9 key: node.</description>
+    </item>
+    
     <item>
       <title>Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</title>
       <link>https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/</link>
