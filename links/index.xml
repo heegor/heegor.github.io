@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Links on 保罗札记</title>
+    <link>https://www.zengxi.net/links/</link>
+    <description>Recent content in Links on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Thu, 14 Jan 2021 15:00:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/links/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在线学习资源</title>
+      <link>https://www.zengxi.net/links/learning_material/</link>
+      <pubDate>Thu, 14 Jan 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/links/learning_material/</guid>
+      <description>Ansible  Ansible中文权威指南 - https://ansible-tran.readthedocs.io/en/latest/  </description>
+    </item>
+    
+    <item>
+      <title>国内常用镜像地址</title>
+      <link>https://www.zengxi.net/links/mirror/</link>
+      <pubDate>Thu, 14 Jan 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/links/mirror/</guid>
+      <description>Docker Hub 本地配置 创建或编辑 /etc/docker/daemon.json：
+1{ 2 &amp;#34;registry-mirrors&amp;#34;: [ 3 &amp;#34;https://docker.mirrors.ustc.edu.cn&amp;#34;, 4 &amp;#34;https://reg-mirror.qiniu.com&amp;#34; 5 ] 6} 执行下面命令
+1sudo systemctl daemon-reload 2sudo systemctl restart docker 镜像列表 无需登录：
+ Azure 中国镜像 - https://dockerhub.azk8s.cn 科大镜像站 - https://docker.mirrors.ustc.edu.cn 七牛云 - https://reg-mirror.qiniu.com 网易云 - https://hub-mirror.c.163.com 腾讯云 - https://mirror.ccs.tencentyun.com  需登录：
+ DaoCloud - http://&amp;lt;your_code&amp;gt;.m.daocloud.io 阿里云 - https://&amp;lt;your_code&amp;gt;.mirror.aliyuncs.com  </description>
+    </item>
+    
+  </channel>
+</rss>
