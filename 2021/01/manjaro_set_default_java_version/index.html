@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="" class="page">
   <head>
-<title>Ubuntu安装Postgres | 保罗札记</title>
+<title>Manjaro设置默认Java版本 | 保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,15 +19,17 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="ubuntu自带的软件仓库可能没有最新的postgres，这就需要自己手动添加安装源，再安装
-1# 添加安装源 2sudo sh -c &#39;echo &#34;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&#34; …">
+<meta name="description" content="如果本机装了多个java版本，会有一个默认的java版本。随着java版本的不断升级，一些新的工具会要求高版本的java，否则无法运行。这个时候，就需要修改默认的java版本。
+查看当前的java版本
+1$ java -version 2openjdk version &#34;11.0.10&#34; …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="Ubuntu安装Postgres" />
-<meta property="og:url" content="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" />
-<meta property="og:title" content="Ubuntu安装Postgres" />
-<meta property="og:description" content="ubuntu自带的软件仓库可能没有最新的postgres，这就需要自己手动添加安装源，再安装
-1# 添加安装源 2sudo sh -c &#39;echo &#34;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&#34; …" />
+<meta name="twitter:title" content="Manjaro设置默认Java版本" />
+<meta property="og:url" content="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/" />
+<meta property="og:title" content="Manjaro设置默认Java版本" />
+<meta property="og:description" content="如果本机装了多个java版本，会有一个默认的java版本。随着java版本的不断升级，一些新的工具会要求高版本的java，否则无法运行。这个时候，就需要修改默认的java版本。
+查看当前的java版本
+1$ java -version 2openjdk version &#34;11.0.10&#34; …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -36,7 +38,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/">
+<link rel="canonical" href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/">
 
     
 
@@ -125,27 +127,25 @@
   
 <div class="grid-inverse wrap content">
   <article class="post_content">
-    <h1 class="post_title">Ubuntu安装Postgres</h1><div class="post_meta">
+    <h1 class="post_title">Manjaro设置默认Java版本</h1><div class="post_meta">
   <svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg>
   <span class="post_date">
-    Oct 27, 2020</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-    <a href='https://www.zengxi.net/tags/ubuntu' class="post_tag button button_translucent">ubuntu
+    Jan 20, 2021</span>
+    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
     </a>
 </div>
 
     
 <div class="post_share">
   分享到:
-  <a href="https://twitter.com/intent/tweet?text=Ubuntu%e5%ae%89%e8%a3%85Postgres&url=https%3a%2f%2fwww.zengxi.net%2f2020%2f10%2fubuntu_install_postgresql%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+  <a href="https://twitter.com/intent/tweet?text=Manjaro%e8%ae%be%e7%bd%ae%e9%bb%98%e8%ae%a4Java%e7%89%88%e6%9c%ac&url=https%3a%2f%2fwww.zengxi.net%2f2021%2f01%2fmanjaro_set_default_java_version%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
     <svg class="icon">
   <use xlink:href="#twitter"></use>
 </svg>
   </a>
-  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2020%2f10%2fubuntu_install_postgresql%2f&t=Ubuntu%e5%ae%89%e8%a3%85Postgres" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2021%2f01%2fmanjaro_set_default_java_version%2f&t=Manjaro%e8%ae%be%e7%bd%ae%e9%bb%98%e8%ae%a4Java%e7%89%88%e6%9c%ac" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
     <svg class="icon">
   <use xlink:href="#facebook"></use>
 </svg>
@@ -155,7 +155,7 @@
   <use xlink:href="#linkedin"></use>
 </svg>
   </a>
-  <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" title="Copy Link" class="link link_yank">
+  <a href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/" title="Copy Link" class="link link_yank">
     <svg class="icon">
   <use xlink:href="#copy"></use>
 </svg>
@@ -163,27 +163,27 @@
 </div>
 
     
-    <p>ubuntu自带的软件仓库可能没有最新的postgres，这就需要自己手动添加安装源，再安装</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln"> 1</span><span class="c1"># 添加安装源</span>
-<span class="ln"> 2</span>sudo sh -c <span class="s1">&#39;echo &#34;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&#34; &gt; /etc/apt/sources.list.d/pgdg.list&#39;</span>
-<span class="ln"> 3</span>
-<span class="ln"> 4</span><span class="c1"># 导入key</span>
-<span class="ln"> 5</span>wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc <span class="p">|</span> sudo apt-key add -
-<span class="ln"> 6</span>
-<span class="ln"> 7</span><span class="c1"># 更新软件列表</span>
-<span class="ln"> 8</span>sudo apt-get update
-<span class="ln"> 9</span>
-<span class="ln">10</span><span class="c1"># 查找相关的软件包</span>
-<span class="ln">11</span>sudo apt-cache search postgres
-<span class="ln">12</span>
-<span class="ln">13</span><span class="c1"># 安装</span>
-<span class="ln">14</span>sudo apt install &lt;对应的软件名称&gt;
-</code></pre></div><hr>
-<p>参考：</p>
-<ul>
-<li><a href="https://www.postgresql.org/download/linux/ubuntu/">https://www.postgresql.org/download/linux/ubuntu/</a></li>
-</ul>
-
+    <p>如果本机装了多个java版本，会有一个默认的java版本。随着java版本的不断升级，一些新的工具会要求高版本的java，否则无法运行。这个时候，就需要修改默认的java版本。</p>
+<p>查看当前的java版本</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>$ java -version
+<span class="ln">2</span>openjdk version <span class="s2">&#34;11.0.10&#34;</span> 2021-01-19
+<span class="ln">3</span>OpenJDK Runtime Environment <span class="o">(</span>build 11.0.10+8<span class="o">)</span>
+<span class="ln">4</span>OpenJDK 64-Bit Server VM <span class="o">(</span>build 11.0.10+8, mixed mode<span class="o">)</span>
+</code></pre></div><p>命令查看已安装的java版本</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>$ archlinux-java status
+<span class="ln">2</span>
+<span class="ln">3</span>Available Java environments:
+<span class="ln">4</span>  java-11-openjdk <span class="o">(</span>default<span class="o">)</span>
+<span class="ln">5</span>  java-15-openjdk
+<span class="ln">6</span>  java-8-openjdk
+</code></pre></div><p>设置新的默认版本</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo archlinux-java <span class="nb">set</span> java-15-openjdk
+</code></pre></div><p>再次查看当前的java版本，可以发现已经变更</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>$ java -version
+<span class="ln">2</span>openjdk version <span class="s2">&#34;15.0.1&#34;</span> 2020-10-20
+<span class="ln">3</span>OpenJDK Runtime Environment <span class="o">(</span>build 15.0.1+9<span class="o">)</span>
+<span class="ln">4</span>OpenJDK 64-Bit Server VM <span class="o">(</span>build 15.0.1+9, mixed mode<span class="o">)</span>
+</code></pre></div>
     
       
     
@@ -197,9 +197,6 @@
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
-      <li>
-        <a href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/" class="nav-link">Manjaro设置默认Java版本</a>
-      </li>
       <li>
         <a href="https://www.zengxi.net/2021/01/k8s_advanced_scheduling/" class="nav-link">Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性</a>
       </li>
@@ -220,6 +217,9 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_deployment/" class="nav-link">Kubernetes in Action笔记 - (12) Deployment</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2020/12/k8s_pod_meta_data/" class="nav-link">Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源</a>
       </li>
     </ul>
     <div>

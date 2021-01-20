@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="">
   <head>
-	<meta name="generator" content="Hugo 0.79.0" />
+	<meta name="generator" content="Hugo 0.80.0" />
 <title>保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -127,6 +127,40 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2018/07/shell-translate-character/">shell中用tr命令转换字符大小写</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 25, 2018</span>
+    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
+    </a>
+    <a href='https://www.zengxi.net/tags/shell' class="post_tag button button_translucent">shell
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在写shell脚本的时候，可能需要将特定的英文字符转换大小写。可以借助tr命令来实现这个功能。
+（1）tr的下面这个命令表示把string1替换成string2
+ tr string1 string2  运行下面的命令
+1echo &#39;this is a pen&#39; | tr &#39;a&#39; &#39;A&#39; 可以看到输出结果中把a换成了A
+ this is A pen  （2）同时，tr命令也支持指定一个字符的范围，在这个范围内分别作替换
+ tr 'c1-c2' 'c3-c4'  比如，如果只需要把从a到h的字符，替换成大写，那么可以用下面的命令
+1tr &#39;a-h&#39; …</p>
+          <a href="https://www.zengxi.net/2018/07/shell-translate-character/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -436,37 +470,6 @@ grep的帮助文档中有这几个参数：
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/06/set-postgres-default-schema/">设置Postgres数据库的默认schema</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 15, 2018</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-    <a href='https://www.zengxi.net/tags/schema' class="post_tag button button_translucent">schema
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">查看当前的schema
-1SHOW search_path; 设置默认schema，仅对当前连接有效
-1SET search_path TO your_schema; 设置默认schema，数据库级别，修改之后的所有连接都有效
-1ALTER database &#34;your_database&#34; SET search_path TO your_schema; </p>
-          <a href="https://www.zengxi.net/2018/06/set-postgres-default-schema/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -517,6 +520,9 @@ grep的帮助文档中有这几个参数：
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/" class="nav-link">Manjaro设置默认Java版本</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/01/k8s_advanced_scheduling/" class="nav-link">Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性</a>
       </li>
       <li>
@@ -536,9 +542,6 @@ grep的帮助文档中有这几个参数：
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_deployment/" class="nav-link">Kubernetes in Action笔记 - (12) Deployment</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_pod_meta_data/" class="nav-link">Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源</a>
       </li>
     </ul>
     <div>
@@ -566,7 +569,7 @@ grep的帮助文档中有这几个参数：
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
           MANJARO
-          <span class="button_tally">4</span>
+          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
@@ -652,7 +655,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=4>MANJARO<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=5>MANJARO<span class="button_tally">5</span>
             </a>
             
             
@@ -735,7 +738,7 @@ grep的帮助文档中有这几个参数：
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
           MANJARO
-          <span class="button_tally">4</span>
+          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/nginx/' class="post_tag button button_translucent">
@@ -902,7 +905,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=4>MANJARO<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=5>MANJARO<span class="button_tally">5</span>
             </a>
             
             

@@ -6,20 +6,25 @@
     <description>Recent content on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 14 Jan 2021 15:00:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Jan 2021 14:15:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>在线学习资源</title>
-      <link>https://www.zengxi.net/links/learning_material/</link>
-      <pubDate>Thu, 14 Jan 2021 15:00:00 +0800</pubDate>
+      <title>Manjaro设置默认Java版本</title>
+      <link>https://www.zengxi.net/2021/01/manjaro_set_default_java_version/</link>
+      <pubDate>Wed, 20 Jan 2021 14:15:00 +0800</pubDate>
       
-      <guid>https://www.zengxi.net/links/learning_material/</guid>
-      <description>Ansible  Ansible中文权威指南 - https://ansible-tran.readthedocs.io/en/latest/  </description>
+      <guid>https://www.zengxi.net/2021/01/manjaro_set_default_java_version/</guid>
+      <description>如果本机装了多个java版本，会有一个默认的java版本。随着java版本的不断升级，一些新的工具会要求高版本的java，否则无法运行。这个时候，就需要修改默认的java版本。
+查看当前的java版本
+1$ java -version 2openjdk version &amp;#34;11.0.10&amp;#34; 2021-01-19 3OpenJDK Runtime Environment (build 11.0.10+8) 4OpenJDK 64-Bit Server VM (build 11.0.10+8, mixed mode) 命令查看已安装的java版本
+1$ archlinux-java status 2 3Available Java environments: 4 java-11-openjdk (default) 5 java-15-openjdk 6 java-8-openjdk 设置新的默认版本
+1sudo archlinux-java set java-15-openjdk 再次查看当前的java版本，可以发现已经变更
+1$ java -version 2openjdk version &amp;#34;15.0.1&amp;#34; 2020-10-20 3OpenJDK Runtime Environment (build 15.0.1+9) 4OpenJDK 64-Bit Server VM (build 15.0.1+9, mixed mode) </description>
     </item>
     
     <item>
       <title>国内常用镜像地址</title>
       <link>https://www.zengxi.net/links/mirror/</link>
-      <pubDate>Thu, 14 Jan 2021 00:00:00 +0800</pubDate>
+      <pubDate>Thu, 14 Jan 2021 15:00:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/links/mirror/</guid>
       <description>Docker Hub 本地配置 创建或编辑 /etc/docker/daemon.json：
@@ -27,6 +32,15 @@
 1sudo systemctl daemon-reload 2sudo systemctl restart docker 镜像列表 无需登录：
  Azure 中国镜像 - https://dockerhub.azk8s.cn 科大镜像站 - https://docker.mirrors.ustc.edu.cn 七牛云 - https://reg-mirror.qiniu.com 网易云 - https://hub-mirror.c.163.com 腾讯云 - https://mirror.ccs.tencentyun.com  需登录：
  DaoCloud - http://&amp;lt;your_code&amp;gt;.m.daocloud.io 阿里云 - https://&amp;lt;your_code&amp;gt;.mirror.aliyuncs.com  </description>
+    </item>
+    
+    <item>
+      <title>在线学习资源</title>
+      <link>https://www.zengxi.net/links/learning_material/</link>
+      <pubDate>Thu, 14 Jan 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/links/learning_material/</guid>
+      <description>Ansible  Ansible中文权威指南 - https://ansible-tran.readthedocs.io/en/latest/  </description>
     </item>
     
     <item>

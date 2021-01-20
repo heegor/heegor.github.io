@@ -4,7 +4,37 @@
   
   <url>
     <loc>https://www.zengxi.net/</loc>
-    <lastmod>2021-01-14T15:00:00+08:00</lastmod>
+    <lastmod>2021-01-20T14:15:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/categories/</loc>
+    <lastmod>2021-01-20T14:15:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/tags/manjaro/</loc>
+    <lastmod>2021-01-20T14:15:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/categories/manjaro/</loc>
+    <lastmod>2021-01-20T14:15:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/2021/01/manjaro_set_default_java_version/</loc>
+    <lastmod>2021-01-20T14:15:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/posts/</loc>
+    <lastmod>2021-01-20T14:15:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/tags/</loc>
+    <lastmod>2021-01-20T14:15:00+08:00</lastmod>
   </url>
   
   <url>
@@ -13,18 +43,13 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/links/learning_material/</loc>
+    <loc>https://www.zengxi.net/links/mirror/</loc>
     <lastmod>2021-01-14T15:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/links/mirror/</loc>
-    <lastmod>2021-01-14T00:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.zengxi.net/categories/</loc>
-    <lastmod>2021-01-05T23:00:00+08:00</lastmod>
+    <loc>https://www.zengxi.net/links/learning_material/</loc>
+    <lastmod>2021-01-14T15:00:00+08:00</lastmod>
   </url>
   
   <url>
@@ -48,17 +73,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/</loc>
-    <lastmod>2021-01-05T23:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.zengxi.net/series/</loc>
-    <lastmod>2021-01-05T23:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.zengxi.net/tags/</loc>
     <lastmod>2021-01-05T23:00:00+08:00</lastmod>
   </url>
   
@@ -290,16 +305,6 @@
   <url>
     <loc>https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/</loc>
     <lastmod>2020-09-20T20:23:45+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.zengxi.net/tags/manjaro/</loc>
-    <lastmod>2020-08-13T12:23:45+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.zengxi.net/categories/manjaro/</loc>
-    <lastmod>2020-08-13T12:23:45+00:00</lastmod>
   </url>
   
   <url>
