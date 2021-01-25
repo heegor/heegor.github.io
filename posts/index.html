@@ -127,6 +127,37 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/">MyBatis查询中动态指定schema</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 25, 2021</span>
+    <a href='https://www.zengxi.net/tags/mybatis' class="post_tag button button_translucent">mybatis
+    </a>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+    <a href='https://www.zengxi.net/tags/schema' class="post_tag button button_translucent">schema
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">由于业务的需要，在查询的时候，需要动态地在SQL语句中指定schema。在mybatis的的查询语句中，可以使用 ${schemaName}。注意，必须要用$, 而不是#
+1SET search_path TO ${schemaName}; 2 3select * from foo where bar = #{bar}; </p>
+          <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/">Manjaro设置默认Java版本</a>
       </h3>
       <div class="post_meta">
@@ -382,39 +413,6 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_config_map_secret/">Kubernetes in Action笔记 - (10) 使用ConfigMap与Secret传递应用配置</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 25, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-    <a href='https://www.zengxi.net/tags/configmap' class="post_tag button button_translucent">configmap
-    </a>
-    <a href='https://www.zengxi.net/tags/secret' class="post_tag button button_translucent">secret
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">向容器传递应用程序的配置参数 方法：
- 向容器传递命令行参数 为每个容器设置自定义环境变量 通过特殊类型的卷将配置文件挂载到容器中  向容器传递命令行参数 在Docker中定义命令与参数 容器中运行的完整指令由两部分组成:命令与参数。Dockerfile中的两种指令分别定义命令与参数这两个部分：
- ENTRYPOINT: 定义容器启动时被调用的可执行程序 CMD: 指定传递给ENTRYPOINT的参数。  尽管可以直接使用CMD指令指定镜像运行时想要执行的命令, 正确的做法依旧 是借助ENTRYPOINT指令, 仅仅用CMD指定所需的默认参数。 这样, 镜像可以直 接运行, 无须添加任何参数
-1docker run …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_config_map_secret/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -459,6 +457,9 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/" class="nav-link">MyBatis查询中动态指定schema</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/" class="nav-link">Manjaro设置默认Java版本</a>
       </li>
       <li>
@@ -478,9 +479,6 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
       </li>
       <li>
         <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="nav-link">Kubernetes in Action笔记 - (13) Statefulset</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_deployment/" class="nav-link">Kubernetes in Action笔记 - (12) Deployment</a>
       </li>
     </ul>
     <div>
@@ -602,6 +600,10 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
+            <a href='https://www.zengxi.net/categories/mybatis/' class=" post_tag button button_translucent" data-position=1>MYBATIS<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/categories/nginx/' class=" post_tag button button_translucent" data-position=2>NGINX<span class="button_tally">2</span>
             </a>
             
@@ -667,7 +669,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
           POSTGRES
-          <span class="button_tally">9</span>
+          <span class="button_tally">10</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -856,6 +858,10 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/mybatis/' class=" post_tag button button_translucent" data-position=1>MYBATIS<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/nas/' class=" post_tag button button_translucent" data-position=1>NAS<span class="button_tally">1</span>
             </a>
             
@@ -872,7 +878,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/postgres/' class=" post_tag button button_translucent" data-position=9>POSTGRES<span class="button_tally">9</span>
+            <a href='https://www.zengxi.net/tags/postgres/' class=" post_tag button button_translucent" data-position=10>POSTGRES<span class="button_tally">10</span>
             </a>
             
             
@@ -888,7 +894,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/schema/' class=" post_tag button button_translucent" data-position=1>SCHEMA<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/schema/' class=" post_tag button button_translucent" data-position=2>SCHEMA<span class="button_tally">2</span>
             </a>
             
             

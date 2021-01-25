@@ -6,7 +6,34 @@
     <description>Recent content in Tags on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 20 Jan 2021 14:15:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Jan 2021 13:59:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mybatis</title>
+      <link>https://www.zengxi.net/tags/mybatis/</link>
+      <pubDate>Mon, 25 Jan 2021 13:59:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/mybatis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postgres</title>
+      <link>https://www.zengxi.net/tags/postgres/</link>
+      <pubDate>Mon, 25 Jan 2021 13:59:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/postgres/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>schema</title>
+      <link>https://www.zengxi.net/tags/schema/</link>
+      <pubDate>Mon, 25 Jan 2021 13:59:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/schema/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>manjaro</title>
       <link>https://www.zengxi.net/tags/manjaro/</link>
@@ -130,15 +157,6 @@
       <pubDate>Mon, 09 Nov 2020 08:23:45 +0000</pubDate>
       
       <guid>https://www.zengxi.net/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>postgres</title>
-      <link>https://www.zengxi.net/tags/postgres/</link>
-      <pubDate>Tue, 27 Oct 2020 08:23:45 +0000</pubDate>
-      
-      <guid>https://www.zengxi.net/tags/postgres/</guid>
       <description></description>
     </item>
     
@@ -616,15 +634,6 @@
       <pubDate>Mon, 25 Jun 2018 03:34:29 +0000</pubDate>
       
       <guid>https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>schema</title>
-      <link>https://www.zengxi.net/tags/schema/</link>
-      <pubDate>Fri, 15 Jun 2018 10:26:05 +0000</pubDate>
-      
-      <guid>https://www.zengxi.net/tags/schema/</guid>
       <description></description>
     </item>
     
