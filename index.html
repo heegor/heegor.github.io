@@ -131,6 +131,64 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/">使用Python在两个Postgres数据库直接复制数据</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 26, 2021</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+    <a href='https://www.zengxi.net/tags/python' class="post_tag button button_translucent">python
+    </a>
+    <a href='https://www.zengxi.net/tags/psycopg2' class="post_tag button button_translucent">psycopg2
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在python脚本中，通过 psycopg2 库的copy_expert，可以很方便地在两个Postgres数据库之间复制数据
+1s = StringIO() 2 3# Export into memory buffer 4sql = &#34;&#34;&#34; 5COPY (select * from foo) TO STDOUT WITH CSV HEADER ENCODING &#39;UTF8&#39;; 6&#34;&#34;&#34; 7 8sourceCursor = sourceConn.cursor() 9sourceCursor.copy_expert(sql, s) 10 11# Import from …</p>
+          <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/01/postgres_copy_table_schema/">Postgres通过SQL语句复制表结构</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 26, 2021</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在创建临时数据表的时候会有用
+1create table if not exists foo as (select * from bar) with no data; </p>
+          <a href="https://www.zengxi.net/2021/01/postgres_copy_table_schema/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/">MyBatis查询中动态指定schema</a>
       </h3>
       <div class="post_meta">
@@ -360,63 +418,6 @@ pod …</p>
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_deployment/">Kubernetes in Action笔记 - (12) Deployment</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 27, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">Deployment是一种更高阶资源, 用于部署应用程序并以声明的方式升级应用。
-在使用 Deployment 时, 实际的 pod是由 Deployment 的 Replicaset 创建和管理的, 而不是由 Deployment 直接创建和管理的。
-在升级应用过程中，部署新版本的应用时，会创建新的Replicaset用于管理版本的pod。升级过程中的某个时刻，就会存在新旧两个版本的Replicaset。因此，需要引入Deployment来协调。
-与Replicaset类似，Deployment也是由标签选择器、期望副数和pod模板组成的。此外,它还包含另一个字段，用于指定一 个部署策略，表示在修改Deployment资源时应该如 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_deployment/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_pod_meta_data/">Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 26, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">通过Downward API传递元数据 对于pod调度、运行前预设的数据，可以通过环境变量或者configMap和secret卷向应用传递配置数据。但是对于那些不能预先知道的数据, 比如pod的IP、 主机名或者是通过ReplicaSet等控制生成的pod名称，该如何获取呢？这种类型的数据，可以通过使用Kubernetes Downward API解决。
-Downward API可以给在pod中运行的进程暴露pod的元数据。目前可以给容器传递以下数据:
- pod的名称 pod的IP pod所在的命名空间 pod运行节点的名称 pod运行所归属的服务账户的名称 每个容器请求的CPU和内存的使用量 每个容器可以使用的CPU …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_pod_meta_data/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -488,6 +489,12 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/" class="nav-link">使用Python在两个Postgres数据库直接复制数据</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/01/postgres_copy_table_schema/" class="nav-link">Postgres通过SQL语句复制表结构</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/" class="nav-link">MyBatis查询中动态指定schema</a>
       </li>
       <li>
@@ -505,12 +512,6 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
       <li>
         <a href="https://www.zengxi.net/2021/01/k8s_node_security/" class="nav-link">Kubernetes in Action笔记 - (15) 节点与网络安全</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_api_server_security/" class="nav-link">Kubernetes in Action笔记 - (14) API Server服务器的安全防护</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="nav-link">Kubernetes in Action笔记 - (13) Statefulset</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -520,13 +521,13 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
-          LINUX
-          <span class="button_tally">9</span>
-        </a>
-        
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
           POSTGRES
+          <span class="button_tally">10</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
+          LINUX
           <span class="button_tally">9</span>
         </a>
         
@@ -643,7 +644,11 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/postgres/' class=" post_tag button button_translucent" data-position=9>POSTGRES<span class="button_tally">9</span>
+            <a href='https://www.zengxi.net/categories/postgres/' class=" post_tag button button_translucent" data-position=10>POSTGRES<span class="button_tally">10</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/python/' class=" post_tag button button_translucent" data-position=1>PYTHON<span class="button_tally">1</span>
             </a>
             
             
@@ -700,7 +705,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
           POSTGRES
-          <span class="button_tally">10</span>
+          <span class="button_tally">12</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -909,7 +914,15 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/postgres/' class=" post_tag button button_translucent" data-position=10>POSTGRES<span class="button_tally">10</span>
+            <a href='https://www.zengxi.net/tags/postgres/' class=" post_tag button button_translucent" data-position=12>POSTGRES<span class="button_tally">12</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/psycopg2/' class=" post_tag button button_translucent" data-position=1>PSYCOPG2<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/python/' class=" post_tag button button_translucent" data-position=1>PYTHON<span class="button_tally">1</span>
             </a>
             
             

@@ -127,6 +127,65 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/">Kubernetes in Action笔记 - (2) k8s集群架构</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 3, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">集群架构 k8s集群由很多节点组成，被分成两种类型：Master节点与Node节点。
+Master节点 承载着控制和管理整个集群系统的 Control Panel。包含下面组件：
+ API Server  一个api服务器，所有外部与k8s集群的交互都需要经过它 可水平扩展   Scheduler  将pod调度到具体的Node节点上 一个master集群中只会有一个节点处于激活状态，由etcd选举产生   Control Manager  执行集群级别的功能，通过apiserver监控集群状态做出相应的处理，如复制组件、持续跟踪工作节点 、处理节点失败等 一个master集群中只会有一个节点处于激活状态，由etcd …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/">Kubernetes in Action笔记 - (1) 容器技术介绍</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 2, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+    <a href='https://www.zengxi.net/tags/container' class="post_tag button button_translucent">container
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">容器允许你在同一台机器上运行多个服务, 不仅提供不同的环境给每个服务, 而且将它们互相隔离。
+容器与虚拟机比较 轻量级 和虚拟机比较, 容器更加轻量级, 它允许在相同的硬件上运行更多数量的组件。主要是因为每个虚拟机需要运行自己的一组系统进程, 这就产生了除组件进程消耗以外的额外计算资源损耗。而一个容器仅仅是运行在宿主机上被隔离的单个进程, 仅消耗应用容器消耗的资源, 不会有其他进程的开销。
+虚拟化 多个容器则会完全执行运行在宿主机上的同一个内核的系统调用, 此内核是唯一一个在宿主机操作系统上执行指令的内核。 CPU也不需要做任何对虚拟机能做那样的虚拟化。
+隔离性 虚拟机的主要好处是它们提供完全隔离的环境, 因为每个虚拟机运行在它自己 …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/11/nginx_security/">Nginx服务器安全加固</a>
       </h3>
       <div class="post_meta">
@@ -359,64 +418,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/08/manjaro_debtap/">Manjaro安装deb包</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Aug 13, 2020</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">安装debtap
-1yay -S debtap 替换源，解决国内debtap同步仓库执行超慢的问题。打开 /usr/bin/debtap，更换 debtap 内容：
- 将 http://ftp.debian.org/debian/dists 替换成 https://mirrors.ustc.edu.cn/debian/dists 将 http://archive.ubuntu.com/ubuntu/dists 替换成 https://mirrors.ustc.edu.cn/ubuntu/dists  升级debtap数据库
-1sudo debtap -u 转换deb包。注意： 转换过程中会提示输入包名，以及license。包名随 …</p>
-          <a href="https://www.zengxi.net/2020/08/manjaro_debtap/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/08/linux_auto_set_brightness/">Manjaro笔记本启动时自动设置屏幕亮度</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Aug 10, 2020</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">笔记本在manjaro在启动的时候，屏幕可能会默认设置为最大亮度。可以通过设置开机启动脚本，来设置启动时候的亮度。
-1. 创建一个启动service脚本 执行下面的命令
-1sudo vim /etc/systemd/system/rc-local.service 输入下面的内容
-1[Unit] 2Description=&#34;/etc/rc.local Compatibility&#34; 3 4[Service] 5Type=oneshot 6ExecStart=/etc/rc.local start 7TimeoutSec=0 8StandardInput=tty 9RemainAfterExit=yes …</p>
-          <a href="https://www.zengxi.net/2020/08/linux_auto_set_brightness/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -491,6 +492,12 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/" class="nav-link">使用Python在两个Postgres数据库直接复制数据</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/01/postgres_copy_table_schema/" class="nav-link">Postgres通过SQL语句复制表结构</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/" class="nav-link">MyBatis查询中动态指定schema</a>
       </li>
       <li>
@@ -508,12 +515,6 @@
       <li>
         <a href="https://www.zengxi.net/2021/01/k8s_node_security/" class="nav-link">Kubernetes in Action笔记 - (15) 节点与网络安全</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_api_server_security/" class="nav-link">Kubernetes in Action笔记 - (14) API Server服务器的安全防护</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="nav-link">Kubernetes in Action笔记 - (13) Statefulset</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -523,13 +524,13 @@
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
-          LINUX
-          <span class="button_tally">9</span>
-        </a>
-        
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
           POSTGRES
+          <span class="button_tally">10</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
+          LINUX
           <span class="button_tally">9</span>
         </a>
         
@@ -646,7 +647,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/postgres/' class=" post_tag button button_translucent" data-position=9>POSTGRES<span class="button_tally">9</span>
+            <a href='https://www.zengxi.net/categories/postgres/' class=" post_tag button button_translucent" data-position=10>POSTGRES<span class="button_tally">10</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/python/' class=" post_tag button button_translucent" data-position=1>PYTHON<span class="button_tally">1</span>
             </a>
             
             
@@ -703,7 +708,7 @@
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
           POSTGRES
-          <span class="button_tally">10</span>
+          <span class="button_tally">12</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -912,7 +917,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/postgres/' class=" post_tag button button_translucent" data-position=10>POSTGRES<span class="button_tally">10</span>
+            <a href='https://www.zengxi.net/tags/postgres/' class=" post_tag button button_translucent" data-position=12>POSTGRES<span class="button_tally">12</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/psycopg2/' class=" post_tag button button_translucent" data-position=1>PSYCOPG2<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/python/' class=" post_tag button button_translucent" data-position=1>PYTHON<span class="button_tally">1</span>
             </a>
             
             
