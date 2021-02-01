@@ -21,8 +21,8 @@
 <meta property="og:type" content="article">
 <meta name="description" content="SEO对于网站的推广很重要，大多数搜索引擎都提供了一些API用于给站长主动提交URL，加快网页被收录的速度。
 百度提供了快速收录的API接口，下面这个Python脚本可以用来读取本地磁盘中的sitemap.xml文件，并调用接口提交URL至百度。
-仅需要修改4个参数：
- lastUpdateTimeStr - 上次推送 …">
+仅需要修改下面的参数：
+ lastUpdateTimeStr - 上次推 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="用Python读取sitemap并调用百度接口推送URL" />
@@ -30,8 +30,8 @@
 <meta property="og:title" content="用Python读取sitemap并调用百度接口推送URL" />
 <meta property="og:description" content="SEO对于网站的推广很重要，大多数搜索引擎都提供了一些API用于给站长主动提交URL，加快网页被收录的速度。
 百度提供了快速收录的API接口，下面这个Python脚本可以用来读取本地磁盘中的sitemap.xml文件，并调用接口提交URL至百度。
-仅需要修改4个参数：
- lastUpdateTimeStr - 上次推送 …" />
+仅需要修改下面的参数：
+ lastUpdateTimeStr - 上次推 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -169,12 +169,14 @@
     
     <p>SEO对于网站的推广很重要，大多数搜索引擎都提供了一些API用于给站长主动提交URL，加快网页被收录的速度。</p>
 <p>百度提供了快速收录的API接口，下面这个Python脚本可以用来读取本地磁盘中的sitemap.xml文件，并调用接口提交URL至百度。</p>
-<p>仅需要修改4个参数：</p>
+<p>仅需要修改下面的参数：</p>
 <ul>
 <li>lastUpdateTimeStr - 上次推送的时间。会与sitemap.xml中的时间做比较，仅推送在该时间之后更新的URL</li>
 <li>siteMapPath - sitemap.xml在本地磁盘上的存放路径</li>
 <li>siteUrl - 网站地址</li>
 <li>baiduApiToken - Baidu API的token</li>
+<li>tmpFile - 临时文件的保存地址</li>
+<li>ignorePathPrefixes - 需要忽略的URL的前缀</li>
 </ul>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="ln"> 1</span><span class="ch">#!/usr/bin/env python3</span>
 <span class="ln"> 2</span><span class="c1"># coding: utf-8</span>
@@ -203,18 +205,18 @@
 <span class="ln">25</span><span class="n">siteMapPath</span><span class="o">=</span><span class="s1">&#39;public/sitemap.xml&#39;</span>
 <span class="ln">26</span><span class="n">siteUrl</span><span class="o">=</span><span class="s1">&#39;https://www.zengxi.net&#39;</span>
 <span class="ln">27</span><span class="n">baiduApiToken</span><span class="o">=</span><span class="s1">&#39;faketoken&#39;</span>
-<span class="ln">28</span>
-<span class="ln">29</span><span class="c1">### CONSTANTS ###</span>
-<span class="ln">30</span><span class="n">SITEMAP_DATETIME_FORMAT</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S%z&#39;</span>
-<span class="ln">31</span><span class="n">tmpFile</span><span class="o">=</span><span class="s2">&#34;/tmp/submitSiteMap&#34;</span>
-<span class="ln">32</span><span class="n">ignorePathPrefixes</span><span class="o">=</span><span class="p">[</span>
-<span class="ln">33</span>     <span class="s1">&#39;https://www.zengxi.net/archives/&#39;</span><span class="p">,</span>
-<span class="ln">34</span>     <span class="s1">&#39;https://www.zengxi.net/categories/&#39;</span><span class="p">,</span>
-<span class="ln">35</span>     <span class="s1">&#39;https://www.zengxi.net/links/&#39;</span><span class="p">,</span>
-<span class="ln">36</span>     <span class="s1">&#39;https://www.zengxi.net/posts/&#39;</span><span class="p">,</span>
-<span class="ln">37</span>     <span class="s1">&#39;https://www.zengxi.net/series/&#39;</span><span class="p">,</span>
-<span class="ln">38</span>     <span class="s1">&#39;https://www.zengxi.net/tags/&#39;</span>
-<span class="ln">39</span><span class="p">]</span>
+<span class="ln">28</span><span class="n">tmpFile</span><span class="o">=</span><span class="s2">&#34;/tmp/submitSiteMap&#34;</span>
+<span class="ln">29</span><span class="n">ignorePathPrefixes</span><span class="o">=</span><span class="p">[</span>
+<span class="ln">30</span>     <span class="s1">&#39;https://www.zengxi.net/archives/&#39;</span><span class="p">,</span>
+<span class="ln">31</span>     <span class="s1">&#39;https://www.zengxi.net/categories/&#39;</span><span class="p">,</span>
+<span class="ln">32</span>     <span class="s1">&#39;https://www.zengxi.net/links/&#39;</span><span class="p">,</span>
+<span class="ln">33</span>     <span class="s1">&#39;https://www.zengxi.net/posts/&#39;</span><span class="p">,</span>
+<span class="ln">34</span>     <span class="s1">&#39;https://www.zengxi.net/series/&#39;</span><span class="p">,</span>
+<span class="ln">35</span>     <span class="s1">&#39;https://www.zengxi.net/tags/&#39;</span>
+<span class="ln">36</span><span class="p">]</span>
+<span class="ln">37</span>
+<span class="ln">38</span><span class="c1">### CONSTANTS ###</span>
+<span class="ln">39</span><span class="n">SITEMAP_DATETIME_FORMAT</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S%z&#39;</span>
 <span class="ln">40</span>
 <span class="ln">41</span>
 <span class="ln">42</span><span class="n">lastUpdateTime</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">lastUpdateTimeStr</span><span class="p">,</span> <span class="n">SITEMAP_DATETIME_FORMAT</span><span class="p">)</span>
