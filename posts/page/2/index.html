@@ -127,6 +127,36 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_statefulset/">Kubernetes in Action笔记 - (13) Statefulset</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 29, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">了解Statefulset 与ReplicaSet比较 Statefulset 保证了pod在重新调度后保留它们的标识和状态。
+与ReplicaSet类似, Statefulset 也是依据Statefulset 的pod模板创建的，也会指定期望的副本个数。
+不同的是, Statefulset创建的pod副本并不是完全一样的。每个pod都可以拥有一组独立的数据卷(持久化状态)。pod的名字都是规律的(固定的), 而不是每个新pod都随机获取一个名字。
+提供稳定的网络标识 一个Statefulset创建的每个pod都有一个从零开始的顺序索引, 这个会体现在pod的名称和主机名上, 同样还会体现在pod对应的固定存储上。
+与普通的pod …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/12/k8s_deployment/">Kubernetes in Action笔记 - (12) Deployment</a>
       </h3>
       <div class="post_meta">
@@ -384,34 +414,6 @@ phase有以下几种值：
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/">Kubernetes in Action笔记 - (3) Pod介绍</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 3, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">什么是Pod Pod是k8s的基本构建模块，包含一个或者多个容器。一个Pod中的所有容器都运行在同—个节点上，绝不跨越两个节点
-为何需要Pod 多个容器比单个容器中包含多个进程要好 想象一个由多个进程组成的应用程序, 无论是通过ipc (进程间通信)还是本地存储文件进行通信, 都要求它们运行于同一 台机器上。 在k8s中, 我们经常在容器中运行进程, 由于每一个容器都非常像一台独立的机器, 此时你可能认为在单个容器中运行多个进程是合乎逻辑的, 然而在实践中这种做法并不合理。
-容器被设计为每个容器只运行一个进程(除非进程本身产生子进程)。如果在单个容器中运行多个不相关的进程, 那么保持所有进程运行、 管理它们的日志等将会是我们的责任。 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -483,6 +485,9 @@ phase有以下几种值：
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="nav-link">用Python读取sitemap并调用百度接口推送URL</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/" class="nav-link">使用Python在两个Postgres数据库直接复制数据</a>
       </li>
       <li>
@@ -502,9 +507,6 @@ phase有以下几种值：
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management/" class="nav-link">Kubernetes in Action笔记 - (16) 计算资源管理</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/k8s_node_security/" class="nav-link">Kubernetes in Action笔记 - (15) 节点与网络安全</a>
       </li>
     </ul>
     <div>
@@ -565,6 +567,11 @@ phase有以下几种值：
           <span class="button_tally">2</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/python/' class="post_tag button button_translucent">
+          PYTHON
+          <span class="button_tally">2</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/terraform/' class="post_tag button button_translucent">
           TERRAFORM
           <span class="button_tally">2</span>
@@ -573,11 +580,6 @@ phase有以下几种值：
         <a href='https://www.zengxi.net/categories/zookeeper/' class="post_tag button button_translucent">
           ZOOKEEPER
           <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/chrome/' class="post_tag button button_translucent">
-          CHROME
-          <span class="button_tally">1</span>
         </a>
         
         
@@ -642,7 +644,7 @@ phase有以下几种值：
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/python/' class=" post_tag button button_translucent" data-position=1>PYTHON<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/python/' class=" post_tag button button_translucent" data-position=2>PYTHON<span class="button_tally">2</span>
             </a>
             
             
@@ -916,7 +918,7 @@ phase有以下几种值：
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/python/' class=" post_tag button button_translucent" data-position=1>PYTHON<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/python/' class=" post_tag button button_translucent" data-position=2>PYTHON<span class="button_tally">2</span>
             </a>
             
             
@@ -941,6 +943,10 @@ phase有以下几种值：
             
             
             <a href='https://www.zengxi.net/tags/security/' class=" post_tag button button_translucent" data-position=1>SECURITY<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/seo/' class=" post_tag button button_translucent" data-position=1>SEO<span class="button_tally">1</span>
             </a>
             
             

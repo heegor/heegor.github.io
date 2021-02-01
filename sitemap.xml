@@ -4,12 +4,42 @@
   
   <url>
     <loc>https://www.zengxi.net/</loc>
-    <lastmod>2021-01-26T17:17:00+08:00</lastmod>
+    <lastmod>2021-02-01T18:06:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/categories/</loc>
-    <lastmod>2021-01-26T17:17:00+08:00</lastmod>
+    <lastmod>2021-02-01T18:06:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/posts/</loc>
+    <lastmod>2021-02-01T18:06:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/tags/python/</loc>
+    <lastmod>2021-02-01T18:06:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/categories/python/</loc>
+    <lastmod>2021-02-01T18:06:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/tags/seo/</loc>
+    <lastmod>2021-02-01T18:06:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/tags/</loc>
+    <lastmod>2021-02-01T18:06:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/2021/02/python_push_url_to_baidu/</loc>
+    <lastmod>2021-02-01T18:06:00+08:00</lastmod>
   </url>
   
   <url>
@@ -18,27 +48,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/posts/</loc>
-    <lastmod>2021-01-26T17:17:00+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.zengxi.net/tags/psycopg2/</loc>
-    <lastmod>2021-01-26T17:17:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.zengxi.net/tags/python/</loc>
-    <lastmod>2021-01-26T17:17:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.zengxi.net/categories/python/</loc>
-    <lastmod>2021-01-26T17:17:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.zengxi.net/tags/</loc>
     <lastmod>2021-01-26T17:17:00+08:00</lastmod>
   </url>
   

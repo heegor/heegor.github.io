@@ -6,7 +6,25 @@
     <description>Recent content in Tags on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 26 Jan 2021 17:17:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Feb 2021 18:06:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>python</title>
+      <link>https://www.zengxi.net/tags/python/</link>
+      <pubDate>Mon, 01 Feb 2021 18:06:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>seo</title>
+      <link>https://www.zengxi.net/tags/seo/</link>
+      <pubDate>Mon, 01 Feb 2021 18:06:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/seo/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>postgres</title>
       <link>https://www.zengxi.net/tags/postgres/</link>
@@ -22,15 +40,6 @@
       <pubDate>Tue, 26 Jan 2021 17:17:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/tags/psycopg2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://www.zengxi.net/tags/python/</link>
-      <pubDate>Tue, 26 Jan 2021 17:17:00 +0800</pubDate>
-      
-      <guid>https://www.zengxi.net/tags/python/</guid>
       <description></description>
     </item>
     

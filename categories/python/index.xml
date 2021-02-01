@@ -6,7 +6,19 @@
     <description>Recent content in python on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 26 Jan 2021 17:17:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Feb 2021 18:06:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用Python读取sitemap并调用百度接口推送URL</title>
+      <link>https://www.zengxi.net/2021/02/python_push_url_to_baidu/</link>
+      <pubDate>Mon, 01 Feb 2021 18:06:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/02/python_push_url_to_baidu/</guid>
+      <description>SEO对于网站的推广很重要，大多数搜索引擎都提供了一些API用于给站长主动提交URL，加快网页被收录的速度。
+百度提供了快速收录的API接口，下面这个Python脚本可以用来读取本地磁盘中的sitemap.xml文件，并调用接口提交URL至百度。
+仅需要修改4个参数：
+ lastUpdateTimeStr - 上次推送的时间。会与sitemap.xml中的时间做比较，仅推送在该时间之后更新的URL siteMapPath - sitemap.xml在本地磁盘上的存放路径 siteUrl - 网站地址 baiduApiToken - Baidu API的token  1#!/usr/bin/env python3 2# coding: utf-8 3 4import xml.etree.ElementTree as ET 5from datetime import datetime 6import os 7 8 9### Methods ######### 10def stripNs(el): 11 # Recursively search this element tree, removing namespaces. 12 if el.tag.startswith(&amp;#34;{&amp;#34;): 13 el.tag = el.tag.split(&amp;#39;}&amp;#39;, 1)[1] # strip namespace 14 for k in el.attrib.keys(): 15 if k.startswith(&amp;#34;{&amp;#34;): 16 k2 = k.</description>
+    </item>
+    
     <item>
       <title>使用Python在两个Postgres数据库直接复制数据</title>
       <link>https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/</link>
