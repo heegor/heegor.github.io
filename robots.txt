@@ -2,4 +2,4 @@ Sitemap: https://www.zengxi.net/zh-cn/sitemap.xml
 
 User-agent: *
 Disallow: /fonts/
-
+Disallow: /images/

@@ -4,17 +4,42 @@
   
   <url>
     <loc>https://www.zengxi.net/</loc>
-    <lastmod>2021-02-01T18:06:00+08:00</lastmod>
+    <lastmod>2021-02-20T13:12:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/categories/</loc>
-    <lastmod>2021-02-01T18:06:00+08:00</lastmod>
+    <lastmod>2021-02-20T13:12:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/tags/elastic-search/</loc>
+    <lastmod>2021-02-20T13:12:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/posts/</loc>
-    <lastmod>2021-02-01T18:06:00+08:00</lastmod>
+    <lastmod>2021-02-20T13:12:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/categories/sre%E9%82%A3%E7%82%B9%E4%BA%8B/</loc>
+    <lastmod>2021-02-20T13:12:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/tags/</loc>
+    <lastmod>2021-02-20T13:12:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2021-02-20T13:12:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/2021/02/es_search_improvement/</loc>
+    <lastmod>2021-02-20T13:12:00+08:00</lastmod>
   </url>
   
   <url>
@@ -29,11 +54,6 @@
   
   <url>
     <loc>https://www.zengxi.net/tags/seo/</loc>
-    <lastmod>2021-02-01T18:06:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.zengxi.net/tags/</loc>
     <lastmod>2021-02-01T18:06:00+08:00</lastmod>
   </url>
   
@@ -263,11 +283,6 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/tags/elastic-search/</loc>
-    <lastmod>2020-11-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.zengxi.net/categories/elastic-search/</loc>
     <lastmod>2020-11-19T00:00:00+00:00</lastmod>
   </url>
@@ -469,11 +484,6 @@
   
   <url>
     <loc>https://www.zengxi.net/2020/07/jetty_tmp_dir/</loc>
-    <lastmod>2020-07-14T22:03:51+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.zengxi.net/categories/%E5%A1%AB%E5%9D%91%E4%B9%8B%E6%97%85/</loc>
     <lastmod>2020-07-14T22:03:51+00:00</lastmod>
   </url>
   

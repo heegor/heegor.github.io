@@ -127,6 +127,35 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/02/es_search_improvement/">订单ES查询性能优化</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Feb 20, 2021</span>
+    <a href='https://www.zengxi.net/tags/elastic-search' class="post_tag button button_translucent">elastic search
+    </a>
+    <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96' class="post_tag button button_translucent">性能优化
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">背景 由于系统中的订单量大，一些查询语句需要级联多张表来查询，单纯靠数据库的索引已经无法满足查询速度与用户界面响应速度的要求，因此在5年前引入了ES来加快查询速度。但是，原先的方案中ES存放的是全量的订单数据，并且是存放在同一个数据库索引中，随着业务的发展与订单量的累积，ES查询的速度已经越来越慢。通过Grafana监控数据，可以看到单个索引的数据量已达到1.5TB，主要的性能指标越来越差。ES的CPU使用率不时地大于80%，甚至100%，导致极端情况下ES查询耗时十几秒。对于用户的直观感受就是，在界面上面查询数据，需要耗时很久才能看到数据。
+解决方案 系统总是慢慢演变的，某个时间点的解决方案都是基于当前的一些情况，满足近3年内的需 …</p>
+          <a href="https://www.zengxi.net/2021/02/es_search_improvement/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/">Elastic Search vm.max_map_count too low 错误</a>
       </h3>
       <div class="post_meta">
@@ -196,6 +225,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/02/es_search_improvement/" class="nav-link">订单ES查询性能优化</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="nav-link">用Python读取sitemap并调用百度接口推送URL</a>
       </li>
       <li>
@@ -216,9 +248,6 @@
       <li>
         <a href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/" class="nav-link">Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management/" class="nav-link">Kubernetes in Action笔记 - (16) 计算资源管理</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -238,9 +267,9 @@
           <span class="button_tally">9</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/%E5%A1%AB%E5%9D%91%E4%B9%8B%E6%97%85/' class="post_tag button button_translucent">
-          填坑之旅
-          <span class="button_tally">8</span>
+        <a href='https://www.zengxi.net/categories/sre%E9%82%A3%E7%82%B9%E4%BA%8B/' class="post_tag button button_translucent">
+          SRE那点事
+          <span class="button_tally">9</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -363,6 +392,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/categories/sre%E9%82%A3%E7%82%B9%E4%BA%8B/' class=" post_tag button button_translucent" data-position=9>SRE那点事<span class="button_tally">9</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/categories/terraform/' class=" post_tag button button_translucent" data-position=2>TERRAFORM<span class="button_tally">2</span>
             </a>
             
@@ -372,10 +405,6 @@
             
             
             <a href='https://www.zengxi.net/categories/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/categories/%E5%A1%AB%E5%9D%91%E4%B9%8B%E6%97%85/' class=" post_tag button button_translucent" data-position=8>填坑之旅<span class="button_tally">8</span>
             </a>
             
             
@@ -460,6 +489,11 @@
           <span class="button_tally">2</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/elastic-search/' class="post_tag button button_translucent">
+          ELASTIC-SEARCH
+          <span class="button_tally">2</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/grep/' class="post_tag button button_translucent">
           GREP
           <span class="button_tally">2</span>
@@ -467,11 +501,6 @@
         
         <a href='https://www.zengxi.net/tags/nodejs/' class="post_tag button button_translucent">
           NODEJS
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/pglogical/' class="post_tag button button_translucent">
-          PGLOGICAL
           <span class="button_tally">2</span>
         </a>
         
@@ -521,7 +550,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/elastic-search/' class=" post_tag button button_translucent" data-position=1>ELASTIC-SEARCH<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/elastic-search/' class=" post_tag button button_translucent" data-position=2>ELASTIC-SEARCH<span class="button_tally">2</span>
             </a>
             
             
@@ -738,6 +767,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
             </a>
             
             

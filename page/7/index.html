@@ -131,6 +131,40 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/">重建基于pglogical逻辑复制的从库</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 6, 2019</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+    <a href='https://www.zengxi.net/tags/pglogical' class="post_tag button button_translucent">pglogical
+    </a>
+    <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93' class="post_tag button button_translucent">从库
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">《Postgres 9.x 升级至 10.x》一文中提到了使用pglogical逻辑复制升级。基于这种方式的升级有个缺点，就是主库的DDL发生改变的话，那么从库的复制就会有影响，可能需要重建从库来解决。
+重建从库的步骤与之前创建逻辑复制有点类似，但是由于之前已经做过一些操作，所以相比之下，少了一些步骤。
+从库中删除数据库，再创建一个空的数据库 由于表结构的改变，原先的数据都不能用了，需要重新同步。创建新的空数据库是最快的方式
+从库中导入最新的表结构 在 provider 上导出结构数据
+1sudo -iu postgres pg_dumpall --schema-only -f dump.sql 在 subscriber 上导入结构 …</p>
+          <a href="https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2019/12/pg-upgrade-version/">Postgres 9.x 升级至 10.x</a>
       </h3>
       <div class="post_meta">
@@ -428,39 +462,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/06/redis-data-migration/">使用redis-cli与AOF迁移数据</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 27, 2018</span>
-    <a href='https://www.zengxi.net/tags/redis' class="post_tag button button_translucent">redis
-    </a>
-    <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB' class="post_tag button button_translucent">数据迁移
-    </a>
-    <a href='https://www.zengxi.net/tags/migration' class="post_tag button button_translucent">migration
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">把一台Redis上的数据，迁移到另外一台Redis服务器上，有很多种方式。其中一个简便的方法是，利用Redis自带的命令行工具redis-cli，实现数据的无缝迁移。
-在旧的Redis服务器上开启AOF 执行下面的命令，检查AOF是否开启。返回yes表示开启，no表示关闭
-1redis-cli -h old_redis_ip -p old_redis_port config get appendonly 如果未开启，执行下面的命令开启AOF
-1redis-cli -h old_redis_ip -p old_redis_port config set appendonly yes 复制AOF文件 默认生成的AOF文件名 …</p>
-          <a href="https://www.zengxi.net/2018/06/redis-data-migration/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -538,6 +539,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/02/es_search_improvement/" class="nav-link">订单ES查询性能优化</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="nav-link">用Python读取sitemap并调用百度接口推送URL</a>
       </li>
       <li>
@@ -558,9 +562,6 @@
       <li>
         <a href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/" class="nav-link">Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management/" class="nav-link">Kubernetes in Action笔记 - (16) 计算资源管理</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -580,9 +581,9 @@
           <span class="button_tally">9</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/%E5%A1%AB%E5%9D%91%E4%B9%8B%E6%97%85/' class="post_tag button button_translucent">
-          填坑之旅
-          <span class="button_tally">8</span>
+        <a href='https://www.zengxi.net/categories/sre%E9%82%A3%E7%82%B9%E4%BA%8B/' class="post_tag button button_translucent">
+          SRE那点事
+          <span class="button_tally">9</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -705,6 +706,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/categories/sre%E9%82%A3%E7%82%B9%E4%BA%8B/' class=" post_tag button button_translucent" data-position=9>SRE那点事<span class="button_tally">9</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/categories/terraform/' class=" post_tag button button_translucent" data-position=2>TERRAFORM<span class="button_tally">2</span>
             </a>
             
@@ -714,10 +719,6 @@
             
             
             <a href='https://www.zengxi.net/categories/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/categories/%E5%A1%AB%E5%9D%91%E4%B9%8B%E6%97%85/' class=" post_tag button button_translucent" data-position=8>填坑之旅<span class="button_tally">8</span>
             </a>
             
             
@@ -802,6 +803,11 @@
           <span class="button_tally">2</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/elastic-search/' class="post_tag button button_translucent">
+          ELASTIC-SEARCH
+          <span class="button_tally">2</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/grep/' class="post_tag button button_translucent">
           GREP
           <span class="button_tally">2</span>
@@ -809,11 +815,6 @@
         
         <a href='https://www.zengxi.net/tags/nodejs/' class="post_tag button button_translucent">
           NODEJS
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/pglogical/' class="post_tag button button_translucent">
-          PGLOGICAL
           <span class="button_tally">2</span>
         </a>
         
@@ -863,7 +864,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/elastic-search/' class=" post_tag button button_translucent" data-position=1>ELASTIC-SEARCH<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/elastic-search/' class=" post_tag button button_translucent" data-position=2>ELASTIC-SEARCH<span class="button_tally">2</span>
             </a>
             
             
@@ -1080,6 +1081,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
             </a>
             
             
