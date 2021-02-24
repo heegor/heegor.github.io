@@ -127,6 +127,34 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 11, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">Pod生命周期 Pod的phase是Pod生命周期中的简单宏观描述，定义在Pod的PodStatus对象的phase 字段中。
+phase有以下几种值：
+   状态值 说明     挂起（Pending） Pod 已被 Kubernetes 系统接受，但有一个或者多个容器镜像尚未创建。等待时间包括调度 Pod 的时间和通过网络下载镜像的时间。   运行中（Running） 该 Pod 已经绑定到了一个节点上，Pod 中所有的容器都已被创建。至少有一个容器正在运行，或者正处于启动或重启状态。   成功（Succeeded） Pod 中的所有容器都被成功终止，并且不会再重启。   失败（Failed） Pod 中的所有容器都已终止了，并 …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/">Kubernetes in Action笔记 - (4) 标签、注解与命名空间</a>
       </h3>
       <div class="post_meta">
@@ -388,35 +416,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/">Ubuntu安装Postgres</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Oct 27, 2020</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-    <a href='https://www.zengxi.net/tags/ubuntu' class="post_tag button button_translucent">ubuntu
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">ubuntu自带的软件仓库可能没有最新的postgres，这就需要自己手动添加安装源，再安装
-1# 添加安装源 2sudo sh -c &#39;echo &#34;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&#34; &gt; /etc/apt/sources.list.d/pgdg.list&#39; 3 4# 导入key 5wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - 6 7# …</p>
-          <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -491,6 +490,9 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/02/java7_gramma_new_features/" class="nav-link">Java 7新特性 - (1)Java语法特性</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/02/es_search_improvement/" class="nav-link">订单ES查询性能优化</a>
       </li>
       <li>
@@ -510,9 +512,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/01/k8s_advanced_scheduling/" class="nav-link">Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/" class="nav-link">Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</a>
       </li>
     </ul>
     <div>
@@ -543,6 +542,11 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
           <span class="button_tally">5</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
           MAC
           <span class="button_tally">3</span>
@@ -555,11 +559,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
         
         <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
           <span class="button_tally">2</span>
         </a>
         
@@ -610,7 +609,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=2>JAVA<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=3>JAVA<span class="button_tally">3</span>
             </a>
             
             
@@ -694,6 +693,11 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
           <span class="button_tally">18</span>
         </a>
         
+        <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
+          JAVA各版本新特性
+          <span class="button_tally">1</span>
+        </a>
+        
         
       </nav>
     </div>
@@ -720,6 +724,11 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
           <span class="button_tally">5</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">4</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/nginx/' class="post_tag button button_translucent">
           NGINX
           <span class="button_tally">4</span>
@@ -732,11 +741,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
         
         <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">3</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
-          JAVA
           <span class="button_tally">3</span>
         </a>
         
@@ -844,7 +848,11 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=3>JAVA<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=4>JAVA<span class="button_tally">4</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/java-7/' class=" post_tag button button_translucent" data-position=1>JAVA-7<span class="button_tally">1</span>
             </a>
             
             

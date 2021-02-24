@@ -163,25 +163,22 @@
   <ul>
     <li><a href="#docker-hub">Docker Hub</a>
       <ul>
-        <li><a href="#本地配置">本地配置</a></li>
         <li><a href="#镜像列表">镜像列表</a></li>
+        <li><a href="#本地配置">本地配置</a></li>
       </ul>
     </li>
+    <li><a href="#quayio">quay.io</a>
+      <ul>
+        <li><a href="#镜像列表-1">镜像列表</a></li>
+        <li><a href="#本地配置-1">本地配置</a></li>
+      </ul>
+    </li>
+    <li><a href="#gcrio-和-k8sgcrio">gcr.io 和 k8s.gcr.io</a></li>
   </ul>
 </nav>
-    <h2 id="docker-hub">Docker Hub</h2>
-<h3 id="本地配置">本地配置</h3>
-<p>创建或编辑 /etc/docker/daemon.json：</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="ln">1</span><span class="p">{</span>
-<span class="ln">2</span>    <span class="nt">&#34;registry-mirrors&#34;</span><span class="p">:</span> <span class="p">[</span>
-<span class="ln">3</span>        <span class="s2">&#34;https://docker.mirrors.ustc.edu.cn&#34;</span><span class="p">,</span>
-<span class="ln">4</span>        <span class="s2">&#34;https://reg-mirror.qiniu.com&#34;</span>
-<span class="ln">5</span>    <span class="p">]</span>
-<span class="ln">6</span><span class="p">}</span>
-</code></pre></div><p>执行下面命令</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>sudo systemctl daemon-reload
-<span class="ln">2</span>sudo systemctl restart docker
-</code></pre></div><h3 id="镜像列表">镜像列表</h3>
+    <p><em>最近更新日期：2021-02-24</em></p>
+<h2 id="docker-hub">Docker Hub</h2>
+<h3 id="镜像列表">镜像列表</h3>
 <p>无需登录：</p>
 <ul>
 <li>Azure 中国镜像 - <a href="https://dockerhub.azk8s.cn">https://dockerhub.azk8s.cn</a></li>
@@ -195,6 +192,36 @@
 <li>DaoCloud - http://&lt;your_code&gt;.m.daocloud.io</li>
 <li>阿里云 - https://&lt;your_code&gt;.mirror.aliyuncs.com</li>
 </ul>
+<h3 id="本地配置">本地配置</h3>
+<p>创建或编辑 /etc/docker/daemon.json：</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="ln">1</span><span class="p">{</span>
+<span class="ln">2</span>    <span class="nt">&#34;registry-mirrors&#34;</span><span class="p">:</span> <span class="p">[</span>
+<span class="ln">3</span>        <span class="s2">&#34;https://docker.mirrors.ustc.edu.cn&#34;</span><span class="p">,</span>
+<span class="ln">4</span>        <span class="s2">&#34;https://reg-mirror.qiniu.com&#34;</span>
+<span class="ln">5</span>    <span class="p">]</span>
+<span class="ln">6</span><span class="p">}</span>
+</code></pre></div><p>执行下面命令</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>sudo systemctl daemon-reload
+<span class="ln">2</span>sudo systemctl restart docker
+</code></pre></div><h2 id="quayio">quay.io</h2>
+<h3 id="镜像列表-1">镜像列表</h3>
+<ul>
+<li>quay-mirror.qiniu.com (七牛云, 推荐, 但没有找到长期支持的声明)</li>
+<li>quay.mirrors.ustc.edu.cn (中科大, 经常不可用, 不推荐)</li>
+</ul>
+<h3 id="本地配置-1">本地配置</h3>
+<p>将镜像中的 quay.io 替换成国内镜像地址，例如：</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>quay.io/prometheus/node-exporter:v0.18.1
+<span class="ln">2</span># 替换成如下格式
+<span class="ln">3</span>quay-mirror.qiniu.com/prometheus/node-exporter:v0.18.1
+</code></pre></div><h2 id="gcrio-和-k8sgcrio">gcr.io 和 k8s.gcr.io</h2>
+<p>k8s.gcr.io 是 gcr.io/google-containers 的别名，所以 k8s.gcr.io/<image>:<tag> 等同于 gcr.io/google-containers/<image>:<tag></p>
+<p>目前未找到这两个源的通用镜像站，只能去国内镜像站找别人传上来的副本：</p>
+<ul>
+<li><a href="https://hub.docker.com/u/googlecontainersmirror">https://hub.docker.com/u/googlecontainersmirror</a>  (从 gcr.io 同步到Docker Hub的镜像, 只包含核心的几个镜像和版本, 能保障K8S正常运行)</li>
+<li>registry.aliyuncs.com/google_containers (阿里云第三方用户上传的镜像，镜像比较多)</li>
+</ul>
+<p>最好是自己同步镜像而不直接使用现有的镜像库，因为需要避免生产的K8S集群遭遇到安全问题</p>
 
     
       
@@ -237,6 +264,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/02/java7_gramma_new_features/" class="nav-link">Java 7新特性 - (1)Java语法特性</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/02/es_search_improvement/" class="nav-link">订单ES查询性能优化</a>
       </li>
       <li>
@@ -256,9 +286,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/01/k8s_advanced_scheduling/" class="nav-link">Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/" class="nav-link">Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</a>
       </li>
     </ul>
     <div>
@@ -289,6 +316,11 @@
           <span class="button_tally">5</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
           MAC
           <span class="button_tally">3</span>
@@ -301,11 +333,6 @@
         
         <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
           <span class="button_tally">2</span>
         </a>
         
@@ -356,7 +383,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=2>JAVA<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=3>JAVA<span class="button_tally">3</span>
             </a>
             
             
@@ -440,6 +467,11 @@
           <span class="button_tally">18</span>
         </a>
         
+        <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
+          JAVA各版本新特性
+          <span class="button_tally">1</span>
+        </a>
+        
         
       </nav>
     </div>
@@ -466,6 +498,11 @@
           <span class="button_tally">5</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">4</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/nginx/' class="post_tag button button_translucent">
           NGINX
           <span class="button_tally">4</span>
@@ -478,11 +515,6 @@
         
         <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">3</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
-          JAVA
           <span class="button_tally">3</span>
         </a>
         
@@ -590,7 +622,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=3>JAVA<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=4>JAVA<span class="button_tally">4</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/java-7/' class=" post_tag button button_translucent" data-position=1>JAVA-7<span class="button_tally">1</span>
             </a>
             
             

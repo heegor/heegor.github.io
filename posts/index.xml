@@ -6,7 +6,21 @@
     <description>Recent content in Posts on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Sat, 20 Feb 2021 13:12:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Feb 2021 13:33:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 7新特性 - (1)Java语法特性</title>
+      <link>https://www.zengxi.net/2021/02/java7_gramma_new_features/</link>
+      <pubDate>Wed, 24 Feb 2021 13:33:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/02/java7_gramma_new_features/</guid>
+      <description>二进制数字表达方式 在Java 7之前，支持十进制（123）、八进制（0123）、十六进制（0X12AB）的表示形式。Java 7中增加支持二进制的表示（0B11110001、0b11110001）
+1int binary = 0b0001_1001; 2System.out.println(&amp;#34;binary is :&amp;#34; + binary); 输出
+1binary is :25 使用下划线对数字进行分隔表达 Java 7中支持在数字中间增加&#39;_&#39;作为分隔符，分隔长int以及long（也支持double,float），显示更直观，如（12_123_456）。
+下划线只能在数字中间，编译时编译器自动删除数字中的下划线。
+1int intOne = 1_000_000; 2long longOne = 1_000_000; 3double doubleOne = 1_000_000; 4float floatOne = 1_000_000; switch 语句支持字符串变量 之前在switch中只能使用number或enum，Java 7开始支持string。
+1String s = &amp;#34;a&amp;#34;; 2switch (s) { 3 case &amp;#34;a&amp;#34;: 4 System.out.println(&amp;#34;is a&amp;#34;); 5 break; 6 case &amp;#34;b&amp;#34;: 7 System.out.println(&amp;#34;is b&amp;#34;); 8 break; 9 default: 10 System.out.println(&amp;#34;is c&amp;#34;); 11 break; 12} 泛型实例创建的类型推断 运用泛型实例化类型自动推断，对通用实例创建(diamond)的type引用进行了改进，语法更加简洁</description>
+    </item>
+    
     <item>
       <title>订单ES查询性能优化</title>
       <link>https://www.zengxi.net/2021/02/es_search_improvement/</link>

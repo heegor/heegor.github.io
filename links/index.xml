@@ -13,11 +13,12 @@
       <pubDate>Thu, 14 Jan 2021 15:00:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/links/mirror/</guid>
-      <description>Docker Hub 本地配置 创建或编辑 /etc/docker/daemon.json：
-1{ 2 &amp;#34;registry-mirrors&amp;#34;: [ 3 &amp;#34;https://docker.mirrors.ustc.edu.cn&amp;#34;, 4 &amp;#34;https://reg-mirror.qiniu.com&amp;#34; 5 ] 6} 执行下面命令
-1sudo systemctl daemon-reload 2sudo systemctl restart docker 镜像列表 无需登录：
+      <description>最近更新日期：2021-02-24
+Docker Hub 镜像列表 无需登录：
  Azure 中国镜像 - https://dockerhub.azk8s.cn 科大镜像站 - https://docker.mirrors.ustc.edu.cn 七牛云 - https://reg-mirror.qiniu.com 网易云 - https://hub-mirror.c.163.com 腾讯云 - https://mirror.ccs.tencentyun.com  需登录：
- DaoCloud - http://&amp;lt;your_code&amp;gt;.m.daocloud.io 阿里云 - https://&amp;lt;your_code&amp;gt;.mirror.aliyuncs.com  </description>
+ DaoCloud - http://&amp;lt;your_code&amp;gt;.m.daocloud.io 阿里云 - https://&amp;lt;your_code&amp;gt;.mirror.aliyuncs.com  本地配置 创建或编辑 /etc/docker/daemon.json：
+1{ 2 &amp;#34;registry-mirrors&amp;#34;: [ 3 &amp;#34;https://docker.mirrors.ustc.edu.cn&amp;#34;, 4 &amp;#34;https://reg-mirror.qiniu.com&amp;#34; 5 ] 6} 执行下面命令
+1sudo systemctl daemon-reload 2sudo systemctl restart docker quay.io 镜像列表  quay-mirror.qiniu.com (七牛云, 推荐, 但没有找到长期支持的声明) quay.mirrors.ustc.edu.cn (中科大, 经常不可用, 不推荐)  本地配置 将镜像中的 quay.io 替换成国内镜像地址，例如：</description>
     </item>
     
     <item>

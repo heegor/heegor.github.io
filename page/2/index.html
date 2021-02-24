@@ -131,6 +131,34 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/01/k8s_node_security/">Kubernetes in Action笔记 - (15) 节点与网络安全</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 3, 2021</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在pod中使用宿主节点的Linux命名空间 pod中的容器通常在分开的Linux命名空间中运行。 这些命名空间将容器中的进程与其他容器中,或者宿主机默认命名空间中的进程隔离开来。
+使用宿主节点的网络命名空间 部分pod(特别是系统pod)需要在宿主节点的默认命名空间中运行,以允许它们看到和操作节点级别的资源和设备。例如,某个pod可能需要使用宿主节点上的网络适配器,而不是自己的虚拟网络设备。这可以通过将pod spec中的hostNetwork设置为true实现。
+在这种情况下,这个pod可以使用宿主节点的网络接口,而不是拥有自己独立的网络。这意味着这个pod没有自己的IP地址;如果这个pod中的一某进程绑定了某个端口,那么该进程将 …</p>
+          <a href="https://www.zengxi.net/2021/01/k8s_node_security/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/12/k8s_api_server_security/">Kubernetes in Action笔记 - (14) API Server服务器的安全防护</a>
       </h3>
       <div class="post_meta">
@@ -392,34 +420,6 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/">Kubernetes in Action笔记 - (5) Pod的生命周期与探针</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 11, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">Pod生命周期 Pod的phase是Pod生命周期中的简单宏观描述，定义在Pod的PodStatus对象的phase 字段中。
-phase有以下几种值：
-   状态值 说明     挂起（Pending） Pod 已被 Kubernetes 系统接受，但有一个或者多个容器镜像尚未创建。等待时间包括调度 Pod 的时间和通过网络下载镜像的时间。   运行中（Running） 该 Pod 已经绑定到了一个节点上，Pod 中所有的容器都已被创建。至少有一个容器正在运行，或者正处于启动或重启状态。   成功（Succeeded） Pod 中的所有容器都被成功终止，并且不会再重启。   失败（Failed） Pod 中的所有容器都已终止了，并 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_pod_lifecycle_probes/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -491,6 +491,9 @@ phase有以下几种值：
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/02/java7_gramma_new_features/" class="nav-link">Java 7新特性 - (1)Java语法特性</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/02/es_search_improvement/" class="nav-link">订单ES查询性能优化</a>
       </li>
       <li>
@@ -510,9 +513,6 @@ phase有以下几种值：
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/01/k8s_advanced_scheduling/" class="nav-link">Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/" class="nav-link">Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</a>
       </li>
     </ul>
     <div>
@@ -543,6 +543,11 @@ phase有以下几种值：
           <span class="button_tally">5</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
           MAC
           <span class="button_tally">3</span>
@@ -555,11 +560,6 @@ phase有以下几种值：
         
         <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
           <span class="button_tally">2</span>
         </a>
         
@@ -610,7 +610,7 @@ phase有以下几种值：
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=2>JAVA<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=3>JAVA<span class="button_tally">3</span>
             </a>
             
             
@@ -694,6 +694,11 @@ phase有以下几种值：
           <span class="button_tally">18</span>
         </a>
         
+        <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
+          JAVA各版本新特性
+          <span class="button_tally">1</span>
+        </a>
+        
         
       </nav>
     </div>
@@ -720,6 +725,11 @@ phase有以下几种值：
           <span class="button_tally">5</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">4</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/nginx/' class="post_tag button button_translucent">
           NGINX
           <span class="button_tally">4</span>
@@ -732,11 +742,6 @@ phase有以下几种值：
         
         <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">3</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
-          JAVA
           <span class="button_tally">3</span>
         </a>
         
@@ -844,7 +849,11 @@ phase有以下几种值：
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=3>JAVA<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=4>JAVA<span class="button_tally">4</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/java-7/' class=" post_tag button button_translucent" data-position=1>JAVA-7<span class="button_tally">1</span>
             </a>
             
             
