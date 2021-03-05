@@ -4,27 +4,52 @@
   
   <url>
     <loc>https://www.zengxi.net/</loc>
-    <lastmod>2021-02-25T13:15:00+08:00</lastmod>
+    <lastmod>2021-03-05T12:56:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/categories/</loc>
-    <lastmod>2021-02-25T13:15:00+08:00</lastmod>
+    <lastmod>2021-03-05T12:56:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/categories/java/</loc>
-    <lastmod>2021-02-25T13:15:00+08:00</lastmod>
+    <lastmod>2021-03-05T12:56:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/tags/java/</loc>
-    <lastmod>2021-02-25T13:15:00+08:00</lastmod>
+    <lastmod>2021-03-05T12:56:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zengxi.net/tags/java-8/</loc>
-    <lastmod>2021-02-25T13:15:00+08:00</lastmod>
+    <lastmod>2021-03-05T12:56:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/2021/03/java8_stream_api/</loc>
+    <lastmod>2021-03-05T12:56:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/</loc>
+    <lastmod>2021-03-05T12:56:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/posts/</loc>
+    <lastmod>2021-03-05T12:56:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/series/</loc>
+    <lastmod>2021-03-05T12:56:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zengxi.net/tags/</loc>
+    <lastmod>2021-03-05T12:56:00+08:00</lastmod>
   </url>
   
   <url>
@@ -33,27 +58,7 @@
   </url>
   
   <url>
-    <loc>https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/</loc>
-    <lastmod>2021-02-25T13:15:00+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.zengxi.net/tags/lambda/</loc>
-    <lastmod>2021-02-25T13:15:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.zengxi.net/posts/</loc>
-    <lastmod>2021-02-25T13:15:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.zengxi.net/series/</loc>
-    <lastmod>2021-02-25T13:15:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.zengxi.net/tags/</loc>
     <lastmod>2021-02-25T13:15:00+08:00</lastmod>
   </url>
   

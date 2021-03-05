@@ -131,6 +131,36 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/">Spring Quartz 指定Scheduler Name</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    May 31, 2020</span>
+    <a href='https://www.zengxi.net/tags/spring' class="post_tag button button_translucent">spring
+    </a>
+    <a href='https://www.zengxi.net/tags/quartz' class="post_tag button button_translucent">quartz
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">当前项目使用quartz与spring来做基于数据库的集群化任务调度，但是在实际使用过程发现同一个scheduler中，不同group之间任务调度可能会相互跑串。当前项目中使用的 quartz-scheduler 版本 2.3.1， spring 版本 3.2.18.RELEASE。
+举个例子，配置是这样的, 下面示例中隐去不重要的配置
+1&lt;bean id=&#34;my-cluster-scheduler&#34; 2 class=&#34;org.springframework.scheduling.quartz.SchedulerFactoryBean&#34; 3 …</p>
+          <a href="https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/05/manjaro_install_vmware/">Manjaro安装VMware Workstation</a>
       </h3>
       <div class="post_meta">
@@ -393,36 +423,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/01/mac-shell-support-map/">Mac下shell命令支持map</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 19, 2020</span>
-    <a href='https://www.zengxi.net/tags/shell' class="post_tag button button_translucent">shell
-    </a>
-    <a href='https://www.zengxi.net/tags/declare' class="post_tag button button_translucent">declare
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：
-1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持，需要升级至4.x以上的版本
-1# 安装最新版本的bash 2brew install bash 3 4# 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash 5# 需要把新版本的shell添加至信任列表中 6sudo bash -c &#39;echo …</p>
-          <a href="https://www.zengxi.net/2020/01/mac-shell-support-map/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -503,6 +503,9 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/java8_stream_api/" class="nav-link">Java 8新特性 - (2)Stream API</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/02/java8_lambda/" class="nav-link">Java 8新特性 - (1)Lambda表达式</a>
       </li>
       <li>
@@ -522,9 +525,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/" class="nav-link">MyBatis查询中动态指定schema</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/" class="nav-link">Manjaro设置默认Java版本</a>
       </li>
     </ul>
     <div>
@@ -550,14 +550,14 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <span class="button_tally">9</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
-          MANJARO
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
           <span class="button_tally">5</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">4</span>
+        <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
+          MANJARO
+          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
@@ -622,7 +622,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=4>JAVA<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=5>JAVA<span class="button_tally">5</span>
             </a>
             
             
@@ -708,7 +708,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">2</span>
+          <span class="button_tally">3</span>
         </a>
         
         
@@ -729,7 +729,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">5</span>
+          <span class="button_tally">6</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -782,8 +782,8 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <span class="button_tally">2</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/nodejs/' class="post_tag button button_translucent">
-          NODEJS
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
           <span class="button_tally">2</span>
         </a>
         
@@ -861,7 +861,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=5>JAVA<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=6>JAVA<span class="button_tally">6</span>
             </a>
             
             
@@ -869,7 +869,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=1>JAVA-8<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=2>JAVA-8<span class="button_tally">2</span>
             </a>
             
             

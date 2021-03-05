@@ -1,8 +1,8 @@
 
 <!DOCTYPE html>
-<html lang="zh-cn" data-figures="">
+<html lang="zh-cn" data-figures="" class="page">
   <head>
-<title>serialize | 保罗札记</title>
+<title>Java 8新特性 - (2)Stream API | 保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,13 +19,15 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="">
+<meta name="description" content="什么是Stream API Stream API让开发者能够以一种声明的方式处理数据源（集合、数组等），它专注于对数据源进行各种高效的聚合操作（aggregate operation）和大批量数据操作 (bulk data operation)。
+Stream API将处理的数据源看做一种Stream（ …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="serialize" />
-<meta property="og:url" content="https://www.zengxi.net/tags/serialize/" />
-<meta property="og:title" content="serialize" />
-<meta property="og:description" content="" />
+<meta name="twitter:title" content="Java 8新特性 - (2)Stream API" />
+<meta property="og:url" content="https://www.zengxi.net/2021/03/java8_stream_api/" />
+<meta property="og:title" content="Java 8新特性 - (2)Stream API" />
+<meta property="og:description" content="什么是Stream API Stream API让开发者能够以一种声明的方式处理数据源（集合、数组等），它专注于对数据源进行各种高效的聚合操作（aggregate operation）和大批量数据操作 (bulk data operation)。
+Stream API将处理的数据源看做一种Stream（ …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -34,7 +36,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://www.zengxi.net/tags/serialize/">
+<link rel="canonical" href="https://www.zengxi.net/2021/03/java8_stream_api/">
 
     
 
@@ -120,49 +122,420 @@
 </header>
 
     <main>
-
+  
 <div class="grid-inverse wrap content">
-  <ul class="posts" id="posts">
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/06/inputstream-serialize/">实现InputStream的序列化</a>
-      </h3>
-      <div class="post_meta">
+  <article class="post_content">
+    <h1 class="post_title">Java 8新特性 - (2)Stream API</h1><div class="post_meta">
   <svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg>
   <span class="post_date">
-    Jun 12, 2018</span>
+    Mar 5, 2021</span>
     <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
     </a>
-    <a href='https://www.zengxi.net/tags/inputstream' class="post_tag button button_translucent">inputstream
-    </a>
-    <a href='https://www.zengxi.net/tags/serialize' class="post_tag button button_translucent">serialize
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96' class="post_tag button button_translucent">序列化
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
     </a>
 </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">InputStream本身是不支持序列化的，但是在实际开发的过程中有时会需要将输入流通过socket传输，比如RMI的远程调用。
-在Serializable的Java文档文档中有下面的描述：
- Classes that require special handling during the serialization and deserialization process must implement special methods with these exact signatures:
- private void writeObject(java.io.ObjectOutputStream out) throws …</p>
-          <a href="https://www.zengxi.net/2018/06/inputstream-serialize/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
+    
+<div class="post_share">
+  分享到:
+  <a href="https://twitter.com/intent/tweet?text=Java%208%e6%96%b0%e7%89%b9%e6%80%a7%20-%20%282%29Stream%20API&url=https%3a%2f%2fwww.zengxi.net%2f2021%2f03%2fjava8_stream_api%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#twitter"></use>
+</svg>
+  </a>
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2021%2f03%2fjava8_stream_api%2f&t=Java%208%e6%96%b0%e7%89%b9%e6%80%a7%20-%20%282%29Stream%20API" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#facebook"></use>
+</svg>
+  </a>
+  <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="分享到 LinkedIn" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#linkedin"></use>
+</svg>
+  </a>
+  <a href="https://www.zengxi.net/2021/03/java8_stream_api/" title="Copy Link" class="link link_yank">
+    <svg class="icon">
+  <use xlink:href="#copy"></use>
+</svg>
+  </a>
+</div>
 
-    <li>
-
-
+    
+    
+    <h2>文章目录</h2>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是stream-api">什么是Stream API</a></li>
+    <li><a href="#stream操作的三个步骤">Stream操作的三个步骤</a>
+      <ul>
+        <li><a href="#创建stream">创建Stream</a></li>
+        <li><a href="#中间操作">中间操作</a></li>
+        <li><a href="#终止操作">终止操作</a></li>
+      </ul>
     </li>
   </ul>
+</nav>
+    <hr>
+<h2 id="什么是stream-api">什么是Stream API</h2>
+<p>Stream API让开发者能够以一种声明的方式处理数据源（集合、数组等），它专注于对数据源进行各种高效的聚合操作（aggregate operation）和大批量数据操作 (bulk data operation)。</p>
+<p>Stream API将处理的数据源看做一种Stream（流），Stream（流）在Pipeline（管道）中传输和运算，支持的运算包含筛选、排序、聚合等，当到达终点后便得到最终的处理结果。如果说集合讲的的数据，那么流讲的就是计算！</p>
+<p>几个关键概念：</p>
+<ol>
+<li>元素: Stream是一个来自数据源的元素队列，Stream本身并不存储元素。</li>
+<li>数据源: 即Stream的来源, 包含集合、数组、I/O channel、generator（发生器）等。</li>
+<li>聚合操作: 类似SQL中的filter、map、find、match、sorted等操作</li>
+<li>管道运算: Stream在Pipeline中运算后返回Stream对象本身，这样多个操作串联成一个Pipeline，并形成fluent风格的代码。这种方式可以优化操作，如延迟执行(laziness)和短路( short-circuiting)。</li>
+<li>内部迭代: 不同于java 8以前对集合的遍历方式（外部迭代），Stream API采用访问者模式（Visitor）实现了内部迭代。</li>
+<li>并行运算: Stream API支持串行（stream()）或并行（parallelStream()）的两种操作方式。</li>
+</ol>
+<p>特点：</p>
+<ul>
+<li>Stream API的使用和同样是java8新特性的lambda表达式密不可分，可以大大提高编码效率和代码可读性。</li>
+<li>Stream API提供串行和并行两种操作，其中并行操作能发挥多核处理器的优势，使用<a href="/2021/03/java8_fork_join/">fork/join</a>的方式进行并行操作以提高运行速度。</li>
+<li>Stream API进行并行操作无需编写多线程代码即可写出高效的并发程序，且通常可避免多线程代码出错的问题。</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>Stream 自己不会存储元素。</li>
+<li>Stream 不会改变源对象。相反，他们会返回一个持有结果的新Stream。</li>
+<li>Stream 操作是延迟执行的。这意味着他们会等到需要结果的时候才执行。</li>
+</ul>
+<h2 id="stream操作的三个步骤">Stream操作的三个步骤</h2>
+<ol>
+<li>创建Stream：一个数据源（如： 集合、数组）， 获取一个流。</li>
+<li>中间操作:一个中间操作链，对数据源的数据进行处理。</li>
+<li>终止操作(终端操作):一个终止操作，执行中间操作链，并产生结果。</li>
+</ol>
+<h3 id="创建stream">创建Stream</h3>
+<h4 id="1-获取stream">(1) 获取Stream</h4>
+<p>Java 8中Collection接口被扩展，提供两种获取流的方法:</p>
+<ul>
+<li>stream() 返回一个顺序流</li>
+<li>parallelStream()返回一个并行流</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="k">default</span> <span class="n">Stream</span> <span class="nf">stream</span><span class="o">()</span> <span class="c1">// 返回一个顺序流
+</span><span class="ln">2</span><span class="c1"></span>
+<span class="ln">3</span><span class="k">default</span> <span class="n">Stream</span> <span class="nf">parallelStream</span><span class="o">()</span> <span class="c1">// 返回一个并行流
+</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="ln">2</span>
+<span class="ln">3</span><span class="c1">// 顺序流
+</span><span class="ln">4</span><span class="c1"></span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">stream1</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">();</span>
+<span class="ln">5</span>
+<span class="ln">6</span><span class="c1">// 并行流
+</span><span class="ln">7</span><span class="c1"></span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">parallelStream</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">parallelStream</span><span class="o">();</span>
+</code></pre></div><h4 id="2-由数组创建流">(2) 由数组创建流</h4>
+<p>Arrays中静态方法stream()获取数组流</p>
+<p>Java 8 中的 Arrays 的静态方法 stream() 可以获取数组流：</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">static</span> <span class="n">Stream</span> <span class="nf">stream</span><span class="o">(</span><span class="n">T</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span> <span class="c1">// 返回一个流重载形式，能够处理对应基本类型的数组
+</span><span class="ln">2</span><span class="c1"></span>
+<span class="ln">3</span><span class="kd">public</span> <span class="kd">static</span> <span class="n">IntStream</span> <span class="nf">stream</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span>
+<span class="ln">4</span>
+<span class="ln">5</span><span class="kd">public</span> <span class="kd">static</span> <span class="n">LongStream</span> <span class="nf">stream</span><span class="o">(</span><span class="kt">long</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span>
+<span class="ln">6</span>
+<span class="ln">7</span><span class="kd">public</span> <span class="kd">static</span> <span class="n">DoubleStream</span> <span class="nf">stream</span><span class="o">(</span><span class="kt">double</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Employess</span><span class="o">[]</span> <span class="n">emps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Employess</span><span class="o">[</span><span class="n">10</span><span class="o">];</span>
+<span class="ln">2</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">Employess</span><span class="o">&gt;</span> <span class="n">stream2</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">emps</span><span class="o">);</span>
+</code></pre></div><h4 id="3由值创建流">（3）由值创建流</h4>
+<p>可以使用静态方法 Stream.of(), 通过显示值创建一个流。它可以接收任意数量的参数。</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="kd">static</span> <span class="n">Stream</span> <span class="nf">of</span><span class="o">(</span><span class="n">T</span><span class="o">...</span> <span class="n">values</span><span class="o">)</span>  <span class="c1">// 返回一个流
+</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">stream3</span> <span class="o">=</span> <span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;aa&#34;</span><span class="o">,</span> <span class="s">&#34;bb&#34;</span><span class="o">,</span> <span class="s">&#34;cc&#34;</span><span class="o">);</span>
+</code></pre></div><h4 id="4由函数创建流">（4）由函数创建流</h4>
+<p>由函数创建流可以创建无限流。可以使用静态方法 Stream.iterate() 和Stream.generate(), 创建无限流 。</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// 迭代
+</span><span class="ln">2</span><span class="c1"></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">Stream</span> <span class="nf">iterate</span><span class="o">(</span><span class="kd">final</span> <span class="n">T</span> <span class="n">seed</span><span class="o">,</span> <span class="kd">final</span> <span class="n">UnaryOperator</span> <span class="n">f</span><span class="o">)</span>
+<span class="ln">3</span>
+<span class="ln">4</span><span class="c1">// 生成
+</span><span class="ln">5</span><span class="c1"></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">Stream</span> <span class="nf">generate</span><span class="o">(</span><span class="n">Supplier</span> <span class="n">s</span><span class="o">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// 迭代
+</span><span class="ln">2</span><span class="c1"></span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stream4</span> <span class="o">=</span> <span class="n">Stream</span><span class="o">.</span><span class="na">iterate</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">2</span><span class="o">).</span><span class="na">limit</span><span class="o">(</span><span class="n">10</span><span class="o">);</span>
+<span class="ln">3</span>
+<span class="ln">4</span><span class="c1">// 生成
+</span><span class="ln">5</span><span class="c1"></span><span class="n">Stream</span><span class="o">.</span><span class="na">generate</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()).</span><span class="na">limit</span><span class="o">(</span><span class="n">5</span><span class="o">);</span>
+</code></pre></div><h3 id="中间操作">中间操作</h3>
+<h4 id="1-筛选与切片">(1) 筛选与切片</h4>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filter(Predicate p)</td>
+<td>接收Lambda,从流中排除某些元素</td>
+</tr>
+<tr>
+<td>distinct()</td>
+<td>筛选，通过流所生成元素的hashCode()和equals()去除重复元素</td>
+</tr>
+<tr>
+<td>limit(long maxSize)</td>
+<td>截断流，使其元素不超过给定数量</td>
+</tr>
+<tr>
+<td>skip(long n)</td>
+<td>跳过元素，返回一个扔掉了前n个元素的流。若流中元素不足n个，则返回一个空流。与limit(n)互补</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-映射">(2) 映射</h4>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>map(Function f)</td>
+<td>接收一个函数作为参数，该函数会被应用到每个元素上，并映射成一个新元素</td>
+</tr>
+<tr>
+<td>mapToDouble(ToDoubleFunction f)</td>
+<td>接收一个函数作为参数，该函数会被应用到每个元素上，并产生一个新的DoubleStream</td>
+</tr>
+<tr>
+<td>mapToInt(ToIntFunction f)</td>
+<td>接收一个函数作为参数，该函数会被应用到每个元素上，并产生一个新的IntStream</td>
+</tr>
+<tr>
+<td>mapToLong(ToLongFunction f)</td>
+<td>接收一个函数作为参数，该函数会被应用到每个元素上，并产生一个新的LongStream</td>
+</tr>
+<tr>
+<td>Flat(Function f)</td>
+<td>接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个流</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-排序">(3) 排序</h4>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sorted()</td>
+<td>产生一个新流，其中按自然顺序排列</td>
+</tr>
+<tr>
+<td>sorted(Comparator comp)</td>
+<td>产生一个新流，其中按比较器顺序排列</td>
+</tr>
+</tbody>
+</table>
+<h3 id="终止操作">终止操作</h3>
+<p>终端操作会从流的流水线生成结果。其结果可以是任何不是流的值，例如：List, Integer，甚至是void</p>
+<h4 id="1-查找与匹配">(1) 查找与匹配</h4>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>allMatch(Predicate p)</td>
+<td>检查是否匹配所有元素</td>
+</tr>
+<tr>
+<td>anyMatch(Predicate p)</td>
+<td>检查是否至少匹配一个元素</td>
+</tr>
+<tr>
+<td>noneMatch(Predicate p)</td>
+<td>检查是否所有元素都不匹配</td>
+</tr>
+<tr>
+<td>findFirst()</td>
+<td>返回第一个元素</td>
+</tr>
+<tr>
+<td>findAny()</td>
+<td>返回当前流中的任意一个元素</td>
+</tr>
+<tr>
+<td>count()</td>
+<td>返回流中元素总数</td>
+</tr>
+<tr>
+<td>max(Comparator c)</td>
+<td>返回流中最大值</td>
+</tr>
+<tr>
+<td>min(Comparator c)</td>
+<td>返回流中最小值</td>
+</tr>
+<tr>
+<td>forEach(Comparator c)</td>
+<td>内部迭代。与之相反的是，使用Collection接口需要用户去做迭代，称为外部迭代</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-规约">(2) 规约</h4>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reduce(T iden, BinaryOperator b)</td>
+<td>可以将流中元素反复结合起来，得到一个值。返回T</td>
+</tr>
+<tr>
+<td>reduce(BinaryOperator b)</td>
+<td>可以将流中元素反复结合起来，得到一个值。返回Optional<T></td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-收集">(3) 收集</h4>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>collect(Collector c)</td>
+<td>将流转换为其他形式。接收一个Collector接口的实现，用于给Stream中元素做汇总的方法</td>
+</tr>
+</tbody>
+</table>
+<p>Collector 接口中方法的实现决定了如何对流执行收集操作(如收集到 List、 Set、 Map)。但是 Collectors 实用类提供了很多静态方法，可以方便地创建常见收集器实例， 具体方法与实例如下表</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>返回类型</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>toList</td>
+<td>List<T></td>
+<td>把流中元素收集到List</td>
+</tr>
+<tr>
+<td>toSet</td>
+<td>Set<T></td>
+<td>把流中元素收集到Set</td>
+</tr>
+<tr>
+<td>toCollection</td>
+<td>Collection<T></td>
+<td>把流中元素收集到创建的集合</td>
+</tr>
+<tr>
+<td>counting</td>
+<td>Long</td>
+<td>计算流中元素的个数</td>
+</tr>
+<tr>
+<td>summingInt</td>
+<td>Integer</td>
+<td>对流中元素的整数属性求和</td>
+</tr>
+<tr>
+<td>averageingInt</td>
+<td>Double</td>
+<td>计算流中元素Integer属性的平均值</td>
+</tr>
+<tr>
+<td>summarizingInt</td>
+<td>IntSummaryStatistics</td>
+<td>收集流中Integer属性的统计值。如平均值</td>
+</tr>
+<tr>
+<td>joining</td>
+<td>String</td>
+<td>连接流中每个字符串</td>
+</tr>
+<tr>
+<td>maxBy</td>
+<td>Optional<T></td>
+<td>根据比较器选择最大值</td>
+</tr>
+<tr>
+<td>minBy</td>
+<td>Optional<T></td>
+<td>根据比较器选择最小值</td>
+</tr>
+<tr>
+<td>reducing</td>
+<td>规约产生的类型</td>
+<td>从一个作为累加器的初始值开始，利用BinaryOperator与流中元素逐个结合，从而归约成单个值</td>
+</tr>
+<tr>
+<td>collectingAndThen</td>
+<td>转换函数返回的类型</td>
+<td>包裹另一个收集器，对其结果转换函数</td>
+</tr>
+<tr>
+<td>groupingBy</td>
+<td>Map&lt;K, List<T>&gt;</td>
+<td>根据某属性值对流分组，属性为K，结果为V</td>
+</tr>
+<tr>
+<td>partitioningBy</td>
+<td>Map&lt;Boolean, List<T>&gt;</td>
+<td>根据true或者false进行分区</td>
+</tr>
+</tbody>
+</table>
+<p>示例：</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="n">emps</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="n">emps</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toSet</span><span class="o">());</span>
+<span class="ln"> 4</span>
+<span class="ln"> 5</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="n">emps</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toCollection</span><span class="o">(</span><span class="n">ArrayList</span><span class="o">::</span><span class="k">new</span><span class="o">));</span>
+<span class="ln"> 6</span>
+<span class="ln"> 7</span><span class="kt">long</span> <span class="n">count</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">counting</span><span class="o">());</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span><span class="n">inttotal</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">summingInt</span><span class="o">(</span><span class="n">Employee</span><span class="o">::</span><span class="n">getSalary</span><span class="o">));</span>
+<span class="ln">10</span>
+<span class="ln">11</span><span class="n">doubleavg</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">averagingInt</span><span class="o">(</span><span class="n">Employee</span><span class="o">::</span><span class="n">getSalary</span><span class="o">));</span>
+<span class="ln">12</span>
+<span class="ln">13</span><span class="n">IntSummaryStatisticsiss</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">summarizingInt</span><span class="o">(</span><span class="n">Employee</span><span class="o">::</span><span class="n">getSalary</span><span class="o">));</span>
+<span class="ln">14</span>
+<span class="ln">15</span><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="n">Employee</span><span class="o">::</span><span class="n">getName</span><span class="o">).</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">joining</span><span class="o">());</span>
+<span class="ln">16</span>
+<span class="ln">17</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Emp</span><span class="o">&gt;</span> <span class="n">max</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">maxBy</span><span class="o">(</span><span class="n">comparingInt</span><span class="o">(</span><span class="n">Employee</span><span class="o">:</span><span class="n">getSalary</span><span class="o">)));</span>
+<span class="ln">18</span>
+<span class="ln">19</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Emp</span><span class="o">&gt;</span> <span class="n">min</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">minBy</span><span class="o">(</span><span class="n">comparingInt</span><span class="o">(</span><span class="n">Employee</span><span class="o">:</span><span class="n">getSalary</span><span class="o">)));</span>
+<span class="ln">20</span>
+<span class="ln">21</span><span class="n">inttotal</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">reducing</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">Employee</span><span class="o">::</span><span class="n">getSalary</span><span class="o">,</span> <span class="n">Integer</span><span class="o">::</span><span class="n">sum</span><span class="o">));</span>
+<span class="ln">22</span>
+<span class="ln">23</span><span class="n">inthow</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">collectingAndThen</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">(),</span> <span class="n">List</span><span class="o">:</span><span class="n">size</span><span class="o">));</span>
+<span class="ln">24</span>
+<span class="ln">25</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Emp</span><span class="o">.</span><span class="na">Status</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Emp</span><span class="o">&gt;&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">groupingBy</span><span class="o">(</span><span class="n">Employee</span><span class="o">::</span><span class="n">getStatus</span><span class="o">));</span>
+<span class="ln">26</span>
+<span class="ln">27</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Emp</span><span class="o">&gt;&gt;</span> <span class="n">vd</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">partitioningBy</span><span class="o">(</span><span class="n">Employee</span><span class="o">::</span><span class="n">getManage</span><span class="o">));</span>
+</code></pre></div><hr>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.jianshu.com/p/2b40fd0765c3">https://www.jianshu.com/p/2b40fd0765c3</a></li>
+<li><a href="https://blog.csdn.net/jiadajing267/article/details/80074022">https://blog.csdn.net/jiadajing267/article/details/80074022</a></li>
+<li><a href="https://www.cnblogs.com/binghe001/p/12940721.html">https://www.cnblogs.com/binghe001/p/12940721.html</a></li>
+</ul>
+
+    
+      
+    
+  </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <h2>Paul Zeng</h2>
@@ -200,9 +573,6 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://www.zengxi.net/2021/03/java8_stream_api/" class="nav-link">Java 8新特性 - (2)Stream API</a>
-      </li>
-      <li>
         <a href="https://www.zengxi.net/2021/02/java8_lambda/" class="nav-link">Java 8新特性 - (1)Lambda表达式</a>
       </li>
       <li>
@@ -222,6 +592,9 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/" class="nav-link">MyBatis查询中动态指定schema</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/" class="nav-link">Manjaro设置默认Java版本</a>
       </li>
     </ul>
     <div>
@@ -822,8 +1195,6 @@
 </aside>
 
 </div>
-
-
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>

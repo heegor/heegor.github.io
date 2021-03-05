@@ -127,6 +127,47 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2018/07/force-date-use-locale/">date命令按指定locale所对应的日期格式输出</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 4, 2018</span>
+    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
+    </a>
+    <a href='https://www.zengxi.net/tags/unix' class="post_tag button button_translucent">unix
+    </a>
+    <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4' class="post_tag button button_translucent">命令
+    </a>
+    <a href='https://www.zengxi.net/tags/shell' class="post_tag button button_translucent">shell
+    </a>
+    <a href='https://www.zengxi.net/tags/date' class="post_tag button button_translucent">date
+    </a>
+    <a href='https://www.zengxi.net/tags/locale' class="post_tag button button_translucent">locale
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。
+比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出
+1date +%a 下面是locale为zh_CN的输出：
+ 三  下面是locale为en_US的输出：
+ Wed  如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值
+首先我们可以运行 …</p>
+          <a href="https://www.zengxi.net/2018/07/force-date-use-locale/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2018/07/insertion-sort/">排序算法 - （直接）插入排序 （Insertion Sort)</a>
       </h3>
       <div class="post_meta">
@@ -493,6 +534,9 @@ grep的帮助文档中有这几个参数：
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/java8_stream_api/" class="nav-link">Java 8新特性 - (2)Stream API</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/02/java8_lambda/" class="nav-link">Java 8新特性 - (1)Lambda表达式</a>
       </li>
       <li>
@@ -512,9 +556,6 @@ grep的帮助文档中有这几个参数：
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/" class="nav-link">MyBatis查询中动态指定schema</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/" class="nav-link">Manjaro设置默认Java版本</a>
       </li>
     </ul>
     <div>
@@ -540,14 +581,14 @@ grep的帮助文档中有这几个参数：
           <span class="button_tally">9</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
-          MANJARO
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
           <span class="button_tally">5</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">4</span>
+        <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
+          MANJARO
+          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
@@ -612,7 +653,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=4>JAVA<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=5>JAVA<span class="button_tally">5</span>
             </a>
             
             
@@ -698,7 +739,7 @@ grep的帮助文档中有这几个参数：
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">2</span>
+          <span class="button_tally">3</span>
         </a>
         
         
@@ -719,7 +760,7 @@ grep的帮助文档中有这几个参数：
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">5</span>
+          <span class="button_tally">6</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -772,8 +813,8 @@ grep的帮助文档中有这几个参数：
           <span class="button_tally">2</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/nodejs/' class="post_tag button button_translucent">
-          NODEJS
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
           <span class="button_tally">2</span>
         </a>
         
@@ -851,7 +892,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=5>JAVA<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=6>JAVA<span class="button_tally">6</span>
             </a>
             
             
@@ -859,7 +900,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=1>JAVA-8<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=2>JAVA-8<span class="button_tally">2</span>
             </a>
             
             
