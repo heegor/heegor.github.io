@@ -41,8 +41,8 @@
     
     
     <link rel="preload" href="https://www.zengxi.net/css/styles.17bd8db1e1e9d3fde7e52431779c901a12c654a66914bb4472fd4b0c6880c72ea87f9dc818f7ca35bf2e934c65a6a7d6c7afa12a18e60a79ff4e093e3ac621ba.css" integrity = "sha512-F72NseHp0/3n5SQxd5yQGhLGVKZpFLtEcv1LDGiAxy6of53IGPfKNb8uk0xlpqfWx6&#43;hKhjmCnn/Tgk&#43;OsYhug==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.8247567be6f4dd123beccbeea5c7a9195169f206ea800a9ee95147c14e6a77ebc43c7dda9eefc04bbcb16d328234c5be2fa40712cef55a1543065206b2943a15.js" as="script" integrity=
-    "sha512-gkdWe&#43;b03RI77MvupcepGVFp8gbqgAqe6VFHwU5qd&#43;vEPH3anu/AS7yxbTKCNMW&#43;L6QHEs71WhVDBlIGspQ6FQ==" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
+    "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
 
     
     <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.17bd8db1e1e9d3fde7e52431779c901a12c654a66914bb4472fd4b0c6880c72ea87f9dc818f7ca35bf2e934c65a6a7d6c7afa12a18e60a79ff4e093e3ac621ba.css" integrity="sha512-F72NseHp0/3n5SQxd5yQGhLGVKZpFLtEcv1LDGiAxy6of53IGPfKNb8uk0xlpqfWx6&#43;hKhjmCnn/Tgk&#43;OsYhug==" crossorigin="anonymous">
@@ -123,6 +123,44 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2018/07/docker-mino-cluster/">Docker Compose创建minio集群</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 18, 2018</span>
+    <a href='https://www.zengxi.net/tags/minio' class="post_tag button button_translucent">minio
+    </a>
+    <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8' class="post_tag button button_translucent">对象存储
+    </a>
+    <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4' class="post_tag button button_translucent">集群
+    </a>
+    <a href='https://www.zengxi.net/tags/cluster' class="post_tag button button_translucent">cluster
+    </a>
+    <a href='https://www.zengxi.net/tags/docker' class="post_tag button button_translucent">docker
+    </a>
+    <a href='https://www.zengxi.net/tags/nginx' class="post_tag button button_translucent">nginx
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">Minio是一个简单易用的轻量级对象存储服务，同时它也支持集群环境。使用Minio的docker镜像可以快速地搭建集群环境。
+下面是docker-compose.yml文件的示例。分布式的Minio服务至少需要4个节点，所以在docker-compose.yml文件中，至少要配置4个服务。每个服务的command配置必须一样，保证集群环境正常运行。
+1version:&#39;3&#39;2services:3minio-node1:4image:minio/minio 5hostname:minio-node1 6ports:7- &#34;29001:9000&#34;8volumes:9- …</p>
+          <a href="https://www.zengxi.net/2018/07/docker-mino-cluster/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -425,41 +463,6 @@ grep的帮助文档中有这几个参数：
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/06/inputstream-serialize/">实现InputStream的序列化</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 12, 2018</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/inputstream' class="post_tag button button_translucent">inputstream
-    </a>
-    <a href='https://www.zengxi.net/tags/serialize' class="post_tag button button_translucent">serialize
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96' class="post_tag button button_translucent">序列化
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">InputStream本身是不支持序列化的，但是在实际开发的过程中有时会需要将输入流通过socket传输，比如RMI的远程调用。
-在Serializable的Java文档文档中有下面的描述：
- Classes that require special handling during the serialization and deserialization process must implement special methods with these exact signatures:
- private void writeObject(java.io.ObjectOutputStream out) throws …</p>
-          <a href="https://www.zengxi.net/2018/06/inputstream-serialize/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -486,11 +489,14 @@ grep的帮助文档中有这几个参数：
   <li class="page-item active">
     <a class="page-link" href="/posts/page/8/">8</a>
   </li>
-  <li class="page-item disabled">
-    <a  class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+  <li class="page-item">
+    <a class="page-link" href="/posts/page/9/">9</a>
   </li>
   <li class="page-item">
-    <a href="/posts/page/8/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <a href="/posts/page/9/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+  </li>
+  <li class="page-item">
+    <a href="/posts/page/9/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
   </li>
 </ul>
 
@@ -534,6 +540,9 @@ grep的帮助文档中有这几个参数：
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="nav-link">Manjaro升级后打印服务不可用</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/03/java8_stream_api/" class="nav-link">Java 8新特性 - (2)Stream API</a>
       </li>
       <li>
@@ -553,9 +562,6 @@ grep的帮助文档中有这几个参数：
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/01/postgres_copy_table_schema/" class="nav-link">Postgres通过SQL语句复制表结构</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/" class="nav-link">MyBatis查询中动态指定schema</a>
       </li>
     </ul>
     <div>
@@ -581,13 +587,13 @@ grep的帮助文档中有这几个参数：
           <span class="button_tally">9</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">5</span>
-        </a>
-        
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
           MANJARO
+          <span class="button_tally">6</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
           <span class="button_tally">5</span>
         </a>
         
@@ -669,7 +675,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=5>MANJARO<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=6>MANJARO<span class="button_tally">6</span>
             </a>
             
             
@@ -763,13 +769,13 @@ grep的帮助文档中有这几个参数：
           <span class="button_tally">6</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
-          LINUX
-          <span class="button_tally">5</span>
-        </a>
-        
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
           MANJARO
+          <span class="button_tally">6</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
+          LINUX
           <span class="button_tally">5</span>
         </a>
         
@@ -944,7 +950,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=5>MANJARO<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=6>MANJARO<span class="button_tally">6</span>
             </a>
             
             
@@ -1104,6 +1110,10 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E6%89%93%E5%8D%B0%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>打印机<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=3>排序<span class="button_tally">3</span>
             </a>
             
@@ -1219,7 +1229,7 @@ grep的帮助文档中有这几个参数：
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.8247567be6f4dd123beccbeea5c7a9195169f206ea800a9ee95147c14e6a77ebc43c7dda9eefc04bbcb16d328234c5be2fa40712cef55a1543065206b2943a15.js" integrity="sha512-gkdWe&#43;b03RI77MvupcepGVFp8gbqgAqe6VFHwU5qd&#43;vEPH3anu/AS7yxbTKCNMW&#43;L6QHEs71WhVDBlIGspQ6FQ==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" integrity="sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous"></script>
     
   </body>
 </html>

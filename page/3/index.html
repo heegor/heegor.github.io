@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="">
   <head>
-	<meta name="generator" content="Hugo 0.80.0" />
+	<meta name="generator" content="Hugo 0.81.0" />
 <title>保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -43,8 +43,8 @@
     
     
     <link rel="preload" href="https://www.zengxi.net/css/styles.17bd8db1e1e9d3fde7e52431779c901a12c654a66914bb4472fd4b0c6880c72ea87f9dc818f7ca35bf2e934c65a6a7d6c7afa12a18e60a79ff4e093e3ac621ba.css" integrity = "sha512-F72NseHp0/3n5SQxd5yQGhLGVKZpFLtEcv1LDGiAxy6of53IGPfKNb8uk0xlpqfWx6&#43;hKhjmCnn/Tgk&#43;OsYhug==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.8247567be6f4dd123beccbeea5c7a9195169f206ea800a9ee95147c14e6a77ebc43c7dda9eefc04bbcb16d328234c5be2fa40712cef55a1543065206b2943a15.js" as="script" integrity=
-    "sha512-gkdWe&#43;b03RI77MvupcepGVFp8gbqgAqe6VFHwU5qd&#43;vEPH3anu/AS7yxbTKCNMW&#43;L6QHEs71WhVDBlIGspQ6FQ==" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
+    "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
 
     
     <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.17bd8db1e1e9d3fde7e52431779c901a12c654a66914bb4472fd4b0c6880c72ea87f9dc818f7ca35bf2e934c65a6a7d6c7afa12a18e60a79ff4e093e3ac621ba.css" integrity="sha512-F72NseHp0/3n5SQxd5yQGhLGVKZpFLtEcv1LDGiAxy6of53IGPfKNb8uk0xlpqfWx6&#43;hKhjmCnn/Tgk&#43;OsYhug==" crossorigin="anonymous">
@@ -127,6 +127,34 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_service/">Kubernetes in Action笔记 - (8) 服务、Endpoint、Ingress</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 20, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">什么是服务 服务是一种为一组功能相同的 pod 提供单 一 不变的接入点的资源。当服务存在时,它的 IP 地址和端口不会改变
+为什么需要服务 pod 的存在是短暂的,一个 pod 可能会在任何时候消失, 或许因为它所在节点发生故障, 或许因为有人删除了 pod, 或者因为 pod 被从一个健康的节点剔除了。 当其中任何一种情况发生时, 消失的 pod 将被ReplicationController 替换为新的 pod。 新的 pod 与替换它的 pod 具有不同的 IP 地址。
+这就是需要服务的地方，解决不断变化的 pod IP 地址的问题, 以及在一个固定的IP和端口对上对外暴露多个 pod。当一个服务被创建时, 它会得到一个静态 …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_service/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -389,41 +417,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/">利用frp与nginx实现公网访问NAS</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Nov 14, 2020</span>
-    <a href='https://www.zengxi.net/tags/frp' class="post_tag button button_translucent">frp
-    </a>
-    <a href='https://www.zengxi.net/tags/nginx' class="post_tag button button_translucent">nginx
-    </a>
-    <a href='https://www.zengxi.net/tags/nas' class="post_tag button button_translucent">nas
-    </a>
-    <a href='https://www.zengxi.net/tags/kcp' class="post_tag button button_translucent">kcp
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">能够在远程访问存储NAS上面的资料，才能真正发挥NAS的作用。但是对于没有公网IP的内网用户，如何实现在公网上面访问NAS，是一个需要事先解决的问题。
-如果拥有一个有公网IP的VPS，可以通过 frp + Nginx 来实现内网穿透解决这个问题。另外，从安全角度考虑，如果有可能的话，整个链路上面的都使用 https 协议通讯更加安全。
-下面大致描绘了访问的链路图：
- 浏览器通过https协议与 VPS 通讯。浏览器的请求先发到nginx上，ngnix再将请求转发的至frps。在frps前面加上nginx做反向代理的好处是，如果这个VPS上面有其他请求转发的需求（比如这个VPS部署了个人网站或者博客），那在访问所有这些服务的时候，都可 …</p>
-          <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -448,13 +441,13 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     <span aria-hidden="true">&nbsp;&hellip;&nbsp;</span>
   </li>
   <li class="page-item">
-    <a class="page-link" href="/page/8/">8</a>
+    <a class="page-link" href="/page/9/">9</a>
   </li>
   <li class="page-item">
     <a href="/page/4/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
   </li>
   <li class="page-item">
-    <a href="/page/8/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <a href="/page/9/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
   </li>
 </ul>
 
@@ -498,6 +491,9 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="nav-link">Manjaro升级后打印服务不可用</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/03/java8_stream_api/" class="nav-link">Java 8新特性 - (2)Stream API</a>
       </li>
       <li>
@@ -517,9 +513,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/01/postgres_copy_table_schema/" class="nav-link">Postgres通过SQL语句复制表结构</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/" class="nav-link">MyBatis查询中动态指定schema</a>
       </li>
     </ul>
     <div>
@@ -545,13 +538,13 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
           <span class="button_tally">9</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">5</span>
-        </a>
-        
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
           MANJARO
+          <span class="button_tally">6</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
           <span class="button_tally">5</span>
         </a>
         
@@ -633,7 +626,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=5>MANJARO<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=6>MANJARO<span class="button_tally">6</span>
             </a>
             
             
@@ -727,13 +720,13 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
           <span class="button_tally">6</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
-          LINUX
-          <span class="button_tally">5</span>
-        </a>
-        
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
           MANJARO
+          <span class="button_tally">6</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
+          LINUX
           <span class="button_tally">5</span>
         </a>
         
@@ -908,7 +901,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=5>MANJARO<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=6>MANJARO<span class="button_tally">6</span>
             </a>
             
             
@@ -1068,6 +1061,10 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E6%89%93%E5%8D%B0%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>打印机<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=3>排序<span class="button_tally">3</span>
             </a>
             
@@ -1183,7 +1180,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.8247567be6f4dd123beccbeea5c7a9195169f206ea800a9ee95147c14e6a77ebc43c7dda9eefc04bbcb16d328234c5be2fa40712cef55a1543065206b2943a15.js" integrity="sha512-gkdWe&#43;b03RI77MvupcepGVFp8gbqgAqe6VFHwU5qd&#43;vEPH3anu/AS7yxbTKCNMW&#43;L6QHEs71WhVDBlIGspQ6FQ==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" integrity="sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous"></script>
     
   </body>
 </html>

@@ -6,7 +6,18 @@
     <description>Recent content in Posts on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 05 Mar 2021 12:56:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Mar 2021 09:40:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Manjaro升级后打印服务不可用</title>
+      <link>https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/</link>
+      <pubDate>Tue, 16 Mar 2021 09:40:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/</guid>
+      <description>Manjaro升级到某个版本后，在系统设置中，查看打印机，显示“打印机服务不可用，错误的文件描述符“。
+其中一个原因是CUPS（Common UNIX Printing System）打印管理服务未启动。可以用下面的方法来解决：
+1# 启动服务，保证本次登录打印机可用 2sudo systemctl start cups.service 3 4# 设置开启启动 5sudo systemctl enable cups.service </description>
+    </item>
+    
     <item>
       <title>Java 8新特性 - (2)Stream API</title>
       <link>https://www.zengxi.net/2021/03/java8_stream_api/</link>
