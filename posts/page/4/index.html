@@ -127,6 +127,66 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/11/nginx_security/">Nginx服务器安全加固</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Nov 22, 2020</span>
+    <a href='https://www.zengxi.net/tags/nginx' class="post_tag button button_translucent">nginx
+    </a>
+    <a href='https://www.zengxi.net/tags/security' class="post_tag button button_translucent">security
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">基础知识 常用配置 顶部配置
+1#定义 Nginx 运行的用户和用户组 2user nginx; 3 4#进程文件 5pid /var/run/nginx.pid; 6 7#错误日志位置和级别，debug、info、notice、warn、error、crit 8error_log /var/log/nginx/error.log warn; 9 10#Nginx worker 的进程数，一般可设置为可用的CPU内核数。 11worker_processes 8; 12 13#每个 worker 打开文件描述符的最大数量限制。理论值应该是最多打开文件数（系统的值ulimit -n） 14#与 nginx 进程数相除，但是 nginx …</p>
+          <a href="https://www.zengxi.net/2020/11/nginx_security/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/">Elastic Search vm.max_map_count too low 错误</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Nov 19, 2020</span>
+    <a href='https://www.zengxi.net/tags/elastic-search' class="post_tag button button_translucent">elastic search
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在启动elastic search的时候，在启动日志看到下面的错误提示
+1Max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144] 解决这个问题，有两个办法：
+ 临时的，仅当前会话窗口有效 执行下面命令  1sysctl -w vm.max_map_count=262144 然后启动elastic search
+永久生效  编辑/etc/sysctl.conf, 添加或者修改下面参数：
+1vm.max_map_count=262144 重启系统，或者执行下面命令加载参数：
+1sysctl --system </p>
+          <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/">利用frp与nginx实现公网访问NAS</a>
       </h3>
       <div class="post_meta">
@@ -357,62 +417,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/08/gitbook_installation_error/">gitbook因为nodejs版本不匹配导致安装报错</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Aug 1, 2020</span>
-    <a href='https://www.zengxi.net/tags/nodejs' class="post_tag button button_translucent">nodejs
-    </a>
-    <a href='https://www.zengxi.net/tags/gitbook' class="post_tag button button_translucent">gitbook
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">如果nodejs使用的不是10.x版本，就会报错
-1Installing GitBook 3.2.3 2/usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287 3 if (cb) cb.apply(this, arguments) 4 ^ 5 6TypeError: cb.apply is not a function 7 at …</p>
-          <a href="https://www.zengxi.net/2020/08/gitbook_installation_error/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/zookeeper_purge_file/">zookeeper服务器文件清理</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 29, 2020</span>
-    <a href='https://www.zengxi.net/tags/zookeeper' class="post_tag button button_translucent">zookeeper
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">zookeeper主要存放了三类文件，他们都可以在配置文件中指定存储路径：
- snapshot： 内存数据的快照，配置项为dataDir 事务日志：所有与修改数据相关的操作记录，配置项为dataLogDir。在没有dataLogDir配置项的时候，zookeeper默认将事务日志文件和快照日志文件都存储在dataDir对应的目录下。 log4j日志：记录zookeeper集群服务器运行日志。日志的配置地址在conf/目录下的log4j.properties文件中，该文件中有一个配置项为&quot;zookeeper.log.dir=.&quot;  正常运行过程中，zookeeper会不断地把快照数据和日志输出到这些目录。如果没有专 …</p>
-          <a href="https://www.zengxi.net/2020/07/zookeeper_purge_file/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -490,6 +494,12 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="nav-link">配置Nginx支持长轮询</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/" class="nav-link">基于alpine构建docker镜像修改时区</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="nav-link">Manjaro升级后打印服务不可用</a>
       </li>
       <li>
@@ -506,12 +516,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="nav-link">用Python读取sitemap并调用百度接口推送URL</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/" class="nav-link">使用Python在两个Postgres数据库直接复制数据</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/postgres_copy_table_schema/" class="nav-link">Postgres通过SQL语句复制表结构</a>
       </li>
     </ul>
     <div>
@@ -547,24 +551,24 @@
           <span class="button_tally">5</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
+          DOCKER
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
           MAC
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/nginx/' class="post_tag button button_translucent">
+          NGINX
           <span class="button_tally">3</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/%E7%AE%97%E6%B3%95/' class="post_tag button button_translucent">
           算法
           <span class="button_tally">3</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
-          DOCKER
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/nginx/' class="post_tag button button_translucent">
-          NGINX
-          <span class="button_tally">2</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/nodejs/' class="post_tag button button_translucent">
@@ -597,7 +601,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=2>DOCKER<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=3>DOCKER<span class="button_tally">3</span>
             </a>
             
             
@@ -637,7 +641,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/nginx/' class=" post_tag button button_translucent" data-position=2>NGINX<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/categories/nginx/' class=" post_tag button button_translucent" data-position=3>NGINX<span class="button_tally">3</span>
             </a>
             
             
@@ -731,17 +735,17 @@
         
         <a href='https://www.zengxi.net/tags/nginx/' class="post_tag button button_translucent">
           NGINX
+          <span class="button_tally">5</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
+          DOCKER
           <span class="button_tally">4</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
           SHELL
           <span class="button_tally">4</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
-          DOCKER
-          <span class="button_tally">3</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class="post_tag button button_translucent">
@@ -752,6 +756,11 @@
         <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/' class="post_tag button button_translucent">
           算法
           <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/alpine/' class="post_tag button button_translucent">
+          ALPINE
+          <span class="button_tally">2</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/chrome/' class="post_tag button button_translucent">
@@ -769,18 +778,13 @@
           <span class="button_tally">2</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
-          <span class="button_tally">2</span>
-        </a>
-        
         
         <br>
         <div class="post_tags_toggle button">所有标签</div>
         <div class="post_tags">
           <div class="tags_list">
             
-            <a href='https://www.zengxi.net/tags/alpine/' class=" post_tag button button_translucent" data-position=1>ALPINE<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/alpine/' class=" post_tag button button_translucent" data-position=2>ALPINE<span class="button_tally">2</span>
             </a>
             
             
@@ -816,7 +820,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=3>DOCKER<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=4>DOCKER<span class="button_tally">4</span>
             </a>
             
             
@@ -920,7 +924,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/nginx/' class=" post_tag button button_translucent" data-position=4>NGINX<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/tags/nginx/' class=" post_tag button button_translucent" data-position=5>NGINX<span class="button_tally">5</span>
             </a>
             
             
@@ -1093,6 +1097,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%BF%9C%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>远程<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%95%BF%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>长轮询<span class="button_tally">1</span>
             </a>
             
             

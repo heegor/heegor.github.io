@@ -6,7 +6,25 @@
     <description>Recent content in Categories on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 16 Mar 2021 09:40:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Mar 2021 13:20:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nginx</title>
+      <link>https://www.zengxi.net/categories/nginx/</link>
+      <pubDate>Thu, 25 Mar 2021 13:20:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/categories/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://www.zengxi.net/categories/docker/</link>
+      <pubDate>Thu, 25 Mar 2021 13:18:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/categories/docker/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>manjaro</title>
       <link>https://www.zengxi.net/categories/manjaro/</link>
@@ -71,15 +89,6 @@
     </item>
     
     <item>
-      <title>Nginx</title>
-      <link>https://www.zengxi.net/categories/nginx/</link>
-      <pubDate>Sun, 22 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.zengxi.net/categories/nginx/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>elastic search</title>
       <link>https://www.zengxi.net/categories/elastic-search/</link>
       <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
@@ -139,15 +148,6 @@
       <pubDate>Thu, 21 May 2020 10:10:07 +0000</pubDate>
       
       <guid>https://www.zengxi.net/categories/mac/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>docker</title>
-      <link>https://www.zengxi.net/categories/docker/</link>
-      <pubDate>Wed, 22 Apr 2020 14:43:24 +0000</pubDate>
-      
-      <guid>https://www.zengxi.net/categories/docker/</guid>
       <description></description>
     </item>
     

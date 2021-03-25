@@ -3,10 +3,40 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.zengxi.net/</loc>
-    <lastmod>2021-03-16T09:40:00+08:00</lastmod>
+    <lastmod>2021-03-25T13:20:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/categories/</loc>
-    <lastmod>2021-03-16T09:40:00+08:00</lastmod>
+    <lastmod>2021-03-25T13:20:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/categories/nginx/</loc>
+    <lastmod>2021-03-25T13:20:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/nginx/</loc>
+    <lastmod>2021-03-25T13:20:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/posts/</loc>
+    <lastmod>2021-03-25T13:20:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/</loc>
+    <lastmod>2021-03-25T13:20:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/</loc>
+    <lastmod>2021-03-25T13:20:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/%E9%95%BF%E8%BD%AE%E8%AF%A2/</loc>
+    <lastmod>2021-03-25T13:20:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/alpine/</loc>
+    <lastmod>2021-03-25T13:18:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/docker/</loc>
+    <lastmod>2021-03-25T13:18:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/categories/docker/</loc>
+    <lastmod>2021-03-25T13:18:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/2021/03/update_docker_image_timezone/</loc>
+    <lastmod>2021-03-25T13:18:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/manjaro/</loc>
     <lastmod>2021-03-16T09:40:00+08:00</lastmod>
@@ -15,12 +45,6 @@
     <lastmod>2021-03-16T09:40:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/</loc>
-    <lastmod>2021-03-16T09:40:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/posts/</loc>
-    <lastmod>2021-03-16T09:40:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/tags/</loc>
     <lastmod>2021-03-16T09:40:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/%E6%89%93%E5%8D%B0%E6%9C%BA/</loc>
@@ -190,12 +214,6 @@
   </url><url>
     <loc>https://www.zengxi.net/2020/12/k8s_container_tech_intro/</loc>
     <lastmod>2020-12-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/categories/nginx/</loc>
-    <lastmod>2020-11-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/tags/nginx/</loc>
-    <lastmod>2020-11-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2020/11/nginx_security/</loc>
     <lastmod>2020-11-22T00:00:00+00:00</lastmod>
@@ -377,17 +395,8 @@
     <loc>https://www.zengxi.net/2020/04/pg_close_session_remove_db/</loc>
     <lastmod>2020-04-23T10:10:07+00:00</lastmod>
   </url><url>
-    <loc>https://www.zengxi.net/tags/docker/</loc>
-    <lastmod>2020-04-22T14:43:24+00:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/categories/docker/</loc>
-    <lastmod>2020-04-22T14:43:24+00:00</lastmod>
-  </url><url>
     <loc>https://www.zengxi.net/2020/04/docker-hub-mirror/</loc>
     <lastmod>2020-04-22T14:43:24+00:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/tags/alpine/</loc>
-    <lastmod>2020-04-21T10:18:24+00:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2020/04/modify-apine-mirror/</loc>
     <lastmod>2020-04-21T10:18:24+00:00</lastmod>

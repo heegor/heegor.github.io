@@ -127,6 +127,69 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2018/11/nginx-setting-for-long-polling/">配置Nginx支持长轮询</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Nov 21, 2018</span>
+    <a href='https://www.zengxi.net/tags/nginx' class="post_tag button button_translucent">nginx
+    </a>
+    <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2' class="post_tag button button_translucent">轮询
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">对于需要用到长轮询的web项目，可以在Nginx做一些配置来支持请求转发。分别在http与server块中加入下面的配置：
+1http { 2 map $http_upgrade $connection_upgrade { 3 default upgrade; 4 &#39;&#39; close; 5 } 6} 7 8server { 9 location /your-api-url/ { 10 proxy_pass http://127.0.0.1:9000/your-api-url/; 11 proxy_http_version 1.1; 12 proxy_set_header Upgrade $http_upgrade; …</p>
+          <a href="https://www.zengxi.net/2018/11/nginx-setting-for-long-polling/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2018/07/shell-translate-character/">shell中用tr命令转换字符大小写</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 25, 2018</span>
+    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
+    </a>
+    <a href='https://www.zengxi.net/tags/shell' class="post_tag button button_translucent">shell
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在写shell脚本的时候，可能需要将特定的英文字符转换大小写。可以借助tr命令来实现这个功能。
+（1）tr的下面这个命令表示把string1替换成string2
+ tr string1 string2  运行下面的命令
+1echo &#39;this is a pen&#39; | tr &#39;a&#39; &#39;A&#39; 可以看到输出结果中把a换成了A
+ this is A pen  （2）同时，tr命令也支持指定一个字符的范围，在这个范围内分别作替换
+ tr 'c1-c2' 'c3-c4'  比如，如果只需要把从a到h的字符，替换成大写，那么可以用下面的命令
+1tr &#39;a-h&#39; …</p>
+          <a href="https://www.zengxi.net/2018/07/shell-translate-character/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2018/07/docker-mino-cluster/">Docker Compose创建minio集群</a>
       </h3>
       <div class="post_meta">
@@ -402,67 +465,6 @@ grep的帮助文档中有这几个参数：
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/06/bubble-sort/">排序算法 - 冒泡排序(Bubble Sort)</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 17, 2018</span>
-    <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95' class="post_tag button button_translucent">算法
-    </a>
-    <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F' class="post_tag button button_translucent">排序
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">算法思路 基本思路 假设按照从小到大排列，总共有n个元素
- 从第一个元素开始至第n-1个元素，依次比较当前元素与它后面相邻元素的大小，如果前面一个比后面一个大，交换两个元素的位置。第一遍处理之后，最后一个元素就是当前循环中最大的一个。 重复上面的步骤，第二遍处理第一至第n-2个元素，第三遍处理第一至第n-3个元素……直到仅剩一个元素。  改进后的思路 上面的基本思路中需要进行n-1轮的比较。但是存在一种可能，在其中的某一轮之后，该数组就已经是有序的了，也就意味着后面就不需要再进行额外的比较和交换。可以设置一个标志位，用来表示当前这一轮是否存在元素交换，如果没有的话，就结束整个排序过程
-性能 时间复杂度：最好的情况O(n),最差的情 …</p>
-          <a href="https://www.zengxi.net/2018/06/bubble-sort/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/06/set-postgres-default-schema/">设置Postgres数据库的默认schema</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 15, 2018</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-    <a href='https://www.zengxi.net/tags/schema' class="post_tag button button_translucent">schema
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">查看当前的schema
-1SHOW search_path; 设置默认schema，仅对当前连接有效
-1SET search_path TO your_schema; 设置默认schema，数据库级别，修改之后的所有连接都有效
-1ALTER database &#34;your_database&#34; SET search_path TO your_schema; </p>
-          <a href="https://www.zengxi.net/2018/06/set-postgres-default-schema/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -540,6 +542,12 @@ grep的帮助文档中有这几个参数：
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="nav-link">配置Nginx支持长轮询</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/" class="nav-link">基于alpine构建docker镜像修改时区</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="nav-link">Manjaro升级后打印服务不可用</a>
       </li>
       <li>
@@ -556,12 +564,6 @@ grep的帮助文档中有这几个参数：
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="nav-link">用Python读取sitemap并调用百度接口推送URL</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/" class="nav-link">使用Python在两个Postgres数据库直接复制数据</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/postgres_copy_table_schema/" class="nav-link">Postgres通过SQL语句复制表结构</a>
       </li>
     </ul>
     <div>
@@ -597,24 +599,24 @@ grep的帮助文档中有这几个参数：
           <span class="button_tally">5</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
+          DOCKER
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
           MAC
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/nginx/' class="post_tag button button_translucent">
+          NGINX
           <span class="button_tally">3</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/%E7%AE%97%E6%B3%95/' class="post_tag button button_translucent">
           算法
           <span class="button_tally">3</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
-          DOCKER
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/nginx/' class="post_tag button button_translucent">
-          NGINX
-          <span class="button_tally">2</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/nodejs/' class="post_tag button button_translucent">
@@ -647,7 +649,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=2>DOCKER<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=3>DOCKER<span class="button_tally">3</span>
             </a>
             
             
@@ -687,7 +689,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/nginx/' class=" post_tag button button_translucent" data-position=2>NGINX<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/categories/nginx/' class=" post_tag button button_translucent" data-position=3>NGINX<span class="button_tally">3</span>
             </a>
             
             
@@ -781,17 +783,17 @@ grep的帮助文档中有这几个参数：
         
         <a href='https://www.zengxi.net/tags/nginx/' class="post_tag button button_translucent">
           NGINX
+          <span class="button_tally">5</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
+          DOCKER
           <span class="button_tally">4</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
           SHELL
           <span class="button_tally">4</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
-          DOCKER
-          <span class="button_tally">3</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class="post_tag button button_translucent">
@@ -802,6 +804,11 @@ grep的帮助文档中有这几个参数：
         <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/' class="post_tag button button_translucent">
           算法
           <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/alpine/' class="post_tag button button_translucent">
+          ALPINE
+          <span class="button_tally">2</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/chrome/' class="post_tag button button_translucent">
@@ -819,18 +826,13 @@ grep的帮助文档中有这几个参数：
           <span class="button_tally">2</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
-          <span class="button_tally">2</span>
-        </a>
-        
         
         <br>
         <div class="post_tags_toggle button">所有标签</div>
         <div class="post_tags">
           <div class="tags_list">
             
-            <a href='https://www.zengxi.net/tags/alpine/' class=" post_tag button button_translucent" data-position=1>ALPINE<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/alpine/' class=" post_tag button button_translucent" data-position=2>ALPINE<span class="button_tally">2</span>
             </a>
             
             
@@ -866,7 +868,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=3>DOCKER<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=4>DOCKER<span class="button_tally">4</span>
             </a>
             
             
@@ -970,7 +972,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/nginx/' class=" post_tag button button_translucent" data-position=4>NGINX<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/tags/nginx/' class=" post_tag button button_translucent" data-position=5>NGINX<span class="button_tally">5</span>
             </a>
             
             
@@ -1143,6 +1145,10 @@ grep的帮助文档中有这几个参数：
             
             
             <a href='https://www.zengxi.net/tags/%E8%BF%9C%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>远程<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%95%BF%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>长轮询<span class="button_tally">1</span>
             </a>
             
             

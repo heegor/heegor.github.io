@@ -127,6 +127,67 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_config_map_secret/">Kubernetes in Action笔记 - (10) 使用ConfigMap与Secret传递应用配置</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 25, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+    <a href='https://www.zengxi.net/tags/configmap' class="post_tag button button_translucent">configmap
+    </a>
+    <a href='https://www.zengxi.net/tags/secret' class="post_tag button button_translucent">secret
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">向容器传递应用程序的配置参数 方法：
+ 向容器传递命令行参数 为每个容器设置自定义环境变量 通过特殊类型的卷将配置文件挂载到容器中  向容器传递命令行参数 在Docker中定义命令与参数 容器中运行的完整指令由两部分组成:命令与参数。Dockerfile中的两种指令分别定义命令与参数这两个部分：
+ ENTRYPOINT: 定义容器启动时被调用的可执行程序 CMD: 指定传递给ENTRYPOINT的参数。  尽管可以直接使用CMD指令指定镜像运行时想要执行的命令, 正确的做法依旧 是借助ENTRYPOINT指令, 仅仅用CMD指定所需的默认参数。 这样, 镜像可以直 接运行, 无须添加任何参数
+1docker run …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_config_map_secret/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_volume/">Kubernetes in Action笔记 - (9) 卷</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 22, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">卷 卷是 pod 的一个组成部分，不是独立的 Kubernetes 对象, 不能单独创建或删除。 pod 中的所有容器都可以使用卷, 但必须先将它挂载在每个需要访问它的容器中。
+卷类型 主要类型：
+ emptyDir:用于存储临时数据的简单空目录。 hostPath: 用于将目录从工作节点的文件系统挂载到pod中 gitRepo: 通过检出Git仓库的内容来初始化的卷 nfs: 挂载到pod中的NFS共享卷 用于挂载云服务商提供的特定存储类型。比如，gcePersistentDi sk (Google 高效能型存储磁盘卷)、 awsElasticBlockStore (AmazonWeb 服务弹性块存储卷)、 azureDisk …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/12/k8s_service/">Kubernetes in Action笔记 - (8) 服务、Endpoint、Ingress</a>
       </h3>
       <div class="post_meta">
@@ -353,66 +414,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/11/nginx_security/">Nginx服务器安全加固</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Nov 22, 2020</span>
-    <a href='https://www.zengxi.net/tags/nginx' class="post_tag button button_translucent">nginx
-    </a>
-    <a href='https://www.zengxi.net/tags/security' class="post_tag button button_translucent">security
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">基础知识 常用配置 顶部配置
-1#定义 Nginx 运行的用户和用户组 2user nginx; 3 4#进程文件 5pid /var/run/nginx.pid; 6 7#错误日志位置和级别，debug、info、notice、warn、error、crit 8error_log /var/log/nginx/error.log warn; 9 10#Nginx worker 的进程数，一般可设置为可用的CPU内核数。 11worker_processes 8; 12 13#每个 worker 打开文件描述符的最大数量限制。理论值应该是最多打开文件数（系统的值ulimit -n） 14#与 nginx 进程数相除，但是 nginx …</p>
-          <a href="https://www.zengxi.net/2020/11/nginx_security/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/">Elastic Search vm.max_map_count too low 错误</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Nov 19, 2020</span>
-    <a href='https://www.zengxi.net/tags/elastic-search' class="post_tag button button_translucent">elastic search
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在启动elastic search的时候，在启动日志看到下面的错误提示
-1Max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144] 解决这个问题，有两个办法：
- 临时的，仅当前会话窗口有效 执行下面命令  1sysctl -w vm.max_map_count=262144 然后启动elastic search
-永久生效  编辑/etc/sysctl.conf, 添加或者修改下面参数：
-1vm.max_map_count=262144 重启系统，或者执行下面命令加载参数：
-1sysctl --system </p>
-          <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -487,6 +488,12 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="nav-link">配置Nginx支持长轮询</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/" class="nav-link">基于alpine构建docker镜像修改时区</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="nav-link">Manjaro升级后打印服务不可用</a>
       </li>
       <li>
@@ -503,12 +510,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="nav-link">用Python读取sitemap并调用百度接口推送URL</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/" class="nav-link">使用Python在两个Postgres数据库直接复制数据</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/01/postgres_copy_table_schema/" class="nav-link">Postgres通过SQL语句复制表结构</a>
       </li>
     </ul>
     <div>
@@ -544,24 +545,24 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
           <span class="button_tally">5</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
+          DOCKER
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
           MAC
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/nginx/' class="post_tag button button_translucent">
+          NGINX
           <span class="button_tally">3</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/%E7%AE%97%E6%B3%95/' class="post_tag button button_translucent">
           算法
           <span class="button_tally">3</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
-          DOCKER
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/nginx/' class="post_tag button button_translucent">
-          NGINX
-          <span class="button_tally">2</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/nodejs/' class="post_tag button button_translucent">
@@ -594,7 +595,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=2>DOCKER<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=3>DOCKER<span class="button_tally">3</span>
             </a>
             
             
@@ -634,7 +635,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/nginx/' class=" post_tag button button_translucent" data-position=2>NGINX<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/categories/nginx/' class=" post_tag button button_translucent" data-position=3>NGINX<span class="button_tally">3</span>
             </a>
             
             
@@ -728,17 +729,17 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
         
         <a href='https://www.zengxi.net/tags/nginx/' class="post_tag button button_translucent">
           NGINX
+          <span class="button_tally">5</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
+          DOCKER
           <span class="button_tally">4</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
           SHELL
           <span class="button_tally">4</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
-          DOCKER
-          <span class="button_tally">3</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class="post_tag button button_translucent">
@@ -749,6 +750,11 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
         <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/' class="post_tag button button_translucent">
           算法
           <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/alpine/' class="post_tag button button_translucent">
+          ALPINE
+          <span class="button_tally">2</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/chrome/' class="post_tag button button_translucent">
@@ -766,18 +772,13 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
           <span class="button_tally">2</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
-          <span class="button_tally">2</span>
-        </a>
-        
         
         <br>
         <div class="post_tags_toggle button">所有标签</div>
         <div class="post_tags">
           <div class="tags_list">
             
-            <a href='https://www.zengxi.net/tags/alpine/' class=" post_tag button button_translucent" data-position=1>ALPINE<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/alpine/' class=" post_tag button button_translucent" data-position=2>ALPINE<span class="button_tally">2</span>
             </a>
             
             
@@ -813,7 +814,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=3>DOCKER<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=4>DOCKER<span class="button_tally">4</span>
             </a>
             
             
@@ -917,7 +918,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/nginx/' class=" post_tag button button_translucent" data-position=4>NGINX<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/tags/nginx/' class=" post_tag button button_translucent" data-position=5>NGINX<span class="button_tally">5</span>
             </a>
             
             
@@ -1090,6 +1091,10 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             
             
             <a href='https://www.zengxi.net/tags/%E8%BF%9C%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>远程<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%95%BF%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>长轮询<span class="button_tally">1</span>
             </a>
             
             
