@@ -79,14 +79,14 @@
     <a href="https://www.zengxi.net/" class="nav_item">首页 </a>
   </div>
   <div class="nav_parent">
-    <a href="https://www.zengxi.net/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
+    <a href="https://www.zengxi.net/series/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
         <a href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/" class="nav_child nav_item">Kubernetes in Action笔记</a>
     </div>
   </div>
   <div class="nav_parent">
-    <a href="https://www.zengxi.net/" class="nav_item">链接 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
+    <a href="https://www.zengxi.net/links/" class="nav_item">链接 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
         <a href="https://www.zengxi.net/links/mirror/" class="nav_child nav_item">国内常用镜像地址</a>
@@ -123,6 +123,95 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/">用Python读取sitemap并调用百度接口推送URL</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Feb 1, 2021</span>
+    <a href='https://www.zengxi.net/tags/python' class="post_tag button button_translucent">python
+    </a>
+    <a href='https://www.zengxi.net/tags/seo' class="post_tag button button_translucent">seo
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">SEO对于网站的推广很重要，大多数搜索引擎都提供了一些API用于给站长主动提交URL，加快网页被收录的速度。
+百度提供了快速收录的API接口，下面这个Python脚本可以用来读取本地磁盘中的sitemap.xml文件，并调用接口提交URL至百度。
+仅需要修改下面的参数：
+ lastUpdateTimeStr - 上次推送的时间。会与sitemap.xml中的时间做比较，仅推送在该时间之后更新的URL siteMapPath - sitemap.xml在本地磁盘上的存放路径 siteUrl - 网站地址 baiduApiToken - Baidu API的token tmpFile - …</p>
+          <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/">使用Python在两个Postgres数据库直接复制数据</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 26, 2021</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+    <a href='https://www.zengxi.net/tags/python' class="post_tag button button_translucent">python
+    </a>
+    <a href='https://www.zengxi.net/tags/psycopg2' class="post_tag button button_translucent">psycopg2
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在python脚本中，通过 psycopg2 库的copy_expert，可以很方便地在两个Postgres数据库之间复制数据
+1s = StringIO() 2 3# Export into memory buffer 4sql = &#34;&#34;&#34; 5COPY (select * from foo) TO STDOUT WITH CSV HEADER ENCODING &#39;UTF8&#39;; 6&#34;&#34;&#34; 7 8sourceCursor = sourceConn.cursor() 9sourceCursor.copy_expert(sql, s) 10 11# Import from …</p>
+          <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/01/postgres_copy_table_schema/">Postgres通过SQL语句复制表结构</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 26, 2021</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在创建临时数据表的时候会有用
+1create table if not exists foo as (select * from bar) with no data; </p>
+          <a href="https://www.zengxi.net/2021/01/postgres_copy_table_schema/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -326,93 +415,6 @@ pod …</p>
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_statefulset/">Kubernetes in Action笔记 - (13) Statefulset</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 29, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">了解Statefulset 与ReplicaSet比较 Statefulset 保证了pod在重新调度后保留它们的标识和状态。
-与ReplicaSet类似, Statefulset 也是依据Statefulset 的pod模板创建的，也会指定期望的副本个数。
-不同的是, Statefulset创建的pod副本并不是完全一样的。每个pod都可以拥有一组独立的数据卷(持久化状态)。pod的名字都是规律的(固定的), 而不是每个新pod都随机获取一个名字。
-提供稳定的网络标识 一个Statefulset创建的每个pod都有一个从零开始的顺序索引, 这个会体现在pod的名称和主机名上, 同样还会体现在pod对应的固定存储上。
-与普通的pod …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_deployment/">Kubernetes in Action笔记 - (12) Deployment</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 27, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">Deployment是一种更高阶资源, 用于部署应用程序并以声明的方式升级应用。
-在使用 Deployment 时, 实际的 pod是由 Deployment 的 Replicaset 创建和管理的, 而不是由 Deployment 直接创建和管理的。
-在升级应用过程中，部署新版本的应用时，会创建新的Replicaset用于管理版本的pod。升级过程中的某个时刻，就会存在新旧两个版本的Replicaset。因此，需要引入Deployment来协调。
-与Replicaset类似，Deployment也是由标签选择器、期望副数和pod模板组成的。此外,它还包含另一个字段，用于指定一 个部署策略，表示在修改Deployment资源时应该如 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_deployment/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_pod_meta_data/">Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 26, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">通过Downward API传递元数据 对于pod调度、运行前预设的数据，可以通过环境变量或者configMap和secret卷向应用传递配置数据。但是对于那些不能预先知道的数据, 比如pod的IP、 主机名或者是通过ReplicaSet等控制生成的pod名称，该如何获取呢？这种类型的数据，可以通过使用Kubernetes Downward API解决。
-Downward API可以给在pod中运行的进程暴露pod的元数据。目前可以给容器传递以下数据:
- pod的名称 pod的IP pod所在的命名空间 pod运行节点的名称 pod运行所归属的服务账户的名称 每个容器请求的CPU和内存的使用量 每个容器可以使用的CPU …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_pod_meta_data/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -484,6 +486,15 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="nav-link">CXF记录WebService的soap日志</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/" class="nav-link">设置周日为一个星期的第一天</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/03/jetty_session_remove_node_name/" class="nav-link">删除Jetty中session ID的node名称</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="nav-link">配置Nginx支持长轮询</a>
       </li>
       <li>
@@ -497,15 +508,6 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/02/java8_lambda/" class="nav-link">Java 8新特性 - (1)Lambda表达式</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/java7_gramma_new_features/" class="nav-link">Java 7新特性 - (1)Java语法特性</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/es_search_improvement/" class="nav-link">订单ES查询性能优化</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="nav-link">用Python读取sitemap并调用百度接口推送URL</a>
       </li>
     </ul>
     <div>
@@ -546,6 +548,11 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
           <span class="button_tally">3</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/jetty/' class="post_tag button button_translucent">
+          JETTY
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
           MAC
           <span class="button_tally">3</span>
@@ -576,11 +583,6 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
           <span class="button_tally">2</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/zookeeper/' class="post_tag button button_translucent">
-          ZOOKEEPER
-          <span class="button_tally">2</span>
-        </a>
-        
         
         <br>
         <div class="post_tags_toggle button">所有分类</div>
@@ -604,6 +606,10 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             
             
             <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=5>JAVA<span class="button_tally">5</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/jetty/' class=" post_tag button button_translucent" data-position=3>JETTY<span class="button_tally">3</span>
             </a>
             
             
@@ -733,6 +739,16 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
           <span class="button_tally">4</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
+          JETTY
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/session/' class="post_tag button button_translucent">
+          SESSION
+          <span class="button_tally">4</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
           SHELL
           <span class="button_tally">4</span>
@@ -755,16 +771,6 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
         
         <a href='https://www.zengxi.net/tags/chrome/' class="post_tag button button_translucent">
           CHROME
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/elastic-search/' class="post_tag button button_translucent">
-          ELASTIC-SEARCH
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/grep/' class="post_tag button button_translucent">
-          GREP
           <span class="button_tally">2</span>
         </a>
         
@@ -858,7 +864,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/jetty/' class=" post_tag button button_translucent" data-position=1>JETTY<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/jetty/' class=" post_tag button button_translucent" data-position=4>JETTY<span class="button_tally">4</span>
             </a>
             
             
@@ -970,7 +976,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/session/' class=" post_tag button button_translucent" data-position=1>SESSION<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/session/' class=" post_tag button button_translucent" data-position=4>SESSION<span class="button_tally">4</span>
             </a>
             
             

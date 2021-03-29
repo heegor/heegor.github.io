@@ -79,14 +79,14 @@
     <a href="https://www.zengxi.net/" class="nav_item">首页 </a>
   </div>
   <div class="nav_parent">
-    <a href="https://www.zengxi.net/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
+    <a href="https://www.zengxi.net/series/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
         <a href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/" class="nav_child nav_item">Kubernetes in Action笔记</a>
     </div>
   </div>
   <div class="nav_parent">
-    <a href="https://www.zengxi.net/" class="nav_item">链接 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
+    <a href="https://www.zengxi.net/links/" class="nav_item">链接 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
         <a href="https://www.zengxi.net/links/mirror/" class="nav_child nav_item">国内常用镜像地址</a>
@@ -123,6 +123,95 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/03/cxf_ws_log/">CXF记录WebService的soap日志</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Mar 29, 2021</span>
+    <a href='https://www.zengxi.net/tags/jetty' class="post_tag button button_translucent">jetty
+    </a>
+    <a href='https://www.zengxi.net/tags/session' class="post_tag button button_translucent">session
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">cxf本身就支持日志功能，能打印传入传出的soap报文，但是需要配置一下。
+这里配置的是cxf结合spring做的WebService，配置步骤如下：
+ 在spring配置文件中的jaxws:endpoint节点下配置日志拦截器  1&lt;import resource=&#34;classpath:META-INF/cxf/cxf.xml&#34; /&gt; 2&lt;import resource=&#34;classpath:META-INF/cxf/cxf-extension-soap.xml&#34; /&gt; 3&lt;import …</p>
+          <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/">设置周日为一个星期的第一天</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Mar 29, 2021</span>
+    <a href='https://www.zengxi.net/tags/jetty' class="post_tag button button_translucent">jetty
+    </a>
+    <a href='https://www.zengxi.net/tags/session' class="post_tag button button_translucent">session
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">用 “locale”命令检查当前的区域，例如我的机器运行结果是：
+1ls@ls-laptop:~$ locale 2 3LANG=zh_CN.UTF-8 4LANGUAGE=zh_CN.UTF-8 5LC_CTYPE=&#34;zh_CN.UTF-8&#34; 6LC_NUMERIC=&#34;zh_CN.UTF-8&#34; 7LC_TIME=&#34;zh_CN.UTF-8&#34; 8LC_COLLATE=&#34;zh_CN.UTF-8&#34; 9LC_MONETARY=&#34;zh_CN.UTF-8&#34; 10LC_MESSAGES=&#34;zh_CN.UTF-8&#34; …</p>
+          <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/03/jetty_session_remove_node_name/">删除Jetty中session ID的node名称</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Mar 29, 2021</span>
+    <a href='https://www.zengxi.net/tags/jetty' class="post_tag button button_translucent">jetty
+    </a>
+    <a href='https://www.zengxi.net/tags/session' class="post_tag button button_translucent">session
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">jetty 9.4 版本对session id的生成做了升级. 他会自动在session id后面加个节点的名字(workName配置项). jetty 9.3 以及之前的版本没有这个问题.
+可以通过修改配置文件来去除session id后缀:
+1# 执行下面命令来启用sessions模块，这样就会在start.d目录下面自动生成sessions.ini配置文件 2java -jar &#34;/usr/local/jetty/start.jar&#34; --add-to-startd=sessions 3 4# 修改sessions.ini配置， …</p>
+          <a href="https://www.zengxi.net/2021/03/jetty_session_remove_node_name/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -337,95 +426,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/">用Python读取sitemap并调用百度接口推送URL</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Feb 1, 2021</span>
-    <a href='https://www.zengxi.net/tags/python' class="post_tag button button_translucent">python
-    </a>
-    <a href='https://www.zengxi.net/tags/seo' class="post_tag button button_translucent">seo
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">SEO对于网站的推广很重要，大多数搜索引擎都提供了一些API用于给站长主动提交URL，加快网页被收录的速度。
-百度提供了快速收录的API接口，下面这个Python脚本可以用来读取本地磁盘中的sitemap.xml文件，并调用接口提交URL至百度。
-仅需要修改下面的参数：
- lastUpdateTimeStr - 上次推送的时间。会与sitemap.xml中的时间做比较，仅推送在该时间之后更新的URL siteMapPath - sitemap.xml在本地磁盘上的存放路径 siteUrl - 网站地址 baiduApiToken - Baidu API的token tmpFile - …</p>
-          <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/">使用Python在两个Postgres数据库直接复制数据</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 26, 2021</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-    <a href='https://www.zengxi.net/tags/python' class="post_tag button button_translucent">python
-    </a>
-    <a href='https://www.zengxi.net/tags/psycopg2' class="post_tag button button_translucent">psycopg2
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在python脚本中，通过 psycopg2 库的copy_expert，可以很方便地在两个Postgres数据库之间复制数据
-1s = StringIO() 2 3# Export into memory buffer 4sql = &#34;&#34;&#34; 5COPY (select * from foo) TO STDOUT WITH CSV HEADER ENCODING &#39;UTF8&#39;; 6&#34;&#34;&#34; 7 8sourceCursor = sourceConn.cursor() 9sourceCursor.copy_expert(sql, s) 10 11# Import from …</p>
-          <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/01/postgres_copy_table_schema/">Postgres通过SQL语句复制表结构</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 26, 2021</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在创建临时数据表的时候会有用
-1create table if not exists foo as (select * from bar) with no data; </p>
-          <a href="https://www.zengxi.net/2021/01/postgres_copy_table_schema/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -497,6 +497,15 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="nav-link">CXF记录WebService的soap日志</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/" class="nav-link">设置周日为一个星期的第一天</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/03/jetty_session_remove_node_name/" class="nav-link">删除Jetty中session ID的node名称</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="nav-link">配置Nginx支持长轮询</a>
       </li>
       <li>
@@ -510,15 +519,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/02/java8_lambda/" class="nav-link">Java 8新特性 - (1)Lambda表达式</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/java7_gramma_new_features/" class="nav-link">Java 7新特性 - (1)Java语法特性</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/es_search_improvement/" class="nav-link">订单ES查询性能优化</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="nav-link">用Python读取sitemap并调用百度接口推送URL</a>
       </li>
     </ul>
     <div>
@@ -559,6 +559,11 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
           <span class="button_tally">3</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/jetty/' class="post_tag button button_translucent">
+          JETTY
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
           MAC
           <span class="button_tally">3</span>
@@ -589,11 +594,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
           <span class="button_tally">2</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/zookeeper/' class="post_tag button button_translucent">
-          ZOOKEEPER
-          <span class="button_tally">2</span>
-        </a>
-        
         
         <br>
         <div class="post_tags_toggle button">所有分类</div>
@@ -617,6 +617,10 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             
             
             <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=5>JAVA<span class="button_tally">5</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/jetty/' class=" post_tag button button_translucent" data-position=3>JETTY<span class="button_tally">3</span>
             </a>
             
             
@@ -746,6 +750,16 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
           <span class="button_tally">4</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
+          JETTY
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/session/' class="post_tag button button_translucent">
+          SESSION
+          <span class="button_tally">4</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
           SHELL
           <span class="button_tally">4</span>
@@ -768,16 +782,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
         
         <a href='https://www.zengxi.net/tags/chrome/' class="post_tag button button_translucent">
           CHROME
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/elastic-search/' class="post_tag button button_translucent">
-          ELASTIC-SEARCH
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/grep/' class="post_tag button button_translucent">
-          GREP
           <span class="button_tally">2</span>
         </a>
         
@@ -871,7 +875,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/jetty/' class=" post_tag button button_translucent" data-position=1>JETTY<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/jetty/' class=" post_tag button button_translucent" data-position=4>JETTY<span class="button_tally">4</span>
             </a>
             
             
@@ -983,7 +987,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/session/' class=" post_tag button button_translucent" data-position=1>SESSION<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/session/' class=" post_tag button button_translucent" data-position=4>SESSION<span class="button_tally">4</span>
             </a>
             
             

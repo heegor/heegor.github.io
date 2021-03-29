@@ -79,14 +79,14 @@
     <a href="https://www.zengxi.net/" class="nav_item">首页 </a>
   </div>
   <div class="nav_parent">
-    <a href="https://www.zengxi.net/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
+    <a href="https://www.zengxi.net/series/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
         <a href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/" class="nav_child nav_item">Kubernetes in Action笔记</a>
     </div>
   </div>
   <div class="nav_parent">
-    <a href="https://www.zengxi.net/" class="nav_item">链接 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
+    <a href="https://www.zengxi.net/links/" class="nav_item">链接 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
         <a href="https://www.zengxi.net/links/mirror/" class="nav_child nav_item">国内常用镜像地址</a>
@@ -123,6 +123,93 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_statefulset/">Kubernetes in Action笔记 - (13) Statefulset</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 29, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">了解Statefulset 与ReplicaSet比较 Statefulset 保证了pod在重新调度后保留它们的标识和状态。
+与ReplicaSet类似, Statefulset 也是依据Statefulset 的pod模板创建的，也会指定期望的副本个数。
+不同的是, Statefulset创建的pod副本并不是完全一样的。每个pod都可以拥有一组独立的数据卷(持久化状态)。pod的名字都是规律的(固定的), 而不是每个新pod都随机获取一个名字。
+提供稳定的网络标识 一个Statefulset创建的每个pod都有一个从零开始的顺序索引, 这个会体现在pod的名称和主机名上, 同样还会体现在pod对应的固定存储上。
+与普通的pod …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_deployment/">Kubernetes in Action笔记 - (12) Deployment</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 27, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">Deployment是一种更高阶资源, 用于部署应用程序并以声明的方式升级应用。
+在使用 Deployment 时, 实际的 pod是由 Deployment 的 Replicaset 创建和管理的, 而不是由 Deployment 直接创建和管理的。
+在升级应用过程中，部署新版本的应用时，会创建新的Replicaset用于管理版本的pod。升级过程中的某个时刻，就会存在新旧两个版本的Replicaset。因此，需要引入Deployment来协调。
+与Replicaset类似，Deployment也是由标签选择器、期望副数和pod模板组成的。此外,它还包含另一个字段，用于指定一 个部署策略，表示在修改Deployment资源时应该如 …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_deployment/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_pod_meta_data/">Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 26, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">通过Downward API传递元数据 对于pod调度、运行前预设的数据，可以通过环境变量或者configMap和secret卷向应用传递配置数据。但是对于那些不能预先知道的数据, 比如pod的IP、 主机名或者是通过ReplicaSet等控制生成的pod名称，该如何获取呢？这种类型的数据，可以通过使用Kubernetes Downward API解决。
+Downward API可以给在pod中运行的进程暴露pod的元数据。目前可以给容器传递以下数据:
+ pod的名称 pod的IP pod所在的命名空间 pod运行节点的名称 pod运行所归属的服务账户的名称 每个容器请求的CPU和内存的使用量 每个容器可以使用的CPU …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_pod_meta_data/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -327,93 +414,6 @@ phase有以下几种值：
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/">Kubernetes in Action笔记 - (3) Pod介绍</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 3, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">什么是Pod Pod是k8s的基本构建模块，包含一个或者多个容器。一个Pod中的所有容器都运行在同—个节点上，绝不跨越两个节点
-为何需要Pod 多个容器比单个容器中包含多个进程要好 想象一个由多个进程组成的应用程序, 无论是通过ipc (进程间通信)还是本地存储文件进行通信, 都要求它们运行于同一 台机器上。 在k8s中, 我们经常在容器中运行进程, 由于每一个容器都非常像一台独立的机器, 此时你可能认为在单个容器中运行多个进程是合乎逻辑的, 然而在实践中这种做法并不合理。
-容器被设计为每个容器只运行一个进程(除非进程本身产生子进程)。如果在单个容器中运行多个不相关的进程, 那么保持所有进程运行、 管理它们的日志等将会是我们的责任。 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/">Kubernetes in Action笔记 - (2) k8s集群架构</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 3, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">集群架构 k8s集群由很多节点组成，被分成两种类型：Master节点与Node节点。
-Master节点 承载着控制和管理整个集群系统的 Control Panel。包含下面组件：
- API Server  一个api服务器，所有外部与k8s集群的交互都需要经过它 可水平扩展   Scheduler  将pod调度到具体的Node节点上 一个master集群中只会有一个节点处于激活状态，由etcd选举产生   Control Manager  执行集群级别的功能，通过apiserver监控集群状态做出相应的处理，如复制组件、持续跟踪工作节点 、处理节点失败等 一个master集群中只会有一个节点处于激活状态，由etcd …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/">Kubernetes in Action笔记 - (1) 容器技术介绍</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 2, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-    <a href='https://www.zengxi.net/tags/container' class="post_tag button button_translucent">container
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">容器允许你在同一台机器上运行多个服务, 不仅提供不同的环境给每个服务, 而且将它们互相隔离。
-容器与虚拟机比较 轻量级 和虚拟机比较, 容器更加轻量级, 它允许在相同的硬件上运行更多数量的组件。主要是因为每个虚拟机需要运行自己的一组系统进程, 这就产生了除组件进程消耗以外的额外计算资源损耗。而一个容器仅仅是运行在宿主机上被隔离的单个进程, 仅消耗应用容器消耗的资源, 不会有其他进程的开销。
-虚拟化 多个容器则会完全执行运行在宿主机上的同一个内核的系统调用, 此内核是唯一一个在宿主机操作系统上执行指令的内核。 CPU也不需要做任何对虚拟机能做那样的虚拟化。
-隔离性 虚拟机的主要好处是它们提供完全隔离的环境, 因为每个虚拟机运行在它自己 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -488,6 +488,15 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="nav-link">CXF记录WebService的soap日志</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/" class="nav-link">设置周日为一个星期的第一天</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/03/jetty_session_remove_node_name/" class="nav-link">删除Jetty中session ID的node名称</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="nav-link">配置Nginx支持长轮询</a>
       </li>
       <li>
@@ -501,15 +510,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/02/java8_lambda/" class="nav-link">Java 8新特性 - (1)Lambda表达式</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/java7_gramma_new_features/" class="nav-link">Java 7新特性 - (1)Java语法特性</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/es_search_improvement/" class="nav-link">订单ES查询性能优化</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="nav-link">用Python读取sitemap并调用百度接口推送URL</a>
       </li>
     </ul>
     <div>
@@ -550,6 +550,11 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
           <span class="button_tally">3</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/jetty/' class="post_tag button button_translucent">
+          JETTY
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
           MAC
           <span class="button_tally">3</span>
@@ -580,11 +585,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
           <span class="button_tally">2</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/zookeeper/' class="post_tag button button_translucent">
-          ZOOKEEPER
-          <span class="button_tally">2</span>
-        </a>
-        
         
         <br>
         <div class="post_tags_toggle button">所有分类</div>
@@ -608,6 +608,10 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             
             
             <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=5>JAVA<span class="button_tally">5</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/jetty/' class=" post_tag button button_translucent" data-position=3>JETTY<span class="button_tally">3</span>
             </a>
             
             
@@ -737,6 +741,16 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
           <span class="button_tally">4</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
+          JETTY
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/session/' class="post_tag button button_translucent">
+          SESSION
+          <span class="button_tally">4</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
           SHELL
           <span class="button_tally">4</span>
@@ -759,16 +773,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
         
         <a href='https://www.zengxi.net/tags/chrome/' class="post_tag button button_translucent">
           CHROME
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/elastic-search/' class="post_tag button button_translucent">
-          ELASTIC-SEARCH
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/grep/' class="post_tag button button_translucent">
-          GREP
           <span class="button_tally">2</span>
         </a>
         
@@ -862,7 +866,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/jetty/' class=" post_tag button button_translucent" data-position=1>JETTY<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/jetty/' class=" post_tag button button_translucent" data-position=4>JETTY<span class="button_tally">4</span>
             </a>
             
             
@@ -974,7 +978,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/session/' class=" post_tag button button_translucent" data-position=1>SESSION<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/session/' class=" post_tag button button_translucent" data-position=4>SESSION<span class="button_tally">4</span>
             </a>
             
             

@@ -3,21 +3,39 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.zengxi.net/</loc>
-    <lastmod>2021-03-25T13:20:00+08:00</lastmod>
+    <lastmod>2021-03-29T11:55:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/categories/</loc>
-    <lastmod>2021-03-25T13:20:00+08:00</lastmod>
+    <lastmod>2021-03-29T11:55:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/2021/03/cxf_ws_log/</loc>
+    <lastmod>2021-03-29T11:55:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/jetty/</loc>
+    <lastmod>2021-03-29T11:55:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/categories/jetty/</loc>
+    <lastmod>2021-03-29T11:55:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/posts/</loc>
+    <lastmod>2021-03-29T11:55:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/session/</loc>
+    <lastmod>2021-03-29T11:55:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/</loc>
+    <lastmod>2021-03-29T11:55:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/</loc>
+    <lastmod>2021-03-29T11:49:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/2021/03/jetty_session_remove_node_name/</loc>
+    <lastmod>2021-03-29T11:47:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/categories/nginx/</loc>
     <lastmod>2021-03-25T13:20:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/nginx/</loc>
-    <lastmod>2021-03-25T13:20:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/posts/</loc>
-    <lastmod>2021-03-25T13:20:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/tags/</loc>
     <lastmod>2021-03-25T13:20:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/</loc>
@@ -338,9 +356,6 @@
     <loc>https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/</loc>
     <lastmod>2020-07-15T09:21:02+00:00</lastmod>
   </url><url>
-    <loc>https://www.zengxi.net/tags/jetty/</loc>
-    <lastmod>2020-07-14T22:03:51+00:00</lastmod>
-  </url><url>
     <loc>https://www.zengxi.net/2020/07/jetty_tmp_dir/</loc>
     <lastmod>2020-07-14T22:03:51+00:00</lastmod>
   </url><url>
@@ -403,9 +418,6 @@
   </url><url>
     <loc>https://www.zengxi.net/2020/01/postgres-frequently-used-commands/</loc>
     <lastmod>2020-01-27T21:22:07+00:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/tags/session/</loc>
-    <lastmod>2020-01-26T16:21:39+00:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</loc>
     <lastmod>2020-01-26T16:21:39+00:00</lastmod>

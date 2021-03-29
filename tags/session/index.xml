@@ -6,7 +6,45 @@
     <description>Recent content in session on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Sun, 26 Jan 2020 16:21:39 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/session/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Mar 2021 11:55:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/session/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CXF记录WebService的soap日志</title>
+      <link>https://www.zengxi.net/2021/03/cxf_ws_log/</link>
+      <pubDate>Mon, 29 Mar 2021 11:55:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/03/cxf_ws_log/</guid>
+      <description>cxf本身就支持日志功能，能打印传入传出的soap报文，但是需要配置一下。
+这里配置的是cxf结合spring做的WebService，配置步骤如下：
+ 在spring配置文件中的jaxws:endpoint节点下配置日志拦截器  1&amp;lt;import resource=&amp;#34;classpath:META-INF/cxf/cxf.xml&amp;#34; /&amp;gt; 2&amp;lt;import resource=&amp;#34;classpath:META-INF/cxf/cxf-extension-soap.xml&amp;#34; /&amp;gt; 3&amp;lt;import resource=&amp;#34;classpath:META-INF/cxf/cxf-servlet.xml&amp;#34; /&amp;gt; 4 5&amp;lt;!-- 配置的cxf web service的地址 --&amp;gt; 6&amp;lt;jaxws:endpoint id=&amp;#34;searchReq11&amp;#34; implementor=&amp;#34;com.iflytek.server.HelloImpl&amp;#34; 7 address=&amp;#34;/SearchReqService.asmx&amp;#34;&amp;gt; 8 &amp;lt;jaxws:inInterceptors&amp;gt; 9 &amp;lt;bean class=&amp;#34;org.apache.cxf.interceptor.LoggingInInterceptor&amp;#34; /&amp;gt; 10 &amp;lt;/jaxws:inInterceptors&amp;gt; 11 &amp;lt;jaxws:outInterceptors&amp;gt; 12 &amp;lt;bean class=&amp;#34;org.apache.cxf.interceptor.LoggingOutInterceptor&amp;#34; /&amp;gt; 13 &amp;lt;/jaxws:outInterceptors&amp;gt; 14&amp;lt;/jaxws:endpoint&amp;gt; 具体的日志输出目录（3种方式）。需要注意,下面的3种方式优先级从低到高：   什么也不配置，使用java原生的java.util.logging.Logger记录日志。日志文件为Tomcat的logs/catalina.xxxx-xx-xx.log 配置使用slf4j+log4j。cxf默认为使用slf4j记录日志。所以在项目中引入slf4j的jar包即可。如果同时引入log4j则使用log4j记录日志，如果同时引入jcl则使用jcl记录日志。 直接使用log4j记录日志。在项目的类加载路径下创建目录META-INF/cxf/，然后在目录下新建文件“org.apache.cxf.Logger”，在文件中写入：org.apache.cxf.common.logging.Log4jLogger即可。特别要注意，(1)上述目录要放在classes目录下；(2)要引入log4j的jar包。   参考：
+ http://ajita.iteye.com/blog/1745845  </description>
+    </item>
+    
+    <item>
+      <title>设置周日为一个星期的第一天</title>
+      <link>https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/</link>
+      <pubDate>Mon, 29 Mar 2021 11:49:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/</guid>
+      <description>用 “locale”命令检查当前的区域，例如我的机器运行结果是：
+1ls@ls-laptop:~$ locale 2 3LANG=zh_CN.UTF-8 4LANGUAGE=zh_CN.UTF-8 5LC_CTYPE=&amp;#34;zh_CN.UTF-8&amp;#34; 6LC_NUMERIC=&amp;#34;zh_CN.UTF-8&amp;#34; 7LC_TIME=&amp;#34;zh_CN.UTF-8&amp;#34; 8LC_COLLATE=&amp;#34;zh_CN.UTF-8&amp;#34; 9LC_MONETARY=&amp;#34;zh_CN.UTF-8&amp;#34; 10LC_MESSAGES=&amp;#34;zh_CN.UTF-8&amp;#34; 11LC_PAPER=&amp;#34;zh_CN.UTF-8&amp;#34; 12LC_NAME=&amp;#34;zh_CN.UTF-8&amp;#34; 13LC_ADDRESS=&amp;#34;zh_CN.UTF-8&amp;#34; 14LC_TELEPHONE=&amp;#34;zh_CN.UTF-8&amp;#34; 15LC_MEASUREMENT=&amp;#34;zh_CN.UTF-8&amp;#34; 16LC_IDENTIFICATION=&amp;#34;zh_CN.UTF-8&amp;#34; 17LC_ALL= 执行下面命令
+1sudo gedit /usr/share/i18n/locales/zh_CN 找到 “first_weekday 2” 这一行，将2改成1，周日就是每周的第一天了
+执行下面的命令重新生成 locale 信息
+1sudo locale-gen 重新启动
+ 参考原文：
+ http://ubuntuforums.org/archive/index.php/t-26409.html  </description>
+    </item>
+    
+    <item>
+      <title>删除Jetty中session ID的node名称</title>
+      <link>https://www.zengxi.net/2021/03/jetty_session_remove_node_name/</link>
+      <pubDate>Mon, 29 Mar 2021 11:47:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/03/jetty_session_remove_node_name/</guid>
+      <description>jetty 9.4 版本对session id的生成做了升级. 他会自动在session id后面加个节点的名字(workName配置项). jetty 9.3 以及之前的版本没有这个问题.
+可以通过修改配置文件来去除session id后缀:
+1# 执行下面命令来启用sessions模块，这样就会在start.d目录下面自动生成sessions.ini配置文件 2java -jar &amp;#34;/usr/local/jetty/start.jar&amp;#34; --add-to-startd=sessions 3 4# 修改sessions.ini配置，把下面配置项的值为空 5jetty.sessionIdManager.workerName= </description>
+    </item>
+    
     <item>
       <title>根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</title>
       <link>https://www.zengxi.net/2020/01/manage-distribution-session-by-id/</link>

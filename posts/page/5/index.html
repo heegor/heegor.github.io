@@ -79,14 +79,14 @@
     <a href="https://www.zengxi.net/" class="nav_item">首页 </a>
   </div>
   <div class="nav_parent">
-    <a href="https://www.zengxi.net/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
+    <a href="https://www.zengxi.net/series/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
         <a href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/" class="nav_child nav_item">Kubernetes in Action笔记</a>
     </div>
   </div>
   <div class="nav_parent">
-    <a href="https://www.zengxi.net/" class="nav_item">链接 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
+    <a href="https://www.zengxi.net/links/" class="nav_item">链接 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
         <a href="https://www.zengxi.net/links/mirror/" class="nav_child nav_item">国内常用镜像地址</a>
@@ -123,6 +123,91 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/">Postgres启动时遇到只读文件系统的错误</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Sep 20, 2020</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">问题与解决方法 公司内部私有云由于断电，机器没有正常关机，结果导致 Postgres 服务器启动时，报错
+12020-09-09 07:22:15.296 UTC [3876] FATAL: could not remove old lock file &#34;postmaster.pid&#34;: Read-only file system 22020-09-09 07:22:15.296 UTC [3876] HINT: The file seems accidentally left over, but it could not be removed. Please remove the file by hand and …</p>
+          <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/08/manjaro_debtap/">Manjaro安装deb包</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Aug 13, 2020</span>
+    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">安装debtap
+1yay -S debtap 替换源，解决国内debtap同步仓库执行超慢的问题。打开 /usr/bin/debtap，更换 debtap 内容：
+ 将 http://ftp.debian.org/debian/dists 替换成 https://mirrors.ustc.edu.cn/debian/dists 将 http://archive.ubuntu.com/ubuntu/dists 替换成 https://mirrors.ustc.edu.cn/ubuntu/dists  升级debtap数据库
+1sudo debtap -u 转换deb包。注意： 转换过程中会提示输入包名，以及license。包名随 …</p>
+          <a href="https://www.zengxi.net/2020/08/manjaro_debtap/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/08/linux_auto_set_brightness/">Manjaro笔记本启动时自动设置屏幕亮度</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Aug 10, 2020</span>
+    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">笔记本在manjaro在启动的时候，屏幕可能会默认设置为最大亮度。可以通过设置开机启动脚本，来设置启动时候的亮度。
+1. 创建一个启动service脚本 执行下面的命令
+1sudo vim /etc/systemd/system/rc-local.service 输入下面的内容
+1[Unit] 2Description=&#34;/etc/rc.local Compatibility&#34; 3 4[Service] 5Type=oneshot 6ExecStart=/etc/rc.local start 7TimeoutSec=0 8StandardInput=tty 9RemainAfterExit=yes …</p>
+          <a href="https://www.zengxi.net/2020/08/linux_auto_set_brightness/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -327,95 +412,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/jetty_tmp_dir/">jetty临时目录下的资源文件被删导致js等资源找不到</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 14, 2020</span>
-    <a href='https://www.zengxi.net/tags/jetty' class="post_tag button button_translucent">jetty
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">生产环境上jetty运行一段时间后，在打开某个网页的时候发现有js、css文件找不到，但是重启之后问题会解决。后来发现是设定了tmpwatch后台任务，定时会清理一次系统的tmp目录。
-默认情况下，如果没有指定jetty的临时目录，默认会使用系统的临时目录。解决方案就是，修改jetty的临时文件存放目录，不要放在 /tmp 目录下面。主要有下面几个方法：
- 设置basetempdir值  1&lt;Configure class=&#34;org.eclipse.jetty.webapp.WebAppContext&#34;&gt; 2 3 &lt;Set …</p>
-          <a href="https://www.zengxi.net/2020/07/jetty_tmp_dir/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/">Linux下面使用dd命令烧录U盘并查看执行进度</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 13, 2020</span>
-    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">烧录U盘 先用fdisk来查看U盘的盘符
-1sudo fdisk -l 再用dd命令来写数据到U盘
-1sudo dd if=/home/paul/Downloads/test.iso of=/dev/sdc bs=1M count=10000 查看执行进度 假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命令行窗口，执行下面的命令，注意命令上面可能需要加上sudo
-方法一：
-1watch -n 5 pkill -USR1 ^dd$ 方法二：
-1watch -n 5 killall -USR1 dd 方法三：
-1while killall -USR1 dd; do sleep 5; done 方法四：
-1while (ps …</p>
-          <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/">rsyslog内存占用高导致服务不可用</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 22, 2020</span>
-    <a href='https://www.zengxi.net/tags/rsyslog' class="post_tag button button_translucent">rsyslog
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">这几天生产环境中某个服务内存不时地被撑爆，原先以为是应用的问题，但是近来没有上过新的代码。该服务的总内存是8G，启动参数关于内存的配置大致是：-Xmx=6.4G，-Xms=4G 左右。看了Grafana上面的监控记录，JVM 老年代使用最多也就到4G左右，在GC的日志中发现也仅仅用到4G左右，并没有到达最高的内存值。这两个结果可以看出来，应该不是应用程序导致内存占用过大。
-后来用top命令看了一下，发现rsyslog进程使用了将近40%的内存。再查一下日志文件，发现一些日志文件大小都达到2G以上。
-rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程，不应该占用那么内存，即使它同步延迟较大甚至不工作，也不应该影响到应用程序 …</p>
-          <a href="https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -496,6 +492,15 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="nav-link">CXF记录WebService的soap日志</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/" class="nav-link">设置周日为一个星期的第一天</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/03/jetty_session_remove_node_name/" class="nav-link">删除Jetty中session ID的node名称</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="nav-link">配置Nginx支持长轮询</a>
       </li>
       <li>
@@ -509,15 +514,6 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/02/java8_lambda/" class="nav-link">Java 8新特性 - (1)Lambda表达式</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/java7_gramma_new_features/" class="nav-link">Java 7新特性 - (1)Java语法特性</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/es_search_improvement/" class="nav-link">订单ES查询性能优化</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="nav-link">用Python读取sitemap并调用百度接口推送URL</a>
       </li>
     </ul>
     <div>
@@ -558,6 +554,11 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
           <span class="button_tally">3</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/jetty/' class="post_tag button button_translucent">
+          JETTY
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
           MAC
           <span class="button_tally">3</span>
@@ -588,11 +589,6 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
           <span class="button_tally">2</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/zookeeper/' class="post_tag button button_translucent">
-          ZOOKEEPER
-          <span class="button_tally">2</span>
-        </a>
-        
         
         <br>
         <div class="post_tags_toggle button">所有分类</div>
@@ -616,6 +612,10 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
             
             
             <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=5>JAVA<span class="button_tally">5</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/jetty/' class=" post_tag button button_translucent" data-position=3>JETTY<span class="button_tally">3</span>
             </a>
             
             
@@ -745,6 +745,16 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
           <span class="button_tally">4</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
+          JETTY
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/session/' class="post_tag button button_translucent">
+          SESSION
+          <span class="button_tally">4</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
           SHELL
           <span class="button_tally">4</span>
@@ -767,16 +777,6 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
         
         <a href='https://www.zengxi.net/tags/chrome/' class="post_tag button button_translucent">
           CHROME
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/elastic-search/' class="post_tag button button_translucent">
-          ELASTIC-SEARCH
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/grep/' class="post_tag button button_translucent">
-          GREP
           <span class="button_tally">2</span>
         </a>
         
@@ -870,7 +870,7 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/jetty/' class=" post_tag button button_translucent" data-position=1>JETTY<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/jetty/' class=" post_tag button button_translucent" data-position=4>JETTY<span class="button_tally">4</span>
             </a>
             
             
@@ -982,7 +982,7 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/session/' class=" post_tag button button_translucent" data-position=1>SESSION<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/session/' class=" post_tag button button_translucent" data-position=4>SESSION<span class="button_tally">4</span>
             </a>
             
             

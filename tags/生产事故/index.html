@@ -79,14 +79,14 @@
     <a href="https://www.zengxi.net/" class="nav_item">首页 </a>
   </div>
   <div class="nav_parent">
-    <a href="https://www.zengxi.net/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
+    <a href="https://www.zengxi.net/series/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
         <a href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/" class="nav_child nav_item">Kubernetes in Action笔记</a>
     </div>
   </div>
   <div class="nav_parent">
-    <a href="https://www.zengxi.net/" class="nav_item">链接 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
+    <a href="https://www.zengxi.net/links/" class="nav_item">链接 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
         <a href="https://www.zengxi.net/links/mirror/" class="nav_child nav_item">国内常用镜像地址</a>
@@ -195,6 +195,15 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="nav-link">CXF记录WebService的soap日志</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/" class="nav-link">设置周日为一个星期的第一天</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/03/jetty_session_remove_node_name/" class="nav-link">删除Jetty中session ID的node名称</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="nav-link">配置Nginx支持长轮询</a>
       </li>
       <li>
@@ -208,15 +217,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/02/java8_lambda/" class="nav-link">Java 8新特性 - (1)Lambda表达式</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/java7_gramma_new_features/" class="nav-link">Java 7新特性 - (1)Java语法特性</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/es_search_improvement/" class="nav-link">订单ES查询性能优化</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="nav-link">用Python读取sitemap并调用百度接口推送URL</a>
       </li>
     </ul>
     <div>
@@ -257,6 +257,11 @@
           <span class="button_tally">3</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/jetty/' class="post_tag button button_translucent">
+          JETTY
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/mac/' class="post_tag button button_translucent">
           MAC
           <span class="button_tally">3</span>
@@ -287,11 +292,6 @@
           <span class="button_tally">2</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/zookeeper/' class="post_tag button button_translucent">
-          ZOOKEEPER
-          <span class="button_tally">2</span>
-        </a>
-        
         
         <br>
         <div class="post_tags_toggle button">所有分类</div>
@@ -315,6 +315,10 @@
             
             
             <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=5>JAVA<span class="button_tally">5</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/jetty/' class=" post_tag button button_translucent" data-position=3>JETTY<span class="button_tally">3</span>
             </a>
             
             
@@ -444,6 +448,16 @@
           <span class="button_tally">4</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
+          JETTY
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/session/' class="post_tag button button_translucent">
+          SESSION
+          <span class="button_tally">4</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
           SHELL
           <span class="button_tally">4</span>
@@ -466,16 +480,6 @@
         
         <a href='https://www.zengxi.net/tags/chrome/' class="post_tag button button_translucent">
           CHROME
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/elastic-search/' class="post_tag button button_translucent">
-          ELASTIC-SEARCH
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/grep/' class="post_tag button button_translucent">
-          GREP
           <span class="button_tally">2</span>
         </a>
         
@@ -569,7 +573,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/jetty/' class=" post_tag button button_translucent" data-position=1>JETTY<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/jetty/' class=" post_tag button button_translucent" data-position=4>JETTY<span class="button_tally">4</span>
             </a>
             
             
@@ -681,7 +685,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/session/' class=" post_tag button button_translucent" data-position=1>SESSION<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/session/' class=" post_tag button button_translucent" data-position=4>SESSION<span class="button_tally">4</span>
             </a>
             
             
