@@ -131,6 +131,37 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/05/mac_write_iso_into_udisk/">MacOS中通过ISO镜像制作U盘安装盘</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    May 21, 2020</span>
+    <a href='https://www.zengxi.net/tags/mac' class="post_tag button button_translucent">mac
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">使用MacOS自带的dd命令，就可以将ISO镜像写入到U盘。这就可以利用这个命令来制作安装windows，Linux等系统用U盘
+通过下面的命令，找出U盘挂载的路径
+1diskutil list 将U盘取消挂载，在下面命令中将N替换为所对应的挂载盘：
+1diskutil unmountDisk /dev/disk[N] 将内容写入U盘。下面的命令中 rdisk 的 r 可以加快写入速度
+1sudo dd if=iso路径 of=/dev/rdisk[N] bs=1m 弹出磁盘
+1diskutil eject /dev/disk[N] </p>
+          <a href="https://www.zengxi.net/2020/05/mac_write_iso_into_udisk/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/04/pg_close_session_remove_db/">Postgres关闭某个数据库关联的session</a>
       </h3>
       <div class="post_meta">
@@ -391,40 +422,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/">重建基于pglogical逻辑复制的从库</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 6, 2019</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-    <a href='https://www.zengxi.net/tags/pglogical' class="post_tag button button_translucent">pglogical
-    </a>
-    <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93' class="post_tag button button_translucent">从库
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">《Postgres 9.x 升级至 10.x》一文中提到了使用pglogical逻辑复制升级。基于这种方式的升级有个缺点，就是主库的DDL发生改变的话，那么从库的复制就会有影响，可能需要重建从库来解决。
-重建从库的步骤与之前创建逻辑复制有点类似，但是由于之前已经做过一些操作，所以相比之下，少了一些步骤。
-从库中删除数据库，再创建一个空的数据库 由于表结构的改变，原先的数据都不能用了，需要重新同步。创建新的空数据库是最快的方式
-从库中导入最新的表结构 在 provider 上导出结构数据
-1sudo -iu postgres pg_dumpall --schema-only -f dump.sql 在 subscriber 上导入结构 …</p>
-          <a href="https://www.zengxi.net/2019/12/pg-recreate-pglogical-slave/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -505,6 +502,9 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/update_response_via_fiddler/" class="nav-link">在Fiddler中使用脚本来修改Response数据</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="nav-link">CXF记录WebService的soap日志</a>
       </li>
       <li>
@@ -524,9 +524,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/03/java8_stream_api/" class="nav-link">Java 8新特性 - (2)Stream API</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/java8_lambda/" class="nav-link">Java 8新特性 - (1)Lambda表达式</a>
       </li>
     </ul>
     <div>
@@ -617,6 +614,10 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             
             
             <a href='https://www.zengxi.net/categories/elastic-search/' class=" post_tag button button_translucent" data-position=1>ELASTIC-SEARCH<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/fiddler/' class=" post_tag button button_translucent" data-position=1>FIDDLER<span class="button_tally">1</span>
             </a>
             
             
@@ -844,6 +845,10 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             
             
             <a href='https://www.zengxi.net/tags/excel/' class=" post_tag button button_translucent" data-position=1>EXCEL<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/fiddler/' class=" post_tag button button_translucent" data-position=1>FIDDLER<span class="button_tally">1</span>
             </a>
             
             

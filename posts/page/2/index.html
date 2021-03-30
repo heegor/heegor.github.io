@@ -127,6 +127,35 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/02/es_search_improvement/">订单ES查询性能优化</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Feb 20, 2021</span>
+    <a href='https://www.zengxi.net/tags/elastic-search' class="post_tag button button_translucent">elastic search
+    </a>
+    <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96' class="post_tag button button_translucent">性能优化
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">背景 由于系统中的订单量大，一些查询语句需要级联多张表来查询，单纯靠数据库的索引已经无法满足查询速度与用户界面响应速度的要求，因此在5年前引入了ES来加快查询速度。但是，原先的方案中ES存放的是全量的订单数据，并且是存放在同一个数据库索引中，随着业务的发展与订单量的累积，ES查询的速度已经越来越慢。通过Grafana监控数据，可以看到单个索引的数据量已达到1.5TB，主要的性能指标越来越差。ES的CPU使用率不时地大于80%，甚至100%，导致极端情况下ES查询耗时十几秒。对于用户的直观感受就是，在界面上面查询数据，需要耗时很久才能看到数据。
+解决方案 系统总是慢慢演变的，某个时间点的解决方案都是基于当前的一些情况，满足近3年内的需 …</p>
+          <a href="https://www.zengxi.net/2021/02/es_search_improvement/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/">用Python读取sitemap并调用百度接口推送URL</a>
       </h3>
       <div class="post_meta">
@@ -385,36 +414,6 @@ pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_api_server_security/">Kubernetes in Action笔记 - (14) API Server服务器的安全防护</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 29, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">如果攻击者获得了访问API服务器的权限, 他们可以通过在容器镜像中打包自己的代码并在pod中运行来做任何事
-认证机制 API 服务器可以配置一个认证插件列表。列表中的每个插件都可以检查这个请求和尝试确定谁在发送这个请求。当通过认证后，返回用户名、用户 ID 和组信息给 API 服务器，API服务器就会停止调用剩余的认证插件井继续进入授权阶段。
-用户与组 k8s 区分了两种连接到 API 服务器的客户端 :
- 用户（真实的人） pod (更准确地说是运行在 pod 中的应用)  用户应该被管理在外部系统中，例如单点登录系统。没有资源代表用户账户，这也就意味着不能通过 API 服务器来创建、更新或删除用户。
-pod …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_api_server_security/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -486,6 +485,9 @@ pod …</p>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/update_response_via_fiddler/" class="nav-link">在Fiddler中使用脚本来修改Response数据</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="nav-link">CXF记录WebService的soap日志</a>
       </li>
       <li>
@@ -505,9 +507,6 @@ pod …</p>
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/03/java8_stream_api/" class="nav-link">Java 8新特性 - (2)Stream API</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/java8_lambda/" class="nav-link">Java 8新特性 - (1)Lambda表达式</a>
       </li>
     </ul>
     <div>
@@ -598,6 +597,10 @@ pod …</p>
             
             
             <a href='https://www.zengxi.net/categories/elastic-search/' class=" post_tag button button_translucent" data-position=1>ELASTIC-SEARCH<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/fiddler/' class=" post_tag button button_translucent" data-position=1>FIDDLER<span class="button_tally">1</span>
             </a>
             
             
@@ -825,6 +828,10 @@ pod …</p>
             
             
             <a href='https://www.zengxi.net/tags/excel/' class=" post_tag button button_translucent" data-position=1>EXCEL<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/fiddler/' class=" post_tag button button_translucent" data-position=1>FIDDLER<span class="button_tally">1</span>
             </a>
             
             

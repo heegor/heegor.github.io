@@ -131,6 +131,36 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_api_server_security/">Kubernetes in Action笔记 - (14) API Server服务器的安全防护</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 29, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">如果攻击者获得了访问API服务器的权限, 他们可以通过在容器镜像中打包自己的代码并在pod中运行来做任何事
+认证机制 API 服务器可以配置一个认证插件列表。列表中的每个插件都可以检查这个请求和尝试确定谁在发送这个请求。当通过认证后，返回用户名、用户 ID 和组信息给 API 服务器，API服务器就会停止调用剩余的认证插件井继续进入授权阶段。
+用户与组 k8s 区分了两种连接到 API 服务器的客户端 :
+ 用户（真实的人） pod (更准确地说是运行在 pod 中的应用)  用户应该被管理在外部系统中，例如单点登录系统。没有资源代表用户账户，这也就意味着不能通过 API 服务器来创建、更新或删除用户。
+pod …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_api_server_security/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/12/k8s_statefulset/">Kubernetes in Action笔记 - (13) Statefulset</a>
       </h3>
       <div class="post_meta">
@@ -390,34 +420,6 @@ phase有以下几种值：
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/">Kubernetes in Action笔记 - (4) 标签、注解与命名空间</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 10, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">标签 什么是标签 标签是可以附加到资源的任意键值对。通过标签选择器，可以筛选出具有该确切标签的资源。
-使用标签和选择器来约束pod调度 默认情况下，Pod基本上是随机地调度到任意Node节点的。但是某些情况下，想要调度到特定的Node节点，比如SSD硬盘的节点。这个时候，可以通过节点标签和节点标签选择器完成。
-1# 这个例子中通过nodeSelector选择部署到gpu=true的节点2apiVersion:vl3kind:Pod4metadata:5name:kubia-gpu6spec:7nodeSelector:8gpu=true9containers:10- image:luksa/kubia11name:kubia注解 除 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -492,6 +494,9 @@ phase有以下几种值：
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/03/update_response_via_fiddler/" class="nav-link">在Fiddler中使用脚本来修改Response数据</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="nav-link">CXF记录WebService的soap日志</a>
       </li>
       <li>
@@ -511,9 +516,6 @@ phase有以下几种值：
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/03/java8_stream_api/" class="nav-link">Java 8新特性 - (2)Stream API</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/02/java8_lambda/" class="nav-link">Java 8新特性 - (1)Lambda表达式</a>
       </li>
     </ul>
     <div>
@@ -604,6 +606,10 @@ phase有以下几种值：
             
             
             <a href='https://www.zengxi.net/categories/elastic-search/' class=" post_tag button button_translucent" data-position=1>ELASTIC-SEARCH<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/fiddler/' class=" post_tag button button_translucent" data-position=1>FIDDLER<span class="button_tally">1</span>
             </a>
             
             
@@ -831,6 +837,10 @@ phase有以下几种值：
             
             
             <a href='https://www.zengxi.net/tags/excel/' class=" post_tag button button_translucent" data-position=1>EXCEL<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/fiddler/' class=" post_tag button button_translucent" data-position=1>FIDDLER<span class="button_tally">1</span>
             </a>
             
             
