@@ -6,7 +6,19 @@
     <description>Recent content in java 8 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 05 Mar 2021 12:56:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/java-8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Apr 2021 13:01:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/java-8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 8新特性 - (3)方法引用</title>
+      <link>https://www.zengxi.net/2021/04/java8_method_references/</link>
+      <pubDate>Wed, 07 Apr 2021 13:01:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/04/java8_method_references/</guid>
+      <description>方法引用（Method references）。方法引用提供了非常有用的语法，可以直接引用已有Java类或对象（实例）的方法或构造器。与lambda联合使用，可以使语言的构造更紧凑简洁，减少冗余代码。
+方法引用使用到的操作符“::”，这个操作符把方法引用分成两边，左边是类名或者某个对象的引用，右边是方法名。引用方法有下面几种方式：
+ 对象引用::实例方法名 类名::静态方法名 类名::实例方法名 类名::new 类型[]::new  对象引用::实例方法名 创建了一个PersonCompare对象，调用了其内部的compareByName实例方法。
+1public class PersonCompare { 2 public int compareByName(Person a, Person b) { 3 return a.getName().compareTo(b.getName()); 4 } 5 public int compareByAge(Person a, Person b) { 6 return a.getBirthday().compareTo(b.getBirthday()); 7 } 8 @Test 9 public void test(){ 10 Person[] pArr = new Person[]{ 11 new Person(&amp;#34;1&amp;#34;, LocalDate.of(2019, 12, 1)), 12 new Person(&amp;#34;2&amp;#34;, LocalDate.of(2019, 12, 2)), 13 new Person(&amp;#34;3&amp;#34;, LocalDate.</description>
+    </item>
+    
     <item>
       <title>Java 8新特性 - (2)Stream API</title>
       <link>https://www.zengxi.net/2021/03/java8_stream_api/</link>

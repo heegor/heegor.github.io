@@ -127,6 +127,35 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/">Ubuntu安装Postgres</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Oct 27, 2020</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+    <a href='https://www.zengxi.net/tags/ubuntu' class="post_tag button button_translucent">ubuntu
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">ubuntu自带的软件仓库可能没有最新的postgres，这就需要自己手动添加安装源，再安装
+1# 添加安装源 2sudo sh -c &#39;echo &#34;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&#34; &gt; /etc/apt/sources.list.d/pgdg.list&#39; 3 4# 导入key 5wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - 6 7# …</p>
+          <a href="https://www.zengxi.net/2020/10/ubuntu_install_postgresql/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/">利用n来切换Nodejs版本</a>
       </h3>
       <div class="post_meta">
@@ -383,37 +412,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/grep_binary_file_match/">grep 返回 Binary file (standard input) matches</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 20, 2020</span>
-    <a href='https://www.zengxi.net/tags/grep' class="post_tag button button_translucent">grep
-    </a>
-    <a href='https://www.zengxi.net/tags/shell' class="post_tag button button_translucent">shell
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">grep &quot;keyword&quot; xxx.log时输出: Binary file (standard input) matches
-这个是因为grep命令认为它是一个二进制文件。解决方案是，加上一个参数 -a：
-1grep -a &#34;keyword&#34; xxx.log 该参数的解释：
-1-a, --text equivalent to --binary-files=text </p>
-          <a href="https://www.zengxi.net/2020/07/grep_binary_file_match/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -494,6 +492,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/04/java8_method_references/" class="nav-link">Java 8新特性 - (3)方法引用</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/03/update_response_via_fiddler/" class="nav-link">在Fiddler中使用脚本来修改Response数据</a>
       </li>
       <li>
@@ -513,9 +514,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="nav-link">Manjaro升级后打印服务不可用</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/java8_stream_api/" class="nav-link">Java 8新特性 - (2)Stream API</a>
       </li>
     </ul>
     <div>
@@ -541,14 +539,14 @@
           <span class="button_tally">9</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
-          MANJARO
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
           <span class="button_tally">6</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">5</span>
+        <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
+          MANJARO
+          <span class="button_tally">6</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
@@ -617,7 +615,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=5>JAVA<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=6>JAVA<span class="button_tally">6</span>
             </a>
             
             
@@ -707,7 +705,7 @@
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">3</span>
+          <span class="button_tally">4</span>
         </a>
         
         
@@ -728,7 +726,7 @@
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">6</span>
+          <span class="button_tally">7</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
@@ -766,6 +764,11 @@
           <span class="button_tally">4</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
+          <span class="button_tally">3</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class="post_tag button button_translucent">
           排序
           <span class="button_tally">3</span>
@@ -778,11 +781,6 @@
         
         <a href='https://www.zengxi.net/tags/alpine/' class="post_tag button button_translucent">
           ALPINE
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/chrome/' class="post_tag button button_translucent">
-          CHROME
           <span class="button_tally">2</span>
         </a>
         
@@ -864,7 +862,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=6>JAVA<span class="button_tally">6</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
             </a>
             
             
@@ -872,7 +870,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=2>JAVA-8<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=3>JAVA-8<span class="button_tally">3</span>
             </a>
             
             
