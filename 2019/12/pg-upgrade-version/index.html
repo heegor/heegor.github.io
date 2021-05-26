@@ -84,6 +84,7 @@
     <a href="https://www.zengxi.net/series/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
+        <a href="https://www.zengxi.net/links/java_feature/" class="nav_child nav_item">Java各版本特性</a>
         <a href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/" class="nav_child nav_item">Kubernetes in Action笔记</a>
     </div>
   </div>
@@ -191,14 +192,14 @@
 <h2 id="前提条件">前提条件</h2>
 <h3 id="所有表都必须有主键">所有表都必须有主键</h3>
 <p>可以用下面的语句来检查</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">SELECT</span> <span class="k">table_name</span>
-<span class="ln">2</span>  <span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span>
-<span class="ln">3</span> <span class="k">WHERE</span> <span class="p">(</span><span class="n">table_catalog</span><span class="p">,</span> <span class="n">table_schema</span><span class="p">,</span> <span class="k">table_name</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">IN</span>
-<span class="ln">4</span>          <span class="p">(</span><span class="k">SELECT</span> <span class="n">table_catalog</span><span class="p">,</span> <span class="n">table_schema</span><span class="p">,</span> <span class="k">table_name</span>
-<span class="ln">5</span>             <span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">table_constraints</span>
-<span class="ln">6</span>            <span class="k">WHERE</span> <span class="n">constraint_type</span> <span class="o">=</span> <span class="s1">&#39;PRIMARY KEY&#39;</span><span class="p">)</span>
-<span class="ln">7</span>   <span class="k">AND</span> <span class="n">table_schema</span> <span class="k">IN</span> <span class="p">(</span><span class="s1">&#39;myschema&#39;</span><span class="p">)</span>
-</code></pre></div><h3 id="super-user无密码访问provider和subscriber">super user无密码访问provider和subscriber</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">SELECT</span><span class="w"> </span><span class="k">table_name</span><span class="w">
+</span><span class="ln">2</span><span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span><span class="w">
+</span><span class="ln">3</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">table_catalog</span><span class="p">,</span><span class="w"> </span><span class="n">table_schema</span><span class="p">,</span><span class="w"> </span><span class="k">table_name</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">IN</span><span class="w">
+</span><span class="ln">4</span><span class="w">          </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">table_catalog</span><span class="p">,</span><span class="w"> </span><span class="n">table_schema</span><span class="p">,</span><span class="w"> </span><span class="k">table_name</span><span class="w">
+</span><span class="ln">5</span><span class="w">             </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">table_constraints</span><span class="w">
+</span><span class="ln">6</span><span class="w">            </span><span class="k">WHERE</span><span class="w"> </span><span class="n">constraint_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PRIMARY KEY&#39;</span><span class="p">)</span><span class="w">
+</span><span class="ln">7</span><span class="w">   </span><span class="k">AND</span><span class="w"> </span><span class="n">table_schema</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;myschema&#39;</span><span class="p">)</span><span class="w">
+</span></code></pre></div><h3 id="super-user无密码访问provider和subscriber">super user无密码访问provider和subscriber</h3>
 <p>修改配置文件</p>
 <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="c1"># prodvider 上配置允许 super user 从 subscriber 上访问 replication。</span>
 <span class="ln">2</span><span class="c1"># 假如 subscriber IP 是 10.1.10.15，则 provider 的 pg_hba.conf 中应包含以下配置</span>
@@ -224,14 +225,14 @@ mydb=# CREATE EXTENSION pglogical;</li>
 <li>创建逻辑复制节点</li>
 </ol>
 <div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="c1">-- host 填的是provider的IP
-</span><span class="ln">2</span><span class="c1"></span><span class="n">mydb</span><span class="o">=#</span> <span class="k">SELECT</span> <span class="n">pglogical</span><span class="p">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">node_name</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;provider&#39;</span><span class="p">,</span> <span class="n">dsn</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;host=10.1.10.6 port=5432 dbname=mydb&#39;</span><span class="p">);</span>
-</code></pre></div><ol start="4">
+</span><span class="ln">2</span><span class="c1"></span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">node_name</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;provider&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dsn</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;host=10.1.10.6 port=5432 dbname=mydb&#39;</span><span class="p">);</span><span class="w">
+</span></code></pre></div><ol start="4">
 <li>添加所有表到需要逻辑复制的集合中</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span> <span class="k">SELECT</span> <span class="n">pglogical</span><span class="p">.</span><span class="n">replication_set_add_all_tables</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="nb">ARRAY</span><span class="p">[</span><span class="s1">&#39;public&#39;</span><span class="p">,</span> <span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;monitoring&#39;</span><span class="p">,</span> <span class="s1">&#39;authenticator&#39;</span><span class="p">]);</span>
-</code></pre></div><p>如果replication_set_add_all_tables 出现 deadlock, 可尝试逐个表添加</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">postgres</span><span class="o">@</span><span class="n">provider</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="o">`</span><span class="n">psql</span> <span class="n">mydb</span> <span class="o">-</span><span class="k">c</span> <span class="s1">&#39;\d&#39;</span> <span class="o">|</span> <span class="n">grep</span> <span class="k">table</span> <span class="o">|</span> <span class="n">cut</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;|&#39;</span> <span class="o">-</span><span class="n">f</span> <span class="mi">2</span><span class="o">`</span><span class="p">;</span> <span class="k">do</span> <span class="n">psql</span> <span class="n">mydb</span> <span class="o">-</span><span class="k">c</span> <span class="s2">&#34;select pglogical.replication_set_add_table(&#39;default&#39;, &#39;$i&#39;)&#34;</span><span class="p">;</span> <span class="n">done</span>
-</code></pre></div><h3 id="从库上的操作">从库上的操作</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">replication_set_add_all_tables</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">ARRAY</span><span class="p">[</span><span class="s1">&#39;public&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;monitoring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;authenticator&#39;</span><span class="p">]);</span><span class="w">
+</span></code></pre></div><p>如果replication_set_add_all_tables 出现 deadlock, 可尝试逐个表添加</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">postgres</span><span class="o">@</span><span class="n">provider</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">`</span><span class="n">psql</span><span class="w"> </span><span class="n">mydb</span><span class="w"> </span><span class="o">-</span><span class="k">c</span><span class="w"> </span><span class="s1">&#39;\d&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">grep</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">cut</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="s1">&#39;|&#39;</span><span class="w"> </span><span class="o">-</span><span class="n">f</span><span class="w"> </span><span class="mi">2</span><span class="o">`</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">psql</span><span class="w"> </span><span class="n">mydb</span><span class="w"> </span><span class="o">-</span><span class="k">c</span><span class="w"> </span><span class="s2">&#34;select pglogical.replication_set_add_table(&#39;default&#39;, &#39;$i&#39;)&#34;</span><span class="p">;</span><span class="w"> </span><span class="n">done</span><span class="w">
+</span></code></pre></div><h3 id="从库上的操作">从库上的操作</h3>
 <p>安装的 pg 10.x 作为从库，和逻辑复制的subscriber</p>
 <ol>
 <li>从库上安装postgresql-10</li>
@@ -245,30 +246,30 @@ mydb=# CREATE EXTENSION pglogical;</li>
 </code></pre></div><ol start="4">
 <li>subscriber上，连到对应的数据库，创建pglogical扩展</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span> <span class="k">CREATE</span> <span class="n">EXTENSION</span> <span class="n">pglogical</span><span class="p">;</span>
-</code></pre></div><ol start="5">
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="n">EXTENSION</span><span class="w"> </span><span class="n">pglogical</span><span class="p">;</span><span class="w">
+</span></code></pre></div><ol start="5">
 <li>创建逻辑复制节点</li>
 </ol>
 <div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="c1">-- host 填的是subscriber的IP
-</span><span class="ln">2</span><span class="c1"></span><span class="n">mydb</span><span class="o">=#</span> <span class="k">SELECT</span> <span class="n">pglogical</span><span class="p">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">node_name</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;subscriber&#39;</span><span class="p">,</span> <span class="n">dsn</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;host=10.1.10.15 port=5432 dbname=mydb&#39;</span><span class="p">);</span>
-</code></pre></div><ol start="6">
+</span><span class="ln">2</span><span class="c1"></span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">node_name</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;subscriber&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dsn</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;host=10.1.10.15 port=5432 dbname=mydb&#39;</span><span class="p">);</span><span class="w">
+</span></code></pre></div><ol start="6">
 <li>创建逻辑复制订阅端</li>
 </ol>
 <div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="c1">-- host 填的是provider的IP
-</span><span class="ln">2</span><span class="c1"></span><span class="n">mydb</span><span class="o">=#</span> <span class="k">SELECT</span> <span class="n">pglogical</span><span class="p">.</span><span class="n">create_subscription</span><span class="p">(</span> <span class="n">subscription_name</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;subscriber&#39;</span><span class="p">,</span> <span class="n">provider_dsn</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;host=10.1.10.6 port=5432 dbname=mydb&#39;</span><span class="p">);</span>
-</code></pre></div><h2 id="升级">升级</h2>
+</span><span class="ln">2</span><span class="c1"></span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">create_subscription</span><span class="p">(</span><span class="w"> </span><span class="n">subscription_name</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;subscriber&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">provider_dsn</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;host=10.1.10.6 port=5432 dbname=mydb&#39;</span><span class="p">);</span><span class="w">
+</span></code></pre></div><h2 id="升级">升级</h2>
 <h3 id="一次性同步所有sequence数据provider-上执行">一次性同步所有sequence数据，provider 上执行</h3>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span> <span class="k">SELECT</span> <span class="n">pglogical</span><span class="p">.</span><span class="n">replication_set_add_all_sequences</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="nb">ARRAY</span><span class="p">[</span><span class="s1">&#39;public&#39;</span><span class="p">,</span> <span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;monitoring&#39;</span><span class="p">,</span> <span class="s1">&#39;authenticator&#39;</span><span class="p">],</span> <span class="k">true</span><span class="p">);</span>
-</code></pre></div><h3 id="升级完成后需drop-replication">升级完成后需drop replication</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">replication_set_add_all_sequences</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">ARRAY</span><span class="p">[</span><span class="s1">&#39;public&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;monitoring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;authenticator&#39;</span><span class="p">],</span><span class="w"> </span><span class="k">true</span><span class="p">);</span><span class="w">
+</span></code></pre></div><h3 id="升级完成后需drop-replication">升级完成后需drop replication</h3>
 <h4 id="subscribe端的操作">subscribe端的操作</h4>
 <p>subscriber端删除订阅</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">pglogical</span><span class="p">.</span><span class="n">drop_subscription</span><span class="p">(</span><span class="s1">&#39;subscriber&#39;</span><span class="p">);</span>
-</code></pre></div><p>subscriber端删除逻辑复制节点</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">pglogical</span><span class="p">.</span><span class="n">drop_node</span><span class="p">(</span><span class="s1">&#39;subscriber&#39;</span><span class="p">);</span>
-</code></pre></div><h4 id="provider端的操作">provider端的操作</h4>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">drop_subscription</span><span class="p">(</span><span class="s1">&#39;subscriber&#39;</span><span class="p">);</span><span class="w">
+</span></code></pre></div><p>subscriber端删除逻辑复制节点</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">drop_node</span><span class="p">(</span><span class="s1">&#39;subscriber&#39;</span><span class="p">);</span><span class="w">
+</span></code></pre></div><h4 id="provider端的操作">provider端的操作</h4>
 <p>provider端删除逻辑复制节点</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">pglogical</span><span class="p">.</span><span class="n">drop_node</span><span class="p">(</span><span class="s1">&#39;provider&#39;</span><span class="p">);</span>
-</code></pre></div><h1 id="pg_upgrade升级">pg_upgrade升级</h1>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">drop_node</span><span class="p">(</span><span class="s1">&#39;provider&#39;</span><span class="p">);</span><span class="w">
+</span></code></pre></div><h1 id="pg_upgrade升级">pg_upgrade升级</h1>
 <p>事前准备</p>
 <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln"> 1</span><span class="nb">export</span> <span class="nv">LC_CTYPE</span><span class="o">=</span>en_US.UTF-8
 <span class="ln"> 2</span><span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8
@@ -426,6 +427,9 @@ mydb=# CREATE EXTENSION pglogical;</li>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/05/java8_default_method/" class="nav-link">Java 8新特性 - (4)默认方法</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/04/java8_method_references/" class="nav-link">Java 8新特性 - (3)方法引用</a>
       </li>
       <li>
@@ -445,9 +449,6 @@ mydb=# CREATE EXTENSION pglogical;</li>
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/" class="nav-link">基于alpine构建docker镜像修改时区</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="nav-link">Manjaro升级后打印服务不可用</a>
       </li>
     </ul>
     <div>
@@ -475,7 +476,7 @@ mydb=# CREATE EXTENSION pglogical;</li>
         
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">6</span>
+          <span class="button_tally">7</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -549,7 +550,7 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=6>JAVA<span class="button_tally">6</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
             </a>
             
             
@@ -639,7 +640,7 @@ mydb=# CREATE EXTENSION pglogical;</li>
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">4</span>
+          <span class="button_tally">5</span>
         </a>
         
         
@@ -660,7 +661,7 @@ mydb=# CREATE EXTENSION pglogical;</li>
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">7</span>
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
@@ -683,6 +684,11 @@ mydb=# CREATE EXTENSION pglogical;</li>
           <span class="button_tally">4</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
+          <span class="button_tally">4</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
           JETTY
           <span class="button_tally">4</span>
@@ -696,11 +702,6 @@ mydb=# CREATE EXTENSION pglogical;</li>
         <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
           SHELL
           <span class="button_tally">4</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
-          <span class="button_tally">3</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class="post_tag button button_translucent">
@@ -796,7 +797,7 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=8>JAVA<span class="button_tally">8</span>
             </a>
             
             
@@ -804,7 +805,7 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=3>JAVA-8<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=4>JAVA-8<span class="button_tally">4</span>
             </a>
             
             

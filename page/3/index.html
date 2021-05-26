@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="">
   <head>
-	<meta name="generator" content="Hugo 0.81.0" />
+	<meta name="generator" content="Hugo 0.83.1" />
 <title>保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -84,6 +84,7 @@
     <a href="https://www.zengxi.net/series/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
+        <a href="https://www.zengxi.net/links/java_feature/" class="nav_child nav_item">Java各版本特性</a>
         <a href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/" class="nav_child nav_item">Kubernetes in Action笔记</a>
     </div>
   </div>
@@ -127,6 +128,33 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management/">Kubernetes in Action笔记 - (16) 计算资源管理</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 3, 2021</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">为pod中的容器申请资源 创建一个pod时,可以指定容器对 CPU 和内存的资源请求量(即requests),以及资源限制量(即limits)。它是针对每个容器单独指定，pod对资源的请求量和限制量是所包含的所有容器的请求量和限制量之和。
+1apiVersion:v12kind:Pod3metadata:4name:requests-pod5spec:6containers:7- image:busybox8command:[&#34;dd&#34;,&#34;if=/dev/zero&#34;,&#34;of=/dev/null&#34;]9name:main10resources:11requests:12cpu:200m #  …</p>
+          <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -390,36 +418,6 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/">Kubernetes in Action笔记 - (6) ReplicationController和ReplicationSet</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 13, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">托管的Pod 如果是直接创建Pod，当节点失效，这个Pod就会丢失。
-如果是通过ReplicationController或者Deployment等资源来创建的，那就属于托管的资源。k8s集群会管理并检测它的运行状态，当一些意外情况发生的，k8s会自动采取应对措施。
-ReplicationController ReplicationController是一种k8s资源，会持续监控正在运行的pod列表, 并保证相应类型的pod的数目与期望相符。
-一个ReplicationController有三个主要部分：
- label selector (标签选择器), 用于确定ReplicationController作用域中有哪些pod …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_replctl_replset/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -494,6 +492,9 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/05/java8_default_method/" class="nav-link">Java 8新特性 - (4)默认方法</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/04/java8_method_references/" class="nav-link">Java 8新特性 - (3)方法引用</a>
       </li>
       <li>
@@ -513,9 +514,6 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/" class="nav-link">基于alpine构建docker镜像修改时区</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="nav-link">Manjaro升级后打印服务不可用</a>
       </li>
     </ul>
     <div>
@@ -543,7 +541,7 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
         
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">6</span>
+          <span class="button_tally">7</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -617,7 +615,7 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=6>JAVA<span class="button_tally">6</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
             </a>
             
             
@@ -707,7 +705,7 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">4</span>
+          <span class="button_tally">5</span>
         </a>
         
         
@@ -728,7 +726,7 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">7</span>
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
@@ -751,6 +749,11 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
           <span class="button_tally">4</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
+          <span class="button_tally">4</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
           JETTY
           <span class="button_tally">4</span>
@@ -764,11 +767,6 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
         <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
           SHELL
           <span class="button_tally">4</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
-          <span class="button_tally">3</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class="post_tag button button_translucent">
@@ -864,7 +862,7 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=8>JAVA<span class="button_tally">8</span>
             </a>
             
             
@@ -872,7 +870,7 @@ ReplicationController ReplicationController是一种k8s资源，会持续监控�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=3>JAVA-8<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=4>JAVA-8<span class="button_tally">4</span>
             </a>
             
             

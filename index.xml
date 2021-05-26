@@ -6,7 +6,31 @@
     <description>Recent content on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 07 Apr 2021 13:01:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 26 May 2021 22:40:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 8新特性 - (4)默认方法</title>
+      <link>https://www.zengxi.net/2021/05/java8_default_method/</link>
+      <pubDate>Wed, 26 May 2021 22:40:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/05/java8_default_method/</guid>
+      <description>什么是默认方法 简单说，就是接口可以有实现方法，而且不需要实现类去实现其方法。只需在方法名前面加个default关键字即可。
+为什么要有默认方法 首先，之前的接口是个双刃剑，好处是面向抽象而不是面向具体编程，缺陷是，当需要修改接口时候，需要修改全部实现该接口的类，目前的java 8之前的集合框架没有foreach方法，通常能想到的解决办法是在JDK里给相关的接口添加新的方法及实现。然而，对于已经发布的版本，是没法在给接口添加新方法的同时不影响已有的实现。所以引进的默认方法。他们的目的是为了解决接口的修改与现有的实现不兼容的问题。
+简单的例子: 一个接口A，Clazz类实现了接口A。
+1public interface A { 2 default void foo(){ 3 System.out.println(&amp;#34;Calling A.foo()&amp;#34;); 4 } 5} 6 7public class Clazz implements A { 8 public static void main(String[] args){ 9 Clazz clazz = new Clazz(); 10 clazz.foo();//调用A.foo() 11 } 12} 代码是可以编译的，即使Clazz类并没有实现foo()方法。在接口A中提供了foo()方法的默认实现。
+java 8抽象类与接口对比 相同点  都是抽象类型； 都可以有实现方法（以前接口不行）； 都可以不需要实现类或者继承者去实现所有方法，（以前不行，现在接口中默认方法不需要实现者实现）  不同点  抽象类不可以多重继承，接口可以（无论是多重类型继承还是多重行为继承）； 抽象类和接口所反映出的设计理念不同。其实抽象类表示的是&amp;quot;is-a&amp;quot;关系，接口表示的是&amp;quot;like-a&amp;quot;关系； 接口中定义的变量默认是public static final 型，且必须给其初值，所以实现类中不能改变其值；抽象类中的变量默认是 friendly 型，其值可以在子类中重新定义，也可以重新赋值。  多重继承的冲突 观察以下代码，会出现编译错误：
+ java: class InterfaceC inherits unrelated defaults for f() from types InterfaceA and InterfaceB</description>
+    </item>
+    
+    <item>
+      <title>Java各版本特性</title>
+      <link>https://www.zengxi.net/links/java_feature/</link>
+      <pubDate>Tue, 25 May 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/links/java_feature/</guid>
+      <description>Java 7 Java语法特性。 点击查看详细内容
+ 二进制前缀0b或者0B。整型（byte, short, int, long）可以直接用二进制表示 字面常量数字的下划线。用下划线连接整数提升其可读性，自身无含义，不可用在数字的起始和末尾。 switch 支持String类型。 泛型实例化类型自动推断。 try-with-resources语句。 单个catch中捕获多个异常类型（用| 分割）并通过改进的类型检查重新抛出异常。  Java 8  Lamda表达式(Lambda Expressions)。Lambda允许把函数作为一个方法的参数（函数作为参数传递进方法中)。点击查看详细内容 方法引用（Method references）。方法引用提供了非常有用的语法，可以直接引用已有Java类或对象（实例）的方法或构造器。与Lambda联合使用，可以使语言的构造更紧凑简洁，减少冗余代码。点击查看详细内容 默认方法（Default methods）。默认方法允许将新功能添加到库的接口中，并确保兼容实现老版本接口的旧有代码。点击查看详细内容 重复注解（Repeating Annotations）。重复注解提供了在同一声明或类型中多次应用相同注解类型的能力。 类型注解（Type Annotation）。在任何地方都能使用注解，而不是在声明的地方。 类型推断增强。 方法参数反射（Method Parameter Reflection）。 Stream API 。新添加的Stream API（java.util.stream） 把真正的函数式编程风格引入到Java中。Stream API集成到了Collections API里。点击查看详细内容 HashMap改进，在键值哈希冲突时能有更好表现。 Date Time API。加强对日期和时间的处理。 java.util 包下的改进，提供了几个实用的工具类。   并行数组排序。 标准的Base64编解码。 支持无符号运算。  java.util.concurrent 包下增加了新的类和方法。   java.util.concurrent.ConcurrentHashMap 类添加了新的方法以支持新的StreamApi和lambada表达式。 java.util.concurrent.atomic 包下新增了类以支持可伸缩可更新的变量。 java.util.concurrent.ForkJoinPool类新增了方法以支持 common pool。  新增了java.util.concurrent.locks.StampedLock类，为控制读/写访问提供了一个基于性能的锁，且有三种模式可供选择。 HotSpot   删除了永久代（PermGen）.</description>
+    </item>
+    
     <item>
       <title>Java 8新特性 - (3)方法引用</title>
       <link>https://www.zengxi.net/2021/04/java8_method_references/</link>
@@ -199,8 +223,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
       <pubDate>Tue, 26 Jan 2021 17:06:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/2021/01/postgres_copy_table_schema/</guid>
-      <description>在创建临时数据表的时候会有用
-1create table if not exists foo as (select * from bar) with no data; </description>
+      <description>在创建临时数据表的时候会有用</description>
     </item>
     
     <item>
@@ -209,8 +232,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
       <pubDate>Mon, 25 Jan 2021 13:59:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/2021/01/mybatis_set_schema/</guid>
-      <description>由于业务的需要，在查询的时候，需要动态地在SQL语句中指定schema。在mybatis的的查询语句中，可以使用 ${schemaName}。注意，必须要用$, 而不是#
-1SET search_path TO ${schemaName}; 2 3select * from foo where bar = #{bar}; </description>
+      <description>由于业务的需要，在查询的时候，需要动态地在SQL语句中指定schema。在mybatis的的查询语句中，可以使用 ${schemaName}。注意，必须要用$, 而不是#</description>
     </item>
     
     <item>
@@ -842,9 +864,8 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
       <guid>https://www.zengxi.net/2020/06/pg_check_table_size/</guid>
       <description>原文链接：https://blog.csdn.net/kmust20093211/article/details/47616345
 方法一 ，查某个表
-1select pg_size_pretty(pg_relation_size(&amp;#39;table_name&amp;#39;)); 方法二 ，查出所有表并按大小排序
-1SELECT 2table_schema || &amp;#39;.&amp;#39; || table_name 3AS table_full_name, pg_size_pretty(pg_total_relation_size(&amp;#39;&amp;#34;&amp;#39; ||table_schema || &amp;#39;&amp;#34;.&amp;#34;&amp;#39; || table_name || &amp;#39;&amp;#34;&amp;#39;)) AS size 4FROM 5information_schema.tables 6ORDER BY 7 pg_total_relation_size(&amp;#39;&amp;#34;&amp;#39; || table_schema || &amp;#39;&amp;#34;.&amp;#34;&amp;#39; || table_name || &amp;#39;&amp;#34;&amp;#39;) 8DESC limit 20; 方法三，查出所有表按大小排序并分离data与index
-1SELECT 2 table_name, 3 pg_size_pretty(table_size) AS table_size, 4 pg_size_pretty(indexes_size) AS indexes_size, 5 pg_size_pretty(total_size) AS total_size 6FROM ( 7 SELECT 8 table_name, 9 pg_table_size(table_name) AS table_size, 10 pg_indexes_size(table_name) AS indexes_size, 11 pg_total_relation_size(table_name) AS total_size 12 FROM ( 13 SELECT (&amp;#39;&amp;#34;&amp;#39; || table_schema || &amp;#39;&amp;#34;.</description>
+1selectpg_size_pretty(pg_relation_size(&amp;#39;table_name&amp;#39;));方法二 ，查出所有表并按大小排序
+1SELECT2table_schema||&amp;#39;.&amp;#39;||table_name3AStable_full_name,pg_size_pretty(pg_total_relation_size(&amp;#39;&amp;#34;&amp;#39;||table_schema||&amp;#39;&amp;#34;.&amp;#34;&amp;#39;||table_name||&amp;#39;&amp;#34;&amp;#39;))ASsize4FROM5information_schema.tables6ORDERBY7pg_total_relation_size(&amp;#39;&amp;#34;&amp;#39;||table_schema||&amp;#39;&amp;#34;.&amp;#34;&amp;#39;||table_name||&amp;#39;&amp;#34;&amp;#39;)8DESClimit20;方法三，查出所有表按大小排序并分离data与index</description>
     </item>
     
     <item>
@@ -932,8 +953,7 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
       
       <guid>https://www.zengxi.net/2020/04/pg_close_session_remove_db/</guid>
       <description>Postgres删除数据库的时候，报错：有其他用户正在使用该数据库，无法删除。这时，需要关闭这个数据库的相关的连接，然后再删除数据库
-可以执行下面的命令来关闭连接：
-1 SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname=&amp;#39;要删除的数据库名称&amp;#39; AND pid&amp;lt;&amp;gt;pg_backend_pid(); </description>
+可以执行下面的命令来关闭连接：</description>
     </item>
     
     <item>
@@ -969,13 +989,39 @@ Alpine 的源文件为/etc/apk/repositories。默认的配置类似：
       
       <guid>https://www.zengxi.net/2020/01/postgres-frequently-used-commands/</guid>
       <description>原作者：廖学强 原文链接：点击这里   查看帮助命令
-1DB=# help --总的帮助 2 3DB=# \h --SQL commands级的帮助 4 5DB=# \? --psql commands级的帮助 按列显示，类似mysql的\G
+1DB=#help--总的帮助 23DB=#\h--SQL commands级的帮助 45DB=#\?--psql commands级的帮助 按列显示，类似mysql的\G
 1DB=# \x 2 3Expanded display is on. 查看DB安装目录(最好root用户执行)
 1find / -name initdb 查看有多少DB实例在运行(最好root用户执行)
 1find / -name postgresql.conf 查看DB版本
-1cat $PGDATA/PG_VERSION 2 3psql --version 4 5DB=# show server_version; 6 7DB=# select version(); 查看DB实例运行状态
-1pg_ctl status 查看所有数据库
-1psql –l --查看5432端口下面有多少个DB 2 3psql –p XX –l --查看XX端口下面有多少个DB 4 5DB=# \l 6 7DB=# select * from pg_database; 创建数据库</description>
+1cat$PGDATA/PG_VERSION23psql--version 45DB=#showserver_version;67DB=#selectversion();查看DB实例运行状态
+1pg_ctlstatus查看所有数据库
+1psql–l--查看5432端口下面有多少个DB 23psql–pXX–l--查看XX端口下面有多少个DB 45DB=#\l67DB=#select*frompg_database;创建数据库
+1createdbdatabase_name23DB=#\hcreatedatabase--创建数据库的帮助命令 45DB=#createdatabasedatabase_name进入某个数据库
+1psql–ddbname23DB=#\cdbname查看当前数据库
+1DB=#\c23DB=#selectcurrent_database();查看数据库文件目录
+1DB=#showdata_directory;23cat$PGDATA/postgresql.conf|grepdata_directory45cat/etc/init.d/postgresql|grepPGDATA=67lsof|grep5432得出第二列的PID号再ps–ef|grepPID查看表空间
+1select*frompg_tablespace;查看语言
+1select*frompg_language;查询所有schema，必须到指定的数据库下执行
+1select*frominformation_schema.schemata;23SELECTnspnameFROMpg_namespace;45\dnS查看表名
+1DB=#\dt--只能查看到当前数据库下public的表名 23DB=#SELECTtablenameFROMpg_tablesWHEREtablenameNOTLIKE&amp;#39;pg%&amp;#39;ANDtablenameNOTLIKE&amp;#39;sql_%&amp;#39;ORDERBYtablename;45DB=#SELECT*FROMinformation_schema.tablesWHEREtable_name=&amp;#39;ff_v3_ff_basic_af&amp;#39;;查看表结构
+1DB=#\dtablename23DB=#select*frominformation_schema.columnswheretable_schema=&amp;#39;public&amp;#39;andtable_name=&amp;#39;XX&amp;#39;;查看索引
+1DB=#\di23DB=#select*frompg_index;查看视图
+1DB=#\dv23DB=#select*frompg_viewswhereschemaname=&amp;#39;public&amp;#39;;45DB=#select*frominformation_schema.viewswheretable_schema=&amp;#39;public&amp;#39;;查看触发器
+1DB=#select*frominformation_schema.triggers;查看序列
+1DB=#select*frominformation_schema.sequenceswheresequence_schema=&amp;#39;public&amp;#39;;查看约束
+1DB=#select*frompg_constraintwherecontype=&amp;#39;p&amp;#39;23DB=#selecta.relnameastable_name,b.connameasconstraint_name,b.contypeasconstraint_typefrompg_classa,pg_constraintbwherea.oid=b.conrelidanda.relname=&amp;#39;cc&amp;#39;;查看XX数据库的大小
+1SELECTpg_size_pretty(pg_database_size(&amp;#39;XX&amp;#39;))Asfulldbsize;查看所有数据库的大小
+1selectpg_database.datname,pg_size_pretty(pg_database_size(pg_database.datname))ASsizefrompg_database;查看各数据库数据创建时间：
+1selectdatname,(pg_stat_file(format(&amp;#39;%s/%s/PG_VERSION&amp;#39;,casewhenspcname=&amp;#39;pg_default&amp;#39;then&amp;#39;base&amp;#39;else&amp;#39;pg_tblspc/&amp;#39;||t2.oid||&amp;#39;/PG_11_201804061/&amp;#39;end,t1.oid))).*frompg_databaset1,pg_tablespacet2wheret1.dattablespace=t2.oid;按占空间大小，顺序查看所有表的大小
+1selectrelname,pg_size_pretty(pg_relation_size(relid))frompg_stat_user_tableswhereschemaname=&amp;#39;public&amp;#39;orderbypg_relation_size(relid)desc;按占空间大小，顺序查看索引大小
+1selectindexrelname,pg_size_pretty(pg_relation_size(relid))frompg_stat_user_indexeswhereschemaname=&amp;#39;public&amp;#39;orderbypg_relation_size(relid)desc;查看参数文件
+1DB=#showconfig_file;23DB=#showhba_file;45DB=#showident_file;查看当前会话的参数值
+1DB=#showall;查看参数值
+1select*frompg_file_settings查看某个参数值,比如参数work_mem
+1DB=#showwork_mem修改某个参数值,比如参数work_mem
+1DB=#altersystemsetwork_mem=&amp;#39;8MB&amp;#39;23--使用alter system命令将修改postgresql.auto.conf文件，而不是postgresql.conf，这样可以很好的保护postgresql.conf文件，加入你使用很多alter system命令后搞的一团糟，那么你只需要删除postgresql.auto.conf，再执行pg_ctl reload加载postgresql.conf文件即可实现参数的重新加载。 查看是否归档
+1DB=#showarchive_mode;查看运行日志的相关配置，运行日志包括Error信息，定位慢查询SQL，数据库的启动关闭信息，checkpoint过于频繁等的告警信息。
+1showlogging_collector;--启动日志收集 23showlog_directory;--日志输出路径 45showlog_filename;--日志文件名 67showlog_truncate_on_rotation;--当生成新的文件时如果文件名已存在，是否覆盖同名旧文件名 89showlog_statement;--设置日志记录内容 1011showlog_min_duration_statement;--运行XX毫秒的语句会被记录到日志中，-1表示禁用这个功能，0表示记录所有语句，类似mysql的慢查询配置 查看wal日志的配置，wal日志就是redo重做日志</description>
     </item>
     
     <item>
@@ -1031,7 +1077,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       <guid>https://www.zengxi.net/2020/01/quartz-job-issue-improvement/</guid>
       <description>遇到的问题与原因分析 生产环境中遇到的问题：
  服务在启动过程中，不时地卡住，后来发生的越来越频繁。看日志分析，卡在初始化quartz job store的时候 服务在运行过程中，不时地出现定时任务不被触发的情况  通过分析，得知问题产生的原因：
- 目前代码中用的是Quartz scheduler 1.8.3版本，定时框架采用的是行锁，通过执行下面的SQL来锁住特定的记录。在分布式的系统的情况下，节点越多越容易发生锁等待，甚至死锁。Quartz scheduler 的 2.x 版本做了改进，在QRTZ_LOCKS表中多加了一个字段 SCHED_NAME。这有一个好处就是，可以给不同的应用分配不同的scheduler name，这样定时框架在调度的时候，不同的应用分别去尝试锁定不同的行，而不像之前锁的时同一个行，避免死锁的发生。  1SELECT * FROM QRTZ_LOCKS WHERE LOCK_NAME = $1 FOR UPDATE;  org.quartz.threadPool.threadCount 值设置太小。Quartz scheduler的线程池大小不足，这个也有可能导致定时任务在排队，无法被触发。  另外，在研究现有代码过程中，还发现另外3个问题：
+ 目前代码中用的是Quartz scheduler 1.8.3版本，定时框架采用的是行锁，通过执行下面的SQL来锁住特定的记录。在分布式的系统的情况下，节点越多越容易发生锁等待，甚至死锁。Quartz scheduler 的 2.x 版本做了改进，在QRTZ_LOCKS表中多加了一个字段 SCHED_NAME。这有一个好处就是，可以给不同的应用分配不同的scheduler name，这样定时框架在调度的时候，不同的应用分别去尝试锁定不同的行，而不像之前锁的时同一个行，避免死锁的发生。  1SELECT*FROMQRTZ_LOCKSWHERELOCK_NAME=$1FORUPDATE; org.quartz.threadPool.threadCount 值设置太小。Quartz scheduler的线程池大小不足，这个也有可能导致定时任务在排队，无法被触发。  另外，在研究现有代码过程中，还发现另外3个问题：
  group未正确赋值。Quartz中实际上是把job name与group的组合作为一个唯一标识的key，用它来触发和调度一个任务。job name相同，group不同，被当做是不同的任务。如果同一个应用多个节点，需要分成不同的组来分别执行不同的定时任务（比如其中一个组仅统计某个时间段出国的旅游人数，另外一个组仅统计在国内的旅游人数），那就必须给不同的组赋予不同的group值。否则，可能导致其中的一个任务没有执行，因为他们被当做是同一个任务。 应用中的instanceId被写死在配置文件中。由于一个应用往往有多个节点，这个就导致集群中有多个节点的instanceId是相同。然而同一个Quartz scheduler的集群中，任意节点的instanceId必须保证唯一。 目前的系统有个需求，某个任务必须在某个服务的所有节点上执行，比如定时从数据库或者其他地方同步某些配置项到内存中。由于Quartz框架不支持这个功能，原先的代码对job detail等类进行扩展，添加了一个属性，用来表示该任务是在该应用的所有节点上或仅仅选择一台执行。为了支持这个功能，代码改动的比较多，甚至也有可能是因为这些改动，直接或者间接导致前面的那些问题。在网上搜索了一下，发现也有一些人有类似的需求，他们在某网站上面提问，使用Quartz框架时怎样才能支持任务在集群的所有节点上执行。后来仔细想想，Quartz框架支持集群模式与基于内存的RAMJobStore单机模式这两种，如果需要在所有节点上执行，其实使用基于内存的RAMJobStore单机模式就可以了，没有必要再通过扩展集群模式来支持这个功能。  解决方案 最终的解决方案，总结如下：
  升级所有应用的quartz scheduler库至2.3.1版本 不同的应用，分别赋予不同的scheduler name；同一个应用中，如果同时有集群模式与单机模式，需要使用不同的scheduler，并赋予不同的name值 对于同一个应用，某个任务仅需要任意一个节点执行的，使用JobStoreCMT的cluster模式。同时需要保证不同节点instanceId不同， 比如将org.quartz.scheduler.instanceId的值设置为AUTO 对于同一个应用，某个任务需要所有节点都执行的，使用基于内存的RAMJobStore org.quartz.threadPool.threadCount 设置成与任务数一致。避免因线程数不够，任务无法执行 job detail赋予正确的group名称 如果job不允许并发，则在job对应的类上添加@DisallowConcurrentExecution 注解 如果job对应的类上面有autowire的需求，可以自定义一个job factory，继承SpringBeanJobFactory，并调用AutowireCapableBeanFactory的autowireBean，来避免Job类里面@Autowired无法注入的问题。同时在配置文件中使用自定义的job factory  1&amp;lt;property name=&amp;#34;jobFactory&amp;#34; ref=&amp;#34;myCustomizedJobFactory&amp;#34; /&amp;gt; </description>
     </item>
@@ -1064,7 +1110,7 @@ minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉
 从库中删除数据库，再创建一个空的数据库 由于表结构的改变，原先的数据都不能用了，需要重新同步。创建新的空数据库是最快的方式
 从库中导入最新的表结构 在 provider 上导出结构数据
 1sudo -iu postgres pg_dumpall --schema-only -f dump.sql 在 subscriber 上导入结构数据
-1sudo -iu postgres psql -f dump.sql 从库上创建pglogical扩展 1mydb=# CREATE EXTENSION pglogical; 从库上创建逻辑复制节点 1-- host 填的是subscriber的IP 2mydb=# SELECT pglogical.create_node(node_name := &amp;#39;subscriber&amp;#39;, dsn := &amp;#39;host=10.1.10.22 port=5432 dbname=mydb&amp;#39;); 从库上创建逻辑复制订阅端 1-- host 填的是provider的IP 2mydb=# SELECT pglogical.create_subscription( subscription_name := &amp;#39;subscriber&amp;#39;, provider_dsn := &amp;#39;host=10.1.10.6 port=5432 dbname=mydb&amp;#39;); 在主库上检查复制状态 1select * from pg_stat_replication; </description>
+1sudo -iu postgres psql -f dump.sql 从库上创建pglogical扩展 1mydb=#CREATEEXTENSIONpglogical;从库上创建逻辑复制节点 1-- host 填的是subscriber的IP 2mydb=#SELECTpglogical.create_node(node_name:=&amp;#39;subscriber&amp;#39;,dsn:=&amp;#39;host=10.1.10.22 port=5432 dbname=mydb&amp;#39;);从库上创建逻辑复制订阅端 1-- host 填的是provider的IP 2mydb=#SELECTpglogical.create_subscription(subscription_name:=&amp;#39;subscriber&amp;#39;,provider_dsn:=&amp;#39;host=10.1.10.6 port=5432 dbname=mydb&amp;#39;);在主库上检查复制状态 1select*frompg_stat_replication;</description>
     </item>
     
     <item>
@@ -1075,8 +1121,8 @@ minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉
       <guid>https://www.zengxi.net/2019/12/pg-upgrade-version/</guid>
       <description>目前主要有两种升级方式，它们分别使用于不同的场景。
    升级方式 优点 缺点     pglogical逻辑复制升级 停机时间短 需提前准备从库，并搭建replication，在replication期间，需考虑DDL语句带来的影响。   pg_upgrade升级 不需要提前准备replication 升级完成后需检查index是否正常，并执行vacuum analyze，对于数据量较大的库，这可能耗时较长    逻辑复制升级 前提条件 所有表都必须有主键 可以用下面的语句来检查
-1SELECT table_name 2 FROM information_schema.tables 3 WHERE (table_catalog, table_schema, table_name) NOT IN 4 (SELECT table_catalog, table_schema, table_name 5 FROM information_schema.table_constraints 6 WHERE constraint_type = &amp;#39;PRIMARY KEY&amp;#39;) 7 AND table_schema IN (&amp;#39;myschema&amp;#39;) super user无密码访问provider和subscriber 修改配置文件
-1# prodvider 上配置允许 super user 从 subscriber 上访问 replication。 2# 假如 subscriber IP 是 10.</description>
+1SELECTtable_name2FROMinformation_schema.tables3WHERE(table_catalog,table_schema,table_name)NOTIN4(SELECTtable_catalog,table_schema,table_name5FROMinformation_schema.table_constraints6WHEREconstraint_type=&amp;#39;PRIMARY KEY&amp;#39;)7ANDtable_schemaIN(&amp;#39;myschema&amp;#39;)super user无密码访问provider和subscriber 修改配置文件
+1# prodvider 上配置允许 super user 从 subscriber 上访问 replication。 2# 假如 subscriber IP 是 10.1.10.15，则 provider 的 pg_hba.conf 中应包含以下配置 3host all postgres 10.1.10.15/32 trust 4host replication postgres 10.1.10.15/32 trust 1# subscriber 上允许 super user 访问本地的 postgresql， 2# 假如 subscriber IP 是 10.</description>
     </item>
     
     <item>
@@ -1097,8 +1143,7 @@ minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉
       <description>现有系统中原先在设计数据库字段的时候，把日期与时间分别存入两个不同的字段，但是这两个字段在数据库中都是以timestamp类型来保存。这样的话，如果需要在where条件中把这两个字段与某个特定的时间做比较，则需要分别截取有效的信息。对于日期字段仅仅取出日期的值，把时间舍弃；对于时间字段仅仅取出时间的值，把日期舍弃。
 举个例子，假设数据库中有两个字段：returnSlaDate存的是物品归还截止日期，returnSlaTime存的是物品归还截止时间。实际在保存的时候，数据库中returnSlaDate字段的值可能会是 2018-12-31 00:00:00 ，其中 00:00:00 是没有用的，在与特定时间做比较的时候，需要舍弃；returnSlaTime字段的值可能会是 1970-01-01 17:59:59 ，其中 1970-01-01 是没有用的，在与特定时间做比较的时候，需要舍弃。
 假设数据库中有另外一个字段actualReturnDate，它表示物品实际归还时间（仅仅一个字段表示，包含有效的日期与时间）。如果现在有个需求，要在系统中查出来物品未按时归还的记录，需要怎么处理呢？直接用SQL写会相对简单，如果用hibernate的criteria builder则需要用as关键字做一下转换。下面是示例代码：
-1// 转换截止日期字段成java.sql.Date类型，这样可以仅取出日期的值 2Expression returnSlaDate = pTimeSchedule.get(&amp;#34;returnSlaDate&amp;#34;).as(java.sql.Date.class); 3// 转换截止时间字段成java.sql.Time类型，这样可以仅取出时间的值 4Expression returnSlaTime = pTimeSchedule.get(&amp;#34;returnSlaTime&amp;#34;).as(java.sql.Time.class); 5 6// 对实际归还时间做与上面一样的处理 7Expression actualReturnDate = pTimeSchedule.get(&amp;#34;actualReturnDate&amp;#34;).as(java.sql.Date.class); 8Expression actualReturnTime = pTimeSchedule.get(&amp;#34;actualReturnDate&amp;#34;).as(java.sql.Time.class); 9 10// 在where语句中，筛选出实际归还日期大于截止日期，或者实际归还日期等于截止日期且归还时间大于截止时间 11orFilter.add(builder.or( 12 builder.greaterThan(actualReturnDate, returnSlaDate), 13 builder.and( 14 builder.equal(actualReturnDate, returnSlaDate), 15 builder.greaterThan(actualReturnTime, returnSlaTime) 16 ) 17)); 18 打出hibernate的日志，可以看到转换之后的SQL语句
-1( 2 cast(generatedAlias0.actualReturnDate as date)&amp;gt;cast(generatedAlias0.timeSchedule.returnSlaDate as date) 3) 4or ( 5 ( 6 cast(generatedAlias0.</description>
+1// 转换截止日期字段成java.sql.Date类型，这样可以仅取出日期的值 2Expression returnSlaDate = pTimeSchedule.get(&amp;#34;returnSlaDate&amp;#34;).as(java.sql.Date.class); 3// 转换截止时间字段成java.sql.Time类型，这样可以仅取出时间的值 4Expression returnSlaTime = pTimeSchedule.get(&amp;#34;returnSlaTime&amp;#34;).as(java.sql.Time.class); 5 6// 对实际归还时间做与上面一样的处理 7Expression actualReturnDate = pTimeSchedule.get(&amp;#34;actualReturnDate&amp;#34;).as(java.sql.Date.class); 8Expression actualReturnTime = pTimeSchedule.get(&amp;#34;actualReturnDate&amp;#34;).as(java.sql.Time.class); 9 10// 在where语句中，筛选出实际归还日期大于截止日期，或者实际归还日期等于截止日期且归还时间大于截止时间 11orFilter.add(builder.or( 12 builder.greaterThan(actualReturnDate, returnSlaDate), 13 builder.and( 14 builder.equal(actualReturnDate, returnSlaDate), 15 builder.greaterThan(actualReturnTime, returnSlaTime) 16 ) 17)); 18 打出hibernate的日志，可以看到转换之后的SQL语句</description>
     </item>
     
     <item>
@@ -1282,9 +1327,8 @@ grep的帮助文档中有这几个参数：
       
       <guid>https://www.zengxi.net/2018/06/set-postgres-default-schema/</guid>
       <description>查看当前的schema
-1SHOW search_path; 设置默认schema，仅对当前连接有效
-1SET search_path TO your_schema; 设置默认schema，数据库级别，修改之后的所有连接都有效
-1ALTER database &amp;#34;your_database&amp;#34; SET search_path TO your_schema; </description>
+1SHOWsearch_path;设置默认schema，仅对当前连接有效
+1SETsearch_pathTOyour_schema;设置默认schema，数据库级别，修改之后的所有连接都有效</description>
     </item>
     
     <item>

@@ -24,8 +24,7 @@
       <pubDate>Tue, 26 Jan 2021 17:06:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/2021/01/postgres_copy_table_schema/</guid>
-      <description>在创建临时数据表的时候会有用
-1create table if not exists foo as (select * from bar) with no data; </description>
+      <description>在创建临时数据表的时候会有用</description>
     </item>
     
     <item>
@@ -34,8 +33,7 @@
       <pubDate>Mon, 25 Jan 2021 13:59:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/2021/01/mybatis_set_schema/</guid>
-      <description>由于业务的需要，在查询的时候，需要动态地在SQL语句中指定schema。在mybatis的的查询语句中，可以使用 ${schemaName}。注意，必须要用$, 而不是#
-1SET search_path TO ${schemaName}; 2 3select * from foo where bar = #{bar}; </description>
+      <description>由于业务的需要，在查询的时候，需要动态地在SQL语句中指定schema。在mybatis的的查询语句中，可以使用 ${schemaName}。注意，必须要用$, 而不是#</description>
     </item>
     
     <item>
@@ -70,9 +68,8 @@
       <guid>https://www.zengxi.net/2020/06/pg_check_table_size/</guid>
       <description>原文链接：https://blog.csdn.net/kmust20093211/article/details/47616345
 方法一 ，查某个表
-1select pg_size_pretty(pg_relation_size(&amp;#39;table_name&amp;#39;)); 方法二 ，查出所有表并按大小排序
-1SELECT 2table_schema || &amp;#39;.&amp;#39; || table_name 3AS table_full_name, pg_size_pretty(pg_total_relation_size(&amp;#39;&amp;#34;&amp;#39; ||table_schema || &amp;#39;&amp;#34;.&amp;#34;&amp;#39; || table_name || &amp;#39;&amp;#34;&amp;#39;)) AS size 4FROM 5information_schema.tables 6ORDER BY 7 pg_total_relation_size(&amp;#39;&amp;#34;&amp;#39; || table_schema || &amp;#39;&amp;#34;.&amp;#34;&amp;#39; || table_name || &amp;#39;&amp;#34;&amp;#39;) 8DESC limit 20; 方法三，查出所有表按大小排序并分离data与index
-1SELECT 2 table_name, 3 pg_size_pretty(table_size) AS table_size, 4 pg_size_pretty(indexes_size) AS indexes_size, 5 pg_size_pretty(total_size) AS total_size 6FROM ( 7 SELECT 8 table_name, 9 pg_table_size(table_name) AS table_size, 10 pg_indexes_size(table_name) AS indexes_size, 11 pg_total_relation_size(table_name) AS total_size 12 FROM ( 13 SELECT (&amp;#39;&amp;#34;&amp;#39; || table_schema || &amp;#39;&amp;#34;.</description>
+1selectpg_size_pretty(pg_relation_size(&amp;#39;table_name&amp;#39;));方法二 ，查出所有表并按大小排序
+1SELECT2table_schema||&amp;#39;.&amp;#39;||table_name3AStable_full_name,pg_size_pretty(pg_total_relation_size(&amp;#39;&amp;#34;&amp;#39;||table_schema||&amp;#39;&amp;#34;.&amp;#34;&amp;#39;||table_name||&amp;#39;&amp;#34;&amp;#39;))ASsize4FROM5information_schema.tables6ORDERBY7pg_total_relation_size(&amp;#39;&amp;#34;&amp;#39;||table_schema||&amp;#39;&amp;#34;.&amp;#34;&amp;#39;||table_name||&amp;#39;&amp;#34;&amp;#39;)8DESClimit20;方法三，查出所有表按大小排序并分离data与index</description>
     </item>
     
     <item>
@@ -99,8 +96,7 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
       
       <guid>https://www.zengxi.net/2020/04/pg_close_session_remove_db/</guid>
       <description>Postgres删除数据库的时候，报错：有其他用户正在使用该数据库，无法删除。这时，需要关闭这个数据库的相关的连接，然后再删除数据库
-可以执行下面的命令来关闭连接：
-1 SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname=&amp;#39;要删除的数据库名称&amp;#39; AND pid&amp;lt;&amp;gt;pg_backend_pid(); </description>
+可以执行下面的命令来关闭连接：</description>
     </item>
     
     <item>
@@ -110,13 +106,39 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
       
       <guid>https://www.zengxi.net/2020/01/postgres-frequently-used-commands/</guid>
       <description>原作者：廖学强 原文链接：点击这里   查看帮助命令
-1DB=# help --总的帮助 2 3DB=# \h --SQL commands级的帮助 4 5DB=# \? --psql commands级的帮助 按列显示，类似mysql的\G
+1DB=#help--总的帮助 23DB=#\h--SQL commands级的帮助 45DB=#\?--psql commands级的帮助 按列显示，类似mysql的\G
 1DB=# \x 2 3Expanded display is on. 查看DB安装目录(最好root用户执行)
 1find / -name initdb 查看有多少DB实例在运行(最好root用户执行)
 1find / -name postgresql.conf 查看DB版本
-1cat $PGDATA/PG_VERSION 2 3psql --version 4 5DB=# show server_version; 6 7DB=# select version(); 查看DB实例运行状态
-1pg_ctl status 查看所有数据库
-1psql –l --查看5432端口下面有多少个DB 2 3psql –p XX –l --查看XX端口下面有多少个DB 4 5DB=# \l 6 7DB=# select * from pg_database; 创建数据库</description>
+1cat$PGDATA/PG_VERSION23psql--version 45DB=#showserver_version;67DB=#selectversion();查看DB实例运行状态
+1pg_ctlstatus查看所有数据库
+1psql–l--查看5432端口下面有多少个DB 23psql–pXX–l--查看XX端口下面有多少个DB 45DB=#\l67DB=#select*frompg_database;创建数据库
+1createdbdatabase_name23DB=#\hcreatedatabase--创建数据库的帮助命令 45DB=#createdatabasedatabase_name进入某个数据库
+1psql–ddbname23DB=#\cdbname查看当前数据库
+1DB=#\c23DB=#selectcurrent_database();查看数据库文件目录
+1DB=#showdata_directory;23cat$PGDATA/postgresql.conf|grepdata_directory45cat/etc/init.d/postgresql|grepPGDATA=67lsof|grep5432得出第二列的PID号再ps–ef|grepPID查看表空间
+1select*frompg_tablespace;查看语言
+1select*frompg_language;查询所有schema，必须到指定的数据库下执行
+1select*frominformation_schema.schemata;23SELECTnspnameFROMpg_namespace;45\dnS查看表名
+1DB=#\dt--只能查看到当前数据库下public的表名 23DB=#SELECTtablenameFROMpg_tablesWHEREtablenameNOTLIKE&amp;#39;pg%&amp;#39;ANDtablenameNOTLIKE&amp;#39;sql_%&amp;#39;ORDERBYtablename;45DB=#SELECT*FROMinformation_schema.tablesWHEREtable_name=&amp;#39;ff_v3_ff_basic_af&amp;#39;;查看表结构
+1DB=#\dtablename23DB=#select*frominformation_schema.columnswheretable_schema=&amp;#39;public&amp;#39;andtable_name=&amp;#39;XX&amp;#39;;查看索引
+1DB=#\di23DB=#select*frompg_index;查看视图
+1DB=#\dv23DB=#select*frompg_viewswhereschemaname=&amp;#39;public&amp;#39;;45DB=#select*frominformation_schema.viewswheretable_schema=&amp;#39;public&amp;#39;;查看触发器
+1DB=#select*frominformation_schema.triggers;查看序列
+1DB=#select*frominformation_schema.sequenceswheresequence_schema=&amp;#39;public&amp;#39;;查看约束
+1DB=#select*frompg_constraintwherecontype=&amp;#39;p&amp;#39;23DB=#selecta.relnameastable_name,b.connameasconstraint_name,b.contypeasconstraint_typefrompg_classa,pg_constraintbwherea.oid=b.conrelidanda.relname=&amp;#39;cc&amp;#39;;查看XX数据库的大小
+1SELECTpg_size_pretty(pg_database_size(&amp;#39;XX&amp;#39;))Asfulldbsize;查看所有数据库的大小
+1selectpg_database.datname,pg_size_pretty(pg_database_size(pg_database.datname))ASsizefrompg_database;查看各数据库数据创建时间：
+1selectdatname,(pg_stat_file(format(&amp;#39;%s/%s/PG_VERSION&amp;#39;,casewhenspcname=&amp;#39;pg_default&amp;#39;then&amp;#39;base&amp;#39;else&amp;#39;pg_tblspc/&amp;#39;||t2.oid||&amp;#39;/PG_11_201804061/&amp;#39;end,t1.oid))).*frompg_databaset1,pg_tablespacet2wheret1.dattablespace=t2.oid;按占空间大小，顺序查看所有表的大小
+1selectrelname,pg_size_pretty(pg_relation_size(relid))frompg_stat_user_tableswhereschemaname=&amp;#39;public&amp;#39;orderbypg_relation_size(relid)desc;按占空间大小，顺序查看索引大小
+1selectindexrelname,pg_size_pretty(pg_relation_size(relid))frompg_stat_user_indexeswhereschemaname=&amp;#39;public&amp;#39;orderbypg_relation_size(relid)desc;查看参数文件
+1DB=#showconfig_file;23DB=#showhba_file;45DB=#showident_file;查看当前会话的参数值
+1DB=#showall;查看参数值
+1select*frompg_file_settings查看某个参数值,比如参数work_mem
+1DB=#showwork_mem修改某个参数值,比如参数work_mem
+1DB=#altersystemsetwork_mem=&amp;#39;8MB&amp;#39;23--使用alter system命令将修改postgresql.auto.conf文件，而不是postgresql.conf，这样可以很好的保护postgresql.conf文件，加入你使用很多alter system命令后搞的一团糟，那么你只需要删除postgresql.auto.conf，再执行pg_ctl reload加载postgresql.conf文件即可实现参数的重新加载。 查看是否归档
+1DB=#showarchive_mode;查看运行日志的相关配置，运行日志包括Error信息，定位慢查询SQL，数据库的启动关闭信息，checkpoint过于频繁等的告警信息。
+1showlogging_collector;--启动日志收集 23showlog_directory;--日志输出路径 45showlog_filename;--日志文件名 67showlog_truncate_on_rotation;--当生成新的文件时如果文件名已存在，是否覆盖同名旧文件名 89showlog_statement;--设置日志记录内容 1011showlog_min_duration_statement;--运行XX毫秒的语句会被记录到日志中，-1表示禁用这个功能，0表示记录所有语句，类似mysql的慢查询配置 查看wal日志的配置，wal日志就是redo重做日志</description>
     </item>
     
     <item>
@@ -130,7 +152,7 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
 从库中删除数据库，再创建一个空的数据库 由于表结构的改变，原先的数据都不能用了，需要重新同步。创建新的空数据库是最快的方式
 从库中导入最新的表结构 在 provider 上导出结构数据
 1sudo -iu postgres pg_dumpall --schema-only -f dump.sql 在 subscriber 上导入结构数据
-1sudo -iu postgres psql -f dump.sql 从库上创建pglogical扩展 1mydb=# CREATE EXTENSION pglogical; 从库上创建逻辑复制节点 1-- host 填的是subscriber的IP 2mydb=# SELECT pglogical.create_node(node_name := &amp;#39;subscriber&amp;#39;, dsn := &amp;#39;host=10.1.10.22 port=5432 dbname=mydb&amp;#39;); 从库上创建逻辑复制订阅端 1-- host 填的是provider的IP 2mydb=# SELECT pglogical.create_subscription( subscription_name := &amp;#39;subscriber&amp;#39;, provider_dsn := &amp;#39;host=10.1.10.6 port=5432 dbname=mydb&amp;#39;); 在主库上检查复制状态 1select * from pg_stat_replication; </description>
+1sudo -iu postgres psql -f dump.sql 从库上创建pglogical扩展 1mydb=#CREATEEXTENSIONpglogical;从库上创建逻辑复制节点 1-- host 填的是subscriber的IP 2mydb=#SELECTpglogical.create_node(node_name:=&amp;#39;subscriber&amp;#39;,dsn:=&amp;#39;host=10.1.10.22 port=5432 dbname=mydb&amp;#39;);从库上创建逻辑复制订阅端 1-- host 填的是provider的IP 2mydb=#SELECTpglogical.create_subscription(subscription_name:=&amp;#39;subscriber&amp;#39;,provider_dsn:=&amp;#39;host=10.1.10.6 port=5432 dbname=mydb&amp;#39;);在主库上检查复制状态 1select*frompg_stat_replication;</description>
     </item>
     
     <item>
@@ -141,8 +163,8 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
       <guid>https://www.zengxi.net/2019/12/pg-upgrade-version/</guid>
       <description>目前主要有两种升级方式，它们分别使用于不同的场景。
    升级方式 优点 缺点     pglogical逻辑复制升级 停机时间短 需提前准备从库，并搭建replication，在replication期间，需考虑DDL语句带来的影响。   pg_upgrade升级 不需要提前准备replication 升级完成后需检查index是否正常，并执行vacuum analyze，对于数据量较大的库，这可能耗时较长    逻辑复制升级 前提条件 所有表都必须有主键 可以用下面的语句来检查
-1SELECT table_name 2 FROM information_schema.tables 3 WHERE (table_catalog, table_schema, table_name) NOT IN 4 (SELECT table_catalog, table_schema, table_name 5 FROM information_schema.table_constraints 6 WHERE constraint_type = &amp;#39;PRIMARY KEY&amp;#39;) 7 AND table_schema IN (&amp;#39;myschema&amp;#39;) super user无密码访问provider和subscriber 修改配置文件
-1# prodvider 上配置允许 super user 从 subscriber 上访问 replication。 2# 假如 subscriber IP 是 10.</description>
+1SELECTtable_name2FROMinformation_schema.tables3WHERE(table_catalog,table_schema,table_name)NOTIN4(SELECTtable_catalog,table_schema,table_name5FROMinformation_schema.table_constraints6WHEREconstraint_type=&amp;#39;PRIMARY KEY&amp;#39;)7ANDtable_schemaIN(&amp;#39;myschema&amp;#39;)super user无密码访问provider和subscriber 修改配置文件
+1# prodvider 上配置允许 super user 从 subscriber 上访问 replication。 2# 假如 subscriber IP 是 10.1.10.15，则 provider 的 pg_hba.conf 中应包含以下配置 3host all postgres 10.1.10.15/32 trust 4host replication postgres 10.1.10.15/32 trust 1# subscriber 上允许 super user 访问本地的 postgresql， 2# 假如 subscriber IP 是 10.</description>
     </item>
     
     <item>
@@ -152,9 +174,8 @@ WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原�
       
       <guid>https://www.zengxi.net/2018/06/set-postgres-default-schema/</guid>
       <description>查看当前的schema
-1SHOW search_path; 设置默认schema，仅对当前连接有效
-1SET search_path TO your_schema; 设置默认schema，数据库级别，修改之后的所有连接都有效
-1ALTER database &amp;#34;your_database&amp;#34; SET search_path TO your_schema; </description>
+1SHOWsearch_path;设置默认schema，仅对当前连接有效
+1SETsearch_pathTOyour_schema;设置默认schema，数据库级别，修改之后的所有连接都有效</description>
     </item>
     
   </channel>

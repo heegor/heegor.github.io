@@ -82,6 +82,7 @@
     <a href="https://www.zengxi.net/series/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
+        <a href="https://www.zengxi.net/links/java_feature/" class="nav_child nav_item">Java各版本特性</a>
         <a href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/" class="nav_child nav_item">Kubernetes in Action笔记</a>
     </div>
   </div>
@@ -123,6 +124,36 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/05/manjaro_install_vmware/">Manjaro安装VMware Workstation</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    May 26, 2020</span>
+    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
+    </a>
+    <a href='https://www.zengxi.net/tags/vmware' class="post_tag button button_translucent">vmware
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">安装VMware workstation
+1yay -S vmware-workstation 启动时候如果报错：Please make sure that the kernel module `vmmon’ is loaded. 则需要重新安装一下linux-headers，加载一下vmmon模块
+1# 先查看内核。返回值版本号格式为: A.B.C-D-MANJARO。示例： 5.2.8-1-MANJARO， 2uname -r 3 4# 安装 linux-headers。根据上面的内核版本来选择安装包，安装包名字为：linuxAB-headers 5sudo pacman -S linux52-headers 6 7# 加 …</p>
+          <a href="https://www.zengxi.net/2020/05/manjaro_install_vmware/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -203,8 +234,7 @@
       <div class="excerpt_footer">
         <div>
           <p class="pale">Postgres删除数据库的时候，报错：有其他用户正在使用该数据库，无法删除。这时，需要关闭这个数据库的相关的连接，然后再删除数据库
-可以执行下面的命令来关闭连接：
-1 SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname=&#39;要删除的数据库名称&#39; AND pid&lt;&gt;pg_backend_pid(); </p>
+可以执行下面的命令来关闭连接：</p>
           <a href="https://www.zengxi.net/2020/04/pg_close_session_remove_db/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
@@ -291,11 +321,11 @@ Alpine 的源文件为/etc/apk/repositories。默认的配置类似：
       <div class="excerpt_footer">
         <div>
           <p class="pale">原作者：廖学强 原文链接：点击这里   查看帮助命令
-1DB=# help --总的帮助 2 3DB=# \h --SQL commands级的帮助 4 5DB=# \? --psql commands级的帮助 按列显示，类似mysql的\G
+1DB=#help--总的帮助 23DB=#\h--SQL commands级的帮助 45DB=#\?--psql commands级的帮助 按列显示，类似mysql的\G
 1DB=# \x 2 3Expanded display is on. 查看DB安装目录(最好root用户执行)
 1find / -name initdb 查看有多少DB实例在运行(最好root用户执行)
 1find / -name postgresql.conf 查看DB版本
-1cat $PGDATA/PG_VERSION 2 3psql --version 4 5DB=# show …</p>
+1cat$PGDATA/PG_VERSION23psql--version …</p>
           <a href="https://www.zengxi.net/2020/01/postgres-frequently-used-commands/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
@@ -389,34 +419,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/01/quartz-job-issue-improvement/">Quartz job使用过程中的发现问题与改进</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 5, 2020</span>
-    <a href='https://www.zengxi.net/tags/quartz' class="post_tag button button_translucent">quartz
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">遇到的问题与原因分析 生产环境中遇到的问题：
- 服务在启动过程中，不时地卡住，后来发生的越来越频繁。看日志分析，卡在初始化quartz job store的时候 服务在运行过程中，不时地出现定时任务不被触发的情况  通过分析，得知问题产生的原因：
- 目前代码中用的是Quartz scheduler 1.8.3版本，定时框架采用的是行锁，通过执行下面的SQL来锁住特定的记录。在分布式的系统的情况下，节点越多越容易发生锁等待，甚至死锁。Quartz scheduler 的 2.x 版本做了改进，在QRTZ_LOCKS表中多加了一个字段 SCHED_NAME。这有一个好处就是，可以给不同的应用分配不同的scheduler name，这样定 …</p>
-          <a href="https://www.zengxi.net/2020/01/quartz-job-issue-improvement/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -497,6 +499,9 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/05/java8_default_method/" class="nav-link">Java 8新特性 - (4)默认方法</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/04/java8_method_references/" class="nav-link">Java 8新特性 - (3)方法引用</a>
       </li>
       <li>
@@ -516,9 +521,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/" class="nav-link">基于alpine构建docker镜像修改时区</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="nav-link">Manjaro升级后打印服务不可用</a>
       </li>
     </ul>
     <div>
@@ -546,7 +548,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">6</span>
+          <span class="button_tally">7</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -620,7 +622,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=6>JAVA<span class="button_tally">6</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
             </a>
             
             
@@ -710,7 +712,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">4</span>
+          <span class="button_tally">5</span>
         </a>
         
         
@@ -731,7 +733,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">7</span>
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
@@ -754,6 +756,11 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <span class="button_tally">4</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
+          <span class="button_tally">4</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
           JETTY
           <span class="button_tally">4</span>
@@ -767,11 +774,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
           SHELL
           <span class="button_tally">4</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
-          <span class="button_tally">3</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class="post_tag button button_translucent">
@@ -867,7 +869,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=8>JAVA<span class="button_tally">8</span>
             </a>
             
             
@@ -875,7 +877,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=3>JAVA-8<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=4>JAVA-8<span class="button_tally">4</span>
             </a>
             
             

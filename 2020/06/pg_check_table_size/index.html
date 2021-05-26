@@ -21,7 +21,7 @@
 <meta property="og:type" content="article">
 <meta name="description" content="原文链接：https://blog.csdn.net/kmust20093211/article/details/47616345
 方法一 ，查某个表
-1select pg_size_pretty(pg_relation_size(&#39;table_name&#39;)); 方法二 ， …">
+1selectpg_size_pretty(pg_relation_size(&#39;table_name&#39;));方法二 ， …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="转: postgresql 查看单个表大小" />
@@ -29,7 +29,7 @@
 <meta property="og:title" content="转: postgresql 查看单个表大小" />
 <meta property="og:description" content="原文链接：https://blog.csdn.net/kmust20093211/article/details/47616345
 方法一 ，查某个表
-1select pg_size_pretty(pg_relation_size(&#39;table_name&#39;)); 方法二 ， …" />
+1selectpg_size_pretty(pg_relation_size(&#39;table_name&#39;));方法二 ， …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -86,6 +86,7 @@
     <a href="https://www.zengxi.net/series/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
+        <a href="https://www.zengxi.net/links/java_feature/" class="nav_child nav_item">Java各版本特性</a>
         <a href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/" class="nav_child nav_item">Kubernetes in Action笔记</a>
     </div>
   </div>
@@ -165,35 +166,35 @@
     
     <p>原文链接：https://blog.csdn.net/kmust20093211/article/details/47616345</p>
 <p>方法一 ，查某个表</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span> <span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_relation_size</span><span class="p">(</span><span class="s1">&#39;table_name&#39;</span><span class="p">));</span>
-</code></pre></div><p>方法二 ，查出所有表并按大小排序</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">SELECT</span> 
-<span class="ln">2</span><span class="n">table_schema</span> <span class="o">||</span> <span class="s1">&#39;.&#39;</span> <span class="o">||</span> <span class="k">table_name</span> 
-<span class="ln">3</span><span class="k">AS</span> <span class="n">table_full_name</span><span class="p">,</span> <span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_total_relation_size</span><span class="p">(</span><span class="s1">&#39;&#34;&#39;</span> <span class="o">||</span><span class="n">table_schema</span> <span class="o">||</span> <span class="s1">&#39;&#34;.&#34;&#39;</span> <span class="o">||</span> <span class="k">table_name</span> <span class="o">||</span> <span class="s1">&#39;&#34;&#39;</span><span class="p">))</span> <span class="k">AS</span> <span class="k">size</span>
-<span class="ln">4</span><span class="k">FROM</span> 
-<span class="ln">5</span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span>
-<span class="ln">6</span><span class="k">ORDER</span> <span class="k">BY</span>
-<span class="ln">7</span>    <span class="n">pg_total_relation_size</span><span class="p">(</span><span class="s1">&#39;&#34;&#39;</span> <span class="o">||</span> <span class="n">table_schema</span> <span class="o">||</span> <span class="s1">&#39;&#34;.&#34;&#39;</span> <span class="o">||</span> <span class="k">table_name</span> <span class="o">||</span> <span class="s1">&#39;&#34;&#39;</span><span class="p">)</span>
-<span class="ln">8</span><span class="k">DESC</span> <span class="k">limit</span> <span class="mi">20</span><span class="p">;</span>
-</code></pre></div><p>方法三，查出所有表按大小排序并分离data与index</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln"> 1</span><span class="k">SELECT</span>
-<span class="ln"> 2</span>    <span class="k">table_name</span><span class="p">,</span>
-<span class="ln"> 3</span>    <span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">table_size</span><span class="p">)</span> <span class="k">AS</span> <span class="n">table_size</span><span class="p">,</span>
-<span class="ln"> 4</span>    <span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">indexes_size</span><span class="p">)</span> <span class="k">AS</span> <span class="n">indexes_size</span><span class="p">,</span>
-<span class="ln"> 5</span>    <span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">total_size</span><span class="p">)</span> <span class="k">AS</span> <span class="n">total_size</span>
-<span class="ln"> 6</span><span class="k">FROM</span> <span class="p">(</span>
-<span class="ln"> 7</span>    <span class="k">SELECT</span>
-<span class="ln"> 8</span>        <span class="k">table_name</span><span class="p">,</span>
-<span class="ln"> 9</span>        <span class="n">pg_table_size</span><span class="p">(</span><span class="k">table_name</span><span class="p">)</span> <span class="k">AS</span> <span class="n">table_size</span><span class="p">,</span>
-<span class="ln">10</span>        <span class="n">pg_indexes_size</span><span class="p">(</span><span class="k">table_name</span><span class="p">)</span> <span class="k">AS</span> <span class="n">indexes_size</span><span class="p">,</span>
-<span class="ln">11</span>        <span class="n">pg_total_relation_size</span><span class="p">(</span><span class="k">table_name</span><span class="p">)</span> <span class="k">AS</span> <span class="n">total_size</span>
-<span class="ln">12</span>    <span class="k">FROM</span> <span class="p">(</span>
-<span class="ln">13</span>        <span class="k">SELECT</span> <span class="p">(</span><span class="s1">&#39;&#34;&#39;</span> <span class="o">||</span> <span class="n">table_schema</span> <span class="o">||</span> <span class="s1">&#39;&#34;.&#34;&#39;</span> <span class="o">||</span> <span class="k">table_name</span> <span class="o">||</span> <span class="s1">&#39;&#34;&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="k">table_name</span>
-<span class="ln">14</span>        <span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span>
-<span class="ln">15</span>    <span class="p">)</span> <span class="k">AS</span> <span class="n">all_tables</span>
-<span class="ln">16</span>    <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">total_size</span> <span class="k">DESC</span>
-<span class="ln">17</span><span class="p">)</span> <span class="k">AS</span> <span class="n">pretty_sizes</span><span class="p">;</span>
-</code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_relation_size</span><span class="p">(</span><span class="s1">&#39;table_name&#39;</span><span class="p">));</span><span class="w">
+</span></code></pre></div><p>方法二 ，查出所有表并按大小排序</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">SELECT</span><span class="w"> 
+</span><span class="ln">2</span><span class="w"></span><span class="n">table_schema</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;.&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">table_name</span><span class="w"> 
+</span><span class="ln">3</span><span class="w"></span><span class="k">AS</span><span class="w"> </span><span class="n">table_full_name</span><span class="p">,</span><span class="w"> </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_total_relation_size</span><span class="p">(</span><span class="s1">&#39;&#34;&#39;</span><span class="w"> </span><span class="o">||</span><span class="n">table_schema</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&#34;.&#34;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&#34;&#39;</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">size</span><span class="w">
+</span><span class="ln">4</span><span class="w"></span><span class="k">FROM</span><span class="w"> 
+</span><span class="ln">5</span><span class="w"></span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span><span class="w">
+</span><span class="ln">6</span><span class="w"></span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w">
+</span><span class="ln">7</span><span class="w">    </span><span class="n">pg_total_relation_size</span><span class="p">(</span><span class="s1">&#39;&#34;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">table_schema</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&#34;.&#34;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&#34;&#39;</span><span class="p">)</span><span class="w">
+</span><span class="ln">8</span><span class="w"></span><span class="k">DESC</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>方法三，查出所有表按大小排序并分离data与index</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln"> 1</span><span class="k">SELECT</span><span class="w">
+</span><span class="ln"> 2</span><span class="w">    </span><span class="k">table_name</span><span class="p">,</span><span class="w">
+</span><span class="ln"> 3</span><span class="w">    </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">table_size</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">table_size</span><span class="p">,</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">    </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">indexes_size</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">indexes_size</span><span class="p">,</span><span class="w">
+</span><span class="ln"> 5</span><span class="w">    </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">total_size</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total_size</span><span class="w">
+</span><span class="ln"> 6</span><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">    </span><span class="k">SELECT</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">        </span><span class="k">table_name</span><span class="p">,</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">        </span><span class="n">pg_table_size</span><span class="p">(</span><span class="k">table_name</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">table_size</span><span class="p">,</span><span class="w">
+</span><span class="ln">10</span><span class="w">        </span><span class="n">pg_indexes_size</span><span class="p">(</span><span class="k">table_name</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">indexes_size</span><span class="p">,</span><span class="w">
+</span><span class="ln">11</span><span class="w">        </span><span class="n">pg_total_relation_size</span><span class="p">(</span><span class="k">table_name</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total_size</span><span class="w">
+</span><span class="ln">12</span><span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="ln">13</span><span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;&#34;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">table_schema</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&#34;.&#34;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&#34;&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">table_name</span><span class="w">
+</span><span class="ln">14</span><span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span><span class="w">
+</span><span class="ln">15</span><span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">all_tables</span><span class="w">
+</span><span class="ln">16</span><span class="w">    </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">total_size</span><span class="w"> </span><span class="k">DESC</span><span class="w">
+</span><span class="ln">17</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pretty_sizes</span><span class="p">;</span><span class="w">
+</span></code></pre></div>
     
       
     
@@ -235,6 +236,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/05/java8_default_method/" class="nav-link">Java 8新特性 - (4)默认方法</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/04/java8_method_references/" class="nav-link">Java 8新特性 - (3)方法引用</a>
       </li>
       <li>
@@ -254,9 +258,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/" class="nav-link">基于alpine构建docker镜像修改时区</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="nav-link">Manjaro升级后打印服务不可用</a>
       </li>
     </ul>
     <div>
@@ -284,7 +285,7 @@
         
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">6</span>
+          <span class="button_tally">7</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -358,7 +359,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=6>JAVA<span class="button_tally">6</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
             </a>
             
             
@@ -448,7 +449,7 @@
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">4</span>
+          <span class="button_tally">5</span>
         </a>
         
         
@@ -469,7 +470,7 @@
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">7</span>
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
@@ -492,6 +493,11 @@
           <span class="button_tally">4</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
+          <span class="button_tally">4</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
           JETTY
           <span class="button_tally">4</span>
@@ -505,11 +511,6 @@
         <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
           SHELL
           <span class="button_tally">4</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
-          <span class="button_tally">3</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class="post_tag button button_translucent">
@@ -605,7 +606,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=8>JAVA<span class="button_tally">8</span>
             </a>
             
             
@@ -613,7 +614,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=3>JAVA-8<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=4>JAVA-8<span class="button_tally">4</span>
             </a>
             
             

@@ -82,6 +82,7 @@
     <a href="https://www.zengxi.net/series/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
+        <a href="https://www.zengxi.net/links/java_feature/" class="nav_child nav_item">Java各版本特性</a>
         <a href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/" class="nav_child nav_item">Kubernetes in Action笔记</a>
     </div>
   </div>
@@ -123,6 +124,37 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/07/terraform_state_consistent/">解决terraform与远程云服务器资源状态不一致的问题</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 22, 2020</span>
+    <a href='https://www.zengxi.net/tags/terraform' class="post_tag button button_translucent">terraform
+    </a>
+    <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91' class="post_tag button button_translucent">阿里云
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">概述 在运维过程中遇到了下面的情况：长期使用terraform管理资源，但是通过terraform以外的工具对云资源做过属性变更（比如通过网页上的控制台对云资源做属性变更）。此时，云资源的属性与terraform state的信息已经不一致，跑terraform plan就会发现，它会删除现有的，然后重建一个。但是这个是我们不希望看到的，我们希望可以保留原有实例并且把本地的terraform state更新成最新的属性。
+解决方案 要想解决这个问题，可以利用 terraform import 命令。也就是重新导入云资源的实例，然后同步成最新的信息。
+下面以阿里云ECS为例子。
+(1)删除 state …</p>
+          <a href="https://www.zengxi.net/2020/07/terraform_state_consistent/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -292,8 +324,7 @@ rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程�
         <div>
           <p class="pale">原文链接：https://blog.csdn.net/kmust20093211/article/details/47616345
 方法一 ，查某个表
-1select pg_size_pretty(pg_relation_size(&#39;table_name&#39;)); 方法二 ，查出所有表并按大小排序
-1SELECT 2table_schema || &#39;.&#39; || table_name 3AS table_full_name, pg_size_pretty(pg_total_relation_size(&#39;&#34;&#39; ||table_schema || …</p>
+1selectpg_size_pretty(pg_relation_size(&#39;table_name&#39;));方法二 ， …</p>
           <a href="https://www.zengxi.net/2020/06/pg_check_table_size/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
@@ -387,36 +418,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/05/manjaro_install_vmware/">Manjaro安装VMware Workstation</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    May 26, 2020</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
-    </a>
-    <a href='https://www.zengxi.net/tags/vmware' class="post_tag button button_translucent">vmware
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">安装VMware workstation
-1yay -S vmware-workstation 启动时候如果报错：Please make sure that the kernel module `vmmon’ is loaded. 则需要重新安装一下linux-headers，加载一下vmmon模块
-1# 先查看内核。返回值版本号格式为: A.B.C-D-MANJARO。示例： 5.2.8-1-MANJARO， 2uname -r 3 4# 安装 linux-headers。根据上面的内核版本来选择安装包，安装包名字为：linuxAB-headers 5sudo pacman -S linux52-headers 6 7# 加 …</p>
-          <a href="https://www.zengxi.net/2020/05/manjaro_install_vmware/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -500,6 +501,9 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/05/java8_default_method/" class="nav-link">Java 8新特性 - (4)默认方法</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/04/java8_method_references/" class="nav-link">Java 8新特性 - (3)方法引用</a>
       </li>
       <li>
@@ -519,9 +523,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/" class="nav-link">基于alpine构建docker镜像修改时区</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="nav-link">Manjaro升级后打印服务不可用</a>
       </li>
     </ul>
     <div>
@@ -549,7 +550,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
         
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">6</span>
+          <span class="button_tally">7</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -623,7 +624,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=6>JAVA<span class="button_tally">6</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
             </a>
             
             
@@ -713,7 +714,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">4</span>
+          <span class="button_tally">5</span>
         </a>
         
         
@@ -734,7 +735,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">7</span>
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
@@ -757,6 +758,11 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
           <span class="button_tally">4</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
+          <span class="button_tally">4</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
           JETTY
           <span class="button_tally">4</span>
@@ -770,11 +776,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
         <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
           SHELL
           <span class="button_tally">4</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
-          <span class="button_tally">3</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class="post_tag button button_translucent">
@@ -870,7 +871,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=8>JAVA<span class="button_tally">8</span>
             </a>
             
             
@@ -878,7 +879,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=3>JAVA-8<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=4>JAVA-8<span class="button_tally">4</span>
             </a>
             
             

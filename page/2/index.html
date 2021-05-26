@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="">
   <head>
-	<meta name="generator" content="Hugo 0.81.0" />
+	<meta name="generator" content="Hugo 0.83.1" />
 <title>保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -84,6 +84,7 @@
     <a href="https://www.zengxi.net/series/" class="nav_item">专栏 <img src='https://www.zengxi.net/icons/caret-icon.svg' alt="icon" class="nav_icon"></a>
     <div class="nav_sub">
       <span class="nav_child"></span>
+        <a href="https://www.zengxi.net/links/java_feature/" class="nav_child nav_item">Java各版本特性</a>
         <a href="https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/" class="nav_child nav_item">Kubernetes in Action笔记</a>
     </div>
   </div>
@@ -127,6 +128,38 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/02/java8_lambda/">Java 8新特性 - (1)Lambda表达式</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Feb 25, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
+    </a>
+    <a href='https://www.zengxi.net/tags/lambda' class="post_tag button button_translucent">lambda
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">为什么Java需要Lambda表达式? 在函数式编程语言中，函数是一等公民，它们可以独立存在，你可以将其赋值给一个变量，或将他们当做参数传给其他函数。JavaScript是最典型的函数式编程语言。函数式语言提供了一种强大的功能——闭包，相比于传统的编程方法有很多优势，闭包是一个可调用的对象，它记录了一些信息，这些信息来自于创建它的作用域。
+Java现在提供的最接近闭包的概念便是Lambda表达式，虽然闭包与Lambda表达式之间存在显著差别，但至少Lambda表达式是闭包很好的替代者。
+Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不同，但是又无限地接近闭包。在支持一类函数的语言中，Lambda 表达式的类型将是函 …</p>
+          <a href="https://www.zengxi.net/2021/02/java8_lambda/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -268,8 +301,7 @@
     </div>
       <div class="excerpt_footer">
         <div>
-          <p class="pale">在创建临时数据表的时候会有用
-1create table if not exists foo as (select * from bar) with no data; </p>
+          <p class="pale">在创建临时数据表的时候会有用</p>
           <a href="https://www.zengxi.net/2021/01/postgres_copy_table_schema/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
@@ -299,8 +331,7 @@
     </div>
       <div class="excerpt_footer">
         <div>
-          <p class="pale">由于业务的需要，在查询的时候，需要动态地在SQL语句中指定schema。在mybatis的的查询语句中，可以使用 ${schemaName}。注意，必须要用$, 而不是#
-1SET search_path TO ${schemaName}; 2 3select * from foo where bar = #{bar}; </p>
+          <p class="pale">由于业务的需要，在查询的时候，需要动态地在SQL语句中指定schema。在mybatis的的查询语句中，可以使用 ${schemaName}。注意，必须要用$, 而不是#</p>
           <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
@@ -394,33 +425,6 @@ pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management/">Kubernetes in Action笔记 - (16) 计算资源管理</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 3, 2021</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">为pod中的容器申请资源 创建一个pod时,可以指定容器对 CPU 和内存的资源请求量(即requests),以及资源限制量(即limits)。它是针对每个容器单独指定，pod对资源的请求量和限制量是所包含的所有容器的请求量和限制量之和。
-1apiVersion:v12kind:Pod3metadata:4name:requests-pod5spec:6containers:7- image:busybox8command:[&#34;dd&#34;,&#34;if=/dev/zero&#34;,&#34;of=/dev/null&#34;]9name:main10resources:11requests:12cpu:200m #  …</p>
-          <a href="https://www.zengxi.net/2021/01/k8s_computing_resource_management/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -492,6 +496,9 @@ pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/05/java8_default_method/" class="nav-link">Java 8新特性 - (4)默认方法</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/04/java8_method_references/" class="nav-link">Java 8新特性 - (3)方法引用</a>
       </li>
       <li>
@@ -511,9 +518,6 @@ pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/" class="nav-link">基于alpine构建docker镜像修改时区</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="nav-link">Manjaro升级后打印服务不可用</a>
       </li>
     </ul>
     <div>
@@ -541,7 +545,7 @@ pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制
         
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">6</span>
+          <span class="button_tally">7</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -615,7 +619,7 @@ pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=6>JAVA<span class="button_tally">6</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
             </a>
             
             
@@ -705,7 +709,7 @@ pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">4</span>
+          <span class="button_tally">5</span>
         </a>
         
         
@@ -726,7 +730,7 @@ pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">7</span>
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
@@ -749,6 +753,11 @@ pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制
           <span class="button_tally">4</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
+          <span class="button_tally">4</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
           JETTY
           <span class="button_tally">4</span>
@@ -762,11 +771,6 @@ pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制
         <a href='https://www.zengxi.net/tags/shell/' class="post_tag button button_translucent">
           SHELL
           <span class="button_tally">4</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
-          <span class="button_tally">3</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class="post_tag button button_translucent">
@@ -862,7 +866,7 @@ pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=8>JAVA<span class="button_tally">8</span>
             </a>
             
             
@@ -870,7 +874,7 @@ pod的横向自动伸缩 自动伸缩步骤 横向pod自动伸缩是指由控制
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=3>JAVA-8<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=4>JAVA-8<span class="button_tally">4</span>
             </a>
             
             

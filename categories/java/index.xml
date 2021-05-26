@@ -6,7 +6,21 @@
     <description>Recent content in Java on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 07 Apr 2021 13:01:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 26 May 2021 22:40:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 8新特性 - (4)默认方法</title>
+      <link>https://www.zengxi.net/2021/05/java8_default_method/</link>
+      <pubDate>Wed, 26 May 2021 22:40:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/05/java8_default_method/</guid>
+      <description>什么是默认方法 简单说，就是接口可以有实现方法，而且不需要实现类去实现其方法。只需在方法名前面加个default关键字即可。
+为什么要有默认方法 首先，之前的接口是个双刃剑，好处是面向抽象而不是面向具体编程，缺陷是，当需要修改接口时候，需要修改全部实现该接口的类，目前的java 8之前的集合框架没有foreach方法，通常能想到的解决办法是在JDK里给相关的接口添加新的方法及实现。然而，对于已经发布的版本，是没法在给接口添加新方法的同时不影响已有的实现。所以引进的默认方法。他们的目的是为了解决接口的修改与现有的实现不兼容的问题。
+简单的例子: 一个接口A，Clazz类实现了接口A。
+1public interface A { 2 default void foo(){ 3 System.out.println(&amp;#34;Calling A.foo()&amp;#34;); 4 } 5} 6 7public class Clazz implements A { 8 public static void main(String[] args){ 9 Clazz clazz = new Clazz(); 10 clazz.foo();//调用A.foo() 11 } 12} 代码是可以编译的，即使Clazz类并没有实现foo()方法。在接口A中提供了foo()方法的默认实现。
+java 8抽象类与接口对比 相同点  都是抽象类型； 都可以有实现方法（以前接口不行）； 都可以不需要实现类或者继承者去实现所有方法，（以前不行，现在接口中默认方法不需要实现者实现）  不同点  抽象类不可以多重继承，接口可以（无论是多重类型继承还是多重行为继承）； 抽象类和接口所反映出的设计理念不同。其实抽象类表示的是&amp;quot;is-a&amp;quot;关系，接口表示的是&amp;quot;like-a&amp;quot;关系； 接口中定义的变量默认是public static final 型，且必须给其初值，所以实现类中不能改变其值；抽象类中的变量默认是 friendly 型，其值可以在子类中重新定义，也可以重新赋值。  多重继承的冲突 观察以下代码，会出现编译错误：
+ java: class InterfaceC inherits unrelated defaults for f() from types InterfaceA and InterfaceB</description>
+    </item>
+    
     <item>
       <title>Java 8新特性 - (3)方法引用</title>
       <link>https://www.zengxi.net/2021/04/java8_method_references/</link>

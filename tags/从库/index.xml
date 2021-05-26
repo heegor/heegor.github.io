@@ -18,7 +18,7 @@
 从库中删除数据库，再创建一个空的数据库 由于表结构的改变，原先的数据都不能用了，需要重新同步。创建新的空数据库是最快的方式
 从库中导入最新的表结构 在 provider 上导出结构数据
 1sudo -iu postgres pg_dumpall --schema-only -f dump.sql 在 subscriber 上导入结构数据
-1sudo -iu postgres psql -f dump.sql 从库上创建pglogical扩展 1mydb=# CREATE EXTENSION pglogical; 从库上创建逻辑复制节点 1-- host 填的是subscriber的IP 2mydb=# SELECT pglogical.create_node(node_name := &amp;#39;subscriber&amp;#39;, dsn := &amp;#39;host=10.1.10.22 port=5432 dbname=mydb&amp;#39;); 从库上创建逻辑复制订阅端 1-- host 填的是provider的IP 2mydb=# SELECT pglogical.create_subscription( subscription_name := &amp;#39;subscriber&amp;#39;, provider_dsn := &amp;#39;host=10.1.10.6 port=5432 dbname=mydb&amp;#39;); 在主库上检查复制状态 1select * from pg_stat_replication; </description>
+1sudo -iu postgres psql -f dump.sql 从库上创建pglogical扩展 1mydb=#CREATEEXTENSIONpglogical;从库上创建逻辑复制节点 1-- host 填的是subscriber的IP 2mydb=#SELECTpglogical.create_node(node_name:=&amp;#39;subscriber&amp;#39;,dsn:=&amp;#39;host=10.1.10.22 port=5432 dbname=mydb&amp;#39;);从库上创建逻辑复制订阅端 1-- host 填的是provider的IP 2mydb=#SELECTpglogical.create_subscription(subscription_name:=&amp;#39;subscriber&amp;#39;,provider_dsn:=&amp;#39;host=10.1.10.6 port=5432 dbname=mydb&amp;#39;);在主库上检查复制状态 1select*frompg_stat_replication;</description>
     </item>
     
   </channel>
