@@ -52,7 +52,7 @@
   
     
   
-  <body data-code="7" data-lines="false" id="documentTop">
+  <body data-code="10" data-lines="false" id="documentTop">
 
 <header class="nav_header" >
   <nav class="nav">
@@ -124,6 +124,36 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/">Java 8新特性 - (5)重复注解</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    May 27, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在JDK8之前，不能使用重复注解的，即某个位置相同注解只能出现一次。
+如果想编写一个定时任务的注解，使用者可以配置在每天哪一小时触发，而且允许用户配置多个时间。传统做法是：
+1@Target(ElementType.TYPE) 2@Retention(RetentionPolicy.RUNTIME) 3public @interface TraditionalAnnoSchedule { 4 int[] hour() default {0}; 5} 6 7@TraditionalAnnoSchedule(hour = {0, 8, 12}) 8public class Target { 9 public static void …</p>
+          <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -322,6 +352,9 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/" class="nav-link">Java 8新特性 - (5)重复注解</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/05/java8_default_method/" class="nav-link">Java 8新特性 - (4)默认方法</a>
       </li>
       <li>
@@ -341,9 +374,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="nav-link">配置Nginx支持长轮询</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/" class="nav-link">基于alpine构建docker镜像修改时区</a>
       </li>
     </ul>
     <div>
@@ -371,7 +401,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
         
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">7</span>
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -445,7 +475,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=8>JAVA<span class="button_tally">8</span>
             </a>
             
             
@@ -535,7 +565,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">5</span>
+          <span class="button_tally">6</span>
         </a>
         
         
@@ -556,12 +586,17 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">8</span>
+          <span class="button_tally">9</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
           MANJARO
           <span class="button_tally">6</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
+          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -576,11 +611,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
         
         <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">4</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
           <span class="button_tally">4</span>
         </a>
         
@@ -692,7 +722,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=8>JAVA<span class="button_tally">8</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=9>JAVA<span class="button_tally">9</span>
             </a>
             
             
@@ -700,7 +730,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=4>JAVA-8<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=5>JAVA-8<span class="button_tally">5</span>
             </a>
             
             

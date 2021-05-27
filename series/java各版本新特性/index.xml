@@ -6,7 +6,19 @@
     <description>Recent content in Java各版本新特性 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 26 May 2021 22:40:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 May 2021 10:30:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 8新特性 - (5)重复注解</title>
+      <link>https://www.zengxi.net/2021/05/java8_repeating_annotations/</link>
+      <pubDate>Thu, 27 May 2021 10:30:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/05/java8_repeating_annotations/</guid>
+      <description>在JDK8之前，不能使用重复注解的，即某个位置相同注解只能出现一次。
+如果想编写一个定时任务的注解，使用者可以配置在每天哪一小时触发，而且允许用户配置多个时间。传统做法是：
+1@Target(ElementType.TYPE) 2@Retention(RetentionPolicy.RUNTIME) 3public @interface TraditionalAnnoSchedule { 4 int[] hour() default {0}; 5} 6 7@TraditionalAnnoSchedule(hour = {0, 8, 12}) 8public class Target { 9 public static void main(String[] args) { 10 TraditionalAnnoSchedule[] annotations = Target.class.getAnnotationsByType(TraditionalAnnoSchedule.class); 11 for (TraditionalAnnoSchedule each : annotations) { 12 System.out.println(Arrays.toString(each.hour())); 13 } 14 } 15} 使用JDK8的重复注解特性改造一下。
+1@Target(ElementType.TYPE) 2@Retention(RetentionPolicy.RUNTIME) 3public @interface Schedules { 4 Schedule[] value(); 5} 6 7// JDK8新增的@Repeatable 8@Repeatable(Schedules.class) 9public @interface Schedule { 10 int hour() default 0; 11} 12 13@Schedule(hour = 0) 14@Schedule(hour = 8) 15@Schedule(hour = 12) 16public class Target { 17 public static void main(String[] args) { 18 // 推荐的方式 19 Schedule[] annotations = Target.</description>
+    </item>
+    
     <item>
       <title>Java 8新特性 - (4)默认方法</title>
       <link>https://www.zengxi.net/2021/05/java8_default_method/</link>

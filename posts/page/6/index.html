@@ -52,7 +52,7 @@
   
     
   
-  <body data-code="7" data-lines="false" id="documentTop">
+  <body data-code="10" data-lines="false" id="documentTop">
 
 <header class="nav_header" >
   <nav class="nav">
@@ -124,6 +124,36 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/">terraform中阿里云ECS ssh key变化问题</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 23, 2020</span>
+    <a href='https://www.zengxi.net/tags/terraform' class="post_tag button button_translucent">terraform
+    </a>
+    <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91' class="post_tag button button_translucent">阿里云
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">目前的terraform脚本中，在新建阿里云ECS的时候，会通过 user_data 属性值来设定初始的ssh key。但是这个就存在一个隐患，如果将来想要改变初始的ssh key，再用terraform来推机器的时候，terraform发现user_data属性值发生变化，会删除现有的ECS并重建。
+解决的方法是，修改ECS的lifecycle，将user_data添加到忽略列表中。这样terraform就可以忽略掉该属性值的变化。
+1{ 2 resource &#34;alicloud_instance&#34; &#34;test_instance&#34; { 3 ... 4 5 lifecycle { 6 …</p>
+          <a href="https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -388,36 +418,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/">Spring Quartz 指定Scheduler Name</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    May 31, 2020</span>
-    <a href='https://www.zengxi.net/tags/spring' class="post_tag button button_translucent">spring
-    </a>
-    <a href='https://www.zengxi.net/tags/quartz' class="post_tag button button_translucent">quartz
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">当前项目使用quartz与spring来做基于数据库的集群化任务调度，但是在实际使用过程发现同一个scheduler中，不同group之间任务调度可能会相互跑串。当前项目中使用的 quartz-scheduler 版本 2.3.1， spring 版本 3.2.18.RELEASE。
-举个例子，配置是这样的, 下面示例中隐去不重要的配置
-1&lt;bean id=&#34;my-cluster-scheduler&#34; 2 class=&#34;org.springframework.scheduling.quartz.SchedulerFactoryBean&#34; 3 …</p>
-          <a href="https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -501,6 +501,9 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/" class="nav-link">Java 8新特性 - (5)重复注解</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/05/java8_default_method/" class="nav-link">Java 8新特性 - (4)默认方法</a>
       </li>
       <li>
@@ -520,9 +523,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="nav-link">配置Nginx支持长轮询</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/" class="nav-link">基于alpine构建docker镜像修改时区</a>
       </li>
     </ul>
     <div>
@@ -550,7 +550,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
         
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">7</span>
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -624,7 +624,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=7>JAVA<span class="button_tally">7</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=8>JAVA<span class="button_tally">8</span>
             </a>
             
             
@@ -714,7 +714,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">5</span>
+          <span class="button_tally">6</span>
         </a>
         
         
@@ -735,12 +735,17 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">8</span>
+          <span class="button_tally">9</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
           MANJARO
           <span class="button_tally">6</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
+          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -755,11 +760,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
         
         <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">4</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
           <span class="button_tally">4</span>
         </a>
         
@@ -871,7 +871,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=8>JAVA<span class="button_tally">8</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=9>JAVA<span class="button_tally">9</span>
             </a>
             
             
@@ -879,7 +879,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=4>JAVA-8<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=5>JAVA-8<span class="button_tally">5</span>
             </a>
             
             
