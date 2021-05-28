@@ -3,33 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.zengxi.net/</loc>
-    <lastmod>2021-05-27T10:30:00+08:00</lastmod>
+    <lastmod>2021-05-28T18:45:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/categories/</loc>
-    <lastmod>2021-05-27T10:30:00+08:00</lastmod>
+    <lastmod>2021-05-28T18:45:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/categories/java/</loc>
-    <lastmod>2021-05-27T10:30:00+08:00</lastmod>
+    <lastmod>2021-05-28T18:45:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/java/</loc>
-    <lastmod>2021-05-27T10:30:00+08:00</lastmod>
+    <lastmod>2021-05-28T18:45:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/java-8/</loc>
-    <lastmod>2021-05-27T10:30:00+08:00</lastmod>
+    <lastmod>2021-05-28T18:45:00+08:00</lastmod>
   </url><url>
-    <loc>https://www.zengxi.net/2021/05/java8_repeating_annotations/</loc>
-    <lastmod>2021-05-27T10:30:00+08:00</lastmod>
+    <loc>https://www.zengxi.net/2021/05/java8_method_parameter_reflection/</loc>
+    <lastmod>2021-05-28T18:45:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/</loc>
-    <lastmod>2021-05-27T10:30:00+08:00</lastmod>
+    <lastmod>2021-05-28T18:45:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/posts/</loc>
-    <lastmod>2021-05-27T10:30:00+08:00</lastmod>
+    <lastmod>2021-05-28T18:45:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/series/</loc>
-    <lastmod>2021-05-27T10:30:00+08:00</lastmod>
+    <lastmod>2021-05-28T18:45:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/</loc>
+    <lastmod>2021-05-28T18:45:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/2021/05/java8_type_inference/</loc>
+    <lastmod>2021-05-28T18:05:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/2021/05/java8_type_annotation/</loc>
+    <lastmod>2021-05-28T12:48:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/2021/05/java8_repeating_annotations/</loc>
     <lastmod>2021-05-27T10:30:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2021/05/java8_default_method/</loc>

@@ -132,6 +132,95 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/">MyBatis查询中动态指定schema</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 25, 2021</span>
+    <a href='https://www.zengxi.net/tags/mybatis' class="post_tag button button_translucent">mybatis
+    </a>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+    <a href='https://www.zengxi.net/tags/schema' class="post_tag button button_translucent">schema
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">由于业务的需要，在查询的时候，需要动态地在SQL语句中指定schema。在mybatis的的查询语句中，可以使用 ${schemaName}。注意，必须要用$, 而不是#</p>
+          <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/">Manjaro设置默认Java版本</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 20, 2021</span>
+    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">如果本机装了多个java版本，会有一个默认的java版本。随着java版本的不断升级，一些新的工具会要求高版本的java，否则无法运行。这个时候，就需要修改默认的java版本。
+查看当前的java版本
+1$ java -version 2openjdk version &#34;11.0.10&#34; 2021-01-19 3OpenJDK Runtime Environment (build 11.0.10+8) 4OpenJDK 64-Bit Server VM (build 11.0.10+8, mixed mode) 命令查看已安装的java版本
+1$ archlinux-java status 2 3Available …</p>
+          <a href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/01/k8s_advanced_scheduling/">Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 5, 2021</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">使用污点和容忍度阻止节点调度到特定节点 污点和容忍度 污点是在不修改已有pod信息的前提下,通过在节点上添加污点信息,来拒绝pod在某些节点上的部署。
+只有当一个pod容忍某个节点的污点, 这个pod才能被调度到该节点。
+可以通过kubectl describe node查看节点的污点信息，在返回结果的Taints字段值中；可以通过kubectl describe po查看pod的污点容忍度，在返回结果的Tolerations字段值中。
+每一个污点都可以关联一个效果, 效果包含了以下三种:
+ NoSchedule：表示如果pod没有容忍这些污点, pod则不能被调度到包含这些污点的节点上。 PreferNoSchedule：它 …</p>
+          <a href="https://www.zengxi.net/2021/01/k8s_advanced_scheduling/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/01/k8s_pod_auto_scaling/">Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</a>
       </h3>
       <div class="post_meta">
@@ -328,95 +417,6 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_config_map_secret/">Kubernetes in Action笔记 - (10) 使用ConfigMap与Secret传递应用配置</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 25, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-    <a href='https://www.zengxi.net/tags/configmap' class="post_tag button button_translucent">configmap
-    </a>
-    <a href='https://www.zengxi.net/tags/secret' class="post_tag button button_translucent">secret
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">向容器传递应用程序的配置参数 方法：
- 向容器传递命令行参数 为每个容器设置自定义环境变量 通过特殊类型的卷将配置文件挂载到容器中  向容器传递命令行参数 在Docker中定义命令与参数 容器中运行的完整指令由两部分组成:命令与参数。Dockerfile中的两种指令分别定义命令与参数这两个部分：
- ENTRYPOINT: 定义容器启动时被调用的可执行程序 CMD: 指定传递给ENTRYPOINT的参数。  尽管可以直接使用CMD指令指定镜像运行时想要执行的命令, 正确的做法依旧 是借助ENTRYPOINT指令, 仅仅用CMD指定所需的默认参数。 这样, 镜像可以直 接运行, 无须添加任何参数
-1docker run …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_config_map_secret/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_volume/">Kubernetes in Action笔记 - (9) 卷</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 22, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">卷 卷是 pod 的一个组成部分，不是独立的 Kubernetes 对象, 不能单独创建或删除。 pod 中的所有容器都可以使用卷, 但必须先将它挂载在每个需要访问它的容器中。
-卷类型 主要类型：
- emptyDir:用于存储临时数据的简单空目录。 hostPath: 用于将目录从工作节点的文件系统挂载到pod中 gitRepo: 通过检出Git仓库的内容来初始化的卷 nfs: 挂载到pod中的NFS共享卷 用于挂载云服务商提供的特定存储类型。比如，gcePersistentDi sk (Google 高效能型存储磁盘卷)、 awsElasticBlockStore (AmazonWeb 服务弹性块存储卷)、 azureDisk …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_service/">Kubernetes in Action笔记 - (8) 服务、Endpoint、Ingress</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 20, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">什么是服务 服务是一种为一组功能相同的 pod 提供单 一 不变的接入点的资源。当服务存在时,它的 IP 地址和端口不会改变
-为什么需要服务 pod 的存在是短暂的,一个 pod 可能会在任何时候消失, 或许因为它所在节点发生故障, 或许因为有人删除了 pod, 或者因为 pod 被从一个健康的节点剔除了。 当其中任何一种情况发生时, 消失的 pod 将被ReplicationController 替换为新的 pod。 新的 pod 与替换它的 pod 具有不同的 IP 地址。
-这就是需要服务的地方，解决不断变化的 pod IP 地址的问题, 以及在一个固定的IP和端口对上对外暴露多个 pod。当一个服务被创建时, 它会得到一个静态 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_service/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -441,13 +441,13 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
     <span aria-hidden="true">&nbsp;&hellip;&nbsp;</span>
   </li>
   <li class="page-item">
-    <a class="page-link" href="/page/9/">9</a>
+    <a class="page-link" href="/page/10/">10</a>
   </li>
   <li class="page-item">
     <a href="/page/4/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
   </li>
   <li class="page-item">
-    <a href="/page/9/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <a href="/page/10/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
   </li>
 </ul>
 
@@ -491,6 +491,15 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/05/java8_method_parameter_reflection/" class="nav-link">Java 8新特性 - (8)方法参数反射</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/05/java8_type_inference/" class="nav-link">Java 8新特性 - (7)泛型的类型推断</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/05/java8_type_annotation/" class="nav-link">Java 8新特性 - (6)类型注解</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/" class="nav-link">Java 8新特性 - (5)重复注解</a>
       </li>
       <li>
@@ -505,15 +514,6 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
       <li>
         <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="nav-link">CXF记录WebService的soap日志</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/" class="nav-link">设置周日为一个星期的第一天</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/jetty_session_remove_node_name/" class="nav-link">删除Jetty中session ID的node名称</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="nav-link">配置Nginx支持长轮询</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -521,6 +521,11 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
           <span class="button_tally">18</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">11</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -536,11 +541,6 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
         <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class="post_tag button button_translucent">
           系统优化那些事
           <span class="button_tally">9</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -614,7 +614,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=8>JAVA<span class="button_tally">8</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=11>JAVA<span class="button_tally">11</span>
             </a>
             
             
@@ -704,7 +704,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">6</span>
+          <span class="button_tally">9</span>
         </a>
         
         
@@ -718,24 +718,24 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
           <span class="button_tally">18</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">12</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
           POSTGRES
           <span class="button_tally">12</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">9</span>
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
           MANJARO
           <span class="button_tally">6</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
-          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -861,7 +861,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=9>JAVA<span class="button_tally">9</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=12>JAVA<span class="button_tally">12</span>
             </a>
             
             
@@ -869,7 +869,7 @@ Downward API可以给在pod中运行的进程暴露pod的元数据。目前可�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=5>JAVA-8<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=8>JAVA-8<span class="button_tally">8</span>
             </a>
             
             

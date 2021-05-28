@@ -132,6 +132,91 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/06/pg_check_table_size/">转: postgresql 查看单个表大小</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 15, 2020</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">原文链接：https://blog.csdn.net/kmust20093211/article/details/47616345
+方法一 ，查某个表
+1selectpg_size_pretty(pg_relation_size(&#39;table_name&#39;));方法二 ， …</p>
+          <a href="https://www.zengxi.net/2020/06/pg_check_table_size/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/06/pg_wale_continuous_archiving/">postgres增量备份工具：wal-e</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 9, 2020</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+    <a href='https://www.zengxi.net/tags/wal-e' class="post_tag button button_translucent">wal-e
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">wal-e这个工具可以用来给postgres数据库做基础备份与增量备份，这个对数据库容灾很有帮助。目前它支持将备份存储到AWS S3，Azure Blob Store与Google Storage等。
+一些基本概念 Base Backup 也称为热备份，它不会中断PostgreSQL中任何事务。一旦启动了basebackup，它将等待一个checkpoint。如果到达了checkpoint，那么它将把整个数据目录复制到一个文件中。这些备份将会是replication或POINT IN TIME恢复的起点。通常，basebackup是不一致的，可能包含已经损坏的数据。这时，就需要用到WAL文件
+WAL 通过WAL文件可以获得数据库内所 …</p>
+          <a href="https://www.zengxi.net/2020/06/pg_wale_continuous_archiving/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/06/string_adapter/">用string adapter来解决系统接口对接中发现的空值验证问题</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 1, 2020</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">客户用的是很旧版本的ERP系统，在与客户系统做接口对接的时候发现了一个问题。假设接口请求需要的body是xml格式的，共有三个字段：name, mobile, email。由于客户ERP系统比较老，如果某个字段没有值，传的是空字符串，而不是将该字段在请求消息体中隐藏。客户发的请求类似下面的例子：
+1&lt;xml&gt; 2 &lt;name&gt;John&lt;/name&gt; 3 &lt;mobile&gt;13800138000&lt;/mobile&gt; 4 &lt;email&gt;&lt;/email&gt; 5&lt;/xml&gt; 由于历史遗留问题， …</p>
+          <a href="https://www.zengxi.net/2020/06/string_adapter/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/">Spring Quartz 指定Scheduler Name</a>
       </h3>
       <div class="post_meta">
@@ -335,94 +420,6 @@ Alpine 的源文件为/etc/apk/repositories。默认的配置类似：
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/01/postgres-frequently-used-commands/">转: Postgres数据库DBA常用命令</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 27, 2020</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">原作者：廖学强 原文链接：点击这里   查看帮助命令
-1DB=#help--总的帮助 23DB=#\h--SQL commands级的帮助 45DB=#\?--psql commands级的帮助 按列显示，类似mysql的\G
-1DB=# \x 2 3Expanded display is on. 查看DB安装目录(最好root用户执行)
-1find / -name initdb 查看有多少DB实例在运行(最好root用户执行)
-1find / -name postgresql.conf 查看DB版本
-1cat$PGDATA/PG_VERSION23psql--version …</p>
-          <a href="https://www.zengxi.net/2020/01/postgres-frequently-used-commands/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/01/manage-distribution-session-by-id/">根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 26, 2020</span>
-    <a href='https://www.zengxi.net/tags/session' class="post_tag button button_translucent">session
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F' class="post_tag button button_translucent">分布式
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">背景 由于历史原因，原先的界面是用vaadin框架来实现。但是这个框架不适合互联网的分布式系统，正在逐步用目前主流的前端框架重写各个模块，把旧的vaadin页面替换掉。在替换过程中，新老界面并存。
-vaadin界面的servlet，每次都会判断请求中的session id值，如果在服务器中找不到对应这个id的session，就会重新生成一个。由于session id是在新界面登录的时候生成的，当点击链接从新界面跳转到vaadin界面的时候，vaadin服务会发现没有这个session id，就会重新生成一个新的session。换句话说，新老界面会有各自的session id。当然，分布式系统本来就有这个问题，可以采用分布 …</p>
-          <a href="https://www.zengxi.net/2020/01/manage-distribution-session-by-id/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/">Mac 检查附近wifi所使用的信道</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 24, 2020</span>
-    <a href='https://www.zengxi.net/tags/wifi' class="post_tag button button_translucent">wifi
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">信道，也称作通道或频段，是以无线信号作为传输载体的数据信号传送通道。2.4G频段的工作频率为2.4-2.4835GHz，这83.5MHz频带划分为13个信道，各信道中心频率相差5MHz，向上向下分别扩展11MHz，信道带宽22MHz。中国采用欧洲/ETSI标准，使用1-13信道。
-相近无线路由器采用相同或重叠信道会形成信道竞争关系，相互影响无线链路质量，为了有效避免信道重叠造成的相互干扰，相近无线路由器应选择互不重叠的信道工作。
-早期无线路由器出厂时预设相同的信道（大多为6），因用户很少会修改信道，从而导致相互影响的情况。随着无线应用的迅速普及，无线路由器增加了信道自动选择功能，在设备启动时检测周围无线信道分布情况，选择最佳信道工 …</p>
-          <a href="https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -452,14 +449,17 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
   <li class="page-item">
     <a class="page-link" href="/page/8/">8</a>
   </li>
+  <li class="page-item disabled">
+    <span aria-hidden="true">&nbsp;&hellip;&nbsp;</span>
+  </li>
   <li class="page-item">
-    <a class="page-link" href="/page/9/">9</a>
+    <a class="page-link" href="/page/10/">10</a>
   </li>
   <li class="page-item">
     <a href="/page/8/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
   </li>
   <li class="page-item">
-    <a href="/page/9/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <a href="/page/10/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
   </li>
 </ul>
 
@@ -503,6 +503,15 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/05/java8_method_parameter_reflection/" class="nav-link">Java 8新特性 - (8)方法参数反射</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/05/java8_type_inference/" class="nav-link">Java 8新特性 - (7)泛型的类型推断</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/05/java8_type_annotation/" class="nav-link">Java 8新特性 - (6)类型注解</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/" class="nav-link">Java 8新特性 - (5)重复注解</a>
       </li>
       <li>
@@ -517,15 +526,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       <li>
         <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="nav-link">CXF记录WebService的soap日志</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/" class="nav-link">设置周日为一个星期的第一天</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/jetty_session_remove_node_name/" class="nav-link">删除Jetty中session ID的node名称</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="nav-link">配置Nginx支持长轮询</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -533,6 +533,11 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
           <span class="button_tally">18</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">11</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -548,11 +553,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class="post_tag button button_translucent">
           系统优化那些事
           <span class="button_tally">9</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -626,7 +626,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=8>JAVA<span class="button_tally">8</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=11>JAVA<span class="button_tally">11</span>
             </a>
             
             
@@ -716,7 +716,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">6</span>
+          <span class="button_tally">9</span>
         </a>
         
         
@@ -730,24 +730,24 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <span class="button_tally">18</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">12</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
           POSTGRES
           <span class="button_tally">12</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">9</span>
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
           MANJARO
           <span class="button_tally">6</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
-          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -873,7 +873,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=9>JAVA<span class="button_tally">9</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=12>JAVA<span class="button_tally">12</span>
             </a>
             
             
@@ -881,7 +881,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=5>JAVA-8<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=8>JAVA-8<span class="button_tally">8</span>
             </a>
             
             

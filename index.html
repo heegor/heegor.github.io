@@ -132,6 +132,98 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/05/java8_method_parameter_reflection/">Java 8新特性 - (8)方法参数反射</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    May 28, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">方法的参数名，在很多时候我们是需要反射得到的。但是在java8之前，代码编译为class文件后，方法参数的类型是固定的，但参数名称却丢失了，这和动态语言严重依赖参数名称形成了鲜明对比。（java是静态语言，所以入参名称叫什么其实无所谓的）。虽然名称无所谓，但很多时候，我们需要此名称来做更好的安排.
+比如mybatis的Dao层接口方法，需要特意用个注解@Param来显示标识出参数名。所以java8来了，带来的新特性解决了这一问题。
+获取方法参数名称有3种方法：
+采用javassit包获取 很麻烦，参考其他网上文章
+通过spring的LocalVariableTableParameterNameDiscoverer 1public …</p>
+          <a href="https://www.zengxi.net/2021/05/java8_method_parameter_reflection/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/05/java8_type_inference/">Java 8新特性 - (7)泛型的类型推断</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    May 28, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">泛型简介 泛型由Java 1.5引入，泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。通俗点将就是“类型的变量”。这种类型变量可以用在类、接口和方法的创建中。理解Java泛型最简单的方法是把它看成一种便捷语法，能节省某些Java类型转换(casting)上的操作.
+泛型的最大优点是提供了程序的类型安全同时可以向后兼容，但也有尴尬的地方，就是每次定义时都要写明泛型的类型，这样显示指定不仅感觉有些冗长。Java 7中对泛型做了改进，编译器会根据变量声明时的泛型类型自动推断.
+1// Java 7之前的写法 2Map&lt;String, String&gt; myMap = new HashMap&lt;String, …</p>
+          <a href="https://www.zengxi.net/2021/05/java8_type_inference/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/05/java8_type_annotation/">Java 8新特性 - (6)类型注解</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    May 28, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">什么是类型注解 在java 8之前，注解只能是在声明的地方所使用，比如类，方法，属性；从java 8开始，注解可以应用在任何地方。但是需要注意的是，类型注解只是语法而不是语义，并不会影响java的编译时间，加载时间，以及运行时间，也就是说，编译成class文件的时候并不包含类型注解。换句话说，仅提供定义这些类型的注释的功能，然后由框架和工具开发者来实际上使用它们。
+主要的场景：
+ 创建类实例：  1new @Interned MyObject(); 类型定义：  1@NotNull String str1 = ... 2@Email String str2 = ... 类型转换：  1myString = (@NonNull …</p>
+          <a href="https://www.zengxi.net/2021/05/java8_type_annotation/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/">Java 8新特性 - (5)重复注解</a>
       </h3>
       <div class="post_meta">
@@ -338,97 +430,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/">配置Nginx支持长轮询</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Mar 25, 2021</span>
-    <a href='https://www.zengxi.net/tags/nginx' class="post_tag button button_translucent">nginx
-    </a>
-    <a href='https://www.zengxi.net/tags/%E9%95%BF%E8%BD%AE%E8%AF%A2' class="post_tag button button_translucent">长轮询
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">某些web应用需要使用到长轮询，在Nginx中需要添加配置来支持。比如说vaadin界面，如果没有做一些额外的配置，使用nginx做反向代理，会出现页面一直在加载的问题
-首先需要在http中添加map块
-1map $http_upgrade $connection_upgrade { 2 default Upgrade; 3 &#39;&#39; close; 4} 然后在location中添加下面的配置，使用刚才定义的内容
-1location /chat { 2 proxy_pass https://192.168.67.100:8443/chatapi; 3 proxy_http_version 1.1; 4 …</p>
-          <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/">基于alpine构建docker镜像修改时区</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Mar 25, 2021</span>
-    <a href='https://www.zengxi.net/tags/docker' class="post_tag button button_translucent">docker
-    </a>
-    <a href='https://www.zengxi.net/tags/alpine' class="post_tag button button_translucent">alpine
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">默认apline镜像没有安装时区, 即使把宿主机的/etc/localtime 挂在到镜像中也无法把时区改成 GMT+8的.
-这个就只能在构建镜像的时候,安装并设置一下时区
-1RUN apk add tzdata \ 2&amp;&amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \ 3&amp;&amp; echo &#34;Asia/Shanghai&#34; &gt; /etc/timezone </p>
-          <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/">Manjaro升级后打印服务不可用</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Mar 16, 2021</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
-    </a>
-    <a href='https://www.zengxi.net/tags/%E6%89%93%E5%8D%B0%E6%9C%BA' class="post_tag button button_translucent">打印机
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">Manjaro升级到某个版本后，在系统设置中，查看打印机，显示“打印机服务不可用，错误的文件描述符“。
-其中一个原因是CUPS（Common UNIX Printing System）打印管理服务未启动。可以用下面的方法来解决：
-1# 启动服务，保证本次登录打印机可用 2sudo systemctl start cups.service 3 4# 设置开启启动 5sudo systemctl enable cups.service </p>
-          <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -450,13 +451,13 @@
     <span aria-hidden="true">&nbsp;&hellip;&nbsp;</span>
   </li>
   <li class="page-item">
-    <a class="page-link" href="/page/9/">9</a>
+    <a class="page-link" href="/page/10/">10</a>
   </li>
   <li class="page-item">
     <a href="/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
   </li>
   <li class="page-item">
-    <a href="/page/9/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <a href="/page/10/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
   </li>
 </ul>
 
@@ -500,6 +501,15 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/05/java8_method_parameter_reflection/" class="nav-link">Java 8新特性 - (8)方法参数反射</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/05/java8_type_inference/" class="nav-link">Java 8新特性 - (7)泛型的类型推断</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/05/java8_type_annotation/" class="nav-link">Java 8新特性 - (6)类型注解</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/" class="nav-link">Java 8新特性 - (5)重复注解</a>
       </li>
       <li>
@@ -514,15 +524,6 @@
       <li>
         <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="nav-link">CXF记录WebService的soap日志</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/" class="nav-link">设置周日为一个星期的第一天</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/jetty_session_remove_node_name/" class="nav-link">删除Jetty中session ID的node名称</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="nav-link">配置Nginx支持长轮询</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -530,6 +531,11 @@
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
           <span class="button_tally">18</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">11</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -545,11 +551,6 @@
         <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class="post_tag button button_translucent">
           系统优化那些事
           <span class="button_tally">9</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -623,7 +624,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=8>JAVA<span class="button_tally">8</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=11>JAVA<span class="button_tally">11</span>
             </a>
             
             
@@ -713,7 +714,7 @@
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">6</span>
+          <span class="button_tally">9</span>
         </a>
         
         
@@ -727,24 +728,24 @@
           <span class="button_tally">18</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">12</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
           POSTGRES
           <span class="button_tally">12</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">9</span>
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
           MANJARO
           <span class="button_tally">6</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
-          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -870,7 +871,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=9>JAVA<span class="button_tally">9</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=12>JAVA<span class="button_tally">12</span>
             </a>
             
             
@@ -878,7 +879,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=5>JAVA-8<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=8>JAVA-8<span class="button_tally">8</span>
             </a>
             
             

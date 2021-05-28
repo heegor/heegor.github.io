@@ -128,6 +128,97 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/">配置Nginx支持长轮询</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Mar 25, 2021</span>
+    <a href='https://www.zengxi.net/tags/nginx' class="post_tag button button_translucent">nginx
+    </a>
+    <a href='https://www.zengxi.net/tags/%E9%95%BF%E8%BD%AE%E8%AF%A2' class="post_tag button button_translucent">长轮询
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">某些web应用需要使用到长轮询，在Nginx中需要添加配置来支持。比如说vaadin界面，如果没有做一些额外的配置，使用nginx做反向代理，会出现页面一直在加载的问题
+首先需要在http中添加map块
+1map $http_upgrade $connection_upgrade { 2 default Upgrade; 3 &#39;&#39; close; 4} 然后在location中添加下面的配置，使用刚才定义的内容
+1location /chat { 2 proxy_pass https://192.168.67.100:8443/chatapi; 3 proxy_http_version 1.1; 4 …</p>
+          <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/">基于alpine构建docker镜像修改时区</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Mar 25, 2021</span>
+    <a href='https://www.zengxi.net/tags/docker' class="post_tag button button_translucent">docker
+    </a>
+    <a href='https://www.zengxi.net/tags/alpine' class="post_tag button button_translucent">alpine
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">默认apline镜像没有安装时区, 即使把宿主机的/etc/localtime 挂在到镜像中也无法把时区改成 GMT+8的.
+这个就只能在构建镜像的时候,安装并设置一下时区
+1RUN apk add tzdata \ 2&amp;&amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \ 3&amp;&amp; echo &#34;Asia/Shanghai&#34; &gt; /etc/timezone </p>
+          <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/">Manjaro升级后打印服务不可用</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Mar 16, 2021</span>
+    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
+    </a>
+    <a href='https://www.zengxi.net/tags/%E6%89%93%E5%8D%B0%E6%9C%BA' class="post_tag button button_translucent">打印机
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">Manjaro升级到某个版本后，在系统设置中，查看打印机，显示“打印机服务不可用，错误的文件描述符“。
+其中一个原因是CUPS（Common UNIX Printing System）打印管理服务未启动。可以用下面的方法来解决：
+1# 启动服务，保证本次登录打印机可用 2sudo systemctl start cups.service 3 4# 设置开启启动 5sudo systemctl enable cups.service </p>
+          <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/03/java8_stream_api/">Java 8新特性 - (2)Stream API</a>
       </h3>
       <div class="post_meta">
@@ -335,95 +426,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/">MyBatis查询中动态指定schema</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 25, 2021</span>
-    <a href='https://www.zengxi.net/tags/mybatis' class="post_tag button button_translucent">mybatis
-    </a>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-    <a href='https://www.zengxi.net/tags/schema' class="post_tag button button_translucent">schema
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">由于业务的需要，在查询的时候，需要动态地在SQL语句中指定schema。在mybatis的的查询语句中，可以使用 ${schemaName}。注意，必须要用$, 而不是#</p>
-          <a href="https://www.zengxi.net/2021/01/mybatis_set_schema/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/">Manjaro设置默认Java版本</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 20, 2021</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">如果本机装了多个java版本，会有一个默认的java版本。随着java版本的不断升级，一些新的工具会要求高版本的java，否则无法运行。这个时候，就需要修改默认的java版本。
-查看当前的java版本
-1$ java -version 2openjdk version &#34;11.0.10&#34; 2021-01-19 3OpenJDK Runtime Environment (build 11.0.10+8) 4OpenJDK 64-Bit Server VM (build 11.0.10+8, mixed mode) 命令查看已安装的java版本
-1$ archlinux-java status 2 3Available …</p>
-          <a href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/01/k8s_advanced_scheduling/">Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 5, 2021</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">使用污点和容忍度阻止节点调度到特定节点 污点和容忍度 污点是在不修改已有pod信息的前提下,通过在节点上添加污点信息,来拒绝pod在某些节点上的部署。
-只有当一个pod容忍某个节点的污点, 这个pod才能被调度到该节点。
-可以通过kubectl describe node查看节点的污点信息，在返回结果的Taints字段值中；可以通过kubectl describe po查看pod的污点容忍度，在返回结果的Tolerations字段值中。
-每一个污点都可以关联一个效果, 效果包含了以下三种:
- NoSchedule：表示如果pod没有容忍这些污点, pod则不能被调度到包含这些污点的节点上。 PreferNoSchedule：它 …</p>
-          <a href="https://www.zengxi.net/2021/01/k8s_advanced_scheduling/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -445,13 +447,13 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
     <span aria-hidden="true">&nbsp;&hellip;&nbsp;</span>
   </li>
   <li class="page-item">
-    <a class="page-link" href="/posts/page/9/">9</a>
+    <a class="page-link" href="/posts/page/10/">10</a>
   </li>
   <li class="page-item">
     <a href="/posts/page/3/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
   </li>
   <li class="page-item">
-    <a href="/posts/page/9/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <a href="/posts/page/10/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
   </li>
 </ul>
 
@@ -495,6 +497,15 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/05/java8_method_parameter_reflection/" class="nav-link">Java 8新特性 - (8)方法参数反射</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/05/java8_type_inference/" class="nav-link">Java 8新特性 - (7)泛型的类型推断</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/05/java8_type_annotation/" class="nav-link">Java 8新特性 - (6)类型注解</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/" class="nav-link">Java 8新特性 - (5)重复注解</a>
       </li>
       <li>
@@ -509,15 +520,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
       <li>
         <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="nav-link">CXF记录WebService的soap日志</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/" class="nav-link">设置周日为一个星期的第一天</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/jetty_session_remove_node_name/" class="nav-link">删除Jetty中session ID的node名称</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/nginx_cfg_for_long_polling/" class="nav-link">配置Nginx支持长轮询</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -525,6 +527,11 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
           <span class="button_tally">18</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">11</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -540,11 +547,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
         <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class="post_tag button button_translucent">
           系统优化那些事
           <span class="button_tally">9</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
@@ -618,7 +620,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=8>JAVA<span class="button_tally">8</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=11>JAVA<span class="button_tally">11</span>
             </a>
             
             
@@ -708,7 +710,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">6</span>
+          <span class="button_tally">9</span>
         </a>
         
         
@@ -722,24 +724,24 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
           <span class="button_tally">18</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">12</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
           POSTGRES
           <span class="button_tally">12</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">9</span>
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
           MANJARO
           <span class="button_tally">6</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
-          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -865,7 +867,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=9>JAVA<span class="button_tally">9</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=12>JAVA<span class="button_tally">12</span>
             </a>
             
             
@@ -873,7 +875,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=5>JAVA-8<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=8>JAVA-8<span class="button_tally">8</span>
             </a>
             
             

@@ -6,7 +6,45 @@
     <description>Recent content in java 8 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 27 May 2021 10:30:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/java-8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 28 May 2021 18:45:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/java-8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 8新特性 - (8)方法参数反射</title>
+      <link>https://www.zengxi.net/2021/05/java8_method_parameter_reflection/</link>
+      <pubDate>Fri, 28 May 2021 18:45:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/05/java8_method_parameter_reflection/</guid>
+      <description>方法的参数名，在很多时候我们是需要反射得到的。但是在java8之前，代码编译为class文件后，方法参数的类型是固定的，但参数名称却丢失了，这和动态语言严重依赖参数名称形成了鲜明对比。（java是静态语言，所以入参名称叫什么其实无所谓的）。虽然名称无所谓，但很多时候，我们需要此名称来做更好的安排.
+比如mybatis的Dao层接口方法，需要特意用个注解@Param来显示标识出参数名。所以java8来了，带来的新特性解决了这一问题。
+获取方法参数名称有3种方法：
+采用javassit包获取 很麻烦，参考其他网上文章
+通过spring的LocalVariableTableParameterNameDiscoverer 1public static void main(String[] args) { 2 List&amp;lt;String&amp;gt; paramterNames = getParamterName(StaffMark.class, &amp;#34;fun1&amp;#34;); 3 paramterNames.forEach((x) -&amp;gt; System.out.println(x)); 4} 5 6public static void fun1(String aaa, Integer bbb) { 7 8} 9 10public static List&amp;lt;String&amp;gt; getParamterName(Class clazz, String methodName) { 11 LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer(); 12 Method[] methods = clazz.getDeclaredMethods(); 13 for (Method method : methods) { 14 if (methodName.equals(method.getName())) { 15 //获取到该方法的参数们 16 String[] params = u.</description>
+    </item>
+    
+    <item>
+      <title>Java 8新特性 - (7)泛型的类型推断</title>
+      <link>https://www.zengxi.net/2021/05/java8_type_inference/</link>
+      <pubDate>Fri, 28 May 2021 18:05:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/05/java8_type_inference/</guid>
+      <description>泛型简介 泛型由Java 1.5引入，泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。通俗点将就是“类型的变量”。这种类型变量可以用在类、接口和方法的创建中。理解Java泛型最简单的方法是把它看成一种便捷语法，能节省某些Java类型转换(casting)上的操作.
+泛型的最大优点是提供了程序的类型安全同时可以向后兼容，但也有尴尬的地方，就是每次定义时都要写明泛型的类型，这样显示指定不仅感觉有些冗长。Java 7中对泛型做了改进，编译器会根据变量声明时的泛型类型自动推断.
+1// Java 7之前的写法 2Map&amp;lt;String, String&amp;gt; myMap = new HashMap&amp;lt;String, String&amp;gt;(); 3 4// Java 7及之后的写法 5Map&amp;lt;String, String&amp;gt; myMap = new HashMap&amp;lt;&amp;gt;(); //注意后面的&amp;#34;&amp;lt;&amp;gt;&amp;#34; 但是，Java 7在创建泛型实例时的类型推断是有限制的：只有构造器的参数化类型在上下文中被显著的声明了，才可以使用类型推断，否则不行。例如：下面的例子在java 7无法正确编译（但在java8里面可以编译，因为根据方法参数来自动推断泛型的类型）：
+1List&amp;lt;String&amp;gt; list = new ArrayList&amp;lt;&amp;gt;(); 2list.add(&amp;#34;A&amp;#34;); 3// 由于addAll期望获得Collection&amp;lt;? extends String&amp;gt;类型的参数，因此下面的语句在Java 7中无法编译无法通过 4list.addAll(new ArrayList&amp;lt;&amp;gt;()); Java 8的泛型类型推断改进 java 8里面泛型的目标类型推断主要2个：
+ 支持通过方法上下文推断泛型目标类型 支持在方法调用链路当中，泛型类型推断传递到最后一个方法  看看官网的例子：
+1class List&amp;lt;E&amp;gt; { 2 static &amp;lt;Z&amp;gt; List&amp;lt;Z&amp;gt; nil() { ... }; 3 static &amp;lt;Z&amp;gt; List&amp;lt;Z&amp;gt; cons(Z head, List&amp;lt;Z&amp;gt; tail) { .</description>
+    </item>
+    
+    <item>
+      <title>Java 8新特性 - (6)类型注解</title>
+      <link>https://www.zengxi.net/2021/05/java8_type_annotation/</link>
+      <pubDate>Fri, 28 May 2021 12:48:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/05/java8_type_annotation/</guid>
+      <description>什么是类型注解 在java 8之前，注解只能是在声明的地方所使用，比如类，方法，属性；从java 8开始，注解可以应用在任何地方。但是需要注意的是，类型注解只是语法而不是语义，并不会影响java的编译时间，加载时间，以及运行时间，也就是说，编译成class文件的时候并不包含类型注解。换句话说，仅提供定义这些类型的注释的功能，然后由框架和工具开发者来实际上使用它们。
+主要的场景：
+ 创建类实例：  1new @Interned MyObject(); 类型定义：  1@NotNull String str1 = ... 2@Email String str2 = ... 类型转换：  1myString = (@NonNull String) str; 泛型  1List&amp;lt;@Email String&amp;gt; emails = ... 包括参数边界和通配符边界  1class Folder&amp;lt;F extends @Existing File&amp;gt; { ... } 2Collection&amp;lt;? super @Existing File&amp;gt; c = ... 3List&amp;lt;@Immutable ? extends Comparable&amp;lt;T&amp;gt;&amp;gt; unchangeable = ... instanceof 语句  1boolean isNonNull = myString instanceof @NonNull String; 2boolean isNonBlankEmail = myString instanceof @NotBlank @Email String; 继承  1class UnmodifiableList&amp;lt;T&amp;gt; implements @Readonly List&amp;lt;@Readonly T&amp;gt; { .</description>
+    </item>
+    
     <item>
       <title>Java 8新特性 - (5)重复注解</title>
       <link>https://www.zengxi.net/2021/05/java8_repeating_annotations/</link>
