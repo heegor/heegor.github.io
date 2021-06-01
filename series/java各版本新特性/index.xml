@@ -6,7 +6,23 @@
     <description>Recent content in Java各版本新特性 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 28 May 2021 18:45:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jun 2021 14:15:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 8新特性 - (9)DateTime API</title>
+      <link>https://www.zengxi.net/2021/06/java8_datetime_api/</link>
+      <pubDate>Tue, 01 Jun 2021 14:15:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/06/java8_datetime_api/</guid>
+      <description>相关背景 Java对日期、日历及时间的处理一直以来都饱受诟病：
+ java.util.Date和java.util.Calendar类易用性差，不支持时区，非线程安全 用于格式化日期的类DateFormat被放在java.text包中，它是一个抽象类，所以我们需要实例化一个SimpleDateFormat对象来处理日期格式化，并且DateFormat也是非线程安全，这意味着如果你在多线程程序中调用同一个DateFormat对象，会得到意想不到的结果。 对日期的计算方式繁琐，而且容易出错，因为月份是从0开始的，从Calendar中获取的月份需要加一才能表示当前月份。  由于以上这些问题，出现了一些三方的日期处理框架，例如Joda-Time，date4j等开源项目。但是，Java需要一套标准的用于处理时间和日期的框架，于是Java 8中引入了新的日期API。新的日期API是JSR-310规范的实现，Joda-Time框架的作者正是JSR-310的规范的倡导者，所以能从Java 8的日期API中看到很多Joda-Time的特性。
+简介 新的API对时间日期的处理提供了更好的支持，清楚的定义了时间日期的一些概念，比如说，瞬时时间（Instant）,持续时间（duration），日期（date）,时间（time），时区（time-zone）以及时间段（Period）。
+新的时间日期API核心位于java.time内，另外也在java.time.chrono，java.time.format，java.time.temporal和java.time.zone有相关的API，但使用频次较少。时间与日期API中的所有类都是线程安全的。
+Java 8常用的日期和时间类主要包括包含：
+ LocalDate：不包含时间的日期，比如2019-10-14。可以用来存储生日，周年纪念日，入职日期等。 LocalTime：与LocalDate想对照，它是不包含日期的时间。 LocalDateTime：包含了日期及时间，没有偏移信息（时区）。 ZonedDateTime：包含时区的完整的日期时间，偏移量是以UTC/格林威治时间为基准的。 Instant：时间戳，与System.currentTimeMillis()类似。 Duration：表示一个时间段。 Period：用来表示以年月日来衡量一个时间段。  LocalDate LocalDate类内只包含日期，不包含具体时间。只需要表示日期而不包含时间，就可以使用它。
+1// 只获取日期 2LocalDate today = LocalDate.now(); 3System.out.println(today); 4 5int year = today.getYear(); 6int month = today.getMonthValue(); 7int day = today.getDayOfMonth(); 8 9System.out.printf(&amp;#34;Year : %d Month : %d day : %d \t %n&amp;#34;, year, month, day); 同时，还可以通过LocalDate获取日期是月份的第几天、周的第几天，月份的天数，是否为闰年等。看下面的代码是不是非常方便。
+1LocalDate today = LocalDate.now(); 2// 月份中的第几天 3int dayOfMonth = today.</description>
+    </item>
+    
     <item>
       <title>Java 8新特性 - (8)方法参数反射</title>
       <link>https://www.zengxi.net/2021/05/java8_method_parameter_reflection/</link>
