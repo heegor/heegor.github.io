@@ -6,7 +6,19 @@
     <description>Recent content in Java各版本新特性 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 01 Jun 2021 14:15:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jun 2021 22:09:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 8新特性 - (10)并行数组排序</title>
+      <link>https://www.zengxi.net/2021/06/java8_parallel_sort/</link>
+      <pubDate>Tue, 01 Jun 2021 22:09:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/06/java8_parallel_sort/</guid>
+      <description>在Java 7中已经有了Arrays.sort()方法可对对象进行排序，而在Java 8中，引入了新的并行排序，它比前者的排序速度更快，且遵循了Java 7引入的Fork/Join框架，可以把排序任务分配给线程池中可用的多个线程。 Java 8在java.util.Arrays类中新增了并行排序功能，能够更充分地利用多线程机制，最重要的方法是parallelSort()，可以显著加快多核机器上的数组排序
+并行排序算法：
+ 将给定的数组划分为子数组，将子数组进一步划分为子数组，直到子数组达到最小粒度为止。 子数组由多个线程单独排序。并行排序使用 Fork / Join Framework 并行地对子数组进行排序。 已合并的已排序子数组。  1// 对原始数据类型进行并行排序 2// 输出：1 5 19 22 32 89 3int numbers[] = {22, 89, 1, 32, 19, 5}; 4Arrays.parallelSort(numbers); 5 6// 通过指定开始和结束索引进行并行排序。 7// 在这种情况下，从开始索引开始并在结束索引结束的子数组被排序，数组的其余部分被忽略并且不被排序。 8// 输出：22 1 19 32 89 5 9int numbers[] = {22, 89, 1, 32, 19, 5}; 10Arrays.parallelSort(numbers, 1, 5);  参考：
+ https://www.jianshu.com/p/2f038115de06 https://www.yuque.com/apachecn/beginnersbook-zh/docs_java_69  </description>
+    </item>
+    
     <item>
       <title>Java 8新特性 - (9)DateTime API</title>
       <link>https://www.zengxi.net/2021/06/java8_datetime_api/</link>

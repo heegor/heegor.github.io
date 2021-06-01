@@ -128,6 +128,39 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/">Linux下面使用dd命令烧录U盘并查看执行进度</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 13, 2020</span>
+    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">烧录U盘 先用fdisk来查看U盘的盘符
+1sudo fdisk -l 再用dd命令来写数据到U盘
+1sudo dd if=/home/paul/Downloads/test.iso of=/dev/sdc bs=1M count=10000 查看执行进度 假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命令行窗口，执行下面的命令，注意命令上面可能需要加上sudo
+方法一：
+1watch -n 5 pkill -USR1 ^dd$ 方法二：
+1watch -n 5 killall -USR1 dd 方法三：
+1while killall -USR1 dd; do sleep 5; done 方法四：
+1while (ps …</p>
+          <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/">rsyslog内存占用高导致服务不可用</a>
       </h3>
       <div class="post_meta">
@@ -384,35 +417,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/04/docker-hub-mirror/">Docker Hub国内镜像加速</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Apr 22, 2020</span>
-    <a href='https://www.zengxi.net/tags/docker' class="post_tag button button_translucent">docker
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">国内访问Docker Hub速度比较感人，这个时候需要配置国内的镜像，来加速下载。由于镜像服务可能出现宕机，建议同时配置多个镜像。
-Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json，写入如下内容
-1{ 2 &#34;registry-mirrors&#34;: [ 3 &#34;https://hub-mirror.c.163.com&#34;, 4 &#34;https://registry.docker-cn.com&#34; 5 ] 6} 重启服务
-1sudo systemctl daemon-reload 2sudo systemctl …</p>
-          <a href="https://www.zengxi.net/2020/04/docker-hub-mirror/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -496,6 +500,9 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/java8_parallel_sort/" class="nav-link">Java 8新特性 - (10)并行数组排序</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java8_datetime_api/" class="nav-link">Java 8新特性 - (9)DateTime API</a>
       </li>
       <li>
@@ -516,9 +523,6 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
       <li>
         <a href="https://www.zengxi.net/2021/04/java8_method_references/" class="nav-link">Java 8新特性 - (3)方法引用</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/03/update_response_via_fiddler/" class="nav-link">在Fiddler中使用脚本来修改Response数据</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -530,7 +534,7 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
         
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">12</span>
+          <span class="button_tally">13</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -619,7 +623,7 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=12>JAVA<span class="button_tally">12</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=13>JAVA<span class="button_tally">13</span>
             </a>
             
             
@@ -709,7 +713,7 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">10</span>
+          <span class="button_tally">11</span>
         </a>
         
         
@@ -725,7 +729,7 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -735,7 +739,7 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
         
         <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
           JAVA-8
-          <span class="button_tally">9</span>
+          <span class="button_tally">10</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
@@ -775,7 +779,7 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
         
         <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class="post_tag button button_translucent">
           排序
-          <span class="button_tally">3</span>
+          <span class="button_tally">4</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/' class="post_tag button button_translucent">
@@ -866,7 +870,7 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=13>JAVA<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=14>JAVA<span class="button_tally">14</span>
             </a>
             
             
@@ -874,7 +878,7 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=9>JAVA-8<span class="button_tally">9</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=10>JAVA-8<span class="button_tally">10</span>
             </a>
             
             
@@ -1082,7 +1086,7 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=3>排序<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=4>排序<span class="button_tally">4</span>
             </a>
             
             
