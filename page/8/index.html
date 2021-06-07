@@ -132,6 +132,33 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/04/pg_close_session_remove_db/">Postgres关闭某个数据库关联的session</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Apr 23, 2020</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">Postgres删除数据库的时候，报错：有其他用户正在使用该数据库，无法删除。这时，需要关闭这个数据库的相关的连接，然后再删除数据库
+可以执行下面的命令来关闭连接：</p>
+          <a href="https://www.zengxi.net/2020/04/pg_close_session_remove_db/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/04/docker-hub-mirror/">Docker Hub国内镜像加速</a>
       </h3>
       <div class="post_meta">
@@ -398,37 +425,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2019/12/pg-upgrade-version/">Postgres 9.x 升级至 10.x</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 1, 2019</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7' class="post_tag button button_translucent">升级
-    </a>
-    <a href='https://www.zengxi.net/tags/pglogical' class="post_tag button button_translucent">pglogical
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">目前主要有两种升级方式，它们分别使用于不同的场景。
-   升级方式 优点 缺点     pglogical逻辑复制升级 停机时间短 需提前准备从库，并搭建replication，在replication期间，需考虑DDL语句带来的影响。   pg_upgrade升级 不需要提前准备replication 升级完成后需检查index是否正常，并执行vacuum analyze，对于数据量较大的库， …</p>
-          <a href="https://www.zengxi.net/2019/12/pg-upgrade-version/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -509,6 +505,9 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/java8_base64/" class="nav-link">Java 8新特性 - (11)Base64编解码</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java8_parallel_sort/" class="nav-link">Java 8新特性 - (10)并行数组排序</a>
       </li>
       <li>
@@ -529,9 +528,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       <li>
         <a href="https://www.zengxi.net/2021/05/java8_default_method/" class="nav-link">Java 8新特性 - (4)默认方法</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/04/java8_method_references/" class="nav-link">Java 8新特性 - (3)方法引用</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -543,7 +539,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -632,7 +628,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=13>JAVA<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=14>JAVA<span class="button_tally">14</span>
             </a>
             
             
@@ -722,7 +718,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">11</span>
+          <span class="button_tally">12</span>
         </a>
         
         
@@ -738,7 +734,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">14</span>
+          <span class="button_tally">15</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -748,7 +744,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
           JAVA-8
-          <span class="button_tally">10</span>
+          <span class="button_tally">11</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
@@ -808,6 +804,10 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <div class="tags_list">
             
             <a href='https://www.zengxi.net/tags/alpine/' class=" post_tag button button_translucent" data-position=2>ALPINE<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/base64/' class=" post_tag button button_translucent" data-position=1>BASE64<span class="button_tally">1</span>
             </a>
             
             
@@ -879,7 +879,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=14>JAVA<span class="button_tally">14</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=15>JAVA<span class="button_tally">15</span>
             </a>
             
             
@@ -887,7 +887,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=10>JAVA-8<span class="button_tally">10</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=11>JAVA-8<span class="button_tally">11</span>
             </a>
             
             

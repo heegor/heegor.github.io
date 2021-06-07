@@ -128,6 +128,37 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/">用Python读取sitemap并调用百度接口推送URL</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Feb 1, 2021</span>
+    <a href='https://www.zengxi.net/tags/python' class="post_tag button button_translucent">python
+    </a>
+    <a href='https://www.zengxi.net/tags/seo' class="post_tag button button_translucent">seo
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">SEO对于网站的推广很重要，大多数搜索引擎都提供了一些API用于给站长主动提交URL，加快网页被收录的速度。
+百度提供了快速收录的API接口，下面这个Python脚本可以用来读取本地磁盘中的sitemap.xml文件，并调用接口提交URL至百度。
+仅需要修改下面的参数：
+ lastUpdateTimeStr - 上次推送的时间。会与sitemap.xml中的时间做比较，仅推送在该时间之后更新的URL siteMapPath - sitemap.xml在本地磁盘上的存放路径 siteUrl - 网站地址 baiduApiToken - Baidu API的token tmpFile - …</p>
+          <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/">使用Python在两个Postgres数据库直接复制数据</a>
       </h3>
       <div class="post_meta">
@@ -383,36 +414,6 @@ pod …</p>
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_statefulset/">Kubernetes in Action笔记 - (13) Statefulset</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 29, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">了解Statefulset 与ReplicaSet比较 Statefulset 保证了pod在重新调度后保留它们的标识和状态。
-与ReplicaSet类似, Statefulset 也是依据Statefulset 的pod模板创建的，也会指定期望的副本个数。
-不同的是, Statefulset创建的pod副本并不是完全一样的。每个pod都可以拥有一组独立的数据卷(持久化状态)。pod的名字都是规律的(固定的), 而不是每个新pod都随机获取一个名字。
-提供稳定的网络标识 一个Statefulset创建的每个pod都有一个从零开始的顺序索引, 这个会体现在pod的名称和主机名上, 同样还会体现在pod对应的固定存储上。
-与普通的pod …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -487,6 +488,9 @@ pod …</p>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/java8_base64/" class="nav-link">Java 8新特性 - (11)Base64编解码</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java8_parallel_sort/" class="nav-link">Java 8新特性 - (10)并行数组排序</a>
       </li>
       <li>
@@ -507,9 +511,6 @@ pod …</p>
       <li>
         <a href="https://www.zengxi.net/2021/05/java8_default_method/" class="nav-link">Java 8新特性 - (4)默认方法</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/04/java8_method_references/" class="nav-link">Java 8新特性 - (3)方法引用</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -521,7 +522,7 @@ pod …</p>
         
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -610,7 +611,7 @@ pod …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=13>JAVA<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=14>JAVA<span class="button_tally">14</span>
             </a>
             
             
@@ -700,7 +701,7 @@ pod …</p>
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">11</span>
+          <span class="button_tally">12</span>
         </a>
         
         
@@ -716,7 +717,7 @@ pod …</p>
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">14</span>
+          <span class="button_tally">15</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -726,7 +727,7 @@ pod …</p>
         
         <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
           JAVA-8
-          <span class="button_tally">10</span>
+          <span class="button_tally">11</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
@@ -786,6 +787,10 @@ pod …</p>
           <div class="tags_list">
             
             <a href='https://www.zengxi.net/tags/alpine/' class=" post_tag button button_translucent" data-position=2>ALPINE<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/base64/' class=" post_tag button button_translucent" data-position=1>BASE64<span class="button_tally">1</span>
             </a>
             
             
@@ -857,7 +862,7 @@ pod …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=14>JAVA<span class="button_tally">14</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=15>JAVA<span class="button_tally">15</span>
             </a>
             
             
@@ -865,7 +870,7 @@ pod …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=10>JAVA-8<span class="button_tally">10</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=11>JAVA-8<span class="button_tally">11</span>
             </a>
             
             

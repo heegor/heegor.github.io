@@ -6,7 +6,20 @@
     <description>Recent content in Posts on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 01 Jun 2021 22:09:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Jun 2021 12:59:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 8新特性 - (11)Base64编解码</title>
+      <link>https://www.zengxi.net/2021/06/java8_base64/</link>
+      <pubDate>Mon, 07 Jun 2021 12:59:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/06/java8_base64/</guid>
+      <description>早期处理BASE64编码, 需借助外部依赖：commons-codec，sun.misc.BASE64Decoder或JAXB的DatatypeConverter。Java 8实现了BASE64编解码API，它包含到java.util包。
+java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编解码器：
+ Basic编码 URL编码 MIME编码  Basic编码 Basic编码是标准的BASE64编码，用于处理常规的需求：输出的内容不添加换行符，而且输出的内容由字母加数字组成。
+1// 编码 2String asB64 = Base64.getEncoder().encodeToString(&amp;#34;some string&amp;#34;.getBytes(&amp;#34;utf-8&amp;#34;)); 3System.out.println(asB64); // 输出为: c29tZSBzdHJpbmc= 4 5// 解码 6byte[] asBytes = Base64.getDecoder().decode(&amp;#34;c29tZSBzdHJpbmc=&amp;#34;); 7System.out.println(new String(asBytes, &amp;#34;utf-8&amp;#34;)); // 输出为: some string URL编码 URL编码也是经常的需求，但由于URL对反斜线“/”有特殊的意义，因此URL编码需要替换掉它，使用下划线替换
+1String basicEncoded = Base64.getEncoder().encodeToString(&amp;#34;subjects?abcd&amp;#34;.getBytes(&amp;#34;utf-8&amp;#34;)); 2System.out.println(&amp;#34;Using Basic Alphabet: &amp;#34; + basicEncoded); 3 4String urlEncoded = Base64.getUrlEncoder().encodeToString(&amp;#34;subjects?abcd&amp;#34;.getBytes(&amp;#34;utf-8&amp;#34;)); 5System.out.println(&amp;#34;Using URL Alphabet: &amp;#34; + urlEncoded); 6 7// 输出为: 8Using Basic Alphabet: c3ViamVjdHM/YWJjZA== 9Using URL Alphabet: c3ViamVjdHM_YWJjZA== MIME编码 MIME编码器会使用基本的字母数字产生BASE64输出，而且对MIME格式友好：每一行输出不超过76个字符，而且每行以“\r\n”符结束。</description>
+    </item>
+    
     <item>
       <title>Java 8新特性 - (10)并行数组排序</title>
       <link>https://www.zengxi.net/2021/06/java8_parallel_sort/</link>
