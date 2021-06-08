@@ -132,6 +132,97 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/05/java8_default_method/">Java 8新特性 - (4)默认方法</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    May 26, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">什么是默认方法 简单说，就是接口可以有实现方法，而且不需要实现类去实现其方法。只需在方法名前面加个default关键字即可。
+为什么要有默认方法 首先，之前的接口是个双刃剑，好处是面向抽象而不是面向具体编程，缺陷是，当需要修改接口时候，需要修改全部实现该接口的类，目前的java 8之前的集合框架没有foreach方法，通常能想到的解决办法是在JDK里给相关的接口添加新的方法及实现。然而，对于已经发布的版本，是没法在给接口添加新方法的同时不影响已有的实现。所以引进的默认方法。他们的目的是为了解决接口的修改与现有的实现不兼容的问题。
+简单的例子: 一个接口A，Clazz类实现了接口A。
+1public interface A { 2 …</p>
+          <a href="https://www.zengxi.net/2021/05/java8_default_method/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/04/java8_method_references/">Java 8新特性 - (3)方法引用</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Apr 7, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">方法引用（Method references）。方法引用提供了非常有用的语法，可以直接引用已有Java类或对象（实例）的方法或构造器。与lambda联合使用，可以使语言的构造更紧凑简洁，减少冗余代码。
+方法引用使用到的操作符“::”，这个操作符把方法引用分成两边，左边是类名或者某个对象的引用，右边是方法名。引用方法有下面几种方式：
+ 对象引用::实例方法名 类名::静态方法名 类名::实例方法名 类名::new 类型[]::new  对象引用::实例方法名 创建了一个PersonCompare对象，调用了其内部的compareByName实例方法。
+1public class PersonCompare { 2 public int …</p>
+          <a href="https://www.zengxi.net/2021/04/java8_method_references/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/03/update_response_via_fiddler/">在Fiddler中使用脚本来修改Response数据</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Mar 30, 2021</span>
+    <a href='https://www.zengxi.net/tags/fiddler' class="post_tag button button_translucent">fiddler
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">使用Fiddler抓包工具，通过修改CustomRules.js脚本达到修改Http请求的Response中Body信息（如JSON串）。
+常用于在Server开发未完全Ready而前端或客户端开发需要Server数据时，修改请求的返回数据，达到Debug和测试的目的，较添加BreakPoint的方法更加便捷。
+本例Demo中会为JSON添加一个字段和修改一个字段，如下所示：
+1// 原JSON串 V1.0 2{ 3 &#34;music&#34;: &#34;big big world&#34;, 4 &#34;singer&#34;: &#34;Emilia Rydberg&#34; 5} 6 7// 新JSON串 V1.1 …</p>
+          <a href="https://www.zengxi.net/2021/03/update_response_via_fiddler/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/03/cxf_ws_log/">CXF记录WebService的soap日志</a>
       </h3>
       <div class="post_meta">
@@ -339,98 +430,6 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/02/java8_lambda/">Java 8新特性 - (1)Lambda表达式</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Feb 25, 2021</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
-    </a>
-    <a href='https://www.zengxi.net/tags/lambda' class="post_tag button button_translucent">lambda
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">为什么Java需要Lambda表达式? 在函数式编程语言中，函数是一等公民，它们可以独立存在，你可以将其赋值给一个变量，或将他们当做参数传给其他函数。JavaScript是最典型的函数式编程语言。函数式语言提供了一种强大的功能——闭包，相比于传统的编程方法有很多优势，闭包是一个可调用的对象，它记录了一些信息，这些信息来自于创建它的作用域。
-Java现在提供的最接近闭包的概念便是Lambda表达式，虽然闭包与Lambda表达式之间存在显著差别，但至少Lambda表达式是闭包很好的替代者。
-Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不同，但是又无限地接近闭包。在支持一类函数的语言中，Lambda 表达式的类型将是函 …</p>
-          <a href="https://www.zengxi.net/2021/02/java8_lambda/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/02/java7_gramma_new_features/">Java 7新特性 - (1)Java语法特性</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Feb 24, 2021</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/java-7' class="post_tag button button_translucent">java 7
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">二进制数字表达方式 在Java 7之前，支持十进制（123）、八进制（0123）、十六进制（0X12AB）的表示形式。Java 7中增加支持二进制的表示（0B11110001、0b11110001）
-1int binary = 0b0001_1001; 2System.out.println(&#34;binary is :&#34; + binary); 输出
-1binary is :25 使用下划线对数字进行分隔表达 Java 7中支持在数字中间增加'_'作为分隔符，分隔长int以及long（也支持double,float），显示更直观，如（12_123_456）。
-下划线只能在数字中间，编译时编译器自动删除数字中的下划线。 …</p>
-          <a href="https://www.zengxi.net/2021/02/java7_gramma_new_features/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/02/es_search_improvement/">订单ES查询性能优化</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Feb 20, 2021</span>
-    <a href='https://www.zengxi.net/tags/elastic-search' class="post_tag button button_translucent">elastic search
-    </a>
-    <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96' class="post_tag button button_translucent">性能优化
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">背景 由于系统中的订单量大，一些查询语句需要级联多张表来查询，单纯靠数据库的索引已经无法满足查询速度与用户界面响应速度的要求，因此在5年前引入了ES来加快查询速度。但是，原先的方案中ES存放的是全量的订单数据，并且是存放在同一个数据库索引中，随着业务的发展与订单量的累积，ES查询的速度已经越来越慢。通过Grafana监控数据，可以看到单个索引的数据量已达到1.5TB，主要的性能指标越来越差。ES的CPU使用率不时地大于80%，甚至100%，导致极端情况下ES查询耗时十几秒。对于用户的直观感受就是，在界面上面查询数据，需要耗时很久才能看到数据。
-解决方案 系统总是慢慢演变的，某个时间点的解决方案都是基于当前的一些情况，满足近3年内的需 …</p>
-          <a href="https://www.zengxi.net/2021/02/es_search_improvement/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -502,6 +501,15 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/java8_stamped_lock/" class="nav-link">Java 8新特性 - (13)StampedLock</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/06/java8_unsigned_arithmetic/" class="nav-link">Java 8新特性 - (12)无符号运算</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/06/true_form_and_complement/" class="nav-link">原码、反码、补码和位移运算</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java8_base64/" class="nav-link">Java 8新特性 - (11)Base64编解码</a>
       </li>
       <li>
@@ -516,15 +524,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
       <li>
         <a href="https://www.zengxi.net/2021/05/java8_type_inference/" class="nav-link">Java 8新特性 - (7)泛型的类型推断</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/05/java8_type_annotation/" class="nav-link">Java 8新特性 - (6)类型注解</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/" class="nav-link">Java 8新特性 - (5)重复注解</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/05/java8_default_method/" class="nav-link">Java 8新特性 - (4)默认方法</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -536,7 +535,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
         
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">14</span>
+          <span class="button_tally">17</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -625,7 +624,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=14>JAVA<span class="button_tally">14</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=17>JAVA<span class="button_tally">17</span>
             </a>
             
             
@@ -715,7 +714,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">12</span>
+          <span class="button_tally">14</span>
         </a>
         
         
@@ -731,17 +730,17 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
         
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">15</span>
+          <span class="button_tally">17</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
+          JAVA-8
+          <span class="button_tally">13</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
           POSTGRES
           <span class="button_tally">12</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
-          JAVA-8
-          <span class="button_tally">11</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
@@ -876,7 +875,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=15>JAVA<span class="button_tally">15</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=17>JAVA<span class="button_tally">17</span>
             </a>
             
             
@@ -884,7 +883,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=11>JAVA-8<span class="button_tally">11</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=13>JAVA-8<span class="button_tally">13</span>
             </a>
             
             
@@ -921,6 +920,10 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             
             
             <a href='https://www.zengxi.net/tags/locale/' class=" post_tag button button_translucent" data-position=1>LOCALE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/lock/' class=" post_tag button button_translucent" data-position=1>LOCK<span class="button_tally">1</span>
             </a>
             
             
@@ -1021,6 +1024,10 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             
             
             <a href='https://www.zengxi.net/tags/ssl/' class=" post_tag button button_translucent" data-position=1>SSL<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/stampedlock/' class=" post_tag button button_translucent" data-position=1>STAMPEDLOCK<span class="button_tally">1</span>
             </a>
             
             
