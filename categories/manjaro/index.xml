@@ -6,7 +6,18 @@
     <description>Recent content in manjaro on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 16 Mar 2021 09:40:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/manjaro/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Jun 2021 20:58:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/manjaro/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Manjaro安装软件时找不到strip binary</title>
+      <link>https://www.zengxi.net/2021/06/manjaro_installation_failure/</link>
+      <pubDate>Tue, 15 Jun 2021 20:58:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/06/manjaro_installation_failure/</guid>
+      <description>Manjaro 安装软件时报错：
+1:: (1/1) Parsing SRCINFO: wps-office 2==&amp;gt; ERROR: Cannot find the strip binary required for object file stripping. 3error downloading sources: wps-office 这个是由于某些基础包没装，执行下面命令安装基础包，然后再次安装需要的软件即可
+1sudo pacman -Sy base-devel </description>
+    </item>
+    
     <item>
       <title>Manjaro升级后打印服务不可用</title>
       <link>https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/</link>

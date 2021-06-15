@@ -132,6 +132,35 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/">Cloudflare开启HTTPS加密后，请求转发到源站报522错误</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Nov 13, 2020</span>
+    <a href='https://www.zengxi.net/tags/cloudflare' class="post_tag button button_translucent">cloudflare
+    </a>
+    <a href='https://www.zengxi.net/tags/ssl' class="post_tag button button_translucent">ssl
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">笔者使用Cloudflare做DNS，同时使用Cloudflare的SSL证书服务。整个链路如下图:
+1|----------| |-----------| |---------------| 2| Brower | ------&gt; | Cloudfare | ------&gt; | Origin Server | 3|----------| |-----------| |---------------| 4 笔者想要做整个链路的https，但是在配置完之后，打开页面是看到522的错误。这个错误表示连接上源站点，但是请求超时。可以参考这个页面来找到可能的原因： …</p>
+          <a href="https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/11/ubuntu_install_postgresql/">Linux查看某个端口是否被占用</a>
       </h3>
       <div class="post_meta">
@@ -382,36 +411,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/">terraform中阿里云ECS ssh key变化问题</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 23, 2020</span>
-    <a href='https://www.zengxi.net/tags/terraform' class="post_tag button button_translucent">terraform
-    </a>
-    <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91' class="post_tag button button_translucent">阿里云
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">目前的terraform脚本中，在新建阿里云ECS的时候，会通过 user_data 属性值来设定初始的ssh key。但是这个就存在一个隐患，如果将来想要改变初始的ssh key，再用terraform来推机器的时候，terraform发现user_data属性值发生变化，会删除现有的ECS并重建。
-解决的方法是，修改ECS的lifecycle，将user_data添加到忽略列表中。这样terraform就可以忽略掉该属性值的变化。
-1{ 2 resource &#34;alicloud_instance&#34; &#34;test_instance&#34; { 3 ... 4 5 lifecycle { 6 …</p>
-          <a href="https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -495,6 +494,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/manjaro_installation_failure/" class="nav-link">Manjaro安装软件时找不到strip binary</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java8_stamped_lock/" class="nav-link">Java 8新特性 - (13)StampedLock</a>
       </li>
       <li>
@@ -514,9 +516,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/05/java8_method_parameter_reflection/" class="nav-link">Java 8新特性 - (8)方法参数反射</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/05/java8_type_inference/" class="nav-link">Java 8新特性 - (7)泛型的类型推断</a>
       </li>
     </ul>
     <div>
@@ -549,7 +548,7 @@
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
           MANJARO
-          <span class="button_tally">6</span>
+          <span class="button_tally">7</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
@@ -638,7 +637,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=6>MANJARO<span class="button_tally">6</span>
+            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=7>MANJARO<span class="button_tally">7</span>
             </a>
             
             
@@ -739,7 +738,7 @@
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
           MANJARO
-          <span class="button_tally">6</span>
+          <span class="button_tally">7</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -925,7 +924,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=6>MANJARO<span class="button_tally">6</span>
+            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=7>MANJARO<span class="button_tally">7</span>
             </a>
             
             

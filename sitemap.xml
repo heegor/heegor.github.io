@@ -3,10 +3,25 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.zengxi.net/</loc>
-    <lastmod>2021-06-08T13:37:00+08:00</lastmod>
+    <lastmod>2021-06-15T20:58:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/categories/</loc>
-    <lastmod>2021-06-08T13:37:00+08:00</lastmod>
+    <lastmod>2021-06-15T20:58:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/manjaro/</loc>
+    <lastmod>2021-06-15T20:58:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/categories/manjaro/</loc>
+    <lastmod>2021-06-15T20:58:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/2021/06/manjaro_installation_failure/</loc>
+    <lastmod>2021-06-15T20:58:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/posts/</loc>
+    <lastmod>2021-06-15T20:58:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/</loc>
+    <lastmod>2021-06-15T20:58:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/categories/java/</loc>
     <lastmod>2021-06-08T13:37:00+08:00</lastmod>
@@ -26,16 +41,10 @@
     <loc>https://www.zengxi.net/tags/lock/</loc>
     <lastmod>2021-06-08T13:37:00+08:00</lastmod>
   </url><url>
-    <loc>https://www.zengxi.net/posts/</loc>
-    <lastmod>2021-06-08T13:37:00+08:00</lastmod>
-  </url><url>
     <loc>https://www.zengxi.net/series/</loc>
     <lastmod>2021-06-08T13:37:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/stampedlock/</loc>
-    <lastmod>2021-06-08T13:37:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/tags/</loc>
     <lastmod>2021-06-08T13:37:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2021/06/java8_unsigned_arithmetic/</loc>
@@ -133,12 +142,6 @@
   </url><url>
     <loc>https://www.zengxi.net/2021/03/update_docker_image_timezone/</loc>
     <lastmod>2021-03-25T13:18:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/tags/manjaro/</loc>
-    <lastmod>2021-03-16T09:40:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/categories/manjaro/</loc>
-    <lastmod>2021-03-16T09:40:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/</loc>
     <lastmod>2021-03-16T09:40:00+08:00</lastmod>

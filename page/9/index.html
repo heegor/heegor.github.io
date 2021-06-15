@@ -132,6 +132,36 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/01/mac-shell-support-map/">Mac下shell命令支持map</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 19, 2020</span>
+    <a href='https://www.zengxi.net/tags/shell' class="post_tag button button_translucent">shell
+    </a>
+    <a href='https://www.zengxi.net/tags/declare' class="post_tag button button_translucent">declare
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：
+1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持，需要升级至4.x以上的版本
+1# 安装最新版本的bash 2brew install bash 3 4# 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash 5# 需要把新版本的shell添加至信任列表中 6sudo bash -c &#39;echo …</p>
+          <a href="https://www.zengxi.net/2020/01/mac-shell-support-map/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/01/quartz-job-issue-improvement/">Quartz job使用过程中的发现问题与改进</a>
       </h3>
       <div class="post_meta">
@@ -409,47 +439,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/07/force-date-use-locale/">date命令按指定locale所对应的日期格式输出</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 4, 2018</span>
-    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
-    </a>
-    <a href='https://www.zengxi.net/tags/unix' class="post_tag button button_translucent">unix
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4' class="post_tag button button_translucent">命令
-    </a>
-    <a href='https://www.zengxi.net/tags/shell' class="post_tag button button_translucent">shell
-    </a>
-    <a href='https://www.zengxi.net/tags/date' class="post_tag button button_translucent">date
-    </a>
-    <a href='https://www.zengxi.net/tags/locale' class="post_tag button button_translucent">locale
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。
-比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出
-1date +%a 下面是locale为zh_CN的输出：
- 三  下面是locale为en_US的输出：
- Wed  如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值
-首先我们可以运行 …</p>
-          <a href="https://www.zengxi.net/2018/07/force-date-use-locale/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -527,6 +516,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/manjaro_installation_failure/" class="nav-link">Manjaro安装软件时找不到strip binary</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java8_stamped_lock/" class="nav-link">Java 8新特性 - (13)StampedLock</a>
       </li>
       <li>
@@ -546,9 +538,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/05/java8_method_parameter_reflection/" class="nav-link">Java 8新特性 - (8)方法参数反射</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/05/java8_type_inference/" class="nav-link">Java 8新特性 - (7)泛型的类型推断</a>
       </li>
     </ul>
     <div>
@@ -581,7 +570,7 @@
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
           MANJARO
-          <span class="button_tally">6</span>
+          <span class="button_tally">7</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
@@ -670,7 +659,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=6>MANJARO<span class="button_tally">6</span>
+            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=7>MANJARO<span class="button_tally">7</span>
             </a>
             
             
@@ -771,7 +760,7 @@
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
           MANJARO
-          <span class="button_tally">6</span>
+          <span class="button_tally">7</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
@@ -957,7 +946,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=6>MANJARO<span class="button_tally">6</span>
+            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=7>MANJARO<span class="button_tally">7</span>
             </a>
             
             
