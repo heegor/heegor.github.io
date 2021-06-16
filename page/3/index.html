@@ -132,6 +132,36 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/">Manjaro升级后打印服务不可用</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Mar 16, 2021</span>
+    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
+    </a>
+    <a href='https://www.zengxi.net/tags/%E6%89%93%E5%8D%B0%E6%9C%BA' class="post_tag button button_translucent">打印机
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">Manjaro升级到某个版本后，在系统设置中，查看打印机，显示“打印机服务不可用，错误的文件描述符“。
+其中一个原因是CUPS（Common UNIX Printing System）打印管理服务未启动。可以用下面的方法来解决：
+1# 启动服务，保证本次登录打印机可用 2sudo systemctl start cups.service 3 4# 设置开启启动 5sudo systemctl enable cups.service </p>
+          <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/03/java8_stream_api/">Java 8新特性 - (2)Stream API</a>
       </h3>
       <div class="post_meta">
@@ -398,36 +428,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/01/k8s_advanced_scheduling/">Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 5, 2021</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">使用污点和容忍度阻止节点调度到特定节点 污点和容忍度 污点是在不修改已有pod信息的前提下,通过在节点上添加污点信息,来拒绝pod在某些节点上的部署。
-只有当一个pod容忍某个节点的污点, 这个pod才能被调度到该节点。
-可以通过kubectl describe node查看节点的污点信息，在返回结果的Taints字段值中；可以通过kubectl describe po查看pod的污点容忍度，在返回结果的Tolerations字段值中。
-每一个污点都可以关联一个效果, 效果包含了以下三种:
- NoSchedule：表示如果pod没有容忍这些污点, pod则不能被调度到包含这些污点的节点上。 PreferNoSchedule：它 …</p>
-          <a href="https://www.zengxi.net/2021/01/k8s_advanced_scheduling/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -452,13 +452,13 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
     <span aria-hidden="true">&nbsp;&hellip;&nbsp;</span>
   </li>
   <li class="page-item">
-    <a class="page-link" href="/page/10/">10</a>
+    <a class="page-link" href="/page/11/">11</a>
   </li>
   <li class="page-item">
     <a href="/page/4/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
   </li>
   <li class="page-item">
-    <a href="/page/10/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <a href="/page/11/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
   </li>
 </ul>
 
@@ -502,6 +502,9 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/docker_curl_ssl_certificate_fail/" class="nav-link">Docker环境中curl报证书错误</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/manjaro_installation_failure/" class="nav-link">Manjaro安装软件时找不到strip binary</a>
       </li>
       <li>
@@ -521,9 +524,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_datetime_api/" class="nav-link">Java 8新特性 - (9)DateTime API</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/05/java8_method_parameter_reflection/" class="nav-link">Java 8新特性 - (8)方法参数反射</a>
       </li>
     </ul>
     <div>
@@ -561,7 +561,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
         
         <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">3</span>
+          <span class="button_tally">4</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/jetty/' class="post_tag button button_translucent">
@@ -609,7 +609,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=3>DOCKER<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=4>DOCKER<span class="button_tally">4</span>
             </a>
             
             
@@ -749,6 +749,11 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
           <span class="button_tally">7</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
+          DOCKER
+          <span class="button_tally">5</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
           LINUX
           <span class="button_tally">5</span>
@@ -757,11 +762,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
         <a href='https://www.zengxi.net/tags/nginx/' class="post_tag button button_translucent">
           NGINX
           <span class="button_tally">5</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
-          DOCKER
-          <span class="button_tally">4</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
@@ -832,6 +832,10 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/curl/' class=" post_tag button button_translucent" data-position=1>CURL<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/date/' class=" post_tag button button_translucent" data-position=1>DATE<span class="button_tally">1</span>
             </a>
             
@@ -840,7 +844,7 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=4>DOCKER<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=5>DOCKER<span class="button_tally">5</span>
             </a>
             
             

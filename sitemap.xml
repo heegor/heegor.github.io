@@ -3,10 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.zengxi.net/</loc>
-    <lastmod>2021-06-15T20:58:00+08:00</lastmod>
+    <lastmod>2021-06-16T12:41:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/categories/</loc>
-    <lastmod>2021-06-15T20:58:00+08:00</lastmod>
+    <lastmod>2021-06-16T12:41:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/curl/</loc>
+    <lastmod>2021-06-16T12:41:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/docker/</loc>
+    <lastmod>2021-06-16T12:41:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/categories/docker/</loc>
+    <lastmod>2021-06-16T12:41:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/2021/06/docker_curl_ssl_certificate_fail/</loc>
+    <lastmod>2021-06-16T12:41:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/posts/</loc>
+    <lastmod>2021-06-16T12:41:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/</loc>
+    <lastmod>2021-06-16T12:41:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/manjaro/</loc>
     <lastmod>2021-06-15T20:58:00+08:00</lastmod>
@@ -15,12 +33,6 @@
     <lastmod>2021-06-15T20:58:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2021/06/manjaro_installation_failure/</loc>
-    <lastmod>2021-06-15T20:58:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/posts/</loc>
-    <lastmod>2021-06-15T20:58:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/tags/</loc>
     <lastmod>2021-06-15T20:58:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/categories/java/</loc>
@@ -132,12 +144,6 @@
     <lastmod>2021-03-25T13:20:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/alpine/</loc>
-    <lastmod>2021-03-25T13:18:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/tags/docker/</loc>
-    <lastmod>2021-03-25T13:18:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/categories/docker/</loc>
     <lastmod>2021-03-25T13:18:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2021/03/update_docker_image_timezone/</loc>

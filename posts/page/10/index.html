@@ -128,6 +128,44 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2018/07/docker-mino-cluster/">Docker Compose创建minio集群</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 18, 2018</span>
+    <a href='https://www.zengxi.net/tags/minio' class="post_tag button button_translucent">minio
+    </a>
+    <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8' class="post_tag button button_translucent">对象存储
+    </a>
+    <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4' class="post_tag button button_translucent">集群
+    </a>
+    <a href='https://www.zengxi.net/tags/cluster' class="post_tag button button_translucent">cluster
+    </a>
+    <a href='https://www.zengxi.net/tags/docker' class="post_tag button button_translucent">docker
+    </a>
+    <a href='https://www.zengxi.net/tags/nginx' class="post_tag button button_translucent">nginx
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">Minio是一个简单易用的轻量级对象存储服务，同时它也支持集群环境。使用Minio的docker镜像可以快速地搭建集群环境。
+下面是docker-compose.yml文件的示例。分布式的Minio服务至少需要4个节点，所以在docker-compose.yml文件中，至少要配置4个服务。每个服务的command配置必须一样，保证集群环境正常运行。
+1version:&#39;3&#39;2services:3minio-node1:4image:minio/minio 5hostname:minio-node1 6ports:7- &#34;29001:9000&#34;8volumes:9- …</p>
+          <a href="https://www.zengxi.net/2018/07/docker-mino-cluster/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2018/07/force-date-use-locale/">date命令按指定locale所对应的日期格式输出</a>
       </h3>
       <div class="post_meta">
@@ -425,41 +463,6 @@ grep的帮助文档中有这几个参数：
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/06/inputstream-serialize/">实现InputStream的序列化</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 12, 2018</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/inputstream' class="post_tag button button_translucent">inputstream
-    </a>
-    <a href='https://www.zengxi.net/tags/serialize' class="post_tag button button_translucent">serialize
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96' class="post_tag button button_translucent">序列化
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">InputStream本身是不支持序列化的，但是在实际开发的过程中有时会需要将输入流通过socket传输，比如RMI的远程调用。
-在Serializable的Java文档文档中有下面的描述：
- Classes that require special handling during the serialization and deserialization process must implement special methods with these exact signatures:
- private void writeObject(java.io.ObjectOutputStream out) throws …</p>
-          <a href="https://www.zengxi.net/2018/06/inputstream-serialize/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -486,11 +489,14 @@ grep的帮助文档中有这几个参数：
   <li class="page-item active">
     <a class="page-link" href="/posts/page/10/">10</a>
   </li>
-  <li class="page-item disabled">
-    <a  class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+  <li class="page-item">
+    <a class="page-link" href="/posts/page/11/">11</a>
   </li>
   <li class="page-item">
-    <a href="/posts/page/10/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <a href="/posts/page/11/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+  </li>
+  <li class="page-item">
+    <a href="/posts/page/11/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
   </li>
 </ul>
 
@@ -534,6 +540,9 @@ grep的帮助文档中有这几个参数：
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/docker_curl_ssl_certificate_fail/" class="nav-link">Docker环境中curl报证书错误</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/manjaro_installation_failure/" class="nav-link">Manjaro安装软件时找不到strip binary</a>
       </li>
       <li>
@@ -553,9 +562,6 @@ grep的帮助文档中有这几个参数：
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_datetime_api/" class="nav-link">Java 8新特性 - (9)DateTime API</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/05/java8_method_parameter_reflection/" class="nav-link">Java 8新特性 - (8)方法参数反射</a>
       </li>
     </ul>
     <div>
@@ -593,7 +599,7 @@ grep的帮助文档中有这几个参数：
         
         <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">3</span>
+          <span class="button_tally">4</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/jetty/' class="post_tag button button_translucent">
@@ -641,7 +647,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=3>DOCKER<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=4>DOCKER<span class="button_tally">4</span>
             </a>
             
             
@@ -781,6 +787,11 @@ grep的帮助文档中有这几个参数：
           <span class="button_tally">7</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
+          DOCKER
+          <span class="button_tally">5</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
           LINUX
           <span class="button_tally">5</span>
@@ -789,11 +800,6 @@ grep的帮助文档中有这几个参数：
         <a href='https://www.zengxi.net/tags/nginx/' class="post_tag button button_translucent">
           NGINX
           <span class="button_tally">5</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
-          DOCKER
-          <span class="button_tally">4</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
@@ -864,6 +870,10 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/curl/' class=" post_tag button button_translucent" data-position=1>CURL<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/date/' class=" post_tag button button_translucent" data-position=1>DATE<span class="button_tally">1</span>
             </a>
             
@@ -872,7 +882,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=4>DOCKER<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=5>DOCKER<span class="button_tally">5</span>
             </a>
             
             

@@ -6,7 +6,18 @@
     <description>Recent content in Posts on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 15 Jun 2021 20:58:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Jun 2021 12:41:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker环境中curl报证书错误</title>
+      <link>https://www.zengxi.net/2021/06/docker_curl_ssl_certificate_fail/</link>
+      <pubDate>Wed, 16 Jun 2021 12:41:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/06/docker_curl_ssl_certificate_fail/</guid>
+      <description>使用debian:buster-slim镜像编写dockfile，在调用curl命令的时候，报下面的错误：
+1curl: (60) SSL certificate problem: unable to get local issuer certificate 这个是由于本地没有证书。其中一个解决办法是，在dockfile中加入类似下面的语句来安装证书，再调用curl命令
+1RUN \ 2 apt-get update &amp;amp;&amp;amp; \ 3 apt-get install ca-certificates &amp;amp;&amp;amp; \ 4 apt-get clean </description>
+    </item>
+    
     <item>
       <title>Manjaro安装软件时找不到strip binary</title>
       <link>https://www.zengxi.net/2021/06/manjaro_installation_failure/</link>
