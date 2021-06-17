@@ -6,7 +6,26 @@
     <description>Recent content on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 16 Jun 2021 12:41:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 Jun 2021 16:28:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>阿里云WAF与SNI问题</title>
+      <link>https://www.zengxi.net/2021/06/aliyun_waf_sni/</link>
+      <pubDate>Thu, 17 Jun 2021 16:28:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/06/aliyun_waf_sni/</guid>
+      <description>什么是SNI 当多个网站托管在一台服务器上并共享一个IP地址，并且每个网站都有自己的SSL证书，在客户端设备尝试安全地连接到其中一个网站时，服务器可能不知道显示哪个SSL证书。这是因为SSL/TLS握手发生在客户端设备通过HTTP指示连接到某个网站之前。这个有点像邮寄包裹到公寓楼而不是独栋房子。将邮件邮寄到某人的独栋房子时，仅街道地址就足以将包裹发送给收件人。但是，当包裹进入公寓楼时，除了街道地址外，还需要公寓号码。否则，包裹可能无法送达收件人或根本无法交付。
+服务器名称指示（SNI，Server Name Indication）旨在解决此问题。 SNI是TLS协议（以前称为SSL协议）的扩展，该协议在HTTPS中使用。它包含在TLS/SSL握手流程中，以确保客户端设备能够看到他们尝试访问的网站的正确SSL证书。该扩展使得可以在TLS握手期间指定网站的主机名或域名，而不是在握手之后打开HTTP连接时指定。
+SNI在2003年被添加为TLS/SSL的扩展；它最初不是协议的一部分。几乎所有的浏览器、操作系统和Web服务器都支持它，除了一些仍在使用的最旧的浏览器和操作系统。如果客户端或者浏览器不支持SNI，用户可能无法访问某些网站，将返回错误消息，例如&amp;quot;您的连接缺乏安全隐私。&amp;quot;
+阿里云WAF对于SNI的支持 如下图，阿里云WAF支持多配置多个域名，并根据用户请求来返回对应域名的证书。同时阿里云有个默认证书，当无法确定证书的时候，就返回默认的证书。
+对于共享型的WAF，默认返回的是阿里云的SSL证书；对于独享型的WAF，用户可以在控制台配置默认的证书。
+这个对to-B的系统来说，会有一定的挑战。如果对方企业用的是比较老的SAP版本，可能http客户端不支持SNI，这样的话，共享版的WAF会返回默认的阿里云证书，客户端验证证书时候会报错。这种情况，可能就只能选择独享版WAF，毕竟用户可以自定义默认证书，将默认证书设置成所需要的证书即可。
+另外，在更新SSL证书的时候，如果使用的是独享版WAF，除了更新所配置域名的证书以外，也要更新默认的证书。否则，由于旧的默认证书过期，对于不支持SNI的客户端，会出现验证证书的错误。
+SNI兼容性 SNI支持以下桌面版浏览器：
+ Chrome 5及以上版本 Chrome 6及以上版本（Windows XP） Firefox 2及以上版本 IE 7及以上版本（运行在Windows Vista/Server 2008及以上版本系统中，在XP系统中任何版本的IE浏览器都不支持SNI） Konqueror 4.7及以上版本 Opera 8及以上版本 Safari 3.0 on Windows Vista/Server 2008及以上版本，Mac OS X 10.5.6 及以上版本  SNI支持以下库：
+ GNU TLS Java 7及以上版本，仅作为客户端 HTTP client 4.3.2及以上版本 libcurl 7.18.1及以上版本 NSS 3.1.1及以上版本 OpenSSL 0.9.8j及以上版本 OpenSSL 0.9.8f及以上版本，需配置flag Qt 4.8及以上版本 Python3、Python 2.7.9及以上版本  SNI支持以下手机端浏览器：
+ Android Browser on 3.0 Honeycomb及以上版本 iOS Safari on iOS 4及以上版本 Windows Phone 7及以上版本  SNI支持以下服务器：</description>
+    </item>
+    
     <item>
       <title>Docker环境中curl报证书错误</title>
       <link>https://www.zengxi.net/2021/06/docker_curl_ssl_certificate_fail/</link>

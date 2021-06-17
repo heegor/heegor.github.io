@@ -132,6 +132,34 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_volume/">Kubernetes in Action笔记 - (9) 卷</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 22, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">卷 卷是 pod 的一个组成部分，不是独立的 Kubernetes 对象, 不能单独创建或删除。 pod 中的所有容器都可以使用卷, 但必须先将它挂载在每个需要访问它的容器中。
+卷类型 主要类型：
+ emptyDir:用于存储临时数据的简单空目录。 hostPath: 用于将目录从工作节点的文件系统挂载到pod中 gitRepo: 通过检出Git仓库的内容来初始化的卷 nfs: 挂载到pod中的NFS共享卷 用于挂载云服务商提供的特定存储类型。比如，gcePersistentDi sk (Google 高效能型存储磁盘卷)、 awsElasticBlockStore (AmazonWeb 服务弹性块存储卷)、 azureDisk …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/12/k8s_service/">Kubernetes in Action笔记 - (8) 服务、Endpoint、Ingress</a>
       </h3>
       <div class="post_meta">
@@ -387,37 +415,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/">Elastic Search vm.max_map_count too low 错误</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Nov 19, 2020</span>
-    <a href='https://www.zengxi.net/tags/elastic-search' class="post_tag button button_translucent">elastic search
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在启动elastic search的时候，在启动日志看到下面的错误提示
-1Max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144] 解决这个问题，有两个办法：
- 临时的，仅当前会话窗口有效 执行下面命令  1sysctl -w vm.max_map_count=262144 然后启动elastic search
-永久生效  编辑/etc/sysctl.conf, 添加或者修改下面参数：
-1vm.max_map_count=262144 重启系统，或者执行下面命令加载参数：
-1sysctl --system </p>
-          <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -471,6 +468,9 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
+        <a href="https://www.zengxi.net/2021/06/aliyun_waf_sni/" class="nav-link">阿里云WAF与SNI问题</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/02/es_search_improvement/" class="nav-link">订单ES查询性能优化</a>
       </li>
       <li>
@@ -491,12 +491,12 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <li>
         <a href="https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/" class="nav-link">Spring Quartz 指定Scheduler Name</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/01/manage-distribution-session-by-id/" class="nav-link">根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</a>
-      </li>
     </ul>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
+      <li>
+        <a href="https://www.zengxi.net/2021/06/aliyun_waf_sni/" class="nav-link">阿里云WAF与SNI问题</a>
+      </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/docker_curl_ssl_certificate_fail/" class="nav-link">Docker环境中curl报证书错误</a>
       </li>
@@ -518,9 +518,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_parallel_sort/" class="nav-link">Java 8新特性 - (10)并行数组排序</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java8_datetime_api/" class="nav-link">Java 8新特性 - (9)DateTime API</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -540,13 +537,13 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
           <span class="button_tally">10</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
-          LINUX
-          <span class="button_tally">9</span>
-        </a>
-        
         <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class="post_tag button button_translucent">
           系统优化那些事
+          <span class="button_tally">10</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/linux/' class="post_tag button button_translucent">
+          LINUX
           <span class="button_tally">9</span>
         </a>
         
@@ -689,7 +686,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=9>系统优化那些事<span class="button_tally">9</span>
+            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=10>系统优化那些事<span class="button_tally">10</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -785,9 +782,9 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
           <span class="button_tally">3</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/alpine/' class="post_tag button button_translucent">
-          ALPINE
-          <span class="button_tally">2</span>
+        <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class="post_tag button button_translucent">
+          阿里云
+          <span class="button_tally">3</span>
         </a>
         
         
@@ -1016,6 +1013,10 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/sni/' class=" post_tag button button_translucent" data-position=1>SNI<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/spring/' class=" post_tag button button_translucent" data-position=1>SPRING<span class="button_tally">1</span>
             </a>
             
@@ -1045,6 +1046,10 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             
             
             <a href='https://www.zengxi.net/tags/vmware/' class=" post_tag button button_translucent" data-position=1>VMWARE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/waf/' class=" post_tag button button_translucent" data-position=1>WAF<span class="button_tally">1</span>
             </a>
             
             
@@ -1136,7 +1141,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=2>阿里云<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
             </a>
             
             
