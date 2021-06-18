@@ -128,6 +128,35 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/11/nginx_security/">Nginx服务器安全加固</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Nov 22, 2020</span>
+    <a href='https://www.zengxi.net/tags/nginx' class="post_tag button button_translucent">nginx
+    </a>
+    <a href='https://www.zengxi.net/tags/security' class="post_tag button button_translucent">security
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">基础知识 常用配置 顶部配置
+1#定义 Nginx 运行的用户和用户组 2user nginx; 3 4#进程文件 5pid /var/run/nginx.pid; 6 7#错误日志位置和级别，debug、info、notice、warn、error、crit 8error_log /var/log/nginx/error.log warn; 9 10#Nginx worker 的进程数，一般可设置为可用的CPU内核数。 11worker_processes 8; 12 13#每个 worker 打开文件描述符的最大数量限制。理论值应该是最多打开文件数（系统的值ulimit -n） 14#与 nginx 进程数相除，但是 nginx …</p>
+          <a href="https://www.zengxi.net/2020/11/nginx_security/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/">Elastic Search vm.max_map_count too low 错误</a>
       </h3>
       <div class="post_meta">
@@ -389,35 +418,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/08/gitbook_installation_error/">gitbook因为nodejs版本不匹配导致安装报错</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Aug 1, 2020</span>
-    <a href='https://www.zengxi.net/tags/nodejs' class="post_tag button button_translucent">nodejs
-    </a>
-    <a href='https://www.zengxi.net/tags/gitbook' class="post_tag button button_translucent">gitbook
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">如果nodejs使用的不是10.x版本，就会报错
-1Installing GitBook 3.2.3 2/usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287 3 if (cb) cb.apply(this, arguments) 4 ^ 5 6TypeError: cb.apply is not a function 7 at …</p>
-          <a href="https://www.zengxi.net/2020/08/gitbook_installation_error/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -501,6 +501,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/java9_interface_private_method/" class="nav-link">Java 9新特性 - (1)接口中的私有方法</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/aliyun_waf_sni/" class="nav-link">阿里云WAF与SNI问题</a>
       </li>
       <li>
@@ -521,21 +524,18 @@
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_base64/" class="nav-link">Java 8新特性 - (11)Base64编解码</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java8_parallel_sort/" class="nav-link">Java 8新特性 - (10)并行数组排序</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
-        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">17</span>
+        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">18</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -624,7 +624,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=17>JAVA<span class="button_tally">17</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=18>JAVA<span class="button_tally">18</span>
             </a>
             
             
@@ -714,7 +714,7 @@
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">14</span>
+          <span class="button_tally">15</span>
         </a>
         
         
@@ -723,19 +723,19 @@
     <div>
       <h2 class="mt-4 taxonomy" id="tags-section">标签</h2>
       <nav class="tags_nav">
+        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">18</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">17</span>
-        </a>
-        
         <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
           JAVA-8
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -879,7 +879,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=17>JAVA<span class="button_tally">17</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=18>JAVA<span class="button_tally">18</span>
             </a>
             
             
@@ -887,7 +887,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=13>JAVA-8<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=14>JAVA-8<span class="button_tally">14</span>
             </a>
             
             

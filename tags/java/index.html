@@ -128,6 +128,38 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/06/java9_interface_private_method/">Java 9新特性 - (1)接口中的私有方法</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 18, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在Java 7或更早版本中，一个接口中只能定义如下两种：
+ 常量 抽象方法  在Java 8中接口引入了默认方法和静态方法。可以在接口中编写方法实现，仅仅需要使用default关键字来定义它们。
+Java 9提供了新的功能,可以在接口中使用private关键字定义私有方法和私有静态方法，这些私有方法的作用是用于改善接口内部的代码可重用性。例如，如果需要两个默认方法来共享代码，则私有接口方法将允许它们共享代码，但不将该私有方法暴露给它的实现类调用。
+截止至Java 9，一个接口中能定义如下几种：
+ 常量 (Java 7及以前版本支持) 抽象方法 (Java 7及以前版本支持) 默认方法 （Java 8+） 静态方法 （Java 8+） …</p>
+          <a href="https://www.zengxi.net/2021/06/java9_interface_private_method/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/06/java8_stamped_lock/">Java 8新特性 - (13)StampedLock</a>
       </h3>
       <div class="post_meta">
@@ -405,37 +437,6 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/05/java8_default_method/">Java 8新特性 - (4)默认方法</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    May 26, 2021</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">什么是默认方法 简单说，就是接口可以有实现方法，而且不需要实现类去实现其方法。只需在方法名前面加个default关键字即可。
-为什么要有默认方法 首先，之前的接口是个双刃剑，好处是面向抽象而不是面向具体编程，缺陷是，当需要修改接口时候，需要修改全部实现该接口的类，目前的java 8之前的集合框架没有foreach方法，通常能想到的解决办法是在JDK里给相关的接口添加新的方法及实现。然而，对于已经发布的版本，是没法在给接口添加新方法的同时不影响已有的实现。所以引进的默认方法。他们的目的是为了解决接口的修改与现有的实现不兼容的问题。
-简单的例子: 一个接口A，Clazz类实现了接口A。
-1public interface A { 2 …</p>
-          <a href="https://www.zengxi.net/2021/05/java8_default_method/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -498,6 +499,9 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/java9_interface_private_method/" class="nav-link">Java 9新特性 - (1)接口中的私有方法</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/aliyun_waf_sni/" class="nav-link">阿里云WAF与SNI问题</a>
       </li>
       <li>
@@ -518,21 +522,18 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_base64/" class="nav-link">Java 8新特性 - (11)Base64编解码</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java8_parallel_sort/" class="nav-link">Java 8新特性 - (10)并行数组排序</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
-        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">17</span>
+        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">18</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -621,7 +622,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=17>JAVA<span class="button_tally">17</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=18>JAVA<span class="button_tally">18</span>
             </a>
             
             
@@ -711,7 +712,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">14</span>
+          <span class="button_tally">15</span>
         </a>
         
         
@@ -720,19 +721,19 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
     <div>
       <h2 class="mt-4 taxonomy" id="tags-section">标签</h2>
       <nav class="tags_nav">
+        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">18</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">17</span>
-        </a>
-        
         <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
           JAVA-8
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -876,7 +877,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=17>JAVA<span class="button_tally">17</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=18>JAVA<span class="button_tally">18</span>
             </a>
             
             
@@ -884,7 +885,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=13>JAVA-8<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=14>JAVA-8<span class="button_tally">14</span>
             </a>
             
             

@@ -164,9 +164,13 @@
   <ul>
     <li><a href="#java-7">Java 7</a></li>
     <li><a href="#java-8">Java 8</a></li>
+    <li><a href="#java-9">Java 9</a></li>
+    <li><a href="#java-10">Java 10</a></li>
+    <li><a href="#java-11">Java 11</a></li>
   </ul>
 </nav>
     <hr>
+<p><em>最后更新日期：2021-06-18</em></p>
 <h2 id="java-7">Java 7</h2>
 <p><a href="/2021/02/java7_gramma_new_features/">Java语法特性</a>:</p>
 <ol>
@@ -212,6 +216,67 @@
 <li>删除了永久代（PermGen）.</li>
 <li>方法调用的字节码指令支持默认方法。</li>
 </ul>
+<h2 id="java-9">Java 9</h2>
+<ol>
+<li>Java模块系统 （Java Platform Module System）。</li>
+<li>新的版本号格式。$MAJOR.$MINOR.$SECURITY.$PATCH</li>
+<li>java shell，交互式命令行控制台。</li>
+<li>在private instance methods方法上可以使用@SafeVarargs注解。</li>
+<li>支持diamond语法与匿名内部类结合使用。</li>
+<li>下划线_不能单独作为变量名使用。</li>
+<li><a href="/2021/06/java9_interface_private_method/">支持私有接口方法</a></li>
+<li>Javadoc</li>
+</ol>
+<ul>
+<li>简化Doclet API。</li>
+<li>支持生成HTML5格式。</li>
+<li>加入了搜索框,使用这个搜索框可以查询程序元素、标记的单词和文档中的短语。</li>
+<li>支持新的模块系统。</li>
+</ul>
+<ol start="9">
+<li>JVM</li>
+</ol>
+<ul>
+<li>增强了Garbage-First(G1)并用它替代Parallel GC成为默认的垃圾收集器。</li>
+<li>统一了JVM 日志，为所有组件引入了同一个日志系统。</li>
+<li>删除了JDK 8中弃用的GC组合。（DefNew + CMS，ParNew + SerialOld，Incremental CMS）。</li>
+</ul>
+<ol start="10">
+<li>properties文件支持UTF-8编码,之前只支持ISO-8859-1。</li>
+<li>支持Unicode 8.0，在JDK8中是Unicode 6.2。</li>
+</ol>
+<h2 id="java-10">Java 10</h2>
+<ol>
+<li>局部变量类型推断（Local-Variable Type Inference）</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="c1">//之前的代码格式
+</span><span class="ln"> 2</span><span class="c1"></span><span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">&#34;http://www.oracle.com/&#34;</span><span class="o">);</span> 
+<span class="ln"> 3</span><span class="n">URLConnection</span> <span class="n">conn</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span> 
+<span class="ln"> 4</span><span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+<span class="ln"> 5</span>    <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">conn</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()))</span>
+<span class="ln"> 6</span><span class="c1">//java10中用var来声明变量
+</span><span class="ln"> 7</span><span class="c1"></span><span class="n">var</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">&#34;http://www.oracle.com/&#34;</span><span class="o">);</span> 
+<span class="ln"> 8</span><span class="n">var</span> <span class="n">conn</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span> 
+<span class="ln"> 9</span><span class="n">var</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+<span class="ln">10</span>    <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">conn</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+</code></pre></div><p>var是一个保留类型名称，而不是关键字。所以之前使用var作为变量、方法名、包名的都没问题，但是如果作为类或接口名，那么这个类和接口就必须重命名了。</p>
+<p>var的使用场景主要有以下四种：</p>
+<ul>
+<li>本地变量初始化。</li>
+<li>增强for循环中。</li>
+<li>传统for循环中声明的索引变量。</li>
+<li><code>Try-with-resources</code> 变量。​</li>
+</ul>
+<p>2.Optional类添加了新的方法orElseThrow(无参数版)。相比于已经存在的get方法，这个方法更推荐使用。</p>
+<h2 id="java-11">Java 11</h2>
+<ol>
+<li>支持Unicode 10.0,在jdk10中是8.0。</li>
+<li>标准化HTTP Client</li>
+<li>编译器线程的延迟分配。添加了新的命令<code>-XX:+UseDynamicNumberOfCompilerThreads</code>动态控制编译器线程的数量。</li>
+<li>新的垃圾收集器—ZGC。一种可伸缩的低延迟垃圾收集器(实验性)。</li>
+<li>Epsilon。一款新的实验性无操作垃圾收集器。Epsilon GC 只负责内存分配，不实现任何内存回收机制。这对于性能测试非常有用，可用于与其他GC对比成本和收益。</li>
+<li>Lambda参数的局部变量语法。java10中引入的var字段得到了增强，现在可以用在lambda表达式的声明中。如果lambda表达式的其中一个形式参数使用了var，那所有的参数都必须使用var。</li>
+</ol>
 <hr>
 <p>参考：</p>
 <ul>
@@ -259,6 +324,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/java9_interface_private_method/" class="nav-link">Java 9新特性 - (1)接口中的私有方法</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/aliyun_waf_sni/" class="nav-link">阿里云WAF与SNI问题</a>
       </li>
       <li>
@@ -279,21 +347,18 @@
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_base64/" class="nav-link">Java 8新特性 - (11)Base64编解码</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java8_parallel_sort/" class="nav-link">Java 8新特性 - (10)并行数组排序</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
-        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
-          KUBERNETES
+        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
+          JAVA
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">17</span>
+        <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
+          KUBERNETES
+          <span class="button_tally">18</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -382,7 +447,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=17>JAVA<span class="button_tally">17</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=18>JAVA<span class="button_tally">18</span>
             </a>
             
             
@@ -472,7 +537,7 @@
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">14</span>
+          <span class="button_tally">15</span>
         </a>
         
         
@@ -481,19 +546,19 @@
     <div>
       <h2 class="mt-4 taxonomy" id="tags-section">标签</h2>
       <nav class="tags_nav">
+        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
+          JAVA
+          <span class="button_tally">18</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
           KUBERNETES
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
-          JAVA
-          <span class="button_tally">17</span>
-        </a>
-        
         <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
           JAVA-8
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -637,7 +702,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=17>JAVA<span class="button_tally">17</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=18>JAVA<span class="button_tally">18</span>
             </a>
             
             
@@ -645,7 +710,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=13>JAVA-8<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=14>JAVA-8<span class="button_tally">14</span>
             </a>
             
             

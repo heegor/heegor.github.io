@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="" class="page">
   <head>
-<title>Linux下面使用dd命令烧录U盘并查看执行进度 | 保罗札记</title>
+<title>Java 9新特性 - (1)接口中的私有方法 | 保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,17 +19,17 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="烧录U盘 先用fdisk来查看U盘的盘符
-1sudo fdisk -l 再用dd命令来写数据到U盘
-1sudo dd if=/home/paul/Downloads/test.iso of=/dev/sdc bs=1M count=10000 查看执行进度 假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命 …">
+<meta name="description" content="在Java 7或更早版本中，一个接口中只能定义如下两种：
+ 常量 抽象方法  在Java 8中接口引入了默认方法和静态方法。可以在接口中编写方法实现，仅仅需要使用default关键字来定义它们。
+Java 9提供了新的功能,可以在接口中使用private关键字定义私有方法和私有静态方法，这些私有方法的作用是用于改善接口 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="Linux下面使用dd命令烧录U盘并查看执行进度" />
-<meta property="og:url" content="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/" />
-<meta property="og:title" content="Linux下面使用dd命令烧录U盘并查看执行进度" />
-<meta property="og:description" content="烧录U盘 先用fdisk来查看U盘的盘符
-1sudo fdisk -l 再用dd命令来写数据到U盘
-1sudo dd if=/home/paul/Downloads/test.iso of=/dev/sdc bs=1M count=10000 查看执行进度 假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命 …" />
+<meta name="twitter:title" content="Java 9新特性 - (1)接口中的私有方法" />
+<meta property="og:url" content="https://www.zengxi.net/2021/06/java9_interface_private_method/" />
+<meta property="og:title" content="Java 9新特性 - (1)接口中的私有方法" />
+<meta property="og:description" content="在Java 7或更早版本中，一个接口中只能定义如下两种：
+ 常量 抽象方法  在Java 8中接口引入了默认方法和静态方法。可以在接口中编写方法实现，仅仅需要使用default关键字来定义它们。
+Java 9提供了新的功能,可以在接口中使用private关键字定义私有方法和私有静态方法，这些私有方法的作用是用于改善接口 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -38,7 +38,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/">
+<link rel="canonical" href="https://www.zengxi.net/2021/06/java9_interface_private_method/">
 
     
 
@@ -128,25 +128,27 @@
   
 <div class="grid-inverse wrap content">
   <article class="post_content">
-    <h1 class="post_title">Linux下面使用dd命令烧录U盘并查看执行进度</h1><div class="post_meta">
+    <h1 class="post_title">Java 9新特性 - (1)接口中的私有方法</h1><div class="post_meta">
   <svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg>
   <span class="post_date">
-    Jul 13, 2020</span>
-    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
+    Jun 18, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
     </a>
 </div>
 
     
 <div class="post_share">
   分享到:
-  <a href="https://twitter.com/intent/tweet?text=Linux%e4%b8%8b%e9%9d%a2%e4%bd%bf%e7%94%a8dd%e5%91%bd%e4%bb%a4%e7%83%a7%e5%bd%95U%e7%9b%98%e5%b9%b6%e6%9f%a5%e7%9c%8b%e6%89%a7%e8%a1%8c%e8%bf%9b%e5%ba%a6&url=https%3a%2f%2fwww.zengxi.net%2f2020%2f07%2flinux_dd_cmd_write_usb_disk%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+  <a href="https://twitter.com/intent/tweet?text=Java%209%e6%96%b0%e7%89%b9%e6%80%a7%20-%20%281%29%e6%8e%a5%e5%8f%a3%e4%b8%ad%e7%9a%84%e7%a7%81%e6%9c%89%e6%96%b9%e6%b3%95&url=https%3a%2f%2fwww.zengxi.net%2f2021%2f06%2fjava9_interface_private_method%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
     <svg class="icon">
   <use xlink:href="#twitter"></use>
 </svg>
   </a>
-  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2020%2f07%2flinux_dd_cmd_write_usb_disk%2f&t=Linux%e4%b8%8b%e9%9d%a2%e4%bd%bf%e7%94%a8dd%e5%91%bd%e4%bb%a4%e7%83%a7%e5%bd%95U%e7%9b%98%e5%b9%b6%e6%9f%a5%e7%9c%8b%e6%89%a7%e8%a1%8c%e8%bf%9b%e5%ba%a6" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2021%2f06%2fjava9_interface_private_method%2f&t=Java%209%e6%96%b0%e7%89%b9%e6%80%a7%20-%20%281%29%e6%8e%a5%e5%8f%a3%e4%b8%ad%e7%9a%84%e7%a7%81%e6%9c%89%e6%96%b9%e6%b3%95" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
     <svg class="icon">
   <use xlink:href="#facebook"></use>
 </svg>
@@ -156,7 +158,7 @@
   <use xlink:href="#linkedin"></use>
 </svg>
   </a>
-  <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/" title="Copy Link" class="link link_yank">
+  <a href="https://www.zengxi.net/2021/06/java9_interface_private_method/" title="Copy Link" class="link link_yank">
     <svg class="icon">
   <use xlink:href="#copy"></use>
 </svg>
@@ -164,45 +166,59 @@
 </div>
 
     
-    <h1 id="烧录u盘">烧录U盘</h1>
-<p>先用fdisk来查看U盘的盘符</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo fdisk -l
-</code></pre></div><p>再用dd命令来写数据到U盘</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo dd <span class="k">if</span><span class="o">=</span>/home/paul/Downloads/test.iso <span class="nv">of</span><span class="o">=</span>/dev/sdc <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span><span class="m">10000</span>
-</code></pre></div><h1 id="查看执行进度">查看执行进度</h1>
-<p>假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命令行窗口，执行下面的命令，注意命令上面可能需要加上sudo</p>
-<p>方法一：</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>watch -n 5 pkill -USR1 ^dd$
-</code></pre></div><p>方法二：</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>watch -n 5 killall -USR1 dd
-</code></pre></div><p>方法三：</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>while killall -USR1 dd; do sleep 5; done
-</code></pre></div><p>方法四：</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>while (ps auxww |grep &#34; dd &#34; |grep -v grep |awk &#39;{print $2}&#39; |while read pid; do kill -USR1 $pid; done) ; do sleep 5; done
-</code></pre></div><p>上述四种方法中使用三个命令：pkill、killall、kill向dd命令发送SIGUSR1信息，dd命令进程接收到信号之后就打印出自己当前的进度。</p>
-<p>看到的效果类似：</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln"> 1</span>772+0 records in
-<span class="ln"> 2</span>772+0 records out
-<span class="ln"> 3</span>809500672 bytes (810 MB, 772 MiB) copied, 117.321 s, 6.9 MB/s
-<span class="ln"> 4</span>791+0 records in
-<span class="ln"> 5</span>791+0 records out
-<span class="ln"> 6</span>829423616 bytes (829 MB, 791 MiB) copied, 122.737 s, 6.8 MB/s
-<span class="ln"> 7</span>809+0 records in
-<span class="ln"> 8</span>809+0 records out
-<span class="ln"> 9</span>848297984 bytes (848 MB, 809 MiB) copied, 128.148 s, 6.6 MB/s
-<span class="ln">10</span>824+0 records in
-<span class="ln">11</span>824+0 records out
-<span class="ln">12</span>864026624 bytes (864 MB, 824 MiB) copied, 132.425 s, 6.5 MB/s
-<span class="ln">13</span>843+0 records in
-<span class="ln">14</span>843+0 records out
-<span class="ln">15</span>883949568 bytes (884 MB, 843 MiB) copied, 137.895 s, 6.4 MB/s
-<span class="ln">16</span>862+0 records in
-<span class="ln">17</span>862+0 records out
-<span class="ln">18</span>903872512 bytes (904 MB, 862 MiB) copied, 143.285 s, 6.3 MB/s
-<span class="ln">19</span>877+0 records in
-<span class="ln">20</span>877+0 records out
-<span class="ln">21</span>919601152 bytes (920 MB, 877 MiB) copied, 147.639 s, 6.2 MB/s
-</code></pre></div>
+    <p>在Java 7或更早版本中，一个接口中只能定义如下两种：</p>
+<ul>
+<li>常量</li>
+<li>抽象方法</li>
+</ul>
+<p>在Java 8中接口引入了默认方法和静态方法。可以在接口中编写方法实现，仅仅需要使用<code>default</code>关键字来定义它们。</p>
+<p>Java 9提供了新的功能,可以在接口中使用<code>private</code>关键字定义私有方法和私有静态方法，这些私有方法的作用是用于改善接口内部的代码可重用性。例如，如果需要两个默认方法来共享代码，则私有接口方法将允许它们共享代码，但不将该私有方法暴露给它的实现类调用。</p>
+<p>截止至Java 9，一个接口中能定义如下几种：</p>
+<ul>
+<li>常量 (Java 7及以前版本支持)</li>
+<li>抽象方法 (Java 7及以前版本支持)</li>
+<li>默认方法 （Java 8+）</li>
+<li>静态方法 （Java 8+）</li>
+<li>私有方法 （Java 9+）</li>
+<li>私有静态方法 （Java 9+）</li>
+</ul>
+<p>可以使用<code>private</code>访问修饰符在接口中编写私有方法。在接口中使用私有方法有四个规则：</p>
+<ul>
+<li>接口中private方法不能是abstract抽象方法。因为abstract抽象方法是公开的用于给接口实现类实现的方法，所以不能是private。</li>
+<li>接口中私有方法只能在接口内部的方法里面被调用。</li>
+<li>接口中私有静态方法可以在其他静态和非静态接口方法中使用。</li>
+<li>接口中私有非静态方法不能在私有静态方法内部使用。</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">interface</span> <span class="nc">CustomInterface</span> <span class="o">{</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span>    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">abstractMethod</span><span class="o">();</span>  <span class="c1">//抽象方法不能是私有的
+</span><span class="ln"> 4</span><span class="c1"></span>
+<span class="ln"> 5</span>    <span class="kd">public</span> <span class="k">default</span> <span class="kt">void</span> <span class="nf">defaultMethod</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln"> 6</span>        <span class="n">privateMethod</span><span class="o">();</span> <span class="c1">//可以调用接口中的私有方法
+</span><span class="ln"> 7</span><span class="c1"></span>        <span class="n">privateStaticMethod</span><span class="o">();</span> <span class="c1">//可以调用接口中的私有静态方法
+</span><span class="ln"> 8</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;普通方法被调用&#34;</span><span class="o">);</span>
+<span class="ln"> 9</span>    <span class="o">}</span>
+<span class="ln">10</span>
+<span class="ln">11</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">staticMethod</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln">12</span>        <span class="n">privateStaticMethod</span><span class="o">();</span> <span class="c1">//public静态方法可以调用private静态方法
+</span><span class="ln">13</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;静态方法被调用&#34;</span><span class="o">);</span>
+<span class="ln">14</span>    <span class="o">}</span>
+<span class="ln">15</span>
+<span class="ln">16</span>    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">privateMethod</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln">17</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;private私有方法被调用&#34;</span><span class="o">);</span>
+<span class="ln">18</span>    <span class="o">}</span>
+<span class="ln">19</span>
+<span class="ln">20</span>    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">privateStaticMethod</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln">21</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;private私有静态方法被调用&#34;</span><span class="o">);</span>
+<span class="ln">22</span>    <span class="o">}</span>
+<span class="ln">23</span><span class="o">}</span>
+</code></pre></div><hr>
+<p>参考：</p>
+<ul>
+<li><a href="https://blog.csdn.net/tracydragonlxy/article/details/78082600">https://blog.csdn.net/tracydragonlxy/article/details/78082600</a></li>
+<li><a href="https://blog.csdn.net/hanxiaotongtong/article/details/109043531">https://blog.csdn.net/hanxiaotongtong/article/details/109043531</a></li>
+</ul>
+
     
       
     
@@ -244,9 +260,6 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://www.zengxi.net/2021/06/java9_interface_private_method/" class="nav-link">Java 9新特性 - (1)接口中的私有方法</a>
-      </li>
-      <li>
         <a href="https://www.zengxi.net/2021/06/aliyun_waf_sni/" class="nav-link">阿里云WAF与SNI问题</a>
       </li>
       <li>
@@ -266,6 +279,9 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_base64/" class="nav-link">Java 8新特性 - (11)Base64编解码</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/06/java8_parallel_sort/" class="nav-link">Java 8新特性 - (10)并行数组排序</a>
       </li>
     </ul>
     <div>
