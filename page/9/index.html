@@ -132,6 +132,66 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/04/docker-hub-mirror/">Docker Hub国内镜像加速</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Apr 22, 2020</span>
+    <a href='https://www.zengxi.net/tags/docker' class="post_tag button button_translucent">docker
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">国内访问Docker Hub速度比较感人，这个时候需要配置国内的镜像，来加速下载。由于镜像服务可能出现宕机，建议同时配置多个镜像。
+Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json，写入如下内容
+1{ 2 &#34;registry-mirrors&#34;: [ 3 &#34;https://hub-mirror.c.163.com&#34;, 4 &#34;https://registry.docker-cn.com&#34; 5 ] 6} 重启服务
+1sudo systemctl daemon-reload 2sudo systemctl …</p>
+          <a href="https://www.zengxi.net/2020/04/docker-hub-mirror/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/04/modify-apine-mirror/">修改Alpine镜像源</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Apr 21, 2020</span>
+    <a href='https://www.zengxi.net/tags/alpine' class="post_tag button button_translucent">alpine
+    </a>
+    <a href='https://www.zengxi.net/tags/docker' class="post_tag button button_translucent">docker
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">docker使用alpine作为基础可以减少image的大小，但是如果编写的dockerfile中需要安装一些软件，在编译image过程中，可能速度会很慢甚至卡住。
+Alpine 的源文件为/etc/apk/repositories。默认的配置类似：
+1http://dl-cdn.alpinelinux.org/alpine/v3.11/main 2http://dl-cdn.alpinelinux.org/alpine/v3.11/community 这个时候就需要在dockerfile中添加下面的命令，将安装包路径指向国内的镜像。
+1# 使用阿里云的镜像源 2sed -i …</p>
+          <a href="https://www.zengxi.net/2020/04/modify-apine-mirror/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/01/postgres-frequently-used-commands/">转: Postgres数据库DBA常用命令</a>
       </h3>
       <div class="post_meta">
@@ -369,63 +429,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/12/hibernate-criteria-builder-time-range/">Hibernate中用criteria builder处理日期与时间分开的字段</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 6, 2018</span>
-    <a href='https://www.zengxi.net/tags/hibernate' class="post_tag button button_translucent">hibernate
-    </a>
-    <a href='https://www.zengxi.net/tags/criteria-builder' class="post_tag button button_translucent">criteria builder
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">现有系统中原先在设计数据库字段的时候，把日期与时间分别存入两个不同的字段，但是这两个字段在数据库中都是以timestamp类型来保存。这样的话，如果需要在where条件中把这两个字段与某个特定的时间做比较，则需要分别截取有效的信息。对于日期字段仅仅取出日期的值，把时间舍弃；对于时间字段仅仅取出时间的值，把日期舍弃。
-举个例子，假设数据库中有两个字段：returnSlaDate存的是物品归还截止日期，returnSlaTime存的是物品归还截止时间。实际在保存的时候，数据库中returnSlaDate字段的值可能会是 2018-12-31 00:00:00 ，其中 00:00:00 是没有用的，在与特定时间做比较的时候，需要舍 …</p>
-          <a href="https://www.zengxi.net/2018/12/hibernate-criteria-builder-time-range/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/">记一次打开Excel文件错误的排查</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 5, 2018</span>
-    <a href='https://www.zengxi.net/tags/excel' class="post_tag button button_translucent">excel
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在生产环境中，某个结果集导出的excel文件用Microsoft Excel无法打开，看到如下错误：
-最开始怀疑是在生成文件的时候，文件损坏掉了，但是重新生成多次，得到的结果都是一样的。在相同的界面，导出其他结果集所生成的文件却都是可以成功打开的，这样就可以排除代码功能方面的问题。如果和代码无关，那么就可能和数据有关系。根据出错提示给出的文件地址“C:\Users\ZHANGZ~1\AppData\Local\Temp\error083200_01.xml”, 打开该临时文件，可以看到下面的信息
-1&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; …</p>
-          <a href="https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -506,6 +509,12 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/06/java9_anonymous_inner_class_and_diamond_operator/" class="nav-link">Java 9新特性 - (2)匿名内部类与菱形运算符</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java9_interface_private_method/" class="nav-link">Java 9新特性 - (1)接口中的私有方法</a>
       </li>
       <li>
@@ -523,19 +532,13 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_unsigned_arithmetic/" class="nav-link">Java 8新特性 - (12)无符号运算</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/true_form_and_complement/" class="nav-link">原码、反码、补码和位移运算</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java8_base64/" class="nav-link">Java 8新特性 - (11)Base64编解码</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">18</span>
+          <span class="button_tally">20</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
@@ -629,7 +632,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=18>JAVA<span class="button_tally">18</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=20>JAVA<span class="button_tally">20</span>
             </a>
             
             
@@ -719,7 +722,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">15</span>
+          <span class="button_tally">17</span>
         </a>
         
         
@@ -730,7 +733,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">18</span>
+          <span class="button_tally">20</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
@@ -740,7 +743,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
           JAVA-8
-          <span class="button_tally">14</span>
+          <span class="button_tally">13</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -788,13 +791,13 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <span class="button_tally">4</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/' class="post_tag button button_translucent">
-          算法
+        <a href='https://www.zengxi.net/tags/java-9/' class="post_tag button button_translucent">
+          JAVA-9
           <span class="button_tally">3</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class="post_tag button button_translucent">
-          阿里云
+        <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/' class="post_tag button button_translucent">
+          算法
           <span class="button_tally">3</span>
         </a>
         
@@ -884,7 +887,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=18>JAVA<span class="button_tally">18</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=20>JAVA<span class="button_tally">20</span>
             </a>
             
             
@@ -892,7 +895,11 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=14>JAVA-8<span class="button_tally">14</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=13>JAVA-8<span class="button_tally">13</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/java-9/' class=" post_tag button button_translucent" data-position=3>JAVA-9<span class="button_tally">3</span>
             </a>
             
             

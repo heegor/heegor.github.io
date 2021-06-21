@@ -6,7 +6,30 @@
     <description>Recent content in java on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 18 Jun 2021 17:22:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Jun 2021 16:10:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 9新特性 - (3)@SafeVarargs注解支持私有方法</title>
+      <link>https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/</link>
+      <pubDate>Mon, 21 Jun 2021 16:10:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/</guid>
+      <description>Java 7 引入了@SafeVarargs注解来抑制当方法具有varargs（可变数量的参数）时出现的不安全操作警告,比如具有模糊类型（比如：泛型）的可变参数。@SafeVarargs注解只能用于无法覆盖的方法（final方法、static方法或构造函数），因为重写方法仍然可以对其 varargs（可变数量的参数）执行不安全操作。
+Java 9 扩展了@SafeVarargs注解的使用，它现在也可以与私有方法一起使用。这是因为私有方法也是无法覆盖的。
+Java 9 示例 - 当不使用@SafeVarargs注解时
+1import java.util.ArrayList; 2import java.util.List; 3public class JavaExample{ 4 // We are not using @SafeVarargs annotation - Java 9 5 private void print(List... names) { 6 for (List&amp;lt;String&amp;gt; name : names) { 7 System.out.println(name); 8 } 9 } 10 public static void main(String[] args) { 11 JavaExample obj = new JavaExample(); 12 List&amp;lt;String&amp;gt; list = new ArrayList&amp;lt;String&amp;gt;(); 13 list.add(&amp;#34;Kevin&amp;#34;); 14 list.</description>
+    </item>
+    
+    <item>
+      <title>Java 9新特性 - (2)匿名内部类与菱形运算符</title>
+      <link>https://www.zengxi.net/2021/06/java9_anonymous_inner_class_and_diamond_operator/</link>
+      <pubDate>Mon, 21 Jun 2021 15:30:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/06/java9_anonymous_inner_class_and_diamond_operator/</guid>
+      <description>什么是菱形运算符 菱形操作符是作为 java SE 7 中的新功能引入的。菱形操作符的目的是通过将泛型类型保留在表达式的右侧来避免冗余代码。
+1// Java 7之前的写法 2List&amp;lt;string&amp;gt; myList = new ArrayList&amp;lt;string&amp;gt;(); 3 4// Java 7及之后的写法 5List&amp;lt;string&amp;gt; myList = new ArrayList&amp;lt;&amp;gt;(); Java 7 允许我们在普通类中使用菱形运算符，但它不允许我们在匿名内部类中使用它们。
+1abstract class MyClass&amp;lt;T&amp;gt;{ 2 abstract T add(T num, T num2); 3} 4public class JavaExample { 5 public static void main(String[] args) { 6 MyClass&amp;lt;Integer&amp;gt; obj = new MyClass&amp;lt;&amp;gt;() { 7 Integer add(Integer x, Integer y) { 8 return x+y; 9 } 10 }; 11 Integer sum = obj.</description>
+    </item>
+    
     <item>
       <title>Java 9新特性 - (1)接口中的私有方法</title>
       <link>https://www.zengxi.net/2021/06/java9_interface_private_method/</link>

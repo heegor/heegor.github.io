@@ -6,21 +6,7 @@
     <description>Recent content in java 8 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 18 Jun 2021 17:22:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/java-8/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Java 9新特性 - (1)接口中的私有方法</title>
-      <link>https://www.zengxi.net/2021/06/java9_interface_private_method/</link>
-      <pubDate>Fri, 18 Jun 2021 17:22:00 +0800</pubDate>
-      
-      <guid>https://www.zengxi.net/2021/06/java9_interface_private_method/</guid>
-      <description>在Java 7或更早版本中，一个接口中只能定义如下两种：
- 常量 抽象方法  在Java 8中接口引入了默认方法和静态方法。可以在接口中编写方法实现，仅仅需要使用default关键字来定义它们。
-Java 9提供了新的功能,可以在接口中使用private关键字定义私有方法和私有静态方法，这些私有方法的作用是用于改善接口内部的代码可重用性。例如，如果需要两个默认方法来共享代码，则私有接口方法将允许它们共享代码，但不将该私有方法暴露给它的实现类调用。
-截止至Java 9，一个接口中能定义如下几种：
- 常量 (Java 7及以前版本支持) 抽象方法 (Java 7及以前版本支持) 默认方法 （Java 8+） 静态方法 （Java 8+） 私有方法 （Java 9+） 私有静态方法 （Java 9+）  可以使用private访问修饰符在接口中编写私有方法。在接口中使用私有方法有四个规则：
- 接口中private方法不能是abstract抽象方法。因为abstract抽象方法是公开的用于给接口实现类实现的方法，所以不能是private。 接口中私有方法只能在接口内部的方法里面被调用。 接口中私有静态方法可以在其他静态和非静态接口方法中使用。 接口中私有非静态方法不能在私有静态方法内部使用。  1interface CustomInterface { 2 3 public abstract void abstractMethod(); //抽象方法不能是私有的 4 5 public default void defaultMethod() { 6 privateMethod(); //可以调用接口中的私有方法 7 privateStaticMethod(); //可以调用接口中的私有静态方法 8 System.out.println(&amp;#34;普通方法被调用&amp;#34;); 9 } 10 11 public static void staticMethod() { 12 privateStaticMethod(); //public静态方法可以调用private静态方法 13 System.</description>
-    </item>
-    
+    <lastBuildDate>Tue, 08 Jun 2021 13:37:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/java-8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Java 8新特性 - (13)StampedLock</title>
       <link>https://www.zengxi.net/2021/06/java8_stamped_lock/</link>
