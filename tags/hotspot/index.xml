@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hotspot on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/hotspot/</link>
+    <description>Recent content in hotspot on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Mon, 21 Jun 2021 19:30:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/hotspot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 8新特性 - (14)Hotspot删除永久代</title>
+      <link>https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/</link>
+      <pubDate>Mon, 21 Jun 2021 19:30:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/</guid>
+      <description>JDK 6、JDK 7、JDK 8 内存模型演变 这些版本的JVM内存模型主要有以下差异：
+ JDK 6：有永久代，静态变量存放在永久代上。 JDK 7：有永久代，但已经把字符串常量池、静态变量，存放在堆上。逐渐地减少永久代的使用。 JDK 8：无永久代，运行时常量池、类常量池，都保存在元数据区，也就是常说的元空间。但字符串常量池仍然存放在堆上。  内存模型各区域概要 程序计数器  较小的内存空间、线程私有，记录当前线程所执行的字节码行号。 如果执行 Java 方法，计数器记录虚拟机字节码当前指令的地址，本地方法则为空。 这一块区域没有任何 OutOfMemoryError 定义。  Java虚拟机栈  每一个方法在执行的同时，都会创建出一个栈帧，用于存放局部变量表、操作数栈、动态链接、方法出口、线程等信息。 方法从调用到执行完成，都对应着栈帧从虚拟机中入栈和出栈的过程。 最终，栈帧会随着方法的创建到结束而销毁。  本地方法栈  本地方法栈与Java虚拟机栈作用类似，唯一不同的就是本地方法栈执行的是Native方法，而虚拟机栈是为JVM执行Java方法服务的。 与 Java 虚拟机栈一样，本地方法栈也会抛出 StackOverflowError 和 OutOfMemoryError 异常。 Java 8 HotSpot虚拟机直接就把本地方法栈和虚拟机栈合二为一。  堆和元空间 Java 8 JVM 的内存结构主要由三大块组成：堆内存、元空间和栈，Java 堆是内存空间占据最大的一块区域。
+ Java 堆，由年轻代和年老代组成，分别占据1/3和2/3。 而年轻代又分为三部分，Eden、From Survivor、To Survivor，占据比例为8:1:1，可调。 这里特意画出了元空间，也就是直接内存区域。在 Java 8 之后就不在堆上分配方法区了。 元空间从虚拟机Java堆中转移到本地内存，默认情况下，元空间的大小仅受本地内存的限制，说白了也就是以后不会因为永久代空间不够而抛出OOM异常出现了。Java 8以前版本的 class和JAR包数据存储在 PermGen下面 ，PermGen 大小是固定的，而且项目之间无法共用，公有的 class，所以比较容易出现OOM异常。  常量池 从 Java 7开始把常量池从永久代中剥离，直到 Java 8 去掉了永久代。而字符串常量池一直放在堆空间，用于存储字符串对象，或是字符串对象的引用。</description>
+    </item>
+    
+  </channel>
+</rss>

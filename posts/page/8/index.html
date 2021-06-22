@@ -128,6 +128,34 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/07/jetty_tmp_dir/">jetty临时目录下的资源文件被删导致js等资源找不到</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 14, 2020</span>
+    <a href='https://www.zengxi.net/tags/jetty' class="post_tag button button_translucent">jetty
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">生产环境上jetty运行一段时间后，在打开某个网页的时候发现有js、css文件找不到，但是重启之后问题会解决。后来发现是设定了tmpwatch后台任务，定时会清理一次系统的tmp目录。
+默认情况下，如果没有指定jetty的临时目录，默认会使用系统的临时目录。解决方案就是，修改jetty的临时文件存放目录，不要放在 /tmp 目录下面。主要有下面几个方法：
+ 设置basetempdir值  1&lt;Configure class=&#34;org.eclipse.jetty.webapp.WebAppContext&#34;&gt; 2 3 &lt;Set …</p>
+          <a href="https://www.zengxi.net/2020/07/jetty_tmp_dir/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/">Linux下面使用dd命令烧录U盘并查看执行进度</a>
       </h3>
       <div class="post_meta">
@@ -390,33 +418,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/04/pg_close_session_remove_db/">Postgres关闭某个数据库关联的session</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Apr 23, 2020</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">Postgres删除数据库的时候，报错：有其他用户正在使用该数据库，无法删除。这时，需要关闭这个数据库的相关的连接，然后再删除数据库
-可以执行下面的命令来关闭连接：</p>
-          <a href="https://www.zengxi.net/2020/04/pg_close_session_remove_db/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -500,6 +501,9 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
       <li>
@@ -520,16 +524,13 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_stamped_lock/" class="nav-link">Java 8新特性 - (13)StampedLock</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java8_unsigned_arithmetic/" class="nav-link">Java 8新特性 - (12)无符号运算</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">20</span>
+          <span class="button_tally">21</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
@@ -623,7 +624,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=20>JAVA<span class="button_tally">20</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=21>JAVA<span class="button_tally">21</span>
             </a>
             
             
@@ -706,14 +707,14 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     <div>
       <h2 class="mt-4 taxonomy" id="series-section">专栏</h2>
       <nav class="tags_nav">
-        <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
-          KUBERNETES-IN-ACTION笔记
+        <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
+          JAVA各版本新特性
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
-          JAVA各版本新特性
-          <span class="button_tally">17</span>
+        <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
+          KUBERNETES-IN-ACTION笔记
+          <span class="button_tally">18</span>
         </a>
         
         
@@ -724,7 +725,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">20</span>
+          <span class="button_tally">21</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
@@ -734,7 +735,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
         
         <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
           JAVA-8
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -874,11 +875,15 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/hotspot/' class=" post_tag button button_translucent" data-position=1>HOTSPOT<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/inputstream/' class=" post_tag button button_translucent" data-position=1>INPUTSTREAM<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=20>JAVA<span class="button_tally">20</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=21>JAVA<span class="button_tally">21</span>
             </a>
             
             
@@ -886,7 +891,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=13>JAVA-8<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=14>JAVA-8<span class="button_tally">14</span>
             </a>
             
             
@@ -907,6 +912,10 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             
             
             <a href='https://www.zengxi.net/tags/jvisualvm/' class=" post_tag button button_translucent" data-position=1>JVISUALVM<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/jvm/' class=" post_tag button button_translucent" data-position=1>JVM<span class="button_tally">1</span>
             </a>
             
             

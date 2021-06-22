@@ -128,6 +128,36 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_statefulset/">Kubernetes in Action笔记 - (13) Statefulset</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 29, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">了解Statefulset 与ReplicaSet比较 Statefulset 保证了pod在重新调度后保留它们的标识和状态。
+与ReplicaSet类似, Statefulset 也是依据Statefulset 的pod模板创建的，也会指定期望的副本个数。
+不同的是, Statefulset创建的pod副本并不是完全一样的。每个pod都可以拥有一组独立的数据卷(持久化状态)。pod的名字都是规律的(固定的), 而不是每个新pod都随机获取一个名字。
+提供稳定的网络标识 一个Statefulset创建的每个pod都有一个从零开始的顺序索引, 这个会体现在pod的名称和主机名上, 同样还会体现在pod对应的固定存储上。
+与普通的pod …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/12/k8s_deployment/">Kubernetes in Action笔记 - (12) Deployment</a>
       </h3>
       <div class="post_meta">
@@ -385,34 +415,6 @@ phase有以下几种值：
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/">Kubernetes in Action笔记 - (3) Pod介绍</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 3, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">什么是Pod Pod是k8s的基本构建模块，包含一个或者多个容器。一个Pod中的所有容器都运行在同—个节点上，绝不跨越两个节点
-为何需要Pod 多个容器比单个容器中包含多个进程要好 想象一个由多个进程组成的应用程序, 无论是通过ipc (进程间通信)还是本地存储文件进行通信, 都要求它们运行于同一 台机器上。 在k8s中, 我们经常在容器中运行进程, 由于每一个容器都非常像一台独立的机器, 此时你可能认为在单个容器中运行多个进程是合乎逻辑的, 然而在实践中这种做法并不合理。
-容器被设计为每个容器只运行一个进程(除非进程本身产生子进程)。如果在单个容器中运行多个不相关的进程, 那么保持所有进程运行、 管理它们的日志等将会是我们的责任。 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -493,6 +495,9 @@ phase有以下几种值：
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
       <li>
@@ -513,16 +518,13 @@ phase有以下几种值：
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_stamped_lock/" class="nav-link">Java 8新特性 - (13)StampedLock</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java8_unsigned_arithmetic/" class="nav-link">Java 8新特性 - (12)无符号运算</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">20</span>
+          <span class="button_tally">21</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
@@ -616,7 +618,7 @@ phase有以下几种值：
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=20>JAVA<span class="button_tally">20</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=21>JAVA<span class="button_tally">21</span>
             </a>
             
             
@@ -699,14 +701,14 @@ phase有以下几种值：
     <div>
       <h2 class="mt-4 taxonomy" id="series-section">专栏</h2>
       <nav class="tags_nav">
-        <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
-          KUBERNETES-IN-ACTION笔记
+        <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
+          JAVA各版本新特性
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
-          JAVA各版本新特性
-          <span class="button_tally">17</span>
+        <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
+          KUBERNETES-IN-ACTION笔记
+          <span class="button_tally">18</span>
         </a>
         
         
@@ -717,7 +719,7 @@ phase有以下几种值：
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">20</span>
+          <span class="button_tally">21</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
@@ -727,7 +729,7 @@ phase有以下几种值：
         
         <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
           JAVA-8
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -867,11 +869,15 @@ phase有以下几种值：
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/hotspot/' class=" post_tag button button_translucent" data-position=1>HOTSPOT<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/inputstream/' class=" post_tag button button_translucent" data-position=1>INPUTSTREAM<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=20>JAVA<span class="button_tally">20</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=21>JAVA<span class="button_tally">21</span>
             </a>
             
             
@@ -879,7 +885,7 @@ phase有以下几种值：
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=13>JAVA-8<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=14>JAVA-8<span class="button_tally">14</span>
             </a>
             
             
@@ -900,6 +906,10 @@ phase有以下几种值：
             
             
             <a href='https://www.zengxi.net/tags/jvisualvm/' class=" post_tag button button_translucent" data-position=1>JVISUALVM<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/jvm/' class=" post_tag button button_translucent" data-position=1>JVM<span class="button_tally">1</span>
             </a>
             
             

@@ -132,6 +132,39 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/06/java8_base64/">Java 8新特性 - (11)Base64编解码</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 7, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
+    </a>
+    <a href='https://www.zengxi.net/tags/base64' class="post_tag button button_translucent">base64
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">早期处理BASE64编码, 需借助外部依赖：commons-codec，sun.misc.BASE64Decoder或JAXB的DatatypeConverter。Java 8实现了BASE64编解码API，它包含到java.util包。
+java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编解码器：
+ Basic编码 URL编码 MIME编码  Basic编码 Basic编码是标准的BASE64编码，用于处理常规的需求：输出的内容不添加换行符，而且输出的内容由字母加数字组成。
+1// 编码 2String asB64 = …</p>
+          <a href="https://www.zengxi.net/2021/06/java8_base64/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/06/java8_parallel_sort/">Java 8新特性 - (10)并行数组排序</a>
       </h3>
       <div class="post_meta">
@@ -402,36 +435,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/03/cxf_ws_log/">CXF记录WebService的soap日志</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Mar 29, 2021</span>
-    <a href='https://www.zengxi.net/tags/jetty' class="post_tag button button_translucent">jetty
-    </a>
-    <a href='https://www.zengxi.net/tags/session' class="post_tag button button_translucent">session
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">cxf本身就支持日志功能，能打印传入传出的soap报文，但是需要配置一下。
-这里配置的是cxf结合spring做的WebService，配置步骤如下：
- 在spring配置文件中的jaxws:endpoint节点下配置日志拦截器  1&lt;import resource=&#34;classpath:META-INF/cxf/cxf.xml&#34; /&gt; 2&lt;import resource=&#34;classpath:META-INF/cxf/cxf-extension-soap.xml&#34; /&gt; 3&lt;import …</p>
-          <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -503,6 +506,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
       <li>
@@ -523,16 +529,13 @@
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_stamped_lock/" class="nav-link">Java 8新特性 - (13)StampedLock</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java8_unsigned_arithmetic/" class="nav-link">Java 8新特性 - (12)无符号运算</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">20</span>
+          <span class="button_tally">21</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
@@ -626,7 +629,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=20>JAVA<span class="button_tally">20</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=21>JAVA<span class="button_tally">21</span>
             </a>
             
             
@@ -709,14 +712,14 @@
     <div>
       <h2 class="mt-4 taxonomy" id="series-section">专栏</h2>
       <nav class="tags_nav">
-        <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
-          KUBERNETES-IN-ACTION笔记
+        <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
+          JAVA各版本新特性
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
-          JAVA各版本新特性
-          <span class="button_tally">17</span>
+        <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
+          KUBERNETES-IN-ACTION笔记
+          <span class="button_tally">18</span>
         </a>
         
         
@@ -727,7 +730,7 @@
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">20</span>
+          <span class="button_tally">21</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
@@ -737,7 +740,7 @@
         
         <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
           JAVA-8
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -877,11 +880,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/hotspot/' class=" post_tag button button_translucent" data-position=1>HOTSPOT<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/inputstream/' class=" post_tag button button_translucent" data-position=1>INPUTSTREAM<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=20>JAVA<span class="button_tally">20</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=21>JAVA<span class="button_tally">21</span>
             </a>
             
             
@@ -889,7 +896,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=13>JAVA-8<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=14>JAVA-8<span class="button_tally">14</span>
             </a>
             
             
@@ -910,6 +917,10 @@
             
             
             <a href='https://www.zengxi.net/tags/jvisualvm/' class=" post_tag button button_translucent" data-position=1>JVISUALVM<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/jvm/' class=" post_tag button button_translucent" data-position=1>JVM<span class="button_tally">1</span>
             </a>
             
             
