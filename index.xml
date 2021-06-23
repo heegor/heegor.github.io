@@ -6,11 +6,22 @@
     <description>Recent content on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 21 Jun 2021 19:30:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Jun 2021 13:50:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 9新特性 - (4)统一的JVM日志系统</title>
+      <link>https://www.zengxi.net/2021/06/java9_unique_jvm_log/</link>
+      <pubDate>Wed, 23 Jun 2021 13:50:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/06/java9_unique_jvm_log/</guid>
+      <description>Java 9新增了新的命令行选项-Xlog, 用于所有日志记录设置和统一的JVM日志记录
+Xlog的参数遵循以下规则：
+ 已按照在命令行中显示的顺序应用了多个参数。 最后的配置规则：对于相同的输出，多个参数可以按给定的顺序相互覆盖。  1-Xlog[:option] 2 option := [&amp;lt;what&amp;gt;][:[&amp;lt;output&amp;gt;][:[&amp;lt;decorators&amp;gt;][:&amp;lt;output-options&amp;gt;]]] 3 &amp;#39;help&amp;#39; 4 &amp;#39;disable&amp;#39; 5 what := &amp;lt;selector&amp;gt;[,...] 6 selector := &amp;lt;tag-set&amp;gt;[*][=&amp;lt;level&amp;gt;] 7 tag-set := &amp;lt;tag&amp;gt;[+...] 8 &amp;#39;all&amp;#39; 9 tag := name of tag 10 level := trace 11 debug 12 info 13 warning 14 error 15 output := &amp;#39;stderr&amp;#39; 16 &amp;#39;stdout&amp;#39; 17 [file=]&amp;lt;filename&amp;gt; 18 decorators := &amp;lt;decorator&amp;gt;[,...] 19 &amp;#39;none&amp;#39; 20 decorator := time 21 uptime 22 timemillis 23 uptimemillis 24 timenanos 25 uptimenanos 26 pid 27 tid 28 level 29 tags 30 output-options := &amp;lt;output_option&amp;gt;[,.</description>
+    </item>
+    
     <item>
       <title>Java 8新特性 - (14)Hotspot删除永久代</title>
       <link>https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/</link>
-      <pubDate>Mon, 21 Jun 2021 19:30:00 +0800</pubDate>
+      <pubDate>Tue, 22 Jun 2021 12:58:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/</guid>
       <description>JDK 6、JDK 7、JDK 8 内存模型演变 这些版本的JVM内存模型主要有以下差异：
@@ -254,7 +265,7 @@ java 8抽象类与接口对比 相同点  都是抽象类型； 都可以有实�
       <guid>https://www.zengxi.net/links/java_feature/</guid>
       <description>最后更新日期：2021-06-18
 Java 7 Java语法特性:
- 二进制前缀0b或者0B。整型（byte, short, int, long）可以直接用二进制表示 字面常量数字的下划线。用下划线连接整数提升其可读性，自身无含义，不可用在数字的起始和末尾。 switch 支持String类型。 泛型实例化类型自动推断。 try-with-resources语句。 单个catch中捕获多个异常类型（用| 分割）并通过改进的类型检查重新抛出异常。  Java 8  Lamda表达式(Lambda Expressions)。Lambda允许把函数作为一个方法的参数（函数作为参数传递进方法中)。 方法引用（Method references）。方法引用提供了非常有用的语法，可以直接引用已有Java类或对象（实例）的方法或构造器。与Lambda联合使用，可以使语言的构造更紧凑简洁，减少冗余代码。 默认方法（Default methods）。默认方法允许将新功能添加到库的接口中，并确保兼容实现老版本接口的旧有代码。 重复注解（Repeating Annotations）。重复注解提供了在同一声明或类型中多次应用相同注解类型的能力。 类型注解（Type Annotation）。在任何地方都能使用注解，而不仅仅在声明的地方。 类型推断增强。 方法参数反射（Method Parameter Reflection）。 Stream API 。新添加的Stream API（java.util.stream） 把真正的函数式编程风格引入到Java中。Stream API集成到了Collections API里。 HashMap改进，在键值哈希冲突时能有更好表现。 Date Time API。加强对日期和时间的处理。 java.util 包下的改进，提供了几个实用的工具类：   并行数组排序 标准的Base64编解码 支持无符号运算。  java.util.concurrent 包下增加了新的类和方法。   java.util.concurrent.ConcurrentHashMap 类添加了新的方法以支持新的StreamApi和lambada表达式。 java.util.concurrent.atomic 包下新增了类以支持可伸缩可更新的变量。 java.util.concurrent.ForkJoinPool类新增了方法以支持 common pool。  新增了java.util.concurrent.locks.StampedLock类，为控制读/写访问提供了一个基于性能的锁，且有三种模式可供选择。 HotSpot   删除了永久代（PermGen）.</description>
+ 二进制前缀0b或者0B。整型（byte, short, int, long）可以直接用二进制表示 字面常量数字的下划线。用下划线连接整数提升其可读性，自身无含义，不可用在数字的起始和末尾。 switch 支持String类型。 泛型实例化类型自动推断。 try-with-resources语句。 单个catch中捕获多个异常类型（用| 分割）并通过改进的类型检查重新抛出异常。  Java 8  Lamda表达式(Lambda Expressions)。Lambda允许把函数作为一个方法的参数（函数作为参数传递进方法中)。 方法引用（Method references）。方法引用提供了非常有用的语法，可以直接引用已有Java类或对象（实例）的方法或构造器。与Lambda联合使用，可以使语言的构造更紧凑简洁，减少冗余代码。 默认方法（Default methods）。默认方法允许将新功能添加到库的接口中，并确保兼容实现老版本接口的旧有代码。 重复注解（Repeating Annotations）。重复注解提供了在同一声明或类型中多次应用相同注解类型的能力。 类型注解（Type Annotation）。在任何地方都能使用注解，而不仅仅在声明的地方。 类型推断增强。 方法参数反射（Method Parameter Reflection）。 Stream API 。新添加的Stream API（java.util.stream） 把真正的函数式编程风格引入到Java中。Stream API集成到了Collections API里。 HashMap改进，在键值哈希冲突时能有更好表现。 Date Time API。加强对日期和时间的处理。 java.util 包下的改进，提供了几个实用的工具类：   并行数组排序 标准的Base64编解码 支持无符号运算。  java.util.concurrent 包下增加了新的类和方法。   java.util.concurrent.ConcurrentHashMap 类添加了新的方法以支持新的StreamApi和lambada表达式。 java.util.concurrent.atomic 包下新增了类以支持可伸缩可更新的变量。 java.util.concurrent.ForkJoinPool类新增了方法以支持 common pool。  新增了java.util.concurrent.locks.StampedLock类，为控制读/写访问提供了一个基于性能的锁，且有三种模式可供选择。 HotSpot   删除了永久代.</description>
     </item>
     
     <item>

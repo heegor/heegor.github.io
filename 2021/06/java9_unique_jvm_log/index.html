@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="" class="page">
   <head>
-<title>Kubernetes in Action笔记 - (12) Deployment | 保罗札记</title>
+<title>Java 9新特性 - (4)统一的JVM日志系统 | 保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,17 +19,17 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="Deployment是一种更高阶资源, 用于部署应用程序并以声明的方式升级应用。
-在使用 Deployment 时, 实际的 pod是由 Deployment 的 Replicaset 创建和管理的, 而不是由 Deployment 直接创建和管理的。
-在升级应用过程中，部署新版本的应用时，会创建新 …">
+<meta name="description" content="Java 9新增了新的命令行选项-Xlog, 用于所有日志记录设置和统一的JVM日志记录
+Xlog的参数遵循以下规则：
+ 已按照在命令行中显示的顺序应用了多个参数。 最后的配置规则：对于相同的输出，多个参数可以按给定的顺序相互覆盖。  1-Xlog[:option] 2 option := …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="Kubernetes in Action笔记 - (12) Deployment" />
-<meta property="og:url" content="https://www.zengxi.net/2020/12/k8s_deployment/" />
-<meta property="og:title" content="Kubernetes in Action笔记 - (12) Deployment" />
-<meta property="og:description" content="Deployment是一种更高阶资源, 用于部署应用程序并以声明的方式升级应用。
-在使用 Deployment 时, 实际的 pod是由 Deployment 的 Replicaset 创建和管理的, 而不是由 Deployment 直接创建和管理的。
-在升级应用过程中，部署新版本的应用时，会创建新 …" />
+<meta name="twitter:title" content="Java 9新特性 - (4)统一的JVM日志系统" />
+<meta property="og:url" content="https://www.zengxi.net/2021/06/java9_unique_jvm_log/" />
+<meta property="og:title" content="Java 9新特性 - (4)统一的JVM日志系统" />
+<meta property="og:description" content="Java 9新增了新的命令行选项-Xlog, 用于所有日志记录设置和统一的JVM日志记录
+Xlog的参数遵循以下规则：
+ 已按照在命令行中显示的顺序应用了多个参数。 最后的配置规则：对于相同的输出，多个参数可以按给定的顺序相互覆盖。  1-Xlog[:option] 2 option := …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -38,7 +38,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://www.zengxi.net/2020/12/k8s_deployment/">
+<link rel="canonical" href="https://www.zengxi.net/2021/06/java9_unique_jvm_log/">
 
     
 
@@ -128,25 +128,27 @@
   
 <div class="grid-inverse wrap content">
   <article class="post_content">
-    <h1 class="post_title">Kubernetes in Action笔记 - (12) Deployment</h1><div class="post_meta">
+    <h1 class="post_title">Java 9新特性 - (4)统一的JVM日志系统</h1><div class="post_meta">
   <svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg>
   <span class="post_date">
-    Dec 27, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    Jun 23, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-9' class="post_tag button button_translucent">java 9
     </a>
 </div>
 
     
 <div class="post_share">
   分享到:
-  <a href="https://twitter.com/intent/tweet?text=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%2812%29%20Deployment&url=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_deployment%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+  <a href="https://twitter.com/intent/tweet?text=Java%209%e6%96%b0%e7%89%b9%e6%80%a7%20-%20%284%29%e7%bb%9f%e4%b8%80%e7%9a%84JVM%e6%97%a5%e5%bf%97%e7%b3%bb%e7%bb%9f&url=https%3a%2f%2fwww.zengxi.net%2f2021%2f06%2fjava9_unique_jvm_log%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
     <svg class="icon">
   <use xlink:href="#twitter"></use>
 </svg>
   </a>
-  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2020%2f12%2fk8s_deployment%2f&t=Kubernetes%20in%20Action%e7%ac%94%e8%ae%b0%20-%20%2812%29%20Deployment" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2021%2f06%2fjava9_unique_jvm_log%2f&t=Java%209%e6%96%b0%e7%89%b9%e6%80%a7%20-%20%284%29%e7%bb%9f%e4%b8%80%e7%9a%84JVM%e6%97%a5%e5%bf%97%e7%b3%bb%e7%bb%9f" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
     <svg class="icon">
   <use xlink:href="#facebook"></use>
 </svg>
@@ -156,7 +158,7 @@
   <use xlink:href="#linkedin"></use>
 </svg>
   </a>
-  <a href="https://www.zengxi.net/2020/12/k8s_deployment/" title="Copy Link" class="link link_yank">
+  <a href="https://www.zengxi.net/2021/06/java9_unique_jvm_log/" title="Copy Link" class="link link_yank">
     <svg class="icon">
   <use xlink:href="#copy"></use>
 </svg>
@@ -164,140 +166,64 @@
 </div>
 
     
-    
-    <h2>文章目录</h2>
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#创建deployment">创建Deployment</a></li>
-    <li><a href="#升级deployment">升级deployment</a></li>
-    <li><a href="#回滚deployment">回滚Deployment</a></li>
-    <li><a href="#控制滚动升级速率">控制滚动升级速率</a></li>
-    <li><a href="#暂停滚动升级">暂停滚动升级</a></li>
-    <li><a href="#恢复滚动升级">恢复滚动升级</a></li>
-    <li><a href="#阻止出错版本的滚动升级">阻止出错版本的滚动升级</a></li>
-  </ul>
-</nav>
-    <p>Deployment是一种更高阶资源, 用于部署应用程序并以声明的方式升级应用。</p>
-<p>在使用 Deployment 时, 实际的 pod是由 Deployment 的 Replicaset 创建和管理的, 而不是由 Deployment 直接创建和管理的。</p>
-<p>在升级应用过程中，部署新版本的应用时，会创建新的Replicaset用于管理版本的pod。升级过程中的某个时刻，就会存在新旧两个版本的Replicaset。因此，需要引入Deployment来协调。</p>
-<p>与Replicaset类似，Deployment也是由标签选择器、期望副数和pod模板组成的。此外,它还包含另一个字段，用于指定一
-个部署策略，表示在修改Deployment资源时应该如何执行更新。</p>
-<h2 id="创建deployment">创建Deployment</h2>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">appVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1beta1</span><span class="w">
-</span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment </span><span class="w">
-</span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
-</span><span class="ln"> 5</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 6</span><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
-</span><span class="ln"> 7</span><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 8</span><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 9</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
-</span><span class="ln">10</span><span class="w">    </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span><span class="ln">11</span><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
-</span><span class="ln">12</span><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span><span class="ln">13</span><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span><span class="ln">14</span><span class="w">      </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">luksa/kubia:vl</span><span class="w">
-</span><span class="ln">15</span><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nodejs</span><span class="w">
-</span></code></pre></div><p>创建一个Deployment</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1"># 确保在创建时使用了 --record 选项。 这个选项会记录历史版本号, 在之后的操作中非常有用</span>
-<span class="ln">2</span>kubectl create -f kubia-deployment-v1.yaml --record
-</code></pre></div><p>查看 Deployment 的详细信息</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl get deployment
-<span class="ln">2</span>
-<span class="ln">3</span>kubectl describe de­ployment
-</code></pre></div><p>查看部署状态</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span> kubectl rollout status deployment kubia
-</code></pre></div><h2 id="升级deployment">升级deployment</h2>
-<p>只需修改 Deployment 资源中定义的 pod 模板, k8s 会自动将实际的系统状态收敛为资源中定义的状态</p>
-<p>不同的 Deployment 升级策略：</p>
+    <p>Java 9新增了新的命令行选项<code>-Xlog</code>, 用于所有日志记录设置和统一的JVM日志记录</p>
+<p>Xlog的参数遵循以下规则：</p>
 <ul>
-<li>RollingUpdate：执行滚动更新，默认值。如果应用能够支持多个版本同时对外提供服务, 则推荐使用这个策略来升级应用</li>
-<li>Recreate：一次性删除所有旧版本的 pod, 然后创建新的 pod。如果应用程序不支持多个版本同时对外提供服务, 需要在启动新版本之前完全停用旧版本, 那么需要使用这种策略。但是会导致应用程序出现短暂的不可用。</li>
+<li>已按照在命令行中显示的顺序应用了多个参数。</li>
+<li>最后的配置规则：对于相同的输出，多个参数可以按给定的顺序相互覆盖。</li>
 </ul>
-<p>下面是修改 Deployment 或其他资源的不同方式。这些方式在操作 Deployment 资源时效果都是一样的。 它们无非就是修改Deployment 的规格定义, 修改后会触发滚动升级过程。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>kubectl edit</td>
-<td>使用默认编辑器打开资源配置。修改保存并退出编辑器, 资源对象会被更新。例子: kubectl edit deployment kubia</td>
-</tr>
-<tr>
-<td>kubectl patch</td>
-<td>修改单个资源属性。例子: kubectl patch deployment kubia -p' {&quot;spec&quot;: {&quot;template&quot;: {&quot;spec&quot;: {&quot;containers&quot;: [ {&quot;name&quot;: &quot;nodejs&quot;, &quot;image&quot;: &quot;luksa/kubia:v2&quot;}]}}}}'</td>
-</tr>
-<tr>
-<td>kubectl apply</td>
-<td>通过一个完整的YAML或JSON文件,应用其中新的值来修改对象。如果YAML/JSON中指定的对象不存在,则会被创建。该文件需要包含资源的完整定义(不能像kubectl patch那样只包含想要更新的字段)。例子 : kubectl apply -f kubia-deployment-v2.yaml</td>
-</tr>
-<tr>
-<td>kubectl replace</td>
-<td>将原有对象替换为YAML/JSON文件中定义的新对象。与apply命令相反, 运行这个命令前要求对象必须存在,否则会打印错误。例子: kubectl replace -f kubia-deployment-v2.yaml 。</td>
-</tr>
-<tr>
-<td>kubectl setimage</td>
-<td>修改Pod、ReplicationController、Deployment、DaemonSet、Job或ReplicaSet内的镜像。例子: kubectl set image deployment kubia nodejs=luksa/kubia:v2</td>
-</tr>
-</tbody>
-</table>
-<h2 id="回滚deployment">回滚Deployment</h2>
-<p>取消最后一次部署的 Deployment</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl rollout undo deployment kubia
-</code></pre></div><p>undo 命令也可以在滚动升级过程中运行,并直接停止滚动升级。过程中已创建的 pod 会被删除并被老版本的 pod 替代。</p>
-<p>使用<code>kubectl rollout history</code>显示升级的版本。注意：需要在创建 Deployment 时指定 --record 参数。如果不给定这个参数, 版本历史中的 CHANGE-CAUSE 这一栏会为空，这就很难辨别每次的版本做了哪些修改</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ kubectl rollout <span class="nb">history</span> deployment kubia
-<span class="ln">2</span>
-<span class="ln">3</span>deployments <span class="s2">&#34;kubia&#34;</span>
-<span class="ln">4</span>REVISION  CHANGE-CAUSE
-<span class="ln">5</span><span class="m">2</span>         kubectl <span class="nb">set</span> image deployment kubia <span class="nv">nodejs</span><span class="o">=</span>luksa/kubia:v2
-<span class="ln">6</span><span class="m">3</span>         kubectl <span class="nb">set</span> image deployment kubia <span class="nv">nodejs</span><span class="o">=</span>luksa/kubia:v3
-</code></pre></div><p>回滚到一个特定的 Deployment 版本</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl rollout undo deployment kubia --to-revision<span class="o">=</span>l
-</code></pre></div><p>可以通过指定 Deployment 的 revisionHistoryLimit 属性来限制历史版本数量。默认值是2，所以正常情况下在版本列表里只有当前版本和上一个版本</p>
-<h2 id="控制滚动升级速率">控制滚动升级速率</h2>
-<p>在 Deployment 的滚动升级期间,有两个属性会决定一次替换多少个pod: maxSurge 和 maxUnavailable。可以通过 Deployment 的 strategy 字段下rollingUpdate 的子属性来配置</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span><span class="ln">2</span><span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w">
-</span><span class="ln">3</span><span class="w">    </span><span class="nt">rollingUpdate</span><span class="p">:</span><span class="w">
-</span><span class="ln">4</span><span class="w">      </span><span class="nt">maxSurge</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
-</span><span class="ln">5</span><span class="w">      </span><span class="nt">maxunavailable</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
-</span><span class="ln">6</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">RollingUpdate</span><span class="w">
-</span><span class="ln">7</span><span class="w">
-</span></code></pre></div><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>maxSurge</td>
-<td>决定了 Deployment 配置中期望的副本数之外,最多允许超出的 pod 实例的数量。默认值为 25% ,所以 pod 实例最多可以比期望数量多25%。如果期望副本数被设置为4，那么在滚动升级期间,不会运行超过 5 个 pod 实例。当把百分数转换成绝对值时, 会将数字四舍五入。这个值也可以不是百分数而是绝对值 ( 例如,可以允许最多多出一个或两个pod) 。</td>
-</tr>
-<tr>
-<td>maxUnavailable</td>
-<td>决定了在滚动升级期间，相对于期望副本数能够允许有多少 pod 实例处于不可用状态。默认值也是 25%, 所以可用 pod 实例的数量不能低于期望副本数的 75%。百分数转换成绝对值时这个数字也会四舍五入。如果期望副本数设置为 4，并且百分比为 25%。那么只能有一个pod 处于不可用状态。在整个发布过程中，总是保持至少有三个pod实例处于可用状态来提供服务。与 maxSurge 一样,也可以指定绝对值而不是百分比</td>
-</tr>
-</tbody>
-</table>
-<h2 id="暂停滚动升级">暂停滚动升级</h2>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl rollout pause deployment kubia
-</code></pre></div><h2 id="恢复滚动升级">恢复滚动升级</h2>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl rollout resume deployment kubia
-</code></pre></div><h2 id="阻止出错版本的滚动升级">阻止出错版本的滚动升级</h2>
-<p>Deployment的minReadySeconds属性指定新创建的pod至少要成功运行多久之后, 才能将其视为可用。在pod可用之前, 滚动升级的过程不会继续。</p>
-<p>如果一个新的pod 运行出错, 并且在minReadySeconds时间内它的就绪探针出现了失败, 那么新版本的滚动升级将被阻止。</p>
-<p>使用这个属性可以通过让k8s在pod就绪之后继续等待10秒, 然后继续执行滚动升级, 来减缓滚动升级的过程。通常情况下需要将minReadySeconds设置为 更高的值, 以确保pod在它们真正开始接收实际流量之后可以持续保持就绪状态。</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln"> 1</span>-Xlog[:option]
+<span class="ln"> 2</span>    option         :=  [&lt;what&gt;][:[&lt;output&gt;][:[&lt;decorators&gt;][:&lt;output-options&gt;]]]
+<span class="ln"> 3</span>                       &#39;help&#39;
+<span class="ln"> 4</span>                       &#39;disable&#39;
+<span class="ln"> 5</span>    what           :=  &lt;selector&gt;[,...]
+<span class="ln"> 6</span>    selector       :=  &lt;tag-set&gt;[*][=&lt;level&gt;]
+<span class="ln"> 7</span>    tag-set        :=  &lt;tag&gt;[+...]
+<span class="ln"> 8</span>                       &#39;all&#39;
+<span class="ln"> 9</span>    tag            :=  name of tag
+<span class="ln">10</span>    level          :=  trace
+<span class="ln">11</span>                       debug
+<span class="ln">12</span>                       info
+<span class="ln">13</span>                       warning
+<span class="ln">14</span>                       error
+<span class="ln">15</span>    output         :=  &#39;stderr&#39;
+<span class="ln">16</span>                       &#39;stdout&#39;
+<span class="ln">17</span>                       [file=]&lt;filename&gt;
+<span class="ln">18</span>    decorators     :=  &lt;decorator&gt;[,...]
+<span class="ln">19</span>                       &#39;none&#39;
+<span class="ln">20</span>    decorator      :=  time
+<span class="ln">21</span>                       uptime
+<span class="ln">22</span>                       timemillis
+<span class="ln">23</span>                       uptimemillis
+<span class="ln">24</span>                       timenanos
+<span class="ln">25</span>                       uptimenanos
+<span class="ln">26</span>                       pid
+<span class="ln">27</span>                       tid
+<span class="ln">28</span>                       level
+<span class="ln">29</span>                       tags
+<span class="ln">30</span>    output-options :=  &lt;output_option&gt;[,...]
+<span class="ln">31</span>    output-option  :=  filecount=&lt;file count&gt;
+<span class="ln">32</span>                       filesize=&lt;file size in kb&gt;
+<span class="ln">33</span>                       parameter=values
+</code></pre></div><p>下面的例子中，tag为gc，level为trace，rotate文件数为5，每个文件1M，文件名为gctrace.txt，decrotators为uptimemillis和pid</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>-Xlog:gc=trace:file=gctrace.txt:uptimemillis,pid:filecount=5,filesize=1024
+</code></pre></div><p>得到输出</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln"> 1</span>[1110ms][1867] GC(2) Pause Remark 17M-&gt;17M(256M) 2.024ms
+<span class="ln"> 2</span>[1110ms][1867] GC(2) Finalize Live Data 0.000ms
+<span class="ln"> 3</span>[1110ms][1867] GC(2) Pause Cleanup 17M-&gt;17M(256M) 0.177ms
+<span class="ln"> 4</span>[1112ms][1867] GC(2) Concurrent Cycle 7.470ms
+<span class="ln"> 5</span>[2951ms][1867] GC(3) Pause Initial Mark (Metadata GC Threshold) 149M-&gt;30M(256M) 27.175ms
+<span class="ln"> 6</span>[2951ms][1867] GC(4) Concurrent Cycle
+<span class="ln"> 7</span>[2972ms][1867] GC(4) Pause Remark 32M-&gt;32M(256M) 5.132ms
+<span class="ln"> 8</span>[2974ms][1867] GC(4) Finalize Live Data 0.000ms
+<span class="ln"> 9</span>[2974ms][1867] GC(4) Pause Cleanup 32M-&gt;32M(256M) 0.214ms
+<span class="ln">10</span>[2976ms][1867] GC(4) Concurrent Cycle 25.422ms
+</code></pre></div><p>旧版GC相关参数迁移，可以参考 <a href="https://docs.oracle.com/javase/9/tools/java.htm#JSWOR624">https://docs.oracle.com/javase/9/tools/java.htm#JSWOR624</a></p>
 <hr>
-<p>图书资料：</p>
+<p>参考：</p>
 <ul>
-<li><a href="https://book.douban.com/subject/30418855/">https://book.douban.com/subject/30418855/</a></li>
+<li><a href="https://www.nhooo.com/note/qa0hdj.html">https://www.nhooo.com/note/qa0hdj.html</a></li>
+<li><a href="https://segmentfault.com/a/1190000013475524">https://segmentfault.com/a/1190000013475524</a></li>
 </ul>
 
     
@@ -341,9 +267,6 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://www.zengxi.net/2021/06/java9_unique_jvm_log/" class="nav-link">Java 9新特性 - (4)统一的JVM日志系统</a>
-      </li>
-      <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
       </li>
       <li>
@@ -363,6 +286,9 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/manjaro_installation_failure/" class="nav-link">Manjaro安装软件时找不到strip binary</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/06/java8_stamped_lock/" class="nav-link">Java 8新特性 - (13)StampedLock</a>
       </li>
     </ul>
     <div>

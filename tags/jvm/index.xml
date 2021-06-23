@@ -6,11 +6,11 @@
     <description>Recent content in jvm on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 21 Jun 2021 19:30:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Jun 2021 12:58:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Java 8新特性 - (14)Hotspot删除永久代</title>
       <link>https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/</link>
-      <pubDate>Mon, 21 Jun 2021 19:30:00 +0800</pubDate>
+      <pubDate>Tue, 22 Jun 2021 12:58:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/</guid>
       <description>JDK 6、JDK 7、JDK 8 内存模型演变 这些版本的JVM内存模型主要有以下差异：

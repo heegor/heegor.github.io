@@ -6,11 +6,22 @@
     <description>Recent content in java on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 21 Jun 2021 19:30:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Jun 2021 13:50:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 9新特性 - (4)统一的JVM日志系统</title>
+      <link>https://www.zengxi.net/2021/06/java9_unique_jvm_log/</link>
+      <pubDate>Wed, 23 Jun 2021 13:50:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/06/java9_unique_jvm_log/</guid>
+      <description>Java 9新增了新的命令行选项-Xlog, 用于所有日志记录设置和统一的JVM日志记录
+Xlog的参数遵循以下规则：
+ 已按照在命令行中显示的顺序应用了多个参数。 最后的配置规则：对于相同的输出，多个参数可以按给定的顺序相互覆盖。  1-Xlog[:option] 2 option := [&amp;lt;what&amp;gt;][:[&amp;lt;output&amp;gt;][:[&amp;lt;decorators&amp;gt;][:&amp;lt;output-options&amp;gt;]]] 3 &amp;#39;help&amp;#39; 4 &amp;#39;disable&amp;#39; 5 what := &amp;lt;selector&amp;gt;[,...] 6 selector := &amp;lt;tag-set&amp;gt;[*][=&amp;lt;level&amp;gt;] 7 tag-set := &amp;lt;tag&amp;gt;[+...] 8 &amp;#39;all&amp;#39; 9 tag := name of tag 10 level := trace 11 debug 12 info 13 warning 14 error 15 output := &amp;#39;stderr&amp;#39; 16 &amp;#39;stdout&amp;#39; 17 [file=]&amp;lt;filename&amp;gt; 18 decorators := &amp;lt;decorator&amp;gt;[,...] 19 &amp;#39;none&amp;#39; 20 decorator := time 21 uptime 22 timemillis 23 uptimemillis 24 timenanos 25 uptimenanos 26 pid 27 tid 28 level 29 tags 30 output-options := &amp;lt;output_option&amp;gt;[,.</description>
+    </item>
+    
     <item>
       <title>Java 8新特性 - (14)Hotspot删除永久代</title>
       <link>https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/</link>
-      <pubDate>Mon, 21 Jun 2021 19:30:00 +0800</pubDate>
+      <pubDate>Tue, 22 Jun 2021 12:58:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/</guid>
       <description>JDK 6、JDK 7、JDK 8 内存模型演变 这些版本的JVM内存模型主要有以下差异：
