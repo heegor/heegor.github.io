@@ -6,7 +6,39 @@
     <description>Recent content on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 23 Jun 2021 13:50:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Jun 2021 13:38:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 9新特性 - (5)Optional类中新增几个方法</title>
+      <link>https://www.zengxi.net/2021/06/java9_optional_enhancement/</link>
+      <pubDate>Thu, 24 Jun 2021 13:38:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/06/java9_optional_enhancement/</guid>
+      <description>相关文章： Java 8引入Optional类
+ Optional 类在 Java 8 中引入，Optional 类的引入很好的解决空指针异常。。在 java 9 中, 添加了三个方法来改进它的功能.
+stream() 方法 语法
+1public Stream&amp;lt;T&amp;gt; stream() stream 方法的作用就是将 Optional 转为一个 Stream，如果该 Optional 中包含值，那么就返回包含这个值的 Stream，否则返回一个空的 Stream（Stream.empty()）。
+实例
+1List&amp;lt;Optional&amp;lt;String&amp;gt;&amp;gt; list = Arrays.asList ( 2 Optional.empty(), 3 Optional.of(&amp;#34;A&amp;#34;), 4 Optional.empty(), 5 Optional.of(&amp;#34;B&amp;#34;)); 6 7//filter the list based to print non-empty values 8//if optional is non-empty, get the value in stream, otherwise return empty 9List&amp;lt;String&amp;gt; filteredList = list.stream() 10 .</description>
+    </item>
+    
+    <item>
+      <title>Java 8新特性 - (15)Optional类</title>
+      <link>https://www.zengxi.net/2021/06/java8_optional/</link>
+      <pubDate>Thu, 24 Jun 2021 12:59:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/06/java8_optional/</guid>
+      <description>相关文章： Java 9对Optional类的改进
+ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null 检查。它是一个封装值的类，用于保存类型为T的值，从本质上说它就是一个容器。
+变量存在时，Optional类只是对类简单封装。变量不存在时，缺失的值会被建模成一个“空” 的Optional对象，由方法Optional.empty()返回。那null和 Optional.empty()的区别在哪呢？从语义上，可以把它们当作一回事儿，但是实际中它们之间的差别非常大：如果尝试解引用一个null， 一定会触发NullPointerException，而使用Optional.empty()就完全没事，它是 Optional类的一个有效对象。
+创建 Optional 对象 空Optional 可以通过静态工厂方法 Optional.empty，创建一个空的 Optional 对象：
+1Optional&amp;lt;Car&amp;gt; option = Optional.empty(); 因为 empty() 本身代表的就是空对象，所以调用 get 方法会抛出 NoSuchElementException 异常。
+非空Optional 可以使用静态工厂方法 Optional.of，依据一个非空值创建一个 Optional 对象：
+1Optional&amp;lt;Car&amp;gt; optional = Optional.of(car); 如果 car 是一个 null，这段代码会立即抛出一个 NullPointerException，而不是等到试图访问car的属性值时才返回一个错误。
+可为null的Optional 使用静态工厂方法 Optional.ofNullable，可以创建一个允许 null 值的 Optional 对象：
+1Optional&amp;lt;Car&amp;gt; optional = Optional.ofNullable(car); 如果 car 是 null，那么得到的 Optional 对象就是个空对象。我们可以查看一下它的实现原理：
+1public static &amp;lt;T&amp;gt; Optional&amp;lt;T&amp;gt; ofNullable(T value) { 2 return value == null ?</description>
+    </item>
+    
     <item>
       <title>Java 9新特性 - (4)统一的JVM日志系统</title>
       <link>https://www.zengxi.net/2021/06/java9_unique_jvm_log/</link>
@@ -263,9 +295,9 @@ java 8抽象类与接口对比 相同点  都是抽象类型； 都可以有实�
       <pubDate>Tue, 25 May 2021 15:00:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/links/java_feature/</guid>
-      <description>最后更新日期：2021-06-18
+      <description>最后更新日期：2021-06-24
 Java 7 Java语法特性:
- 二进制前缀0b或者0B。整型（byte, short, int, long）可以直接用二进制表示 字面常量数字的下划线。用下划线连接整数提升其可读性，自身无含义，不可用在数字的起始和末尾。 switch 支持String类型。 泛型实例化类型自动推断。 try-with-resources语句。 单个catch中捕获多个异常类型（用| 分割）并通过改进的类型检查重新抛出异常。  Java 8  Lamda表达式(Lambda Expressions)。Lambda允许把函数作为一个方法的参数（函数作为参数传递进方法中)。 方法引用（Method references）。方法引用提供了非常有用的语法，可以直接引用已有Java类或对象（实例）的方法或构造器。与Lambda联合使用，可以使语言的构造更紧凑简洁，减少冗余代码。 默认方法（Default methods）。默认方法允许将新功能添加到库的接口中，并确保兼容实现老版本接口的旧有代码。 重复注解（Repeating Annotations）。重复注解提供了在同一声明或类型中多次应用相同注解类型的能力。 类型注解（Type Annotation）。在任何地方都能使用注解，而不仅仅在声明的地方。 类型推断增强。 方法参数反射（Method Parameter Reflection）。 Stream API 。新添加的Stream API（java.util.stream） 把真正的函数式编程风格引入到Java中。Stream API集成到了Collections API里。 HashMap改进，在键值哈希冲突时能有更好表现。 Date Time API。加强对日期和时间的处理。 java.util 包下的改进，提供了几个实用的工具类：   并行数组排序 标准的Base64编解码 支持无符号运算。  java.util.concurrent 包下增加了新的类和方法。   java.util.concurrent.ConcurrentHashMap 类添加了新的方法以支持新的StreamApi和lambada表达式。 java.util.concurrent.atomic 包下新增了类以支持可伸缩可更新的变量。 java.util.concurrent.ForkJoinPool类新增了方法以支持 common pool。  新增了java.util.concurrent.locks.StampedLock类，为控制读/写访问提供了一个基于性能的锁，且有三种模式可供选择。 HotSpot   删除了永久代.</description>
+ 二进制前缀0b或者0B。整型（byte, short, int, long）可以直接用二进制表示 字面常量数字的下划线。用下划线连接整数提升其可读性，自身无含义，不可用在数字的起始和末尾。 switch 支持String类型。 泛型实例化类型自动推断。 try-with-resources语句。 单个catch中捕获多个异常类型（用| 分割）并通过改进的类型检查重新抛出异常。  Java 8  Lamda表达式(Lambda Expressions)。Lambda允许把函数作为一个方法的参数（函数作为参数传递进方法中)。 方法引用（Method references）。方法引用提供了非常有用的语法，可以直接引用已有Java类或对象（实例）的方法或构造器。与Lambda联合使用，可以使语言的构造更紧凑简洁，减少冗余代码。 默认方法（Default methods）。默认方法允许将新功能添加到库的接口中，并确保兼容实现老版本接口的旧有代码。 重复注解（Repeating Annotations）。重复注解提供了在同一声明或类型中多次应用相同注解类型的能力。 类型注解（Type Annotation）。在任何地方都能使用注解，而不仅仅在声明的地方。 类型推断增强。 方法参数反射（Method Parameter Reflection）。 Stream API 。新添加的Stream API（java.util.stream） 把真正的函数式编程风格引入到Java中。Stream API集成到了Collections API里。 HashMap改进，在键值哈希冲突时能有更好表现。 Date Time API。加强对日期和时间的处理。 java.util 包下的改进，提供了几个实用的工具类：   并行数组排序 标准的Base64编解码 支持无符号运算 Optional类  java.util.concurrent 包下增加了新的类和方法。   java.util.concurrent.ConcurrentHashMap 类添加了新的方法以支持新的StreamApi和lambada表达式。 java.util.concurrent.atomic 包下新增了类以支持可伸缩可更新的变量。 java.util.concurrent.ForkJoinPool类新增了方法以支持 common pool。  新增了java.util.concurrent.locks.StampedLock类，为控制读/写访问提供了一个基于性能的锁，且有三种模式可供选择。 HotSpot   删除了永久代.</description>
     </item>
     
     <item>

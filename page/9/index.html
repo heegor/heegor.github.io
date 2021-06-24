@@ -132,6 +132,65 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/05/manjaro_install_vmware/">Manjaro安装VMware Workstation</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    May 26, 2020</span>
+    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
+    </a>
+    <a href='https://www.zengxi.net/tags/vmware' class="post_tag button button_translucent">vmware
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">安装VMware workstation
+1yay -S vmware-workstation 启动时候如果报错：Please make sure that the kernel module `vmmon’ is loaded. 则需要重新安装一下linux-headers，加载一下vmmon模块
+1# 先查看内核。返回值版本号格式为: A.B.C-D-MANJARO。示例： 5.2.8-1-MANJARO， 2uname -r 3 4# 安装 linux-headers。根据上面的内核版本来选择安装包，安装包名字为：linuxAB-headers 5sudo pacman -S linux52-headers 6 7# 加 …</p>
+          <a href="https://www.zengxi.net/2020/05/manjaro_install_vmware/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/">Manjaro设置chrome为默认浏览器</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    May 25, 2020</span>
+    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
+    </a>
+    <a href='https://www.zengxi.net/tags/chrome' class="post_tag button button_translucent">chrome
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">安装完 Manjaro，一般会自带 Firefox浏览器。如果自己想再安装 chrome，并且设置成默认浏览器，则需要两个步骤：
+ 在 Default Applications 中选择 Chrome 为默认的浏览器。除了这一步还不够，打开 chrome 依然有提示说“chrome 不是默认浏览器”，这就需要下面的第二步来解决。 在 File Association 中找到 html 项， 选择使用 Chrome 打开该类型的文件。  </p>
+          <a href="https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/05/mac_write_iso_into_udisk/">MacOS中通过ISO镜像制作U盘安装盘</a>
       </h3>
       <div class="post_meta">
@@ -364,64 +423,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/01/quartz-job-issue-improvement/">Quartz job使用过程中的发现问题与改进</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 5, 2020</span>
-    <a href='https://www.zengxi.net/tags/quartz' class="post_tag button button_translucent">quartz
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">遇到的问题与原因分析 生产环境中遇到的问题：
- 服务在启动过程中，不时地卡住，后来发生的越来越频繁。看日志分析，卡在初始化quartz job store的时候 服务在运行过程中，不时地出现定时任务不被触发的情况  通过分析，得知问题产生的原因：
- 目前代码中用的是Quartz scheduler 1.8.3版本，定时框架采用的是行锁，通过执行下面的SQL来锁住特定的记录。在分布式的系统的情况下，节点越多越容易发生锁等待，甚至死锁。Quartz scheduler 的 2.x 版本做了改进，在QRTZ_LOCKS表中多加了一个字段 SCHED_NAME。这有一个好处就是，可以给不同的应用分配不同的scheduler name，这样定 …</p>
-          <a href="https://www.zengxi.net/2020/01/quartz-job-issue-improvement/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2019/12/incident-caused-by-app/">复盘 - 手机app上一行代码导致的生产事故</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 10, 2019</span>
-    <a href='https://www.zengxi.net/tags/%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85' class="post_tag button button_translucent">生产事故
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98' class="post_tag button button_translucent">复盘
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">过程 由于一些历史原因，以及与原先代码的兼容性，临时文件存储在minio中。
-某天，生产环境突发事故，minio集群的CPU与内存爆了，只能重启集群。过了十来分钟，很多服务都不可用，健康检查都不通过。日志中的错误信息显示，这些服务都是数据库拿不到连接。需要事先处理数据库连接的问题，于是连接到数据库查死锁，终止导致死锁的sql进程，再重启来恢复这些服务。
-由于前不久minio集群挂掉，很容易就想到是由于minio的原因。其他服务通过RPC调用一个文件存储服务来操作minio中的数据，当minio集群挂掉的时候，文件存储服务访问minio一直想访问minio直到超时。在这个期间，其他服务如果有事务调用文件存储服务来操作minio中文件， …</p>
-          <a href="https://www.zengxi.net/2019/12/incident-caused-by-app/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -502,6 +503,12 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/java9_optional_enhancement/" class="nav-link">Java 9新特性 - (5)Optional类中新增几个方法</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/06/java8_optional/" class="nav-link">Java 8新特性 - (15)Optional类</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java9_unique_jvm_log/" class="nav-link">Java 9新特性 - (4)统一的JVM日志系统</a>
       </li>
       <li>
@@ -519,19 +526,13 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       <li>
         <a href="https://www.zengxi.net/2021/06/aliyun_waf_sni/" class="nav-link">阿里云WAF与SNI问题</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/docker_curl_ssl_certificate_fail/" class="nav-link">Docker环境中curl报证书错误</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/manjaro_installation_failure/" class="nav-link">Manjaro安装软件时找不到strip binary</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">22</span>
+          <span class="button_tally">24</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
@@ -625,7 +626,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=22>JAVA<span class="button_tally">22</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=24>JAVA<span class="button_tally">24</span>
             </a>
             
             
@@ -710,7 +711,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">19</span>
+          <span class="button_tally">21</span>
         </a>
         
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
@@ -726,7 +727,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">22</span>
+          <span class="button_tally">24</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
@@ -736,7 +737,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
           JAVA-8
-          <span class="button_tally">14</span>
+          <span class="button_tally">15</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -754,6 +755,11 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <span class="button_tally">5</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java-9/' class="post_tag button button_translucent">
+          JAVA-9
+          <span class="button_tally">5</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
           LINUX
           <span class="button_tally">5</span>
@@ -762,11 +768,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         <a href='https://www.zengxi.net/tags/nginx/' class="post_tag button button_translucent">
           NGINX
           <span class="button_tally">5</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-9/' class="post_tag button button_translucent">
-          JAVA-9
-          <span class="button_tally">4</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
@@ -884,7 +885,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=22>JAVA<span class="button_tally">22</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=24>JAVA<span class="button_tally">24</span>
             </a>
             
             
@@ -892,11 +893,11 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=14>JAVA-8<span class="button_tally">14</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=15>JAVA-8<span class="button_tally">15</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-9/' class=" post_tag button button_translucent" data-position=4>JAVA-9<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/tags/java-9/' class=" post_tag button button_translucent" data-position=5>JAVA-9<span class="button_tally">5</span>
             </a>
             
             
@@ -973,6 +974,10 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             
             
             <a href='https://www.zengxi.net/tags/nodejs/' class=" post_tag button button_translucent" data-position=2>NODEJS<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/optional/' class=" post_tag button button_translucent" data-position=2>OPTIONAL<span class="button_tally">2</span>
             </a>
             
             

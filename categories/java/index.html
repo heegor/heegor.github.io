@@ -128,6 +128,73 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/06/java9_optional_enhancement/">Java 9新特性 - (5)Optional类中新增几个方法</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 24, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-9' class="post_tag button button_translucent">java 9
+    </a>
+    <a href='https://www.zengxi.net/tags/optional' class="post_tag button button_translucent">optional
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">相关文章： Java 8引入Optional类
+ Optional 类在 Java 8 中引入，Optional 类的引入很好的解决空指针异常。。在 java 9 中, 添加了三个方法来改进它的功能.
+stream() 方法 语法
+1public Stream&lt;T&gt; stream() stream 方法的作用就是将 Optional 转为一个 Stream，如果该 Optional 中包含值，那么就返回包含这个值的 Stream，否则返回一个空的 Stream（Stream.empty()）。
+实例
+1List&lt;Optional&lt;String&gt;&gt; list = Arrays.asList ( 2 …</p>
+          <a href="https://www.zengxi.net/2021/06/java9_optional_enhancement/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/06/java8_optional/">Java 8新特性 - (15)Optional类</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 24, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
+    </a>
+    <a href='https://www.zengxi.net/tags/optional' class="post_tag button button_translucent">optional
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">相关文章： Java 9对Optional类的改进
+ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null 检查。它是一个封装值的类，用于保存类型为T的值，从本质上说它就是一个容器。
+变量存在时，Optional类只是对类简单封装。变量不存在时，缺失的值会被建模成一个“空” 的Optional对象，由方法Optional.empty()返回。那null和 Optional.empty()的区别在哪呢？从语义上，可以把它们当作一回事儿，但是实际中它们之间的差别非常大：如果尝试解引用一个null， 一定会触发NullPointerException，而使 …</p>
+          <a href="https://www.zengxi.net/2021/06/java8_optional/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/06/java9_unique_jvm_log/">Java 9新特性 - (4)统一的JVM日志系统</a>
       </h3>
       <div class="post_meta">
@@ -372,71 +439,6 @@ Java 8为Integer，Long新增如下方法:
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/06/java8_base64/">Java 8新特性 - (11)Base64编解码</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 7, 2021</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
-    </a>
-    <a href='https://www.zengxi.net/tags/base64' class="post_tag button button_translucent">base64
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">早期处理BASE64编码, 需借助外部依赖：commons-codec，sun.misc.BASE64Decoder或JAXB的DatatypeConverter。Java 8实现了BASE64编解码API，它包含到java.util包。
-java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编解码器：
- Basic编码 URL编码 MIME编码  Basic编码 Basic编码是标准的BASE64编码，用于处理常规的需求：输出的内容不添加换行符，而且输出的内容由字母加数字组成。
-1// 编码 2String asB64 = …</p>
-          <a href="https://www.zengxi.net/2021/06/java8_base64/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/06/java8_parallel_sort/">Java 8新特性 - (10)并行数组排序</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 1, 2021</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
-    </a>
-    <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F' class="post_tag button button_translucent">排序
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在Java 7中已经有了Arrays.sort()方法可对对象进行排序，而在Java 8中，引入了新的并行排序，它比前者的排序速度更快，且遵循了Java 7引入的Fork/Join框架，可以把排序任务分配给线程池中可用的多个线程。 Java 8在java.util.Arrays类中新增了并行排序功能，能够更充分地利用多线程机制，最重要的方法是parallelSort()，可以显著加快多核机器上的数组排序
-并行排序算法：
- 将给定的数组划分为子数组，将子数组进一步划分为子数组，直到子数组达到最小粒度为止。 子数组由多个线程单独排序。并行排序使用 Fork / Join Framework 并行地对子数组进行排序。 已合并的已排序子数 …</p>
-          <a href="https://www.zengxi.net/2021/06/java8_parallel_sort/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -502,6 +504,12 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/java9_optional_enhancement/" class="nav-link">Java 9新特性 - (5)Optional类中新增几个方法</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/06/java8_optional/" class="nav-link">Java 8新特性 - (15)Optional类</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java9_unique_jvm_log/" class="nav-link">Java 9新特性 - (4)统一的JVM日志系统</a>
       </li>
       <li>
@@ -519,19 +527,13 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
       <li>
         <a href="https://www.zengxi.net/2021/06/aliyun_waf_sni/" class="nav-link">阿里云WAF与SNI问题</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/docker_curl_ssl_certificate_fail/" class="nav-link">Docker环境中curl报证书错误</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/manjaro_installation_failure/" class="nav-link">Manjaro安装软件时找不到strip binary</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">22</span>
+          <span class="button_tally">24</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
@@ -625,7 +627,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=22>JAVA<span class="button_tally">22</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=24>JAVA<span class="button_tally">24</span>
             </a>
             
             
@@ -710,7 +712,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">19</span>
+          <span class="button_tally">21</span>
         </a>
         
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
@@ -726,7 +728,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">22</span>
+          <span class="button_tally">24</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
@@ -736,7 +738,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
         
         <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
           JAVA-8
-          <span class="button_tally">14</span>
+          <span class="button_tally">15</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -754,6 +756,11 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
           <span class="button_tally">5</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java-9/' class="post_tag button button_translucent">
+          JAVA-9
+          <span class="button_tally">5</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
           LINUX
           <span class="button_tally">5</span>
@@ -762,11 +769,6 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
         <a href='https://www.zengxi.net/tags/nginx/' class="post_tag button button_translucent">
           NGINX
           <span class="button_tally">5</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-9/' class="post_tag button button_translucent">
-          JAVA-9
-          <span class="button_tally">4</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
@@ -884,7 +886,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=22>JAVA<span class="button_tally">22</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=24>JAVA<span class="button_tally">24</span>
             </a>
             
             
@@ -892,11 +894,11 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=14>JAVA-8<span class="button_tally">14</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=15>JAVA-8<span class="button_tally">15</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-9/' class=" post_tag button button_translucent" data-position=4>JAVA-9<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/tags/java-9/' class=" post_tag button button_translucent" data-position=5>JAVA-9<span class="button_tally">5</span>
             </a>
             
             
@@ -973,6 +975,10 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             
             
             <a href='https://www.zengxi.net/tags/nodejs/' class=" post_tag button button_translucent" data-position=2>NODEJS<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/optional/' class=" post_tag button button_translucent" data-position=2>OPTIONAL<span class="button_tally">2</span>
             </a>
             
             

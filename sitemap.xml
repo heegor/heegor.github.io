@@ -3,39 +3,48 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.zengxi.net/</loc>
-    <lastmod>2021-06-23T13:50:00+08:00</lastmod>
+    <lastmod>2021-06-24T13:38:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/categories/</loc>
-    <lastmod>2021-06-23T13:50:00+08:00</lastmod>
+    <lastmod>2021-06-24T13:38:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/categories/java/</loc>
-    <lastmod>2021-06-23T13:50:00+08:00</lastmod>
+    <lastmod>2021-06-24T13:38:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/java/</loc>
-    <lastmod>2021-06-23T13:50:00+08:00</lastmod>
+    <lastmod>2021-06-24T13:38:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/java-9/</loc>
-    <lastmod>2021-06-23T13:50:00+08:00</lastmod>
+    <lastmod>2021-06-24T13:38:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/2021/06/java9_optional_enhancement/</loc>
+    <lastmod>2021-06-24T13:38:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/</loc>
+    <lastmod>2021-06-24T13:38:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/optional/</loc>
+    <lastmod>2021-06-24T13:38:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/posts/</loc>
+    <lastmod>2021-06-24T13:38:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/series/</loc>
+    <lastmod>2021-06-24T13:38:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/</loc>
+    <lastmod>2021-06-24T13:38:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/java-8/</loc>
+    <lastmod>2021-06-24T12:59:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/2021/06/java8_optional/</loc>
+    <lastmod>2021-06-24T12:59:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2021/06/java9_unique_jvm_log/</loc>
     <lastmod>2021-06-23T13:50:00+08:00</lastmod>
   </url><url>
-    <loc>https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/</loc>
-    <lastmod>2021-06-23T13:50:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/posts/</loc>
-    <lastmod>2021-06-23T13:50:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/series/</loc>
-    <lastmod>2021-06-23T13:50:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/tags/</loc>
-    <lastmod>2021-06-23T13:50:00+08:00</lastmod>
-  </url><url>
     <loc>https://www.zengxi.net/tags/hotspot/</loc>
-    <lastmod>2021-06-22T12:58:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/tags/java-8/</loc>
     <lastmod>2021-06-22T12:58:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/</loc>

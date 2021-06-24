@@ -132,6 +132,76 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2018/07/insertion-sort/">排序算法 - （直接）插入排序 （Insertion Sort)</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 2, 2018</span>
+    <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95' class="post_tag button button_translucent">算法
+    </a>
+    <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F' class="post_tag button button_translucent">排序
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">基本思路 假设按照从小到大排列，总共有n个元素。
+ 整个数组从逻辑上会被分成两个部分，左边部分是有序的序列，右边部分是待排序的元素。当然，刚开始左边的有序序列仅有一个元素，即第一个元素 将右边待排序元素的第一个元素，与左边有序序列进行比较。比较的时候，是从有序序列的末端（即有序序列最大的一个数）开始进行比较，如果比它大或者与之相等则直接插在其后面，否则一直往前面找，直到找到该插入的位置。插入的时候，需要把所插入位置右边的所有元素往右移。 重复上面的步骤，直到所有待排序的元素处理完毕  性能 平均需要n2/4次比较， n2/4次交换；最差情况n2次比较，n2次交换；最好情况n-1次比较，0次交换
+时间复杂度：平均O(n2)，最 …</p>
+          <a href="https://www.zengxi.net/2018/07/insertion-sort/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2018/06/connect-remote-jmx-with-ssh/">通过SSH和JMX远程监控Java服务</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 28, 2018</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/jmx' class="post_tag button button_translucent">jmx
+    </a>
+    <a href='https://www.zengxi.net/tags/ssh' class="post_tag button button_translucent">ssh
+    </a>
+    <a href='https://www.zengxi.net/tags/%E8%BF%9C%E7%A8%8B' class="post_tag button button_translucent">远程
+    </a>
+    <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7' class="post_tag button button_translucent">监控
+    </a>
+    <a href='https://www.zengxi.net/tags/jvisualvm' class="post_tag button button_translucent">jvisualvm
+    </a>
+    <a href='https://www.zengxi.net/tags/jconsole' class="post_tag button button_translucent">jconsole
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在日常工作中，可以使用一些监控数据的图形展示工具（比如Grafana等）来查看服务器上面JVM的使用情况，比如内存或者CPU的占用情况。但是，在需要解决实际问题的时候，比如CPU或者内存占用过高，还是需要连接到远程的服务器，查看JVM的具体运行情况来分析问题产生的原因。
+通常情况下，我们是通过开启远程服务器上的JMX，使用JVisualVM或JConsole客户端，远程连接到服务器上。然而，在实际的生产环境中，Java应用服务器并没有直接暴露在公网，必须通过跳板机来连接。
+网上查了一些资料，多数比较麻烦，有些还需要借助第三方工具。后来找到一个简便的方法，在使用JVisualVM或JConsole客户端的时候，通过指定socks代理的 …</p>
+          <a href="https://www.zengxi.net/2018/06/connect-remote-jmx-with-ssh/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2018/06/redis-data-migration/">使用redis-cli与AOF迁移数据</a>
       </h3>
       <div class="post_meta">
@@ -427,6 +497,12 @@ grep的帮助文档中有这几个参数：
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/06/java9_optional_enhancement/" class="nav-link">Java 9新特性 - (5)Optional类中新增几个方法</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/06/java8_optional/" class="nav-link">Java 8新特性 - (15)Optional类</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java9_unique_jvm_log/" class="nav-link">Java 9新特性 - (4)统一的JVM日志系统</a>
       </li>
       <li>
@@ -444,19 +520,13 @@ grep的帮助文档中有这几个参数：
       <li>
         <a href="https://www.zengxi.net/2021/06/aliyun_waf_sni/" class="nav-link">阿里云WAF与SNI问题</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/docker_curl_ssl_certificate_fail/" class="nav-link">Docker环境中curl报证书错误</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/manjaro_installation_failure/" class="nav-link">Manjaro安装软件时找不到strip binary</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">22</span>
+          <span class="button_tally">24</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
@@ -550,7 +620,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=22>JAVA<span class="button_tally">22</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=24>JAVA<span class="button_tally">24</span>
             </a>
             
             
@@ -635,7 +705,7 @@ grep的帮助文档中有这几个参数：
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/series/java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/' class="post_tag button button_translucent">
           JAVA各版本新特性
-          <span class="button_tally">19</span>
+          <span class="button_tally">21</span>
         </a>
         
         <a href='https://www.zengxi.net/series/kubernetes-in-action%E7%AC%94%E8%AE%B0/' class="post_tag button button_translucent">
@@ -651,7 +721,7 @@ grep的帮助文档中有这几个参数：
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">22</span>
+          <span class="button_tally">24</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
@@ -661,7 +731,7 @@ grep的帮助文档中有这几个参数：
         
         <a href='https://www.zengxi.net/tags/java-8/' class="post_tag button button_translucent">
           JAVA-8
-          <span class="button_tally">14</span>
+          <span class="button_tally">15</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/postgres/' class="post_tag button button_translucent">
@@ -679,6 +749,11 @@ grep的帮助文档中有这几个参数：
           <span class="button_tally">5</span>
         </a>
         
+        <a href='https://www.zengxi.net/tags/java-9/' class="post_tag button button_translucent">
+          JAVA-9
+          <span class="button_tally">5</span>
+        </a>
+        
         <a href='https://www.zengxi.net/tags/linux/' class="post_tag button button_translucent">
           LINUX
           <span class="button_tally">5</span>
@@ -687,11 +762,6 @@ grep的帮助文档中有这几个参数：
         <a href='https://www.zengxi.net/tags/nginx/' class="post_tag button button_translucent">
           NGINX
           <span class="button_tally">5</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/tags/java-9/' class="post_tag button button_translucent">
-          JAVA-9
-          <span class="button_tally">4</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/jetty/' class="post_tag button button_translucent">
@@ -809,7 +879,7 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=22>JAVA<span class="button_tally">22</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=24>JAVA<span class="button_tally">24</span>
             </a>
             
             
@@ -817,11 +887,11 @@ grep的帮助文档中有这几个参数：
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=14>JAVA-8<span class="button_tally">14</span>
+            <a href='https://www.zengxi.net/tags/java-8/' class=" post_tag button button_translucent" data-position=15>JAVA-8<span class="button_tally">15</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java-9/' class=" post_tag button button_translucent" data-position=4>JAVA-9<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/tags/java-9/' class=" post_tag button button_translucent" data-position=5>JAVA-9<span class="button_tally">5</span>
             </a>
             
             
@@ -898,6 +968,10 @@ grep的帮助文档中有这几个参数：
             
             
             <a href='https://www.zengxi.net/tags/nodejs/' class=" post_tag button button_translucent" data-position=2>NODEJS<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/optional/' class=" post_tag button button_translucent" data-position=2>OPTIONAL<span class="button_tally">2</span>
             </a>
             
             

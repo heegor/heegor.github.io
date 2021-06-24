@@ -6,11 +6,11 @@
     <description>Recent content in Tags on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 23 Jun 2021 13:50:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Jun 2021 13:38:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>java</title>
       <link>https://www.zengxi.net/tags/java/</link>
-      <pubDate>Wed, 23 Jun 2021 13:50:00 +0800</pubDate>
+      <pubDate>Thu, 24 Jun 2021 13:38:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/tags/java/</guid>
       <description></description>
@@ -19,9 +19,27 @@
     <item>
       <title>java 9</title>
       <link>https://www.zengxi.net/tags/java-9/</link>
-      <pubDate>Wed, 23 Jun 2021 13:50:00 +0800</pubDate>
+      <pubDate>Thu, 24 Jun 2021 13:38:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/tags/java-9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>optional</title>
+      <link>https://www.zengxi.net/tags/optional/</link>
+      <pubDate>Thu, 24 Jun 2021 13:38:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/optional/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>java 8</title>
+      <link>https://www.zengxi.net/tags/java-8/</link>
+      <pubDate>Thu, 24 Jun 2021 12:59:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/java-8/</guid>
       <description></description>
     </item>
     
@@ -31,15 +49,6 @@
       <pubDate>Tue, 22 Jun 2021 12:58:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/tags/hotspot/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>java 8</title>
-      <link>https://www.zengxi.net/tags/java-8/</link>
-      <pubDate>Tue, 22 Jun 2021 12:58:00 +0800</pubDate>
-      
-      <guid>https://www.zengxi.net/tags/java-8/</guid>
       <description></description>
     </item>
     

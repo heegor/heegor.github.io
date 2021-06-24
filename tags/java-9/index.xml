@@ -6,7 +6,21 @@
     <description>Recent content in java 9 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 23 Jun 2021 13:50:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/java-9/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Jun 2021 13:38:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/java-9/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 9新特性 - (5)Optional类中新增几个方法</title>
+      <link>https://www.zengxi.net/2021/06/java9_optional_enhancement/</link>
+      <pubDate>Thu, 24 Jun 2021 13:38:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/06/java9_optional_enhancement/</guid>
+      <description>相关文章： Java 8引入Optional类
+ Optional 类在 Java 8 中引入，Optional 类的引入很好的解决空指针异常。。在 java 9 中, 添加了三个方法来改进它的功能.
+stream() 方法 语法
+1public Stream&amp;lt;T&amp;gt; stream() stream 方法的作用就是将 Optional 转为一个 Stream，如果该 Optional 中包含值，那么就返回包含这个值的 Stream，否则返回一个空的 Stream（Stream.empty()）。
+实例
+1List&amp;lt;Optional&amp;lt;String&amp;gt;&amp;gt; list = Arrays.asList ( 2 Optional.empty(), 3 Optional.of(&amp;#34;A&amp;#34;), 4 Optional.empty(), 5 Optional.of(&amp;#34;B&amp;#34;)); 6 7//filter the list based to print non-empty values 8//if optional is non-empty, get the value in stream, otherwise return empty 9List&amp;lt;String&amp;gt; filteredList = list.stream() 10 .</description>
+    </item>
+    
     <item>
       <title>Java 9新特性 - (4)统一的JVM日志系统</title>
       <link>https://www.zengxi.net/2021/06/java9_unique_jvm_log/</link>
