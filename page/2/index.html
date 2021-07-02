@@ -132,6 +132,34 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/06/manjaro_installation_failure/">Manjaro安装软件时找不到strip binary</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 15, 2021</span>
+    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">Manjaro 安装软件时报错：
+1:: (1/1) Parsing SRCINFO: wps-office 2==&gt; ERROR: Cannot find the strip binary required for object file stripping. 3error downloading sources: wps-office 这个是由于某些基础包没装，执行下面命令安装基础包，然后再次安装需要的软件即可
+1sudo pacman -Sy base-devel </p>
+          <a href="https://www.zengxi.net/2021/06/manjaro_installation_failure/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/06/java8_stamped_lock/">Java 8新特性 - (13)StampedLock</a>
       </h3>
       <div class="post_meta">
@@ -406,36 +434,6 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/">Java 8新特性 - (5)重复注解</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    May 27, 2021</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在JDK8之前，不能使用重复注解的，即某个位置相同注解只能出现一次。
-如果想编写一个定时任务的注解，使用者可以配置在每天哪一小时触发，而且允许用户配置多个时间。传统做法是：
-1@Target(ElementType.TYPE) 2@Retention(RetentionPolicy.RUNTIME) 3public @interface TraditionalAnnoSchedule { 4 int[] hour() default {0}; 5} 6 7@TraditionalAnnoSchedule(hour = {0, 8, 12}) 8public class Target { 9 public static void …</p>
-          <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -507,6 +505,9 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/" class="nav-link">Manjaro升级后打开坚果云界面显示空白</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java9_optional_enhancement/" class="nav-link">Java 9新特性 - (5)Optional类中新增几个方法</a>
       </li>
       <li>
@@ -526,9 +527,6 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java9_interface_private_method/" class="nav-link">Java 9新特性 - (1)接口中的私有方法</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/aliyun_waf_sni/" class="nav-link">阿里云WAF与SNI问题</a>
       </li>
     </ul>
     <div>
@@ -561,7 +559,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
           MANJARO
-          <span class="button_tally">7</span>
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
@@ -650,7 +648,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=7>MANJARO<span class="button_tally">7</span>
+            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=8>MANJARO<span class="button_tally">8</span>
             </a>
             
             
@@ -751,7 +749,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
           MANJARO
-          <span class="button_tally">7</span>
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
@@ -953,7 +951,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=7>MANJARO<span class="button_tally">7</span>
+            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=8>MANJARO<span class="button_tally">8</span>
             </a>
             
             

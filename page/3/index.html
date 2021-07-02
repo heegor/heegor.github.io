@@ -132,6 +132,36 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/">Java 8新特性 - (5)重复注解</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    May 27, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在JDK8之前，不能使用重复注解的，即某个位置相同注解只能出现一次。
+如果想编写一个定时任务的注解，使用者可以配置在每天哪一小时触发，而且允许用户配置多个时间。传统做法是：
+1@Target(ElementType.TYPE) 2@Retention(RetentionPolicy.RUNTIME) 3public @interface TraditionalAnnoSchedule { 4 int[] hour() default {0}; 5} 6 7@TraditionalAnnoSchedule(hour = {0, 8, 12}) 8public class Target { 9 public static void …</p>
+          <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/05/java8_default_method/">Java 8新特性 - (4)默认方法</a>
       </h3>
       <div class="post_meta">
@@ -399,37 +429,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/03/java8_stream_api/">Java 8新特性 - (2)Stream API</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Mar 5, 2021</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">什么是Stream API Stream API让开发者能够以一种声明的方式处理数据源（集合、数组等），它专注于对数据源进行各种高效的聚合操作（aggregate operation）和大批量数据操作 (bulk data operation)。
-Stream API将处理的数据源看做一种Stream（流），Stream（流）在Pipeline（管道）中传输和运算，支持的运算包含筛选、排序、聚合等，当到达终点后便得到最终的处理结果。如果说集合讲的的数据，那么流讲的就是计算！
-几个关键概念：
- 元素: Stream是一个来自数据源的元素队列，Stream本身并不存储元素。 数据源: 即Stream的来源, 包含集合、数组、I/O …</p>
-          <a href="https://www.zengxi.net/2021/03/java8_stream_api/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
 <ul class="pagination">
   <li class="page-item">
@@ -504,6 +503,9 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/" class="nav-link">Manjaro升级后打开坚果云界面显示空白</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/java9_optional_enhancement/" class="nav-link">Java 9新特性 - (5)Optional类中新增几个方法</a>
       </li>
       <li>
@@ -523,9 +525,6 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java9_interface_private_method/" class="nav-link">Java 9新特性 - (1)接口中的私有方法</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/aliyun_waf_sni/" class="nav-link">阿里云WAF与SNI问题</a>
       </li>
     </ul>
     <div>
@@ -558,7 +557,7 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
         
         <a href='https://www.zengxi.net/categories/manjaro/' class="post_tag button button_translucent">
           MANJARO
-          <span class="button_tally">7</span>
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
@@ -647,7 +646,7 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=7>MANJARO<span class="button_tally">7</span>
+            <a href='https://www.zengxi.net/categories/manjaro/' class=" post_tag button button_translucent" data-position=8>MANJARO<span class="button_tally">8</span>
             </a>
             
             
@@ -748,7 +747,7 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
         
         <a href='https://www.zengxi.net/tags/manjaro/' class="post_tag button button_translucent">
           MANJARO
-          <span class="button_tally">7</span>
+          <span class="button_tally">8</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
@@ -950,7 +949,7 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=7>MANJARO<span class="button_tally">7</span>
+            <a href='https://www.zengxi.net/tags/manjaro/' class=" post_tag button button_translucent" data-position=8>MANJARO<span class="button_tally">8</span>
             </a>
             
             
