@@ -6,7 +6,21 @@
     <description>Recent content on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 02 Jul 2021 09:46:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Jul 2021 16:19:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>线程池原因导致java.lang.OutOfMemoryError</title>
+      <link>https://www.zengxi.net/2021/07/threadpool_oom/</link>
+      <pubDate>Mon, 19 Jul 2021 16:19:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/07/threadpool_oom/</guid>
+      <description>问题描述 线上环境某个服务经常性地抛出内存溢出，看日志是下面的错误
+1java.lang.OutOfMemoryError: unable to create new native thread 2 at java.lang.Thread.start0(Native Method) ~[?:1.8.0_112] 3 at java.lang.Thread.start(Thread.java:714) ~[?:1.8.0_112] 4 at java.util.concurrent.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:950) ~[?:1.8.0_112] 5 at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1357) ~[?:1.8.0_112] 6 at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134) ~[?:1.8.0_112] 造成这个错误主要有2个原因：
+ 剩余的系统内存不足，导致无法创建新的线程 总线程数达到操作系统允许的上限  看了代码后，发现开发人员把线程池作为一个方法的局部变量，由于这方法是被定时任务调用的，也就意味着线程池局部变量会被实例化N次，如果线程池没有被回收，那么最终总线程数会达到操作系统的上限。
+问题剖析 当对象实例不再使用或者方法执行完毕后，什么时候会释放线程与关闭线程池？不同的线程池的实现方式可能不一样，但是主要还是看是否设置了核心线程数。
+ 如果没有设置核心线程数，比如 newCachedThreadPool ，在线程池的线程空闲时间到达 60s 后，线程会关闭，所有线程关闭后线程池也相应关闭回收。 如果设置了核心线程数，比如 newSingleThreadExecutor 和 newFixedThreadPool，如果没有主动去关闭，或者设置核心线程的超时时间，核心线程会一直存在不会被关闭，这个线程池就不会被释放回收。  可以通过下面的ThreadPoolExecutor源码中runWorker方法，看到要执行线程退出processWorkerExit需要这几种情况：
+ 线程池的状态 &amp;gt;= STOP。对于这个情况，线程池的状态要达到 STOP，需要调用shutdown或者shutdownNow方法 getTask 获取到空任务  1final void runWorker(Worker w) { 2 Thread wt = Thread.currentThread(); 3 Runnable task = w.</description>
+    </item>
+    
     <item>
       <title>Manjaro升级后打开坚果云界面显示空白</title>
       <link>https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/</link>

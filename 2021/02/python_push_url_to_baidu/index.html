@@ -182,7 +182,7 @@
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="ln"> 1</span><span class="ch">#!/usr/bin/env python3</span>
 <span class="ln"> 2</span><span class="c1"># coding: utf-8</span>
 <span class="ln"> 3</span>
-<span class="ln"> 4</span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
+<span class="ln"> 4</span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
 <span class="ln"> 5</span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="ln"> 6</span><span class="kn">import</span> <span class="nn">os</span>
 <span class="ln"> 7</span>
@@ -239,10 +239,10 @@
 <span class="ln">58</span>               <span class="k">elif</span> <span class="n">urlChild</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;lastmod&#39;</span><span class="p">:</span>
 <span class="ln">59</span>                    <span class="n">lastmod</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">urlChild</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">SITEMAP_DATETIME_FORMAT</span><span class="p">)</span>
 <span class="ln">60</span>          
-<span class="ln">61</span>          <span class="n">ignore</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="ln">61</span>          <span class="n">ignore</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="ln">62</span>          <span class="k">for</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">ignorePathPrefixes</span><span class="p">:</span>
 <span class="ln">63</span>               <span class="k">if</span> <span class="n">location</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">prefix</span><span class="p">):</span>
-<span class="ln">64</span>                    <span class="n">ignore</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="ln">64</span>                    <span class="n">ignore</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="ln">65</span>                    <span class="k">break</span>
 <span class="ln">66</span>          
 <span class="ln">67</span>          <span class="k">if</span> <span class="n">ignore</span><span class="p">:</span>
@@ -253,14 +253,14 @@
 <span class="ln">72</span>
 <span class="ln">73</span>
 <span class="ln">74</span><span class="n">command</span><span class="o">=</span><span class="s2">&#34;&#34;&#34;
-</span><span class="ln">75</span><span class="s2">curl -H &#39;Content-Type:text/plain&#39; --data-binary @{filePath} &#34;http://data.zz.baidu.com/urls?site={siteUrl}&amp;token={token}&#34;
+</span><span class="ln">75</span><span class="s2">curl -H &#39;Content-Type:text/plain&#39; --data-binary @</span><span class="si">{filePath}</span><span class="s2"> &#34;http://data.zz.baidu.com/urls?site=</span><span class="si">{siteUrl}</span><span class="s2">&amp;token=</span><span class="si">{token}</span><span class="s2">&#34;
 </span><span class="ln">76</span><span class="s2">&#34;&#34;&#34;</span>
 <span class="ln">77</span>
 <span class="ln">78</span><span class="n">commandToExecute</span><span class="o">=</span><span class="n">command</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filePath</span><span class="o">=</span><span class="n">tmpFile</span><span class="p">,</span> <span class="n">siteUrl</span><span class="o">=</span><span class="n">siteUrl</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="n">baiduApiToken</span><span class="p">)</span>
 <span class="ln">79</span><span class="n">tmpres</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="n">commandToExecute</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
 <span class="ln">80</span>
-<span class="ln">81</span><span class="k">print</span><span class="p">(</span><span class="n">commandToExecute</span><span class="p">)</span>
-<span class="ln">82</span><span class="k">print</span><span class="p">(</span><span class="n">tmpres</span><span class="p">)</span>
+<span class="ln">81</span><span class="nb">print</span><span class="p">(</span><span class="n">commandToExecute</span><span class="p">)</span>
+<span class="ln">82</span><span class="nb">print</span><span class="p">(</span><span class="n">tmpres</span><span class="p">)</span>
 </code></pre></div>
     
       
@@ -303,6 +303,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/07/threadpool_oom/" class="nav-link">线程池原因导致java.lang.OutOfMemoryError</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/" class="nav-link">Manjaro升级后打开坚果云界面显示空白</a>
       </li>
       <li>
@@ -323,9 +326,6 @@
       <li>
         <a href="https://www.zengxi.net/2021/06/java9_anonymous_inner_class_and_diamond_operator/" class="nav-link">Java 9新特性 - (2)匿名内部类与菱形运算符</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_interface_private_method/" class="nav-link">Java 9新特性 - (1)接口中的私有方法</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -340,13 +340,13 @@
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
-          POSTGRES
-          <span class="button_tally">10</span>
-        </a>
-        
         <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class="post_tag button button_translucent">
           系统优化那些事
+          <span class="button_tally">11</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
+          POSTGRES
           <span class="button_tally">10</span>
         </a>
         
@@ -494,7 +494,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=10>系统优化那些事<span class="button_tally">10</span>
+            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -527,7 +527,7 @@
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">24</span>
+          <span class="button_tally">25</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
@@ -685,7 +685,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=24>JAVA<span class="button_tally">24</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=25>JAVA<span class="button_tally">25</span>
             </a>
             
             
@@ -946,6 +946,14 @@
             
             
             <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/' class=" post_tag button button_translucent" data-position=3>算法<span class="button_tally">3</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/' class=" post_tag button button_translucent" data-position=1>线程池<span class="button_tally">1</span>
             </a>
             
             

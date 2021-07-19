@@ -128,6 +128,37 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/07/threadpool_oom/">线程池原因导致java.lang.OutOfMemoryError</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 19, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B' class="post_tag button button_translucent">线程
+    </a>
+    <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0' class="post_tag button button_translucent">线程池
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">问题描述 线上环境某个服务经常性地抛出内存溢出，看日志是下面的错误
+1java.lang.OutOfMemoryError: unable to create new native thread 2 at java.lang.Thread.start0(Native Method) ~[?:1.8.0_112] 3 at java.lang.Thread.start(Thread.java:714) ~[?:1.8.0_112] 4 at java.util.concurrent.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:950) ~[?:1.8.0_112] 5 at …</p>
+          <a href="https://www.zengxi.net/2021/07/threadpool_oom/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/06/java9_optional_enhancement/">Java 9新特性 - (5)Optional类中新增几个方法</a>
       </h3>
       <div class="post_meta">
@@ -412,65 +443,30 @@ Java 8为Integer，Long新增如下方法:
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/06/java8_base64/">Java 8新特性 - (11)Base64编解码</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 7, 2021</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
-    </a>
-    <a href='https://www.zengxi.net/tags/base64' class="post_tag button button_translucent">base64
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">早期处理BASE64编码, 需借助外部依赖：commons-codec，sun.misc.BASE64Decoder或JAXB的DatatypeConverter。Java 8实现了BASE64编解码API，它包含到java.util包。
-java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编解码器：
- Basic编码 URL编码 MIME编码  Basic编码 Basic编码是标准的BASE64编码，用于处理常规的需求：输出的内容不添加换行符，而且输出的内容由字母加数字组成。
-1// 编码 2String asB64 = …</p>
-          <a href="https://www.zengxi.net/2021/06/java8_base64/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
-<ul class="pagination">
-  <li class="page-item">
-    <a href="/tags/java/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
-  </li>
-  <li class="page-item disabled">
-    <a  class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-  </li>
-  <li class="page-item active">
-    <a class="page-link" href="/tags/java/">1</a>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/tags/java/page/2/">2</a>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/tags/java/page/3/">3</a>
-  </li>
-  <li class="page-item">
-    <a href="/tags/java/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-  </li>
-  <li class="page-item">
-    <a href="/tags/java/page/3/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
-  </li>
-</ul>
-
-
+    <ul class="pagination pagination-default">
+      <li class="page-item disabled">
+        <a href="#" aria-disabled="true" aria-label="First" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item disabled">
+        <a href="#" aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item active">
+        <a href="#" aria-current="page" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/java/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/java/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/java/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/java/page/3/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul>
     </li>
   </ul>
 <aside class="sidebar">
@@ -510,6 +506,9 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/07/threadpool_oom/" class="nav-link">线程池原因导致java.lang.OutOfMemoryError</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/" class="nav-link">Manjaro升级后打开坚果云界面显示空白</a>
       </li>
       <li>
@@ -530,9 +529,6 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
       <li>
         <a href="https://www.zengxi.net/2021/06/java9_anonymous_inner_class_and_diamond_operator/" class="nav-link">Java 9新特性 - (2)匿名内部类与菱形运算符</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_interface_private_method/" class="nav-link">Java 9新特性 - (1)接口中的私有方法</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -547,13 +543,13 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
-          POSTGRES
-          <span class="button_tally">10</span>
-        </a>
-        
         <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class="post_tag button button_translucent">
           系统优化那些事
+          <span class="button_tally">11</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
+          POSTGRES
           <span class="button_tally">10</span>
         </a>
         
@@ -701,7 +697,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=10>系统优化那些事<span class="button_tally">10</span>
+            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -734,7 +730,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">24</span>
+          <span class="button_tally">25</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
@@ -892,7 +888,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=24>JAVA<span class="button_tally">24</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=25>JAVA<span class="button_tally">25</span>
             </a>
             
             
@@ -1153,6 +1149,14 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             
             
             <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/' class=" post_tag button button_translucent" data-position=3>算法<span class="button_tally">3</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/' class=" post_tag button button_translucent" data-position=1>线程池<span class="button_tally">1</span>
             </a>
             
             

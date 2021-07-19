@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="">
   <head>
-	<meta name="generator" content="Hugo 0.83.1" />
+	<meta name="generator" content="Hugo 0.85.0" />
 <title>保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -128,6 +128,41 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/">利用frp与nginx实现公网访问NAS</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Nov 14, 2020</span>
+    <a href='https://www.zengxi.net/tags/frp' class="post_tag button button_translucent">frp
+    </a>
+    <a href='https://www.zengxi.net/tags/nginx' class="post_tag button button_translucent">nginx
+    </a>
+    <a href='https://www.zengxi.net/tags/nas' class="post_tag button button_translucent">nas
+    </a>
+    <a href='https://www.zengxi.net/tags/kcp' class="post_tag button button_translucent">kcp
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">能够在远程访问存储NAS上面的资料，才能真正发挥NAS的作用。但是对于没有公网IP的内网用户，如何实现在公网上面访问NAS，是一个需要事先解决的问题。
+如果拥有一个有公网IP的VPS，可以通过 frp + Nginx 来实现内网穿透解决这个问题。另外，从安全角度考虑，如果有可能的话，整个链路上面的都使用 https 协议通讯更加安全。
+下面大致描绘了访问的链路图：
+ 浏览器通过https协议与 VPS 通讯。浏览器的请求先发到nginx上，ngnix再将请求转发的至frps。在frps前面加上nginx做反向代理的好处是，如果这个VPS上面有其他请求转发的需求（比如这个VPS部署了个人网站或者博客），那在访问所有这些服务的时候，都可 …</p>
+          <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -383,78 +418,36 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/check_zookeeper_version/">查看zookeeper版本</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 28, 2020</span>
-    <a href='https://www.zengxi.net/tags/zookeeper' class="post_tag button button_translucent">zookeeper
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在控制台下面命令
-1echo stat|nc localhost 2181 返回结果示例
-1Zookeeper version: 3.4.8-1--1, built on Fri, 26 Feb 2016 14:51:43 +0100 2Clients: 3 /10.30.1.186:33824[1](queued=0,recved=203121,sent=203148) 4 /10.30.1.116:39374[1](queued=0,recved=56774,sent=56790) 5 /10.30.1.171:37240[1](queued=0,recved=20793,sent=20793) 6 7Latency …</p>
-          <a href="https://www.zengxi.net/2020/07/check_zookeeper_version/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
-<ul class="pagination">
-  <li class="page-item">
-    <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
-  </li>
-  <li class="page-item">
-    <a href="/page/6/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/">1</a>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/page/2/">2</a>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/page/3/">3</a>
-  </li>
-  <li class="page-item disabled">
-    <span aria-hidden="true">&nbsp;&hellip;&nbsp;</span>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/page/6/">6</a>
-  </li>
-  <li class="page-item active">
-    <a class="page-link" href="/page/7/">7</a>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/page/8/">8</a>
-  </li>
-  <li class="page-item disabled">
-    <span aria-hidden="true">&nbsp;&hellip;&nbsp;</span>
-  </li>
-  <li class="page-item">
-    <a class="page-link" href="/page/11/">11</a>
-  </li>
-  <li class="page-item">
-    <a href="/page/8/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-  </li>
-  <li class="page-item">
-    <a href="/page/11/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
-  </li>
-</ul>
-
-
+    <ul class="pagination pagination-default">
+      <li class="page-item">
+        <a href="/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/page/6/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/page/5/" aria-label="Page 5" class="page-link" role="button">5</a>
+      </li>
+      <li class="page-item">
+        <a href="/page/6/" aria-label="Page 6" class="page-link" role="button">6</a>
+      </li>
+      <li class="page-item active">
+        <a href="#" aria-current="page" aria-label="Page 7" class="page-link" role="button">7</a>
+      </li>
+      <li class="page-item">
+        <a href="/page/8/" aria-label="Page 8" class="page-link" role="button">8</a>
+      </li>
+      <li class="page-item">
+        <a href="/page/9/" aria-label="Page 9" class="page-link" role="button">9</a>
+      </li>
+      <li class="page-item">
+        <a href="/page/8/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/page/12/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul>
     </li>
   </ul>
 <aside class="sidebar">
@@ -494,6 +487,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/07/threadpool_oom/" class="nav-link">线程池原因导致java.lang.OutOfMemoryError</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/" class="nav-link">Manjaro升级后打开坚果云界面显示空白</a>
       </li>
       <li>
@@ -514,9 +510,6 @@
       <li>
         <a href="https://www.zengxi.net/2021/06/java9_anonymous_inner_class_and_diamond_operator/" class="nav-link">Java 9新特性 - (2)匿名内部类与菱形运算符</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_interface_private_method/" class="nav-link">Java 9新特性 - (1)接口中的私有方法</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -531,13 +524,13 @@
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
-          POSTGRES
-          <span class="button_tally">10</span>
-        </a>
-        
         <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class="post_tag button button_translucent">
           系统优化那些事
+          <span class="button_tally">11</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
+          POSTGRES
           <span class="button_tally">10</span>
         </a>
         
@@ -685,7 +678,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=10>系统优化那些事<span class="button_tally">10</span>
+            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -718,7 +711,7 @@
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/tags/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">24</span>
+          <span class="button_tally">25</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/kubernetes/' class="post_tag button button_translucent">
@@ -876,7 +869,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=24>JAVA<span class="button_tally">24</span>
+            <a href='https://www.zengxi.net/tags/java/' class=" post_tag button button_translucent" data-position=25>JAVA<span class="button_tally">25</span>
             </a>
             
             
@@ -1137,6 +1130,14 @@
             
             
             <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/' class=" post_tag button button_translucent" data-position=3>算法<span class="button_tally">3</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/' class=" post_tag button button_translucent" data-position=1>线程池<span class="button_tally">1</span>
             </a>
             
             
