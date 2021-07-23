@@ -132,6 +132,36 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/06/pg_wale_continuous_archiving/">postgres增量备份工具：wal-e</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 9, 2020</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+    <a href='https://www.zengxi.net/tags/wal-e' class="post_tag button button_translucent">wal-e
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">wal-e这个工具可以用来给postgres数据库做基础备份与增量备份，这个对数据库容灾很有帮助。目前它支持将备份存储到AWS S3，Azure Blob Store与Google Storage等。
+一些基本概念 Base Backup 也称为热备份，它不会中断PostgreSQL中任何事务。一旦启动了basebackup，它将等待一个checkpoint。如果到达了checkpoint，那么它将把整个数据目录复制到一个文件中。这些备份将会是replication或POINT IN TIME恢复的起点。通常，basebackup是不一致的，可能包含已经损坏的数据。这时，就需要用到WAL文件
+WAL 通过WAL文件可以获得数据库内所 …</p>
+          <a href="https://www.zengxi.net/2020/06/pg_wale_continuous_archiving/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/06/string_adapter/">用string adapter来解决系统接口对接中发现的空值验证问题</a>
       </h3>
       <div class="post_meta">
@@ -393,35 +423,6 @@ Alpine 的源文件为/etc/apk/repositories。默认的配置类似：
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/01/manage-distribution-session-by-id/">根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 26, 2020</span>
-    <a href='https://www.zengxi.net/tags/session' class="post_tag button button_translucent">session
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F' class="post_tag button button_translucent">分布式
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">背景 由于历史原因，原先的界面是用vaadin框架来实现。但是这个框架不适合互联网的分布式系统，正在逐步用目前主流的前端框架重写各个模块，把旧的vaadin页面替换掉。在替换过程中，新老界面并存。
-vaadin界面的servlet，每次都会判断请求中的session id值，如果在服务器中找不到对应这个id的session，就会重新生成一个。由于session id是在新界面登录的时候生成的，当点击链接从新界面跳转到vaadin界面的时候，vaadin服务会发现没有这个session id，就会重新生成一个新的session。换句话说，新老界面会有各自的session id。当然，分布式系统本来就有这个问题，可以采用分布 …</p>
-          <a href="https://www.zengxi.net/2020/01/manage-distribution-session-by-id/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -491,6 +492,9 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/threadpool_oom/" class="nav-link">线程池原因导致java.lang.OutOfMemoryError</a>
       </li>
       <li>
@@ -510,9 +514,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_anonymous_inner_class_and_diamond_operator/" class="nav-link">Java 9新特性 - (2)匿名内部类与菱形运算符</a>
       </li>
     </ul>
     <div>
@@ -595,6 +596,10 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <div class="tags_list">
             
             <a href='https://www.zengxi.net/categories/chrome/' class=" post_tag button button_translucent" data-position=1>CHROME<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/dbeaver/' class=" post_tag button button_translucent" data-position=1>DBEAVER<span class="button_tally">1</span>
             </a>
             
             
@@ -826,6 +831,10 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             
             
             <a href='https://www.zengxi.net/tags/date/' class=" post_tag button button_translucent" data-position=1>DATE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/dbeaver/' class=" post_tag button button_translucent" data-position=1>DBEAVER<span class="button_tally">1</span>
             </a>
             
             

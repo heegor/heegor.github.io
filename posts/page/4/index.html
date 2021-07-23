@@ -128,6 +128,36 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/">基于alpine构建docker镜像修改时区</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Mar 25, 2021</span>
+    <a href='https://www.zengxi.net/tags/docker' class="post_tag button button_translucent">docker
+    </a>
+    <a href='https://www.zengxi.net/tags/alpine' class="post_tag button button_translucent">alpine
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">默认apline镜像没有安装时区, 即使把宿主机的/etc/localtime 挂在到镜像中也无法把时区改成 GMT+8的.
+这个就只能在构建镜像的时候,安装并设置一下时区
+1RUN apk add tzdata \ 2&amp;&amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \ 3&amp;&amp; echo &#34;Asia/Shanghai&#34; &gt; /etc/timezone </p>
+          <a href="https://www.zengxi.net/2021/03/update_docker_image_timezone/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/">Manjaro升级后打印服务不可用</a>
       </h3>
       <div class="post_meta">
@@ -395,35 +425,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/">Manjaro设置默认Java版本</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 20, 2021</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">如果本机装了多个java版本，会有一个默认的java版本。随着java版本的不断升级，一些新的工具会要求高版本的java，否则无法运行。这个时候，就需要修改默认的java版本。
-查看当前的java版本
-1$ java -version 2openjdk version &#34;11.0.10&#34; 2021-01-19 3OpenJDK Runtime Environment (build 11.0.10+8) 4OpenJDK 64-Bit Server VM (build 11.0.10+8, mixed mode) 命令查看已安装的java版本
-1$ archlinux-java status 2 3Available …</p>
-          <a href="https://www.zengxi.net/2021/01/manjaro_set_default_java_version/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -493,6 +494,9 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/threadpool_oom/" class="nav-link">线程池原因导致java.lang.OutOfMemoryError</a>
       </li>
       <li>
@@ -512,9 +516,6 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_anonymous_inner_class_and_diamond_operator/" class="nav-link">Java 9新特性 - (2)匿名内部类与菱形运算符</a>
       </li>
     </ul>
     <div>
@@ -597,6 +598,10 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
           <div class="tags_list">
             
             <a href='https://www.zengxi.net/categories/chrome/' class=" post_tag button button_translucent" data-position=1>CHROME<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/dbeaver/' class=" post_tag button button_translucent" data-position=1>DBEAVER<span class="button_tally">1</span>
             </a>
             
             
@@ -828,6 +833,10 @@ Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不�
             
             
             <a href='https://www.zengxi.net/tags/date/' class=" post_tag button button_translucent" data-position=1>DATE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/dbeaver/' class=" post_tag button button_translucent" data-position=1>DBEAVER<span class="button_tally">1</span>
             </a>
             
             

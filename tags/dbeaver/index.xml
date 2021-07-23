@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dbeaver on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/dbeaver/</link>
+    <description>Recent content in dbeaver on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Fri, 23 Jul 2021 13:46:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/dbeaver/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DBeaver自定义JDK路径</title>
+      <link>https://www.zengxi.net/2021/07/dbeaver_jdk/</link>
+      <pubDate>Fri, 23 Jul 2021 13:46:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2021/07/dbeaver_jdk/</guid>
+      <description>新版的DBeaver需要JDK 11才能执行，如果机器中默认的JDK版本低于11，那启动的时候就会报错。
+除了将默认的JDK版本设置成11以上版本之外，还有办法就是修改DBeaver配置文件中的启动参数。
+编辑/usr/lib/dbeaver/dbeaver.ini，添加参数指定jdk的路径：
+1-vm 2/usr/lib/jvm/java-11-openjdk/bin 最终的配置文件内容样例：
+1-startup 2plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar 3--launcher.library 4plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.2.100.v20210209-1541 5-vm 6/usr/lib/jvm/java-11-openjdk/bin 7-vmargs 8-XX:+IgnoreUnrecognizedVMOptions 9--add-modules=ALL-SYSTEM 10-Dosgi.requiredJavaVersion=11 11-Xms64m 12-Xmx1024m </description>
+    </item>
+    
+  </channel>
+</rss>

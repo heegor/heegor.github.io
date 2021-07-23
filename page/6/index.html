@@ -132,6 +132,34 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_volume/">Kubernetes in Action笔记 - (9) 卷</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 22, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">卷 卷是 pod 的一个组成部分，不是独立的 Kubernetes 对象, 不能单独创建或删除。 pod 中的所有容器都可以使用卷, 但必须先将它挂载在每个需要访问它的容器中。
+卷类型 主要类型：
+ emptyDir:用于存储临时数据的简单空目录。 hostPath: 用于将目录从工作节点的文件系统挂载到pod中 gitRepo: 通过检出Git仓库的内容来初始化的卷 nfs: 挂载到pod中的NFS共享卷 用于挂载云服务商提供的特定存储类型。比如，gcePersistentDi sk (Google 高效能型存储磁盘卷)、 awsElasticBlockStore (AmazonWeb 服务弹性块存储卷)、 azureDisk …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_volume/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/12/k8s_service/">Kubernetes in Action笔记 - (8) 服务、Endpoint、Ingress</a>
       </h3>
       <div class="post_meta">
@@ -387,37 +415,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/">Elastic Search vm.max_map_count too low 错误</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Nov 19, 2020</span>
-    <a href='https://www.zengxi.net/tags/elastic-search' class="post_tag button button_translucent">elastic search
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在启动elastic search的时候，在启动日志看到下面的错误提示
-1Max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144] 解决这个问题，有两个办法：
- 临时的，仅当前会话窗口有效 执行下面命令  1sysctl -w vm.max_map_count=262144 然后启动elastic search
-永久生效  编辑/etc/sysctl.conf, 添加或者修改下面参数：
-1vm.max_map_count=262144 重启系统，或者执行下面命令加载参数：
-1sysctl --system </p>
-          <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -487,6 +484,9 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/threadpool_oom/" class="nav-link">线程池原因导致java.lang.OutOfMemoryError</a>
       </li>
       <li>
@@ -506,9 +506,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_anonymous_inner_class_and_diamond_operator/" class="nav-link">Java 9新特性 - (2)匿名内部类与菱形运算符</a>
       </li>
     </ul>
     <div>
@@ -591,6 +588,10 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
           <div class="tags_list">
             
             <a href='https://www.zengxi.net/categories/chrome/' class=" post_tag button button_translucent" data-position=1>CHROME<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/dbeaver/' class=" post_tag button button_translucent" data-position=1>DBEAVER<span class="button_tally">1</span>
             </a>
             
             
@@ -822,6 +823,10 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             
             
             <a href='https://www.zengxi.net/tags/date/' class=" post_tag button button_translucent" data-position=1>DATE<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/dbeaver/' class=" post_tag button button_translucent" data-position=1>DBEAVER<span class="button_tally">1</span>
             </a>
             
             
