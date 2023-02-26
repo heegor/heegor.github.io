@@ -179,20 +179,20 @@
     <hr>
 <h2 id="二进制数字表达方式">二进制数字表达方式</h2>
 <p>在Java 7之前，支持十进制（123）、八进制（0123）、十六进制（0X12AB）的表示形式。Java 7中增加支持二进制的表示（0B11110001、0b11110001）</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kt">int</span> <span class="n">binary</span> <span class="o">=</span> <span class="n">0b0001_1001</span><span class="o">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kt">int</span> <span class="n">binary</span> <span class="o">=</span> <span class="n">0b0001_1001</span><span class="o">;</span>
 <span class="ln">2</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;binary is :&#34;</span> <span class="o">+</span> <span class="n">binary</span><span class="o">);</span>
 </code></pre></div><p>输出</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>binary is :25
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>binary is :25
 </code></pre></div><h2 id="使用下划线对数字进行分隔表达">使用下划线对数字进行分隔表达</h2>
 <p>Java 7中支持在数字中间增加'_'作为分隔符，分隔长int以及long（也支持double,float），显示更直观，如（12_123_456）。</p>
 <p>下划线只能在数字中间，编译时编译器自动删除数字中的下划线。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kt">int</span> <span class="n">intOne</span> <span class="o">=</span> <span class="n">1_000_000</span><span class="o">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kt">int</span> <span class="n">intOne</span> <span class="o">=</span> <span class="n">1_000_000</span><span class="o">;</span>
 <span class="ln">2</span><span class="kt">long</span> <span class="n">longOne</span> <span class="o">=</span> <span class="n">1_000_000</span><span class="o">;</span>
 <span class="ln">3</span><span class="kt">double</span> <span class="n">doubleOne</span> <span class="o">=</span> <span class="n">1_000_000</span><span class="o">;</span>
 <span class="ln">4</span><span class="kt">float</span> <span class="n">floatOne</span> <span class="o">=</span> <span class="n">1_000_000</span><span class="o">;</span>
 </code></pre></div><h2 id="switch-语句支持字符串变量">switch 语句支持字符串变量</h2>
 <p>之前在switch中只能使用number或enum，Java 7开始支持string。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;a&#34;</span><span class="o">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;a&#34;</span><span class="o">;</span>
 <span class="ln"> 2</span><span class="k">switch</span> <span class="o">(</span><span class="n">s</span><span class="o">)</span> <span class="o">{</span>
 <span class="ln"> 3</span>    <span class="k">case</span> <span class="s">&#34;a&#34;</span><span class="o">:</span>
 <span class="ln"> 4</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;is a&#34;</span><span class="o">);</span>
@@ -206,28 +206,28 @@
 <span class="ln">12</span><span class="o">}</span>
 </code></pre></div><h2 id="泛型实例创建的类型推断">泛型实例创建的类型推断</h2>
 <p>运用泛型实例化类型自动推断，对通用实例创建(diamond)的type引用进行了改进，语法更加简洁</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// Java 7 之前的写法
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// Java 7 之前的写法
 </span><span class="ln">2</span><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
 <span class="ln">3</span>
 <span class="ln">4</span><span class="c1">// Java 7 开始支持的写法
 </span><span class="ln">5</span><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
 </code></pre></div><h2 id="try-with-resources-语句">try-with-resources 语句</h2>
 <p>Java 7之前对某些资源的操作是需要手动关闭，如InputStream，Writes，Sockets，Sql等，这些需要在finally语句中进行关闭资源的操作。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">OutputStream</span> <span class="n">fos</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">OutputStream</span> <span class="n">fos</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 <span class="ln">2</span><span class="k">try</span> <span class="o">{</span>
 <span class="ln">3</span>    <span class="n">fos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">&#34;/tmp/file&#34;</span><span class="o">);</span>
 <span class="ln">4</span><span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
 <span class="ln">5</span>    <span class="n">fos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="ln">6</span><span class="o">}</span>
 </code></pre></div><p>从Java 7开始, 在采用try-with-resources方式后，它会自动释放资源, 不需要再次声明流的关闭。可以使用try-with-resources的资源有： 任何实现了java.lang.AutoCloseable接口或者java.io.Closeable接口的对象。这里Closeable继承了AutoCloseable。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Closeable</span> <span class="kd">extends</span> <span class="n">AutoCloseable</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Closeable</span> <span class="kd">extends</span> <span class="n">AutoCloseable</span>
 </code></pre></div><p>从Java 7开始可以把上面例子中的代码改写成下面的形式</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="k">try</span><span class="o">(</span><span class="n">OutputStream</span> <span class="n">fos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">&#34;/tmp/file&#34;</span><span class="o">);)</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="k">try</span><span class="o">(</span><span class="n">OutputStream</span> <span class="n">fos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">&#34;/tmp/file&#34;</span><span class="o">);)</span> <span class="o">{</span>
 <span class="ln">2</span>    <span class="c1">// 不需要再次指明fos.close();
 </span><span class="ln">3</span><span class="c1"></span><span class="o">}</span>
 </code></pre></div><h2 id="同时捕获多个异常处理">同时捕获多个异常处理</h2>
 <p>Java 7以前在一个方法抛出多个异常时，只能一个个的catch</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="k">try</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="k">try</span> <span class="o">{</span>
 <span class="ln">2</span>    <span class="n">result</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">obj</span><span class="o">);</span>
 <span class="ln">3</span><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalArgumentException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 <span class="ln">4</span>    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
@@ -235,7 +235,7 @@
 <span class="ln">6</span>    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 <span class="ln">7</span><span class="o">}</span>
 </code></pre></div><p>Java 7开始支持一个catch语句中包含多个异常类型，用&quot;|&quot;隔开。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="k">try</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="k">try</span> <span class="o">{</span>
 <span class="ln">2</span>    <span class="n">result</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">obj</span><span class="o">);</span>
 <span class="ln">3</span><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalArgumentException</span> <span class="o">|</span> <span class="n">IllegalAccessException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 <span class="ln">4</span>    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
@@ -288,6 +288,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -307,9 +310,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -484,6 +484,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -878,6 +882,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -902,7 +910,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -951,6 +967,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1039,7 +1059,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

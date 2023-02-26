@@ -209,9 +209,9 @@
 <p>尽管可以直接使用CMD指令指定镜像运行时想要执行的命令, 正确的做法依旧
 是借助ENTRYPOINT指令, 仅仅用CMD指定所需的默认参数。 这样, 镜像可以直
 接运行, 无须添加任何参数</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>docker run &lt;image&gt;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>docker run &lt;image&gt;
 </code></pre></div><p>或者是添加一些参数, 覆盖Dockerile中任何由CMD指定的默认参数值:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>docker run &lt;image&gt; &lt;arguments&gt;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>docker run &lt;image&gt; &lt;arguments&gt;
 </code></pre></div><h4 id="shell与exec的区别">shell与exec的区别</h4>
 <p>上述两条指令均支持以下两种形式。两者的区别在于指定的命令是否是在shell中被调用。</p>
 <ul>
@@ -219,7 +219,7 @@
 <li>exec形式。如ENTRYPOINT [&quot;node&quot;, &quot;app.js&quot;]。</li>
 </ul>
 <p>下面用例子来看他们的区别</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1"># exec形式</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1"># exec形式</span>
 <span class="ln"> 2</span><span class="c1"># 从返回的进程列表看出:这里是直接运行node进程,而并非在shell中执行。</span>
 <span class="ln"> 3</span>$ docker <span class="nb">exec</span> 4675d ps x
 <span class="ln"> 4</span>PID TTY STAT TIME COMMAND
@@ -236,7 +236,7 @@
 </code></pre></div><p>shell进程往往是多余的, 因此通常可以直接采用exec形式的ENTRYPOINT指令。</p>
 <h4 id="可配置化镜像中的间隔参数">可配置化镜像中的间隔参数</h4>
 <p>编辑fortuneloop.sh脚本</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="cp">#!/bin/bash
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="cp">#!/bin/bash
 </span><span class="ln"> 2</span><span class="cp"></span><span class="nb">trap</span> <span class="s2">&#34;exit&#34;</span> SIGINT
 <span class="ln"> 3</span><span class="nv">INTERVAL</span><span class="o">=</span><span class="nv">$1</span>
 <span class="ln"> 4</span><span class="nb">echo</span> Configured to generate new fortune every <span class="nv">$INTERVAL</span> seconds
@@ -248,16 +248,16 @@
 <span class="ln">10</span>sleep <span class="nv">$INTERVAL</span>
 <span class="ln">11</span><span class="k">done</span>
 </code></pre></div><p>编写docker file，采用exec形式的ENTRYPOINT命令，并设定默认参数</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>FROM ubuntu:latest
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>FROM ubuntu:latest
 <span class="ln">2</span>RUN apt-get update<span class="p">;</span> apt-get -y install fortune
 <span class="ln">3</span>ADD fortuneloop.sh /bin/fortuneloop.sh
 <span class="ln">4</span>ENTRYPOINT <span class="o">[</span><span class="s2">&#34;/bin/fortuneloop.sh&#34;</span><span class="o">]</span>
 <span class="ln">5</span>CMD <span class="o">[</span><span class="s2">&#34;10&#34;</span><span class="o">]</span>      <span class="c1"># 默认参数</span>
 </code></pre></div><p>启动docker时，另外指定参数值15覆盖默认的值</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>docker run -it docker.io/luksa/fortune:latest <span class="m">15</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>docker run -it docker.io/luksa/fortune:latest <span class="m">15</span>
 </code></pre></div><h4 id="在-kubernetes-中覆盖命令和参数">在 Kubernetes 中覆盖命令和参数</h4>
 <p>在 k8s 中定义容器时, 镜像的 ENTRYPOINT 和 CMD 均可以被覆盖, 仅需在容器定义中设置属性 command 和 args 的值.</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
 </span><span class="ln">2</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span><span class="ln">3</span><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">some/image</span><span class="w">
@@ -270,7 +270,7 @@
 <li>环境变量被设置在pod的容器定义中,并非是pod级别</li>
 <li>在每个容器中,k8s会自动暴露相同命名空间下每个service对应的环境变量。这些环境变量基本上可以被看作自动注入的配置。</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
 </span><span class="ln">2</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span><span class="ln">3</span><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">luksa/fortune:env</span><span class="w">
@@ -280,7 +280,7 @@
 </span><span class="ln">8</span><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;30&#34;</span><span class="w">
 </span><span class="ln">9</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">html-generator</span><span class="w">
 </span></code></pre></div><p>可以采用$(VAR)语法在环境变量值中引用其他的环境变量</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">env</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">env</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">FIRST_VAR</span><span class="w">
 </span><span class="ln">3</span><span class="w">  </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;foo&#34;</span><span class="w">
 </span><span class="ln">4</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">SECOND_VAR</span><span class="w">
@@ -305,27 +305,27 @@
 </ul>
 <h3 id="创建configmap">创建ConfigMap</h3>
 <p>通过字面量创建条目</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1"># 单条目</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1"># 单条目</span>
 <span class="ln">2</span>kubectl create configmap fortune-config --from-literal<span class="o">=</span>sleep-interval<span class="o">=</span><span class="m">25</span>
 <span class="ln">3</span>
 <span class="ln">4</span><span class="c1"># 包含多条目</span>
 <span class="ln">5</span>kubectl create conf igmap myconfigmap --from-literal<span class="o">=</span><span class="nv">foo</span><span class="o">=</span>bar --from-literal<span class="o">=</span><span class="nv">bar</span><span class="o">=</span>baz --from-literal<span class="o">=</span><span class="nv">one</span><span class="o">=</span>two
 <span class="ln">6</span>
 </code></pre></div><p>从文件内容创建 ConfigMap 条目</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1"># 在当前目录下查找 config-file.conf 文件, 并将文件内容存储在 ConfigMap 中以 config-file.conf 为键名的条目下</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1"># 在当前目录下查找 config-file.conf 文件, 并将文件内容存储在 ConfigMap 中以 config-file.conf 为键名的条目下</span>
 <span class="ln">2</span>kubectl create configmap my-config --from-file<span class="o">=</span>config-file.conf
 <span class="ln">3</span>
 <span class="ln">4</span><span class="c1"># 手动指定键名</span>
 <span class="ln">5</span>kubectl create configmap my-config -from-file<span class="o">=</span><span class="nv">customkey</span><span class="o">=</span>config file.conf
 </code></pre></div><p>从文件夹创建 ConfigMap</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1"># 为文件夹中的每个文件单独创建条目,仅限于那些文件名可作为合法 ConfigMap 键名的文件</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1"># 为文件夹中的每个文件单独创建条目,仅限于那些文件名可作为合法 ConfigMap 键名的文件</span>
 <span class="ln">2</span>kubectl create configmap my -config --from-file<span class="o">=</span>/path/to/dir
 </code></pre></div><p>通过上述多种方式创建</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl create configmap my-config --from-file<span class="o">=</span>foo.json --from-file<span class="o">=</span>foobar.conf --from-literal<span class="o">=</span><span class="nv">some</span><span class="o">=</span>thing
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl create configmap my-config --from-file<span class="o">=</span>foo.json --from-file<span class="o">=</span>foobar.conf --from-literal<span class="o">=</span><span class="nv">some</span><span class="o">=</span>thing
 </code></pre></div><h3 id="通过configmap向容器传递参数">通过ConfigMap向容器传递参数</h3>
 <h4 id="1以环境变量的方式">（1）以环境变量的方式</h4>
 <p>仅传递特定的条目</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">env</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">env</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">INTERVAL</span><span class="w">
 </span><span class="ln">3</span><span class="w">  </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">    </span><span class="nt">configMapKeyRef</span><span class="p">:</span><span class="w">
@@ -333,7 +333,7 @@
 </span><span class="ln">6</span><span class="w">      </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">sleep-interval</span><span class="w">
 </span></code></pre></div><p>默认情况下，引用不存在的 ConfigMap , 那容器会启动失败。可以标记对 ConfigMap 的引用是可选的(设置configMapKeyRef.optional: true )。这样,即使 ConfigMap 不存在,容器也能正常启动。</p>
 <p>一次性传递 ConfigMap 的所有条目作为环境变量</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">spec</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
 </span><span class="ln">3</span><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">some-image</span><span class="w">
 </span><span class="ln">4</span><span class="w">    </span><span class="nt">envFrom</span><span class="p">:</span><span class="w">
@@ -343,7 +343,7 @@
 </span></code></pre></div><p>前缀设置是可选的,若不设直前缀佳,环境变量的名称与 ConfigMap 中的键名相同.</p>
 <h4 id="2以命令行参数的方式">（2）以命令行参数的方式</h4>
 <p>在宇段 pod.spec.containers.args 中无法直接引用 ConfigMap 的条目,但是可以利用 ConfigMap 条目初始化某个环境变 量 ,然后再在参数字段中引用该环境变量</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
 </span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">fortune-args-from-configmap</span><span class="w">
@@ -359,7 +359,7 @@
 </span><span class="ln">14</span><span class="w">    </span><span class="nt">args </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;$(INTERVAL)&#34;</span><span class="p">]</span><span class="w">
 </span></code></pre></div><h4 id="3-将条目暴露为文件">(3) 将条目暴露为文件</h4>
 <p>环境变量或者命令行参数值作为配置值通常适用于变量值较短的场景。由于 ConfigMap 中可以包含完整的配置文件内容, 可以通过 configMap 卷将onfigMap 中的每个条目均暴露成一个文件。</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
 </span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">fortune-configmap-volume</span><span class="w">
@@ -381,7 +381,7 @@
 </span><span class="ln">20</span><span class="w">    </span><span class="nt">configMap</span><span class="p">:</span><span class="w">
 </span><span class="ln">21</span><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">fortune-config</span><span class="w">
 </span></code></pre></div><p>卷可以仅暴露指定的ConfigMap条目</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">volumes</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">config</span><span class="w">
 </span><span class="ln">3</span><span class="w">  </span><span class="nt">configMap</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">fortune-config</span><span class="w">
@@ -389,7 +389,7 @@
 </span><span class="ln">6</span><span class="w">    </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">my-nginx-config.conf</span><span class="w"> </span><span class="c"># 该键对应的条目被包含</span><span class="w">
 </span><span class="ln">7</span><span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">gzip.conf          </span><span class="w"> </span><span class="c"># 条目的值被存储在该文件中</span><span class="w">
 </span></code></pre></div><p>为configMap卷中的文件设置权限</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">volumes</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">config</span><span class="w">
 </span><span class="ln">3</span><span class="w">  </span><span class="nt">configMap</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">fortune-config</span><span class="w">
@@ -413,12 +413,12 @@
 <h3 id="默认secret卷">默认secret卷</h3>
 <p>每个pod都会被自动挂载上一个默认的secret卷，这个Secret包含三个条目：ca.crt、namespace与token, 包含了从pod内部安全访问KubernetesAPI服务器所需的全部信息。尽管希望做到应用程序对k8s的完全无感知,然而在除了直连k8s别无他法的情况下,将会使用到secret卷提供的文件。</p>
 <p>挂载secret卷</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">volumes</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">certs</span><span class="w">
 </span><span class="ln">3</span><span class="w">  </span><span class="nt">secret</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">    </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">fortune-https</span><span class="w">
 </span></code></pre></div><p>暴露成环境变量</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">env</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">env</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">FOO_SECRET</span><span class="w">
 </span><span class="ln">3</span><span class="w">  </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">    </span><span class="nt">secretKeyRef</span><span class="p">:</span><span class="w">
@@ -426,11 +426,11 @@
 </span><span class="ln">6</span><span class="w">      </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">foo</span><span class="w">
 </span></code></pre></div><h3 id="使用secret从私有仓库拉取镜像">使用secret从私有仓库拉取镜像</h3>
 <p>先创建用于私有镜像仓库鉴权的secret</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl create secret docker-registry mydockerhubsecret <span class="se">\
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl create secret docker-registry mydockerhubsecret <span class="se">\
 </span><span class="ln">2</span><span class="se"></span>--docker-username<span class="o">=</span>myusername --docker-password<span class="o">=</span>mypassword <span class="se">\
 </span><span class="ln">3</span><span class="se"></span>--docker-email<span class="o">=</span>my.email@provider.com
 </code></pre></div><p>然后在pod定义中使用该secret</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind </span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
 </span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">private-pod</span><span class="w">
@@ -487,6 +487,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -506,9 +509,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -683,6 +683,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1077,6 +1081,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -1101,7 +1109,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -1150,6 +1166,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1238,7 +1258,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

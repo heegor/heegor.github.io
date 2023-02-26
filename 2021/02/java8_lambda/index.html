@@ -189,11 +189,11 @@
 <p>Lambda表达式为Java添加了缺失的函数式编程特点，它与闭包不同，但是又无限地接近闭包。在支持一类函数的语言中，Lambda 表达式的类型将是函数。但是，在Java中，Lambda表达式是对象，他们必须依附于一类特别的对象类型——函数式接口(functional interface)。</p>
 <h2 id="语法">语法</h2>
 <p>Java中的Lambda表达式通常使用 (argument) -&gt; (body) 语法书写，例如：</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>(arg1, arg2...) -&gt; { body }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>(arg1, arg2...) -&gt; { body }
 <span class="ln">2</span>
 <span class="ln">3</span>(type1 arg1, type2 arg2...) -&gt; { body }
 </code></pre></div><p>下面是一些例子:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>(int a, int b) -&gt; {  return a + b; }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>(int a, int b) -&gt; {  return a + b; }
 <span class="ln">2</span>
 <span class="ln">3</span>() -&gt; System.out.println(&#34;Hello World&#34;);
 <span class="ln">4</span>
@@ -216,18 +216,18 @@
 <h2 id="函数式接口">函数式接口</h2>
 <p>在Java中，Marker（标记）类型的接口是一种没有方法或属性声明的接口，也就是空接口。相似地，函数式接口是只包含一个抽象方法声明的接口。比如java.lang.Runnable就是一种函数式接口，在Runnable接口中只声明了一个方法 void run()。</p>
 <p>每个Lambda表达式都能隐式地赋值给函数式接口，例如，可以通过Lambda表达式创建 Runnable 接口的引用。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Runnable</span> <span class="n">r</span> <span class="o">=</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;hello world&#34;</span><span class="o">);</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Runnable</span> <span class="n">r</span> <span class="o">=</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;hello world&#34;</span><span class="o">);</span>
 </code></pre></div><p>当不指明函数式接口时，编译器会自动解释这种转化。下面的代码中，编译器会自动推断：根据线程类的构造函数签名 public Thread(Runnable r) { }，将该 Lambda 表达式赋给 Runnable 接口。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span>
 <span class="ln">2</span>   <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;hello world&#34;</span><span class="o">)</span>
 <span class="ln">3</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
 </code></pre></div><p>@FunctionalInterface 是 Java 8 新加入的一种接口，用于指明该接口类型声明是根据 Java 语言规范定义的函数式接口。Java 8 还声明了一些 Lambda 表达式可以使用的函数式接口，当你注释的接口不是有效的函数式接口时，可以使用 @FunctionalInterface 解决编译层面的错误。</p>
 <p>以下是一种自定义的函数式接口：</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="nd">@FunctionalInterface</span> <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">WorkerInterface</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="nd">@FunctionalInterface</span> <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">WorkerInterface</span> <span class="o">{</span>
 <span class="ln">2</span>     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doSomeWork</span><span class="o">();</span>
 <span class="ln">3</span><span class="o">}</span>
 </code></pre></div><p>根据定义，函数式接口只能有一个抽象方法，如果你尝试添加第二个抽象方法，将抛出编译时错误。例如：</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="nd">@FunctionalInterface</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="nd">@FunctionalInterface</span>
 <span class="ln"> 2</span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">WorkerInterface</span> <span class="o">{</span>
 <span class="ln"> 3</span>
 <span class="ln"> 4</span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doSomeWork</span><span class="o">();</span>
@@ -243,7 +243,7 @@
 <span class="ln">14</span>    <span class="n">non</span><span class="o">-</span><span class="n">overriding</span> <span class="kd">abstract</span> <span class="n">methods</span> <span class="n">found</span> <span class="n">in</span> <span class="kd">interface</span> <span class="nc">WorkerInterface</span> <span class="n">1</span> <span class="n">error</span>
 </code></pre></div><h2 id="变量作用域">变量作用域</h2>
 <p>Lambda 表达式只能引用标记了 final 的外层局部变量，这就是说不能在Lambda内部修改定义在域外的局部变量，否则会编译错误。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Java8Tester</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Java8Tester</span> <span class="o">{</span>
 <span class="ln"> 2</span> 
 <span class="ln"> 3</span>   <span class="kd">final</span> <span class="kd">static</span> <span class="n">String</span> <span class="n">salutation</span> <span class="o">=</span> <span class="s">&#34;Hello! &#34;</span><span class="o">;</span>
 <span class="ln"> 4</span>   
@@ -257,9 +257,9 @@
 <span class="ln">12</span>   <span class="o">}</span>
 <span class="ln">13</span><span class="o">}</span>
 </code></pre></div><p>以上代码输出结果为：</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>Hello! Runoob
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>Hello! Runoob
 </code></pre></div><p>也可以直接在 Lambda 表达式中访问外层的局部变量：</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Java8Tester</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Java8Tester</span> <span class="o">{</span>
 <span class="ln"> 2</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
 <span class="ln"> 3</span>        <span class="kd">final</span> <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
 <span class="ln"> 4</span>        <span class="n">Converter</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="o">(</span><span class="n">param</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">param</span> <span class="o">+</span> <span class="n">num</span><span class="o">));</span>
@@ -272,7 +272,7 @@
 <span class="ln">11</span><span class="o">}</span>
 </code></pre></div><p>Lambda 表达式的局部变量可以不用声明为 final，但是必须不可被后面的代码修改（即隐性的具有 final 的语义）</p>
 <p>将上面代码修改一下：</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Java8Tester</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Java8Tester</span> <span class="o">{</span>
 <span class="ln"> 2</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
 <span class="ln"> 3</span>        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>  
 <span class="ln"> 4</span>        <span class="n">Converter</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="o">(</span><span class="n">param</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">param</span> <span class="o">+</span> <span class="n">num</span><span class="o">));</span>
@@ -285,13 +285,13 @@
 <span class="ln">11</span>    <span class="o">}</span>
 <span class="ln">12</span><span class="o">}</span>
 </code></pre></div><p>可以看到报错信息</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>Local variable num defined in an enclosing scope must be final or effectively final
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>Local variable num defined in an enclosing scope must be final or effectively final
 </code></pre></div><p>在 Lambda 表达式当中不允许声明一个与局部变量同名的参数或者局部变量。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">String</span> <span class="n">first</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="o">;</span>  
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">String</span> <span class="n">first</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="o">;</span>  
 <span class="ln">2</span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">comparator</span> <span class="o">=</span> <span class="o">(</span><span class="n">first</span><span class="o">,</span> <span class="n">second</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">first</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="n">second</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>  <span class="c1">//编译会出错 
 </span></code></pre></div><h2 id="表达式举例">表达式举例</h2>
 <h3 id="线程">线程</h3>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="c1">//旧方法:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="c1">//旧方法:
 </span><span class="ln"> 2</span><span class="c1"></span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
 <span class="ln"> 3</span>    <span class="nd">@Override</span>
 <span class="ln"> 4</span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
@@ -304,7 +304,7 @@
 <span class="ln">11</span>    <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Hello from thread&#34;</span><span class="o">)</span>
 <span class="ln">12</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
 </code></pre></div><h3 id="事件处理">事件处理</h3>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="c1">//旧方法
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="c1">//旧方法
 </span><span class="ln"> 2</span><span class="c1"></span><span class="n">button</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">new</span> <span class="n">ActionListener</span><span class="o">()</span> <span class="o">{</span>
 <span class="ln"> 3</span>    <span class="nd">@Override</span>
 <span class="ln"> 4</span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">actionPerformed</span><span class="o">(</span><span class="n">ActionEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
@@ -318,7 +318,7 @@
 <span class="ln">12</span><span class="o">});</span>
 </code></pre></div><h3 id="遍历元素">遍历元素</h3>
 <p>以下代码的作用是打印出给定数组中的所有元素。注意，使用 Lambda 表达式的方法不止一种。在下面的例子中，我们先是用常用的箭头语法创建 Lambda 表达式，之后，使用 Java 8 全新的双冒号(::)操作符将一个常规方法转化为 Lambda 表达式：</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="c1">//Old way:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="c1">//Old way:
 </span><span class="ln"> 2</span><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">3</span><span class="o">,</span> <span class="n">4</span><span class="o">,</span> <span class="n">5</span><span class="o">,</span> <span class="n">6</span><span class="o">,</span> <span class="n">7</span><span class="o">);</span>
 <span class="ln"> 3</span><span class="k">for</span><span class="o">(</span><span class="n">Integer</span> <span class="n">n</span><span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
 <span class="ln"> 4</span>   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
@@ -331,7 +331,7 @@
 <span class="ln">11</span><span class="c1">//or we can use :: double colon operator in Java 8
 </span><span class="ln">12</span><span class="c1"></span><span class="n">list</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
 </code></pre></div><p>在下面的例子中，我们使用断言(Predicate)函数式接口创建一个测试，并打印所有通过测试的元素</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
 <span class="ln"> 2</span><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
 <span class="ln"> 3</span><span class="kn">import</span> <span class="nn">java.util.function.Predicate</span><span class="o">;</span>
 <span class="ln"> 4</span>
@@ -365,7 +365,7 @@
 <span class="ln">32</span>    <span class="o">}</span>
 <span class="ln">33</span><span class="o">}</span>   
 </code></pre></div><p>输出</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>Print all numbers: 1 2 3 4 5 6 7 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>Print all numbers: 1 2 3 4 5 6 7 
 <span class="ln">2</span>Print no numbers: 
 <span class="ln">3</span>Print even numbers: 2 4 6 
 <span class="ln">4</span>Print odd numbers: 1 3 5 7 
@@ -421,6 +421,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -440,9 +443,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -617,6 +617,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1011,6 +1015,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -1035,7 +1043,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -1084,6 +1100,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1172,7 +1192,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

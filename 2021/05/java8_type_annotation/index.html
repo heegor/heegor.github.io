@@ -177,50 +177,50 @@
 <ol>
 <li>创建类实例：</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="k">new</span> <span class="nd">@Interned</span> <span class="n">MyObject</span><span class="o">();</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="k">new</span> <span class="nd">@Interned</span> <span class="n">MyObject</span><span class="o">();</span>
 </code></pre></div><ol start="2">
 <li>类型定义：</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="nd">@NotNull</span> <span class="n">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="o">...</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="nd">@NotNull</span> <span class="n">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="o">...</span>
 <span class="ln">2</span><span class="nd">@Email</span> <span class="n">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="o">...</span>
 </code></pre></div><ol start="3">
 <li>类型转换：</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">myString</span> <span class="o">=</span> <span class="o">(</span><span class="nd">@NonNull</span> <span class="n">String</span><span class="o">)</span> <span class="n">str</span><span class="o">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">myString</span> <span class="o">=</span> <span class="o">(</span><span class="nd">@NonNull</span> <span class="n">String</span><span class="o">)</span> <span class="n">str</span><span class="o">;</span>
 </code></pre></div><ol start="4">
 <li>泛型</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">List</span><span class="o">&lt;</span><span class="nd">@Email</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">emails</span> <span class="o">=</span> <span class="o">...</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">List</span><span class="o">&lt;</span><span class="nd">@Email</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">emails</span> <span class="o">=</span> <span class="o">...</span>
 </code></pre></div><ol start="5">
 <li>包括参数边界和通配符边界</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">class</span> <span class="nc">Folder</span><span class="o">&lt;</span><span class="n">F</span> <span class="kd">extends</span> <span class="nd">@Existing</span> <span class="n">File</span><span class="o">&gt;</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">class</span> <span class="nc">Folder</span><span class="o">&lt;</span><span class="n">F</span> <span class="kd">extends</span> <span class="nd">@Existing</span> <span class="n">File</span><span class="o">&gt;</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 <span class="ln">2</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nd">@Existing</span> <span class="n">File</span><span class="o">&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="o">...</span>
 <span class="ln">3</span><span class="n">List</span><span class="o">&lt;</span><span class="nd">@Immutable</span> <span class="o">?</span> <span class="kd">extends</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">unchangeable</span> <span class="o">=</span> <span class="o">...</span>
 </code></pre></div><ol start="6">
 <li>instanceof 语句</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kt">boolean</span> <span class="n">isNonNull</span> <span class="o">=</span> <span class="n">myString</span> <span class="k">instanceof</span> <span class="nd">@NonNull</span> <span class="n">String</span><span class="o">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kt">boolean</span> <span class="n">isNonNull</span> <span class="o">=</span> <span class="n">myString</span> <span class="k">instanceof</span> <span class="nd">@NonNull</span> <span class="n">String</span><span class="o">;</span>
 <span class="ln">2</span><span class="kt">boolean</span> <span class="n">isNonBlankEmail</span> <span class="o">=</span> <span class="n">myString</span> <span class="k">instanceof</span> <span class="nd">@NotBlank</span> <span class="nd">@Email</span> <span class="n">String</span><span class="o">;</span>
 </code></pre></div><ol start="7">
 <li>继承</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">class</span> <span class="nc">UnmodifiableList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="nd">@Readonly</span> <span class="n">List</span><span class="o">&lt;</span><span class="nd">@Readonly</span> <span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">class</span> <span class="nc">UnmodifiableList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="nd">@Readonly</span> <span class="n">List</span><span class="o">&lt;</span><span class="nd">@Readonly</span> <span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 </code></pre></div><ol start="8">
 <li>抛出异常:</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kt">void</span> <span class="nf">monitorTemperature</span><span class="o">()</span> <span class="kd">throws</span> <span class="nd">@Critical</span> <span class="n">TemperatureException</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kt">void</span> <span class="nf">monitorTemperature</span><span class="o">()</span> <span class="kd">throws</span> <span class="nd">@Critical</span> <span class="n">TemperatureException</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 </code></pre></div><ol start="9">
 <li>方法引用</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="nd">@Vernal</span> <span class="n">Date</span><span class="o">::</span><span class="n">getDay</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="nd">@Vernal</span> <span class="n">Date</span><span class="o">::</span><span class="n">getDay</span>
 <span class="ln">2</span><span class="n">List</span><span class="o">&lt;</span><span class="nd">@English</span> <span class="n">String</span><span class="o">&gt;::</span><span class="n">size</span>
 <span class="ln">3</span><span class="nl">Arrays:</span><span class="o">:&lt;</span><span class="nd">@NonNegative</span> <span class="n">Integer</span><span class="o">&gt;</span><span class="n">sort</span>
 </code></pre></div><h2 id="新增elementtypetype_use-和elementtypetype_parameter">新增ElementType.TYPE_USE 和ElementType.TYPE_PARAMETER</h2>
 <p>新增的两个注释的程序元素类型 ElementType.TYPE_USE 和 ElementType.TYPE_PARAMETER 用来描述注解的新场合 。
 ElementType.TYPE_PARAMETER 表示该注解能写在类型变量的声明语句中。
 ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中（比如：声明语句、泛型和强制转换语句中的类型）。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="nd">@Target</span><span class="o">({</span><span class="n">ElementType</span><span class="o">.</span><span class="na">TYPE_PARAMETER</span><span class="o">,</span> <span class="n">ElementType</span><span class="o">.</span><span class="na">TYPE_USE</span><span class="o">})</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="nd">@Target</span><span class="o">({</span><span class="n">ElementType</span><span class="o">.</span><span class="na">TYPE_PARAMETER</span><span class="o">,</span> <span class="n">ElementType</span><span class="o">.</span><span class="na">TYPE_USE</span><span class="o">})</span>
 <span class="ln">2</span><span class="nd">@interface</span> <span class="n">MyAnnotation</span> <span class="o">{}</span>
 </code></pre></div><h2 id="类型注解的作用">类型注解的作用</h2>
 <p>类型注解被用来支持在Java的程序中做强类型检查。配合第三方插件工具Checker Framework，可以在编译的时候检测出runtime error（比如UnsupportedOperationException，NumberFormatException，NullPointerException异常等都是runtime error），以提高代码质量。这就是类型注解的作用。</p>
@@ -273,6 +273,9 @@ ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中（�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -292,9 +295,6 @@ ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中（�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -469,6 +469,10 @@ ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中（�
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -863,6 +867,10 @@ ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中（�
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -887,7 +895,15 @@ ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中（�
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -936,6 +952,10 @@ ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中（�
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1024,7 +1044,7 @@ ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中（�
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

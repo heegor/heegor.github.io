@@ -168,7 +168,7 @@
 <p>举个例子，假设数据库中有两个字段：returnSlaDate存的是物品归还截止日期，returnSlaTime存的是物品归还截止时间。实际在保存的时候，数据库中returnSlaDate字段的值可能会是 <em>2018-12-31 00:00:00</em> ，其中 <em>00:00:00</em> 是没有用的，在与特定时间做比较的时候，需要舍弃；returnSlaTime字段的值可能会是 <em>1970-01-01 17:59:59</em> ，其中 <em>1970-01-01</em> 是没有用的，在与特定时间做比较的时候，需要舍弃。</p>
 <!-- more -->
 <p>假设数据库中有另外一个字段actualReturnDate，它表示物品实际归还时间（仅仅一个字段表示，包含有效的日期与时间）。如果现在有个需求，要在系统中查出来物品未按时归还的记录，需要怎么处理呢？直接用SQL写会相对简单，如果用hibernate的criteria builder则需要用as关键字做一下转换。下面是示例代码：</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="c1">// 转换截止日期字段成java.sql.Date类型，这样可以仅取出日期的值
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="c1">// 转换截止日期字段成java.sql.Date类型，这样可以仅取出日期的值
 </span><span class="ln"> 2</span><span class="c1"></span><span class="n">Expression</span> <span class="n">returnSlaDate</span> <span class="o">=</span> <span class="n">pTimeSchedule</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&#34;returnSlaDate&#34;</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">sql</span><span class="o">.</span><span class="na">Date</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 <span class="ln"> 3</span><span class="c1">// 转换截止时间字段成java.sql.Time类型，这样可以仅取出时间的值
 </span><span class="ln"> 4</span><span class="c1"></span><span class="n">Expression</span> <span class="n">returnSlaTime</span> <span class="o">=</span> <span class="n">pTimeSchedule</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&#34;returnSlaTime&#34;</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">sql</span><span class="o">.</span><span class="na">Time</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
@@ -187,7 +187,7 @@
 <span class="ln">17</span><span class="o">));</span>
 <span class="ln">18</span>
 </code></pre></div><p>打出hibernate的日志，可以看到转换之后的SQL语句</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="ln"> 1</span><span class="p">(</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln"> 1</span><span class="p">(</span><span class="w">
 </span><span class="ln"> 2</span><span class="w">    </span><span class="k">cast</span><span class="p">(</span><span class="n">generatedAlias0</span><span class="p">.</span><span class="n">actualReturnDate</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">date</span><span class="p">)</span><span class="o">&gt;</span><span class="k">cast</span><span class="p">(</span><span class="n">generatedAlias0</span><span class="p">.</span><span class="n">timeSchedule</span><span class="p">.</span><span class="n">returnSlaDate</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">date</span><span class="p">)</span><span class="w"> 
 </span><span class="ln"> 3</span><span class="w"></span><span class="p">)</span><span class="w"> 
 </span><span class="ln"> 4</span><span class="w"></span><span class="k">or</span><span class="w"> </span><span class="p">(</span><span class="w">
@@ -240,6 +240,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -259,9 +262,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -436,6 +436,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -830,6 +834,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -854,7 +862,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -903,6 +919,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -991,7 +1011,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

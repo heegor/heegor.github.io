@@ -174,7 +174,7 @@
 tr string1 string2
 </pre>
 <p>运行下面的命令</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="nb">echo</span> <span class="s1">&#39;this is a pen&#39;</span> <span class="p">|</span> tr <span class="s1">&#39;a&#39;</span> <span class="s1">&#39;A&#39;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="nb">echo</span> <span class="s1">&#39;this is a pen&#39;</span> <span class="p">|</span> tr <span class="s1">&#39;a&#39;</span> <span class="s1">&#39;A&#39;</span>
 </code></pre></div><p>可以看到输出结果中把a换成了A</p>
 <pre>
 this is A pen
@@ -185,15 +185,15 @@ this is A pen
 tr 'c1-c2' 'c3-c4'
 </pre>
 <p>比如，如果只需要把从a到h的字符，替换成大写，那么可以用下面的命令</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>tr <span class="s1">&#39;a-h&#39;</span> <span class="s1">&#39;A-H&#39;</span> 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>tr <span class="s1">&#39;a-h&#39;</span> <span class="s1">&#39;A-H&#39;</span> 
 </code></pre></div><p>运行下面的命令</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="nb">echo</span> <span class="s1">&#39;this is a pen&#39;</span> <span class="p">|</span> tr <span class="s1">&#39;a-h&#39;</span> <span class="s1">&#39;A-H&#39;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="nb">echo</span> <span class="s1">&#39;this is a pen&#39;</span> <span class="p">|</span> tr <span class="s1">&#39;a-h&#39;</span> <span class="s1">&#39;A-H&#39;</span>
 </code></pre></div><p>可以看到输出结果中把从a到h的字符全部换成了大写：</p>
 <pre>
 tHis is A pEn
 </pre>    
 <p>如果要把所有字符转成大写，那么只需要把范围指定成a-z即可。运行下面的命令</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="nb">echo</span> <span class="s1">&#39;this is a pen&#39;</span> <span class="p">|</span> tr <span class="s1">&#39;a-z&#39;</span> <span class="s1">&#39;A-Z&#39;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="nb">echo</span> <span class="s1">&#39;this is a pen&#39;</span> <span class="p">|</span> tr <span class="s1">&#39;a-z&#39;</span> <span class="s1">&#39;A-Z&#39;</span>
 </code></pre></div><p>可以看输出结果：</p>
 <pre>
 THIS IS A PEN
@@ -241,6 +241,9 @@ THIS IS A PEN
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -260,9 +263,6 @@ THIS IS A PEN
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -437,6 +437,10 @@ THIS IS A PEN
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -831,6 +835,10 @@ THIS IS A PEN
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -855,7 +863,15 @@ THIS IS A PEN
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -904,6 +920,10 @@ THIS IS A PEN
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -992,7 +1012,7 @@ THIS IS A PEN
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

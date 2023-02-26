@@ -190,7 +190,7 @@
 <p>标签是可以附加到资源的任意键值对。通过标签选择器，可以筛选出具有该确切标签的资源。</p>
 <h3 id="使用标签和选择器来约束pod调度">使用标签和选择器来约束pod调度</h3>
 <p>默认情况下，Pod基本上是随机地调度到任意Node节点的。但是某些情况下，想要调度到特定的Node节点，比如SSD硬盘的节点。这个时候，可以通过节点标签和节点标签选择器完成。</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="c"># 这个例子中通过nodeSelector选择部署到gpu=true的节点</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="c"># 这个例子中通过nodeSelector选择部署到gpu=true的节点</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
 </span><span class="ln"> 3</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
 </span><span class="ln"> 4</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
@@ -209,18 +209,18 @@
 <p>k8s的命名空间简单地为对象名称提供了一个作用域。这样就可以将包含大量组件的复杂系统拆分为更小的不同组，这些不同组也可以用于在多租户环境中分配资源，将资源分配为生产、开发和 QA 环境,或者以其他任何你需要的方式分配资源。资源名称只需在命名空间内保持唯一即可，因此两个不同的命名空间可以包含同名的资源。</p>
 <h3 id="创建命名空间及其资源">创建命名空间及其资源</h3>
 <p>可以使用yaml文件来创建命名空间</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
 </span><span class="ln">2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Namespace</span><span class="w">
 </span><span class="ln">3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">  </span><span class="l">name：custom-namespace</span><span class="w">
 </span></code></pre></div><p>或者使用命令来创建命名空间</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl create namespace custom-namespace
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl create namespace custom-namespace
 </code></pre></div><p>想要在创建的命名空间中创建资源, 可以选择在 metadata 宇段中添加一个 <code>namespace: custom-namespace</code> 属性,也可以在使用 kubectl create命令创建资源时指定命名空间:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl create -f kubia-manual.yaml -n custom-namespace
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl create -f kubia-manual.yaml -n custom-namespace
 </code></pre></div><h3 id="命名空间的切换">命名空间的切换</h3>
 <p>如果不指定命名空间, kubectl 将在当前上下文中配置的默认命名空间中执行操作。而当前上下文的命名空间和当前上下文本身都可以通过 kubectl config 命令进行更改。如果想要对其他命名空间中的对象进行操作, 需要给 kubectl 命令传递-- namespace (或 -n) 选项。</p>
 <p>要想快速切换到不同的命名空间, 可以设置以下别名，然后,可以使用 <code>kcd some-namespace</code> 在命名空间之间进行切换 。</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="nb">alias</span> <span class="nv">kcd</span> <span class="o">=</span>’kubectl config <span class="nb">set</span> context <span class="k">$(</span>kubectl config current-context<span class="k">)</span> -- namespace’
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="nb">alias</span> <span class="nv">kcd</span> <span class="o">=</span>’kubectl config <span class="nb">set</span> context <span class="k">$(</span>kubectl config current-context<span class="k">)</span> -- namespace’
 </code></pre></div><h3 id="命名空间的隔离性">命名空间的隔离性</h3>
 <p>尽管命名空间将对象分隔到不同的组,只允许你对属于特定命名空间的对象进行操作, 但实际上命名空间之间并不提供对正在运行的对象的任何隔离 。</p>
 <p>例如,你可能会认为当不同的用户在不同的命名空间中部署 pod 时,这些 pod 应该彼此隔离,并且无法通信,但事实却并非如此。命名空间之间是否提供网络隔离取决于 Kubemetes 所使用的网络解决方案。</p>
@@ -271,6 +271,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -290,9 +293,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -467,6 +467,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -861,6 +865,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -885,7 +893,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -934,6 +950,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1022,7 +1042,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

@@ -169,9 +169,9 @@
     <p>笔记本在manjaro在启动的时候，屏幕可能会默认设置为最大亮度。可以通过设置开机启动脚本，来设置启动时候的亮度。</p>
 <h1 id="1-创建一个启动service脚本">1. 创建一个启动service脚本</h1>
 <p>执行下面的命令</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo vim /etc/systemd/system/rc-local.service
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo vim /etc/systemd/system/rc-local.service
 </code></pre></div><p>输入下面的内容</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln"> 1</span><span class="o">[</span>Unit<span class="o">]</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln"> 1</span><span class="o">[</span>Unit<span class="o">]</span>
 <span class="ln"> 2</span><span class="nv">Description</span><span class="o">=</span><span class="s2">&#34;/etc/rc.local Compatibility&#34;</span> 
 <span class="ln"> 3</span>
 <span class="ln"> 4</span><span class="o">[</span>Service<span class="o">]</span>
@@ -186,9 +186,9 @@
 <span class="ln">13</span><span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
 </code></pre></div><h1 id="2-创建-etcrclocal-文件">2. 创建 /etc/rc.local 文件</h1>
 <p>执行下面的命令</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo vim /etc/rc.local
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo vim /etc/rc.local
 </code></pre></div><p>输入下面的内容</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="cp">#!/bin/sh
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="cp">#!/bin/sh
 </span><span class="ln">2</span><span class="cp"></span><span class="c1"># /etc/rc.local</span>
 <span class="ln">3</span><span class="k">if</span> <span class="nb">test</span> -d /etc/rc.local.d<span class="p">;</span> <span class="k">then</span>
 <span class="ln">4</span>    <span class="k">for</span> rcscript in /etc/rc.local.d/*.sh<span class="p">;</span> <span class="k">do</span>
@@ -197,21 +197,21 @@
 <span class="ln">7</span>    <span class="nb">unset</span> rcscript
 <span class="ln">8</span><span class="k">fi</span>
 </code></pre></div><h1 id="3-添加执行权限">3. 添加执行权限</h1>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo a+x /etc/rc.local
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo a+x /etc/rc.local
 </code></pre></div><h1 id="4-添加etcrclocald文件夹">4. 添加/etc/rc.local.d文件夹</h1>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo mkdir /etc/rc.local.d
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo mkdir /etc/rc.local.d
 </code></pre></div><h1 id="5-设置开机自启">5. 设置开机自启</h1>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>systemctl <span class="nb">enable</span> rc-local.service
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>systemctl <span class="nb">enable</span> rc-local.service
 </code></pre></div><h1 id="6-添加设置亮度脚本">6. 添加设置亮度脚本</h1>
 <p>在 /sys/class/backlight 可以看到对应显卡的文件夹，如果是双显卡的话，会有两个文件夹。脚本可以先对其中一个文件夹做设置，如果不生效就改成另外一个。</p>
 <p>假设显卡文件夹的名称是intel_backlight，下面的命令可以查看屏幕亮度最大值，后面设置实际亮度的时候，不能超过这个值：</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>cat /sys/class/backlight/intel_backlight/max_brightness
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>cat /sys/class/backlight/intel_backlight/max_brightness
 </code></pre></div><p>修改文件权限避免启动时修改文件内容报错：</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo chmod a+w /sys/class/backlight/intel_backlight/brightness
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo chmod a+w /sys/class/backlight/intel_backlight/brightness
 </code></pre></div><p>执行下面的命令新建文件：</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo vim /etc/rc.local.d/set-brightness.sh
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo vim /etc/rc.local.d/set-brightness.sh
 </code></pre></div><p>输入文件内容，设置一个合适的亮度值：</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="nb">echo</span> <span class="m">50</span> &gt; /sys/class/backlight/intel_backlight/brightness
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="nb">echo</span> <span class="m">50</span> &gt; /sys/class/backlight/intel_backlight/brightness
 </code></pre></div><hr>
 <p>参考：</p>
 <ul>
@@ -259,6 +259,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -278,9 +281,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -455,6 +455,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -849,6 +853,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -873,7 +881,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -922,6 +938,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1010,7 +1030,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

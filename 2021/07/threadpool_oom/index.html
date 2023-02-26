@@ -168,7 +168,7 @@
     
     <h2 id="问题描述">问题描述</h2>
 <p>线上环境某个服务经常性地抛出内存溢出，看日志是下面的错误</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">OutOfMemoryError</span><span class="o">:</span> <span class="n">unable</span> <span class="n">to</span> <span class="n">create</span> <span class="k">new</span> <span class="kd">native</span> <span class="n">thread</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">OutOfMemoryError</span><span class="o">:</span> <span class="n">unable</span> <span class="n">to</span> <span class="n">create</span> <span class="k">new</span> <span class="kd">native</span> <span class="n">thread</span>
 <span class="ln">2</span>    <span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Thread</span><span class="o">.</span><span class="na">start0</span><span class="o">(</span><span class="n">Native</span> <span class="n">Method</span><span class="o">)</span> <span class="o">~[?:</span><span class="n">1</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">0_112</span><span class="o">]</span>
 <span class="ln">3</span>    <span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Thread</span><span class="o">.</span><span class="na">start</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">714</span><span class="o">)</span> <span class="o">~[?:</span><span class="n">1</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">0_112</span><span class="o">]</span>
 <span class="ln">4</span>    <span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">concurrent</span><span class="o">.</span><span class="na">ThreadPoolExecutor</span><span class="o">.</span><span class="na">addWorker</span><span class="o">(</span><span class="n">ThreadPoolExecutor</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">950</span><span class="o">)</span> <span class="o">~[?:</span><span class="n">1</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">0_112</span><span class="o">]</span>
@@ -191,7 +191,7 @@
 <li>线程池的状态 &gt;= STOP。对于这个情况，线程池的状态要达到 STOP，需要调用<code>shutdown</code>或者<code>shutdownNow</code>方法</li>
 <li>getTask 获取到空任务</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">final</span> <span class="kt">void</span> <span class="nf">runWorker</span><span class="o">(</span><span class="n">Worker</span> <span class="n">w</span><span class="o">)</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">final</span> <span class="kt">void</span> <span class="nf">runWorker</span><span class="o">(</span><span class="n">Worker</span> <span class="n">w</span><span class="o">)</span> <span class="o">{</span>
 <span class="ln"> 2</span>    <span class="n">Thread</span> <span class="n">wt</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
 <span class="ln"> 3</span>    <span class="n">Runnable</span> <span class="n">task</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="na">firstTask</span><span class="o">;</span>
 <span class="ln"> 4</span>    <span class="n">w</span><span class="o">.</span><span class="na">firstTask</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
@@ -235,7 +235,7 @@
 <span class="ln">42</span>    <span class="o">}</span>
 <span class="ln">43</span><span class="o">}</span>
 </code></pre></div><p>对于第二种情况，先看看<code>getTask</code>方法的源码。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">private</span> <span class="n">Runnable</span> <span class="nf">getTask</span><span class="o">()</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">private</span> <span class="n">Runnable</span> <span class="nf">getTask</span><span class="o">()</span> <span class="o">{</span>
 <span class="ln"> 2</span>    <span class="kt">boolean</span> <span class="n">timedOut</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span> <span class="c1">// Did the last poll() time out?
 </span><span class="ln"> 3</span><span class="c1"></span>
 <span class="ln"> 4</span>    <span class="k">for</span> <span class="o">(;;)</span> <span class="o">{</span>
@@ -292,7 +292,7 @@
 <li>主动调用 shutdown 或 shutdownNow 来关闭线程池。</li>
 </ul>
 <p>示例:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestThread</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestThread</span> <span class="o">{</span>
 <span class="ln"> 2</span>
 <span class="ln"> 3</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 <span class="ln"> 4</span>        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
@@ -366,6 +366,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -385,9 +388,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_anonymous_inner_class_and_diamond_operator/" class="nav-link">Java 9新特性 - (2)匿名内部类与菱形运算符</a>
       </li>
     </ul>
     <div>
@@ -562,6 +562,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -956,6 +960,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -980,7 +988,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -1029,6 +1045,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1117,7 +1137,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

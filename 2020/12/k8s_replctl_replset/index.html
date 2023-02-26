@@ -191,7 +191,7 @@ ReplicationController …" />
 <li>它能轻松实现 pod 的水平伸缩，手动和自动都可以</li>
 </ul>
 <p>创建一个ReplicationController</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Replicationcontroller</span><span class="w">
 </span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
@@ -210,27 +210,27 @@ ReplicationController …" />
 </span><span class="ln">17</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span><span class="ln">18</span><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">8080</span><span class="w">
 </span></code></pre></div><p>通过kubectl get命令显示的关于ReplicationController的信息</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl get rc
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl get rc
 <span class="ln">2</span>
 <span class="ln">3</span>kubectl  get replicationcontroller
 </code></pre></div><p>通过kubectl describe查看附加信息</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>kubectl describe rc kubia
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>kubectl describe rc kubia
 </code></pre></div><p>通过更改pod的标签, 可以将它从ReplicationController的作用域中添加或删除，甚至移动到另外一个ReplicationController</p>
 <p>ReplicationController 的 pod 模板可以随时修改，但是只会影响后面新建的 Pod。如果需要修改旧的Pod，要将Pod删除，ReplicationController会自动根据新的模板创建Pod来替代。</p>
 <p>通过修改replicas字段，可以实现水平缩放pod</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl scale rc kubia --replicas<span class="o">=</span>lO
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl scale rc kubia --replicas<span class="o">=</span>lO
 </code></pre></div><p>也可以通过下面命令打开编辑器直接修改声明</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl edit rc kubia
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl edit rc kubia
 </code></pre></div><p>通过 kubectl delete 删除 ReplicationController 时, pod 也会被删除</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl delete rc kubia
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl delete rc kubia
 </code></pre></div><p>但是由于由 ReplicationController 创建的 pod 不是 ReplicationController 的组成部分, 只是由其进行管理, 因此可以只删除 ReplicationController 并保待 pod 运行。</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span> kubectl delete rc kubia --cascade<span class="o">=</span><span class="nb">false</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span> kubectl delete rc kubia --cascade<span class="o">=</span><span class="nb">false</span>
 </code></pre></div><h2 id="replicaset">ReplicaSet</h2>
 <p>它是新一代的ReplicationController, ReplicationController会被弃用。ReplicaSet 的行为与 ReplicationController 完全相同, 但 pod 选择器的表达能力
 更强。</p>
 <p>通常不会直接创建ReplicaSet, 而是在创建更高层级的 Deployment 资源时自动创建。</p>
 <p><font color="red">注意：ReplicaSet不是v1 API的一部分，因此需要确保在创建资源时指定正确的apiVersion</font></p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="c"># 与ReplicationController的定义基本相同，唯一的区别在选择器中。</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="c"># 与ReplicationController的定义基本相同，唯一的区别在选择器中。</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1beta2</span><span class="w">
 </span><span class="ln"> 3</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ReplicaSet</span><span class="w">
 </span><span class="ln"> 4</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
@@ -251,14 +251,14 @@ ReplicationController …" />
 </span><span class="ln">19</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span><span class="ln">20</span><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">8080</span><span class="w">
 </span></code></pre></div><p>除了matchLabels之外，还支持matchExpressions表达式。operator支持4中运算符：In, NotIn, Exists, DoesNotExist</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">selector</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">selector</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w">  </span><span class="nt">matchExpression</span><span class="p">:</span><span class="w">
 </span><span class="ln">3</span><span class="w">    </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">app</span><span class="w">
 </span><span class="ln">4</span><span class="w">      </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">In</span><span class="w">
 </span><span class="ln">5</span><span class="w">      </span><span class="nt">values</span><span class="p">:</span><span class="w">
 </span><span class="ln">6</span><span class="w">        </span>- <span class="l">kubia</span><span class="w">
 </span></code></pre></div><p>删除ReplicaSet会删除所有的pod</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl delete rs kubia
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl delete rs kubia
 </code></pre></div><hr>
 <p>图书资料：</p>
 <ul>
@@ -306,6 +306,9 @@ ReplicationController …" />
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -325,9 +328,6 @@ ReplicationController …" />
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -502,6 +502,10 @@ ReplicationController …" />
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -896,6 +900,10 @@ ReplicationController …" />
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -920,7 +928,15 @@ ReplicationController …" />
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -969,6 +985,10 @@ ReplicationController …" />
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1057,7 +1077,7 @@ ReplicationController …" />
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

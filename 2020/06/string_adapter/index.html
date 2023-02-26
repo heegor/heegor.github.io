@@ -161,14 +161,14 @@
 
     
     <p>客户用的是很旧版本的ERP系统，在与客户系统做接口对接的时候发现了一个问题。假设接口请求需要的body是xml格式的，共有三个字段：name, mobile, email。由于客户ERP系统比较老，如果某个字段没有值，传的是空字符串，而不是将该字段在请求消息体中隐藏。客户发的请求类似下面的例子：</p>
-<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="ln">1</span><span class="nt">&lt;xml&gt;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="ln">1</span><span class="nt">&lt;xml&gt;</span>
 <span class="ln">2</span>    <span class="nt">&lt;name&gt;</span>John<span class="nt">&lt;/name&gt;</span>
 <span class="ln">3</span>    <span class="nt">&lt;mobile&gt;</span>13800138000<span class="nt">&lt;/mobile&gt;</span>
 <span class="ln">4</span>    <span class="nt">&lt;email&gt;&lt;/email&gt;</span>
 <span class="ln">5</span><span class="nt">&lt;/xml&gt;</span>
 </code></pre></div><p>由于历史遗留问题，我方系统里在字段上面加了 javax.validation.constraints.Pattern 注解使用正则表达式来对传入的请求值做验证。当传入值为空字符串的时候，正则表达式验证就无法通过。</p>
 <p>与客户做过沟通，对于空值的字段，他们也没有办法在请求中隐藏字段，只能传空字符串。那就只能在我方系统这边看看是否可以通过修改代码来解决。一种方案是修改正则表达式，来兼容空字符串，但是由于这些都是传统代码，不确定把空字符串设置在这个字段上面会对后面的处理会有什么影响。如果有更合适的、代价更小的方案，那么就最好不选择这种。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="nd">@XmlType</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="nd">@XmlType</span>
 <span class="ln"> 2</span><span class="nd">@XmlAccessorType</span><span class="o">(</span><span class="n">XmlAccessType</span><span class="o">.</span><span class="na">FIELD</span><span class="o">)</span>
 <span class="ln"> 3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestRequest</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
 <span class="ln"> 4</span>    <span class="nd">@XmlElement</span><span class="o">(</span><span class="n">required</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
@@ -187,7 +187,7 @@
 <span class="ln">17</span><span class="o">}</span>
 </code></pre></div><p>通过查阅相关资料，发现 javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter 注解可以达到目的。这个注解可以指定一个类，用于转换与处理xml请求中的字段值。这样，我们只需要自定义一个类，将传入空字符串值转换成null</p>
 <p>首先，先定义一个XmlAdapter类</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyXmlStringAdapter</span> <span class="kd">extends</span> <span class="n">XmlAdapter</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyXmlStringAdapter</span> <span class="kd">extends</span> <span class="n">XmlAdapter</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="o">{</span>
 <span class="ln"> 2</span>
 <span class="ln"> 3</span>    <span class="nd">@Override</span>
 <span class="ln"> 4</span>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">marshal</span><span class="o">(</span><span class="n">String</span> <span class="n">value</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
@@ -209,7 +209,7 @@
 <span class="ln">20</span>
 <span class="ln">21</span><span class="o">}</span>
 </code></pre></div><p>然后，在相应的字段上面，使用前面定义好的XmlAdapter类。这样，xml解析器在转换请求的时候，会将空字符串转换成null，这样就认为该字段没有传值，不使用正则表达式做验证。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="nd">@XmlType</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="nd">@XmlType</span>
 <span class="ln"> 2</span><span class="nd">@XmlAccessorType</span><span class="o">(</span><span class="n">XmlAccessType</span><span class="o">.</span><span class="na">FIELD</span><span class="o">)</span>
 <span class="ln"> 3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestRequest</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
 <span class="ln"> 4</span>    <span class="nd">@XmlElement</span><span class="o">(</span><span class="n">required</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
@@ -270,6 +270,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -289,9 +292,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -466,6 +466,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -860,6 +864,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -884,7 +892,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -933,6 +949,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1021,7 +1041,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

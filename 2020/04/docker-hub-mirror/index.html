@@ -167,18 +167,18 @@ Ubuntu 16.04&#43;、Debian 8&#43;、CentOS 7 新建或者修改 /etc/docker/daem
     <p>国内访问Docker Hub速度比较感人，这个时候需要配置国内的镜像，来加速下载。由于镜像服务可能出现宕机，建议同时配置多个镜像。</p>
 <h1 id="ubuntu-1604debian-8centos-7">Ubuntu 16.04+、Debian 8+、CentOS 7</h1>
 <p>新建或者修改 /etc/docker/daemon.json，写入如下内容</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="ln">1</span><span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="ln">1</span><span class="p">{</span>
 <span class="ln">2</span>  <span class="nt">&#34;registry-mirrors&#34;</span><span class="p">:</span> <span class="p">[</span>
 <span class="ln">3</span>    <span class="s2">&#34;https://hub-mirror.c.163.com&#34;</span><span class="p">,</span>
 <span class="ln">4</span>    <span class="s2">&#34;https://registry.docker-cn.com&#34;</span>
 <span class="ln">5</span>  <span class="p">]</span>
 <span class="ln">6</span><span class="p">}</span>
 </code></pre></div><p>重启服务</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo systemctl daemon-reload
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo systemctl daemon-reload
 <span class="ln">2</span>sudo systemctl restart docker
 </code></pre></div><h1 id="windows-10">Windows 10</h1>
 <p>在任务栏托盘 Docker 图标内右键菜单选择 Settings，打开配置窗口后在左侧导航菜单选择 Docker Engine，在右侧像下边一样编辑 json 文件，之后点击 Apply &amp; Restart 保存后 Docker 就会重启并应用配置的镜像地址了。</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="ln">1</span><span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="ln">1</span><span class="p">{</span>
 <span class="ln">2</span>  <span class="nt">&#34;registry-mirrors&#34;</span><span class="p">:</span> <span class="p">[</span>
 <span class="ln">3</span>    <span class="s2">&#34;https://hub-mirror.c.163.com&#34;</span><span class="p">,</span>
 <span class="ln">4</span>    <span class="s2">&#34;https://registry.docker-cn.com&#34;</span>
@@ -186,7 +186,7 @@ Ubuntu 16.04&#43;、Debian 8&#43;、CentOS 7 新建或者修改 /etc/docker/daem
 <span class="ln">6</span><span class="p">}</span>
 </code></pre></div><h1 id="macos">macOS</h1>
 <p>在任务栏点击 Docker Desktop 应用图标 -&gt; Perferences，在左侧导航菜单选择 Docker Engine，在右侧像下边一样编辑 json 文件。修改完成之后，点击 Apply &amp; Restart 按钮，Docker 就会重启并应用配置的镜像地址了。</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="ln">1</span><span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="ln">1</span><span class="p">{</span>
 <span class="ln">2</span>  <span class="nt">&#34;registry-mirrors&#34;</span><span class="p">:</span> <span class="p">[</span>
 <span class="ln">3</span>    <span class="s2">&#34;https://hub-mirror.c.163.com&#34;</span><span class="p">,</span>
 <span class="ln">4</span>    <span class="s2">&#34;https://registry.docker-cn.com&#34;</span>
@@ -194,17 +194,17 @@ Ubuntu 16.04&#43;、Debian 8&#43;、CentOS 7 新建或者修改 /etc/docker/daem
 <span class="ln">6</span><span class="p">}</span>
 </code></pre></div><h1 id="检查加速器是否生效">检查加速器是否生效</h1>
 <p>执行下面命令</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>docker info
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>docker info
 </code></pre></div><p>如果从结果中看到了如下内容，说明配置成功</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>Registry Mirrors:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>Registry Mirrors:
 <span class="ln">2</span>    https://hub-mirror.c.163.com/
 <span class="ln">3</span>    https://registry.docker-cn.com/
 </code></pre></div><h1 id="docker-hub-镜像测速">Docker Hub 镜像测速</h1>
 <p>使用镜像前后，可使用 time 统计所花费的总时间。测速前先移除本地的镜像！</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>docker rmi node:latest
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>docker rmi node:latest
 <span class="ln">2</span><span class="nb">time</span> docker pull node:latest
 </code></pre></div><p>输出结果</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>Pulling repository node
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>Pulling repository node
 <span class="ln">2</span>...
 <span class="ln">3</span>
 <span class="ln">4</span>real   0m30s
@@ -262,6 +262,9 @@ Ubuntu 16.04&#43;、Debian 8&#43;、CentOS 7 新建或者修改 /etc/docker/daem
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -281,9 +284,6 @@ Ubuntu 16.04&#43;、Debian 8&#43;、CentOS 7 新建或者修改 /etc/docker/daem
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -458,6 +458,10 @@ Ubuntu 16.04&#43;、Debian 8&#43;、CentOS 7 新建或者修改 /etc/docker/daem
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -852,6 +856,10 @@ Ubuntu 16.04&#43;、Debian 8&#43;、CentOS 7 新建或者修改 /etc/docker/daem
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -876,7 +884,15 @@ Ubuntu 16.04&#43;、Debian 8&#43;、CentOS 7 新建或者修改 /etc/docker/daem
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -925,6 +941,10 @@ Ubuntu 16.04&#43;、Debian 8&#43;、CentOS 7 新建或者修改 /etc/docker/daem
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1013,7 +1033,7 @@ Ubuntu 16.04&#43;、Debian 8&#43;、CentOS 7 新建或者修改 /etc/docker/daem
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

@@ -232,7 +232,7 @@
 </ul>
 <h3 id="使用指定用户运行容器">使用指定用户运行容器</h3>
 <p>为了使用一个与镜像中不同的用户 ID 来运行 pod, 需要设置该 pod 的securityContext.runAsUser 选项。</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
 </span><span class="ln"> 3</span><span class="w"></span><span class="nt">metaadata</span><span class="p">:</span><span class="w">
 </span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">pod-as-user-guest</span><span class="w">
@@ -247,17 +247,17 @@
 </span></code></pre></div><h3 id="阻止容器以-root-用户运行">阻止容器以 root 用户运行</h3>
 <p>可能安全隐患场景：假设有一个已经部署好的 pod，其在 daemon 用户下运行。如果攻击者获取了访问镜像仓库的权限, 井上传了一个标签完全相同, 在root用户下运行的镜像。当Kubernetes的调度器运行该pod的新实例时, kubelet会下载攻击者的镜像, 并运行该镜像中的任何代码。虽然容器与宿主节点基本上是隔离的,使用 root 用户运行容器中的进程仍然是一种不好的实践。例如,当宿主节点上的一个目录被挂载到容器中时,如果这个容器中的进程使用了 root 用户运行,它就拥有该目录的完整访问权限 ; 如果用非 root用户运行,则没有完整权限。</p>
 <p>runAsNonRoot设置为true后，虽然pod它会被成功调度,但是不允许运行。</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w">  </span><span class="nt">runAsNonRoot</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></code></pre></div><h3 id="使用特权模式运行-pod">使用特权模式运行 pod</h3>
 <p>有时 pod 需要做它们的宿主节点上能够做的任何事,例如操作被保护的系统设
 备,或使用其他在通常容器中不能使用的内核功能。比如kube-proxy pod</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w">  </span><span class="nt">privileged </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></code></pre></div><h3 id="为容器单独添加内核功能">为容器单独添加内核功能</h3>
 <p>相比于让容器运行在特权模式下以给予其无限的权限, 一个更加安全的做法是只给予它使用真正需要的内核功能的权限。Kubernetes允许为特定的容器添加内核功能, 或禁用部分内核功能, 以允许对容器进行更加精细的权限控制, 限制攻击者潜在侵入的影响。</p>
 <p>比如。如果需要允许容器修改系统时间, 可以在容器的capabilities里add一项名为CAP_SYS_TIME的功能</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w">  </span><span class="nt">capabilities</span><span class="p">:</span><span class="w">
 </span><span class="ln">3</span><span class="w">    </span><span class="nt">add</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">    </span>- <span class="l">SYS_TIME</span><span class="w">
@@ -268,13 +268,13 @@
 </ul>
 <h3 id="在容器中禁用内核功能">在容器中禁用内核功能</h3>
 <p>在容器的securityContext.capabilities.drop列表中添加禁用的功能</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w">  </span><span class="nt">capabilities</span><span class="p">:</span><span class="w">
 </span><span class="ln">3</span><span class="w">    </span><span class="nt">drop</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">    </span>- <span class="l">CHOWN</span><span class="w">
 </span></code></pre></div><h3 id="阻止对容器根文件系统的写入">阻止对容器根文件系统的写入</h3>
 <p>为了增强安全性, 请将在生产环境运行的容器的readOnlyRootF且esystem选项设置为true。</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w">  </span><span class="nt">readOnlyRootFilesystem</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></code></pre></div><h3 id="设置pod级别的安全上下文">设置pod级别的安全上下文</h3>
 <p>以上的例子都是对单独的容器设置安全上下文。 这些选项中的一部分也可以从pod级别设定(通过pod.spec.securityContext属性)。 它们会作为pod中每一个容器的默认安全上下文, 但是会被容器级别的安全上下文覆盖</p>
@@ -284,7 +284,7 @@
 <li>fsGroup</li>
 <li>supplementalGroups</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
 </span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">pod-with-shared-volume-fsgroup</span><span class="w">
@@ -333,7 +333,7 @@
 <li>允许 pod 使用哪些类型的存储卷</li>
 </ul>
 <p>下面是一个 PodSecurityPolicy 样例，它阻止了 pod 使用宿主节点的 PID 、 IPC 、 网络命名空间, 运行特权模式的容器, 以及绑定大多数宿主节点的端口(除11 000-11000和13000-14000范围内的端口)。 它没有限制容器运行时使用的用户、用户组和SELinux 选项</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">externsions/v1beta1</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">externsions/v1beta1</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PodSecurityPolicy</span><span class="w">
 </span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">default</span><span class="w">
@@ -360,10 +360,10 @@
 </span><span class="ln">25</span><span class="w">  </span>- <span class="s1">&#39;*&#39;</span><span class="w">
 </span></code></pre></div><p>注意: 修改策略对已经存在的pod无效,因为PodSecurityPolicy资原仅在创建和升级pod时起作用。</p>
 <p>可以使用命令查看当前PodSecurityPolicy</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl get psp
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl get psp
 </code></pre></div><h3 id="runasuserfsgroup-和-supplementalgroup-策略">runAsUser、fsGroup 和 supplementalGroup 策略</h3>
 <p>上面的例子中，没有限制用户或者用户组。如果需要限制容器可以使用的用户和用户组ID, 可以将规则改为MustRunAs</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">runAsUser</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">runAsUser</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w">  </span><span class="nt">rule</span><span class="p">:</span><span class="w"> </span><span class="l">MustRunAs</span><span class="w">
 </span><span class="ln">3</span><span class="w">  </span><span class="nt">ranges</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">  </span>- <span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
@@ -376,7 +376,7 @@
 <li>defaultAddCapabilities</li>
 <li>requiredDropCapabilities</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">externsions/v1beta1</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">externsions/v1beta1</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PodSecurityPolicy</span><span class="w">
 </span><span class="ln"> 3</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span><span class="ln"> 4</span><span class="w">  </span><span class="c"># 允许的功能</span><span class="w">
@@ -398,7 +398,7 @@
 <li>requiredDropCapabilities列出的内核功能会在所有容器中被禁用(PodSecurityPolicy 访问控制插件会在所有容器的 securityContext.capabilities.drop 宇段中加入这些功能〉</li>
 </ul>
 <h3 id="限制-pod-可以使用的存储卷类型">限制 pod 可以使用的存储卷类型</h3>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PodSecurityPolicy</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PodSecurityPolicy</span><span class="w">
 </span><span class="ln">2</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span><span class="ln">3</span><span class="w"></span><span class="nt">volumes</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w"></span>- <span class="l">emptyDir</span><span class="w">
@@ -418,7 +418,7 @@
 <h3 id="在一个命名空间中启用网络隔离">在一个命名空间中启用网络隔离</h3>
 <p>在默认情况下, 某一命名空间中的 pod 可以被任意来源访问。</p>
 <p>下面这个例子中，在任何一个特定的命名空间中创建该 NetworkPolicy 之后,任何客户端都不能访问该命名空间中的 pod 。</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
 </span><span class="ln">2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">NetworkPolicy</span><span class="w">
 </span><span class="ln">3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">default-deny</span><span class="w">
@@ -428,7 +428,7 @@
 </span></code></pre></div><p>注意：集群中的 CNI 插件或其他网络方案需要支持 NetworkPolicy ,否则 NetworkPolicy 将不会影响 pod 之间的可达性。</p>
 <h3 id="允许同一命名空间中的部分pod访问一个服务端pod">允许同一命名空间中的部分pod访问一个服务端pod</h3>
 <p>为了允许同一命名空间中的客户端pod访问该命名空间的pod,需要指明哪些pod可以访问。</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">NetworkPolicy</span><span class="w">
 </span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">postgres-netpolicy</span><span class="w">
@@ -446,7 +446,7 @@
 </span><span class="ln">16</span><span class="w">    </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">5432</span><span class="w">
 </span></code></pre></div><h3 id="在不同-kubernetes-命名空间之间进行网络隔离">在不同 Kubernetes 命名空间之间进行网络隔离</h3>
 <p>存在一种情况，多个租户使用同一Kubernetes集群。每个租户有多个命名空间，每个命名空间中有一个标签指明它们屈于哪个租户。</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVervsion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVervsion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">NetworkPolicy</span><span class="w">
 </span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">shoppingcart-netpolicy</span><span class="w">
@@ -466,13 +466,13 @@
 </span></code></pre></div><p>注意：在多租户的Kubernetes集群中,通常租户不能为他们的命名空间添加标签(或注释)。否则,他们可以规避基于namespaceSelector的入向规则。</p>
 <h3 id="使用cidr隔离网络">使用CIDR隔离网络</h3>
 <p>可以通过CIDR表示法指定一个IP段来隔离网络</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">ingress</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w"></span>- <span class="nt">from</span><span class="p">:</span><span class="w">
 </span><span class="ln">3</span><span class="w">  </span>- <span class="nt">ipBlock</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">      </span><span class="nt">cidr</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.1.0</span><span class="l">/24</span><span class="w">
 </span></code></pre></div><h3 id="限制pod的对外访问流量">限制pod的对外访问流量</h3>
 <p>可以通过出向规则限制pod的对外访问流量</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">spec</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w">  </span><span class="nt">podSelector</span><span class="p">:</span><span class="w">
 </span><span class="ln">3</span><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">webserver</span><span class="w">
@@ -528,6 +528,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -547,9 +550,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -724,6 +724,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1118,6 +1122,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -1142,7 +1150,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -1191,6 +1207,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1279,7 +1299,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

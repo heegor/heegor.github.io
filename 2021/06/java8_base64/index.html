@@ -175,7 +175,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64 …
 </ol>
 <h2 id="basic编码">Basic编码</h2>
 <p>Basic编码是标准的BASE64编码，用于处理常规的需求：输出的内容不添加换行符，而且输出的内容由字母加数字组成。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// 编码
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// 编码
 </span><span class="ln">2</span><span class="c1"></span><span class="n">String</span> <span class="n">asB64</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">getEncoder</span><span class="o">().</span><span class="na">encodeToString</span><span class="o">(</span><span class="s">&#34;some string&#34;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="s">&#34;utf-8&#34;</span><span class="o">));</span>
 <span class="ln">3</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">asB64</span><span class="o">);</span> <span class="c1">// 输出为: c29tZSBzdHJpbmc=
 </span><span class="ln">4</span><span class="c1"></span> 
@@ -184,7 +184,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64 …
 <span class="ln">7</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">asBytes</span><span class="o">,</span> <span class="s">&#34;utf-8&#34;</span><span class="o">));</span> <span class="c1">// 输出为: some string
 </span></code></pre></div><h2 id="url编码">URL编码</h2>
 <p>URL编码也是经常的需求，但由于URL对反斜线“/”有特殊的意义，因此URL编码需要替换掉它，使用下划线替换</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">String</span> <span class="n">basicEncoded</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">getEncoder</span><span class="o">().</span><span class="na">encodeToString</span><span class="o">(</span><span class="s">&#34;subjects?abcd&#34;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="s">&#34;utf-8&#34;</span><span class="o">));</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">String</span> <span class="n">basicEncoded</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">getEncoder</span><span class="o">().</span><span class="na">encodeToString</span><span class="o">(</span><span class="s">&#34;subjects?abcd&#34;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="s">&#34;utf-8&#34;</span><span class="o">));</span>
 <span class="ln">2</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Using Basic Alphabet: &#34;</span> <span class="o">+</span> <span class="n">basicEncoded</span><span class="o">);</span>
 <span class="ln">3</span> 
 <span class="ln">4</span><span class="n">String</span> <span class="n">urlEncoded</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">getUrlEncoder</span><span class="o">().</span><span class="na">encodeToString</span><span class="o">(</span><span class="s">&#34;subjects?abcd&#34;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="s">&#34;utf-8&#34;</span><span class="o">));</span>
@@ -195,7 +195,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64 …
 <span class="ln">9</span><span class="n">Using</span> <span class="n">URL</span> <span class="n">Alphabet</span><span class="o">:</span> <span class="n">c3ViamVjdHM_YWJjZA</span><span class="o">==</span>
 </code></pre></div><h2 id="mime编码">MIME编码</h2>
 <p>MIME编码器会使用基本的字母数字产生BASE64输出，而且对MIME格式友好：每一行输出不超过76个字符，而且每行以“\r\n”符结束。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
 <span class="ln"> 2</span><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="o">++</span><span class="n">t</span><span class="o">)</span> <span class="o">{</span>
 <span class="ln"> 3</span>  <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
 <span class="ln"> 4</span><span class="o">}</span>
@@ -215,7 +215,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64 …
 </code></pre></div><h2 id="流的封装">流的封装</h2>
 <p>java.util.Base64类封装了所有的BASE64编码器和解码器，还支持流的封装——这是一个非常优雅的构造——包括编码和效率都很高（无需缓冲Buffer）——即编码器和解码器的输入和输出无需缓冲Buffer。</p>
 <p>下面的例子来说明了编码器是怎样封装FileOutputStream，以及解码器是怎样封装FileInputStream的，两者皆不需要缓冲Buffer：</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">wrapping</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">wrapping</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
 <span class="ln"> 2</span>  <span class="n">String</span> <span class="n">src</span> <span class="o">=</span> <span class="s">&#34;This is the content of any resource read from somewhere&#34;</span> <span class="o">+</span>
 <span class="ln"> 3</span>    <span class="s">&#34; into a stream. This can be text, image, video or any other stream.&#34;</span><span class="o">;</span>
 <span class="ln"> 4</span> 
@@ -281,6 +281,9 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64 …
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -300,9 +303,6 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64 …
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -477,6 +477,10 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64 …
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -871,6 +875,10 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64 …
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -895,7 +903,15 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64 …
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -944,6 +960,10 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64 …
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1032,7 +1052,7 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64 …
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

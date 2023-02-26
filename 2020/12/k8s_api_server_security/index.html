@@ -202,15 +202,15 @@
 <h4 id="serviceaccount介绍">ServiceAccount介绍</h4>
 <p>ServiceAccount就像Pod、 Secret、 ConfigMap等一样都是资源, 它们作用在单独的命名空间, 为每个命名空间自动创建一个默认的ServiceAccount</p>
 <p>可以像其他资源那样查看ServiceAccount列表：</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl get sa
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl get sa
 </code></pre></div><p>在 pod 的 manifest 文件中, 可以用指定账户名称的方式将一个 ServiceAccount赋值给一个 pod。如果不显式地指定 ServiceAccount 的账户名称, pod 会使用在这个命名空间中的默认 ServiceAccount。</p>
 <p>可以通过将不同的 ServiceAccount 赋值给 pod 来控制每个 pod 可以访问的资源。当 API 服务器接收到一个带有认证 token 的请求时, 服务器会用这个 token 来验证发送请求的客户端所关联的 ServiceAccount 是否允许执行请求的操作。</p>
 <p>为了集群的安全性，根据需要，对不同的Pod赋予不一样的ServiceAccount。</p>
 <h4 id="创建serviceaccount">创建serviceaccount</h4>
 <p>创建serviceaccount</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl create serviceaccount foo
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl create serviceaccount foo
 </code></pre></div><p>查看serviceaccount</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ kubectl describe sa foo
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ kubectl describe sa foo
 <span class="ln">2</span>
 <span class="ln">3</span>Namespace: default
 <span class="ln">4</span>Labels: &lt;none&gt;
@@ -218,7 +218,7 @@
 <span class="ln">6</span>Mountable secrets: foo-token-qzq7j
 <span class="ln">7</span>Tokens: foo-token-qzq7j
 </code></pre></div><p>查看密钥里面的数据</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ kubectl describe secret foo-token-qzq7j
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ kubectl describe secret foo-token-qzq7j
 <span class="ln">2</span>
 <span class="ln">3</span>...
 <span class="ln">4</span>ca.crt: <span class="m">1066</span> bytes
@@ -226,7 +226,7 @@
 <span class="ln">6</span>token: eyJhbGdOiJSUzI1NiisinRScCI6IkpXVCJ9...
 </code></pre></div><p>在默认情况下,pod 可以挂载任何它需要的密钥。但是可以通过对 ServiceAccount 进行配置,让 pod 只允许挂载ServiceAccount 中列出的可挂载密钥。为了开启这个功能,ServiceAccount 必须包含以下注解: kubernetes.io/enforce-mountable-secrets=&quot;true&quot;。如果 ServiceAccount 被加上了这个注解,任何使用这个ServiceAccount的pod只能挂载进 ServiceAccount 的可挂载密钥，而不能使用其他的密钥。</p>
 <p>ServiceAccount 也可以包含镜像拉取密钥的 list:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
 </span><span class="ln">2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ServiceAccount</span><span class="w">
 </span><span class="ln">3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-service-account</span><span class="w">
@@ -290,7 +290,7 @@
 </ul>
 <p>角色和角色绑定是命名空间的资源, 而集群角色和集群角色绑定是集群级别的资源。</p>
 <h4 id="使用role和rolebinding">使用Role和RoleBinding</h4>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io/v1</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io/v1</span><span class="w">
 </span><span class="ln">2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Role</span><span class="w">
 </span><span class="ln">3</span><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">foo   </span><span class="w"> </span><span class="c"># Role所在命名空间，没有填写则使用当前命名空间</span><span class="w">
 </span><span class="ln">4</span><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="l">server-reader</span><span class="w">
@@ -300,7 +300,7 @@
 </span><span class="ln">8</span><span class="w">  </span><span class="nt">resources</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;services&#34;</span><span class="p">]</span><span class="w"> </span><span class="c">#这条规则与服务有关（必须使用复数的名字）</span><span class="w">
 </span></code></pre></div><p>注意：在指定资源时必须使用复数的形式。</p>
 <p>绑定角色到service account</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl create rolebinding te st --role<span class="o">=</span>service-reader --serviceaccount<span class="o">=</span>foo:default -n foo
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl create rolebinding te st --role<span class="o">=</span>service-reader --serviceaccount<span class="o">=</span>foo:default -n foo
 </code></pre></div><p>注意: 如果要绑定一个角色到一个 user (用户)而不是 ServiceAccount 上, 使用 <code>--user</code> 作为参数来指定用户名。如果要绑定角色到组,可以使用 <code>--group</code> 参数 。</p>
 <h4 id="使用-clusterrole-和-clusterrolebinding">使用 ClusterRole 和 ClusterRoleBinding</h4>
 <p>一个 RoleBinding 不能授予集群级别的资源访问权限,即使它引用了一个 ClusterRoleBinding。</p>
@@ -346,7 +346,7 @@
 <h4 id="默认的-clusterrole-和-clusterrolebinding">默认的 ClusterRole 和 ClusterRoleBinding</h4>
 <p>k8s 提供了一 组默认的ClusterRole和ClusterRoleBinding, 每次API服务器启动时都会更新它们。 这保证了在你错误地删除角色和绑定, 或者Kubernetes的新版本使用了不同的集群角色和绑定配置时, 所有的默认角色和绑定都会被重新创建。</p>
 <p>可以执行下面的命令查看：</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl get clusterrolebindings
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl get clusterrolebindings
 <span class="ln">2</span>
 <span class="ln">3</span>kubectl get clusterroles
 </code></pre></div><p>view、edit、admin和 cluster-admin 这些ClusterRole是最重要的角色, 它们应该绑定到用户定义pod中的ServiceAccount上</p>
@@ -403,6 +403,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -422,9 +425,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -599,6 +599,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -993,6 +997,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -1017,7 +1025,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -1066,6 +1082,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1154,7 +1174,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

@@ -169,7 +169,7 @@
 <p>下面以阿里云ECS为例子。</p>
 <h2 id="1删除-state-中的现有资源">(1)删除 state 中的现有资源</h2>
 <p>如果该资源受 terraform 管理，则需要先把它删除。执行下面的命令</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="c1"># 基于当前的tf文件，初始化 state 文件</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="c1"># 基于当前的tf文件，初始化 state 文件</span>
 <span class="ln">2</span>terraform init
 <span class="ln">3</span>
 <span class="ln">4</span><span class="c1"># 列出当前的state文件所有管理的项目清单</span>
@@ -182,9 +182,9 @@
 <h2 id="3tf-文件中添加实例的定义">(3)tf 文件中添加实例的定义</h2>
 <p>保证本地的tf文件中有该实例资源的相关定义。如果没有，则可以用下面的方式在文件中新增内容。</p>
 <p>如果是以resource模式定义，则添加下面内容，直接留空即可，其余的数据在后续步骤中可以补全</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>resource &#34;alicloud_instance&#34; &#34;testecs&#34; {}
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>resource &#34;alicloud_instance&#34; &#34;testecs&#34; {}
 </code></pre></div><p>如果是以模块方式来定义，则添加下面内容，其余的数据在后续步骤中可以补全</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln"> 1</span>module &#34;testmodule&#34; {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln"> 1</span>module &#34;testmodule&#34; {
 <span class="ln"> 2</span>  source           = &#34;../modules/instance&#34;
 <span class="ln"> 3</span>  environment      = &#34;xxx&#34;
 <span class="ln"> 4</span>  vswitch_info     = &#34;xxxx&#34;
@@ -200,12 +200,12 @@
 </code></pre></div><p>​</p>
 <h2 id="4导入实例">(4)导入实例</h2>
 <p>如果是以resource模式定义，则直接用实例的资源路径</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>terraform import alicloud_instance.testecs i-xxxxxxxxxxxxxx
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>terraform import alicloud_instance.testecs i-xxxxxxxxxxxxxx
 </code></pre></div><p>​
 如果是以模块方式来定义, 则使用包含模块的资源路径</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>terraform import module.testmodule.alicloud_instance.instance i-xxxxxxxxxxxxxx
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>terraform import module.testmodule.alicloud_instance.instance i-xxxxxxxxxxxxxx
 </code></pre></div><p>​如果该服务有多个实例，则要指定下标。注意：下标部分要用引号，否则报错</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>terraform import module.testlistmodule.alicloud_instance.<span class="s2">&#34;instance[0]&#34;</span> i-xxxxxxxxxxxxxx
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>terraform import module.testlistmodule.alicloud_instance.<span class="s2">&#34;instance[0]&#34;</span> i-xxxxxxxxxxxxxx
 </code></pre></div><p>​</p>
 <h2 id="5补齐资源模板定义">(5)补齐资源模板定义</h2>
 <p>在确定清楚参数属性的具体值之后，如果以模板参数值为准，那么只需要运行apply命令再变更回来即可；如果以控制台的值为准，那么只需要补充或修改模板参数值即可。</p>
@@ -265,6 +265,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -284,9 +287,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -461,6 +461,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -855,6 +859,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -879,7 +887,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -928,6 +944,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1016,7 +1036,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

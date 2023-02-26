@@ -164,33 +164,33 @@
     
     <h1 id="问题与解决方法">问题与解决方法</h1>
 <p>公司内部私有云由于断电，机器没有正常关机，结果导致 Postgres 服务器启动时，报错</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>2020-09-09 07:22:15.296 UTC [3876] FATAL:  could not remove old lock file &#34;postmaster.pid&#34;: Read-only file system
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>2020-09-09 07:22:15.296 UTC [3876] FATAL:  could not remove old lock file &#34;postmaster.pid&#34;: Read-only file system
 <span class="ln">2</span>2020-09-09 07:22:15.296 UTC [3876] HINT:  The file seems accidentally left over, but it could not be removed. Please remove the file by hand and try again.
 <span class="ln">3</span>pg_ctl: could not start server
 </code></pre></div><p>尝试执行下面命令去重新挂载磁盘目录</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>mount -o remount -w /var/lib/postgresql/
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>mount -o remount -w /var/lib/postgresql/
 </code></pre></div><p>但是报错</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>mount: /dev/vdb is write-protected but explicit `-w&#39; flag given
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>mount: /dev/vdb is write-protected but explicit `-w&#39; flag given
 </code></pre></div><p>尝试另外一个命令</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>umount /dev/vdb
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>umount /dev/vdb
 </code></pre></div><p>但是还是报错</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>umount: /var/lib/postgresql: target is busy
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>umount: /var/lib/postgresql: target is busy
 <span class="ln">2</span>        (In some cases useful info about processes that
 <span class="ln">3</span>         use the device is found by lsof(8) or fuser(1).)
 </code></pre></div><p>这样的话， 看上去由于系统没有正常关机，导致虚拟磁盘出现文件系统错误。只能通过fsck手动修复。</p>
 <p>由于上面出现提示设备忙，则可以用下面命令查看进程号</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>fuser -m /var/lib/postgresql
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>fuser -m /var/lib/postgresql
 <span class="ln">2</span>/var/lib/postgresql:  3760c
 </code></pre></div><p>修改命令参数后可以查看进程，同时杀掉进程</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>fuser -mk /var/lib/postgresql
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>fuser -mk /var/lib/postgresql
 <span class="ln">2</span>/var/lib/postgresql:  3760c
 </code></pre></div><p>杀掉进程后，如果控制台中的ssh连接断开了，重连即可</p>
 <p>接着，运行命令修复磁盘</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>fsck.ext3 -y /dev/vdb
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>fsck.ext3 -y /dev/vdb
 </code></pre></div><p>然后重新挂载设备</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>mount /dev/vdb /var/lib/postgresql/
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>mount /dev/vdb /var/lib/postgresql/
 </code></pre></div><p>重启服务即可</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>service postgresql restart
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>service postgresql restart
 </code></pre></div><h1 id="关于fsck">关于fsck</h1>
 <p>ext3的文件系统使用fsck.ext3，ext4文件系统使用fsck.etx4。/dev/vda3是系统/根分区。运行完毕后，reboot重启系统就恢复正常</p>
 <p>fsck不仅可以对文件系统进行扫描，还能修正文件系统的一些问题。注意的是fsck扫描文件系统时一定要在单用户模式、修复模式或把设备umount后进行。建议在单用户模式下运行。如果扫描正常运行中的系统，会造成系统文件损坏。</p>
@@ -242,6 +242,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -261,9 +264,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -438,6 +438,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -832,6 +836,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -856,7 +864,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -905,6 +921,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -993,7 +1013,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

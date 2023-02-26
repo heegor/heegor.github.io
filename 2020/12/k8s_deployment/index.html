@@ -183,7 +183,7 @@
 <p>与Replicaset类似，Deployment也是由标签选择器、期望副数和pod模板组成的。此外,它还包含另一个字段，用于指定一
 个部署策略，表示在修改Deployment资源时应该如何执行更新。</p>
 <h2 id="创建deployment">创建Deployment</h2>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">appVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1beta1</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">appVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1beta1</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment </span><span class="w">
 </span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span><span class="ln"> 4</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia</span><span class="w">
@@ -199,14 +199,14 @@
 </span><span class="ln">14</span><span class="w">      </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">luksa/kubia:vl</span><span class="w">
 </span><span class="ln">15</span><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nodejs</span><span class="w">
 </span></code></pre></div><p>创建一个Deployment</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1"># 确保在创建时使用了 --record 选项。 这个选项会记录历史版本号, 在之后的操作中非常有用</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1"># 确保在创建时使用了 --record 选项。 这个选项会记录历史版本号, 在之后的操作中非常有用</span>
 <span class="ln">2</span>kubectl create -f kubia-deployment-v1.yaml --record
 </code></pre></div><p>查看 Deployment 的详细信息</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl get deployment
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl get deployment
 <span class="ln">2</span>
 <span class="ln">3</span>kubectl describe de­ployment
 </code></pre></div><p>查看部署状态</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span> kubectl rollout status deployment kubia
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span> kubectl rollout status deployment kubia
 </code></pre></div><h2 id="升级deployment">升级deployment</h2>
 <p>只需修改 Deployment 资源中定义的 pod 模板, k8s 会自动将实际的系统状态收敛为资源中定义的状态</p>
 <p>不同的 Deployment 升级策略：</p>
@@ -247,21 +247,21 @@
 </table>
 <h2 id="回滚deployment">回滚Deployment</h2>
 <p>取消最后一次部署的 Deployment</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl rollout undo deployment kubia
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl rollout undo deployment kubia
 </code></pre></div><p>undo 命令也可以在滚动升级过程中运行,并直接停止滚动升级。过程中已创建的 pod 会被删除并被老版本的 pod 替代。</p>
 <p>使用<code>kubectl rollout history</code>显示升级的版本。注意：需要在创建 Deployment 时指定 --record 参数。如果不给定这个参数, 版本历史中的 CHANGE-CAUSE 这一栏会为空，这就很难辨别每次的版本做了哪些修改</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ kubectl rollout <span class="nb">history</span> deployment kubia
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ kubectl rollout <span class="nb">history</span> deployment kubia
 <span class="ln">2</span>
 <span class="ln">3</span>deployments <span class="s2">&#34;kubia&#34;</span>
 <span class="ln">4</span>REVISION  CHANGE-CAUSE
 <span class="ln">5</span><span class="m">2</span>         kubectl <span class="nb">set</span> image deployment kubia <span class="nv">nodejs</span><span class="o">=</span>luksa/kubia:v2
 <span class="ln">6</span><span class="m">3</span>         kubectl <span class="nb">set</span> image deployment kubia <span class="nv">nodejs</span><span class="o">=</span>luksa/kubia:v3
 </code></pre></div><p>回滚到一个特定的 Deployment 版本</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl rollout undo deployment kubia --to-revision<span class="o">=</span>l
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl rollout undo deployment kubia --to-revision<span class="o">=</span>l
 </code></pre></div><p>可以通过指定 Deployment 的 revisionHistoryLimit 属性来限制历史版本数量。默认值是2，所以正常情况下在版本列表里只有当前版本和上一个版本</p>
 <h2 id="控制滚动升级速率">控制滚动升级速率</h2>
 <p>在 Deployment 的滚动升级期间,有两个属性会决定一次替换多少个pod: maxSurge 和 maxUnavailable。可以通过 Deployment 的 strategy 字段下rollingUpdate 的子属性来配置</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">spec</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w">
 </span><span class="ln">3</span><span class="w">    </span><span class="nt">rollingUpdate</span><span class="p">:</span><span class="w">
 </span><span class="ln">4</span><span class="w">      </span><span class="nt">maxSurge</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
@@ -287,9 +287,9 @@
 </tbody>
 </table>
 <h2 id="暂停滚动升级">暂停滚动升级</h2>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl rollout pause deployment kubia
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl rollout pause deployment kubia
 </code></pre></div><h2 id="恢复滚动升级">恢复滚动升级</h2>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl rollout resume deployment kubia
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl rollout resume deployment kubia
 </code></pre></div><h2 id="阻止出错版本的滚动升级">阻止出错版本的滚动升级</h2>
 <p>Deployment的minReadySeconds属性指定新创建的pod至少要成功运行多久之后, 才能将其视为可用。在pod可用之前, 滚动升级的过程不会继续。</p>
 <p>如果一个新的pod 运行出错, 并且在minReadySeconds时间内它的就绪探针出现了失败, 那么新版本的滚动升级将被阻止。</p>
@@ -341,6 +341,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -360,9 +363,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -537,6 +537,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -931,6 +935,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -955,7 +963,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -1004,6 +1020,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1092,7 +1112,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

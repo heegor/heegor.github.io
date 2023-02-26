@@ -165,7 +165,7 @@
     <p>在生产环境中，某个结果集导出的excel文件用Microsoft Excel无法打开，看到如下错误：</p>
 <p><img src="https://apollo-1256894600.cos.ap-shanghai.myqcloud.com/2018/201812-excel-trouble-shooting-zip-file.png" alt="打开Excel错误提示"></p>
 <p>最开始怀疑是在生成文件的时候，文件损坏掉了，但是重新生成多次，得到的结果都是一样的。在相同的界面，导出其他结果集所生成的文件却都是可以成功打开的，这样就可以排除代码功能方面的问题。如果和代码无关，那么就可能和数据有关系。根据出错提示给出的文件地址“C:\Users\ZHANGZ~1\AppData\Local\Temp\error083200_01.xml”, 打开该临时文件，可以看到下面的信息</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln"> 1</span>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;true&#34;?&gt;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln"> 1</span>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;true&#34;?&gt;
 <span class="ln"> 2</span>@namespace html url(http://www.w3.org/1999/xhtml); :root { font:small Verdana; font-weight: bold; padding: 2em; padding-left:4em; } * { display: block; padding-left: 2em; } html|style { display: none; } html|span, html|a { display: inline; padding: 0; font-weight: normal; text-decoration: none; } html|span.block { display: block; } *[html|hidden], span.block[html|hidden] { display: none; } .expand { display: block; } .expand:before { content: &#39;+&#39;; color: red; position: absolute; left: -1em; } .collapse { display: block; } .collapse:before { content: &#39;-&#39;; color: red; position: absolute; left:-1em; } 
 <span class="ln"> 3</span>&lt;recoveryLog xmlns=&#34;http://schemas.openxmlformats.org/spreadsheetml/2006/main&#34;&gt;
 <span class="ln"> 4</span>&lt;logFileName&gt;error084360_01.xml&lt;/logFileName&gt;
@@ -220,6 +220,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -239,9 +242,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -416,6 +416,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -810,6 +814,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -834,7 +842,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -883,6 +899,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -971,7 +991,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

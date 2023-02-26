@@ -216,10 +216,10 @@ Stream API将处理的数据源看做一种Stream（ …" />
 <li>stream() 返回一个顺序流</li>
 <li>parallelStream()返回一个并行流</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="k">default</span> <span class="n">Stream</span> <span class="nf">stream</span><span class="o">()</span> <span class="c1">// 返回一个顺序流
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="k">default</span> <span class="n">Stream</span> <span class="nf">stream</span><span class="o">()</span> <span class="c1">// 返回一个顺序流
 </span><span class="ln">2</span><span class="c1"></span>
 <span class="ln">3</span><span class="k">default</span> <span class="n">Stream</span> <span class="nf">parallelStream</span><span class="o">()</span> <span class="c1">// 返回一个并行流
-</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
 <span class="ln">2</span>
 <span class="ln">3</span><span class="c1">// 顺序流
 </span><span class="ln">4</span><span class="c1"></span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">stream1</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">();</span>
@@ -229,27 +229,27 @@ Stream API将处理的数据源看做一种Stream（ …" />
 </code></pre></div><h4 id="2-由数组创建流">(2) 由数组创建流</h4>
 <p>Arrays中静态方法stream()获取数组流</p>
 <p>Java 8 中的 Arrays 的静态方法 stream() 可以获取数组流：</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">static</span> <span class="n">Stream</span> <span class="nf">stream</span><span class="o">(</span><span class="n">T</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span> <span class="c1">// 返回一个流重载形式，能够处理对应基本类型的数组
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">static</span> <span class="n">Stream</span> <span class="nf">stream</span><span class="o">(</span><span class="n">T</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span> <span class="c1">// 返回一个流重载形式，能够处理对应基本类型的数组
 </span><span class="ln">2</span><span class="c1"></span>
 <span class="ln">3</span><span class="kd">public</span> <span class="kd">static</span> <span class="n">IntStream</span> <span class="nf">stream</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span>
 <span class="ln">4</span>
 <span class="ln">5</span><span class="kd">public</span> <span class="kd">static</span> <span class="n">LongStream</span> <span class="nf">stream</span><span class="o">(</span><span class="kt">long</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span>
 <span class="ln">6</span>
 <span class="ln">7</span><span class="kd">public</span> <span class="kd">static</span> <span class="n">DoubleStream</span> <span class="nf">stream</span><span class="o">(</span><span class="kt">double</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Employess</span><span class="o">[]</span> <span class="n">emps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Employess</span><span class="o">[</span><span class="n">10</span><span class="o">];</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Employess</span><span class="o">[]</span> <span class="n">emps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Employess</span><span class="o">[</span><span class="n">10</span><span class="o">];</span>
 <span class="ln">2</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">Employess</span><span class="o">&gt;</span> <span class="n">stream2</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">emps</span><span class="o">);</span>
 </code></pre></div><h4 id="3由值创建流">（3）由值创建流</h4>
 <p>可以使用静态方法 Stream.of(), 通过显示值创建一个流。它可以接收任意数量的参数。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="kd">static</span> <span class="n">Stream</span> <span class="nf">of</span><span class="o">(</span><span class="n">T</span><span class="o">...</span> <span class="n">values</span><span class="o">)</span>  <span class="c1">// 返回一个流
-</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">stream3</span> <span class="o">=</span> <span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;aa&#34;</span><span class="o">,</span> <span class="s">&#34;bb&#34;</span><span class="o">,</span> <span class="s">&#34;cc&#34;</span><span class="o">);</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="kd">static</span> <span class="n">Stream</span> <span class="nf">of</span><span class="o">(</span><span class="n">T</span><span class="o">...</span> <span class="n">values</span><span class="o">)</span>  <span class="c1">// 返回一个流
+</span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">stream3</span> <span class="o">=</span> <span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;aa&#34;</span><span class="o">,</span> <span class="s">&#34;bb&#34;</span><span class="o">,</span> <span class="s">&#34;cc&#34;</span><span class="o">);</span>
 </code></pre></div><h4 id="4由函数创建流">（4）由函数创建流</h4>
 <p>由函数创建流可以创建无限流。可以使用静态方法 Stream.iterate() 和Stream.generate(), 创建无限流 。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// 迭代
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// 迭代
 </span><span class="ln">2</span><span class="c1"></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">Stream</span> <span class="nf">iterate</span><span class="o">(</span><span class="kd">final</span> <span class="n">T</span> <span class="n">seed</span><span class="o">,</span> <span class="kd">final</span> <span class="n">UnaryOperator</span> <span class="n">f</span><span class="o">)</span>
 <span class="ln">3</span>
 <span class="ln">4</span><span class="c1">// 生成
 </span><span class="ln">5</span><span class="c1"></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">Stream</span> <span class="nf">generate</span><span class="o">(</span><span class="n">Supplier</span> <span class="n">s</span><span class="o">)</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// 迭代
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// 迭代
 </span><span class="ln">2</span><span class="c1"></span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stream4</span> <span class="o">=</span> <span class="n">Stream</span><span class="o">.</span><span class="na">iterate</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">2</span><span class="o">).</span><span class="na">limit</span><span class="o">(</span><span class="n">10</span><span class="o">);</span>
 <span class="ln">3</span>
 <span class="ln">4</span><span class="c1">// 生成
@@ -498,7 +498,7 @@ Stream API将处理的数据源看做一种Stream（ …" />
 </tbody>
 </table>
 <p>示例：</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="n">emps</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="n">emps</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
 <span class="ln"> 2</span>
 <span class="ln"> 3</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="n">emps</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toSet</span><span class="o">());</span>
 <span class="ln"> 4</span>
@@ -574,6 +574,9 @@ Stream API将处理的数据源看做一种Stream（ …" />
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -593,9 +596,6 @@ Stream API将处理的数据源看做一种Stream（ …" />
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -770,6 +770,10 @@ Stream API将处理的数据源看做一种Stream（ …" />
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1164,6 +1168,10 @@ Stream API将处理的数据源看做一种Stream（ …" />
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -1188,7 +1196,15 @@ Stream API将处理的数据源看做一种Stream（ …" />
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -1237,6 +1253,10 @@ Stream API将处理的数据源看做一种Stream（ …" />
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1325,7 +1345,7 @@ Stream API将处理的数据源看做一种Stream（ …" />
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

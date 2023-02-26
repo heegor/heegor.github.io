@@ -199,7 +199,7 @@
 <li>pod的注解</li>
 </ul>
 <h3 id="通过环境变量暴露元数据">通过环境变量暴露元数据</h3>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">env</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">env</span><span class="p">:</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">POD_NAME</span><span class="w">
 </span><span class="ln"> 3</span><span class="w">  </span><span class="c"># 引用pod manifest中的元数据名称字段,而不是设定一个具体的值</span><span class="w">
 </span><span class="ln"> 4</span><span class="w">  </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w">
@@ -235,10 +235,10 @@
 </span><span class="ln">34</span><span class="w">
 </span></code></pre></div><p>对于暴露资源请 和使用限制的环境变量, 我们会设定一个基数单位。实际的资源请求值和限制值除以这个基数单位, 所得的结果通过环境变量暴露出去。在上面的例子中, 我们设定 CPU 请求的基数为1m (即1 millicore, 也就是千分之一核CPU)。当我们设置资源请求为15m时, 环境变量CONTAINER_CPU_REQUEST_MILLICORES的值就是15</p>
 <p>在完成创建pod后, 我们可以使用kubectl exec命令来查看容器中的所有环境变量</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl <span class="nb">exec</span> downward env
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kubectl <span class="nb">exec</span> downward env
 </code></pre></div><h3 id="通过卷传递元数据">通过卷传递元数据</h3>
 <p>可以定义一个downwardAPI卷，并以文件的方式挂载在容器中。</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
 </span><span class="ln"> 2</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
 </span><span class="ln"> 3</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span><span class="ln"> 4</span><span class="w">  </span><span class="c"># 后面会添加定义，通过downwardAPI卷来暴露这些标签</span><span class="w">
@@ -301,7 +301,7 @@
 <p>可以在pod运行时修改标签和注解。当标签和注解被修改后, k8s会更新存有相关信息的文件,从而使pod可以获取最新的数据。这也解释了为什么不能通过环境变量的方式暴露标签和注解,在环境变量方式下,一旦标签和注解被修改,新的值将无法暴露。</p>
 <h3 id="在卷的定义中引用容器级的元数据">在卷的定义中引用容器级的元数据</h3>
 <p>当暴露容器级的元数据时,如容器可使用的资源限制或者资源请求(使用字段resourceFieldRef), 必须指定引用资源字段对应的容器名称。这是因为对于卷的定义是基于 pod 级的,而不是容器级的。当引用卷定义某一个容器的资源字段时, 需要明确说明引用的容器的名称。这个规则对于只包含单容器的 pod 同样适用。</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">resourceFieldRef</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nt">resourceFieldRef</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w">  </span><span class="nt">containerName</span><span class="p">:</span><span class="w"> </span><span class="l">main  </span><span class="w"> </span><span class="c">#必须指定容器名称</span><span class="w">
 </span><span class="ln">3</span><span class="w">  </span><span class="nt">resource</span><span class="p">:</span><span class="w"> </span><span class="l">limits.memory</span><span class="w">
 </span><span class="ln">4</span><span class="w">  </span><span class="nt">divisor</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
@@ -313,13 +313,13 @@
 <h3 id="通过-kubectl-proxy-访问-api-服务器">通过 Kubectl proxy 访问 API 服务器</h3>
 <p>kubectl proxy命令启动了一 个代理服务来接收来自你本机的 HTTP 连接并转发至 API 服务器, 同时处理身份认证, 所以不需要每次请求都上传认证凭证。</p>
 <p>运行代理很简单, 执行下面的命令</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ kubectl proxy
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ kubectl proxy
 <span class="ln">2</span>
 <span class="ln">3</span>Starting to serve on 127.0.0.1:8001
 </code></pre></div><p>上面的返回结果可以看到已经在本地8001代理端口接受请求。执行下面的命令，服务器会返回一个路径清单，这些路径对应了创建Pod、Service这些资源时定义的API组和版本信息</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>curl http://localhost: <span class="m">8001</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>curl http://localhost: <span class="m">8001</span>
 </code></pre></div><p>通过这些路径可以获取更多的信息，比如下面这个命令可以获取到集群中所有job实例</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>curl http://localhost:8001/apis/batch/vl/jobs
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>curl http://localhost:8001/apis/batch/vl/jobs
 </code></pre></div><h3 id="从pod内部与api服务器进行交互">从pod内部与API服务器进行交互</h3>
 <p>每个pod都会被自动挂载上一个默认的secret卷，映射到每个容器的 /var/run/secrets/kubernetes.io/serviceaccount目录下。 这个Secret包含三个条目：ca.crt、namespace与token, 包含了从pod内部安全访问KubernetesAPI服务器所需的全部信息。</p>
 <p>在pod中运行的应用如何正确访问k8s的 API:</p>
@@ -330,27 +330,27 @@
 </ul>
 <h4 id="1-获取api服务器地址">(1) 获取API服务器地址</h4>
 <p>可以使用下面的命令来获取API服务器地址</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ kubectl get svc
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ kubectl get svc
 <span class="ln">2</span>NAME        CLUSTER-IP  EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>   AGE
 <span class="ln">3</span>kubernetes  10.0.0.1    &lt;none&gt;        443/TCP   46d
 </code></pre></div><p>可以在容器内通过查询KUBERNETES_SERVICE_HOST 和 KUBERNETES_SERVICE_PORT 这两个环境变量</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ env <span class="p">|</span> grep KUBERNETES SERVICE
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ env <span class="p">|</span> grep KUBERNETES SERVICE
 <span class="ln">2</span>KUBERNETES_SERVICE <span class="nv">_PORT</span><span class="o">=</span><span class="m">443</span>
 <span class="ln">3</span><span class="nv">KUBERNETES_SERVICE_HOST</span><span class="o">=</span>l0.0.0.1
 <span class="ln">4</span><span class="nv">KUBERNETES_SERVICE_PORT_HTTPS</span><span class="o">=</span><span class="m">443</span>
 </code></pre></div><p>由于每个服务都获得一个DNS入口，也可以简单地将 curl 指向 https://kubernetes，DNS会自动解析到k8s API服务器</p>
 <h4 id="2验证身份">（2）验证身份</h4>
 <p>指定证书</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt https://kubernetes
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt https://kubernetes
 <span class="ln">2</span>
 <span class="ln">3</span>或者，先定义成环境变量来简化后续的调用
 <span class="ln">4</span><span class="nb">export</span> <span class="nv">CURL_CA_BUNDLE</span><span class="o">=</span>/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 <span class="ln">5</span>curl https://kubernetes
 </code></pre></div><p>需要获得 API 服务器的授权, 以便可以读取并进一步修改或删除部署在集群中的 API 对象。</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="nv">TOKEN</span><span class="o">=</span><span class="k">$(</span>cat /var/run/secrets/kubernetes.io/serviceaccount/token<span class="k">)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="nv">TOKEN</span><span class="o">=</span><span class="k">$(</span>cat /var/run/secrets/kubernetes.io/serviceaccount/token<span class="k">)</span>
 <span class="ln">2</span>curl -H <span class="s2">&#34;Authorization: Bearer </span><span class="nv">$TOKEN</span><span class="s2">&#34;</span> https://kubernetes
 </code></pre></div><p>指定访问命名空间</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="nv">NS</span><span class="o">=</span><span class="k">$(</span>cat /var/run/secrets/kubernetes.io/serviceaccount/namespace<span class="k">)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="nv">NS</span><span class="o">=</span><span class="k">$(</span>cat /var/run/secrets/kubernetes.io/serviceaccount/namespace<span class="k">)</span>
 <span class="ln">2</span>curl -H <span class="s2">&#34;Authorization: Bearer </span><span class="nv">$TOKEN</span><span class="s2">&#34;</span> https://kubernetes/api/vl/namespaces/<span class="nv">$NS</span>/pods
 </code></pre></div><h3 id="通过-ambassador-容器简化与-api-服务器的交互">通过 ambassador 容器简化与 API 服务器的交互</h3>
 <p>使用HTTPS、 证书和授权凭证, 对千开发者来说看上去有点复杂。 在pod中 向代理而不是直接向API服务器发送请求,
@@ -410,6 +410,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
       <li>
@@ -429,9 +432,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="nav-link">Java 8新特性 - (14)Hotspot删除永久代</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="nav-link">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </li>
     </ul>
     <div>
@@ -606,6 +606,10 @@
             
             
             <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1000,6 +1004,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/wince/' class=" post_tag button button_translucent" data-position=1>WINCE<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/zookeeper/' class=" post_tag button button_translucent" data-position=2>ZOOKEEPER<span class="button_tally">2</span>
             </a>
             
@@ -1024,7 +1032,15 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/' class=" post_tag button button_translucent" data-position=1>安卓<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
             </a>
             
             
@@ -1073,6 +1089,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -1161,7 +1181,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2021</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>

@@ -3,10 +3,34 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.zengxi.net/</loc>
-    <lastmod>2021-07-23T13:46:00+08:00</lastmod>
+    <lastmod>2023-02-26T11:19:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/categories/</loc>
-    <lastmod>2021-07-23T13:46:00+08:00</lastmod>
+    <lastmod>2023-02-26T11:19:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/posts/</loc>
+    <lastmod>2023-02-26T11:19:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/</loc>
+    <lastmod>2023-02-26T11:19:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/wince/</loc>
+    <lastmod>2023-02-26T11:19:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/%E5%AE%89%E5%8D%93/</loc>
+    <lastmod>2023-02-26T11:19:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/</loc>
+    <lastmod>2023-02-26T11:19:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/2023/02/change_car_navi/</loc>
+    <lastmod>2023-02-26T11:19:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/</loc>
+    <lastmod>2023-02-26T11:19:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/</loc>
+    <lastmod>2023-02-26T11:19:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/dbeaver/</loc>
     <lastmod>2021-07-23T13:46:00+08:00</lastmod>
@@ -15,12 +39,6 @@
     <lastmod>2021-07-23T13:46:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2021/07/dbeaver_jdk/</loc>
-    <lastmod>2021-07-23T13:46:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/posts/</loc>
-    <lastmod>2021-07-23T13:46:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/tags/</loc>
     <lastmod>2021-07-23T13:46:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/java/</loc>
