@@ -132,6 +132,37 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 21, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-9' class="post_tag button button_translucent">java 9
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">Java 7 引入了@SafeVarargs注解来抑制当方法具有varargs（可变数量的参数）时出现的不安全操作警告,比如具有模糊类型（比如：泛型）的可变参数。@SafeVarargs注解只能用于无法覆盖的方法（final方法、static方法或构造函数），因为重写方法仍然可以对其 varargs（可变数量的参数）执行不安全操作。
+Java 9 扩展了@SafeVarargs注解的使用，它现在也可以与私有方法一起使用。这是因为私有方法也是无法覆盖的。
+Java 9 示例 - 当不使用@SafeVarargs注解时
+1import java.util.ArrayList; 2import java.util.List; …</p>
+          <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/06/java9_anonymous_inner_class_and_diamond_operator/">Java 9新特性 - (2)匿名内部类与菱形运算符</a>
       </h3>
       <div class="post_meta">
@@ -404,38 +435,6 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/06/java8_parallel_sort/">Java 8新特性 - (10)并行数组排序</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 1, 2021</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
-    </a>
-    <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F' class="post_tag button button_translucent">排序
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在Java 7中已经有了Arrays.sort()方法可对对象进行排序，而在Java 8中，引入了新的并行排序，它比前者的排序速度更快，且遵循了Java 7引入的Fork/Join框架，可以把排序任务分配给线程池中可用的多个线程。 Java 8在java.util.Arrays类中新增了并行排序功能，能够更充分地利用多线程机制，最重要的方法是parallelSort()，可以显著加快多核机器上的数组排序
-并行排序算法：
- 将给定的数组划分为子数组，将子数组进一步划分为子数组，直到子数组达到最小粒度为止。 子数组由多个线程单独排序。并行排序使用 Fork / Join Framework 并行地对子数组进行排序。 已合并的已排序子数 …</p>
-          <a href="https://www.zengxi.net/2021/06/java8_parallel_sort/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -505,6 +504,9 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/05/access-new-bing/" class="nav-link">不用魔法直接访问 New Bing</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/05/mouse_wheel_issue/" class="nav-link">鼠标滚轮上下乱跳</a>
       </li>
       <li>
@@ -524,9 +526,6 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/java8_optional/" class="nav-link">Java 8新特性 - (15)Optional类</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_unique_jvm_log/" class="nav-link">Java 9新特性 - (4)统一的JVM日志系统</a>
       </li>
     </ul>
     <div>
@@ -625,6 +624,10 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             
             
             <a href='https://www.zengxi.net/categories/fiddler/' class=" post_tag button button_translucent" data-position=1>FIDDLER<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/gpt/' class=" post_tag button button_translucent" data-position=1>GPT<span class="button_tally">1</span>
             </a>
             
             
@@ -823,6 +826,10 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/bing/' class=" post_tag button button_translucent" data-position=1>BING<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/chrome/' class=" post_tag button button_translucent" data-position=2>CHROME<span class="button_tally">2</span>
             </a>
             
@@ -884,6 +891,10 @@ java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编�
             
             
             <a href='https://www.zengxi.net/tags/gitbook/' class=" post_tag button button_translucent" data-position=1>GITBOOK<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/gpt4/' class=" post_tag button button_translucent" data-position=1>GPT4<span class="button_tally">1</span>
             </a>
             
             
