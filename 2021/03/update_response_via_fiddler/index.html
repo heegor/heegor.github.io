@@ -167,18 +167,18 @@
     <p>使用Fiddler抓包工具，通过修改CustomRules.js脚本达到修改Http请求的Response中Body信息（如JSON串）。</p>
 <p>常用于在Server开发未完全Ready而前端或客户端开发需要Server数据时，修改请求的返回数据，达到Debug和测试的目的，较添加BreakPoint的方法更加便捷。</p>
 <p>本例Demo中会为JSON添加一个字段和修改一个字段，如下所示：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="ln"> 1</span><span class="err">//</span> <span class="err">原JSON串</span> <span class="err">V</span><span class="mf">1.0</span>
-<span class="ln"> 2</span><span class="p">{</span>    
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="ln"> 1</span><span class="c1">// 原JSON串 V1.0
+</span><span class="ln"> 2</span><span class="c1"></span><span class="p">{</span>    
 <span class="ln"> 3</span>  <span class="nt">&#34;music&#34;</span><span class="p">:</span> <span class="s2">&#34;big big world&#34;</span><span class="p">,</span>
 <span class="ln"> 4</span>  <span class="nt">&#34;singer&#34;</span><span class="p">:</span> <span class="s2">&#34;Emilia Rydberg&#34;</span>
 <span class="ln"> 5</span><span class="p">}</span> 
 <span class="ln"> 6</span>
-<span class="ln"> 7</span><span class="err">//</span> <span class="err">新JSON串</span> <span class="err">V</span><span class="mf">1.1</span>
-<span class="ln"> 8</span><span class="p">{</span>
+<span class="ln"> 7</span><span class="c1">// 新JSON串 V1.1
+</span><span class="ln"> 8</span><span class="c1"></span><span class="p">{</span>
 <span class="ln"> 9</span>  <span class="nt">&#34;music&#34;</span><span class="p">:</span> <span class="s2">&#34;big big world&#34;</span><span class="p">,</span>
-<span class="ln">10</span>  <span class="nt">&#34;singer&#34;</span><span class="p">:</span> <span class="s2">&#34;艾密莉亚·怀得堡&#34;</span><span class="p">,</span>    　　<span class="err">//</span> <span class="err">修改该字段(英文名改为中文名显示)</span>
-<span class="ln">11</span>  <span class="nt">&#34;similar song&#34;</span><span class="p">:</span> <span class="p">[</span>    　　　　　　  <span class="err">//</span> <span class="err">添加该字段(相似歌曲列表)</span>
-<span class="ln">12</span>    <span class="p">{</span>
+<span class="ln">10</span>  <span class="nt">&#34;singer&#34;</span><span class="p">:</span> <span class="s2">&#34;艾密莉亚·怀得堡&#34;</span><span class="p">,</span>    　　<span class="c1">// 修改该字段(英文名改为中文名显示)
+</span><span class="ln">11</span><span class="c1"></span>  <span class="nt">&#34;similar song&#34;</span><span class="p">:</span> <span class="p">[</span>    　　　　　　  <span class="c1">// 添加该字段(相似歌曲列表)
+</span><span class="ln">12</span><span class="c1"></span>    <span class="p">{</span>
 <span class="ln">13</span>      <span class="nt">&#34;music&#34;</span><span class="p">:</span> <span class="s2">&#34;dying in the sun&#34;</span><span class="p">,</span>
 <span class="ln">14</span>      <span class="nt">&#34;singer&#34;</span><span class="p">:</span> <span class="s2">&#34;The Cranberries&#34;</span>
 <span class="ln">15</span>    <span class="p">},</span>
@@ -302,6 +302,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/" class="nav-link">Spring Boot 自动设置响应头引发的问题</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/11/on-premise-vs-private-cloud/" class="nav-link">On-Premise 与 Private Cloud 区别</a>
       </li>
       <li>
@@ -321,9 +324,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/" class="nav-link">Manjaro升级后打开坚果云界面显示空白</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_optional_enhancement/" class="nav-link">Java 9新特性 - (5)Optional类中新增几个方法</a>
       </li>
     </ul>
     <div>
@@ -869,6 +869,10 @@
             
             
             <a href='https://www.zengxi.net/tags/spring/' class=" post_tag button button_translucent" data-position=1>SPRING<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/springboot/' class=" post_tag button button_translucent" data-position=1>SPRINGBOOT<span class="button_tally">1</span>
             </a>
             
             

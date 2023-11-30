@@ -6,7 +6,25 @@
     <description>Recent content on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 09 Nov 2023 21:01:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Nov 2023 21:01:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring Boot 自动设置响应头引发的问题</title>
+      <link>https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/</link>
+      <pubDate>Wed, 29 Nov 2023 21:01:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/</guid>
+      <description>在某次排查问题的时候，发现接口返回值的 Response Header 中居然多了下面这个值。
+1Content-Disposition:inline;filename=f.txt Content-disposition 是 MIME 协议的扩展，它指示 MIME 用户代理如何显示附加的文件。上面的值就相当于告诉客户端将文件内容直接显示在页面，同时这个文件名为 f.txt。
+排查了接口代码与 nginx 等设置，并没有发现显式设置它的地方，很疑惑它是什么时候被设置上去的，即使显式设置了 Reponse 的 content-type 也没有用。
+最终在查找资料的时候发现，Spring boot 为了修复 CVE-2015-5211 漏洞，当 URL Path 中包含文件扩展名的时候，就会自动设置这个 Response Header
+看到这个描述就马上知道原因了。自己的接口请求是类似下面这种结构的，spring boot 将 aaaa.bbbb.cccc 当作是文件名
+1http://xxxxx/yyyyy/aaaa.bbbb.cccc 虽然说大部分情况下，即使有这个 Response Header 不会有什么影响，但是在某些特殊的场景，就会出现问题。比如，某个客户在他们的公司内部中部署了网络安全工具，这个网络工具检测到它返回值是个文件，自动将返回的报文加密。这个就导致网页请求接口的时候报错，在浏览器的开发者工具中可以看到下面的返回内容，完全是二进制的形式而不是json字符串
+为了避免这个问题，可以将接口的地址改成下面这种形式，也就是通过 Query Parameter 的方式来传递带有&amp;quot;.&amp;quot;的数据。这样spring boot就不认为它要返回文件，不会自动加上那个 Response Header。
+1http://xxxxx/yyyyy?code=aaaa.bbbb.cccc 这其实也是个编程习惯的问题。对于简单的查询参数，最好就用 GET 请求，以 Query Parameter 的方式来传值，而不是放在 URL Path 中。对于复杂的查询参数，就用 POST 请求，在 Body 中传值。
+参考资料：
+ https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-requestmapping.html#mvc-ann-requestmapping-rfd https://spring.io/security/cve-2015-5211 https://github.com/spring-projects/spring-framework/issues/18220 https://github.com/spring-projects/spring-boot/issues/4220  </description>
+    </item>
+    
     <item>
       <title>On-Premise 与 Private Cloud 区别</title>
       <link>https://www.zengxi.net/2023/11/on-premise-vs-private-cloud/</link>

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="">
   <head>
-	<meta name="generator" content="Hugo 0.88.1" />
+	<meta name="generator" content="Hugo 0.92.2" />
 <title>保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -128,6 +128,36 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_api_server_security/">Kubernetes in Action笔记 - (14) API Server服务器的安全防护</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 29, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">如果攻击者获得了访问API服务器的权限, 他们可以通过在容器镜像中打包自己的代码并在pod中运行来做任何事
+认证机制 API 服务器可以配置一个认证插件列表。列表中的每个插件都可以检查这个请求和尝试确定谁在发送这个请求。当通过认证后，返回用户名、用户 ID 和组信息给 API 服务器，API服务器就会停止调用剩余的认证插件井继续进入授权阶段。
+用户与组 k8s 区分了两种连接到 API 服务器的客户端 :
+ 用户（真实的人） pod (更准确地说是运行在 pod 中的应用)  用户应该被管理在外部系统中，例如单点登录系统。没有资源代表用户账户，这也就意味着不能通过 API 服务器来创建、更新或删除用户。
+pod …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_api_server_security/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -391,34 +421,6 @@ phase有以下几种值：
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/">Kubernetes in Action笔记 - (4) 标签、注解与命名空间</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 10, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">标签 什么是标签 标签是可以附加到资源的任意键值对。通过标签选择器，可以筛选出具有该确切标签的资源。
-使用标签和选择器来约束pod调度 默认情况下，Pod基本上是随机地调度到任意Node节点的。但是某些情况下，想要调度到特定的Node节点，比如SSD硬盘的节点。这个时候，可以通过节点标签和节点标签选择器完成。
-1# 这个例子中通过nodeSelector选择部署到gpu=true的节点2apiVersion:vl3kind:Pod4metadata:5name:kubia-gpu6spec:7nodeSelector:8gpu=true9containers:10- image:luksa/kubia11name:kubia注解 除 …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -434,7 +436,7 @@ phase有以下几种值：
         <a href="/page/5/" aria-label="Page 5" class="page-link" role="button">5</a>
       </li>
       <li class="page-item active">
-        <a href="#" aria-current="page" aria-label="Page 6" class="page-link" role="button">6</a>
+        <a aria-current="page" aria-label="Page 6" class="page-link" role="button">6</a>
       </li>
       <li class="page-item">
         <a href="/page/7/" aria-label="Page 7" class="page-link" role="button">7</a>
@@ -488,6 +490,9 @@ phase有以下几种值：
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/" class="nav-link">Spring Boot 自动设置响应头引发的问题</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/11/on-premise-vs-private-cloud/" class="nav-link">On-Premise 与 Private Cloud 区别</a>
       </li>
       <li>
@@ -507,9 +512,6 @@ phase有以下几种值：
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/" class="nav-link">Manjaro升级后打开坚果云界面显示空白</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_optional_enhancement/" class="nav-link">Java 9新特性 - (5)Optional类中新增几个方法</a>
       </li>
     </ul>
     <div>
@@ -1055,6 +1057,10 @@ phase有以下几种值：
             
             
             <a href='https://www.zengxi.net/tags/spring/' class=" post_tag button button_translucent" data-position=1>SPRING<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/springboot/' class=" post_tag button button_translucent" data-position=1>SPRINGBOOT<span class="button_tally">1</span>
             </a>
             
             

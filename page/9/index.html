@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="">
   <head>
-	<meta name="generator" content="Hugo 0.88.1" />
+	<meta name="generator" content="Hugo 0.92.2" />
 <title>保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -128,6 +128,34 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/">清除chrome中 HTTPS 证书缓存</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 15, 2020</span>
+    <a href='https://www.zengxi.net/tags/chrome' class="post_tag button button_translucent">chrome
+    </a>
+    <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6' class="post_tag button button_translucent">证书
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在地址栏输入 chrome://net-internals/#hsts ， 找到 “Delete domain security policies”， 输入对应的域名，点击 Delete 按钮</p>
+          <a href="https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -391,37 +419,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/05/mac_write_iso_into_udisk/">MacOS中通过ISO镜像制作U盘安装盘</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    May 21, 2020</span>
-    <a href='https://www.zengxi.net/tags/mac' class="post_tag button button_translucent">mac
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">使用MacOS自带的dd命令，就可以将ISO镜像写入到U盘。这就可以利用这个命令来制作安装windows，Linux等系统用U盘
-通过下面的命令，找出U盘挂载的路径
-1diskutil list 将U盘取消挂载，在下面命令中将N替换为所对应的挂载盘：
-1diskutil unmountDisk /dev/disk[N] 将内容写入U盘。下面的命令中 rdisk 的 r 可以加快写入速度
-1sudo dd if=iso路径 of=/dev/rdisk[N] bs=1m 弹出磁盘
-1diskutil eject /dev/disk[N] </p>
-          <a href="https://www.zengxi.net/2020/05/mac_write_iso_into_udisk/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -437,7 +434,7 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
         <a href="/page/8/" aria-label="Page 8" class="page-link" role="button">8</a>
       </li>
       <li class="page-item active">
-        <a href="#" aria-current="page" aria-label="Page 9" class="page-link" role="button">9</a>
+        <a aria-current="page" aria-label="Page 9" class="page-link" role="button">9</a>
       </li>
       <li class="page-item">
         <a href="/page/10/" aria-label="Page 10" class="page-link" role="button">10</a>
@@ -491,6 +488,9 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/" class="nav-link">Spring Boot 自动设置响应头引发的问题</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/11/on-premise-vs-private-cloud/" class="nav-link">On-Premise 与 Private Cloud 区别</a>
       </li>
       <li>
@@ -510,9 +510,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/" class="nav-link">Manjaro升级后打开坚果云界面显示空白</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_optional_enhancement/" class="nav-link">Java 9新特性 - (5)Optional类中新增几个方法</a>
       </li>
     </ul>
     <div>
@@ -1058,6 +1055,10 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
             
             
             <a href='https://www.zengxi.net/tags/spring/' class=" post_tag button button_translucent" data-position=1>SPRING<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/springboot/' class=" post_tag button button_translucent" data-position=1>SPRINGBOOT<span class="button_tally">1</span>
             </a>
             
             

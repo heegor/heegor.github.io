@@ -128,6 +128,34 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/">Kubernetes in Action笔记 - (4) 标签、注解与命名空间</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 10, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">标签 什么是标签 标签是可以附加到资源的任意键值对。通过标签选择器，可以筛选出具有该确切标签的资源。
+使用标签和选择器来约束pod调度 默认情况下，Pod基本上是随机地调度到任意Node节点的。但是某些情况下，想要调度到特定的Node节点，比如SSD硬盘的节点。这个时候，可以通过节点标签和节点标签选择器完成。
+1# 这个例子中通过nodeSelector选择部署到gpu=true的节点2apiVersion:vl3kind:Pod4metadata:5name:kubia-gpu6spec:7nodeSelector:8gpu=true9containers:10- image:luksa/kubia11name:kubia注解 除 …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_label_annotation_namespace/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/12/k8s_pod_intro/">Kubernetes in Action笔记 - (3) Pod介绍</a>
       </h3>
       <div class="post_meta">
@@ -390,36 +418,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/">利用n来切换Nodejs版本</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Oct 20, 2020</span>
-    <a href='https://www.zengxi.net/tags/nodejs' class="post_tag button button_translucent">nodejs
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">安装n
-1sudo npm install n -g 安装完后，可以使用命令 sudo n &lt;NODEJS 版本号&gt; 来安装对应的nodejs版本
-需要切换版本时，执行下面的命令。然后用键盘上面的上下方向键即可切换
-1sudo n 切换完后，执行下面命令来验证当前版本号
-1node -v </p>
-          <a href="https://www.zengxi.net/2020/10/nodejs_switch_version/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -435,7 +433,7 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
         <a href="/posts/page/6/" aria-label="Page 6" class="page-link" role="button">6</a>
       </li>
       <li class="page-item active">
-        <a href="#" aria-current="page" aria-label="Page 7" class="page-link" role="button">7</a>
+        <a aria-current="page" aria-label="Page 7" class="page-link" role="button">7</a>
       </li>
       <li class="page-item">
         <a href="/posts/page/8/" aria-label="Page 8" class="page-link" role="button">8</a>
@@ -489,6 +487,9 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/" class="nav-link">Spring Boot 自动设置响应头引发的问题</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/11/on-premise-vs-private-cloud/" class="nav-link">On-Premise 与 Private Cloud 区别</a>
       </li>
       <li>
@@ -508,9 +509,6 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/" class="nav-link">Manjaro升级后打开坚果云界面显示空白</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/06/java9_optional_enhancement/" class="nav-link">Java 9新特性 - (5)Optional类中新增几个方法</a>
       </li>
     </ul>
     <div>
@@ -1056,6 +1054,10 @@ Master节点 承载着控制和管理整个集群系统的 Control Panel。包�
             
             
             <a href='https://www.zengxi.net/tags/spring/' class=" post_tag button button_translucent" data-position=1>SPRING<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/springboot/' class=" post_tag button button_translucent" data-position=1>SPRINGBOOT<span class="button_tally">1</span>
             </a>
             
             
