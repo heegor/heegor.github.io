@@ -132,6 +132,34 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/01/quartz-job-issue-improvement/">Quartz job使用过程中的发现问题与改进</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jan 5, 2020</span>
+    <a href='https://www.zengxi.net/tags/quartz' class="post_tag button button_translucent">quartz
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">遇到的问题与原因分析 生产环境中遇到的问题：
+ 服务在启动过程中，不时地卡住，后来发生的越来越频繁。看日志分析，卡在初始化quartz job store的时候 服务在运行过程中，不时地出现定时任务不被触发的情况  通过分析，得知问题产生的原因：
+ 目前代码中用的是Quartz scheduler 1.8.3版本，定时框架采用的是行锁，通过执行下面的SQL来锁住特定的记录。在分布式的系统的情况下，节点越多越容易发生锁等待，甚至死锁。Quartz scheduler 的 2.x 版本做了改进，在QRTZ_LOCKS表中多加了一个字段 SCHED_NAME。这有一个好处就是，可以给不同的应用分配不同的scheduler name，这样定 …</p>
+          <a href="https://www.zengxi.net/2020/01/quartz-job-issue-improvement/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2019/12/incident-caused-by-app/">复盘 - 手机app上一行代码导致的生产事故</a>
       </h3>
       <div class="post_meta">
@@ -422,36 +450,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2018/07/insertion-sort/">排序算法 - （直接）插入排序 （Insertion Sort)</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 2, 2018</span>
-    <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95' class="post_tag button button_translucent">算法
-    </a>
-    <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F' class="post_tag button button_translucent">排序
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">基本思路 假设按照从小到大排列，总共有n个元素。
- 整个数组从逻辑上会被分成两个部分，左边部分是有序的序列，右边部分是待排序的元素。当然，刚开始左边的有序序列仅有一个元素，即第一个元素 将右边待排序元素的第一个元素，与左边有序序列进行比较。比较的时候，是从有序序列的末端（即有序序列最大的一个数）开始进行比较，如果比它大或者与之相等则直接插在其后面，否则一直往前面找，直到找到该插入的位置。插入的时候，需要把所插入位置右边的所有元素往右移。 重复上面的步骤，直到所有待排序的元素处理完毕  性能 平均需要n2/4次比较， n2/4次交换；最差情况n2次比较，n2次交换；最好情况n-1次比较，0次交换
-时间复杂度：平均O(n2)，最 …</p>
-          <a href="https://www.zengxi.net/2018/07/insertion-sort/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -521,6 +519,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/12/jvm-args/" class="nav-link">JVM 参数项区别：-D、-X、-XX</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/12/wecom-dev-tool/" class="nav-link">企业微信调试工具</a>
       </li>
       <li>
@@ -541,16 +542,13 @@
       <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/07/threadpool_oom/" class="nav-link">线程池原因导致java.lang.OutOfMemoryError</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">25</span>
+          <span class="button_tally">26</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
@@ -652,7 +650,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=25>JAVA<span class="button_tally">25</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=26>JAVA<span class="button_tally">26</span>
             </a>
             
             
@@ -971,7 +969,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/jvm/' class=" post_tag button button_translucent" data-position=1>JVM<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/jvm/' class=" post_tag button button_translucent" data-position=2>JVM<span class="button_tally">2</span>
             </a>
             
             

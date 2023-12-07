@@ -128,6 +128,36 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2023/12/jvm-args/">JVM 参数项区别：-D、-X、-XX</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 7, 2023</span>
+    <a href='https://www.zengxi.net/tags/jvm' class="post_tag button button_translucent">jvm
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">JVM 包含多种不同类型的参数选项：
+ -D 用来设置系统属性，属于标准选项 -X 设置非标准选项，支持的选项范围跟具体的 JVM 实现有关 -XX 设置高级选项，允许开发者调整 JVM 的行为、性能、输出调试信息，支持的选项范围也跟具体的 JVM 实现有关  标准选项（standard options）-D 标准选项是所有 JVM 实现都会支持。在控制台输入 java 这个命令，除了能看到 java 命令的使用手册，还能看到机器上默认的 JVM 所支持的所有标准选项。
+Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，这个不是环境变量。
+可以在命令行中带入参数:
+1-Dfoo=bar1 也可以在java代码中，设置 …</p>
+          <a href="https://www.zengxi.net/2023/12/jvm-args/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/">Spring Boot 自动设置响应头引发的问题</a>
       </h3>
       <div class="post_meta">
@@ -411,36 +441,6 @@ Lock是一个接口，核心方法 …</p>
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/06/java8_unsigned_arithmetic/">Java 8新特性 - (12)无符号运算</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 8, 2021</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">Java 8为整型包装类，增加类支持无符号运算的方法。注意：仅仅是在新增的运算方法中将long或者int当做无符号的数做运算，而本身java并不支持无符号的数据类型
-Java 8为Integer，Long新增如下方法:
-1// 该方法将指定int货long型整数转换为无符号整数对应的字符串 2static String toUnsignedString(int/long i) 3 4// 该方法将指定int或long型整数转换为指定进制的无符号整数对应的字符串 5static String toUnsignedString(int i/long,int radix) 6 7// 该方法将指定字符串解析成无符号整数。当调用类 …</p>
-          <a href="https://www.zengxi.net/2021/06/java8_unsigned_arithmetic/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item disabled">
@@ -504,6 +504,9 @@ Java 8为Integer，Long新增如下方法:
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/12/jvm-args/" class="nav-link">JVM 参数项区别：-D、-X、-XX</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/12/wecom-dev-tool/" class="nav-link">企业微信调试工具</a>
       </li>
       <li>
@@ -524,16 +527,13 @@ Java 8为Integer，Long新增如下方法:
       <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/07/threadpool_oom/" class="nav-link">线程池原因导致java.lang.OutOfMemoryError</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
       <nav class="tags_nav">
         <a href='https://www.zengxi.net/categories/java/' class="post_tag button button_translucent">
           JAVA
-          <span class="button_tally">25</span>
+          <span class="button_tally">26</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/kubernetes/' class="post_tag button button_translucent">
@@ -635,7 +635,7 @@ Java 8为Integer，Long新增如下方法:
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=25>JAVA<span class="button_tally">25</span>
+            <a href='https://www.zengxi.net/categories/java/' class=" post_tag button button_translucent" data-position=26>JAVA<span class="button_tally">26</span>
             </a>
             
             
@@ -954,7 +954,7 @@ Java 8为Integer，Long新增如下方法:
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/jvm/' class=" post_tag button button_translucent" data-position=1>JVM<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/jvm/' class=" post_tag button button_translucent" data-position=2>JVM<span class="button_tally">2</span>
             </a>
             
             

@@ -1,8 +1,8 @@
 
 <!DOCTYPE html>
-<html lang="zh-cn" data-figures="">
+<html lang="zh-cn" data-figures="" class="page">
   <head>
-<title>session | 保罗札记</title>
+<title>JVM 参数项区别：-D、-X、-XX | 保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,13 +19,15 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="">
+<meta name="description" content="JVM 包含多种不同类型的参数选项：
+ -D 用来设置系统属性，属于标准选项 -X 设置非标准选项，支持的选项范围跟具体的 JVM 实现有关 -XX 设置高级选项，允许开发者调整 JVM 的行为、性能、输出调试信息，支持的选项范围也跟具体的 JVM 实现有关  标准选项（standard options）-D 标准选项 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="session" />
-<meta property="og:url" content="https://www.zengxi.net/tags/session/" />
-<meta property="og:title" content="session" />
-<meta property="og:description" content="" />
+<meta name="twitter:title" content="JVM 参数项区别：-D、-X、-XX" />
+<meta property="og:url" content="https://www.zengxi.net/2023/12/jvm-args/" />
+<meta property="og:title" content="JVM 参数项区别：-D、-X、-XX" />
+<meta property="og:description" content="JVM 包含多种不同类型的参数选项：
+ -D 用来设置系统属性，属于标准选项 -X 设置非标准选项，支持的选项范围跟具体的 JVM 实现有关 -XX 设置高级选项，允许开发者调整 JVM 的行为、性能、输出调试信息，支持的选项范围也跟具体的 JVM 实现有关  标准选项（standard options）-D 标准选项 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -34,7 +36,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://www.zengxi.net/tags/session/">
+<link rel="canonical" href="https://www.zengxi.net/2023/12/jvm-args/">
 
     
 
@@ -121,130 +123,88 @@
 </header>
 
     <main>
-
+  
 <div class="grid-inverse wrap content">
-  <ul class="posts" id="posts">
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/03/cxf_ws_log/">CXF记录WebService的soap日志</a>
-      </h3>
-      <div class="post_meta">
+  <article class="post_content">
+    <h1 class="post_title">JVM 参数项区别：-D、-X、-XX</h1><div class="post_meta">
   <svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg>
   <span class="post_date">
-    Mar 29, 2021</span>
-    <a href='https://www.zengxi.net/tags/jetty' class="post_tag button button_translucent">jetty
-    </a>
-    <a href='https://www.zengxi.net/tags/session' class="post_tag button button_translucent">session
+    Dec 7, 2023</span>
+    <a href='https://www.zengxi.net/tags/jvm' class="post_tag button button_translucent">jvm
     </a>
 </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">cxf本身就支持日志功能，能打印传入传出的soap报文，但是需要配置一下。
-这里配置的是cxf结合spring做的WebService，配置步骤如下：
- 在spring配置文件中的jaxws:endpoint节点下配置日志拦截器  1&lt;import resource=&#34;classpath:META-INF/cxf/cxf.xml&#34; /&gt; 2&lt;import resource=&#34;classpath:META-INF/cxf/cxf-extension-soap.xml&#34; /&gt; 3&lt;import …</p>
-          <a href="https://www.zengxi.net/2021/03/cxf_ws_log/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/">设置周日为一个星期的第一天</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+    
+<div class="post_share">
+  分享到:
+  <a href="https://twitter.com/intent/tweet?text=JVM%20%e5%8f%82%e6%95%b0%e9%a1%b9%e5%8c%ba%e5%88%ab%ef%bc%9a-D%e3%80%81-X%e3%80%81-XX&url=https%3a%2f%2fwww.zengxi.net%2f2023%2f12%2fjvm-args%2f&tw_p=tweetbutton" class="twitter" title="分享到 Twitter" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#twitter"></use>
 </svg>
-  <span class="post_date">
-    Mar 29, 2021</span>
-    <a href='https://www.zengxi.net/tags/jetty' class="post_tag button button_translucent">jetty
-    </a>
-    <a href='https://www.zengxi.net/tags/session' class="post_tag button button_translucent">session
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">用 “locale”命令检查当前的区域，例如我的机器运行结果是：
-1ls@ls-laptop:~$ locale 2 3LANG=zh_CN.UTF-8 4LANGUAGE=zh_CN.UTF-8 5LC_CTYPE=&#34;zh_CN.UTF-8&#34; 6LC_NUMERIC=&#34;zh_CN.UTF-8&#34; 7LC_TIME=&#34;zh_CN.UTF-8&#34; 8LC_COLLATE=&#34;zh_CN.UTF-8&#34; 9LC_MONETARY=&#34;zh_CN.UTF-8&#34; 10LC_MESSAGES=&#34;zh_CN.UTF-8&#34; …</p>
-          <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/03/jetty_session_remove_node_name/">删除Jetty中session ID的node名称</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+  </a>
+  <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.zengxi.net%2f2023%2f12%2fjvm-args%2f&t=JVM%20%e5%8f%82%e6%95%b0%e9%a1%b9%e5%8c%ba%e5%88%ab%ef%bc%9a-D%e3%80%81-X%e3%80%81-XX" class="facebook" title="分享到 Facebook" target="_blank" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#facebook"></use>
 </svg>
-  <span class="post_date">
-    Mar 29, 2021</span>
-    <a href='https://www.zengxi.net/tags/jetty' class="post_tag button button_translucent">jetty
-    </a>
-    <a href='https://www.zengxi.net/tags/session' class="post_tag button button_translucent">session
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">jetty 9.4 版本对session id的生成做了升级. 他会自动在session id后面加个节点的名字(workName配置项). jetty 9.3 以及之前的版本没有这个问题.
-可以通过修改配置文件来去除session id后缀:
-1# 执行下面命令来启用sessions模块，这样就会在start.d目录下面自动生成sessions.ini配置文件 2java -jar &#34;/usr/local/jetty/start.jar&#34; --add-to-startd=sessions 3 4# 修改sessions.ini配置， …</p>
-          <a href="https://www.zengxi.net/2021/03/jetty_session_remove_node_name/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/01/manage-distribution-session-by-id/">根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
+  </a>
+  <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="分享到 LinkedIn" rel="nofollow">
+    <svg class="icon">
+  <use xlink:href="#linkedin"></use>
 </svg>
-  <span class="post_date">
-    Jan 26, 2020</span>
-    <a href='https://www.zengxi.net/tags/session' class="post_tag button button_translucent">session
-    </a>
-    <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F' class="post_tag button button_translucent">分布式
-    </a>
+  </a>
+  <a href="https://www.zengxi.net/2023/12/jvm-args/" title="Copy Link" class="link link_yank">
+    <svg class="icon">
+  <use xlink:href="#copy"></use>
+</svg>
+  </a>
 </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">背景 由于历史原因，原先的界面是用vaadin框架来实现。但是这个框架不适合互联网的分布式系统，正在逐步用目前主流的前端框架重写各个模块，把旧的vaadin页面替换掉。在替换过程中，新老界面并存。
-vaadin界面的servlet，每次都会判断请求中的session id值，如果在服务器中找不到对应这个id的session，就会重新生成一个。由于session id是在新界面登录的时候生成的，当点击链接从新界面跳转到vaadin界面的时候，vaadin服务会发现没有这个session id，就会重新生成一个新的session。换句话说，新老界面会有各自的session id。当然，分布式系统本来就有这个问题，可以采用分布 …</p>
-          <a href="https://www.zengxi.net/2020/01/manage-distribution-session-by-id/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
+    
+    <p>JVM 包含多种不同类型的参数选项：</p>
+<ul>
+<li>-D 用来设置系统属性，属于标准选项</li>
+<li>-X 设置非标准选项，支持的选项范围跟具体的 JVM 实现有关</li>
+<li>-XX 设置高级选项，允许开发者调整 JVM 的行为、性能、输出调试信息，支持的选项范围也跟具体的 JVM 实现有关</li>
+</ul>
+<h2 id="标准选项standard-options-d">标准选项（standard options）-D</h2>
+<p>标准选项是所有 JVM 实现都会支持。在控制台输入 <code>java</code> 这个命令，除了能看到 java 命令的使用手册，还能看到机器上默认的 JVM 所支持的所有标准选项。</p>
+<p>Java 允许我们以 -D<name>=<value> 这种键值对的形式设置系统属性。注意，这个不是环境变量。</p>
+<p>可以在命令行中带入参数:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>-Dfoo=bar1
+</code></pre></div><p>也可以在java代码中，设置或者读取值</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// 设置值
+</span><span class="ln">2</span><span class="c1"></span><span class="n">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&#34;foo&#34;</span><span class="o">);</span>
+<span class="ln">3</span>
+<span class="ln">4</span><span class="c1">// 读取值
+</span><span class="ln">5</span><span class="c1"></span><span class="n">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">&#34;foo&#34;</span><span class="o">,</span> <span class="s">&#34;bar2&#34;</span><span class="o">);</span>
+</code></pre></div><h2 id="非标准选项non-standard-options或者-extra-options--x">非标准选项（non-standard options，或者 extra-options） -X</h2>
+<p>和标准选项类似，可以直接通过 <code>java -X</code> 命令获取 JVM 支持的所有非标准选项。比如下面两个最常见的选项：-Xms<size> 和 -Xmx<size></p>
+<p>非标准选项的支持是与 JVM 的具体实现紧密相关的，并且它们在不同的版本可能会发生改变。</p>
+<h2 id="高级选项advanced-options-xx">高级选项（advanced options）-XX</h2>
+<p>高级选项以 -XX 开头，这些选项一般用于开发者调整 JVM 的行为、性能或输出调试信息等。</p>
+<p>根据参数值类型的不同，高级选项又可以分为两类：布尔类型的选项和带参数的选项。</p>
+<h3 id="1-布尔选项">(1) 布尔选项</h3>
+<p>布尔类型的选项不带参数，只是一个开关。开关是不需要参数的，可以通过 <code>+</code> 启用某个功能（-XX:+Option），而通过 <code>-</code> 禁用某个功能（-XX:-Option）。</p>
+<p>例如，在 HotSpot JVM 中，通过 <code>-XX:+Inline</code> 启用方法内联。不过 HotSpot 为了提高性能，默认是开启了方法内联的，所以可以通过 <code>-XX:-Inline</code> 关闭方法内联。</p>
+<h3 id="2-带参选项">(2) 带参选项</h3>
+<p>还有一类高级选项是需要设置相应的参数值的，形式一般为：-XX:OptionName=OptionValue。</p>
+<p>下面是一些例子：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>-XX:ErrorFile=file.log 告诉 JVM：当不可恢复的错误发生时，将错误信息写入 file.log 这个文件。
+<span class="ln">2</span>-XX:TreadStackSize=256k 将线程栈的大小设置为 256k。
+<span class="ln">3</span>-XX:MaxHeapSize=1g 将堆的最大大小限制为 1GB，等价于 -Xmx1g
+</code></pre></div><p>使用 <code>java -XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:+PrintFlagsFinal -version</code> 命令可以查看 JVM 所有的选项</p>
+<hr>
+<p>参考：</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/638545993">https://zhuanlan.zhihu.com/p/638545993</a></li>
+</ul>
 
-    <li>
-    </li>
-  </ul>
+    
+      
+    
+  </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <h2>Paul Zeng</h2>
@@ -282,9 +242,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://www.zengxi.net/2023/12/jvm-args/" class="nav-link">JVM 参数项区别：-D、-X、-XX</a>
-      </li>
-      <li>
         <a href="https://www.zengxi.net/2023/12/wecom-dev-tool/" class="nav-link">企业微信调试工具</a>
       </li>
       <li>
@@ -304,6 +261,9 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2021/07/threadpool_oom/" class="nav-link">线程池原因导致java.lang.OutOfMemoryError</a>
       </li>
     </ul>
     <div>
@@ -1056,8 +1016,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
 </aside>
 
 </div>
-
-
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>

@@ -6,7 +6,25 @@
     <description>Recent content in Posts on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 07 Dec 2023 19:45:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Dec 2023 20:45:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JVM 参数项区别：-D、-X、-XX</title>
+      <link>https://www.zengxi.net/2023/12/jvm-args/</link>
+      <pubDate>Thu, 07 Dec 2023 20:45:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2023/12/jvm-args/</guid>
+      <description>JVM 包含多种不同类型的参数选项：
+ -D 用来设置系统属性，属于标准选项 -X 设置非标准选项，支持的选项范围跟具体的 JVM 实现有关 -XX 设置高级选项，允许开发者调整 JVM 的行为、性能、输出调试信息，支持的选项范围也跟具体的 JVM 实现有关  标准选项（standard options）-D 标准选项是所有 JVM 实现都会支持。在控制台输入 java 这个命令，除了能看到 java 命令的使用手册，还能看到机器上默认的 JVM 所支持的所有标准选项。
+Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，这个不是环境变量。
+可以在命令行中带入参数:
+1-Dfoo=bar1 也可以在java代码中，设置或者读取值
+1// 设置值 2System.getProperty(&amp;#34;foo&amp;#34;); 3 4// 读取值 5System.setProperty(&amp;#34;foo&amp;#34;, &amp;#34;bar2&amp;#34;); 非标准选项（non-standard options，或者 extra-options） -X 和标准选项类似，可以直接通过 java -X 命令获取 JVM 支持的所有非标准选项。比如下面两个最常见的选项：-Xms 和 -Xmx
+非标准选项的支持是与 JVM 的具体实现紧密相关的，并且它们在不同的版本可能会发生改变。
+高级选项（advanced options）-XX 高级选项以 -XX 开头，这些选项一般用于开发者调整 JVM 的行为、性能或输出调试信息等。
+根据参数值类型的不同，高级选项又可以分为两类：布尔类型的选项和带参数的选项。
+(1) 布尔选项 布尔类型的选项不带参数，只是一个开关。开关是不需要参数的，可以通过 + 启用某个功能（-XX:+Option），而通过 - 禁用某个功能（-XX:-Option）。</description>
+    </item>
+    
     <item>
       <title>企业微信调试工具</title>
       <link>https://www.zengxi.net/2023/12/wecom-dev-tool/</link>
