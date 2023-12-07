@@ -6,7 +6,34 @@
     <description>Recent content in Categories on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 08 May 2023 20:19:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Dec 2023 19:45:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>前端</title>
+      <link>https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/</link>
+      <pubDate>Thu, 07 Dec 2023 19:45:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://www.zengxi.net/categories/java/</link>
+      <pubDate>Wed, 29 Nov 2023 21:01:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/categories/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>运维</title>
+      <link>https://www.zengxi.net/categories/%E8%BF%90%E7%BB%B4/</link>
+      <pubDate>Thu, 09 Nov 2023 21:01:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/categories/%E8%BF%90%E7%BB%B4/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>GPT</title>
       <link>https://www.zengxi.net/categories/gpt/</link>
@@ -17,11 +44,11 @@
     </item>
     
     <item>
-      <title>鼠标</title>
-      <link>https://www.zengxi.net/categories/%E9%BC%A0%E6%A0%87/</link>
+      <title>硬件</title>
+      <link>https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/</link>
       <pubDate>Sun, 07 May 2023 11:19:00 +0800</pubDate>
       
-      <guid>https://www.zengxi.net/categories/%E9%BC%A0%E6%A0%87/</guid>
+      <guid>https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/</guid>
       <description></description>
     </item>
     
@@ -58,15 +85,6 @@
       <pubDate>Fri, 02 Jul 2021 09:46:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/categories/manjaro/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>https://www.zengxi.net/categories/java/</link>
-      <pubDate>Thu, 24 Jun 2021 13:38:00 +0800</pubDate>
-      
-      <guid>https://www.zengxi.net/categories/java/</guid>
       <description></description>
     </item>
     

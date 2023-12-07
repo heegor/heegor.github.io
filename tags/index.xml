@@ -6,13 +6,31 @@
     <description>Recent content in Tags on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 29 Nov 2023 21:01:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Dec 2023 19:45:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>SpringBoot</title>
-      <link>https://www.zengxi.net/tags/springboot/</link>
+      <title>企业微信</title>
+      <link>https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/</link>
+      <pubDate>Thu, 07 Dec 2023 19:45:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>调试</title>
+      <link>https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/</link>
+      <pubDate>Thu, 07 Dec 2023 19:45:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring Boot</title>
+      <link>https://www.zengxi.net/tags/spring-boot/</link>
       <pubDate>Wed, 29 Nov 2023 21:01:00 +0800</pubDate>
       
-      <guid>https://www.zengxi.net/tags/springboot/</guid>
+      <guid>https://www.zengxi.net/tags/spring-boot/</guid>
       <description></description>
     </item>
     
@@ -58,6 +76,15 @@
       <pubDate>Sun, 07 May 2023 11:19:00 +0800</pubDate>
       
       <guid>https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>维修</title>
+      <link>https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/</link>
+      <pubDate>Sun, 07 May 2023 11:19:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/</guid>
       <description></description>
     </item>
     

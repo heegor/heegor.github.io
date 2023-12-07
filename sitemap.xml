@@ -3,18 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.zengxi.net/</loc>
-    <lastmod>2023-11-29T21:01:00+08:00</lastmod>
+    <lastmod>2023-12-07T19:45:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/categories/</loc>
+    <lastmod>2023-12-07T19:45:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/posts/</loc>
+    <lastmod>2023-12-07T19:45:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/</loc>
+    <lastmod>2023-12-07T19:45:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/</loc>
+    <lastmod>2023-12-07T19:45:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/2023/12/wecom-dev-tool/</loc>
+    <lastmod>2023-12-07T19:45:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/</loc>
+    <lastmod>2023-12-07T19:45:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/</loc>
+    <lastmod>2023-12-07T19:45:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/categories/java/</loc>
+    <lastmod>2023-11-29T21:01:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/spring-boot/</loc>
     <lastmod>2023-11-29T21:01:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/</loc>
-    <lastmod>2023-11-29T21:01:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/tags/springboot/</loc>
-    <lastmod>2023-11-29T21:01:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/tags/</loc>
     <lastmod>2023-11-29T21:01:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2023/11/on-premise-vs-private-cloud/</loc>
@@ -26,10 +44,10 @@
     <loc>https://www.zengxi.net/tags/%E7%A7%81%E6%9C%89%E4%BA%91/</loc>
     <lastmod>2023-11-09T21:01:00+08:00</lastmod>
   </url><url>
-    <loc>https://www.zengxi.net/tags/bing/</loc>
-    <lastmod>2023-05-08T20:19:00+08:00</lastmod>
+    <loc>https://www.zengxi.net/categories/%E8%BF%90%E7%BB%B4/</loc>
+    <lastmod>2023-11-09T21:01:00+08:00</lastmod>
   </url><url>
-    <loc>https://www.zengxi.net/categories/</loc>
+    <loc>https://www.zengxi.net/tags/bing/</loc>
     <lastmod>2023-05-08T20:19:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/categories/gpt/</loc>
@@ -44,10 +62,13 @@
     <loc>https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/</loc>
     <lastmod>2023-05-07T11:19:00+08:00</lastmod>
   </url><url>
-    <loc>https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/</loc>
+    <loc>https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/</loc>
     <lastmod>2023-05-07T11:19:00+08:00</lastmod>
   </url><url>
-    <loc>https://www.zengxi.net/categories/%E9%BC%A0%E6%A0%87/</loc>
+    <loc>https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/</loc>
+    <lastmod>2023-05-07T11:19:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/</loc>
     <lastmod>2023-05-07T11:19:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/2023/05/mouse_wheel_issue/</loc>
@@ -103,9 +124,6 @@
   </url><url>
     <loc>https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/</loc>
     <lastmod>2021-07-02T09:46:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.zengxi.net/categories/java/</loc>
-    <lastmod>2021-06-24T13:38:00+08:00</lastmod>
   </url><url>
     <loc>https://www.zengxi.net/tags/java-9/</loc>
     <lastmod>2021-06-24T13:38:00+08:00</lastmod>
