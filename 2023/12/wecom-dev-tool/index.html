@@ -19,13 +19,15 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="请参考企业微信开发者中心的文档：常见问题#客户端调试">
+<meta name="description" content="请参考企业微信开发者中心的文档：常见问题#客户端调试
+这个工具目前有个局限性，它只适用于企业微信浏览器加载完页面之后，才能可以介入排查问题，因为在此之前无法打开企微浏览器的开发者工具。如果要测试企微单点登录的问题，还是要借助于 fiddler 等抓包工具。">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="企业微信调试工具" />
 <meta property="og:url" content="https://www.zengxi.net/2023/12/wecom-dev-tool/" />
 <meta property="og:title" content="企业微信调试工具" />
-<meta property="og:description" content="请参考企业微信开发者中心的文档：常见问题#客户端调试" />
+<meta property="og:description" content="请参考企业微信开发者中心的文档：常见问题#客户端调试
+这个工具目前有个局限性，它只适用于企业微信浏览器加载完页面之后，才能可以介入排查问题，因为在此之前无法打开企微浏览器的开发者工具。如果要测试企微单点登录的问题，还是要借助于 fiddler 等抓包工具。" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -40,12 +42,12 @@
 
     
     
-    <link rel="preload" href="https://www.zengxi.net/css/styles.17bd8db1e1e9d3fde7e52431779c901a12c654a66914bb4472fd4b0c6880c72ea87f9dc818f7ca35bf2e934c65a6a7d6c7afa12a18e60a79ff4e093e3ac621ba.css" integrity = "sha512-F72NseHp0/3n5SQxd5yQGhLGVKZpFLtEcv1LDGiAxy6of53IGPfKNb8uk0xlpqfWx6&#43;hKhjmCnn/Tgk&#43;OsYhug==" as="style" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
     <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
     "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
 
     
-    <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.17bd8db1e1e9d3fde7e52431779c901a12c654a66914bb4472fd4b0c6880c72ea87f9dc818f7ca35bf2e934c65a6a7d6c7afa12a18e60a79ff4e093e3ac621ba.css" integrity="sha512-F72NseHp0/3n5SQxd5yQGhLGVKZpFLtEcv1LDGiAxy6of53IGPfKNb8uk0xlpqfWx6&#43;hKhjmCnn/Tgk&#43;OsYhug==" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
     
   </head>
   
@@ -134,6 +136,10 @@
     </a>
     <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95' class="post_tag button button_translucent">调试
     </a>
+    <a href='https://www.zengxi.net/tags/fiddler' class="post_tag button button_translucent">fiddler
+    </a>
+    <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85' class="post_tag button button_translucent">抓包
+    </a>
 </div>
 
     
@@ -163,6 +169,7 @@
 
     
     <p>请参考企业微信开发者中心的文档：<a href="https://developer.work.weixin.qq.com/document/path/90315#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B0%83%E8%AF%95">常见问题#客户端调试</a></p>
+<p>这个工具目前有个局限性，它只适用于企业微信浏览器加载完页面之后，才能可以介入排查问题，因为在此之前无法打开企微浏览器的开发者工具。如果要测试企微单点登录的问题，还是要借助于 fiddler 等抓包工具。</p>
 
     
       
@@ -205,6 +212,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/12/docker-mount-file-not-sync/" class="nav-link">Docker挂载文件，宿主机修改后容器里文件没有同步更新</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/12/jvm-args/" class="nav-link">JVM 参数项区别：-D、-X、-XX</a>
       </li>
       <li>
@@ -224,9 +234,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/07/threadpool_oom/" class="nav-link">线程池原因导致java.lang.OutOfMemoryError</a>
       </li>
     </ul>
     <div>
@@ -264,7 +271,7 @@
         
         <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">4</span>
+          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/jetty/' class="post_tag button button_translucent">
@@ -316,7 +323,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=4>DOCKER<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=5>DOCKER<span class="button_tally">5</span>
             </a>
             
             
@@ -478,7 +485,7 @@
         
         <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">5</span>
+          <span class="button_tally">6</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/java-9/' class="post_tag button button_translucent">
@@ -579,7 +586,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=5>DOCKER<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=6>DOCKER<span class="button_tally">6</span>
             </a>
             
             
@@ -591,7 +598,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/fiddler/' class=" post_tag button button_translucent" data-position=1>FIDDLER<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/fiddler/' class=" post_tag button button_translucent" data-position=2>FIDDLER<span class="button_tally">2</span>
             </a>
             
             
@@ -884,6 +891,14 @@
             
             
             <a href='https://www.zengxi.net/tags/%E6%89%93%E5%8D%B0%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>打印机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%8C%82%E8%BD%BD/' class=" post_tag button button_translucent" data-position=1>挂载<span class="button_tally">1</span>
             </a>
             
             

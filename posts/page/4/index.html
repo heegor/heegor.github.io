@@ -40,12 +40,12 @@
 
     
     
-    <link rel="preload" href="https://www.zengxi.net/css/styles.17bd8db1e1e9d3fde7e52431779c901a12c654a66914bb4472fd4b0c6880c72ea87f9dc818f7ca35bf2e934c65a6a7d6c7afa12a18e60a79ff4e093e3ac621ba.css" integrity = "sha512-F72NseHp0/3n5SQxd5yQGhLGVKZpFLtEcv1LDGiAxy6of53IGPfKNb8uk0xlpqfWx6&#43;hKhjmCnn/Tgk&#43;OsYhug==" as="style" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
     <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
     "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
 
     
-    <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.17bd8db1e1e9d3fde7e52431779c901a12c654a66914bb4472fd4b0c6880c72ea87f9dc818f7ca35bf2e934c65a6a7d6c7afa12a18e60a79ff4e093e3ac621ba.css" integrity="sha512-F72NseHp0/3n5SQxd5yQGhLGVKZpFLtEcv1LDGiAxy6of53IGPfKNb8uk0xlpqfWx6&#43;hKhjmCnn/Tgk&#43;OsYhug==" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
     
   </head>
   
@@ -124,6 +124,36 @@
 
 <div class="grid-inverse wrap content">
   <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/">Java 8新特性 - (5)重复注解</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    May 27, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在JDK8之前，不能使用重复注解的，即某个位置相同注解只能出现一次。
+如果想编写一个定时任务的注解，使用者可以配置在每天哪一小时触发，而且允许用户配置多个时间。传统做法是：
+1@Target(ElementType.TYPE) 2@Retention(RetentionPolicy.RUNTIME) 3public @interface TraditionalAnnoSchedule { 4 int[] hour() default {0}; 5} 6 7@TraditionalAnnoSchedule(hour = {0, 8, 12}) 8public class Target { 9 public static void …</p>
+          <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
       <li class="post_item">
   <div class="excerpt">
     <div class="excerpt_header">
@@ -395,37 +425,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/03/java8_stream_api/">Java 8新特性 - (2)Stream API</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Mar 5, 2021</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">什么是Stream API Stream API让开发者能够以一种声明的方式处理数据源（集合、数组等），它专注于对数据源进行各种高效的聚合操作（aggregate operation）和大批量数据操作 (bulk data operation)。
-Stream API将处理的数据源看做一种Stream（流），Stream（流）在Pipeline（管道）中传输和运算，支持的运算包含筛选、排序、聚合等，当到达终点后便得到最终的处理结果。如果说集合讲的的数据，那么流讲的就是计算！
-几个关键概念：
- 元素: Stream是一个来自数据源的元素队列，Stream本身并不存储元素。 数据源: 即Stream的来源, 包含集合、数组、I/O …</p>
-          <a href="https://www.zengxi.net/2021/03/java8_stream_api/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -495,6 +494,9 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/12/docker-mount-file-not-sync/" class="nav-link">Docker挂载文件，宿主机修改后容器里文件没有同步更新</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/12/jvm-args/" class="nav-link">JVM 参数项区别：-D、-X、-XX</a>
       </li>
       <li>
@@ -514,9 +516,6 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
     </ul>
     <div>
@@ -554,7 +553,7 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
         
         <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">4</span>
+          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/jetty/' class="post_tag button button_translucent">
@@ -606,7 +605,7 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=4>DOCKER<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=5>DOCKER<span class="button_tally">5</span>
             </a>
             
             
@@ -768,7 +767,7 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
         
         <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">5</span>
+          <span class="button_tally">6</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/java-9/' class="post_tag button button_translucent">
@@ -869,7 +868,7 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=5>DOCKER<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=6>DOCKER<span class="button_tally">6</span>
             </a>
             
             
@@ -881,7 +880,7 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/fiddler/' class=" post_tag button button_translucent" data-position=1>FIDDLER<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/fiddler/' class=" post_tag button button_translucent" data-position=2>FIDDLER<span class="button_tally">2</span>
             </a>
             
             
@@ -1174,6 +1173,14 @@ Stream API将处理的数据源看做一种Stream（流），Stream（流）在P
             
             
             <a href='https://www.zengxi.net/tags/%E6%89%93%E5%8D%B0%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>打印机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%8C%82%E8%BD%BD/' class=" post_tag button button_translucent" data-position=1>挂载<span class="button_tally">1</span>
             </a>
             
             

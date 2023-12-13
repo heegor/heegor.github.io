@@ -40,12 +40,12 @@
 
     
     
-    <link rel="preload" href="https://www.zengxi.net/css/styles.17bd8db1e1e9d3fde7e52431779c901a12c654a66914bb4472fd4b0c6880c72ea87f9dc818f7ca35bf2e934c65a6a7d6c7afa12a18e60a79ff4e093e3ac621ba.css" integrity = "sha512-F72NseHp0/3n5SQxd5yQGhLGVKZpFLtEcv1LDGiAxy6of53IGPfKNb8uk0xlpqfWx6&#43;hKhjmCnn/Tgk&#43;OsYhug==" as="style" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
     <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
     "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
 
     
-    <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.17bd8db1e1e9d3fde7e52431779c901a12c654a66914bb4472fd4b0c6880c72ea87f9dc818f7ca35bf2e934c65a6a7d6c7afa12a18e60a79ff4e093e3ac621ba.css" integrity="sha512-F72NseHp0/3n5SQxd5yQGhLGVKZpFLtEcv1LDGiAxy6of53IGPfKNb8uk0xlpqfWx6&#43;hKhjmCnn/Tgk&#43;OsYhug==" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
     
   </head>
   
@@ -128,6 +128,35 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2023/12/docker-mount-file-not-sync/">Docker挂载文件，宿主机修改后容器里文件没有同步更新</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 13, 2023</span>
+    <a href='https://www.zengxi.net/tags/docker' class="post_tag button button_translucent">docker
+    </a>
+    <a href='https://www.zengxi.net/tags/%E6%8C%82%E8%BD%BD' class="post_tag button button_translucent">挂载
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">问题描述 使用 Docker 时，有时需要挂载一个宿主机目录或者文件。但是有时候发现通过 vi 或者 vim 修改完宿主机上的文件之后，容器中对应的文件并没有变化，看不到修改的内容。
+问题分析 Docker 中，mount volume 的原理是借用了 Linux Namespace 中的 Mount NameSpace 来隔离系统中不同进程的挂载点视图，实际文件是没有变化。比如，在container中，bash 实际就是一个运行在宿主机上的进程，被 Docker 用 Linux 分别隔离了 Mount Namespace、UTS Namespace、IPC Namespace、PID Namespace、Network …</p>
+          <a href="https://www.zengxi.net/2023/12/docker-mount-file-not-sync/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2023/12/jvm-args/">JVM 参数项区别：-D、-X、-XX</a>
       </h3>
       <div class="post_meta">
@@ -170,12 +199,17 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
     </a>
     <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95' class="post_tag button button_translucent">调试
     </a>
+    <a href='https://www.zengxi.net/tags/fiddler' class="post_tag button button_translucent">fiddler
+    </a>
+    <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85' class="post_tag button button_translucent">抓包
+    </a>
 </div>
 
     </div>
       <div class="excerpt_footer">
         <div>
-          <p class="pale">请参考企业微信开发者中心的文档：常见问题#客户端调试</p>
+          <p class="pale">请参考企业微信开发者中心的文档：常见问题#客户端调试
+这个工具目前有个局限性，它只适用于企业微信浏览器加载完页面之后，才能可以介入排查问题，因为在此之前无法打开企微浏览器的开发者工具。如果要测试企微单点登录的问题，还是要借助于 fiddler 等抓包工具。</p>
           <a href="https://www.zengxi.net/2023/12/wecom-dev-tool/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
@@ -400,34 +434,6 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/">Manjaro升级后打开坚果云界面显示空白</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 2, 2021</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">修改 /opt/nutstore/conf/nutstore.properties
-1# 将下面设置修改成false 2webui.enable=false 如果发现界面大小不能修改，则执行下面命令安装相关程序
-1yay -S gvfs libappindicator-gtk3 python-gobject </p>
-          <a href="https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item disabled">
@@ -497,6 +503,9 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/12/docker-mount-file-not-sync/" class="nav-link">Docker挂载文件，宿主机修改后容器里文件没有同步更新</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/12/jvm-args/" class="nav-link">JVM 参数项区别：-D、-X、-XX</a>
       </li>
       <li>
@@ -516,9 +525,6 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="nav-link">DBeaver自定义JDK路径</a>
       </li>
     </ul>
     <div>
@@ -556,7 +562,7 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
         
         <a href='https://www.zengxi.net/categories/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">4</span>
+          <span class="button_tally">5</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/jetty/' class="post_tag button button_translucent">
@@ -608,7 +614,7 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=4>DOCKER<span class="button_tally">4</span>
+            <a href='https://www.zengxi.net/categories/docker/' class=" post_tag button button_translucent" data-position=5>DOCKER<span class="button_tally">5</span>
             </a>
             
             
@@ -770,7 +776,7 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
         
         <a href='https://www.zengxi.net/tags/docker/' class="post_tag button button_translucent">
           DOCKER
-          <span class="button_tally">5</span>
+          <span class="button_tally">6</span>
         </a>
         
         <a href='https://www.zengxi.net/tags/java-9/' class="post_tag button button_translucent">
@@ -871,7 +877,7 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=5>DOCKER<span class="button_tally">5</span>
+            <a href='https://www.zengxi.net/tags/docker/' class=" post_tag button button_translucent" data-position=6>DOCKER<span class="button_tally">6</span>
             </a>
             
             
@@ -883,7 +889,7 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/fiddler/' class=" post_tag button button_translucent" data-position=1>FIDDLER<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/fiddler/' class=" post_tag button button_translucent" data-position=2>FIDDLER<span class="button_tally">2</span>
             </a>
             
             
@@ -1176,6 +1182,14 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             
             
             <a href='https://www.zengxi.net/tags/%E6%89%93%E5%8D%B0%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>打印机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%8C%82%E8%BD%BD/' class=" post_tag button button_translucent" data-position=1>挂载<span class="button_tally">1</span>
             </a>
             
             
