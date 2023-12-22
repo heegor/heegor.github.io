@@ -128,6 +128,36 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/05/java8_type_annotation/">Java 8新特性 - (6)类型注解</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    May 28, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">什么是类型注解 在java 8之前，注解只能是在声明的地方所使用，比如类，方法，属性；从java 8开始，注解可以应用在任何地方。但是需要注意的是，类型注解只是语法而不是语义，并不会影响java的编译时间，加载时间，以及运行时间，也就是说，编译成class文件的时候并不包含类型注解。换句话说，仅提供定义这些类型的注释的功能，然后由框架和工具开发者来实际上使用它们。
+主要的场景：
+ 创建类实例：  1new @Interned MyObject(); 类型定义：  1@NotNull String str1 = ... 2@Email String str2 = ... 类型转换：  1myString = (@NonNull …</p>
+          <a href="https://www.zengxi.net/2021/05/java8_type_annotation/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/05/java8_repeating_annotations/">Java 8新特性 - (5)重复注解</a>
       </h3>
       <div class="post_meta">
@@ -395,36 +425,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/">Manjaro升级后打印服务不可用</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Mar 16, 2021</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
-    </a>
-    <a href='https://www.zengxi.net/tags/%E6%89%93%E5%8D%B0%E6%9C%BA' class="post_tag button button_translucent">打印机
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">Manjaro升级到某个版本后，在系统设置中，查看打印机，显示“打印机服务不可用，错误的文件描述符“。
-其中一个原因是CUPS（Common UNIX Printing System）打印管理服务未启动。可以用下面的方法来解决：
-1# 启动服务，保证本次登录打印机可用 2sudo systemctl start cups.service 3 4# 设置开启启动 5sudo systemctl enable cups.service </p>
-          <a href="https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -452,7 +452,7 @@
         <a href="/posts/page/5/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="/posts/page/12/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/posts/page/13/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul>
     </li>
@@ -466,6 +466,9 @@
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">精选文章</h2>
     <ul>
+      <li>
+        <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
+      </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/aliyun_waf_sni/" class="nav-link">阿里云WAF与SNI问题</a>
       </li>
@@ -487,12 +490,12 @@
       <li>
         <a href="https://www.zengxi.net/2020/07/terraform_state_consistent/" class="nav-link">解决terraform与远程云服务器资源状态不一致的问题</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/" class="nav-link">Spring Quartz 指定Scheduler Name</a>
-      </li>
     </ul>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
+      <li>
+        <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
+      </li>
       <li>
         <a href="https://www.zengxi.net/2023/12/docker-mount-file-not-sync/" class="nav-link">Docker挂载文件，宿主机修改后容器里文件没有同步更新</a>
       </li>
@@ -513,9 +516,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/05/mouse_wheel_issue/" class="nav-link">鼠标滚轮上下乱跳</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
       </li>
     </ul>
     <div>
@@ -576,6 +576,11 @@
           <span class="button_tally">3</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/elastic-search/' class="post_tag button button_translucent">
+          ELASTIC-SEARCH
+          <span class="button_tally">2</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/nodejs/' class="post_tag button button_translucent">
           NODEJS
           <span class="button_tally">2</span>
@@ -583,11 +588,6 @@
         
         <a href='https://www.zengxi.net/categories/python/' class="post_tag button button_translucent">
           PYTHON
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/terraform/' class="post_tag button button_translucent">
-          TERRAFORM
           <span class="button_tally">2</span>
         </a>
         
@@ -609,7 +609,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/elastic-search/' class=" post_tag button button_translucent" data-position=1>ELASTIC-SEARCH<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/elastic-search/' class=" post_tag button button_translucent" data-position=2>ELASTIC-SEARCH<span class="button_tally">2</span>
             </a>
             
             
@@ -805,8 +805,8 @@
           <span class="button_tally">4</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/' class="post_tag button button_translucent">
-          算法
+        <a href='https://www.zengxi.net/tags/elastic-search/' class="post_tag button button_translucent">
+          ELASTIC-SEARCH
           <span class="button_tally">3</span>
         </a>
         
@@ -872,7 +872,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/elastic-search/' class=" post_tag button button_translucent" data-position=2>ELASTIC-SEARCH<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/tags/elastic-search/' class=" post_tag button button_translucent" data-position=3>ELASTIC-SEARCH<span class="button_tally">3</span>
             </a>
             
             

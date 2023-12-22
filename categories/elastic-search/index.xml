@@ -6,7 +6,26 @@
     <description>Recent content in elastic search on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 19 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/categories/elastic-search/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Dec 2023 21:01:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/elastic-search/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据查询ES设计演变</title>
+      <link>https://www.zengxi.net/2023/12/es-order-search-evolution/</link>
+      <pubDate>Fri, 22 Dec 2023 21:01:00 +0800</pubDate>
+      
+      <guid>https://www.zengxi.net/2023/12/es-order-search-evolution/</guid>
+      <description>这里总结一下过去曾参与的一个系统中，对于订单查询设计的演变过程
+第一阶段：仅数据库查询 这个是最初始的阶段，数据查询直接走数据库查询。这种方式会完全依赖于数据库的性能，随着数据越来越来，查询效率也会越来越低
+第二阶段：hibernate 拦截器检测数据变化并更新 ES 随着订单数据量的增多，原先直接查询数据库的方式已经无法满足对性能的要求。因此引入了 Elastic Search 来作为快速订单查询这个功能的支撑，同时增加了一个ES查询服务，用来对ES做读写操作。
+考虑到某些租户的数据量很小，直接查询数据库就满足业务上的客户端响应需求。因此，增加了一个租户级别上的配置，用来开启或者关闭 ES 查询。
+写 ES 由于这个系统使用的是 hibernate 来做数据的持久化，因此添加了一个 hibernate 拦截器，用来监听数据持久化的事件，根据不同的数据变更操作（新增、更新或删除），在 Elastic Search 中做不同的处理：
+ 如果是在数据库中新增一个订单， 则在 ES 中创建一个文档 如果是在数据库中更新一个订单， 则在 ES 中更新对应文档 如果是在数据库中删除一个订单， 则在 ES 中删除对应文档  如果租户没有开启 ES 查询，那么订单数据更新的时候，也不会写 ES 数据，这样就可以节省存储资源。
+读 ES 在读取订单数据的时候，会先判断某个租户是否开启了 ES 查询，如果未开启就查数据库，开启则通过 ES 查询服务来获取订单数据。
+存在的问题 利用 ES 查询，响应速度明显得到提升。但是在实际的运行过程中，发现了另外一个问题：应用如果重启（比如新迭代发布），有些在内存中未处理的数据就无法同步到 ES，这就导致 ES 中的数据没有及时更新。
+第三阶段：引入 Kafka 引入消息队列中间件可以解决上面的问题，将保证消息消费的任务交给中间件，而不需要在业务应用上实现这个功能。
+写 ES 与原先的方案相比，做了一些改动。hibernate 拦截器检测到订单数据变化后，将数据先写入到 Kafka，然后订单的 ES 查询服务去消费 kafka 的数据。
+写入到 kafka 的数据与原先也有些变化。原先的方案中，将变更的数据与操作类型都作为参数，ES 查询服务直接根据这些参数修改 ES 中的文档数据。新的方案中，kafka 中只放租户 ID 与订单 ID，通过这两个参数查询数据库来获取信息，如果数据库中没有数据，则表示订单被删除，就删除 ES 中的文档；如果数据库中有数据，则创建或者更新ES 文档。这么做的好处就是：</description>
+    </item>
+    
     <item>
       <title>Elastic Search vm.max_map_count too low 错误</title>
       <link>https://www.zengxi.net/2020/11/es_max_map_count_error/</link>

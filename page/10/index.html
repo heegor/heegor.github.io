@@ -132,6 +132,33 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/06/string_adapter/">用string adapter来解决系统接口对接中发现的空值验证问题</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 1, 2020</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">客户用的是很旧版本的ERP系统，在与客户系统做接口对接的时候发现了一个问题。假设接口请求需要的body是xml格式的，共有三个字段：name, mobile, email。由于客户ERP系统比较老，如果某个字段没有值，传的是空字符串，而不是将该字段在请求消息体中隐藏。客户发的请求类似下面的例子：
+1&lt;xml&gt; 2 &lt;name&gt;John&lt;/name&gt; 3 &lt;mobile&gt;13800138000&lt;/mobile&gt; 4 &lt;email&gt;&lt;/email&gt; 5&lt;/xml&gt; 由于历史遗留问题， …</p>
+          <a href="https://www.zengxi.net/2020/06/string_adapter/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/">Spring Quartz 指定Scheduler Name</a>
       </h3>
       <div class="post_meta">
@@ -395,34 +422,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/">Mac 检查附近wifi所使用的信道</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 24, 2020</span>
-    <a href='https://www.zengxi.net/tags/wifi' class="post_tag button button_translucent">wifi
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">信道，也称作通道或频段，是以无线信号作为传输载体的数据信号传送通道。2.4G频段的工作频率为2.4-2.4835GHz，这83.5MHz频带划分为13个信道，各信道中心频率相差5MHz，向上向下分别扩展11MHz，信道带宽22MHz。中国采用欧洲/ETSI标准，使用1-13信道。
-相近无线路由器采用相同或重叠信道会形成信道竞争关系，相互影响无线链路质量，为了有效避免信道重叠造成的相互干扰，相近无线路由器应选择互不重叠的信道工作。
-早期无线路由器出厂时预设相同的信道（大多为6），因用户很少会修改信道，从而导致相互影响的情况。随着无线应用的迅速普及，无线路由器增加了信道自动选择功能，在设备启动时检测周围无线信道分布情况，选择最佳信道工 …</p>
-          <a href="https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -450,7 +449,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         <a href="/page/11/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="/page/12/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/page/13/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul>
     </li>
@@ -464,6 +463,9 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">精选文章</h2>
     <ul>
+      <li>
+        <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
+      </li>
       <li>
         <a href="https://www.zengxi.net/2021/06/aliyun_waf_sni/" class="nav-link">阿里云WAF与SNI问题</a>
       </li>
@@ -485,12 +487,12 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       <li>
         <a href="https://www.zengxi.net/2020/07/terraform_state_consistent/" class="nav-link">解决terraform与远程云服务器资源状态不一致的问题</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/" class="nav-link">Spring Quartz 指定Scheduler Name</a>
-      </li>
     </ul>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
+      <li>
+        <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
+      </li>
       <li>
         <a href="https://www.zengxi.net/2023/12/docker-mount-file-not-sync/" class="nav-link">Docker挂载文件，宿主机修改后容器里文件没有同步更新</a>
       </li>
@@ -511,9 +513,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/05/mouse_wheel_issue/" class="nav-link">鼠标滚轮上下乱跳</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
       </li>
     </ul>
     <div>
@@ -574,6 +573,11 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <span class="button_tally">3</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/elastic-search/' class="post_tag button button_translucent">
+          ELASTIC-SEARCH
+          <span class="button_tally">2</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/nodejs/' class="post_tag button button_translucent">
           NODEJS
           <span class="button_tally">2</span>
@@ -581,11 +585,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
         
         <a href='https://www.zengxi.net/categories/python/' class="post_tag button button_translucent">
           PYTHON
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/terraform/' class="post_tag button button_translucent">
-          TERRAFORM
           <span class="button_tally">2</span>
         </a>
         
@@ -607,7 +606,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/elastic-search/' class=" post_tag button button_translucent" data-position=1>ELASTIC-SEARCH<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/elastic-search/' class=" post_tag button button_translucent" data-position=2>ELASTIC-SEARCH<span class="button_tally">2</span>
             </a>
             
             
@@ -803,8 +802,8 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
           <span class="button_tally">4</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/' class="post_tag button button_translucent">
-          算法
+        <a href='https://www.zengxi.net/tags/elastic-search/' class="post_tag button button_translucent">
+          ELASTIC-SEARCH
           <span class="button_tally">3</span>
         </a>
         
@@ -870,7 +869,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/elastic-search/' class=" post_tag button button_translucent" data-position=2>ELASTIC-SEARCH<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/tags/elastic-search/' class=" post_tag button button_translucent" data-position=3>ELASTIC-SEARCH<span class="button_tally">3</span>
             </a>
             
             

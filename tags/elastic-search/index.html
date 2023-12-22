@@ -128,6 +128,36 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/">数据查询ES设计演变</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 22, 2023</span>
+    <a href='https://www.zengxi.net/tags/elastic-search' class="post_tag button button_translucent">elastic search
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">这里总结一下过去曾参与的一个系统中，对于订单查询设计的演变过程
+第一阶段：仅数据库查询 这个是最初始的阶段，数据查询直接走数据库查询。这种方式会完全依赖于数据库的性能，随着数据越来越来，查询效率也会越来越低
+第二阶段：hibernate 拦截器检测数据变化并更新 ES 随着订单数据量的增多，原先直接查询数据库的方式已经无法满足对性能的要求。因此引入了 Elastic Search 来作为快速订单查询这个功能的支撑，同时增加了一个ES查询服务，用来对ES做读写操作。
+考虑到某些租户的数据量很小，直接查询数据库就满足业务上的客户端响应需求。因此，增加了一个租户级别上的配置，用来开启或者关闭 ES 查询。
+写 ES …</p>
+          <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/02/es_search_improvement/">订单ES查询性能优化</a>
       </h3>
       <div class="post_meta">
@@ -197,6 +227,9 @@
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
+        <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2021/06/aliyun_waf_sni/" class="nav-link">阿里云WAF与SNI问题</a>
       </li>
       <li>
@@ -217,12 +250,12 @@
       <li>
         <a href="https://www.zengxi.net/2020/07/terraform_state_consistent/" class="nav-link">解决terraform与远程云服务器资源状态不一致的问题</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/" class="nav-link">Spring Quartz 指定Scheduler Name</a>
-      </li>
     </ul>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
+      <li>
+        <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
+      </li>
       <li>
         <a href="https://www.zengxi.net/2023/12/docker-mount-file-not-sync/" class="nav-link">Docker挂载文件，宿主机修改后容器里文件没有同步更新</a>
       </li>
@@ -243,9 +276,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/05/mouse_wheel_issue/" class="nav-link">鼠标滚轮上下乱跳</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="nav-link">更换安卓智能车机</a>
       </li>
     </ul>
     <div>
@@ -306,6 +336,11 @@
           <span class="button_tally">3</span>
         </a>
         
+        <a href='https://www.zengxi.net/categories/elastic-search/' class="post_tag button button_translucent">
+          ELASTIC-SEARCH
+          <span class="button_tally">2</span>
+        </a>
+        
         <a href='https://www.zengxi.net/categories/nodejs/' class="post_tag button button_translucent">
           NODEJS
           <span class="button_tally">2</span>
@@ -313,11 +348,6 @@
         
         <a href='https://www.zengxi.net/categories/python/' class="post_tag button button_translucent">
           PYTHON
-          <span class="button_tally">2</span>
-        </a>
-        
-        <a href='https://www.zengxi.net/categories/terraform/' class="post_tag button button_translucent">
-          TERRAFORM
           <span class="button_tally">2</span>
         </a>
         
@@ -339,7 +369,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/elastic-search/' class=" post_tag button button_translucent" data-position=1>ELASTIC-SEARCH<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/elastic-search/' class=" post_tag button button_translucent" data-position=2>ELASTIC-SEARCH<span class="button_tally">2</span>
             </a>
             
             
@@ -535,8 +565,8 @@
           <span class="button_tally">4</span>
         </a>
         
-        <a href='https://www.zengxi.net/tags/%E7%AE%97%E6%B3%95/' class="post_tag button button_translucent">
-          算法
+        <a href='https://www.zengxi.net/tags/elastic-search/' class="post_tag button button_translucent">
+          ELASTIC-SEARCH
           <span class="button_tally">3</span>
         </a>
         
@@ -602,7 +632,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/elastic-search/' class=" post_tag button button_translucent" data-position=2>ELASTIC-SEARCH<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/tags/elastic-search/' class=" post_tag button button_translucent" data-position=3>ELASTIC-SEARCH<span class="button_tally">3</span>
             </a>
             
             
