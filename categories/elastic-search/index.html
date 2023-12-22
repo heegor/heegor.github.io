@@ -128,36 +128,6 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/">数据查询ES设计演变</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 22, 2023</span>
-    <a href='https://www.zengxi.net/tags/elastic-search' class="post_tag button button_translucent">elastic search
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">这里总结一下过去曾参与的一个系统中，对于订单查询设计的演变过程
-第一阶段：仅数据库查询 这个是最初始的阶段，数据查询直接走数据库查询。这种方式会完全依赖于数据库的性能，随着数据越来越来，查询效率也会越来越低
-第二阶段：hibernate 拦截器检测数据变化并更新 ES 随着订单数据量的增多，原先直接查询数据库的方式已经无法满足对性能的要求。因此引入了 Elastic Search 来作为快速订单查询这个功能的支撑，同时增加了一个ES查询服务，用来对ES做读写操作。
-考虑到某些租户的数据量很小，直接查询数据库就满足业务上的客户端响应需求。因此，增加了一个租户级别上的配置，用来开启或者关闭 ES 查询。
-写 ES …</p>
-          <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/11/es_max_map_count_error/">Elastic Search vm.max_map_count too low 错误</a>
       </h3>
       <div class="post_meta">
@@ -262,9 +232,9 @@
           <span class="button_tally">18</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class="post_tag button button_translucent">
-          系统优化那些事
-          <span class="button_tally">11</span>
+        <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class="post_tag button button_translucent">
+          系统设计与优化
+          <span class="button_tally">12</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -307,11 +277,6 @@
           <span class="button_tally">3</span>
         </a>
         
-        <a href='https://www.zengxi.net/categories/elastic-search/' class="post_tag button button_translucent">
-          ELASTIC-SEARCH
-          <span class="button_tally">2</span>
-        </a>
-        
         <a href='https://www.zengxi.net/categories/nodejs/' class="post_tag button button_translucent">
           NODEJS
           <span class="button_tally">2</span>
@@ -319,6 +284,11 @@
         
         <a href='https://www.zengxi.net/categories/python/' class="post_tag button button_translucent">
           PYTHON
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://www.zengxi.net/categories/terraform/' class="post_tag button button_translucent">
+          TERRAFORM
           <span class="button_tally">2</span>
         </a>
         
@@ -340,7 +310,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/elastic-search/' class=" post_tag button button_translucent" data-position=2>ELASTIC-SEARCH<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/categories/elastic-search/' class=" post_tag button button_translucent" data-position=1>ELASTIC-SEARCH<span class="button_tally">1</span>
             </a>
             
             
@@ -432,7 +402,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B/' class=" post_tag button button_translucent" data-position=11>系统优化那些事<span class="button_tally">11</span>
+            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=12>系统设计与优化<span class="button_tally">12</span>
             </a>
             
             
