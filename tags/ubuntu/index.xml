@@ -5,28 +5,23 @@
     <link>https://www.zengxi.net/tags/ubuntu/</link>
     <description>Recent content in ubuntu on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 27 Oct 2020 08:23:45 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Oct 2020 08:23:45 +0000</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ubuntu安装Postgres</title>
       <link>https://www.zengxi.net/2020/10/ubuntu_install_postgresql/</link>
       <pubDate>Tue, 27 Oct 2020 08:23:45 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/10/ubuntu_install_postgresql/</guid>
-      <description>ubuntu自带的软件仓库可能没有最新的postgres，这就需要自己手动添加安装源，再安装
-1# 添加安装源 2sudo sh -c &amp;#39;echo &amp;#34;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&amp;#34; &amp;gt; /etc/apt/sources.list.d/pgdg.list&amp;#39; 3 4# 导入key 5wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - 6 7# 更新软件列表 8sudo apt-get update 9 10# 查找相关的软件包 11sudo apt-cache search postgres 12 13# 安装 14sudo apt install &amp;lt;对应的软件名称&amp;gt;  参考：
- https://www.postgresql.org/download/linux/ubuntu/  </description>
+      <description>ubuntu自带的软件仓库可能没有最新的postgres，这就需要自己手动添加安装源，再安装&#xA;1# 添加安装源 2sudo sh -c &amp;#39;echo &amp;#34;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&amp;#34; &amp;gt; /etc/apt/sources.list.d/pgdg.list&amp;#39; 3 4# 导入key 5wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - 6 7# 更新软件列表 8sudo apt-get update 9 10# 查找相关的软件包 11sudo apt-cache search postgres 12 13# 安装 14sudo apt install &amp;lt;对应的软件名称&amp;gt; 参考：&#xA;https://www.postgresql.org/download/linux/ubuntu/ </description>
     </item>
-    
     <item>
       <title>Ubuntu 16.04系统自带截屏工具快捷键</title>
       <link>https://www.zengxi.net/2018/06/ubuntu-screenshot-shortcut/</link>
       <pubDate>Mon, 25 Jun 2018 03:34:29 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2018/06/ubuntu-screenshot-shortcut/</guid>
-      <description>Ubuntu 16.04系统自带了截屏工具，可以实现窗口截屏、区域截屏等。默认的快捷键是：
-1 Print 全屏截图 2 Ctrl + Print 全屏截图并保存到剪贴板 3 4 Alt + Print 窗口截图 5 Ctrl + Alt + Print 窗口截图并保存到剪贴板 6 7 Shift + Print 区域截图 8 Ctrl + Shift + Print 区域截图并保存到剪贴板 9 10 Ctrl + Shift + Alt + R 录制屏幕短视频 </description>
+      <description>Ubuntu 16.04系统自带了截屏工具，可以实现窗口截屏、区域截屏等。默认的快捷键是：&#xA;1 Print 全屏截图 2 Ctrl + Print 全屏截图并保存到剪贴板 3 4 Alt + Print 窗口截图 5 Ctrl + Alt + Print 窗口截图并保存到剪贴板 6 7 Shift + Print 区域截图 8 Ctrl + Shift + Print 区域截图并保存到剪贴板 9 10 Ctrl + Shift + Alt + R 录制屏幕短视频 </description>
     </item>
-    
   </channel>
 </rss>

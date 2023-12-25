@@ -5,17 +5,16 @@
     <link>https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/</link>
     <description>Recent content in 前端 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 07 Dec 2023 19:45:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Dec 2023 19:45:00 +0800</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>企业微信调试工具</title>
       <link>https://www.zengxi.net/2023/12/wecom-dev-tool/</link>
       <pubDate>Thu, 07 Dec 2023 19:45:00 +0800</pubDate>
-      
       <guid>https://www.zengxi.net/2023/12/wecom-dev-tool/</guid>
-      <description>请参考企业微信开发者中心的文档：常见问题#客户端调试
-这个工具目前有个局限性，它只适用于企业微信浏览器加载完页面之后，才能可以介入排查问题，因为在此之前无法打开企微浏览器的开发者工具。如果要测试企微单点登录的问题，还是要借助于 fiddler 等抓包工具。</description>
+      <description>请参考企业微信开发者中心的文档：常见问题#客户端调试&#xA;这个工具目前有个局限性，它只适用于企业微信浏览器加载完页面之后，才能可以介入排查问题，因为在此之前无法打开企微浏览器的开发者工具。如果要测试企微单点登录的问题，还是要借助于 fiddler 等抓包工具。</description>
     </item>
-    
   </channel>
 </rss>

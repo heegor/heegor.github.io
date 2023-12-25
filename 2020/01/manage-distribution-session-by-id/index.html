@@ -43,8 +43,8 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     
     
     <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
-    "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" as="script" integrity=
+    "sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous">
 
     
     <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
@@ -200,103 +200,102 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
                     |---------------------------------|
 </pre>
 <p>如下的代码是从 Tomcat 抽取出来的，展现了HttpServletRequesWrapper类是如何运行的。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HttpServletRequestWrapper</span> <span class="kd">extends</span> <span class="n">ServletRequestWrapper</span> 
-<span class="ln"> 2</span>    <span class="kd">implements</span> <span class="n">HttpServletRequest</span> <span class="o">{</span>
-<span class="ln"> 3</span>
-<span class="ln"> 4</span>    <span class="kd">public</span> <span class="nf">HttpServletRequestWrapper</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln"> 5</span>        <span class="kd">super</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
-<span class="ln"> 6</span>    <span class="o">}</span>
-<span class="ln"> 7</span>    
-<span class="ln"> 8</span>    <span class="kd">private</span> <span class="n">HttpServletRequest</span> <span class="nf">_getHttpServletRequest</span><span class="o">()</span> <span class="o">{</span>
-<span class="ln"> 9</span>        <span class="k">return</span> <span class="o">(</span><span class="n">HttpServletRequest</span><span class="o">)</span> <span class="kd">super</span><span class="o">.</span><span class="na">getRequest</span><span class="o">();</span>
-<span class="ln">10</span>    <span class="o">}</span>
-<span class="ln">11</span>  
-<span class="ln">12</span>    <span class="kd">public</span> <span class="n">HttpSession</span> <span class="nf">getSession</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">create</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">13</span>     <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">_getHttpServletRequest</span><span class="o">().</span><span class="na">getSession</span><span class="o">(</span><span class="n">create</span><span class="o">);</span>
-<span class="ln">14</span>    <span class="o">}</span>
-<span class="ln">15</span>   
-<span class="ln">16</span>    <span class="kd">public</span> <span class="n">HttpSession</span> <span class="nf">getSession</span><span class="o">()</span> <span class="o">{</span>
-<span class="ln">17</span>      <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">_getHttpServletRequest</span><span class="o">().</span><span class="na">getSession</span><span class="o">();</span>
-<span class="ln">18</span>    <span class="o">}</span>
-<span class="ln">19</span>  <span class="c1">// 为了保证可读性，其他的方法删减掉了  
-</span><span class="ln">20</span><span class="c1"></span><span class="o">}</span>
-</code></pre></div><p>我们所需要做的事情，就是重写getSession这个方法，获取Cookie中的JESSIONID，来获取或者新建session。这里由于vaadin框架里面的一些实现，把session所保存的状态放入外部存储不是一个合适的选择，所以就新建了个MySessionContext用于存放，当然还需要额外的代码来清除MySessionContext中过期的session信息。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyHttpServletRequestWrapper</span> <span class="kd">extends</span> <span class="n">HttpServletRequestWrapper</span> <span class="o">{</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span>
-<span class="ln"> 4</span>    <span class="kd">public</span> <span class="nf">MyHttpServletRequestWrapper</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln"> 5</span>        <span class="kd">super</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
-<span class="ln"> 6</span>    <span class="o">}</span>
-<span class="ln"> 7</span>
-<span class="ln"> 8</span>    <span class="nd">@Override</span>
-<span class="ln"> 9</span>    <span class="kd">public</span> <span class="n">HttpSession</span> <span class="nf">getSession</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">create</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">10</span>        <span class="o">...</span>
-<span class="ln">11</span>
-<span class="ln">12</span>        <span class="c1">// 获取请求中的session id，用于获取已有的session或者新建session
-</span><span class="ln">13</span><span class="c1"></span>        <span class="n">String</span> <span class="n">requestedSessionId</span> <span class="o">=</span> <span class="n">getRequestedSessionId</span><span class="o">();</span>
-<span class="ln">14</span>
-<span class="ln">15</span>        <span class="k">if</span><span class="o">(</span><span class="n">requestedSessionId</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">16</span>            <span class="c1">// 根据指定的session id，获取已有的session
-</span><span class="ln">17</span><span class="c1"></span>            <span class="n">HttpSession</span> <span class="n">session</span> <span class="o">=</span> <span class="n">MySessionContext</span><span class="o">.</span><span class="na">getSession</span><span class="o">(</span><span class="n">requestedSessionId</span><span class="o">);</span>
-<span class="ln">18</span>            <span class="k">if</span> <span class="o">(</span><span class="n">session</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">19</span>                <span class="k">return</span> <span class="n">session</span><span class="o">;</span>
-<span class="ln">20</span>            <span class="o">}</span>
-<span class="ln">21</span>        <span class="o">}</span>
-<span class="ln">22</span>
-<span class="ln">23</span>        <span class="k">if</span><span class="o">(!</span><span class="n">create</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">24</span>            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-<span class="ln">25</span>        <span class="o">}</span>
-<span class="ln">26</span>
-<span class="ln">27</span>        <span class="c1">// 新建session，用指定的session id作为key保存
-</span><span class="ln">28</span><span class="c1"></span>        <span class="k">return</span> <span class="n">MySessionContext</span><span class="o">.</span><span class="na">addSession</span><span class="o">(</span><span class="n">requestedSessionId</span><span class="o">,</span> <span class="n">createNewSession</span><span class="o">());</span>
-<span class="ln">29</span>    <span class="o">}</span>
-<span class="ln">30</span>
-<span class="ln">31</span>    <span class="nd">@Override</span>
-<span class="ln">32</span>    <span class="kd">public</span> <span class="n">HttpSession</span> <span class="nf">getSession</span><span class="o">()</span> <span class="o">{</span>
-<span class="ln">33</span>        <span class="k">return</span> <span class="n">getSession</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-<span class="ln">34</span>    <span class="o">}</span>
-<span class="ln">35</span>
-<span class="ln">36</span>    <span class="nd">@Override</span>
-<span class="ln">37</span>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getRequestedSessionId</span><span class="o">()</span> <span class="o">{</span>
-<span class="ln">38</span>        <span class="c1">// 读取Cookie中JSESSIONID的值，为了方便阅读，省略具体实现
-</span><span class="ln">39</span><span class="c1"></span>        <span class="o">...</span>
-<span class="ln">40</span>    <span class="o">}</span>
-<span class="ln">41</span>
-<span class="ln">42</span>    <span class="c1">// 新建session
-</span><span class="ln">43</span><span class="c1"></span>    <span class="kd">private</span> <span class="n">HttpSession</span> <span class="nf">createNewSession</span><span class="o">()</span> <span class="o">{</span>
-<span class="ln">44</span>        <span class="k">return</span> <span class="o">(</span><span class="n">HttpServletRequest</span><span class="o">)</span><span class="k">this</span><span class="o">.</span><span class="na">getRequest</span><span class="o">().</span><span class="na">getSession</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-<span class="ln">45</span>    <span class="o">}</span>
-<span class="ln">46</span><span class="o">}</span>
-</code></pre></div><p>通过filter来使用包装类</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyFilter</span> <span class="kd">implements</span> <span class="n">Filter</span> <span class="o">{</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span>    <span class="cm">/*
-</span><span class="ln"> 4</span><span class="cm">     * 这个方法创建了我们上文所述的封装请求对象, 然后调用其余的 filter 链。
-</span><span class="ln"> 5</span><span class="cm">     * 这里，当这个filter后面的应用代码执行时，如果要获得session的话，将
-</span><span class="ln"> 6</span><span class="cm">     * 会使用我们上面所写的方式来获得
-</span><span class="ln"> 7</span><span class="cm">     */</span>
-<span class="ln"> 8</span>    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doFilterInternal</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span>
-<span class="ln"> 9</span>            <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="n">FilterChain</span> <span class="n">filterChain</span><span class="o">)</span> 
-<span class="ln">10</span>            <span class="kd">throws</span> <span class="n">ServletException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
-<span class="ln">11</span>        
-<span class="ln">12</span>        <span class="n">MyHttpServletRequestWrapper</span> <span class="n">wrappedRequest</span> <span class="o">=</span>
-<span class="ln">13</span>          <span class="k">new</span> <span class="n">MyHttpServletRequestWrapper</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
-<span class="ln">14</span>
-<span class="ln">15</span>        <span class="n">filterChain</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">wrappedRequest</span><span class="o">,</span> <span class="n">strategyResponse</span><span class="o">);</span>
-<span class="ln">16</span>    <span class="o">}</span>
-<span class="ln">17</span><span class="o">}</span>
-<span class="ln">18</span>
-</code></pre></div><p>在web.xml中启用filter</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="ln">1</span><span class="nt">&lt;filter&gt;</span>
-<span class="ln">2</span>   <span class="nt">&lt;filter-name&gt;</span>MyFilter<span class="nt">&lt;/filter-name&gt;</span>
-<span class="ln">3</span>   <span class="nt">&lt;filter-class&gt;</span>net.zengxi.filter.MyFilter<span class="nt">&lt;/filter-class&gt;</span>
-<span class="ln">4</span><span class="nt">&lt;/filter&gt;</span>
-<span class="ln">5</span>
-<span class="ln">6</span><span class="nt">&lt;filter-mapping&gt;</span>
-<span class="ln">7</span>    <span class="nt">&lt;filter-name&gt;</span>MyFilter<span class="nt">&lt;/filter-name&gt;</span>
-<span class="ln">8</span>    <span class="nt">&lt;url-pattern&gt;</span>/module/*<span class="nt">&lt;/url-pattern&gt;</span>
-<span class="ln">9</span><span class="nt">&lt;/filter-mapping&gt;</span>
-</code></pre></div><h1 id="参考资料">参考资料</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HttpServletRequestWrapper</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ServletRequestWrapper</span><span class="w"> 
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">    </span><span class="kd">implements</span><span class="w"> </span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">HttpServletRequestWrapper</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">request</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="nf">_getHttpServletRequest</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="p">)</span><span class="w"> </span><span class="kd">super</span><span class="p">.</span><span class="na">getRequest</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">HttpSession</span><span class="w"> </span><span class="nf">getSession</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">create</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">_getHttpServletRequest</span><span class="p">().</span><span class="na">getSession</span><span class="p">(</span><span class="n">create</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">   
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">HttpSession</span><span class="w"> </span><span class="nf">getSession</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">_getHttpServletRequest</span><span class="p">().</span><span class="na">getSession</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w">  </span><span class="c1">// 为了保证可读性，其他的方法删减掉了  </span><span class="w">
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>我们所需要做的事情，就是重写getSession这个方法，获取Cookie中的JESSIONID，来获取或者新建session。这里由于vaadin框架里面的一些实现，把session所保存的状态放入外部存储不是一个合适的选择，所以就新建了个MySessionContext用于存放，当然还需要额外的代码来清除MySessionContext中过期的session信息。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyHttpServletRequestWrapper</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServletRequestWrapper</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MyHttpServletRequestWrapper</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">request</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">HttpSession</span><span class="w"> </span><span class="nf">getSession</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">create</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">        </span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">        </span><span class="c1">// 获取请求中的session id，用于获取已有的session或者新建session</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">requestedSessionId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getRequestedSessionId</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">requestedSessionId</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">            </span><span class="c1">// 根据指定的session id，获取已有的session</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w">            </span><span class="n">HttpSession</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MySessionContext</span><span class="p">.</span><span class="na">getSession</span><span class="p">(</span><span class="n">requestedSessionId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">session</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">session</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">create</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="w">        </span><span class="c1">// 新建session，用指定的session id作为key保存</span><span class="w">
+</span></span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">MySessionContext</span><span class="p">.</span><span class="na">addSession</span><span class="p">(</span><span class="n">requestedSessionId</span><span class="p">,</span><span class="w"> </span><span class="n">createNewSession</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">31</span><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="ln">32</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">HttpSession</span><span class="w"> </span><span class="nf">getSession</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">33</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">getSession</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">34</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">35</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">36</span><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="ln">37</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getRequestedSessionId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">38</span><span class="cl"><span class="w">        </span><span class="c1">// 读取Cookie中JSESSIONID的值，为了方便阅读，省略具体实现</span><span class="w">
+</span></span></span><span class="line"><span class="ln">39</span><span class="cl"><span class="w">        </span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="ln">40</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">41</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">42</span><span class="cl"><span class="w">    </span><span class="c1">// 新建session</span><span class="w">
+</span></span></span><span class="line"><span class="ln">43</span><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">HttpSession</span><span class="w"> </span><span class="nf">createNewSession</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">44</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="p">)</span><span class="k">this</span><span class="p">.</span><span class="na">getRequest</span><span class="p">().</span><span class="na">getSession</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">45</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">46</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>通过filter来使用包装类</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyFilter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">    </span><span class="cm">/*
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="cm">     * 这个方法创建了我们上文所述的封装请求对象, 然后调用其余的 filter 链。
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="cm">     * 这里，当这个filter后面的应用代码执行时，如果要获得session的话，将
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="cm">     * 会使用我们上面所写的方式来获得
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doFilterInternal</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">            </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">FilterChain</span><span class="w"> </span><span class="n">filterChain</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">        </span><span class="n">MyHttpServletRequestWrapper</span><span class="w"> </span><span class="n">wrappedRequest</span><span class="w"> </span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="n">MyHttpServletRequestWrapper</span><span class="p">(</span><span class="n">request</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">        </span><span class="n">filterChain</span><span class="p">.</span><span class="na">doFilter</span><span class="p">(</span><span class="n">wrappedRequest</span><span class="p">,</span><span class="w"> </span><span class="n">strategyResponse</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>在web.xml中启用filter</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">&lt;filter&gt;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">   <span class="nt">&lt;filter-name&gt;</span>MyFilter<span class="nt">&lt;/filter-name&gt;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">   <span class="nt">&lt;filter-class&gt;</span>net.zengxi.filter.MyFilter<span class="nt">&lt;/filter-class&gt;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="nt">&lt;/filter&gt;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="nt">&lt;filter-mapping&gt;</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="nt">&lt;filter-name&gt;</span>MyFilter<span class="nt">&lt;/filter-name&gt;</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl">    <span class="nt">&lt;url-pattern&gt;</span>/module/*<span class="nt">&lt;/url-pattern&gt;</span>
+</span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="nt">&lt;/filter-mapping&gt;</span>
+</span></span></code></pre></div><h1 id="参考资料">参考资料</h1>
 <ul>
 <li><a href="https://www.infoq.cn/article/Next-Generation-Session-Management-with-Spring-Session">https://www.infoq.cn/article/Next-Generation-Session-Management-with-Spring-Session</a></li>
 </ul>
@@ -309,7 +308,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
   <section class="sidebar_inner">
     <h2>Paul Zeng</h2>
     <div>
-      架构师、团队主管、体育节目爱好者 @Shanghai
+      积跬步，至千里
     </div>
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">精选文章</h2>
@@ -342,6 +341,9 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/12/unsafe_http_methods/" class="nav-link">不安全的http方法</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
       </li>
       <li>
@@ -361,9 +363,6 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/05/access-new-bing/" class="nav-link">不用魔法直接访问 New Bing</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/05/mouse_wheel_issue/" class="nav-link">鼠标滚轮上下乱跳</a>
       </li>
     </ul>
     <div>
@@ -537,11 +536,15 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
             </a>
             
             
@@ -553,7 +556,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
             </a>
             
             
@@ -753,6 +756,10 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             
             
             <a href='https://www.zengxi.net/tags/hotspot/' class=" post_tag button button_translucent" data-position=1>HOTSPOT<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/http/' class=" post_tag button button_translucent" data-position=1>HTTP<span class="button_tally">1</span>
             </a>
             
             
@@ -972,27 +979,11 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
@@ -1000,23 +991,15 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
             </a>
             
             
@@ -1024,7 +1007,23 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
             </a>
             
             
@@ -1032,19 +1031,39 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=4>排序<span class="button_tally">4</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
             </a>
             
             
@@ -1052,7 +1071,11 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
             </a>
             
             
@@ -1064,6 +1087,10 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
             </a>
             
@@ -1072,23 +1099,11 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
             </a>
             
             
@@ -1100,15 +1115,11 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1185,7 +1196,7 @@ vaadin界面的servlet，每次都会判断请求中的session id值，如果在
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" integrity="sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" integrity="sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous"></script>
     
   </body>
 </html>

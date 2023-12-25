@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>http on 保罗札记</title>
+    <link>https://www.zengxi.net/tags/http/</link>
+    <description>Recent content in http on 保罗札记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Mon, 25 Dec 2023 21:45:00 +0800</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/tags/http/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>不安全的http方法</title>
+      <link>https://www.zengxi.net/2023/12/unsafe_http_methods/</link>
+      <pubDate>Mon, 25 Dec 2023 21:45:00 +0800</pubDate>
+      <guid>https://www.zengxi.net/2023/12/unsafe_http_methods/</guid>
+      <description>在安全扫描工具中，会验证服务器是否开启了不安全的 http 方法。&#xA;从资源的角度看，GET、HEAD、OPTIONS、TRACE，这些方法不会产生什么动作，不会在服务器上产生结果，只是简单获取信息。相对的，能产生动作的方法就会被认为是不安全的HTTP方法。&#xA;在上面认为的那些不安全的HTTP方法中，安全界认为 PUT、DELETE、TRACE 是不安全的，另外 WebDAV 中的几个方法，RFC 5789 中的 PATCH 方法也被认为是不安全的。（TRACE容易引发XST攻击，PATCH修改资源的部分内容，PUT/DELETE没有认证机制等原因，不仅仅因为它们会产生结果）。&#xA;下面的方法可能会被利用，向应用程序实施有效攻击：&#xA;PUT：利用PUT方法可以向服务器上传文件，所以恶意攻击者可以上传木马等恶意文件。 DELETE：利用DELETE方法可以删除服务器上特定的资源文件，造成恶意攻击。 OPTIONS：将会造成服务器信息暴露，如中间件版本、支持的HTTP方法等。 TRACE：可以回显服务器收到的请求，主要用于测试或诊断，一般都会存在反射型跨站漏洞 COPY：将指定的资源复制到Destination消息头指定的位置 MOVE：将指定的资源移动到Destination消息头指定的位置 SEARCH：在一个目录路径中搜索资源 PROPFIND：获取与指定资源有关的信息，如作者、大小与内容类型 如果没有必要，最好关闭这些不安全的 HTTP 方法和 WebDAV。&#xA;参考链接：&#xA;https://developer.aliyun.com/article/790150 https://cloud.tencent.com/developer/article/1937077 https://www.cnblogs.com/qmfsun/p/6169641.html https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84HTTP%E6%96%B9%E6%B3%95/ </description>
+    </item>
+  </channel>
+</rss>

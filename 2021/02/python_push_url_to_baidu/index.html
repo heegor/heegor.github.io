@@ -22,7 +22,7 @@
 <meta name="description" content="SEO对于网站的推广很重要，大多数搜索引擎都提供了一些API用于给站长主动提交URL，加快网页被收录的速度。
 百度提供了快速收录的API接口，下面这个Python脚本可以用来读取本地磁盘中的sitemap.xml文件，并调用接口提交URL至百度。
 仅需要修改下面的参数：
- lastUpdateTimeStr - 上次推 …">
+lastUpdateTimeStr - 上次推送 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="用Python读取sitemap并调用百度接口推送URL" />
@@ -31,7 +31,7 @@
 <meta property="og:description" content="SEO对于网站的推广很重要，大多数搜索引擎都提供了一些API用于给站长主动提交URL，加快网页被收录的速度。
 百度提供了快速收录的API接口，下面这个Python脚本可以用来读取本地磁盘中的sitemap.xml文件，并调用接口提交URL至百度。
 仅需要修改下面的参数：
- lastUpdateTimeStr - 上次推 …" />
+lastUpdateTimeStr - 上次推送 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -47,8 +47,8 @@
     
     
     <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
-    "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" as="script" integrity=
+    "sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous">
 
     
     <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
@@ -179,89 +179,89 @@
 <li>tmpFile - 临时文件的保存地址</li>
 <li>ignorePathPrefixes - 需要忽略的URL的前缀</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="ln"> 1</span><span class="ch">#!/usr/bin/env python3</span>
-<span class="ln"> 2</span><span class="c1"># coding: utf-8</span>
-<span class="ln"> 3</span>
-<span class="ln"> 4</span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
-<span class="ln"> 5</span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="ln"> 6</span><span class="kn">import</span> <span class="nn">os</span>
-<span class="ln"> 7</span>
-<span class="ln"> 8</span>
-<span class="ln"> 9</span><span class="c1">### Methods #########</span>
-<span class="ln">10</span><span class="k">def</span> <span class="nf">stripNs</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
-<span class="ln">11</span>  <span class="c1"># Recursively search this element tree, removing namespaces.</span>
-<span class="ln">12</span>  <span class="k">if</span> <span class="n">el</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&#34;{&#34;</span><span class="p">):</span>
-<span class="ln">13</span>    <span class="n">el</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="n">el</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># strip namespace</span>
-<span class="ln">14</span>  <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">el</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-<span class="ln">15</span>    <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&#34;{&#34;</span><span class="p">):</span>
-<span class="ln">16</span>      <span class="n">k2</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-<span class="ln">17</span>      <span class="n">el</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="n">k2</span><span class="p">]</span> <span class="o">=</span> <span class="n">el</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-<span class="ln">18</span>      <span class="k">del</span> <span class="n">el</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-<span class="ln">19</span>  <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">el</span><span class="p">:</span>
-<span class="ln">20</span>    <span class="n">stripNs</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
-<span class="ln">21</span>
-<span class="ln">22</span>
-<span class="ln">23</span><span class="c1">### Arguments to change ####</span>
-<span class="ln">24</span><span class="n">lastUpdateTimeStr</span><span class="o">=</span><span class="s1">&#39;2021-01-26T00:00:00+08:00&#39;</span>
-<span class="ln">25</span><span class="n">siteMapPath</span><span class="o">=</span><span class="s1">&#39;public/sitemap.xml&#39;</span>
-<span class="ln">26</span><span class="n">siteUrl</span><span class="o">=</span><span class="s1">&#39;https://www.zengxi.net&#39;</span>
-<span class="ln">27</span><span class="n">baiduApiToken</span><span class="o">=</span><span class="s1">&#39;faketoken&#39;</span>
-<span class="ln">28</span><span class="n">tmpFile</span><span class="o">=</span><span class="s2">&#34;/tmp/submitSiteMap&#34;</span>
-<span class="ln">29</span><span class="n">ignorePathPrefixes</span><span class="o">=</span><span class="p">[</span>
-<span class="ln">30</span>     <span class="s1">&#39;https://www.zengxi.net/archives/&#39;</span><span class="p">,</span>
-<span class="ln">31</span>     <span class="s1">&#39;https://www.zengxi.net/categories/&#39;</span><span class="p">,</span>
-<span class="ln">32</span>     <span class="s1">&#39;https://www.zengxi.net/links/&#39;</span><span class="p">,</span>
-<span class="ln">33</span>     <span class="s1">&#39;https://www.zengxi.net/posts/&#39;</span><span class="p">,</span>
-<span class="ln">34</span>     <span class="s1">&#39;https://www.zengxi.net/series/&#39;</span><span class="p">,</span>
-<span class="ln">35</span>     <span class="s1">&#39;https://www.zengxi.net/tags/&#39;</span>
-<span class="ln">36</span><span class="p">]</span>
-<span class="ln">37</span>
-<span class="ln">38</span><span class="c1">### CONSTANTS ###</span>
-<span class="ln">39</span><span class="n">SITEMAP_DATETIME_FORMAT</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S%z&#39;</span>
-<span class="ln">40</span>
-<span class="ln">41</span>
-<span class="ln">42</span><span class="n">lastUpdateTime</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">lastUpdateTimeStr</span><span class="p">,</span> <span class="n">SITEMAP_DATETIME_FORMAT</span><span class="p">)</span>
-<span class="ln">43</span>
-<span class="ln">44</span>
-<span class="ln">45</span><span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">siteMapPath</span><span class="p">)</span>
-<span class="ln">46</span><span class="n">urlset</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
-<span class="ln">47</span>
-<span class="ln">48</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tmpFile</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="ln">49</span>     <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urlset</span><span class="p">:</span>
-<span class="ln">50</span>          <span class="n">location</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-<span class="ln">51</span>          <span class="n">lastmod</span> <span class="o">=</span> <span class="n">lastUpdateTime</span>
-<span class="ln">52</span>
-<span class="ln">53</span>          <span class="k">for</span> <span class="n">urlChild</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
-<span class="ln">54</span>               <span class="n">stripNs</span><span class="p">(</span><span class="n">urlChild</span><span class="p">)</span>
-<span class="ln">55</span>
-<span class="ln">56</span>               <span class="k">if</span> <span class="n">urlChild</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;loc&#39;</span><span class="p">:</span>
-<span class="ln">57</span>                    <span class="n">location</span> <span class="o">=</span> <span class="n">urlChild</span><span class="o">.</span><span class="n">text</span>
-<span class="ln">58</span>               <span class="k">elif</span> <span class="n">urlChild</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;lastmod&#39;</span><span class="p">:</span>
-<span class="ln">59</span>                    <span class="n">lastmod</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">urlChild</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">SITEMAP_DATETIME_FORMAT</span><span class="p">)</span>
-<span class="ln">60</span>          
-<span class="ln">61</span>          <span class="n">ignore</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="ln">62</span>          <span class="k">for</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">ignorePathPrefixes</span><span class="p">:</span>
-<span class="ln">63</span>               <span class="k">if</span> <span class="n">location</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">prefix</span><span class="p">):</span>
-<span class="ln">64</span>                    <span class="n">ignore</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="ln">65</span>                    <span class="k">break</span>
-<span class="ln">66</span>          
-<span class="ln">67</span>          <span class="k">if</span> <span class="n">ignore</span><span class="p">:</span>
-<span class="ln">68</span>               <span class="k">continue</span>
-<span class="ln">69</span>
-<span class="ln">70</span>          <span class="k">if</span> <span class="n">lastmod</span> <span class="o">&gt;=</span> <span class="n">lastUpdateTime</span><span class="p">:</span>
-<span class="ln">71</span>               <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="ln">72</span>
-<span class="ln">73</span>
-<span class="ln">74</span><span class="n">command</span><span class="o">=</span><span class="s2">&#34;&#34;&#34;
-</span><span class="ln">75</span><span class="s2">curl -H &#39;Content-Type:text/plain&#39; --data-binary @</span><span class="si">{filePath}</span><span class="s2"> &#34;http://data.zz.baidu.com/urls?site=</span><span class="si">{siteUrl}</span><span class="s2">&amp;token=</span><span class="si">{token}</span><span class="s2">&#34;
-</span><span class="ln">76</span><span class="s2">&#34;&#34;&#34;</span>
-<span class="ln">77</span>
-<span class="ln">78</span><span class="n">commandToExecute</span><span class="o">=</span><span class="n">command</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filePath</span><span class="o">=</span><span class="n">tmpFile</span><span class="p">,</span> <span class="n">siteUrl</span><span class="o">=</span><span class="n">siteUrl</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="n">baiduApiToken</span><span class="p">)</span>
-<span class="ln">79</span><span class="n">tmpres</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="n">commandToExecute</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-<span class="ln">80</span>
-<span class="ln">81</span><span class="nb">print</span><span class="p">(</span><span class="n">commandToExecute</span><span class="p">)</span>
-<span class="ln">82</span><span class="nb">print</span><span class="p">(</span><span class="n">tmpres</span><span class="p">)</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="ch">#!/usr/bin/env python3</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"># coding: utf-8</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="c1">### Methods #########</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="k">def</span> <span class="nf">stripNs</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">  <span class="c1"># Recursively search this element tree, removing namespaces.</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">  <span class="k">if</span> <span class="n">el</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&#34;{&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="n">el</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="n">el</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># strip namespace</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">  <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">el</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&#34;{&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">      <span class="n">k2</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">      <span class="n">el</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="n">k2</span><span class="p">]</span> <span class="o">=</span> <span class="n">el</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">      <span class="k">del</span> <span class="n">el</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">  <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">el</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="n">stripNs</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">
+</span></span><span class="line"><span class="ln">22</span><span class="cl">
+</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="c1">### Arguments to change ####</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="n">lastUpdateTimeStr</span><span class="o">=</span><span class="s1">&#39;2021-01-26T00:00:00+08:00&#39;</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="n">siteMapPath</span><span class="o">=</span><span class="s1">&#39;public/sitemap.xml&#39;</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="n">siteUrl</span><span class="o">=</span><span class="s1">&#39;https://www.zengxi.net&#39;</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="n">baiduApiToken</span><span class="o">=</span><span class="s1">&#39;faketoken&#39;</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="n">tmpFile</span><span class="o">=</span><span class="s2">&#34;/tmp/submitSiteMap&#34;</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="n">ignorePathPrefixes</span><span class="o">=</span><span class="p">[</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">     <span class="s1">&#39;https://www.zengxi.net/archives/&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">     <span class="s1">&#39;https://www.zengxi.net/categories/&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">     <span class="s1">&#39;https://www.zengxi.net/links/&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">     <span class="s1">&#39;https://www.zengxi.net/posts/&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">     <span class="s1">&#39;https://www.zengxi.net/series/&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">     <span class="s1">&#39;https://www.zengxi.net/tags/&#39;</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">
+</span></span><span class="line"><span class="ln">38</span><span class="cl"><span class="c1">### CONSTANTS ###</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl"><span class="n">SITEMAP_DATETIME_FORMAT</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S%z&#39;</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">
+</span></span><span class="line"><span class="ln">41</span><span class="cl">
+</span></span><span class="line"><span class="ln">42</span><span class="cl"><span class="n">lastUpdateTime</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">lastUpdateTimeStr</span><span class="p">,</span> <span class="n">SITEMAP_DATETIME_FORMAT</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">
+</span></span><span class="line"><span class="ln">44</span><span class="cl">
+</span></span><span class="line"><span class="ln">45</span><span class="cl"><span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">siteMapPath</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl"><span class="n">urlset</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">47</span><span class="cl">
+</span></span><span class="line"><span class="ln">48</span><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tmpFile</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">49</span><span class="cl">     <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urlset</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">50</span><span class="cl">          <span class="n">location</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="ln">51</span><span class="cl">          <span class="n">lastmod</span> <span class="o">=</span> <span class="n">lastUpdateTime</span>
+</span></span><span class="line"><span class="ln">52</span><span class="cl">
+</span></span><span class="line"><span class="ln">53</span><span class="cl">          <span class="k">for</span> <span class="n">urlChild</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">54</span><span class="cl">               <span class="n">stripNs</span><span class="p">(</span><span class="n">urlChild</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">55</span><span class="cl">
+</span></span><span class="line"><span class="ln">56</span><span class="cl">               <span class="k">if</span> <span class="n">urlChild</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;loc&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">57</span><span class="cl">                    <span class="n">location</span> <span class="o">=</span> <span class="n">urlChild</span><span class="o">.</span><span class="n">text</span>
+</span></span><span class="line"><span class="ln">58</span><span class="cl">               <span class="k">elif</span> <span class="n">urlChild</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;lastmod&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">59</span><span class="cl">                    <span class="n">lastmod</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">urlChild</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">SITEMAP_DATETIME_FORMAT</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">60</span><span class="cl">          
+</span></span><span class="line"><span class="ln">61</span><span class="cl">          <span class="n">ignore</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="ln">62</span><span class="cl">          <span class="k">for</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">ignorePathPrefixes</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">63</span><span class="cl">               <span class="k">if</span> <span class="n">location</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">prefix</span><span class="p">):</span>
+</span></span><span class="line"><span class="ln">64</span><span class="cl">                    <span class="n">ignore</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="ln">65</span><span class="cl">                    <span class="k">break</span>
+</span></span><span class="line"><span class="ln">66</span><span class="cl">          
+</span></span><span class="line"><span class="ln">67</span><span class="cl">          <span class="k">if</span> <span class="n">ignore</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">68</span><span class="cl">               <span class="k">continue</span>
+</span></span><span class="line"><span class="ln">69</span><span class="cl">
+</span></span><span class="line"><span class="ln">70</span><span class="cl">          <span class="k">if</span> <span class="n">lastmod</span> <span class="o">&gt;=</span> <span class="n">lastUpdateTime</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">71</span><span class="cl">               <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">72</span><span class="cl">
+</span></span><span class="line"><span class="ln">73</span><span class="cl">
+</span></span><span class="line"><span class="ln">74</span><span class="cl"><span class="n">command</span><span class="o">=</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="ln">75</span><span class="cl"><span class="s2">curl -H &#39;Content-Type:text/plain&#39; --data-binary @</span><span class="si">{filePath}</span><span class="s2"> &#34;http://data.zz.baidu.com/urls?site=</span><span class="si">{siteUrl}</span><span class="s2">&amp;token=</span><span class="si">{token}</span><span class="s2">&#34;
+</span></span></span><span class="line"><span class="ln">76</span><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="ln">77</span><span class="cl">
+</span></span><span class="line"><span class="ln">78</span><span class="cl"><span class="n">commandToExecute</span><span class="o">=</span><span class="n">command</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filePath</span><span class="o">=</span><span class="n">tmpFile</span><span class="p">,</span> <span class="n">siteUrl</span><span class="o">=</span><span class="n">siteUrl</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="n">baiduApiToken</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">79</span><span class="cl"><span class="n">tmpres</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="n">commandToExecute</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">80</span><span class="cl">
+</span></span><span class="line"><span class="ln">81</span><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">commandToExecute</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">82</span><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">tmpres</span><span class="p">)</span>
+</span></span></code></pre></div>
     
       
     
@@ -270,7 +270,7 @@
   <section class="sidebar_inner">
     <h2>Paul Zeng</h2>
     <div>
-      架构师、团队主管、体育节目爱好者 @Shanghai
+      积跬步，至千里
     </div>
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">精选文章</h2>
@@ -303,6 +303,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/12/unsafe_http_methods/" class="nav-link">不安全的http方法</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
       </li>
       <li>
@@ -322,9 +325,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/05/access-new-bing/" class="nav-link">不用魔法直接访问 New Bing</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/05/mouse_wheel_issue/" class="nav-link">鼠标滚轮上下乱跳</a>
       </li>
     </ul>
     <div>
@@ -498,11 +498,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
             </a>
             
             
@@ -514,7 +518,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
             </a>
             
             
@@ -714,6 +718,10 @@
             
             
             <a href='https://www.zengxi.net/tags/hotspot/' class=" post_tag button button_translucent" data-position=1>HOTSPOT<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/http/' class=" post_tag button button_translucent" data-position=1>HTTP<span class="button_tally">1</span>
             </a>
             
             
@@ -933,27 +941,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
@@ -961,23 +953,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
             </a>
             
             
@@ -985,7 +969,23 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
             </a>
             
             
@@ -993,19 +993,39 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=4>排序<span class="button_tally">4</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
             </a>
             
             
@@ -1013,7 +1033,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
             </a>
             
             
@@ -1025,6 +1049,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
             </a>
             
@@ -1033,23 +1061,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
             </a>
             
             
@@ -1061,15 +1077,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1146,7 +1158,7 @@
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" integrity="sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" integrity="sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous"></script>
     
   </body>
 </html>

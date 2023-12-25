@@ -19,17 +19,17 @@
 <meta property="og:locale" content="zh-cn" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="原作者：廖学强 原文链接：点击这里   查看帮助命令
-1DB=#help--总的帮助 23DB=#\h--SQL commands级的帮助 45DB=#\?--psql commands级的帮助 按列显示，类似mysql的\G
-1DB=# \x 2 3Expanded display is on. 查看DB安装目录(最 …">
+<meta name="description" content="原作者：廖学强 原文链接：点击这里 查看帮助命令
+1DB=# help --总的帮助 2 3DB=# \h --SQL commands级的帮助 4 5DB=# \? --psql commands级的帮助 按列显示，类似mysql的\G
+1DB=# \x 2 3Expanded display is on. 查看DB …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="转: Postgres数据库DBA常用命令" />
 <meta property="og:url" content="https://www.zengxi.net/2020/01/postgres-frequently-used-commands/" />
 <meta property="og:title" content="转: Postgres数据库DBA常用命令" />
-<meta property="og:description" content="原作者：廖学强 原文链接：点击这里   查看帮助命令
-1DB=#help--总的帮助 23DB=#\h--SQL commands级的帮助 45DB=#\?--psql commands级的帮助 按列显示，类似mysql的\G
-1DB=# \x 2 3Expanded display is on. 查看DB安装目录(最 …" />
+<meta property="og:description" content="原作者：廖学强 原文链接：点击这里 查看帮助命令
+1DB=# help --总的帮助 2 3DB=# \h --SQL commands级的帮助 4 5DB=# \? --psql commands级的帮助 按列显示，类似mysql的\G
+1DB=# \x 2 3Expanded display is on. 查看DB …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -45,8 +45,8 @@
     
     
     <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
-    "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" as="script" integrity=
+    "sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous">
 
     
     <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
@@ -170,258 +170,258 @@
 </ul>
 <hr>
 <p>查看帮助命令</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="c1">--总的帮助
-</span><span class="ln">2</span><span class="c1"></span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">h</span><span class="w"> </span><span class="c1">--SQL commands级的帮助
-</span><span class="ln">4</span><span class="c1"></span><span class="w">
-</span><span class="ln">5</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="o">?</span><span class="w"> </span><span class="c1">--psql commands级的帮助
-</span></code></pre></div><p>按列显示，类似mysql的\G</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="nv">DB</span><span class="o">=</span><span class="c1"># \x</span>
-<span class="ln">2</span>
-<span class="ln">3</span>Expanded display is on.
-</code></pre></div><p>查看DB安装目录(最好root用户执行)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>find / -name initdb
-</code></pre></div><p>查看有多少DB实例在运行(最好root用户执行)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>find / -name postgresql.conf
-</code></pre></div><!-- more -->
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="c1">--总的帮助
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">h</span><span class="w"> </span><span class="c1">--SQL commands级的帮助
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="o">?</span><span class="w"> </span><span class="c1">--psql commands级的帮助
+</span></span></span></code></pre></div><p>按列显示，类似mysql的\G</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">DB</span><span class="o">=</span><span class="c1"># \x</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl">Expanded display is on.
+</span></span></code></pre></div><p>查看DB安装目录(最好root用户执行)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">find / -name initdb
+</span></span></code></pre></div><p>查看有多少DB实例在运行(最好root用户执行)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">find / -name postgresql.conf
+</span></span></code></pre></div><!-- more -->
 <p>查看DB版本</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">cat</span><span class="w"> </span><span class="err">$</span><span class="n">PGDATA</span><span class="o">/</span><span class="n">PG_VERSION</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">psql</span><span class="w"> </span><span class="c1">--version
-</span><span class="ln">4</span><span class="c1"></span><span class="w">
-</span><span class="ln">5</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">server_version</span><span class="p">;</span><span class="w">
-</span><span class="ln">6</span><span class="w">
-</span><span class="ln">7</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">version</span><span class="p">();</span><span class="w">
-</span></code></pre></div><p>查看DB实例运行状态</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">pg_ctl</span><span class="w"> </span><span class="n">status</span><span class="w">
-</span></code></pre></div><p>查看所有数据库</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">psql</span><span class="w"> </span><span class="err">–</span><span class="n">l</span><span class="w"> </span><span class="c1">--查看5432端口下面有多少个DB
-</span><span class="ln">2</span><span class="c1"></span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">psql</span><span class="w"> </span><span class="err">–</span><span class="n">p</span><span class="w"> </span><span class="n">XX</span><span class="w"> </span><span class="err">–</span><span class="n">l</span><span class="w"> </span><span class="c1">--查看XX端口下面有多少个DB
-</span><span class="ln">4</span><span class="c1"></span><span class="w">
-</span><span class="ln">5</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">l</span><span class="w">
-</span><span class="ln">6</span><span class="w">
-</span><span class="ln">7</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_database</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>创建数据库</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">createdb</span><span class="w"> </span><span class="n">database_name</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">h</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="c1">--创建数据库的帮助命令
-</span><span class="ln">4</span><span class="c1"></span><span class="w">
-</span><span class="ln">5</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="n">database_name</span><span class="w">
-</span></code></pre></div><p>进入某个数据库</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">psql</span><span class="w"> </span><span class="err">–</span><span class="n">d</span><span class="w"> </span><span class="n">dbname</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="k">c</span><span class="w"> </span><span class="n">dbname</span><span class="w">
-</span></code></pre></div><p>查看当前数据库</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="k">c</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">current_database</span><span class="p">();</span><span class="w">
-</span></code></pre></div><p>查看数据库文件目录</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">data_directory</span><span class="p">;</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">cat</span><span class="w"> </span><span class="err">$</span><span class="n">PGDATA</span><span class="o">/</span><span class="n">postgresql</span><span class="p">.</span><span class="n">conf</span><span class="w"> </span><span class="o">|</span><span class="n">grep</span><span class="w"> </span><span class="n">data_directory</span><span class="w">
-</span><span class="ln">4</span><span class="w">
-</span><span class="ln">5</span><span class="w"></span><span class="n">cat</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">postgresql</span><span class="o">|</span><span class="n">grep</span><span class="w"> </span><span class="n">PGDATA</span><span class="o">=</span><span class="w">
-</span><span class="ln">6</span><span class="w">
-</span><span class="ln">7</span><span class="w"></span><span class="n">lsof</span><span class="w"> </span><span class="o">|</span><span class="n">grep</span><span class="w"> </span><span class="mi">5432</span><span class="err">得出第二列的</span><span class="n">PID号再ps</span><span class="w"> </span><span class="err">–</span><span class="n">ef</span><span class="o">|</span><span class="n">grep</span><span class="w"> </span><span class="n">PID</span><span class="w">
-</span></code></pre></div><p>查看表空间</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_tablespace</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看语言</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_language</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查询所有schema，必须到指定的数据库下执行</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">schemata</span><span class="p">;</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="n">nspname</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_namespace</span><span class="p">;</span><span class="w">
-</span><span class="ln">4</span><span class="w">
-</span><span class="ln">5</span><span class="w"></span><span class="err">\</span><span class="n">dnS</span><span class="w">
-</span></code></pre></div><p>查看表名</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="c1">--只能查看到当前数据库下public的表名
-</span><span class="ln">2</span><span class="c1"></span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">tablename</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_tables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">tablename</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;pg%&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">tablename</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;sql_%&#39;</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">tablename</span><span class="p">;</span><span class="w">
-</span><span class="ln">4</span><span class="w">
-</span><span class="ln">5</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">table_name</span><span class="o">=</span><span class="s1">&#39;ff_v3_ff_basic_af&#39;</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看表结构</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">d</span><span class="w"> </span><span class="n">tablename</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">table_schema</span><span class="o">=</span><span class="s1">&#39;public&#39;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">table_name</span><span class="o">=</span><span class="s1">&#39;XX&#39;</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看索引</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">di</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_index</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看视图</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dv</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_views</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">schemaname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;public&#39;</span><span class="p">;</span><span class="w">
-</span><span class="ln">4</span><span class="w">
-</span><span class="ln">5</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">views</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">table_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;public&#39;</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看触发器</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">triggers</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看序列</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">sequences</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">sequence_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;public&#39;</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看约束</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_constraint</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">contype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;p&#39;</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">relname</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">table_name</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">conname</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">constraint_name</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">contype</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">constraint_type</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_class</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">pg_constraint</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">conrelid</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">relname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;cc&#39;</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看XX数据库的大小</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">SELECT</span><span class="w"> </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_database_size</span><span class="p">(</span><span class="s1">&#39;XX&#39;</span><span class="p">))</span><span class="w"> </span><span class="k">As</span><span class="w"> </span><span class="n">fulldbsize</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看所有数据库的大小</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="n">pg_database</span><span class="p">.</span><span class="n">datname</span><span class="p">,</span><span class="w"> </span><span class="n">pg_size_pretty</span><span class="w"> </span><span class="p">(</span><span class="n">pg_database_size</span><span class="p">(</span><span class="n">pg_database</span><span class="p">.</span><span class="n">datname</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">size</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_database</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看各数据库数据创建时间：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="n">datname</span><span class="p">,(</span><span class="n">pg_stat_file</span><span class="p">(</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;%s/%s/PG_VERSION&#39;</span><span class="p">,</span><span class="k">case</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="n">spcname</span><span class="o">=</span><span class="s1">&#39;pg_default&#39;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="s1">&#39;base&#39;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;pg_tblspc/&#39;</span><span class="o">||</span><span class="n">t2</span><span class="p">.</span><span class="n">oid</span><span class="o">||</span><span class="s1">&#39;/PG_11_201804061/&#39;</span><span class="w"> </span><span class="k">end</span><span class="p">,</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="n">oid</span><span class="p">))).</span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_database</span><span class="w"> </span><span class="n">t1</span><span class="p">,</span><span class="n">pg_tablespace</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="n">dattablespace</span><span class="o">=</span><span class="n">t2</span><span class="p">.</span><span class="n">oid</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>按占空间大小，顺序查看所有表的大小</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="n">relname</span><span class="p">,</span><span class="w"> </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_relation_size</span><span class="p">(</span><span class="n">relid</span><span class="p">))</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_stat_user_tables</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">schemaname</span><span class="o">=</span><span class="s1">&#39;public&#39;</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">pg_relation_size</span><span class="p">(</span><span class="n">relid</span><span class="p">)</span><span class="w"> </span><span class="k">desc</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>按占空间大小，顺序查看索引大小</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="n">indexrelname</span><span class="p">,</span><span class="w"> </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_relation_size</span><span class="p">(</span><span class="n">relid</span><span class="p">))</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_stat_user_indexes</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">schemaname</span><span class="o">=</span><span class="s1">&#39;public&#39;</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">pg_relation_size</span><span class="p">(</span><span class="n">relid</span><span class="p">)</span><span class="w"> </span><span class="k">desc</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看参数文件</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">config_file</span><span class="p">;</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">hba_file</span><span class="p">;</span><span class="w">
-</span><span class="ln">4</span><span class="w">
-</span><span class="ln">5</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">ident_file</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看当前会话的参数值</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="k">all</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看参数值</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_file_settings</span><span class="w">
-</span></code></pre></div><p>查看某个参数值,比如参数work_mem</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">work_mem</span><span class="w">
-</span></code></pre></div><p>修改某个参数值,比如参数work_mem</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">alter</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">work_mem</span><span class="o">=</span><span class="s1">&#39;8MB&#39;</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="c1">--使用alter system命令将修改postgresql.auto.conf文件，而不是postgresql.conf，这样可以很好的保护postgresql.conf文件，加入你使用很多alter system命令后搞的一团糟，那么你只需要删除postgresql.auto.conf，再执行pg_ctl reload加载postgresql.conf文件即可实现参数的重新加载。
-</span></code></pre></div><p>查看是否归档</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">archive_mode</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看运行日志的相关配置，运行日志包括Error信息，定位慢查询SQL，数据库的启动关闭信息，checkpoint过于频繁等的告警信息。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln"> 1</span><span class="k">show</span><span class="w"> </span><span class="n">logging_collector</span><span class="p">;</span><span class="c1">--启动日志收集
-</span><span class="ln"> 2</span><span class="c1"></span><span class="w">
-</span><span class="ln"> 3</span><span class="w"></span><span class="k">show</span><span class="w"> </span><span class="n">log_directory</span><span class="p">;</span><span class="c1">--日志输出路径
-</span><span class="ln"> 4</span><span class="c1"></span><span class="w">
-</span><span class="ln"> 5</span><span class="w"></span><span class="k">show</span><span class="w"> </span><span class="n">log_filename</span><span class="p">;</span><span class="c1">--日志文件名
-</span><span class="ln"> 6</span><span class="c1"></span><span class="w">
-</span><span class="ln"> 7</span><span class="w"></span><span class="k">show</span><span class="w"> </span><span class="n">log_truncate_on_rotation</span><span class="p">;</span><span class="c1">--当生成新的文件时如果文件名已存在，是否覆盖同名旧文件名
-</span><span class="ln"> 8</span><span class="c1"></span><span class="w">
-</span><span class="ln"> 9</span><span class="w"></span><span class="k">show</span><span class="w"> </span><span class="n">log_statement</span><span class="p">;</span><span class="c1">--设置日志记录内容
-</span><span class="ln">10</span><span class="c1"></span><span class="w">
-</span><span class="ln">11</span><span class="w"></span><span class="k">show</span><span class="w"> </span><span class="n">log_min_duration_statement</span><span class="p">;</span><span class="c1">--运行XX毫秒的语句会被记录到日志中，-1表示禁用这个功能，0表示记录所有语句，类似mysql的慢查询配置
-</span></code></pre></div><p>查看wal日志的配置，wal日志就是redo重做日志</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>存放在data_directory/pg_wal目录
-</code></pre></div><p>查看当前用户</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="k">c</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">current_user</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看所有用户</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_user</span><span class="p">;</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_shadow</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看所有角色</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">du</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_roles</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查询用户XX的权限，必须到指定的数据库下执行</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">table_privileges</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">grantee</span><span class="o">=</span><span class="s1">&#39;XX&#39;</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>创建用户XX，并授予超级管理员权限</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">create</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="n">XXX</span><span class="w"> </span><span class="n">SUPERUSER</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;123456&#39;</span><span class="w">
-</span></code></pre></div><p>创建角色，赋予了login权限，则相当于创建了用户，在pg_user可以看到这个角色</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">create</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="s2">&#34;user1&#34;</span><span class="w"> </span><span class="n">superuser</span><span class="p">;</span><span class="c1">--pg_roles有user1，pg_user和pg_shadow没有user1
-</span><span class="ln">2</span><span class="c1"></span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="k">alter</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="s2">&#34;user1&#34;</span><span class="w"> </span><span class="n">login</span><span class="p">;</span><span class="c1">--pg_user和pg_shadow也有user1了
-</span></code></pre></div><p>授权</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln"> 1</span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">h</span><span class="w"> </span><span class="k">grant</span><span class="w">
-</span><span class="ln"> 2</span><span class="w">
-</span><span class="ln"> 3</span><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="n">schemaname</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">dbuser</span><span class="p">;</span><span class="w">
-</span><span class="ln"> 4</span><span class="w">
-</span><span class="ln"> 5</span><span class="w"></span><span class="k">grant</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="n">tables</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="n">fds</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">dbuser</span><span class="p">;</span><span class="w">
-</span><span class="ln"> 6</span><span class="w">
-</span><span class="ln"> 7</span><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">tablename</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">user</span><span class="p">;</span><span class="w">
-</span><span class="ln"> 8</span><span class="w">
-</span><span class="ln"> 9</span><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">dbname</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">dbuser</span><span class="p">;</span><span class="w">
-</span><span class="ln">10</span><span class="w">
-</span><span class="ln">11</span><span class="w"></span><span class="k">grant</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="n">tables</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">dbuser</span><span class="p">;</span><span class="c1">--给用户读取public这个schema下的所有表
-</span><span class="ln">12</span><span class="c1"></span><span class="w">
-</span><span class="ln">13</span><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="n">schemaname</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">dbuser</span><span class="p">;</span><span class="c1">--给用户授予在schema上的create权限，比如create table、create view等
-</span><span class="ln">14</span><span class="c1"></span><span class="w">
-</span><span class="ln">15</span><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">USAGE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="n">schemaname</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">dbuser</span><span class="p">;</span><span class="w">
-</span><span class="ln">16</span><span class="w">
-</span><span class="ln">17</span><span class="w"></span><span class="k">grant</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">dbuser</span><span class="p">;</span><span class="c1">--报错ERROR: invalid privilege type SELECT for schema
-</span><span class="ln">18</span><span class="c1"></span><span class="w">
-</span><span class="ln">19</span><span class="w"></span><span class="c1">--USAGE：对于程序语言来说，允许使用指定的程序语言创建函数;对于Schema来说，允许查找该Schema下的对象;对于序列来说，允许使用currval和nextval函数;对于外部封装器来说，允许使用外部封装器来创建外部服务器;对于外部服务器来说，允许创建外部表。
-</span></code></pre></div><p>查看表上存在哪些索引以及大小</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="n">relname</span><span class="p">,</span><span class="n">n</span><span class="p">.</span><span class="n">amname</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_class</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="n">pg_am</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">relam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">oid</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">oid</span><span class="w"> </span><span class="k">in</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">indexrelid</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_class</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">pg_index</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">indrelid</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">relname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;cc&#39;</span><span class="p">);</span><span class="w">
-</span><span class="ln">4</span><span class="w">
-</span><span class="ln">5</span><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">relname</span><span class="p">,</span><span class="n">c2</span><span class="p">.</span><span class="n">relname</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="p">.</span><span class="n">relpages</span><span class="o">*</span><span class="mi">8</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">size_kb</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_class</span><span class="w"> </span><span class="k">c</span><span class="p">,</span><span class="w"> </span><span class="n">pg_class</span><span class="w"> </span><span class="n">c2</span><span class="p">,</span><span class="w"> </span><span class="n">pg_index</span><span class="w"> </span><span class="n">i</span><span class="w">
-</span><span class="ln">6</span><span class="w">
-</span><span class="ln">7</span><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">relname</span><span class="w"> </span><span class="o">=</span><span class="s1">&#39;cc&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="n">i</span><span class="p">.</span><span class="n">indrelid</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">c2</span><span class="p">.</span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="n">i</span><span class="p">.</span><span class="n">indexrelid</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">c2</span><span class="p">.</span><span class="n">relname</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看索引定义</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">indexrelid</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_class</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">pg_index</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">indrelid</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">relname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;cc&#39;</span><span class="p">;</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">pg_get_indexdef</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">indexrelid</span><span class="p">);</span><span class="w">
-</span></code></pre></div><p>查看过程函数定义</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="n">oid</span><span class="p">,</span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_proc</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">proname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;insert_platform_action_exist&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">--oid = 24610
-</span><span class="ln">2</span><span class="c1"></span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_get_functiondef</span><span class="p">(</span><span class="mi">24610</span><span class="p">);</span><span class="w">
-</span></code></pre></div><p>查看表大小(不含索引等信息)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="n">pg_relation_size</span><span class="p">(</span><span class="s1">&#39;cc&#39;</span><span class="p">);</span><span class="w"> </span><span class="c1">--368640 byte
-</span><span class="ln">2</span><span class="c1"></span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_relation_size</span><span class="p">(</span><span class="s1">&#39;cc&#39;</span><span class="p">))</span><span class="w"> </span><span class="c1">--360 kB
-</span></code></pre></div><p>查看表所对应的数据文件路径与大小</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">SELECT</span><span class="w"> </span><span class="n">pg_relation_filepath</span><span class="p">(</span><span class="n">oid</span><span class="p">),</span><span class="w"> </span><span class="n">relpages</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_class</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">relname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;empsalary&#39;</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>posegresql查询当前lsn</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">cat</span><span class="w"> </span><span class="err">$</span><span class="n">PGDATA</span><span class="o">/</span><span class="n">PG_VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">psql</span><span class="w"> </span><span class="c1">--version
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">server_version</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">version</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></div><p>查看DB实例运行状态</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">pg_ctl</span><span class="w"> </span><span class="n">status</span><span class="w">
+</span></span></span></code></pre></div><p>查看所有数据库</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">psql</span><span class="w"> </span><span class="err">–</span><span class="n">l</span><span class="w"> </span><span class="c1">--查看5432端口下面有多少个DB
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">psql</span><span class="w"> </span><span class="err">–</span><span class="n">p</span><span class="w"> </span><span class="n">XX</span><span class="w"> </span><span class="err">–</span><span class="n">l</span><span class="w"> </span><span class="c1">--查看XX端口下面有多少个DB
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">l</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_database</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>创建数据库</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">createdb</span><span class="w"> </span><span class="n">database_name</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">h</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="c1">--创建数据库的帮助命令
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="n">database_name</span><span class="w">
+</span></span></span></code></pre></div><p>进入某个数据库</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">psql</span><span class="w"> </span><span class="err">–</span><span class="n">d</span><span class="w"> </span><span class="n">dbname</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="k">c</span><span class="w"> </span><span class="n">dbname</span><span class="w">
+</span></span></span></code></pre></div><p>查看当前数据库</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="k">c</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">current_database</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></div><p>查看数据库文件目录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">data_directory</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">cat</span><span class="w"> </span><span class="err">$</span><span class="n">PGDATA</span><span class="o">/</span><span class="n">postgresql</span><span class="p">.</span><span class="n">conf</span><span class="w"> </span><span class="o">|</span><span class="n">grep</span><span class="w"> </span><span class="n">data_directory</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">cat</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">postgresql</span><span class="o">|</span><span class="n">grep</span><span class="w"> </span><span class="n">PGDATA</span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="n">lsof</span><span class="w"> </span><span class="o">|</span><span class="n">grep</span><span class="w"> </span><span class="mi">5432</span><span class="err">得出第二列的</span><span class="n">PID号再ps</span><span class="w"> </span><span class="err">–</span><span class="n">ef</span><span class="o">|</span><span class="n">grep</span><span class="w"> </span><span class="n">PID</span><span class="w">
+</span></span></span></code></pre></div><p>查看表空间</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_tablespace</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看语言</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_language</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查询所有schema，必须到指定的数据库下执行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">schemata</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="n">nspname</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_namespace</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="err">\</span><span class="n">dnS</span><span class="w">
+</span></span></span></code></pre></div><p>查看表名</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="c1">--只能查看到当前数据库下public的表名
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">tablename</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_tables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">tablename</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;pg%&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">tablename</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;sql_%&#39;</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">tablename</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">table_name</span><span class="o">=</span><span class="s1">&#39;ff_v3_ff_basic_af&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看表结构</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">d</span><span class="w"> </span><span class="n">tablename</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">table_schema</span><span class="o">=</span><span class="s1">&#39;public&#39;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">table_name</span><span class="o">=</span><span class="s1">&#39;XX&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看索引</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">di</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_index</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看视图</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dv</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_views</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">schemaname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;public&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">views</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">table_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;public&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看触发器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">triggers</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看序列</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">sequences</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">sequence_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;public&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看约束</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_constraint</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">contype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;p&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">relname</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">table_name</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">conname</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">constraint_name</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">contype</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">constraint_type</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_class</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">pg_constraint</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">conrelid</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">relname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;cc&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看XX数据库的大小</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_database_size</span><span class="p">(</span><span class="s1">&#39;XX&#39;</span><span class="p">))</span><span class="w"> </span><span class="k">As</span><span class="w"> </span><span class="n">fulldbsize</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看所有数据库的大小</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">pg_database</span><span class="p">.</span><span class="n">datname</span><span class="p">,</span><span class="w"> </span><span class="n">pg_size_pretty</span><span class="w"> </span><span class="p">(</span><span class="n">pg_database_size</span><span class="p">(</span><span class="n">pg_database</span><span class="p">.</span><span class="n">datname</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">size</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_database</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看各数据库数据创建时间：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">datname</span><span class="p">,(</span><span class="n">pg_stat_file</span><span class="p">(</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;%s/%s/PG_VERSION&#39;</span><span class="p">,</span><span class="k">case</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="n">spcname</span><span class="o">=</span><span class="s1">&#39;pg_default&#39;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="s1">&#39;base&#39;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;pg_tblspc/&#39;</span><span class="o">||</span><span class="n">t2</span><span class="p">.</span><span class="n">oid</span><span class="o">||</span><span class="s1">&#39;/PG_11_201804061/&#39;</span><span class="w"> </span><span class="k">end</span><span class="p">,</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="n">oid</span><span class="p">))).</span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_database</span><span class="w"> </span><span class="n">t1</span><span class="p">,</span><span class="n">pg_tablespace</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="n">dattablespace</span><span class="o">=</span><span class="n">t2</span><span class="p">.</span><span class="n">oid</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>按占空间大小，顺序查看所有表的大小</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">relname</span><span class="p">,</span><span class="w"> </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_relation_size</span><span class="p">(</span><span class="n">relid</span><span class="p">))</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_stat_user_tables</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">schemaname</span><span class="o">=</span><span class="s1">&#39;public&#39;</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">pg_relation_size</span><span class="p">(</span><span class="n">relid</span><span class="p">)</span><span class="w"> </span><span class="k">desc</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>按占空间大小，顺序查看索引大小</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">indexrelname</span><span class="p">,</span><span class="w"> </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_relation_size</span><span class="p">(</span><span class="n">relid</span><span class="p">))</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_stat_user_indexes</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">schemaname</span><span class="o">=</span><span class="s1">&#39;public&#39;</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">pg_relation_size</span><span class="p">(</span><span class="n">relid</span><span class="p">)</span><span class="w"> </span><span class="k">desc</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看参数文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">config_file</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">hba_file</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">ident_file</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看当前会话的参数值</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="k">all</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看参数值</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_file_settings</span><span class="w">
+</span></span></span></code></pre></div><p>查看某个参数值,比如参数work_mem</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">work_mem</span><span class="w">
+</span></span></span></code></pre></div><p>修改某个参数值,比如参数work_mem</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">alter</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">work_mem</span><span class="o">=</span><span class="s1">&#39;8MB&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="c1">--使用alter system命令将修改postgresql.auto.conf文件，而不是postgresql.conf，这样可以很好的保护postgresql.conf文件，加入你使用很多alter system命令后搞的一团糟，那么你只需要删除postgresql.auto.conf，再执行pg_ctl reload加载postgresql.conf文件即可实现参数的重新加载。
+</span></span></span></code></pre></div><p>查看是否归档</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">archive_mode</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看运行日志的相关配置，运行日志包括Error信息，定位慢查询SQL，数据库的启动关闭信息，checkpoint过于频繁等的告警信息。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">show</span><span class="w"> </span><span class="n">logging_collector</span><span class="p">;</span><span class="c1">--启动日志收集
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"></span><span class="k">show</span><span class="w"> </span><span class="n">log_directory</span><span class="p">;</span><span class="c1">--日志输出路径
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w"></span><span class="k">show</span><span class="w"> </span><span class="n">log_filename</span><span class="p">;</span><span class="c1">--日志文件名
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w"></span><span class="k">show</span><span class="w"> </span><span class="n">log_truncate_on_rotation</span><span class="p">;</span><span class="c1">--当生成新的文件时如果文件名已存在，是否覆盖同名旧文件名
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"></span><span class="k">show</span><span class="w"> </span><span class="n">log_statement</span><span class="p">;</span><span class="c1">--设置日志记录内容
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w"></span><span class="k">show</span><span class="w"> </span><span class="n">log_min_duration_statement</span><span class="p">;</span><span class="c1">--运行XX毫秒的语句会被记录到日志中，-1表示禁用这个功能，0表示记录所有语句，类似mysql的慢查询配置
+</span></span></span></code></pre></div><p>查看wal日志的配置，wal日志就是redo重做日志</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">存放在data_directory/pg_wal目录
+</span></span></code></pre></div><p>查看当前用户</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="k">c</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">current_user</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看所有用户</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_user</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_shadow</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看所有角色</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">du</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_roles</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查询用户XX的权限，必须到指定的数据库下执行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">table_privileges</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">grantee</span><span class="o">=</span><span class="s1">&#39;XX&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>创建用户XX，并授予超级管理员权限</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">create</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="n">XXX</span><span class="w"> </span><span class="n">SUPERUSER</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;123456&#39;</span><span class="w">
+</span></span></span></code></pre></div><p>创建角色，赋予了login权限，则相当于创建了用户，在pg_user可以看到这个角色</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">create</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="s2">&#34;user1&#34;</span><span class="w"> </span><span class="n">superuser</span><span class="p">;</span><span class="c1">--pg_roles有user1，pg_user和pg_shadow没有user1
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="k">alter</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="s2">&#34;user1&#34;</span><span class="w"> </span><span class="n">login</span><span class="p">;</span><span class="c1">--pg_user和pg_shadow也有user1了
+</span></span></span></code></pre></div><p>授权</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">DB</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">h</span><span class="w"> </span><span class="k">grant</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="n">schemaname</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">dbuser</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w"></span><span class="k">grant</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="n">tables</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="n">fds</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">dbuser</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">tablename</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">user</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">dbname</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">dbuser</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w"></span><span class="k">grant</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="n">tables</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">dbuser</span><span class="p">;</span><span class="c1">--给用户读取public这个schema下的所有表
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="n">schemaname</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">dbuser</span><span class="p">;</span><span class="c1">--给用户授予在schema上的create权限，比如create table、create view等
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">USAGE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="n">schemaname</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">dbuser</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w"></span><span class="k">grant</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">dbuser</span><span class="p">;</span><span class="c1">--报错ERROR: invalid privilege type SELECT for schema
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w"></span><span class="c1">--USAGE：对于程序语言来说，允许使用指定的程序语言创建函数;对于Schema来说，允许查找该Schema下的对象;对于序列来说，允许使用currval和nextval函数;对于外部封装器来说，允许使用外部封装器来创建外部服务器;对于外部服务器来说，允许创建外部表。
+</span></span></span></code></pre></div><p>查看表上存在哪些索引以及大小</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">relname</span><span class="p">,</span><span class="n">n</span><span class="p">.</span><span class="n">amname</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_class</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="n">pg_am</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">relam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">oid</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">oid</span><span class="w"> </span><span class="k">in</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">indexrelid</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_class</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">pg_index</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">indrelid</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">relname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;cc&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">relname</span><span class="p">,</span><span class="n">c2</span><span class="p">.</span><span class="n">relname</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="p">.</span><span class="n">relpages</span><span class="o">*</span><span class="mi">8</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">size_kb</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_class</span><span class="w"> </span><span class="k">c</span><span class="p">,</span><span class="w"> </span><span class="n">pg_class</span><span class="w"> </span><span class="n">c2</span><span class="p">,</span><span class="w"> </span><span class="n">pg_index</span><span class="w"> </span><span class="n">i</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">relname</span><span class="w"> </span><span class="o">=</span><span class="s1">&#39;cc&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="n">i</span><span class="p">.</span><span class="n">indrelid</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">c2</span><span class="p">.</span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="n">i</span><span class="p">.</span><span class="n">indexrelid</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">c2</span><span class="p">.</span><span class="n">relname</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看索引定义</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">indexrelid</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_class</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">pg_index</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">indrelid</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">relname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;cc&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">pg_get_indexdef</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">indexrelid</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>查看过程函数定义</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">oid</span><span class="p">,</span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_proc</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">proname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;insert_platform_action_exist&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">--oid = 24610
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_get_functiondef</span><span class="p">(</span><span class="mi">24610</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>查看表大小(不含索引等信息)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">pg_relation_size</span><span class="p">(</span><span class="s1">&#39;cc&#39;</span><span class="p">);</span><span class="w"> </span><span class="c1">--368640 byte
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_relation_size</span><span class="p">(</span><span class="s1">&#39;cc&#39;</span><span class="p">))</span><span class="w"> </span><span class="c1">--360 kB
+</span></span></span></code></pre></div><p>查看表所对应的数据文件路径与大小</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">pg_relation_filepath</span><span class="p">(</span><span class="n">oid</span><span class="p">),</span><span class="w"> </span><span class="n">relpages</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_class</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">relname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;empsalary&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>posegresql查询当前lsn</p>
 <p>1、用到哪些方法：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln"> 1</span><span class="n">apple</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">proname</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_proc</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">proname</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;pg_%_lsn&#39;</span><span class="p">;</span><span class="w">
-</span><span class="ln"> 2</span><span class="w">
-</span><span class="ln"> 3</span><span class="w"></span><span class="n">proname</span><span class="w">
-</span><span class="ln"> 4</span><span class="w">
-</span><span class="ln"> 5</span><span class="w"></span><span class="c1">---------------------------------
-</span><span class="ln"> 6</span><span class="c1"></span><span class="w">
-</span><span class="ln"> 7</span><span class="w"></span><span class="n">pg_current_wal_flush_lsn</span><span class="w">
-</span><span class="ln"> 8</span><span class="w">
-</span><span class="ln"> 9</span><span class="w"></span><span class="n">pg_current_wal_insert_lsn</span><span class="w">
-</span><span class="ln">10</span><span class="w">
-</span><span class="ln">11</span><span class="w"></span><span class="n">pg_current_wal_lsn</span><span class="w">
-</span><span class="ln">12</span><span class="w">
-</span><span class="ln">13</span><span class="w"></span><span class="n">pg_last_wal_receive_lsn</span><span class="w">
-</span><span class="ln">14</span><span class="w">
-</span><span class="ln">15</span><span class="w"></span><span class="n">pg_last_wal_replay_lsn</span><span class="w">
-</span></code></pre></div><p>2、查询当前的lsn值：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">apple</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">pg_current_wal_lsn</span><span class="p">();</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="n">pg_current_wal_lsn</span><span class="w">
-</span><span class="ln">4</span><span class="w">
-</span><span class="ln">5</span><span class="w"></span><span class="c1">--------------------------
-</span><span class="ln">6</span><span class="c1"></span><span class="w">
-</span><span class="ln">7</span><span class="w"></span><span class="mi">0</span><span class="o">/</span><span class="mi">45000098</span><span class="w">
-</span></code></pre></div><p>3、查询当前lsn对应的日志文件</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="n">pg_walfile_name</span><span class="p">(</span><span class="s1">&#39;0/1732DE8&#39;</span><span class="p">);</span><span class="w">
-</span></code></pre></div><p>4、查询当前lsn在日志文件中的偏移量</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_walfile_name_offset</span><span class="p">(</span><span class="n">pg_current_wal_lsn</span><span class="p">());</span><span class="w">
-</span></code></pre></div><p>切换pg_wal日志</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>select pg_switch_wal();
-</code></pre></div><p>清理pg_wal日志</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">pg_archivecleanup</span><span class="w"> </span><span class="o">/</span><span class="n">postgresql</span><span class="o">/</span><span class="n">pgsql</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">pg_wal</span><span class="w"> </span><span class="mi">000000010000000000000005</span><span class="w">
-</span><span class="ln">2</span><span class="w">
-</span><span class="ln">3</span><span class="w"></span><span class="err">表示删除</span><span class="mi">000000010000000000000005</span><span class="err">之前的所有日志</span><span class="w">
-</span><span class="ln">4</span><span class="w">
-</span><span class="ln">5</span><span class="w"></span><span class="c1">--pg_wal日志没有设置保留周期的参数，即没有类似mysql的参数expire_logs_days，pg_wal日志永久保留，除非sql脚步删除几天前或pg-rman备份时候设置保留策略
-</span></code></pre></div><p>查询有哪些slot，任意一个数据库下都可以查，查询的结果都一样</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_replication_slots</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>启动时间</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="n">statement_timestamp</span><span class="p">()</span><span class="o">-</span><span class="n">pg_postmaster_start_time</span><span class="p">()</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">up_time</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>查看有几个从库</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_stat_replication</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>主从延迟，主库上执行</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_wal_lsn_diff</span><span class="p">(</span><span class="n">pg_current_wal_flush_lsn</span><span class="p">(),</span><span class="n">write_lsn</span><span class="p">))</span><span class="w"> </span><span class="n">delay_wal_size</span><span class="p">,</span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_stat_replication</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>-- 手动激活从库为主库
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">apple</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">proname</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_proc</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">proname</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;pg_%_lsn&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"></span><span class="n">proname</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w"></span><span class="c1">---------------------------------
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w"></span><span class="n">pg_current_wal_flush_lsn</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"></span><span class="n">pg_current_wal_insert_lsn</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w"></span><span class="n">pg_current_wal_lsn</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w"></span><span class="n">pg_last_wal_receive_lsn</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w"></span><span class="n">pg_last_wal_replay_lsn</span><span class="w">
+</span></span></span></code></pre></div><p>2、查询当前的lsn值：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">apple</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">pg_current_wal_lsn</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">pg_current_wal_lsn</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="c1">--------------------------
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="mi">0</span><span class="o">/</span><span class="mi">45000098</span><span class="w">
+</span></span></span></code></pre></div><p>3、查询当前lsn对应的日志文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">pg_walfile_name</span><span class="p">(</span><span class="s1">&#39;0/1732DE8&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>4、查询当前lsn在日志文件中的偏移量</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_walfile_name_offset</span><span class="p">(</span><span class="n">pg_current_wal_lsn</span><span class="p">());</span><span class="w">
+</span></span></span></code></pre></div><p>切换pg_wal日志</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">select pg_switch_wal();
+</span></span></code></pre></div><p>清理pg_wal日志</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">pg_archivecleanup</span><span class="w"> </span><span class="o">/</span><span class="n">postgresql</span><span class="o">/</span><span class="n">pgsql</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">pg_wal</span><span class="w"> </span><span class="mi">000000010000000000000005</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="err">表示删除</span><span class="mi">000000010000000000000005</span><span class="err">之前的所有日志</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="c1">--pg_wal日志没有设置保留周期的参数，即没有类似mysql的参数expire_logs_days，pg_wal日志永久保留，除非sql脚步删除几天前或pg-rman备份时候设置保留策略
+</span></span></span></code></pre></div><p>查询有哪些slot，任意一个数据库下都可以查，查询的结果都一样</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_replication_slots</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>启动时间</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">statement_timestamp</span><span class="p">()</span><span class="o">-</span><span class="n">pg_postmaster_start_time</span><span class="p">()</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">up_time</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>查看有几个从库</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_stat_replication</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>主从延迟，主库上执行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_wal_lsn_diff</span><span class="p">(</span><span class="n">pg_current_wal_flush_lsn</span><span class="p">(),</span><span class="n">write_lsn</span><span class="p">))</span><span class="w"> </span><span class="n">delay_wal_size</span><span class="p">,</span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_stat_replication</span><span class="w"> </span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>-- 手动激活从库为主库
 -- 激活位点最新的库为主库</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">pg_ctl</span><span class="w"> </span><span class="n">promote</span><span class="w"> </span><span class="o">-</span><span class="n">D</span><span class="w"> </span><span class="err">$</span><span class="n">PGDATA</span><span class="w">
-</span></code></pre></div><p>查看活跃连接数</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_stat_activity</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="s1">&#39;IDLE&#39;</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>类似 mysql source xx.sql</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="err">\</span><span class="n">i</span><span class="w"> </span><span class="n">xx</span><span class="p">.</span><span class="k">sql</span><span class="w">
-</span></code></pre></div><p>杀掉某连接</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">select</span><span class="w"> </span><span class="n">pg_cancel_backend</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="k">session</span><span class="w"> </span><span class="err">还在，</span><span class="k">transaction</span><span class="w"> </span><span class="err">回滚</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="w"> </span><span class="err">来自</span><span class="w"> </span><span class="n">pg_stat_activity</span><span class="w">
-</span><span class="ln">2</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">pg_terminate_backend</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="k">session</span><span class="w"> </span><span class="err">消失，</span><span class="k">transaction</span><span class="w"> </span><span class="err">回滚</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="w"> </span><span class="err">来自</span><span class="w"> </span><span class="n">pg_stat_activity</span><span class="w">
-</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">pg_ctl</span><span class="w"> </span><span class="n">promote</span><span class="w"> </span><span class="o">-</span><span class="n">D</span><span class="w"> </span><span class="err">$</span><span class="n">PGDATA</span><span class="w">
+</span></span></span></code></pre></div><p>查看活跃连接数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_stat_activity</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="s1">&#39;IDLE&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>类似 mysql source xx.sql</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="err">\</span><span class="n">i</span><span class="w"> </span><span class="n">xx</span><span class="p">.</span><span class="k">sql</span><span class="w">
+</span></span></span></code></pre></div><p>杀掉某连接</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">pg_cancel_backend</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="k">session</span><span class="w"> </span><span class="err">还在，</span><span class="k">transaction</span><span class="w"> </span><span class="err">回滚</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="w"> </span><span class="err">来自</span><span class="w"> </span><span class="n">pg_stat_activity</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">pg_terminate_backend</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="k">session</span><span class="w"> </span><span class="err">消失，</span><span class="k">transaction</span><span class="w"> </span><span class="err">回滚</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="w"> </span><span class="err">来自</span><span class="w"> </span><span class="n">pg_stat_activity</span><span class="w">
+</span></span></span></code></pre></div>
     
       
     
@@ -430,7 +430,7 @@
   <section class="sidebar_inner">
     <h2>Paul Zeng</h2>
     <div>
-      架构师、团队主管、体育节目爱好者 @Shanghai
+      积跬步，至千里
     </div>
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">精选文章</h2>
@@ -463,6 +463,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/12/unsafe_http_methods/" class="nav-link">不安全的http方法</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
       </li>
       <li>
@@ -482,9 +485,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/05/access-new-bing/" class="nav-link">不用魔法直接访问 New Bing</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/05/mouse_wheel_issue/" class="nav-link">鼠标滚轮上下乱跳</a>
       </li>
     </ul>
     <div>
@@ -658,11 +658,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
             </a>
             
             
@@ -674,7 +678,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
             </a>
             
             
@@ -874,6 +878,10 @@
             
             
             <a href='https://www.zengxi.net/tags/hotspot/' class=" post_tag button button_translucent" data-position=1>HOTSPOT<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/http/' class=" post_tag button button_translucent" data-position=1>HTTP<span class="button_tally">1</span>
             </a>
             
             
@@ -1093,27 +1101,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
@@ -1121,23 +1113,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
             </a>
             
             
@@ -1145,7 +1129,23 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
             </a>
             
             
@@ -1153,19 +1153,39 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=4>排序<span class="button_tally">4</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
             </a>
             
             
@@ -1173,7 +1193,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
             </a>
             
             
@@ -1185,6 +1209,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
             </a>
             
@@ -1193,23 +1221,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
             </a>
             
             
@@ -1221,15 +1237,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1306,7 +1318,7 @@
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" integrity="sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" integrity="sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous"></script>
     
   </body>
 </html>

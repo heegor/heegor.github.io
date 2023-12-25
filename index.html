@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-figures="">
   <head>
-	<meta name="generator" content="Hugo 0.92.2" />
+	<meta name="generator" content="Hugo 0.121.1">
 <title>保罗札记</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -43,8 +43,8 @@
     
     
     <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
-    "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" as="script" integrity=
+    "sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous">
 
     
     <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
@@ -132,6 +132,38 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2023/12/unsafe_http_methods/">不安全的http方法</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 25, 2023</span>
+    <a href='https://www.zengxi.net/tags/http' class="post_tag button button_translucent">http
+    </a>
+    <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8' class="post_tag button button_translucent">安全
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">在安全扫描工具中，会验证服务器是否开启了不安全的 http 方法。
+从资源的角度看，GET、HEAD、OPTIONS、TRACE，这些方法不会产生什么动作，不会在服务器上产生结果，只是简单获取信息。相对的，能产生动作的方法就会被认为是不安全的HTTP方法。
+在上面认为的那些不安全的HTTP方法中，安全界认为 PUT、DELETE、TRACE 是不安全的，另外 WebDAV 中的几个方法，RFC 5789 中的 PATCH 方法也被认为是不安全的。（TRACE容易引发XST攻击，PATCH修改资源的部分内容，PUT/DELETE没有认证机制等原因，不仅仅因为它们会产生结果）。
+下面的方法可能会被利用，向应用程序实施有效攻击：
+PUT： …</p>
+          <a href="https://www.zengxi.net/2023/12/unsafe_http_methods/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/">数据查询ES设计演变</a>
       </h3>
       <div class="post_meta">
@@ -207,10 +239,10 @@
       <div class="excerpt_footer">
         <div>
           <p class="pale">JVM 包含多种不同类型的参数选项：
- -D 用来设置系统属性，属于标准选项 -X 设置非标准选项，支持的选项范围跟具体的 JVM 实现有关 -XX 设置高级选项，允许开发者调整 JVM 的行为、性能、输出调试信息，支持的选项范围也跟具体的 JVM 实现有关  标准选项（standard options）-D 标准选项是所有 JVM 实现都会支持。在控制台输入 java 这个命令，除了能看到 java 命令的使用手册，还能看到机器上默认的 JVM 所支持的所有标准选项。
+-D 用来设置系统属性，属于标准选项 -X 设置非标准选项，支持的选项范围跟具体的 JVM 实现有关 -XX 设置高级选项，允许开发者调整 JVM 的行为、性能、输出调试信息，支持的选项范围也跟具体的 JVM 实现有关 标准选项（standard options）-D 标准选项是所有 JVM 实现都会支持。在控制台输入 java 这个命令，除了能看到 java 命令的使用手册，还能看到机器上默认的 JVM 所支持的所有标准选项。
 Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，这个不是环境变量。
 可以在命令行中带入参数:
-1-Dfoo=bar1 也可以在java代码中，设置 …</p>
+1-Dfoo=bar1 也可以在java代码中，设置或者 …</p>
           <a href="https://www.zengxi.net/2023/12/jvm-args/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
@@ -301,7 +333,8 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
       <div class="excerpt_footer">
         <div>
           <p class="pale">On-Premises 与 Private Cloud 有一定的区别：
- On-Premises 可以认为是本地部署，本地数据中心是指位于组织场所的物理基础设施。这些数据中心由组织的 IT 团队构建和维护，可以完全控制基础设施和数据管理流程。数据中心可以定制以满足特定需求，并且只能由授权人员访问。 Private Cloud 是私有云部署。私有云是虚拟化环境，提供与本地数据中心相同的功能。然而，与本地数据中心不同，私有云托管在远程基础设施上，可以从任何有互联网连接的地方访问。私有云可以由组织的 IT 团队或第三方服务提供商管理。  这两种方法都有其优点和缺点，需要权衡它们以确定哪种方法最适合自己的组织。以下是一些需要考虑的关键因素： …</p>
+On-Premises 可以认为是本地部署，本地数据中心是指位于组织场所的物理基础设施。这些数据中心由组织的 IT 团队构建和维护，可以完全控制基础设施和数据管理流程。数据中心可以定制以满足特定需求，并且只能由授权人员访问。 Private Cloud 是私有云部署。私有云是虚拟化环境，提供与本地数据中心相同的功能。然而，与本地数据中心不同，私有云托管在远程基础设施上，可以从任何有互联网连接的地方访问。私有云可以由组织的 IT 团队或第三方服务提供商管理。 这两种方法都有其优点和缺点，需要权衡它们以确定哪种方法最适合自己的组织。以下是一些需要考虑的关键因素：
+私 …</p>
           <a href="https://www.zengxi.net/2023/11/on-premise-vs-private-cloud/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
@@ -331,8 +364,8 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
         <div>
           <p class="pale">微软的 new bing 已经接入 GPT-4, 这几天已经开放给用户免费免费，不用预约排队体验。但是大陆地区无法直接访问，即使安装了Edge 的 dev 版本也没用，需要借助工具。但是呢，即使通过魔法可能也无法访问，因为 ip 可能在微软的黑名单中。
 目前有人开发了 NewBingGoGo 这个工具，可以不需要通过魔法来使用。目前这个工具有2个版本：
- 插件版：https://gitee.com/jja8/NewBingGoGo web版：https://github.com/jianjianai/NewBingGoGo-Web  使用的时候，可以目前免费的云服务提供商来部署。可以参考 使用免费的的云服务提供商创建魔法链接
-嫌麻烦 …</p>
+插件版：https://gitee.com/jja8/NewBingGoGo web版：https://github.com/jianjianai/NewBingGoGo-Web 使用的时候，可以目前免费的云服务提供商来部署。可以参考 使用免费的的云服务提供商创建魔法链接
+嫌麻烦的 …</p>
           <a href="https://www.zengxi.net/2023/05/access-new-bing/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
@@ -400,38 +433,8 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
 旧的导航屏幕
 换了之后的大屏导航
 自己的车子的15年的，原车的导航是小屏幕，操作系统是wince。当前的智能车机发展的如火如荼，已经脱节太多了。一直以来都是用手机做导航，就是需要一直插着充电口，而且如果有电话打进来就比较麻烦。后来看到网上的一些方案，主要有3种：
- 拿旧的大屏手机，拆掉电池，改装成电源直接供电 拿旧的平板改装 用安卓导航替换原车的  后来选择了第三种，因为最省事，而且现在商家可以提供转接线束，安装的时候不需要破线，直接对插。如果插上协议盒，就可以直接支持原车的各种功能， …</p>
+拿旧的大屏手机，拆掉电池，改装成电源直接供电 拿旧的平板改装 用安卓导航替换原车的 后来选择了第三种，因为最省事，而且现在商家可以提供转接线束，安装的时候不需要破线，直接对插。如果插上协议盒，就可以直接支持原车的各种功能，包括 …</p>
           <a href="https://www.zengxi.net/2023/02/change_car_navi/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/">DBeaver自定义JDK路径</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 23, 2021</span>
-    <a href='https://www.zengxi.net/tags/dbeaver' class="post_tag button button_translucent">dbeaver
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">新版的DBeaver需要JDK 11才能执行，如果机器中默认的JDK版本低于11，那启动的时候就会报错。
-除了将默认的JDK版本设置成11以上版本之外，还有办法就是修改DBeaver配置文件中的启动参数。
-编辑/usr/lib/dbeaver/dbeaver.ini，添加参数指定jdk的路径：
-1-vm 2/usr/lib/jvm/java-11-openjdk/bin 最终的配置文件内容样例：
-1-startup 2plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar 3--launcher.library …</p>
-          <a href="https://www.zengxi.net/2021/07/dbeaver_jdk/" class="excerpt_more button">阅读更多</a>
         </div>
       </div>
     </div>
@@ -473,7 +476,7 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
   <section class="sidebar_inner">
     <h2>Paul Zeng</h2>
     <div>
-      架构师、团队主管、体育节目爱好者 @Shanghai
+      积跬步，至千里
     </div>
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">精选文章</h2>
@@ -506,6 +509,9 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/12/unsafe_http_methods/" class="nav-link">不安全的http方法</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
       </li>
       <li>
@@ -525,9 +531,6 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/05/access-new-bing/" class="nav-link">不用魔法直接访问 New Bing</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/05/mouse_wheel_issue/" class="nav-link">鼠标滚轮上下乱跳</a>
       </li>
     </ul>
     <div>
@@ -701,11 +704,15 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
             </a>
             
             
@@ -717,7 +724,7 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
             </a>
             
             
@@ -917,6 +924,10 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             
             
             <a href='https://www.zengxi.net/tags/hotspot/' class=" post_tag button button_translucent" data-position=1>HOTSPOT<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/http/' class=" post_tag button button_translucent" data-position=1>HTTP<span class="button_tally">1</span>
             </a>
             
             
@@ -1136,27 +1147,11 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
@@ -1164,23 +1159,15 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
             </a>
             
             
@@ -1188,7 +1175,23 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
             </a>
             
             
@@ -1196,19 +1199,39 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=4>排序<span class="button_tally">4</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
             </a>
             
             
@@ -1216,7 +1239,11 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
             </a>
             
             
@@ -1228,6 +1255,10 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
             </a>
             
@@ -1236,23 +1267,11 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
             </a>
             
             
@@ -1264,15 +1283,11 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1351,7 +1366,7 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" integrity="sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" integrity="sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous"></script>
     
   </body>
 </html>

@@ -5,19 +5,16 @@
     <link>https://www.zengxi.net/categories/fiddler/</link>
     <description>Recent content in fiddler on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 30 Mar 2021 12:47:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/fiddler/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 Mar 2021 12:47:00 +0800</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/categories/fiddler/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在Fiddler中使用脚本来修改Response数据</title>
       <link>https://www.zengxi.net/2021/03/update_response_via_fiddler/</link>
       <pubDate>Tue, 30 Mar 2021 12:47:00 +0800</pubDate>
-      
       <guid>https://www.zengxi.net/2021/03/update_response_via_fiddler/</guid>
-      <description>使用Fiddler抓包工具，通过修改CustomRules.js脚本达到修改Http请求的Response中Body信息（如JSON串）。
-常用于在Server开发未完全Ready而前端或客户端开发需要Server数据时，修改请求的返回数据，达到Debug和测试的目的，较添加BreakPoint的方法更加便捷。
-本例Demo中会为JSON添加一个字段和修改一个字段，如下所示：
-1// 原JSON串 V1.0 2{ 3 &amp;#34;music&amp;#34;: &amp;#34;big big world&amp;#34;, 4 &amp;#34;singer&amp;#34;: &amp;#34;Emilia Rydberg&amp;#34; 5} 6 7// 新JSON串 V1.1 8{ 9 &amp;#34;music&amp;#34;: &amp;#34;big big world&amp;#34;, 10 &amp;#34;singer&amp;#34;: &amp;#34;艾密莉亚·怀得堡&amp;#34;, // 修改该字段(英文名改为中文名显示) 11 &amp;#34;similar song&amp;#34;: [ // 添加该字段(相似歌曲列表) 12 { 13 &amp;#34;music&amp;#34;: &amp;#34;dying in the sun&amp;#34;, 14 &amp;#34;singer&amp;#34;: &amp;#34;The Cranberries&amp;#34; 15 }, 16 { 17 &amp;#34;music&amp;#34;: &amp;#34;seasons in sun&amp;#34;, 18 &amp;#34;singer&amp;#34;: &amp;#34;WestLife&amp;#34; 19 } 20 ] 21} 基本流程 基本步骤（简单） 打开并编辑Customize Rule文件，在方法 OnBeforeResponse 中插入修改代码，重启Fiddler重新加载Rule，运行。</description>
+      <description>使用Fiddler抓包工具，通过修改CustomRules.js脚本达到修改Http请求的Response中Body信息（如JSON串）。&#xA;常用于在Server开发未完全Ready而前端或客户端开发需要Server数据时，修改请求的返回数据，达到Debug和测试的目的，较添加BreakPoint的方法更加便捷。&#xA;本例Demo中会为JSON添加一个字段和修改一个字段，如下所示：&#xA;1// 原JSON串 V1.0 2{ 3 &amp;#34;music&amp;#34;: &amp;#34;big big world&amp;#34;, 4 &amp;#34;singer&amp;#34;: &amp;#34;Emilia Rydberg&amp;#34; 5} 6 7// 新JSON串 V1.1 8{ 9 &amp;#34;music&amp;#34;: &amp;#34;big big world&amp;#34;, 10 &amp;#34;singer&amp;#34;: &amp;#34;艾密莉亚·怀得堡&amp;#34;, // 修改该字段(英文名改为中文名显示) 11 &amp;#34;similar song&amp;#34;: [ // 添加该字段(相似歌曲列表) 12 { 13 &amp;#34;music&amp;#34;: &amp;#34;dying in the sun&amp;#34;, 14 &amp;#34;singer&amp;#34;: &amp;#34;The Cranberries&amp;#34; 15 }, 16 { 17 &amp;#34;music&amp;#34;: &amp;#34;seasons in sun&amp;#34;, 18 &amp;#34;singer&amp;#34;: &amp;#34;WestLife&amp;#34; 19 } 20 ] 21} 基本流程 基本步骤（简单） 打开并编辑Customize Rule文件，在方法 OnBeforeResponse 中插入修改代码，重启Fiddler重新加载Rule，运行。</description>
     </item>
-    
   </channel>
 </rss>

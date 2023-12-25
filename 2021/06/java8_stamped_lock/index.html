@@ -20,14 +20,14 @@
 
 <meta property="og:type" content="article">
 <meta name="description" content="synchronized 在java5之前，实现同步主要是使用synchronized。它是Java语言的关键字，当它用来修饰一个方法或者一个代码块的时候，能够保证在同一时刻最多只有一个线程执行该段代码。 有四种不同的同步块:
- 实例方法 静态方法 实例方法中的同步块 静态方法中的同步块  在多线程并发编程 …">
+实例方法 静态方法 实例方法中的同步块 静态方法中的同步块 在多线程并发编程 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="Java 8新特性 - (13)StampedLock" />
 <meta property="og:url" content="https://www.zengxi.net/2021/06/java8_stamped_lock/" />
 <meta property="og:title" content="Java 8新特性 - (13)StampedLock" />
 <meta property="og:description" content="synchronized 在java5之前，实现同步主要是使用synchronized。它是Java语言的关键字，当它用来修饰一个方法或者一个代码块的时候，能够保证在同一时刻最多只有一个线程执行该段代码。 有四种不同的同步块:
- 实例方法 静态方法 实例方法中的同步块 静态方法中的同步块  在多线程并发编程 …" />
+实例方法 静态方法 实例方法中的同步块 静态方法中的同步块 在多线程并发编程 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -43,8 +43,8 @@
     
     
     <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
-    "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" as="script" integrity=
+    "sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous">
 
     
     <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
@@ -202,91 +202,91 @@
 <li>乐观读锁 tryOptimisticRead<br>
 是相对于悲观锁来说的，在操作数据前并没有通过CAS设置锁的状态，如果当前没有线程持有写锁，则简单的返回一个非0的stamp版本信息，获取该stamp后在具体操作数据前还需要调用validate验证下该stamp是否已经不可用，也就是看当调用tryOptimisticRead返回stamp后到到当前时间间是否有其他线程持有了写锁，如果是那么validate会返回0，否者就可以使用该stamp版本的锁对数据进行操作。由于tryOptimisticRead并没有使用CAS设置锁状态所以不需要显示的释放该锁。该锁的一个特点是适用于读多写少的场景，因为获取读锁只是使用与或操作进行检验，不涉及CAS操作，所以效率会高很多，但是同时由于没有使用真正的锁，在保证数据一致性上需要拷贝一份要操作的变量到方法栈，并且在操作数据时候可能其他写线程已经修改了数据，而我们操作的是方法栈里面的数据，也就是一个快照，所以最多返回的不是最新的数据，但是一致性还是得到保障的。</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">Point</span> <span class="o">{</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span>    <span class="c1">// 成员变量
-</span><span class="ln"> 4</span><span class="c1"></span>    <span class="kd">private</span> <span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">;</span>
-<span class="ln"> 5</span>
-<span class="ln"> 6</span>    <span class="c1">// 锁实例
-</span><span class="ln"> 7</span><span class="c1"></span>    <span class="kd">private</span> <span class="kd">final</span> <span class="n">StampedLock</span> <span class="n">sl</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StampedLock</span><span class="o">();</span>
-<span class="ln"> 8</span>
-<span class="ln"> 9</span>    <span class="c1">// 排它锁-写锁（writeLock）
-</span><span class="ln">10</span><span class="c1"></span>    <span class="kt">void</span> <span class="nf">move</span><span class="o">(</span><span class="kt">double</span> <span class="n">deltaX</span><span class="o">,</span> <span class="kt">double</span> <span class="n">deltaY</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">11</span>        <span class="kt">long</span> <span class="n">stamp</span> <span class="o">=</span> <span class="n">sl</span><span class="o">.</span><span class="na">writeLock</span><span class="o">();</span>
-<span class="ln">12</span>        <span class="k">try</span> <span class="o">{</span>
-<span class="ln">13</span>            <span class="n">x</span> <span class="o">+=</span> <span class="n">deltaX</span><span class="o">;</span>
-<span class="ln">14</span>            <span class="n">y</span> <span class="o">+=</span> <span class="n">deltaY</span><span class="o">;</span>
-<span class="ln">15</span>        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-<span class="ln">16</span>            <span class="n">sl</span><span class="o">.</span><span class="na">unlockWrite</span><span class="o">(</span><span class="n">stamp</span><span class="o">);</span>
-<span class="ln">17</span>        <span class="o">}</span>
-<span class="ln">18</span>    <span class="o">}</span>
-<span class="ln">19</span>
-<span class="ln">20</span>    <span class="c1">// 乐观读锁（tryOptimisticRead）
-</span><span class="ln">21</span><span class="c1"></span>    <span class="kt">double</span> <span class="nf">distanceFromOrigin</span><span class="o">()</span> <span class="o">{</span>
-<span class="ln">22</span>
-<span class="ln">23</span>        <span class="c1">// 尝试获取乐观读锁（1）
-</span><span class="ln">24</span><span class="c1"></span>        <span class="kt">long</span> <span class="n">stamp</span> <span class="o">=</span> <span class="n">sl</span><span class="o">.</span><span class="na">tryOptimisticRead</span><span class="o">();</span>
-<span class="ln">25</span>        <span class="c1">// 将全部变量拷贝到方法体栈内（2）
-</span><span class="ln">26</span><span class="c1"></span>        <span class="kt">double</span> <span class="n">currentX</span> <span class="o">=</span> <span class="n">x</span><span class="o">,</span> <span class="n">currentY</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
-<span class="ln">27</span>        <span class="c1">// 检查在（1）获取到读锁票据后，锁有没被其他写线程排它性抢占（3）
-</span><span class="ln">28</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(!</span><span class="n">sl</span><span class="o">.</span><span class="na">validate</span><span class="o">(</span><span class="n">stamp</span><span class="o">))</span> <span class="o">{</span>
-<span class="ln">29</span>            <span class="c1">// 如果被抢占则获取一个共享读锁（悲观获取）（4）
-</span><span class="ln">30</span><span class="c1"></span>            <span class="n">stamp</span> <span class="o">=</span> <span class="n">sl</span><span class="o">.</span><span class="na">readLock</span><span class="o">();</span>
-<span class="ln">31</span>            <span class="k">try</span> <span class="o">{</span>
-<span class="ln">32</span>                <span class="c1">// 将全部变量拷贝到方法体栈内（5）
-</span><span class="ln">33</span><span class="c1"></span>                <span class="n">currentX</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
-<span class="ln">34</span>                <span class="n">currentY</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
-<span class="ln">35</span>            <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-<span class="ln">36</span>                <span class="c1">// 释放共享读锁（6）
-</span><span class="ln">37</span><span class="c1"></span>                <span class="n">sl</span><span class="o">.</span><span class="na">unlockRead</span><span class="o">(</span><span class="n">stamp</span><span class="o">);</span>
-<span class="ln">38</span>            <span class="o">}</span>
-<span class="ln">39</span>        <span class="o">}</span>
-<span class="ln">40</span>        <span class="c1">// 返回计算结果（7）
-</span><span class="ln">41</span><span class="c1"></span>        <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">currentX</span> <span class="o">*</span> <span class="n">currentX</span> <span class="o">+</span> <span class="n">currentY</span> <span class="o">*</span> <span class="n">currentY</span><span class="o">);</span>
-<span class="ln">42</span>    <span class="o">}</span>
-<span class="ln">43</span>
-<span class="ln">44</span>    <span class="c1">// 使用悲观锁获取读锁，并尝试转换为写锁
-</span><span class="ln">45</span><span class="c1"></span>    <span class="kt">void</span> <span class="nf">moveIfAtOrigin</span><span class="o">(</span><span class="kt">double</span> <span class="n">newX</span><span class="o">,</span> <span class="kt">double</span> <span class="n">newY</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">46</span>        <span class="c1">// 这里可以使用乐观读锁替换（1）
-</span><span class="ln">47</span><span class="c1"></span>        <span class="kt">long</span> <span class="n">stamp</span> <span class="o">=</span> <span class="n">sl</span><span class="o">.</span><span class="na">readLock</span><span class="o">();</span>
-<span class="ln">48</span>        <span class="k">try</span> <span class="o">{</span>
-<span class="ln">49</span>            <span class="c1">// 如果当前点在原点则移动（2）
-</span><span class="ln">50</span><span class="c1"></span>            <span class="k">while</span> <span class="o">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">0</span><span class="o">.</span><span class="na">0</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">==</span> <span class="n">0</span><span class="o">.</span><span class="na">0</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">51</span>                <span class="c1">// 尝试将获取的读锁升级为写锁（3）
-</span><span class="ln">52</span><span class="c1"></span>                <span class="kt">long</span> <span class="n">ws</span> <span class="o">=</span> <span class="n">sl</span><span class="o">.</span><span class="na">tryConvertToWriteLock</span><span class="o">(</span><span class="n">stamp</span><span class="o">);</span>
-<span class="ln">53</span>                <span class="c1">// 升级成功，则更新票据，并设置坐标值，然后退出循环（4）
-</span><span class="ln">54</span><span class="c1"></span>                <span class="k">if</span> <span class="o">(</span><span class="n">ws</span> <span class="o">!=</span> <span class="n">0L</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">55</span>                    <span class="n">stamp</span> <span class="o">=</span> <span class="n">ws</span><span class="o">;</span>
-<span class="ln">56</span>                    <span class="n">x</span> <span class="o">=</span> <span class="n">newX</span><span class="o">;</span>
-<span class="ln">57</span>                    <span class="n">y</span> <span class="o">=</span> <span class="n">newY</span><span class="o">;</span>
-<span class="ln">58</span>                    <span class="k">break</span><span class="o">;</span>
-<span class="ln">59</span>                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-<span class="ln">60</span>                    <span class="c1">// 读锁升级写锁失败则释放读锁，显示获取独占写锁，然后循环重试（5）
-</span><span class="ln">61</span><span class="c1"></span>                    <span class="n">sl</span><span class="o">.</span><span class="na">unlockRead</span><span class="o">(</span><span class="n">stamp</span><span class="o">);</span>
-<span class="ln">62</span>                    <span class="n">stamp</span> <span class="o">=</span> <span class="n">sl</span><span class="o">.</span><span class="na">writeLock</span><span class="o">();</span>
-<span class="ln">63</span>                <span class="o">}</span>
-<span class="ln">64</span>            <span class="o">}</span>
-<span class="ln">65</span>        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-<span class="ln">66</span>            <span class="c1">// 释放锁（6）
-</span><span class="ln">67</span><span class="c1"></span>            <span class="n">sl</span><span class="o">.</span><span class="na">unlock</span><span class="o">(</span><span class="n">stamp</span><span class="o">);</span>
-<span class="ln">68</span>        <span class="o">}</span>
-<span class="ln">69</span>    <span class="o">}</span>
-<span class="ln">70</span><span class="o">}</span>
-</code></pre></div><p>使用乐观读锁还是很容易犯错误的，必须要小心，必须要保证如下的使用顺序：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kt">long</span> <span class="n">stamp</span> <span class="o">=</span> <span class="n">lock</span><span class="o">.</span><span class="na">tryOptimisticRead</span><span class="o">();</span> <span class="c1">//非阻塞获取版本信息
-</span><span class="ln"> 2</span><span class="c1"></span><span class="n">copyVaraibale2ThreadMemory</span><span class="o">();</span><span class="c1">//拷贝变量到线程本地堆栈
-</span><span class="ln"> 3</span><span class="c1"></span><span class="k">if</span><span class="o">(!</span><span class="n">lock</span><span class="o">.</span><span class="na">validate</span><span class="o">(</span><span class="n">stamp</span><span class="o">)){</span> <span class="c1">// 校验
-</span><span class="ln"> 4</span><span class="c1"></span>    <span class="kt">long</span> <span class="n">stamp</span> <span class="o">=</span> <span class="n">lock</span><span class="o">.</span><span class="na">readLock</span><span class="o">();</span><span class="c1">//获取读锁
-</span><span class="ln"> 5</span><span class="c1"></span>    <span class="k">try</span> <span class="o">{</span>
-<span class="ln"> 6</span>        <span class="n">copyVaraibale2ThreadMemory</span><span class="o">();</span><span class="c1">//拷贝变量到线程本地堆栈
-</span><span class="ln"> 7</span><span class="c1"></span>     <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-<span class="ln"> 8</span>       <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">(</span><span class="n">stamp</span><span class="o">);</span><span class="c1">//释放悲观锁
-</span><span class="ln"> 9</span><span class="c1"></span>    <span class="o">}</span>
-<span class="ln">10</span>
-<span class="ln">11</span><span class="o">}</span>
-<span class="ln">12</span>
-<span class="ln">13</span><span class="n">useThreadMemoryVarables</span><span class="o">();</span><span class="c1">//使用线程本地堆栈里面的数据进行操作
-</span></code></pre></div><h2 id="总结">总结</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">class</span> <span class="nc">Point</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">    </span><span class="c1">// 成员变量</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">    </span><span class="c1">// 锁实例</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StampedLock</span><span class="w"> </span><span class="n">sl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StampedLock</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">    </span><span class="c1">// 排它锁-写锁（writeLock）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">deltaX</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">deltaY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">stamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sl</span><span class="p">.</span><span class="na">writeLock</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">            </span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">deltaX</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">            </span><span class="n">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">deltaY</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">            </span><span class="n">sl</span><span class="p">.</span><span class="na">unlockWrite</span><span class="p">(</span><span class="n">stamp</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w">    </span><span class="c1">// 乐观读锁（tryOptimisticRead）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="nf">distanceFromOrigin</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="w">        </span><span class="c1">// 尝试获取乐观读锁（1）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">stamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sl</span><span class="p">.</span><span class="na">tryOptimisticRead</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="w">        </span><span class="c1">// 将全部变量拷贝到方法体栈内（2）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">currentX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">currentY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="w">        </span><span class="c1">// 检查在（1）获取到读锁票据后，锁有没被其他写线程排它性抢占（3）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">sl</span><span class="p">.</span><span class="na">validate</span><span class="p">(</span><span class="n">stamp</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="w">            </span><span class="c1">// 如果被抢占则获取一个共享读锁（悲观获取）（4）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="w">            </span><span class="n">stamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sl</span><span class="p">.</span><span class="na">readLock</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">31</span><span class="cl"><span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">32</span><span class="cl"><span class="w">                </span><span class="c1">// 将全部变量拷贝到方法体栈内（5）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">33</span><span class="cl"><span class="w">                </span><span class="n">currentX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">34</span><span class="cl"><span class="w">                </span><span class="n">currentY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">35</span><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">36</span><span class="cl"><span class="w">                </span><span class="c1">// 释放共享读锁（6）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">37</span><span class="cl"><span class="w">                </span><span class="n">sl</span><span class="p">.</span><span class="na">unlockRead</span><span class="p">(</span><span class="n">stamp</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">38</span><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">39</span><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">40</span><span class="cl"><span class="w">        </span><span class="c1">// 返回计算结果（7）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">41</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">sqrt</span><span class="p">(</span><span class="n">currentX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">currentX</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">currentY</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">currentY</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">42</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">43</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">44</span><span class="cl"><span class="w">    </span><span class="c1">// 使用悲观锁获取读锁，并尝试转换为写锁</span><span class="w">
+</span></span></span><span class="line"><span class="ln">45</span><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">moveIfAtOrigin</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">newX</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">newY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">46</span><span class="cl"><span class="w">        </span><span class="c1">// 这里可以使用乐观读锁替换（1）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">47</span><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">stamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sl</span><span class="p">.</span><span class="na">readLock</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">48</span><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">49</span><span class="cl"><span class="w">            </span><span class="c1">// 如果当前点在原点则移动（2）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">50</span><span class="cl"><span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">0</span><span class="p">.</span><span class="na">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">0</span><span class="p">.</span><span class="na">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">51</span><span class="cl"><span class="w">                </span><span class="c1">// 尝试将获取的读锁升级为写锁（3）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">52</span><span class="cl"><span class="w">                </span><span class="kt">long</span><span class="w"> </span><span class="n">ws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sl</span><span class="p">.</span><span class="na">tryConvertToWriteLock</span><span class="p">(</span><span class="n">stamp</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">53</span><span class="cl"><span class="w">                </span><span class="c1">// 升级成功，则更新票据，并设置坐标值，然后退出循环（4）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">54</span><span class="cl"><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ws</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">0L</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">55</span><span class="cl"><span class="w">                    </span><span class="n">stamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ws</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">56</span><span class="cl"><span class="w">                    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newX</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">57</span><span class="cl"><span class="w">                    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newY</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">58</span><span class="cl"><span class="w">                    </span><span class="k">break</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">59</span><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">60</span><span class="cl"><span class="w">                    </span><span class="c1">// 读锁升级写锁失败则释放读锁，显示获取独占写锁，然后循环重试（5）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">61</span><span class="cl"><span class="w">                    </span><span class="n">sl</span><span class="p">.</span><span class="na">unlockRead</span><span class="p">(</span><span class="n">stamp</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">62</span><span class="cl"><span class="w">                    </span><span class="n">stamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sl</span><span class="p">.</span><span class="na">writeLock</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">63</span><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">64</span><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">65</span><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">66</span><span class="cl"><span class="w">            </span><span class="c1">// 释放锁（6）</span><span class="w">
+</span></span></span><span class="line"><span class="ln">67</span><span class="cl"><span class="w">            </span><span class="n">sl</span><span class="p">.</span><span class="na">unlock</span><span class="p">(</span><span class="n">stamp</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">68</span><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">69</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">70</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>使用乐观读锁还是很容易犯错误的，必须要小心，必须要保证如下的使用顺序：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kt">long</span><span class="w"> </span><span class="n">stamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lock</span><span class="p">.</span><span class="na">tryOptimisticRead</span><span class="p">();</span><span class="w"> </span><span class="c1">//非阻塞获取版本信息</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w"></span><span class="n">copyVaraibale2ThreadMemory</span><span class="p">();</span><span class="c1">//拷贝变量到线程本地堆栈</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"></span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">lock</span><span class="p">.</span><span class="na">validate</span><span class="p">(</span><span class="n">stamp</span><span class="p">)){</span><span class="w"> </span><span class="c1">// 校验</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">stamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lock</span><span class="p">.</span><span class="na">readLock</span><span class="p">();</span><span class="c1">//获取读锁</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">        </span><span class="n">copyVaraibale2ThreadMemory</span><span class="p">();</span><span class="c1">//拷贝变量到线程本地堆栈</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">     </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">       </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">(</span><span class="n">stamp</span><span class="p">);</span><span class="c1">//释放悲观锁</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w"></span><span class="n">useThreadMemoryVarables</span><span class="p">();</span><span class="c1">//使用线程本地堆栈里面的数据进行操作</span><span class="w">
+</span></span></span></code></pre></div><h2 id="总结">总结</h2>
 <ul>
 <li>synchronized是在JVM层面上实现的，不但可以通过一些监控工具监控synchronized的锁定，而且在代码执行时出现异常，JVM会自动释放锁定</li>
 <li>ReentrantLock、ReentrantReadWriteLock,、StampedLock都是对象层面的锁定，要保证锁定一定会被释放，就必须将unLock()放到finally{}中</li>
@@ -310,7 +310,7 @@
   <section class="sidebar_inner">
     <h2>Paul Zeng</h2>
     <div>
-      架构师、团队主管、体育节目爱好者 @Shanghai
+      积跬步，至千里
     </div>
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">精选文章</h2>
@@ -343,6 +343,9 @@
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2023/12/unsafe_http_methods/" class="nav-link">不安全的http方法</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
       </li>
       <li>
@@ -362,9 +365,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/05/access-new-bing/" class="nav-link">不用魔法直接访问 New Bing</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/05/mouse_wheel_issue/" class="nav-link">鼠标滚轮上下乱跳</a>
       </li>
     </ul>
     <div>
@@ -538,11 +538,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
             </a>
             
             
@@ -554,7 +558,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
             </a>
             
             
@@ -754,6 +758,10 @@
             
             
             <a href='https://www.zengxi.net/tags/hotspot/' class=" post_tag button button_translucent" data-position=1>HOTSPOT<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/http/' class=" post_tag button button_translucent" data-position=1>HTTP<span class="button_tally">1</span>
             </a>
             
             
@@ -973,27 +981,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
@@ -1001,23 +993,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
             </a>
             
             
@@ -1025,7 +1009,23 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
             </a>
             
             
@@ -1033,19 +1033,39 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=4>排序<span class="button_tally">4</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
             </a>
             
             
@@ -1053,7 +1073,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
             </a>
             
             
@@ -1065,6 +1089,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
             </a>
             
@@ -1073,23 +1101,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
             </a>
             
             
@@ -1101,15 +1117,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1186,7 +1198,7 @@
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" integrity="sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" integrity="sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous"></script>
     
   </body>
 </html>

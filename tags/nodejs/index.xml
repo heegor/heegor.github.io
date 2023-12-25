@@ -5,31 +5,23 @@
     <link>https://www.zengxi.net/tags/nodejs/</link>
     <description>Recent content in nodejs on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 20 Oct 2020 08:23:45 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/nodejs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Oct 2020 08:23:45 +0000</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/tags/nodejs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>利用n来切换Nodejs版本</title>
       <link>https://www.zengxi.net/2020/10/nodejs_switch_version/</link>
       <pubDate>Tue, 20 Oct 2020 08:23:45 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/10/nodejs_switch_version/</guid>
-      <description>安装n
-1sudo npm install n -g 安装完后，可以使用命令 sudo n &amp;lt;NODEJS 版本号&amp;gt; 来安装对应的nodejs版本
-需要切换版本时，执行下面的命令。然后用键盘上面的上下方向键即可切换
-1sudo n 切换完后，执行下面命令来验证当前版本号
-1node -v </description>
+      <description>安装n&#xA;1sudo npm install n -g 安装完后，可以使用命令 sudo n &amp;lt;NODEJS 版本号&amp;gt; 来安装对应的nodejs版本&#xA;需要切换版本时，执行下面的命令。然后用键盘上面的上下方向键即可切换&#xA;1sudo n 切换完后，执行下面命令来验证当前版本号&#xA;1node -v </description>
     </item>
-    
     <item>
       <title>gitbook因为nodejs版本不匹配导致安装报错</title>
       <link>https://www.zengxi.net/2020/08/gitbook_installation_error/</link>
       <pubDate>Sat, 01 Aug 2020 09:21:02 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/08/gitbook_installation_error/</guid>
-      <description>如果nodejs使用的不是10.x版本，就会报错
-1Installing GitBook 3.2.3 2/usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287 3 if (cb) cb.apply(this, arguments) 4 ^ 5 6TypeError: cb.apply is not a function 7 at /usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287:18 8 at FSReqCallback.oncomplete (fs.js:177:5)  参考：
- https://www.bilibili.com/read/cv6932054/  </description>
+      <description>如果nodejs使用的不是10.x版本，就会报错&#xA;1Installing GitBook 3.2.3 2/usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287 3 if (cb) cb.apply(this, arguments) 4 ^ 5 6TypeError: cb.apply is not a function 7 at /usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287:18 8 at FSReqCallback.oncomplete (fs.js:177:5) 参考：&#xA;https://www.bilibili.com/read/cv6932054/ </description>
     </item>
-    
   </channel>
 </rss>
