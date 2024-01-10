@@ -5,16 +5,22 @@
     <link>https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/</link>
     <description>Recent content in 集群 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 18 Jul 2018 23:00:47 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Jul 2018 23:00:47 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker Compose创建minio集群</title>
       <link>https://www.zengxi.net/2018/07/docker-mino-cluster/</link>
       <pubDate>Wed, 18 Jul 2018 23:00:47 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2018/07/docker-mino-cluster/</guid>
-      <description>Minio是一个简单易用的轻量级对象存储服务，同时它也支持集群环境。使用Minio的docker镜像可以快速地搭建集群环境。&#xA;下面是docker-compose.yml文件的示例。分布式的Minio服务至少需要4个节点，所以在docker-compose.yml文件中，至少要配置4个服务。每个服务的command配置必须一样，保证集群环境正常运行。&#xA;1version: &amp;#39;3&amp;#39; 2services: 3 minio-node1: 4 image: minio/minio 5 hostname: minio-node1 6 ports: 7 - &amp;#34;29001:9000&amp;#34; 8 volumes: 9 - ./node1/data:/data 10 env_file: ./key.env 11 command: server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data 12 minio-node2: 13 image: minio/minio 14 hostname: minio-node2 15 ports: 16 - &amp;#34;29002:9000&amp;#34; 17 volumes: 18 - ./node2/data:/data 19 env_file: ./key.env 20 command: server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data 21 minio-node3: 22 image: minio/minio 23 hostname: minio-node3 24 ports: 25 - &amp;#34;29003:9000&amp;#34; 26 volumes: 27 - .</description>
+      <description>Minio是一个简单易用的轻量级对象存储服务，同时它也支持集群环境。使用Minio的docker镜像可以快速地搭建集群环境。
+下面是docker-compose.yml文件的示例。分布式的Minio服务至少需要4个节点，所以在docker-compose.yml文件中，至少要配置4个服务。每个服务的command配置必须一样，保证集群环境正常运行。
+1version:&amp;#39;3&amp;#39;2services:3minio-node1:4image:minio/minio 5hostname:minio-node1 6ports:7- &amp;#34;29001:9000&amp;#34;8volumes:9- ./node1/data:/data10env_file:./key.env11command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data 12minio-node2:13image:minio/minio14hostname:minio-node215ports:16- &amp;#34;29002:9000&amp;#34;17volumes:18- ./node2/data:/data19env_file:./key.env20command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data21minio-node3:22image:minio/minio23hostname:minio-node324ports:25- &amp;#34;29003:9000&amp;#34;26volumes:27- ./node3/data:/data28env_file:./key.env29command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data30minio-node4:31image:minio/minio32hostname:minio-node433ports:34- &amp;#34;29004:9000&amp;#34;35volumes:36- ./node4/data:/data37env_file:./key.env38command:server http://minio-node1/data http://minio-node2/data http://minio-node3/data http://minio-node4/data上面的配置中env_file指定的加载环境变量文件key.env，这里是为了设置登录minio的用户名密码。下面的key.env示例：
+1MINIO_ACCESS_KEY=testkey 2MINIO_SECRET_KEY=testpassword 通过上述的docker-compose.yml文件，就可以启动一个minio的集群环境。可以做一些测试，通过浏览器访问 http://localhost:29001 ，新建bucket并上传一个文件，然后在 http://localhost:29002 上面也可以正常访问。同时，可以特地停掉或者启用其中一些服务，用来测试minio集群环境的高可用性。
+如果其中某一个节点服务不可用，这就意味着无法向该节点发起请求来操作对象。比如上述的节点1挂掉， 就无法通过浏览器来访问 http://localhost:29001。 从高可用和负载均衡角度来讲，必须通过负载均衡器来转发请求到各个节点，而不是直接访问某个节点的服务。可以在nginx上做个简单的配置来实现。
+下面是nginx配置的示例。配置完重启nginx服务后，就可以使用 http://localhost:29000 来访问和操作对象
+1upstream minio_servers { 2 server 127.0.0.1:29001; 3 server 127.0.0.1:29002; 4 server 127.0.0.1:29003; 5 server 127.0.0.1:29004; 6} 7 8server { 9 listen 29000; 10 server_name localhost; 11 12 location / { 13 proxy_set_header Host $http_host; 14 proxy_pass http://minio_servers; 15 } 16} 17 </description>
     </item>
+    
   </channel>
 </rss>

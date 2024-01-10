@@ -5,16 +5,23 @@
     <link>https://www.zengxi.net/tags/container/</link>
     <description>Recent content in container on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 02 Dec 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/container/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/container/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kubernetes in Action笔记 - (1) 容器技术介绍</title>
       <link>https://www.zengxi.net/2020/12/k8s_container_tech_intro/</link>
       <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2020/12/k8s_container_tech_intro/</guid>
-      <description>容器允许你在同一台机器上运行多个服务, 不仅提供不同的环境给每个服务, 而且将它们互相隔离。&#xA;容器与虚拟机比较 轻量级 和虚拟机比较, 容器更加轻量级, 它允许在相同的硬件上运行更多数量的组件。主要是因为每个虚拟机需要运行自己的一组系统进程, 这就产生了除组件进程消耗以外的额外计算资源损耗。而一个容器仅仅是运行在宿主机上被隔离的单个进程, 仅消耗应用容器消耗的资源, 不会有其他进程的开销。&#xA;虚拟化 多个容器则会完全执行运行在宿主机上的同一个内核的系统调用, 此内核是唯一一个在宿主机操作系统上执行指令的内核。 CPU也不需要做任何对虚拟机能做那样的虚拟化。&#xA;隔离性 虚拟机的主要好处是它们提供完全隔离的环境, 因为每个虚拟机运行在它自己的Linux内核上, 而容器都是调用同一个内核, 这会有一定的安全隐患&#xA;容器实现隔离机制介绍 用 Linux 命名空间隔离进程 默认情况下, 每个 Linux 系统最初仅有一个命名空间。可以创建额外的命名空间, 以及在它们之间组织资源。&#xA;对于一个进程, 可以在其中一个命名空间中运行它。进程将只能看到同一个命名空间下的资源。 存在多种类型的多个命名空间, 所以一个进程不单单只属于某一个命名空间, 而属于每个类型的一个命名空间。存在以下类型的命名空间:&#xA;Mount (mnt) Process ID (pid) Network (net) Inter-process communicaion (ipd) UTS (UNIX Time-Sharing) User ID (user) 每种命名空间被用来隔离一组特定的资源。例如, UTS 命名空间决定了运行在命名空间里的进程能看见哪些主机名和域名。通过分派两个不同的 UTS 命名空间给一对进程, 能使它们看见不同的本地主机名。换句话说, 这两个进程就好像正在两个不同的机器上运行一样(至少就主机名而言是这样的)。同样地, 一个进程属于什么 Network 命名空间决定了运行在进程里的应用程序能看见什么网络接口。每个网络接口属于一个命名空间, 但是可以从一个命名空间转移到另一个。 每个容器都使用它自己的网络命名空间, 因此每个容器仅能看见它自己的一组网络接口。&#xA;限制进程的可用资源 另外的隔离性就是限制容器能使用的系统资源。 这通过cgroups来实现。cgroups 是一个Linux 内核功能, 它被用来限制 一个进程或者一组进程的资源使用。一个进程的资源(CPU、 内存、 网络带宽等)使用量不能超出被分配的量。 这种方式下, 进程不能过分使用为其他进程保留的资源, 这和进程运行在不同的机器上是类似的。</description>
+      <description>容器允许你在同一台机器上运行多个服务, 不仅提供不同的环境给每个服务, 而且将它们互相隔离。
+容器与虚拟机比较 轻量级 和虚拟机比较, 容器更加轻量级, 它允许在相同的硬件上运行更多数量的组件。主要是因为每个虚拟机需要运行自己的一组系统进程, 这就产生了除组件进程消耗以外的额外计算资源损耗。而一个容器仅仅是运行在宿主机上被隔离的单个进程, 仅消耗应用容器消耗的资源, 不会有其他进程的开销。
+虚拟化 多个容器则会完全执行运行在宿主机上的同一个内核的系统调用, 此内核是唯一一个在宿主机操作系统上执行指令的内核。 CPU也不需要做任何对虚拟机能做那样的虚拟化。
+隔离性 虚拟机的主要好处是它们提供完全隔离的环境, 因为每个虚拟机运行在它自己的Linux内核上, 而容器都是调用同一个内核, 这会有一定的安全隐患
+容器实现隔离机制介绍 用 Linux 命名空间隔离进程 默认情况下, 每个 Linux 系统最初仅有一个命名空间。可以创建额外的命名空间, 以及在它们之间组织资源。
+对于一个进程, 可以在其中一个命名空间中运行它。进程将只能看到同一个命名空间下的资源。 存在多种类型的多个命名空间, 所以一个进程不单单只属于某一个命名空间, 而属于每个类型的一个命名空间。存在以下类型的命名空间:
+ Mount (mnt) Process ID (pid) Network (net) Inter-process communicaion (ipd) UTS (UNIX Time-Sharing) User ID (user)  每种命名空间被用来隔离一组特定的资源。例如, UTS 命名空间决定了运行在命名空间里的进程能看见哪些主机名和域名。通过分派两个不同的 UTS 命名空间给一对进程, 能使它们看见不同的本地主机名。换句话说, 这两个进程就好像正在两个不同的机器上运行一样(至少就主机名而言是这样的)。同样地, 一个进程属于什么 Network 命名空间决定了运行在进程里的应用程序能看见什么网络接口。每个网络接口属于一个命名空间, 但是可以从一个命名空间转移到另一个。 每个容器都使用它自己的网络命名空间, 因此每个容器仅能看见它自己的一组网络接口。
+限制进程的可用资源 另外的隔离性就是限制容器能使用的系统资源。 这通过cgroups来实现。cgroups 是一个Linux 内核功能, 它被用来限制 一个进程或者一组进程的资源使用。一个进程的资源(CPU、 内存、 网络带宽等)使用量不能超出被分配的量。 这种方式下, 进程不能过分使用为其他进程保留的资源, 这和进程运行在不同的机器上是类似的。</description>
     </item>
+    
   </channel>
 </rss>

@@ -5,65 +5,107 @@
     <link>https://www.zengxi.net/tags/manjaro/</link>
     <description>Recent content in manjaro on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 02 Jul 2021 09:46:00 +0800</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/manjaro/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Jul 2021 09:46:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/manjaro/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Manjaro升级后打开坚果云界面显示空白</title>
       <link>https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/</link>
       <pubDate>Fri, 02 Jul 2021 09:46:00 +0800</pubDate>
+      
       <guid>https://www.zengxi.net/2021/07/manjaro_nutstore_gui_blank/</guid>
-      <description>修改 /opt/nutstore/conf/nutstore.properties&#xA;1# 将下面设置修改成false 2webui.enable=false 如果发现界面大小不能修改，则执行下面命令安装相关程序&#xA;1yay -S gvfs libappindicator-gtk3 python-gobject </description>
+      <description>修改 /opt/nutstore/conf/nutstore.properties
+1# 将下面设置修改成false 2webui.enable=false 如果发现界面大小不能修改，则执行下面命令安装相关程序
+1yay -S gvfs libappindicator-gtk3 python-gobject </description>
     </item>
+    
     <item>
       <title>Manjaro安装软件时找不到strip binary</title>
       <link>https://www.zengxi.net/2021/06/manjaro_installation_failure/</link>
       <pubDate>Tue, 15 Jun 2021 20:58:00 +0800</pubDate>
+      
       <guid>https://www.zengxi.net/2021/06/manjaro_installation_failure/</guid>
-      <description>Manjaro 安装软件时报错：&#xA;1:: (1/1) Parsing SRCINFO: wps-office 2==&amp;gt; ERROR: Cannot find the strip binary required for object file stripping. 3error downloading sources: wps-office 这个是由于某些基础包没装，执行下面命令安装基础包，然后再次安装需要的软件即可&#xA;1sudo pacman -Sy base-devel </description>
+      <description>Manjaro 安装软件时报错：
+1:: (1/1) Parsing SRCINFO: wps-office 2==&amp;gt; ERROR: Cannot find the strip binary required for object file stripping. 3error downloading sources: wps-office 这个是由于某些基础包没装，执行下面命令安装基础包，然后再次安装需要的软件即可
+1sudo pacman -Sy base-devel </description>
     </item>
+    
     <item>
       <title>Manjaro升级后打印服务不可用</title>
       <link>https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/</link>
       <pubDate>Tue, 16 Mar 2021 09:40:00 +0800</pubDate>
+      
       <guid>https://www.zengxi.net/2021/03/manjaro_printer_service_not_available/</guid>
-      <description>Manjaro升级到某个版本后，在系统设置中，查看打印机，显示“打印机服务不可用，错误的文件描述符“。&#xA;其中一个原因是CUPS（Common UNIX Printing System）打印管理服务未启动。可以用下面的方法来解决：&#xA;1# 启动服务，保证本次登录打印机可用 2sudo systemctl start cups.service 3 4# 设置开启启动 5sudo systemctl enable cups.service </description>
+      <description>Manjaro升级到某个版本后，在系统设置中，查看打印机，显示“打印机服务不可用，错误的文件描述符“。
+其中一个原因是CUPS（Common UNIX Printing System）打印管理服务未启动。可以用下面的方法来解决：
+1# 启动服务，保证本次登录打印机可用 2sudo systemctl start cups.service 3 4# 设置开启启动 5sudo systemctl enable cups.service </description>
     </item>
+    
     <item>
       <title>Manjaro设置默认Java版本</title>
       <link>https://www.zengxi.net/2021/01/manjaro_set_default_java_version/</link>
       <pubDate>Wed, 20 Jan 2021 14:15:00 +0800</pubDate>
+      
       <guid>https://www.zengxi.net/2021/01/manjaro_set_default_java_version/</guid>
-      <description>如果本机装了多个java版本，会有一个默认的java版本。随着java版本的不断升级，一些新的工具会要求高版本的java，否则无法运行。这个时候，就需要修改默认的java版本。&#xA;查看当前的java版本&#xA;1$ java -version 2openjdk version &amp;#34;11.0.10&amp;#34; 2021-01-19 3OpenJDK Runtime Environment (build 11.0.10+8) 4OpenJDK 64-Bit Server VM (build 11.0.10+8, mixed mode) 命令查看已安装的java版本&#xA;1$ archlinux-java status 2 3Available Java environments: 4 java-11-openjdk (default) 5 java-15-openjdk 6 java-8-openjdk 设置新的默认版本&#xA;1sudo archlinux-java set java-15-openjdk 再次查看当前的java版本，可以发现已经变更&#xA;1$ java -version 2openjdk version &amp;#34;15.0.1&amp;#34; 2020-10-20 3OpenJDK Runtime Environment (build 15.0.1+9) 4OpenJDK 64-Bit Server VM (build 15.0.1+9, mixed mode) </description>
+      <description>如果本机装了多个java版本，会有一个默认的java版本。随着java版本的不断升级，一些新的工具会要求高版本的java，否则无法运行。这个时候，就需要修改默认的java版本。
+查看当前的java版本
+1$ java -version 2openjdk version &amp;#34;11.0.10&amp;#34; 2021-01-19 3OpenJDK Runtime Environment (build 11.0.10+8) 4OpenJDK 64-Bit Server VM (build 11.0.10+8, mixed mode) 命令查看已安装的java版本
+1$ archlinux-java status 2 3Available Java environments: 4 java-11-openjdk (default) 5 java-15-openjdk 6 java-8-openjdk 设置新的默认版本
+1sudo archlinux-java set java-15-openjdk 再次查看当前的java版本，可以发现已经变更
+1$ java -version 2openjdk version &amp;#34;15.0.1&amp;#34; 2020-10-20 3OpenJDK Runtime Environment (build 15.0.1+9) 4OpenJDK 64-Bit Server VM (build 15.0.1+9, mixed mode) </description>
     </item>
+    
     <item>
       <title>Manjaro安装deb包</title>
       <link>https://www.zengxi.net/2020/08/manjaro_debtap/</link>
       <pubDate>Thu, 13 Aug 2020 12:23:45 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2020/08/manjaro_debtap/</guid>
-      <description>安装debtap&#xA;1yay -S debtap 替换源，解决国内debtap同步仓库执行超慢的问题。打开 /usr/bin/debtap，更换 debtap 内容：&#xA;将 http://ftp.debian.org/debian/dists 替换成 https://mirrors.ustc.edu.cn/debian/dists 将 http://archive.ubuntu.com/ubuntu/dists 替换成 https://mirrors.ustc.edu.cn/ubuntu/dists 升级debtap数据库&#xA;1sudo debtap -u 转换deb包。注意： 转换过程中会提示输入包名，以及license。包名随意，license可以填GPL。上述操作完成后会在deb包同级目录生成xxx.tar.xz文件&#xA;1sudo debtap xxxx.deb 2 3# -q 可以略过除了编辑元数据之外的所有问题 4sudo debtap -q xxx.deb 5 6# 略过所有的问题（不推荐） 7sudo debtap -Q xxx.deb 安装转换好的本地包&#xA;1sudo pacman -U xxx.tar.xz 参考：&#xA;https://www.jianshu.com/p/900dc8a0ecff </description>
+      <description>安装debtap
+1yay -S debtap 替换源，解决国内debtap同步仓库执行超慢的问题。打开 /usr/bin/debtap，更换 debtap 内容：
+ 将 http://ftp.debian.org/debian/dists 替换成 https://mirrors.ustc.edu.cn/debian/dists 将 http://archive.ubuntu.com/ubuntu/dists 替换成 https://mirrors.ustc.edu.cn/ubuntu/dists  升级debtap数据库
+1sudo debtap -u 转换deb包。注意： 转换过程中会提示输入包名，以及license。包名随意，license可以填GPL。上述操作完成后会在deb包同级目录生成xxx.tar.xz文件
+1sudo debtap xxxx.deb 2 3# -q 可以略过除了编辑元数据之外的所有问题 4sudo debtap -q xxx.deb 5 6# 略过所有的问题（不推荐） 7sudo debtap -Q xxx.deb 安装转换好的本地包
+1sudo pacman -U xxx.tar.xz 2  参考：
+ https://www.jianshu.com/p/900dc8a0ecff  </description>
     </item>
+    
     <item>
       <title>Manjaro笔记本启动时自动设置屏幕亮度</title>
       <link>https://www.zengxi.net/2020/08/linux_auto_set_brightness/</link>
       <pubDate>Mon, 10 Aug 2020 10:33:42 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2020/08/linux_auto_set_brightness/</guid>
-      <description>笔记本在manjaro在启动的时候，屏幕可能会默认设置为最大亮度。可以通过设置开机启动脚本，来设置启动时候的亮度。&#xA;1. 创建一个启动service脚本 执行下面的命令&#xA;1sudo vim /etc/systemd/system/rc-local.service 输入下面的内容&#xA;1[Unit] 2Description=&amp;#34;/etc/rc.local Compatibility&amp;#34; 3 4[Service] 5Type=oneshot 6ExecStart=/etc/rc.local start 7TimeoutSec=0 8StandardInput=tty 9RemainAfterExit=yes 10SysVStartPriority=99 11 12[Install] 13WantedBy=multi-user.target 2. 创建 /etc/rc.local 文件 执行下面的命令&#xA;1sudo vim /etc/rc.local 输入下面的内容&#xA;1#!/bin/sh 2# /etc/rc.local 3if test -d /etc/rc.local.d; then 4 for rcscript in /etc/rc.local.d/*.sh; do 5 test -r &amp;#34;${rcscript}&amp;#34; &amp;amp;&amp;amp; sh ${rcscript} 6 done 7 unset rcscript 8fi 3. 添加执行权限 1sudo a+x /etc/rc.local 4. 添加/etc/rc.local.d文件夹 1sudo mkdir /etc/rc.local.d 5. 设置开机自启 1systemctl enable rc-local.</description>
+      <description>笔记本在manjaro在启动的时候，屏幕可能会默认设置为最大亮度。可以通过设置开机启动脚本，来设置启动时候的亮度。
+1. 创建一个启动service脚本 执行下面的命令
+1sudo vim /etc/systemd/system/rc-local.service 输入下面的内容
+1[Unit] 2Description=&amp;#34;/etc/rc.local Compatibility&amp;#34; 3 4[Service] 5Type=oneshot 6ExecStart=/etc/rc.local start 7TimeoutSec=0 8StandardInput=tty 9RemainAfterExit=yes 10SysVStartPriority=99 11 12[Install] 13WantedBy=multi-user.target 2. 创建 /etc/rc.local 文件 执行下面的命令
+1sudo vim /etc/rc.local 输入下面的内容
+1#!/bin/sh 2# /etc/rc.local 3if test -d /etc/rc.local.d; then 4 for rcscript in /etc/rc.local.d/*.sh; do 5 test -r &amp;#34;${rcscript}&amp;#34; &amp;amp;&amp;amp; sh ${rcscript} 6 done 7 unset rcscript 8fi 3. 添加执行权限 1sudo a+x /etc/rc.local 4. 添加/etc/rc.local.d文件夹 1sudo mkdir /etc/rc.local.d 5. 设置开机自启 1systemctl enable rc-local.</description>
     </item>
+    
     <item>
       <title>Manjaro安装VMware Workstation</title>
       <link>https://www.zengxi.net/2020/05/manjaro_install_vmware/</link>
       <pubDate>Tue, 26 May 2020 14:23:31 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2020/05/manjaro_install_vmware/</guid>
-      <description>安装VMware workstation&#xA;1yay -S vmware-workstation 启动时候如果报错：Please make sure that the kernel module `vmmon’ is loaded. 则需要重新安装一下linux-headers，加载一下vmmon模块&#xA;1# 先查看内核。返回值版本号格式为: A.B.C-D-MANJARO。示例： 5.2.8-1-MANJARO， 2uname -r 3 4# 安装 linux-headers。根据上面的内核版本来选择安装包，安装包名字为：linuxAB-headers 5sudo pacman -S linux52-headers 6 7# 加载vmmon模块 8sudo modprobe -a vmw_vmci vmmon 如果需要虚拟机要访问网络，则需要执行下面命令来启动服务&#xA;1systemctl start vmware-networks 2 3# 或者，设置开机启动 4sudo systemctl enable --now vmware-networks.service 如果需要虚拟机要支持USB接口，则需要执行下面命令来启动服务&#xA;1systemctl start vmware-usbarbitrator 2 3# 或者，设置开机启动 4sudo systemctl enable --now vmware-usbarbitrator.service 如果需要虚拟机要支持网络共享，则需要执行下面命令来启动服务&#xA;1systemctl start vmware-hostd 2 3# 或者，设置开机启动 4sudo systemctl enable --now vmware-hostd.</description>
+      <description>安装VMware workstation
+1yay -S vmware-workstation 启动时候如果报错：Please make sure that the kernel module `vmmon’ is loaded. 则需要重新安装一下linux-headers，加载一下vmmon模块
+1# 先查看内核。返回值版本号格式为: A.B.C-D-MANJARO。示例： 5.2.8-1-MANJARO， 2uname -r 3 4# 安装 linux-headers。根据上面的内核版本来选择安装包，安装包名字为：linuxAB-headers 5sudo pacman -S linux52-headers 6 7# 加载vmmon模块 8sudo modprobe -a vmw_vmci vmmon 如果需要虚拟机要访问网络，则需要执行下面命令来启动服务
+1systemctl start vmware-networks 2 3# 或者，设置开机启动 4sudo systemctl enable --now vmware-networks.service 如果需要虚拟机要支持USB接口，则需要执行下面命令来启动服务
+1systemctl start vmware-usbarbitrator 2 3# 或者，设置开机启动 4sudo systemctl enable --now vmware-usbarbitrator.service 如果需要虚拟机要支持网络共享，则需要执行下面命令来启动服务
+1systemctl start vmware-hostd 2 3# 或者，设置开机启动 4sudo systemctl enable --now vmware-hostd.</description>
     </item>
+    
     <item>
       <title>Manjaro设置chrome为默认浏览器</title>
       <link>https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/</link>
       <pubDate>Mon, 25 May 2020 14:01:11 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/</guid>
-      <description>安装完 Manjaro，一般会自带 Firefox浏览器。如果自己想再安装 chrome，并且设置成默认浏览器，则需要两个步骤：&#xA;在 Default Applications 中选择 Chrome 为默认的浏览器。除了这一步还不够，打开 chrome 依然有提示说“chrome 不是默认浏览器”，这就需要下面的第二步来解决。 在 File Association 中找到 html 项， 选择使用 Chrome 打开该类型的文件。 </description>
+      <description>安装完 Manjaro，一般会自带 Firefox浏览器。如果自己想再安装 chrome，并且设置成默认浏览器，则需要两个步骤：
+ 在 Default Applications 中选择 Chrome 为默认的浏览器。除了这一步还不够，打开 chrome 依然有提示说“chrome 不是默认浏览器”，这就需要下面的第二步来解决。 在 File Association 中找到 html 项， 选择使用 Chrome 打开该类型的文件。  </description>
     </item>
+    
   </channel>
 </rss>

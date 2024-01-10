@@ -5,16 +5,16 @@
     <link>https://www.zengxi.net/categories/chrome/</link>
     <description>Recent content in chrome on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 15 Jul 2020 09:21:02 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/categories/chrome/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Jul 2020 09:21:02 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/categories/chrome/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>清除chrome中 HTTPS 证书缓存</title>
       <link>https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/</link>
       <pubDate>Wed, 15 Jul 2020 09:21:02 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/</guid>
       <description>在地址栏输入 chrome://net-internals/#hsts ， 找到 “Delete domain security policies”， 输入对应的域名，点击 Delete 按钮</description>
     </item>
+    
   </channel>
 </rss>

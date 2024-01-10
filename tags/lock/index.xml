@@ -5,16 +5,25 @@
     <link>https://www.zengxi.net/tags/lock/</link>
     <description>Recent content in lock on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 08 Jun 2021 13:37:00 +0800</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/lock/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 08 Jun 2021 13:37:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/lock/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Java 8新特性 - (13)StampedLock</title>
       <link>https://www.zengxi.net/2021/06/java8_stamped_lock/</link>
       <pubDate>Tue, 08 Jun 2021 13:37:00 +0800</pubDate>
+      
       <guid>https://www.zengxi.net/2021/06/java8_stamped_lock/</guid>
-      <description>synchronized 在java5之前，实现同步主要是使用synchronized。它是Java语言的关键字，当它用来修饰一个方法或者一个代码块的时候，能够保证在同一时刻最多只有一个线程执行该段代码。 有四种不同的同步块:&#xA;实例方法 静态方法 实例方法中的同步块 静态方法中的同步块 在多线程并发编程中Synchronized一直是元老级角色，很多人都会称呼它为重量级锁，但是随着Java SE1.6对Synchronized进行了各种优化之后，性能上也有所提升。&#xA;Lock 它是Java 5在java.util.concurrent.locks新增的一个API。&#xA;Lock是一个接口，核心方法是lock()，unlock()，tryLock()，实现类有ReentrantLock, ReentrantReadWriteLock.ReadLock, ReentrantReadWriteLock.WriteLock； ReentrantReadWriteLock, ReentrantLock 和synchronized锁都有相同的内存语义。&#xA;与synchronized不同的是，Lock完全用Java写成，在java这个层面是无关JVM实现的。Lock提供更灵活的锁机制，很多synchronized 没有提供的许多特性，比如锁投票，定时锁等候和中断锁等候，但因为lock是通过代码实现的，要保证锁定一定会被释放，就必须将unLock()放到finally{}中&#xA;StampedLock StampedLock是java.util.concurrent.locks包里面jdk 8版本新增的一个锁，该锁提供了三种模式的读写控制，三种模式分别如下：&#xA;写锁 writeLock&#xA;是个排它锁或者叫独占锁，同时只有一个线程可以获取该锁，当一个线程获取该锁后，其它请求的线程必须等待，当目前没有线程持有读锁或者写锁的时候才可以获取到该锁，请求该锁成功后会返回一个stamp票据变量用来表示该锁的版本，当释放该锁时候需要unlockWrite并传递参数stamp。 悲观读锁 readLock&#xA;是个共享锁，在没有线程获取独占写锁的情况下，同时多个线程可以获取该锁，如果已经有线程持有写锁，其他线程请求获取该读锁会被阻塞。这里讲的悲观其实是参考数据库中的乐观悲观锁的，这里说的悲观是说在具体操作数据前悲观的认为其他线程可能要对自己操作的数据进行修改，所以需要先对数据加锁，这是在读少写多的情况下的一种考虑,请求该锁成功后会返回一个stamp票据变量用来表示该锁的版本，当释放该锁时候需要unlockRead并传递参数stamp。 乐观读锁 tryOptimisticRead&#xA;是相对于悲观锁来说的，在操作数据前并没有通过CAS设置锁的状态，如果当前没有线程持有写锁，则简单的返回一个非0的stamp版本信息，获取该stamp后在具体操作数据前还需要调用validate验证下该stamp是否已经不可用，也就是看当调用tryOptimisticRead返回stamp后到到当前时间间是否有其他线程持有了写锁，如果是那么validate会返回0，否者就可以使用该stamp版本的锁对数据进行操作。由于tryOptimisticRead并没有使用CAS设置锁状态所以不需要显示的释放该锁。该锁的一个特点是适用于读多写少的场景，因为获取读锁只是使用与或操作进行检验，不涉及CAS操作，所以效率会高很多，但是同时由于没有使用真正的锁，在保证数据一致性上需要拷贝一份要操作的变量到方法栈，并且在操作数据时候可能其他写线程已经修改了数据，而我们操作的是方法栈里面的数据，也就是一个快照，所以最多返回的不是最新的数据，但是一致性还是得到保障的。 1class Point { 2 3 // 成员变量 4 private double x, y; 5 6 // 锁实例 7 private final StampedLock sl = new StampedLock(); 8 9 // 排它锁-写锁（writeLock） 10 void move(double deltaX, double deltaY) { 11 long stamp = sl.</description>
+      <description>synchronized 在java5之前，实现同步主要是使用synchronized。它是Java语言的关键字，当它用来修饰一个方法或者一个代码块的时候，能够保证在同一时刻最多只有一个线程执行该段代码。 有四种不同的同步块:
+ 实例方法 静态方法 实例方法中的同步块 静态方法中的同步块  在多线程并发编程中Synchronized一直是元老级角色，很多人都会称呼它为重量级锁，但是随着Java SE1.6对Synchronized进行了各种优化之后，性能上也有所提升。
+Lock 它是Java 5在java.util.concurrent.locks新增的一个API。
+Lock是一个接口，核心方法是lock()，unlock()，tryLock()，实现类有ReentrantLock, ReentrantReadWriteLock.ReadLock, ReentrantReadWriteLock.WriteLock； ReentrantReadWriteLock, ReentrantLock 和synchronized锁都有相同的内存语义。
+与synchronized不同的是，Lock完全用Java写成，在java这个层面是无关JVM实现的。Lock提供更灵活的锁机制，很多synchronized 没有提供的许多特性，比如锁投票，定时锁等候和中断锁等候，但因为lock是通过代码实现的，要保证锁定一定会被释放，就必须将unLock()放到finally{}中
+StampedLock StampedLock是java.util.concurrent.locks包里面jdk 8版本新增的一个锁，该锁提供了三种模式的读写控制，三种模式分别如下：
+ 写锁 writeLock
+是个排它锁或者叫独占锁，同时只有一个线程可以获取该锁，当一个线程获取该锁后，其它请求的线程必须等待，当目前没有线程持有读锁或者写锁的时候才可以获取到该锁，请求该锁成功后会返回一个stamp票据变量用来表示该锁的版本，当释放该锁时候需要unlockWrite并传递参数stamp。 悲观读锁 readLock
+是个共享锁，在没有线程获取独占写锁的情况下，同时多个线程可以获取该锁，如果已经有线程持有写锁，其他线程请求获取该读锁会被阻塞。这里讲的悲观其实是参考数据库中的乐观悲观锁的，这里说的悲观是说在具体操作数据前悲观的认为其他线程可能要对自己操作的数据进行修改，所以需要先对数据加锁，这是在读少写多的情况下的一种考虑,请求该锁成功后会返回一个stamp票据变量用来表示该锁的版本，当释放该锁时候需要unlockRead并传递参数stamp。 乐观读锁 tryOptimisticRead
+是相对于悲观锁来说的，在操作数据前并没有通过CAS设置锁的状态，如果当前没有线程持有写锁，则简单的返回一个非0的stamp版本信息，获取该stamp后在具体操作数据前还需要调用validate验证下该stamp是否已经不可用，也就是看当调用tryOptimisticRead返回stamp后到到当前时间间是否有其他线程持有了写锁，如果是那么validate会返回0，否者就可以使用该stamp版本的锁对数据进行操作。由于tryOptimisticRead并没有使用CAS设置锁状态所以不需要显示的释放该锁。该锁的一个特点是适用于读多写少的场景，因为获取读锁只是使用与或操作进行检验，不涉及CAS操作，所以效率会高很多，但是同时由于没有使用真正的锁，在保证数据一致性上需要拷贝一份要操作的变量到方法栈，并且在操作数据时候可能其他写线程已经修改了数据，而我们操作的是方法栈里面的数据，也就是一个快照，所以最多返回的不是最新的数据，但是一致性还是得到保障的。  1class Point { 2 3 // 成员变量 4 private double x, y; 5 6 // 锁实例 7 private final StampedLock sl = new StampedLock(); 8 9 // 排它锁-写锁（writeLock） 10 void move(double deltaX, double deltaY) { 11 long stamp = sl.</description>
     </item>
+    
   </channel>
 </rss>

@@ -43,8 +43,8 @@
     
     
     <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" as="script" integrity=
-    "sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
+    "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
 
     
     <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
@@ -175,83 +175,84 @@
 <li>浏览器通过https协议与 VPS 通讯。浏览器的请求先发到nginx上，ngnix再将请求转发的至frps。在frps前面加上nginx做反向代理的好处是，如果这个VPS上面有其他请求转发的需求（比如这个VPS部署了个人网站或者博客），那在访问所有这些服务的时候，都可以使用同一个端口（比如443）。使用默认端口的话，在访问的时候，端口号都可以不用输入</li>
 <li>frps与部署在NAS内网的frpc通讯，frpc将请求转发至内网的NAS。</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">(( browser )) ---https---&gt; (( nginx --&gt; frps )) ---https---&gt;&gt; (( frpc --&gt; NAS ))
-</span></span></code></pre></div><h1 id="vps上的配置">VPS上的配置</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>(( browser )) ---https---&gt; (( nginx --&gt; frps )) ---https---&gt;&gt; (( frpc --&gt; NAS ))
+</code></pre></div><h1 id="vps上的配置">VPS上的配置</h1>
 <h2 id="配置frps">配置frps</h2>
 <p>从 <a href="https://github.com/fatedier/frp/releases">https://github.com/fatedier/frp/releases</a> 上找到最新的版本并下载。解压后，修改frps.ini:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="p">[</span><span class="n">common</span><span class="p">]</span>
-</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="n">bind_port</span> <span class="o">=</span> <span class="mi">7000</span> 
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="n">vhost_https_port</span> <span class="o">=</span> <span class="mi">7443</span>
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="c1"># 使用kcp加速</span>
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="n">kcp_bind_port</span> <span class="o">=</span> <span class="mi">7001</span>
-</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1"># auth</span>
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="n">authentication_method</span> <span class="o">=</span> <span class="n">token</span>
-</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="n">token</span> <span class="o">=</span> <span class="mi">12345678</span>
-</span></span><span class="line"><span class="ln">10</span><span class="cl">
-</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="c1"># log</span>
-</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="n">log_file</span> <span class="o">=</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">frps</span><span class="o">.</span><span class="n">log</span>
-</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="n">log_level</span> <span class="o">=</span> <span class="n">info</span> 
-</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="n">log_max_days</span> <span class="o">=</span> <span class="mi">3</span>
-</span></span></code></pre></div><p>下面注册frps为系统服务。如果是ubuntu系统，按如下格式创建一个新的文件 /etc/systemd/system/frps.service</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln"> 1</span><span class="cl">[Unit]
-</span></span><span class="line"><span class="ln"> 2</span><span class="cl">Description=frps service
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl">After=network.target syslog.target
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl">Wants=network.target
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl">[Service]
-</span></span><span class="line"><span class="ln"> 6</span><span class="cl">Type=simple
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl">ExecStart=/root/frp/frps -c /root/frp/frps.ini
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
-</span></span><span class="line"><span class="ln"> 9</span><span class="cl">[Install]
-</span></span><span class="line"><span class="ln">10</span><span class="cl">WantedBy=multi-user.target
-</span></span></code></pre></div><p>启动frps服务</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">systemctl start frps
-</span></span></code></pre></div><p>设置为自动启动</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">systemctl enable frps
-</span></span></code></pre></div><h2 id="nginx配置">Nginx配置</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln"> 1</span>[common]
+<span class="ln"> 2</span>bind_port = 7000 
+<span class="ln"> 3</span>vhost_https_port = 7443
+<span class="ln"> 4</span># 使用kcp加速
+<span class="ln"> 5</span>kcp_bind_port = 7001
+<span class="ln"> 6</span>
+<span class="ln"> 7</span># auth
+<span class="ln"> 8</span>authentication_method = token
+<span class="ln"> 9</span>token = 12345678
+<span class="ln">10</span>
+<span class="ln">11</span># log
+<span class="ln">12</span>log_file = /var/log/frps.log
+<span class="ln">13</span>log_level = info 
+<span class="ln">14</span>log_max_days = 3
+<span class="ln">15</span>
+</code></pre></div><p>下面注册frps为系统服务。如果是ubuntu系统，按如下格式创建一个新的文件 /etc/systemd/system/frps.service</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln"> 1</span>[Unit]
+<span class="ln"> 2</span>Description=frps service
+<span class="ln"> 3</span>After=network.target syslog.target
+<span class="ln"> 4</span>Wants=network.target
+<span class="ln"> 5</span>[Service]
+<span class="ln"> 6</span>Type=simple
+<span class="ln"> 7</span>ExecStart=/root/frp/frps -c /root/frp/frps.ini
+<span class="ln"> 8</span>
+<span class="ln"> 9</span>[Install]
+<span class="ln">10</span>WantedBy=multi-user.target
+</code></pre></div><p>启动frps服务</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>systemctl start frps
+</code></pre></div><p>设置为自动启动</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>systemctl enable frps
+</code></pre></div><h2 id="nginx配置">Nginx配置</h2>
 <p>确保安装的nginx支持SSL。用下面命令， 如果返回值中有http_ssl_module则说明模块已经安装。如果没有，则需要安装该模块</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">nginx -V
-</span></span></code></pre></div><p>创建 /etc/nginx/cert 文件夹，把网站https证书与私钥都上传到这个目录下。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>nginx -V
+</code></pre></div><p>创建 /etc/nginx/cert 文件夹，把网站https证书与私钥都上传到这个目录下。</p>
 <p>新建配置文件 /etc/nginx/conf.d/website.conf 。假设要以二级域名nas.test.com来访问，按照下面的格式配置</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln"> 1</span><span class="cl">server {
-</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    listen 443 ssl;
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    server_name  nas.test.com;
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    # ssl证书地址
-</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    ssl_certificate     /etc/nginx/cert/website.pem;  # pem文件的路径
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    ssl_certificate_key  /etc/nginx/cert/website.key; # key文件的路径
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    
-</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    # ssl验证相关配置
-</span></span><span class="line"><span class="ln">10</span><span class="cl">    ssl_session_timeout  5m;    #缓存有效期
-</span></span><span class="line"><span class="ln">11</span><span class="cl">    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;    #加密算法
-</span></span><span class="line"><span class="ln">12</span><span class="cl">    ssl_protocols TLSv1.2;     #安全链接可选的加密协议
-</span></span><span class="line"><span class="ln">13</span><span class="cl">    ssl_prefer_server_ciphers on;   #使用服务器端的首选算法
-</span></span><span class="line"><span class="ln">14</span><span class="cl">
-</span></span><span class="line"><span class="ln">15</span><span class="cl">    location / {
-</span></span><span class="line"><span class="ln">16</span><span class="cl">        proxy_pass https://127.0.0.1:7443;
-</span></span><span class="line"><span class="ln">17</span><span class="cl">
-</span></span><span class="line"><span class="ln">18</span><span class="cl">        # 针对源点使用https+SNI，需要下面两段
-</span></span><span class="line"><span class="ln">19</span><span class="cl">        proxy_ssl_server_name on;
-</span></span><span class="line"><span class="ln">20</span><span class="cl">        proxy_ssl_name $host;
-</span></span><span class="line"><span class="ln">21</span><span class="cl">
-</span></span><span class="line"><span class="ln">22</span><span class="cl">        # 由于是反向代理https，下面5个需要加上，否则可能报错
-</span></span><span class="line"><span class="ln">23</span><span class="cl">        proxy_set_header Proxy-Connection &#34;&#34;;
-</span></span><span class="line"><span class="ln">24</span><span class="cl">        proxy_set_header Host $http_host;
-</span></span><span class="line"><span class="ln">25</span><span class="cl">        proxy_http_version 1.1;
-</span></span><span class="line"><span class="ln">26</span><span class="cl">        proxy_set_header X-Real-IP $remote_addr;
-</span></span><span class="line"><span class="ln">27</span><span class="cl">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-</span></span><span class="line"><span class="ln">28</span><span class="cl">
-</span></span><span class="line"><span class="ln">29</span><span class="cl">        # proxy_ssl_verify默认是off的. 如果是on,源点的证书必须是正确的
-</span></span><span class="line"><span class="ln">30</span><span class="cl">        proxy_ssl_verify off;
-</span></span><span class="line"><span class="ln">31</span><span class="cl">
-</span></span><span class="line"><span class="ln">32</span><span class="cl">        proxy_set_header cookie $http_cookie;        
-</span></span><span class="line"><span class="ln">33</span><span class="cl">        proxy_ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-</span></span><span class="line"><span class="ln">34</span><span class="cl">    }
-</span></span><span class="line"><span class="ln">35</span><span class="cl">}
-</span></span></code></pre></div><p>为了增加网站安全性，nginx配置里面需要添加一些安全相关的配置。可以自行搜索网上相关内容，这里不再多述。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln"> 1</span>server {
+<span class="ln"> 2</span>    listen 443 ssl;
+<span class="ln"> 3</span>    server_name  nas.test.com;
+<span class="ln"> 4</span>    
+<span class="ln"> 5</span>    # ssl证书地址
+<span class="ln"> 6</span>    ssl_certificate     /etc/nginx/cert/website.pem;  # pem文件的路径
+<span class="ln"> 7</span>    ssl_certificate_key  /etc/nginx/cert/website.key; # key文件的路径
+<span class="ln"> 8</span>    
+<span class="ln"> 9</span>    # ssl验证相关配置
+<span class="ln">10</span>    ssl_session_timeout  5m;    #缓存有效期
+<span class="ln">11</span>    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;    #加密算法
+<span class="ln">12</span>    ssl_protocols TLSv1.2;     #安全链接可选的加密协议
+<span class="ln">13</span>    ssl_prefer_server_ciphers on;   #使用服务器端的首选算法
+<span class="ln">14</span>
+<span class="ln">15</span>    location / {
+<span class="ln">16</span>        proxy_pass https://127.0.0.1:7443;
+<span class="ln">17</span>
+<span class="ln">18</span>        # 针对源点使用https+SNI，需要下面两段
+<span class="ln">19</span>        proxy_ssl_server_name on;
+<span class="ln">20</span>        proxy_ssl_name $host;
+<span class="ln">21</span>
+<span class="ln">22</span>        # 由于是反向代理https，下面5个需要加上，否则可能报错
+<span class="ln">23</span>        proxy_set_header Proxy-Connection &#34;&#34;;
+<span class="ln">24</span>        proxy_set_header Host $http_host;
+<span class="ln">25</span>        proxy_http_version 1.1;
+<span class="ln">26</span>        proxy_set_header X-Real-IP $remote_addr;
+<span class="ln">27</span>        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+<span class="ln">28</span>
+<span class="ln">29</span>        # proxy_ssl_verify默认是off的. 如果是on,源点的证书必须是正确的
+<span class="ln">30</span>        proxy_ssl_verify off;
+<span class="ln">31</span>
+<span class="ln">32</span>        proxy_set_header cookie $http_cookie;        
+<span class="ln">33</span>        proxy_ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+<span class="ln">34</span>    }
+<span class="ln">35</span>}
+</code></pre></div><p>为了增加网站安全性，nginx配置里面需要添加一些安全相关的配置。可以自行搜索网上相关内容，这里不再多述。</p>
 <p>执行下面命令重新加载nginx配置</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">nginx</span> <span class="o">-</span><span class="n">s</span> <span class="n">reload</span>
-</span></span></code></pre></div><h2 id="iptables">iptables</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>nginx -s reload
+</code></pre></div><h2 id="iptables">iptables</h2>
 <p>如果安装了iptables，需要确保所需的端口允许外部访问。至少需要放行4个端口：</p>
 <ul>
 <li>https协议默认端口443</li>
@@ -259,33 +260,34 @@
 <li>frps的vhost https端口。端口号可自定义，用于代理frpc所在内网的https服务。上面例子中是7443</li>
 <li>frps的kcp端口。端口号可自定义，用于提升访问速度，使用的是udp协议。上面例子中是7001</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">iptables -A INPUT -p tcp -m multiport --dport 443,7000,7443 -j ACCEPT
-</span></span><span class="line"><span class="ln">2</span><span class="cl">iptables -A INPUT -p udp --dport 7001 -j ACCEPT
-</span></span></code></pre></div><h1 id="nas端配置">NAS端配置</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>iptables -A INPUT -p tcp -m multiport --dport 443,7000,7443 -j ACCEPT
+<span class="ln">2</span>iptables -A INPUT -p udp --dport 7001 -j ACCEPT
+<span class="ln">3</span>
+</code></pre></div><h1 id="nas端配置">NAS端配置</h1>
 <p>在本机新建文件 frpc.ini, 按下面格式配置：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln"> 1</span><span class="cl">[common]
-</span></span><span class="line"><span class="ln"> 2</span><span class="cl"># VPS服务器IP
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl">server_addr = xxx.xxx.xxx.xxx
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl">server_port = 7000
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl"># 使用kcp加速
-</span></span><span class="line"><span class="ln"> 6</span><span class="cl">protocol = kcp
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl">
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl"># auth
-</span></span><span class="line"><span class="ln"> 9</span><span class="cl">token = 12345678
-</span></span><span class="line"><span class="ln">10</span><span class="cl">
-</span></span><span class="line"><span class="ln">11</span><span class="cl"># log
-</span></span><span class="line"><span class="ln">12</span><span class="cl">log_file = ./frpc.log
-</span></span><span class="line"><span class="ln">13</span><span class="cl">log_level = info
-</span></span><span class="line"><span class="ln">14</span><span class="cl">log_max_days = 3
-</span></span><span class="line"><span class="ln">15</span><span class="cl">
-</span></span><span class="line"><span class="ln">16</span><span class="cl">
-</span></span><span class="line"><span class="ln">17</span><span class="cl">[nas]
-</span></span><span class="line"><span class="ln">18</span><span class="cl">type = https
-</span></span><span class="line"><span class="ln">19</span><span class="cl"># 内网NAS访问地址与端口
-</span></span><span class="line"><span class="ln">20</span><span class="cl">local_ip = 192.168.1.100
-</span></span><span class="line"><span class="ln">21</span><span class="cl">local_port = 443
-</span></span><span class="line"><span class="ln">22</span><span class="cl">custom_domains = nas.test.com
-</span></span></code></pre></div><p>上传刚才创建的frpc.ini至NAS，假设在NAS上路径是 /public/frpc/frpc.ini</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln"> 1</span>[common]
+<span class="ln"> 2</span># VPS服务器IP
+<span class="ln"> 3</span>server_addr = xxx.xxx.xxx.xxx
+<span class="ln"> 4</span>server_port = 7000
+<span class="ln"> 5</span># 使用kcp加速
+<span class="ln"> 6</span>protocol = kcp
+<span class="ln"> 7</span>
+<span class="ln"> 8</span># auth
+<span class="ln"> 9</span>token = 12345678
+<span class="ln">10</span>
+<span class="ln">11</span># log
+<span class="ln">12</span>log_file = ./frpc.log
+<span class="ln">13</span>log_level = info
+<span class="ln">14</span>log_max_days = 3
+<span class="ln">15</span>
+<span class="ln">16</span>
+<span class="ln">17</span>[nas]
+<span class="ln">18</span>type = https
+<span class="ln">19</span># 内网NAS访问地址与端口
+<span class="ln">20</span>local_ip = 192.168.1.100
+<span class="ln">21</span>local_port = 443
+<span class="ln">22</span>custom_domains = nas.test.com
+</code></pre></div><p>上传刚才创建的frpc.ini至NAS，假设在NAS上路径是 /public/frpc/frpc.ini</p>
 <p>在群晖或者威联通的docker容器服务中搜索oldiy/frpc，并下载镜像。创建容器的时候，需要指定一些参数：</p>
 <ul>
 <li>挂载NAS文件路径/public/frpc/frpc.ini 至容器文件路径 /frp/frpc.ini （装载路径不能修改），或者挂载NAS目录路径/public/frpc/ 至容器目录路径 /frp/</li>
@@ -320,6 +322,9 @@
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
+        <a href="https://www.zengxi.net/2024/01/gateway-modify-request-response/" class="nav-link">通过SpringGateway对接口请求进行加解密</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
       </li>
       <li>
@@ -340,14 +345,11 @@
       <li>
         <a href="https://www.zengxi.net/2020/07/terraform_state_consistent/" class="nav-link">解决terraform与远程云服务器资源状态不一致的问题</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/" class="nav-link">Spring Quartz 指定Scheduler Name</a>
-      </li>
     </ul>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://www.zengxi.net/2023/12/unsafe_http_methods/" class="nav-link">不安全的http方法</a>
+        <a href="https://www.zengxi.net/2024/01/gateway-modify-request-response/" class="nav-link">通过SpringGateway对接口请求进行加解密</a>
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
@@ -386,7 +388,7 @@
         
         <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class="post_tag button button_translucent">
           系统设计与优化
-          <span class="button_tally">12</span>
+          <span class="button_tally">13</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -542,15 +544,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
-            </a>
-            
-            
             <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
             </a>
             
             
@@ -558,11 +556,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=12>系统设计与优化<span class="button_tally">12</span>
+            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=13>系统设计与优化<span class="button_tally">13</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -765,10 +763,6 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/http/' class=" post_tag button button_translucent" data-position=1>HTTP<span class="button_tally">1</span>
-            </a>
-            
-            
             <a href='https://www.zengxi.net/tags/inputstream/' class=" post_tag button button_translucent" data-position=1>INPUTSTREAM<span class="button_tally">1</span>
             </a>
             
@@ -937,6 +931,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/spring-cloud/' class=" post_tag button button_translucent" data-position=1>SPRING-CLOUD<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/ssh/' class=" post_tag button button_translucent" data-position=1>SSH<span class="button_tally">1</span>
             </a>
             
@@ -985,7 +983,27 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
             </a>
             
             
@@ -997,19 +1015,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%89%93%E5%8D%B0%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>打印机<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
             </a>
             
             
@@ -1017,35 +1023,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%8C%82%E8%BD%BD/' class=" post_tag button button_translucent" data-position=1>挂载<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
             </a>
             
             
@@ -1053,11 +1035,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%89%93%E5%8D%B0%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>打印机<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%8C%82%E8%BD%BD/' class=" post_tag button button_translucent" data-position=1>挂载<span class="button_tally">1</span>
             </a>
             
             
@@ -1065,11 +1051,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
             </a>
             
             
@@ -1077,11 +1067,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
             </a>
             
             
@@ -1093,10 +1079,6 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
-            </a>
-            
-            
             <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
             </a>
             
@@ -1105,11 +1087,27 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E7%BD%91%E5%85%B3/' class=" post_tag button button_translucent" data-position=1>网关<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
             </a>
             
             
@@ -1121,11 +1119,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1194,7 +1196,7 @@
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2024</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>
@@ -1202,7 +1204,7 @@
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" integrity="sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" integrity="sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous"></script>
     
   </body>
 </html>

@@ -5,16 +5,18 @@
     <link>https://www.zengxi.net/tags/excel/</link>
     <description>Recent content in excel on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 05 Dec 2018 17:56:09 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/excel/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 Dec 2018 17:56:09 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/excel/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>记一次打开Excel文件错误的排查</title>
       <link>https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/</link>
       <pubDate>Wed, 05 Dec 2018 17:56:09 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/</guid>
-      <description>在生产环境中，某个结果集导出的excel文件用Microsoft Excel无法打开，看到如下错误：&#xA;最开始怀疑是在生成文件的时候，文件损坏掉了，但是重新生成多次，得到的结果都是一样的。在相同的界面，导出其他结果集所生成的文件却都是可以成功打开的，这样就可以排除代码功能方面的问题。如果和代码无关，那么就可能和数据有关系。根据出错提示给出的文件地址“C:\Users\ZHANGZ~1\AppData\Local\Temp\error083200_01.xml”, 打开该临时文件，可以看到下面的信息&#xA;1&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; standalone=&amp;#34;true&amp;#34;?&amp;gt; 2@namespace html url(http://www.w3.org/1999/xhtml); :root { font:small Verdana; font-weight: bold; padding: 2em; padding-left:4em; } * { display: block; padding-left: 2em; } html|style { display: none; } html|span, html|a { display: inline; padding: 0; font-weight: normal; text-decoration: none; } html|span.block { display: block; } *[html|hidden], span.block[html|hidden] { display: none; } .expand { display: block; } .expand:before { content: &amp;#39;+&amp;#39;; color: red; position: absolute; left: -1em; } .</description>
+      <description>在生产环境中，某个结果集导出的excel文件用Microsoft Excel无法打开，看到如下错误：
+最开始怀疑是在生成文件的时候，文件损坏掉了，但是重新生成多次，得到的结果都是一样的。在相同的界面，导出其他结果集所生成的文件却都是可以成功打开的，这样就可以排除代码功能方面的问题。如果和代码无关，那么就可能和数据有关系。根据出错提示给出的文件地址“C:\Users\ZHANGZ~1\AppData\Local\Temp\error083200_01.xml”, 打开该临时文件，可以看到下面的信息
+1&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; standalone=&amp;#34;true&amp;#34;?&amp;gt; 2@namespace html url(http://www.w3.org/1999/xhtml); :root { font:small Verdana; font-weight: bold; padding: 2em; padding-left:4em; } * { display: block; padding-left: 2em; } html|style { display: none; } html|span, html|a { display: inline; padding: 0; font-weight: normal; text-decoration: none; } html|span.block { display: block; } *[html|hidden], span.block[html|hidden] { display: none; } .expand { display: block; } .expand:before { content: &amp;#39;+&amp;#39;; color: red; position: absolute; left: -1em; } .</description>
     </item>
+    
   </channel>
 </rss>

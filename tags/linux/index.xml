@@ -5,44 +5,87 @@
     <link>https://www.zengxi.net/tags/linux/</link>
     <description>Recent content in linux on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 09 Nov 2020 08:23:45 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 09 Nov 2020 08:23:45 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux查看某个端口是否被占用</title>
       <link>https://www.zengxi.net/2020/11/ubuntu_install_postgresql/</link>
       <pubDate>Mon, 09 Nov 2020 08:23:45 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2020/11/ubuntu_install_postgresql/</guid>
-      <description> 使用lsof 1lsof -i 2 3lsof -i:80 使用netstat 1netstat -anp | grep 80 </description>
+      <description> 使用lsof  1lsof -i 2 3lsof -i:80 使用netstat  1netstat -anp | grep 80 </description>
     </item>
+    
     <item>
       <title>Linux下面使用dd命令烧录U盘并查看执行进度</title>
       <link>https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/</link>
       <pubDate>Mon, 13 Jul 2020 10:36:12 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/</guid>
-      <description>烧录U盘 先用fdisk来查看U盘的盘符&#xA;1sudo fdisk -l 再用dd命令来写数据到U盘&#xA;1sudo dd if=/home/paul/Downloads/test.iso of=/dev/sdc bs=1M count=10000 查看执行进度 假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命令行窗口，执行下面的命令，注意命令上面可能需要加上sudo&#xA;方法一：&#xA;1watch -n 5 pkill -USR1 ^dd$ 方法二：&#xA;1watch -n 5 killall -USR1 dd 方法三：&#xA;1while killall -USR1 dd; do sleep 5; done 方法四：&#xA;1while (ps auxww |grep &amp;#34; dd &amp;#34; |grep -v grep |awk &amp;#39;{print $2}&amp;#39; |while read pid; do kill -USR1 $pid; done) ; do sleep 5; done 上述四种方法中使用三个命令：pkill、killall、kill向dd命令发送SIGUSR1信息，dd命令进程接收到信号之后就打印出自己当前的进度。&#xA;看到的效果类似：&#xA;1772+0 records in 2772+0 records out 3809500672 bytes (810 MB, 772 MiB) copied, 117.</description>
+      <description>烧录U盘 先用fdisk来查看U盘的盘符
+1sudo fdisk -l 再用dd命令来写数据到U盘
+1sudo dd if=/home/paul/Downloads/test.iso of=/dev/sdc bs=1M count=10000 查看执行进度 假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命令行窗口，执行下面的命令，注意命令上面可能需要加上sudo
+方法一：
+1watch -n 5 pkill -USR1 ^dd$ 方法二：
+1watch -n 5 killall -USR1 dd 方法三：
+1while killall -USR1 dd; do sleep 5; done 方法四：
+1while (ps auxww |grep &amp;#34; dd &amp;#34; |grep -v grep |awk &amp;#39;{print $2}&amp;#39; |while read pid; do kill -USR1 $pid; done) ; do sleep 5; done 上述四种方法中使用三个命令：pkill、killall、kill向dd命令发送SIGUSR1信息，dd命令进程接收到信号之后就打印出自己当前的进度。
+看到的效果类似：
+1772+0 records in 2772+0 records out 3809500672 bytes (810 MB, 772 MiB) copied, 117.</description>
     </item>
+    
     <item>
       <title>shell中用tr命令转换字符大小写</title>
       <link>https://www.zengxi.net/2018/07/shell-translate-character/</link>
       <pubDate>Wed, 25 Jul 2018 21:40:22 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2018/07/shell-translate-character/</guid>
-      <description>在写shell脚本的时候，可能需要将特定的英文字符转换大小写。可以借助tr命令来实现这个功能。&#xA;（1）tr的下面这个命令表示把string1替换成string2&#xA;tr string1 string2 运行下面的命令&#xA;1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a&amp;#39; &amp;#39;A&amp;#39; 可以看到输出结果中把a换成了A&#xA;this is A pen （2）同时，tr命令也支持指定一个字符的范围，在这个范围内分别作替换&#xA;tr &#39;c1-c2&#39; &#39;c3-c4&#39; 比如，如果只需要把从a到h的字符，替换成大写，那么可以用下面的命令&#xA;1tr &amp;#39;a-h&amp;#39; &amp;#39;A-H&amp;#39; 运行下面的命令&#xA;1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a-h&amp;#39; &amp;#39;A-H&amp;#39; 可以看到输出结果中把从a到h的字符全部换成了大写：&#xA;tHis is A pEn 如果要把所有字符转成大写，那么只需要把范围指定成a-z即可。运行下面的命令&#xA;1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a-z&amp;#39; &amp;#39;A-Z&amp;#39; 可以看输出结果：&#xA;THIS IS A PEN </description>
+      <description>在写shell脚本的时候，可能需要将特定的英文字符转换大小写。可以借助tr命令来实现这个功能。
+（1）tr的下面这个命令表示把string1替换成string2
+ tr string1 string2  运行下面的命令
+1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a&amp;#39; &amp;#39;A&amp;#39; 可以看到输出结果中把a换成了A
+ this is A pen  （2）同时，tr命令也支持指定一个字符的范围，在这个范围内分别作替换
+ tr &#39;c1-c2&#39; &#39;c3-c4&#39;  比如，如果只需要把从a到h的字符，替换成大写，那么可以用下面的命令
+1tr &amp;#39;a-h&amp;#39; &amp;#39;A-H&amp;#39; 运行下面的命令
+1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a-h&amp;#39; &amp;#39;A-H&amp;#39; 可以看到输出结果中把从a到h的字符全部换成了大写：
+ tHis is A pEn  如果要把所有字符转成大写，那么只需要把范围指定成a-z即可。运行下面的命令
+1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a-z&amp;#39; &amp;#39;A-Z&amp;#39; 可以看输出结果：
+ THIS IS A PEN   </description>
     </item>
+    
     <item>
       <title>date命令按指定locale所对应的日期格式输出</title>
       <link>https://www.zengxi.net/2018/07/force-date-use-locale/</link>
       <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2018/07/force-date-use-locale/</guid>
-      <description>在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。&#xA;比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出&#xA;1date +%a 下面是locale为zh_CN的输出：&#xA;三 下面是locale为en_US的输出：&#xA;Wed 如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值&#xA;首先我们可以运行下面的命令来列出当前系统安装了哪些locale。这一步有一定的必要，因为在不同的系统下面，locale名称可能不同。比如，Ubuntu下面叫做zh_CN.utf8，而MacOS下面叫做zh_CN.UTF-8。如果locale名称没用对，那么看到的就不是所期望的结果。&#xA;1locale -a 知道locale的具体名称之后，可以用类似下面的命令来指定locale并按照指定格式输出。&#xA;1LC_ALL=zh_CN.UTF-8 date 2LC_ALL=zh_CN.UTF-8 date +%a 3 4LC_ALL=en_US.UTF-8 date 5LC_ALL=en_US.UTF-8 date +%a 上面的命令分别有如下的输出:&#xA;2018年 7月 4日 星期三 20时33分41秒 CST 三 Wed Jul 4 20:33:41 CST 2018 Wed </description>
+      <description>在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。
+比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出
+1date +%a 下面是locale为zh_CN的输出：
+ 三  下面是locale为en_US的输出：
+ Wed  如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值
+首先我们可以运行下面的命令来列出当前系统安装了哪些locale。这一步有一定的必要，因为在不同的系统下面，locale名称可能不同。比如，Ubuntu下面叫做zh_CN.utf8，而MacOS下面叫做zh_CN.UTF-8。如果locale名称没用对，那么看到的就不是所期望的结果。
+1locale -a 知道locale的具体名称之后，可以用类似下面的命令来指定locale并按照指定格式输出。
+1LC_ALL=zh_CN.UTF-8 date 2LC_ALL=zh_CN.UTF-8 date +%a 3 4LC_ALL=en_US.UTF-8 date 5LC_ALL=en_US.UTF-8 date +%a 上面的命令分别有如下的输出:
+ 2018年 7月 4日 星期三 20时33分41秒 CST 三 Wed Jul 4 20:33:41 CST 2018 Wed  </description>
     </item>
+    
     <item>
       <title>如何控制grep命令显示在相关文本前后的行数</title>
       <link>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</link>
       <pubDate>Tue, 19 Jun 2018 23:03:44 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</guid>
-      <description>在Linux/Unix系统中使用grep命令的时候，有时候我们想要把匹配文本的前后几行的信息也同时显示出来。这可以通过设置一些参数来达到目的。&#xA;grep的帮助文档中有这几个参数：&#xA;-A num, --after-context=num Print num lines of trailing context after each match.&#xA;-B num, --before-context=num Print num lines of leading context before each match.&#xA;-C num, --context=num Print num lines of leading and trailing context surrounding each match.&#xA;-A 表示同时输出匹配行的后面几行&#xA;1grep -A 5 word /home/test/a.log -B 表示同时输出匹配行的前面几行&#xA;1grep -B 5 word /home/test/a.log -C 表示同时输出匹配行的前面几行和后面几行&#xA;1grep -C5 word /home/test/a.log </description>
+      <description>在Linux/Unix系统中使用grep命令的时候，有时候我们想要把匹配文本的前后几行的信息也同时显示出来。这可以通过设置一些参数来达到目的。
+grep的帮助文档中有这几个参数：
+ -A num, --after-context=num Print num lines of trailing context after each match.
+-B num, --before-context=num Print num lines of leading context before each match.
+-C num, --context=num Print num lines of leading and trailing context surrounding each match.
+ -A 表示同时输出匹配行的后面几行
+1grep -A 5 word /home/test/a.log -B 表示同时输出匹配行的前面几行
+1grep -B 5 word /home/test/a.log -C 表示同时输出匹配行的前面几行和后面几行
+1grep -C5 word /home/test/a.log </description>
     </item>
+    
   </channel>
 </rss>

@@ -5,16 +5,21 @@
     <link>https://www.zengxi.net/tags/%E6%8C%82%E8%BD%BD/</link>
     <description>Recent content in 挂载 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 13 Dec 2023 14:19:00 +0800</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/%E6%8C%82%E8%BD%BD/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Dec 2023 14:19:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/%E6%8C%82%E8%BD%BD/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker挂载文件，宿主机修改后容器里文件没有同步更新</title>
       <link>https://www.zengxi.net/2023/12/docker-mount-file-not-sync/</link>
       <pubDate>Wed, 13 Dec 2023 14:19:00 +0800</pubDate>
+      
       <guid>https://www.zengxi.net/2023/12/docker-mount-file-not-sync/</guid>
-      <description>问题描述 使用 Docker 时，有时需要挂载一个宿主机目录或者文件。但是有时候发现通过 vi 或者 vim 修改完宿主机上的文件之后，容器中对应的文件并没有变化，看不到修改的内容。&#xA;问题分析 Docker 中，mount volume 的原理是借用了 Linux Namespace 中的 Mount NameSpace 来隔离系统中不同进程的挂载点视图，实际文件是没有变化。比如，在container中，bash 实际就是一个运行在宿主机上的进程，被 Docker 用 Linux 分别隔离了 Mount Namespace、UTS Namespace、IPC Namespace、PID Namespace、Network Namespace 和 User Namespace，使得它看上去好像运行在了一个独立的、相对隔离的系统上，但实际它的一切资源都是宿主机在不同 Namespace 中的一个投影，文件也不例外。&#xA;Linux中，证明文件是否相同的根本途径是，判断其 inode，如果两个文件的inode相同，两个文件必定为同一文件，从而两个文件的内容也必然相同。&#xA;可以使用下面任意一个命令来查看文件inode：&#xA;1stat /path/to/file 2 3ls -i /path/to/file Linux 默认情况下，vi 或 vim 为了防止在修改文件的过程中，由于磁盘或者系统出现问题而导致当前被修改的文件的损坏，它做了类似如下逻辑：&#xA;复制出一个需要修改文件的副本，命名为在原来文件的基础上增加 &amp;quot;.swp&amp;quot; 后缀以及 &amp;quot;.&amp;quot; 前缀。 修改内容保存到有 .swp 后缀的文件，并 flush 到磁盘 执行 :wq 就会交换原文件和 swp 文件的名称 删除临时 swp 文件 从上面可以看出，原来的文件已经被删除，虽然新保存的文件名与原先的相同，但 inode 值是不同的。而容器还是会一直记录以前的文件，保持着与原先 inode 值一样的副本。只有当 restart 容器时，容器才会重新读取新的文件。宿主机上修改的内容才会更新。</description>
+      <description>问题描述 使用 Docker 时，有时需要挂载一个宿主机目录或者文件。但是有时候发现通过 vi 或者 vim 修改完宿主机上的文件之后，容器中对应的文件并没有变化，看不到修改的内容。
+问题分析 Docker 中，mount volume 的原理是借用了 Linux Namespace 中的 Mount NameSpace 来隔离系统中不同进程的挂载点视图，实际文件是没有变化。比如，在container中，bash 实际就是一个运行在宿主机上的进程，被 Docker 用 Linux 分别隔离了 Mount Namespace、UTS Namespace、IPC Namespace、PID Namespace、Network Namespace 和 User Namespace，使得它看上去好像运行在了一个独立的、相对隔离的系统上，但实际它的一切资源都是宿主机在不同 Namespace 中的一个投影，文件也不例外。
+Linux中，证明文件是否相同的根本途径是，判断其 inode，如果两个文件的inode相同，两个文件必定为同一文件，从而两个文件的内容也必然相同。
+可以使用下面任意一个命令来查看文件inode：
+1stat /path/to/file 2 3ls -i /path/to/file Linux 默认情况下，vi 或 vim 为了防止在修改文件的过程中，由于磁盘或者系统出现问题而导致当前被修改的文件的损坏，它做了类似如下逻辑：
+ 复制出一个需要修改文件的副本，命名为在原来文件的基础上增加 &amp;quot;.swp&amp;quot; 后缀以及 &amp;quot;.&amp;quot; 前缀。 修改内容保存到有 .swp 后缀的文件，并 flush 到磁盘 执行 :wq 就会交换原文件和 swp 文件的名称 删除临时 swp 文件  从上面可以看出，原来的文件已经被删除，虽然新保存的文件名与原先的相同，但 inode 值是不同的。而容器还是会一直记录以前的文件，保持着与原先 inode 值一样的副本。只有当 restart 容器时，容器才会重新读取新的文件。宿主机上修改的内容才会更新。</description>
     </item>
+    
   </channel>
 </rss>

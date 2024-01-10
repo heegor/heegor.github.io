@@ -20,7 +20,7 @@
 
 <meta property="og:type" content="article">
 <meta name="description" content="相关文章： Java 9对Optional类的改进
-Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null 检查。它是一个封装值的类，用于保存类型为T的值，从本质上说它就是一个容器。
+ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null 检查。它是一个封装值的类，用于保存类型为T的值，从本质上说它就是一个容器。
 变量存在时，Optional类只是对类简单封装。变量不存在时，缺失的值会被建模成一 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
@@ -28,7 +28,7 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
 <meta property="og:url" content="https://www.zengxi.net/2021/06/java8_optional/" />
 <meta property="og:title" content="Java 8新特性 - (15)Optional类" />
 <meta property="og:description" content="相关文章： Java 9对Optional类的改进
-Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null 检查。它是一个封装值的类，用于保存类型为T的值，从本质上说它就是一个容器。
+ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null 检查。它是一个封装值的类，用于保存类型为T的值，从本质上说它就是一个容器。
 变量存在时，Optional类只是对类简单封装。变量不存在时，缺失的值会被建模成一 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
@@ -45,8 +45,8 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
     
     
     <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" as="script" integrity=
-    "sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
+    "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
 
     
     <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
@@ -205,214 +205,214 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
 <h2 id="创建-optional-对象">创建 Optional 对象</h2>
 <h3 id="空optional">空Optional</h3>
 <p>可以通过静态工厂方法 Optional.empty，创建一个空的 Optional 对象：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">();</span><span class="w">
-</span></span></span></code></pre></div><p>因为 empty() 本身代表的就是空对象，所以调用 get 方法会抛出 NoSuchElementException 异常。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">option</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>
+</code></pre></div><p>因为 empty() 本身代表的就是空对象，所以调用 get 方法会抛出 NoSuchElementException 异常。</p>
 <h3 id="非空optional">非空Optional</h3>
 <p>可以使用静态工厂方法 Optional.of，依据一个非空值创建一个 Optional 对象：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">car</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><p>如果 car 是一个 null，这段代码会立即抛出一个 NullPointerException，而不是等到试图访问car的属性值时才返回一个错误。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">optional</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">car</span><span class="o">);</span>
+</code></pre></div><p>如果 car 是一个 null，这段代码会立即抛出一个 NullPointerException，而不是等到试图访问car的属性值时才返回一个错误。</p>
 <h3 id="可为null的optional">可为null的Optional</h3>
 <p>使用静态工厂方法 Optional.ofNullable，可以创建一个允许 null 值的 Optional 对象：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">car</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><p>如果 car 是 null，那么得到的 Optional 对象就是个空对象。我们可以查看一下它的实现原理：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">ofNullable</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">empty</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">of</span><span class="p">(</span><span class="n">value</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>根据它的实现方式，传入的值是空值时，会返回 Optional.empty() 空对象。这有利于封装那些可能为 null 的值。例如，有一个 Map&lt;String, Object&gt; 实例，访问 key 索引时，如果没有与 key 关联的值，则会返回一个 null。因此，可以使用 Optional.ofNullable 方法封装返回值：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;key&#34;</span><span class="p">));</span><span class="w">
-</span></span></span></code></pre></div><h2 id="访问optional对象的值">访问Optional对象的值</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">optional</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">car</span><span class="o">);</span>
+</code></pre></div><p>如果 car 是 null，那么得到的 Optional 对象就是个空对象。我们可以查看一下它的实现原理：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">ofNullable</span><span class="o">(</span><span class="n">T</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">2</span>    <span class="k">return</span> <span class="n">value</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">empty</span><span class="o">()</span> <span class="o">:</span> <span class="n">of</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+<span class="ln">3</span><span class="o">}</span>
+</code></pre></div><p>根据它的实现方式，传入的值是空值时，会返回 Optional.empty() 空对象。这有利于封装那些可能为 null 的值。例如，有一个 Map&lt;String, Object&gt; 实例，访问 key 索引时，如果没有与 key 关联的值，则会返回一个 null。因此，可以使用 Optional.ofNullable 方法封装返回值：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">value</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&#34;key&#34;</span><span class="o">));</span>
+</code></pre></div><h2 id="访问optional对象的值">访问Optional对象的值</h2>
 <h3 id="ispresent--get">isPresent &amp; get</h3>
 <p>在 Optional 类中，isPresent 方法对 Optional 实例进行判断，是否包含值，如果存在值，就返回 true，否则返回 false；与之相对的是 isEmpty 方法Optional 类中还有 get 方法，它是用来获取 Optional 实例中的值。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;is present&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">optional</span><span class="p">.</span><span class="na">isPresent</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;the value is &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">optional</span><span class="p">.</span><span class="na">get</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>isPresent 与 get 一般组合使用来避免 NullPointerException：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isPresent</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">get</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NoSuchElementException</span><span class="p">(</span><span class="s">&#34;No value present&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>从源码中可看出，get 方法在取值时，要进行判空操作，如果不使用 isPresent 方法，可能会出现空指针异常。但是这种方式和在代码中if(null != value) 没有区别，因此<font color='red'>要尽量避免使用该组合</font></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optional</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;is present&#34;</span><span class="o">);</span>
+<span class="ln">2</span><span class="k">if</span> <span class="o">(</span><span class="n">optional</span><span class="o">.</span><span class="na">isPresent</span><span class="o">())</span> <span class="o">{</span>
+<span class="ln">3</span>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;the value is &#34;</span> <span class="o">+</span> <span class="n">optional</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+<span class="ln">4</span><span class="o">}</span>
+</code></pre></div><p>isPresent 与 get 一般组合使用来避免 NullPointerException：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPresent</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln">2</span>    <span class="k">return</span> <span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="ln">3</span><span class="o">}</span>
+<span class="ln">4</span><span class="kd">public</span> <span class="n">T</span> <span class="nf">get</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln">5</span>    <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">6</span>        <span class="k">throw</span> <span class="k">new</span> <span class="n">NoSuchElementException</span><span class="o">(</span><span class="s">&#34;No value present&#34;</span><span class="o">);</span>
+<span class="ln">7</span>    <span class="o">}</span>
+<span class="ln">8</span>    <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
+<span class="ln">9</span><span class="o">}</span>
+</code></pre></div><p>从源码中可看出，get 方法在取值时，要进行判空操作，如果不使用 isPresent 方法，可能会出现空指针异常。但是这种方式和在代码中if(null != value) 没有区别，因此<font color='red'>要尽量避免使用该组合</font></p>
 <h3 id="ifpresent">ifPresent</h3>
 <p>除了 isPresent 的简洁方法，Optional 还提供了接收函数式参数的接口 ifPresent：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">ifPresent</span><span class="p">(</span><span class="n">Consumer</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">action</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">        </span><span class="n">action</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">value</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>该方法会接收一个消费型函数。如果 Optional 实例中的值不为空，则调用 Consumer 的 accept 方法对 value 进行消费，若为空则不做处理。上面的例子可以使用 ifPresent 重写：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;is present&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">optional</span><span class="p">.</span><span class="na">isPresent</span><span class="p">((</span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;the value is &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">val</span><span class="p">));</span><span class="w">
-</span></span></span></code></pre></div><h3 id="返回默认值">返回默认值</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">ifPresent</span><span class="o">(</span><span class="n">Consumer</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">action</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">2</span>    <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">3</span>        <span class="n">action</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+<span class="ln">4</span>    <span class="o">}</span>
+<span class="ln">5</span><span class="o">}</span>
+</code></pre></div><p>该方法会接收一个消费型函数。如果 Optional 实例中的值不为空，则调用 Consumer 的 accept 方法对 value 进行消费，若为空则不做处理。上面的例子可以使用 ifPresent 重写：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optional</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;is present&#34;</span><span class="o">);</span>
+<span class="ln">2</span><span class="n">optional</span><span class="o">.</span><span class="na">isPresent</span><span class="o">((</span><span class="n">val</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;the value is &#34;</span> <span class="o">+</span> <span class="n">val</span><span class="o">));</span>
+</code></pre></div><h3 id="返回默认值">返回默认值</h3>
 <h4 id="orelse">orElse</h4>
 <p>还可以使用 orElse 方法读取 Optional 中的值。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">orElse</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">other</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>使用这种方式可以定义一个默认值，这种方式当遭遇 Optional 中的变量为空时，默认值会作为该方法的返回值。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">String</span><span class="w"> </span><span class="n">optGet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">String</span><span class="w"> </span><span class="n">orElse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">optGet</span><span class="p">).</span><span class="na">orElse</span><span class="p">(</span><span class="s">&#34;Default&#34;</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><h4 id="orelseget">orElseGet</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="n">T</span> <span class="nf">orElse</span><span class="o">(</span><span class="n">T</span> <span class="n">other</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">2</span>    <span class="k">return</span> <span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">value</span> <span class="o">:</span> <span class="n">other</span><span class="o">;</span>
+<span class="ln">3</span><span class="o">}</span>
+</code></pre></div><p>使用这种方式可以定义一个默认值，这种方式当遭遇 Optional 中的变量为空时，默认值会作为该方法的返回值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">String</span> <span class="n">optGet</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="ln">2</span><span class="n">String</span> <span class="n">orElse</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">optGet</span><span class="o">).</span><span class="na">orElse</span><span class="o">(</span><span class="s">&#34;Default&#34;</span><span class="o">);</span>
+</code></pre></div><h4 id="orelseget">orElseGet</h4>
 <p>还可以使用另一种方式 orElseGet：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">orElseGet</span><span class="p">(</span><span class="n">Supplier</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">supplier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">supplier</span><span class="p">.</span><span class="na">get</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>该方法与 orElse 的区别就是值不存在时，调用实现 Supplier 接口的方法或Lambda表达式来返回默认值。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">String</span><span class="w"> </span><span class="n">optGet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">String</span><span class="w"> </span><span class="n">orElse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">optGet</span><span class="p">).</span><span class="na">orElse</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&#34;Default&#34;</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><h3 id="返回异常">返回异常</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="n">T</span> <span class="nf">orElseGet</span><span class="o">(</span><span class="n">Supplier</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">supplier</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">2</span>    <span class="k">return</span> <span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">value</span> <span class="o">:</span> <span class="n">supplier</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+<span class="ln">3</span><span class="o">}</span>
+</code></pre></div><p>该方法与 orElse 的区别就是值不存在时，调用实现 Supplier 接口的方法或Lambda表达式来返回默认值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">String</span> <span class="n">optGet</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="ln">2</span><span class="n">String</span> <span class="n">orElse</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">optGet</span><span class="o">).</span><span class="na">orElse</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="s">&#34;Default&#34;</span><span class="o">);</span>
+</code></pre></div><h3 id="返回异常">返回异常</h3>
 <h4 id="orelsethrow">orElseThrow</h4>
 <p>orElseThrow方法是在有值时返回其值，无值的时候会抛出由 Supplier 创建的异常。我们看一下它的实现原理：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">X</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Throwable</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">orElseThrow</span><span class="p">(</span><span class="n">Supplier</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">X</span><span class="o">&gt;</span><span class="w"> </span><span class="n">exceptionSupplier</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">exceptionSupplier</span><span class="p">.</span><span class="na">get</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>可以看到，它会传入一个Lambda表达式或方法，如果值不存在来抛出异常：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">class</span> <span class="nc">NoValueException</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">RuntimeException</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">NoValueException</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">        </span><span class="kd">super</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getMessage</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;No value present in the Optional instance&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="nf">orElseThrow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">().</span><span class="na">orElseThrow</span><span class="p">(</span><span class="n">NoValueException</span><span class="p">::</span><span class="k">new</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">    </span><span class="n">orElseThrow</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>orElseThrow 与 orElseGet 的区别就是一个在无值的时候抛出异常，一个在无值的时候使用Lambda表达式来实现默认值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="o">&lt;</span><span class="n">X</span> <span class="kd">extends</span> <span class="n">Throwable</span><span class="o">&gt;</span> <span class="n">T</span> <span class="nf">orElseThrow</span><span class="o">(</span><span class="n">Supplier</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">X</span><span class="o">&gt;</span> <span class="n">exceptionSupplier</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">X</span> <span class="o">{</span>
+<span class="ln">2</span>    <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">3</span>        <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
+<span class="ln">4</span>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+<span class="ln">5</span>        <span class="k">throw</span> <span class="n">exceptionSupplier</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+<span class="ln">6</span>    <span class="o">}</span>
+<span class="ln">7</span><span class="o">}</span>
+</code></pre></div><p>可以看到，它会传入一个Lambda表达式或方法，如果值不存在来抛出异常：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">NoValueException</span> <span class="kd">extends</span> <span class="n">RuntimeException</span> <span class="o">{</span>
+<span class="ln"> 2</span>    <span class="kd">public</span> <span class="nf">NoValueException</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln"> 3</span>        <span class="kd">super</span><span class="o">();</span>
+<span class="ln"> 4</span>    <span class="o">}</span>
+<span class="ln"> 5</span>    <span class="nd">@Override</span>
+<span class="ln"> 6</span>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getMessage</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln"> 7</span>        <span class="k">return</span> <span class="s">&#34;No value present in the Optional instance&#34;</span><span class="o">;</span>
+<span class="ln"> 8</span>    <span class="o">}</span>
+<span class="ln"> 9</span><span class="o">}</span>
+<span class="ln">10</span><span class="kd">public</span> <span class="kd">static</span> <span class="n">Integer</span> <span class="nf">orElseThrow</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln">11</span>    <span class="k">return</span> <span class="o">(</span><span class="n">Integer</span><span class="o">)</span> <span class="n">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">().</span><span class="na">orElseThrow</span><span class="o">(</span><span class="n">NoValueException</span><span class="o">::</span><span class="k">new</span><span class="o">);</span>
+<span class="ln">12</span><span class="o">}</span>
+<span class="ln">13</span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">14</span>    <span class="n">orElseThrow</span><span class="o">();</span>
+<span class="ln">15</span><span class="o">}</span>
+</code></pre></div><p>orElseThrow 与 orElseGet 的区别就是一个在无值的时候抛出异常，一个在无值的时候使用Lambda表达式来实现默认值。</p>
 <p>orElseThrow 只是在无值的时候抛出异常，那本身会抛出异常的方法呢？</p>
 <p>现在拿 Integer.parseInt(String) 做个例子：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="nf">toInt</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">        </span><span class="c1">// 如果String能转换为对应的Integer，将其封装在Optional对象中返回</span><span class="w">
-</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">NumberFormatException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">    </span><span class="c1">// 返回null 或者抛出异常</span><span class="w">
-</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>在将 String 转换为 int 时，如果无法解析到对应的整型，该方法会抛出 NumberFormatException 异常。我们在该方法中使用 try/catch 语句捕获了该异常，不能使用 if 条件判断来控制一个变量的值是否为空。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="kd">static</span> <span class="n">Integer</span> <span class="nf">toInt</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">2</span>    <span class="k">try</span> <span class="o">{</span>
+<span class="ln">3</span>        <span class="c1">// 如果String能转换为对应的Integer，将其封装在Optional对象中返回
+</span><span class="ln">4</span><span class="c1"></span>        <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+<span class="ln">5</span>    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NumberFormatException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">6</span>        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>    <span class="c1">// 返回null 或者抛出异常
+</span><span class="ln">7</span><span class="c1"></span>    <span class="o">}</span>
+<span class="ln">8</span><span class="o">}</span>
+</code></pre></div><p>在将 String 转换为 int 时，如果无法解析到对应的整型，该方法会抛出 NumberFormatException 异常。我们在该方法中使用 try/catch 语句捕获了该异常，不能使用 if 条件判断来控制一个变量的值是否为空。</p>
 <p>这时，可以使用 Optional 类，来对无法转换的 String 时返回的非法值进行建模，因此可以对上述方法进行改进：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">toInt</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">        </span><span class="c1">// 如果String能转换为对应的Integer，将其封装在Optional对象中返回</span><span class="w">
-</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">s</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">NumberFormatException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">();</span><span class="w">    </span><span class="c1">// 否则返回一个空的 Optional 对象</span><span class="w">
-</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>这种返回 Optional 的方式适用很多方法，我们只需要获取被 Optional 包装的值的实例即可。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="kd">static</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">toInt</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">2</span>    <span class="k">try</span> <span class="o">{</span>
+<span class="ln">3</span>        <span class="c1">// 如果String能转换为对应的Integer，将其封装在Optional对象中返回
+</span><span class="ln">4</span><span class="c1"></span>        <span class="k">return</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">s</span><span class="o">));</span>
+<span class="ln">5</span>    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NumberFormatException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">6</span>        <span class="k">return</span> <span class="n">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>    <span class="c1">// 否则返回一个空的 Optional 对象
+</span><span class="ln">7</span><span class="c1"></span>    <span class="o">}</span>
+<span class="ln">8</span><span class="o">}</span>
+</code></pre></div><p>这种返回 Optional 的方式适用很多方法，我们只需要获取被 Optional 包装的值的实例即可。</p>
 <h2 id="对值进行转换">对值进行转换</h2>
 <h3 id="map">map</h3>
 <p>Optional 提供了 map 方法用于从对象中提取信息，它的工作原理如下：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="n">Function</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">U</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mapper</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">mapper</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isPresent</span><span class="p">())</span><span class="w">
-</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">empty</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">mapper</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">value</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>map 操作会将提供的函数应用于流的每个元素。可以把 Optional 对象看成一种特殊的集合数据，它至多包含一个元素。如果 Optional 包含一个值，那通过实现了 Function 接口的 Lambda 表达式对值进行转换。map 方法示例如下：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">class</span> <span class="nc">Car</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">    </span><span class="c1">//...省略getter与setter...</span><span class="w">
-</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">car</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optional</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">Car</span><span class="p">::</span><span class="n">getName</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><h3 id="flatmap">flatMap</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span> <span class="nf">map</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">,</span> <span class="o">?</span> <span class="kd">extends</span> <span class="n">U</span><span class="o">&gt;</span> <span class="n">mapper</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">2</span>    <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">mapper</span><span class="o">);</span>
+<span class="ln">3</span>    <span class="k">if</span> <span class="o">(!</span><span class="n">isPresent</span><span class="o">())</span>
+<span class="ln">4</span>        <span class="k">return</span> <span class="n">empty</span><span class="o">();</span>
+<span class="ln">5</span>    <span class="k">else</span> <span class="o">{</span>
+<span class="ln">6</span>        <span class="k">return</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">mapper</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">value</span><span class="o">));</span>
+<span class="ln">7</span>    <span class="o">}</span>
+<span class="ln">8</span><span class="o">}</span>
+</code></pre></div><p>map 操作会将提供的函数应用于流的每个元素。可以把 Optional 对象看成一种特殊的集合数据，它至多包含一个元素。如果 Optional 包含一个值，那通过实现了 Function 接口的 Lambda 表达式对值进行转换。map 方法示例如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+<span class="ln">2</span>    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+<span class="ln">3</span>    <span class="kd">private</span> <span class="n">String</span> <span class="n">type</span><span class="o">;</span>
+<span class="ln">4</span>    <span class="c1">//...省略getter与setter...
+</span><span class="ln">5</span><span class="c1"></span><span class="o">}</span>
+<span class="ln">6</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">optional</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">car</span><span class="o">);</span>
+<span class="ln">7</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">name</span> <span class="o">=</span> <span class="n">optional</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">Car</span><span class="o">::</span><span class="n">getName</span><span class="o">);</span>
+</code></pre></div><h3 id="flatmap">flatMap</h3>
 <p>看下面这段代码，它想使用 map 方法来从被 Optional 类包装的 Person 类中获取 Car 的名称：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span><span class="w"> </span><span class="n">car</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="n">Car</span><span class="w"> </span><span class="n">car</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">car</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">car</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">    </span><span class="c1">//...省略getter与setter...</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w"></span><span class="n">Person</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"></span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optPerson</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">person</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w"></span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optPerson</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">Person</span><span class="p">::</span><span class="n">getCar</span><span class="p">).</span><span class="na">map</span><span class="p">(</span><span class="n">Car</span><span class="p">::</span><span class="n">getName</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><p>不幸的是，这段代码无法通过编译。为什么呢？optPerson 是 Optional<Person> 类型的变量，调用 map 方法应该没有问题。但 getCar 返回的是一个 Optional<Car> 类型的对象，这意味着 map 操作的结果是一个 Optional&lt;Optional<Car>&gt; 类型的对象。因此，它对 getName 的调用是非法的，因为最外层的 optional 对象包含了另一个 optional 对象的值，而它当然不会支持 getName 方法。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+<span class="ln"> 2</span>    <span class="kd">private</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="n">car</span><span class="o">;</span>
+<span class="ln"> 3</span>    <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="n">Car</span> <span class="n">car</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 4</span>        <span class="k">this</span><span class="o">.</span><span class="na">car</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">car</span><span class="o">);</span>
+<span class="ln"> 5</span>    <span class="o">}</span>
+<span class="ln"> 6</span>    <span class="c1">//...省略getter与setter...
+</span><span class="ln"> 7</span><span class="c1"></span><span class="o">}</span>
+<span class="ln"> 8</span><span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="k">new</span> <span class="n">Car</span><span class="o">());</span>
+<span class="ln"> 9</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">optPerson</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+<span class="ln">10</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">name</span> <span class="o">=</span> <span class="n">optPerson</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">getCar</span><span class="o">).</span><span class="na">map</span><span class="o">(</span><span class="n">Car</span><span class="o">::</span><span class="n">getName</span><span class="o">);</span>
+</code></pre></div><p>不幸的是，这段代码无法通过编译。为什么呢？optPerson 是 Optional<Person> 类型的变量，调用 map 方法应该没有问题。但 getCar 返回的是一个 Optional<Car> 类型的对象，这意味着 map 操作的结果是一个 Optional&lt;Optional<Car>&gt; 类型的对象。因此，它对 getName 的调用是非法的，因为最外层的 optional 对象包含了另一个 optional 对象的值，而它当然不会支持 getName 方法。</p>
 <p>这里，需要使用 flatMap 方法。该方法接受一个函数作为参数，这个函数的返回值是另一个流。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">flatMap</span><span class="p">(</span><span class="n">Function</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">U</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mapper</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">    </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">mapper</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isPresent</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">empty</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">        </span><span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&#34;unchecked&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">        </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="n">mapper</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">value</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">r</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>参照 map 函数，使用 flatMap 重写上述的示例：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optPerson</span><span class="p">.</span><span class="na">flatMap</span><span class="p">(</span><span class="n">Person</span><span class="p">::</span><span class="n">getCar</span><span class="p">).</span><span class="na">map</span><span class="p">(</span><span class="n">Car</span><span class="p">::</span><span class="n">getName</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><h3 id="filter">filter</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span> <span class="nf">flatMap</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">,</span> <span class="o">?</span> <span class="kd">extends</span> <span class="n">Optional</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">U</span><span class="o">&gt;&gt;</span> <span class="n">mapper</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 2</span>    <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">mapper</span><span class="o">);</span>
+<span class="ln"> 3</span>    <span class="k">if</span> <span class="o">(!</span><span class="n">isPresent</span><span class="o">())</span> <span class="o">{</span>
+<span class="ln"> 4</span>        <span class="k">return</span> <span class="n">empty</span><span class="o">();</span>
+<span class="ln"> 5</span>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+<span class="ln"> 6</span>        <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&#34;unchecked&#34;</span><span class="o">)</span>
+<span class="ln"> 7</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="o">(</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;)</span> <span class="n">mapper</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+<span class="ln"> 8</span>        <span class="k">return</span> <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+<span class="ln"> 9</span>    <span class="o">}</span>
+<span class="ln">10</span><span class="o">}</span>
+</code></pre></div><p>参照 map 函数，使用 flatMap 重写上述的示例：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">name</span> <span class="o">=</span> <span class="n">optPerson</span><span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">getCar</span><span class="o">).</span><span class="na">map</span><span class="o">(</span><span class="n">Car</span><span class="o">::</span><span class="n">getName</span><span class="o">);</span>
+</code></pre></div><h3 id="filter">filter</h3>
 <p>有时候我们需要对 Optional 中的值进行过滤，获得我们需要的结果，我们就可以使用 filter 方法：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">Predicate</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">predicate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">predicate</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isPresent</span><span class="p">())</span><span class="w">
-</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">    </span><span class="k">else</span><span class="w">
-</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">predicate</span><span class="p">.</span><span class="na">test</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">empty</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>该方法接受 Predicate 谓词作为参数。如果 Optional 对象的值存在，并且符合谓词的条件，即操作结果为true，filter 方法不做任何改变并返回其值；否则就将该值过滤掉并返回一个空的 Optional 对象。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optionalS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;13846901234&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">optionalS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optionalS</span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&#34;138&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="cm">/**
-</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="cm"> * 上述 `filter` 方法满足条件可以返回同一个Optional，否则返回空Optional
-</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="cm"> */</span><span class="w">
-</span></span></span></code></pre></div><h2 id="注意事项">注意事项</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">filter</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">2</span>    <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">predicate</span><span class="o">);</span>
+<span class="ln">3</span>    <span class="k">if</span> <span class="o">(!</span><span class="n">isPresent</span><span class="o">())</span>
+<span class="ln">4</span>        <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+<span class="ln">5</span>    <span class="k">else</span>
+<span class="ln">6</span>        <span class="k">return</span> <span class="n">predicate</span><span class="o">.</span><span class="na">test</span><span class="o">(</span><span class="n">value</span><span class="o">)</span> <span class="o">?</span> <span class="k">this</span> <span class="o">:</span> <span class="n">empty</span><span class="o">();</span>
+<span class="ln">7</span><span class="o">}</span>
+</code></pre></div><p>该方法接受 Predicate 谓词作为参数。如果 Optional 对象的值存在，并且符合谓词的条件，即操作结果为true，filter 方法不做任何改变并返回其值；否则就将该值过滤掉并返回一个空的 Optional 对象。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optionalS</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;13846901234&#34;</span><span class="o">);</span>
+<span class="ln">2</span><span class="n">optionalS</span> <span class="o">=</span> <span class="n">optionalS</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">&#34;138&#34;</span><span class="o">));</span>
+<span class="ln">3</span><span class="cm">/**
+</span><span class="ln">4</span><span class="cm"> * 上述 `filter` 方法满足条件可以返回同一个Optional，否则返回空Optional
+</span><span class="ln">5</span><span class="cm"> */</span>
+</code></pre></div><h2 id="注意事项">注意事项</h2>
 <ol>
 <li>Optional的包装和访问都有成本，因此不适用于一些特别注重性能和内存的场景。</li>
 <li>不要将null赋给Optional，应赋以Optional.empty()。</li>
 <li>避免调用isPresent()和get()方法，而应使用ifPresent()、orElse()、 orElseGet()和orElseThrow()。举一isPresent()用法示例：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isIntegerNumber</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">number</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">    </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">number</span><span class="p">.</span><span class="na">trim</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">intNumRegex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;\\-{0,1}\\d+&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">number</span><span class="p">.</span><span class="na">matches</span><span class="p">(</span><span class="n">intNumRegex</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w"></span><span class="c1">// Optional写法1（含NPE修复及正则表达式优化）</span><span class="w">
-</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isIntegerNumber1</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">number</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">number</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">String</span><span class="p">::</span><span class="n">trim</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="na">matches</span><span class="p">(</span><span class="s">&#34;-?\\d+&#34;</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">isPresent</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w"></span><span class="c1">// Optional写法2（含NPE修复及正则表达式优化，不用isPresent）</span><span class="w">
-</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isIntegerNumber2</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">number</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">number</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">String</span><span class="p">::</span><span class="n">trim</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="na">matches</span><span class="p">(</span><span class="s">&#34;-?\\d+&#34;</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">orElse</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ol start="4">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isIntegerNumber</span><span class="o">(</span><span class="n">String</span> <span class="n">number</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 2</span>    <span class="n">number</span> <span class="o">=</span> <span class="n">number</span><span class="o">.</span><span class="na">trim</span><span class="o">();</span>
+<span class="ln"> 3</span>    <span class="n">String</span> <span class="n">intNumRegex</span> <span class="o">=</span> <span class="s">&#34;\\-{0,1}\\d+&#34;</span><span class="o">;</span>
+<span class="ln"> 4</span>    <span class="k">if</span> <span class="o">(</span><span class="n">number</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="n">intNumRegex</span><span class="o">))</span> <span class="o">{</span>
+<span class="ln"> 5</span>        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+<span class="ln"> 6</span>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+<span class="ln"> 7</span>        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="ln"> 8</span>    <span class="o">}</span>
+<span class="ln"> 9</span><span class="o">}</span>
+<span class="ln">10</span><span class="c1">// Optional写法1（含NPE修复及正则表达式优化）
+</span><span class="ln">11</span><span class="c1"></span><span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isIntegerNumber1</span><span class="o">(</span><span class="n">String</span> <span class="n">number</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">12</span>    <span class="k">return</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">number</span><span class="o">)</span>
+<span class="ln">13</span>            <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">String</span><span class="o">::</span><span class="n">trim</span><span class="o">)</span>
+<span class="ln">14</span>            <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">&#34;-?\\d+&#34;</span><span class="o">))</span>
+<span class="ln">15</span>            <span class="o">.</span><span class="na">isPresent</span><span class="o">();</span>
+<span class="ln">16</span><span class="o">}</span>
+<span class="ln">17</span><span class="c1">// Optional写法2（含NPE修复及正则表达式优化，不用isPresent）
+</span><span class="ln">18</span><span class="c1"></span><span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isIntegerNumber2</span><span class="o">(</span><span class="n">String</span> <span class="n">number</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">19</span>    <span class="k">return</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">number</span><span class="o">)</span>
+<span class="ln">20</span>            <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">String</span><span class="o">::</span><span class="n">trim</span><span class="o">)</span>
+<span class="ln">21</span>            <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">&#34;-?\\d+&#34;</span><span class="o">))</span>
+<span class="ln">22</span>            <span class="o">.</span><span class="na">orElse</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+<span class="ln">23</span><span class="o">}</span>
+</code></pre></div><ol start="4">
 <li>Optional应该只用处理返回值，而不应作为类的字段(Optional类型不可被序列化)或方法(包括constructor)的参数。</li>
 <li>不要为了链式方法而使用Optional，尤其是在仅仅获取一个值时。例如：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// good</span><span class="w">
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="k">return</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&#34;blablabla&#34;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">variable</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="c1">// bad</span><span class="w">
-</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">variable</span><span class="p">).</span><span class="na">orElse</span><span class="p">(</span><span class="s">&#34;blablabla&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="c1">// bad</span><span class="w">
-</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">someVariable</span><span class="p">).</span><span class="na">ifPresent</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">blablabla</span><span class="p">)</span><span class="w">
-</span></span></span></code></pre></div><ol start="5">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// good
+</span><span class="ln">2</span><span class="c1"></span><span class="k">return</span> <span class="n">variable</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="s">&#34;blablabla&#34;</span> <span class="o">:</span> <span class="n">variable</span><span class="o">;</span>
+<span class="ln">3</span><span class="c1">// bad
+</span><span class="ln">4</span><span class="c1"></span><span class="k">return</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">variable</span><span class="o">).</span><span class="na">orElse</span><span class="o">(</span><span class="s">&#34;blablabla&#34;</span><span class="o">);</span>
+<span class="ln">5</span><span class="c1">// bad
+</span><span class="ln">6</span><span class="c1"></span><span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">someVariable</span><span class="o">).</span><span class="na">ifPresent</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">blablabla</span><span class="o">)</span>
+</code></pre></div><ol start="5">
 <li>滥用Optional不仅影响性能，可读性也不高。应尽可能避免使用null引用。</li>
 <li>避免使用Optional返回空的集合或数组，而应返回Collections.emptyList()、emptyMap()、emptySet()或new Type[0]。注意不要返回null，以便调用者可以省去繁琐的null检查。</li>
 <li>避免在集合中使用Optional，应使用getOrDefault()或computeIfAbsent()等集合方法。</li>
@@ -420,54 +420,54 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
 <li>切忌过度使用Optional，否则可能使代码难以阅读和维护。</li>
 <li>常见的问题是Lambda表达式过长，例如：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">private</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">queryValidUsers</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">    </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">userInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="n">10</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">toJSonObject</span><span class="p">(</span><span class="n">getJsonStrFromSomewhere</span><span class="p">()))</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">optJSONArray</span><span class="p">(</span><span class="s">&#34;data&#34;</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 大段代码割裂了&#34;思路&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">                    </span><span class="n">JSONArray</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">optJSONObject</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="na">optJSONArray</span><span class="p">(</span><span class="s">&#34;users&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">length</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">                        </span><span class="k">continue</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">                    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">                    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">                        </span><span class="n">JSONObject</span><span class="w"> </span><span class="n">userObj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">optJSONObject</span><span class="p">(</span><span class="n">j</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">userObj</span><span class="p">.</span><span class="na">optBoolean</span><span class="p">(</span><span class="s">&#34;stopUse&#34;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// userObj可能为null!</span><span class="w">
-</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w">                            </span><span class="n">userInfo</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">userObj</span><span class="p">.</span><span class="na">optString</span><span class="p">(</span><span class="s">&#34;userId&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">                        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w">                    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">userInfo</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="w">            </span><span class="p">});</span><span class="w">
-</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">userInfo</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>通过简单的抽取方法，可读性得到很大提高：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">private</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">queryValidUsers</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">toJSonObject</span><span class="p">(</span><span class="n">getJsonStrFromSomewhere</span><span class="p">()))</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">optJSONArray</span><span class="p">(</span><span class="s">&#34;data&#34;</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">collectNonStopUsers</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">orElse</span><span class="p">(</span><span class="n">Collections</span><span class="p">.</span><span class="na">emptySet</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">collectNonStopUsers</span><span class="p">(</span><span class="n">JSONArray</span><span class="w"> </span><span class="n">dataArray</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">    </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">userInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="n">10</span><span class="p">);</span><span class="w">   
-</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dataArray</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">        </span><span class="n">JSONArray</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataArray</span><span class="p">.</span><span class="na">optJSONObject</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="na">optJSONArray</span><span class="p">(</span><span class="s">&#34;users&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">        </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">users</span><span class="p">).</span><span class="na">ifPresent</span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">                </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="na">optJSONObject</span><span class="p">(</span><span class="n">j</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">                        </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">!</span><span class="n">user</span><span class="p">.</span><span class="na">optBoolean</span><span class="p">(</span><span class="s">&#34;stopUse&#34;</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">                        </span><span class="p">.</span><span class="na">ifPresent</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">userInfo</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">optString</span><span class="p">(</span><span class="s">&#34;userId&#34;</span><span class="p">)));</span><span class="w">
-</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">        </span><span class="p">});</span><span class="w">
-</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">userInfo</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">private</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">queryValidUsers</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln"> 2</span>    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">userInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;(</span><span class="n">10</span><span class="o">);</span>
+<span class="ln"> 3</span>
+<span class="ln"> 4</span>    <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">toJSonObject</span><span class="o">(</span><span class="n">getJsonStrFromSomewhere</span><span class="o">()))</span>
+<span class="ln"> 5</span>            <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">cur</span> <span class="o">-&gt;</span> <span class="n">cur</span><span class="o">.</span><span class="na">optJSONArray</span><span class="o">(</span><span class="s">&#34;data&#34;</span><span class="o">))</span>
+<span class="ln"> 6</span>            <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">cur</span> <span class="o">-&gt;</span> <span class="o">{</span> <span class="c1">// 大段代码割裂了&#34;思路&#34;
+</span><span class="ln"> 7</span><span class="c1"></span>                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cur</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+<span class="ln"> 8</span>                    <span class="n">JSONArray</span> <span class="n">users</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">optJSONObject</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">optJSONArray</span><span class="o">(</span><span class="s">&#34;users&#34;</span><span class="o">);</span>
+<span class="ln"> 9</span>
+<span class="ln">10</span>                    <span class="k">if</span> <span class="o">(</span><span class="kc">null</span> <span class="o">==</span> <span class="n">users</span> <span class="o">||</span> <span class="n">0</span> <span class="o">==</span> <span class="n">users</span><span class="o">.</span><span class="na">length</span><span class="o">())</span> <span class="o">{</span>
+<span class="ln">11</span>                        <span class="k">continue</span><span class="o">;</span>
+<span class="ln">12</span>                    <span class="o">}</span>
+<span class="ln">13</span>
+<span class="ln">14</span>                    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">users</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+<span class="ln">15</span>                        <span class="n">JSONObject</span> <span class="n">userObj</span> <span class="o">=</span> <span class="n">users</span><span class="o">.</span><span class="na">optJSONObject</span><span class="o">(</span><span class="n">j</span><span class="o">);</span>
+<span class="ln">16</span>                        <span class="k">if</span> <span class="o">(!</span><span class="n">userObj</span><span class="o">.</span><span class="na">optBoolean</span><span class="o">(</span><span class="s">&#34;stopUse&#34;</span><span class="o">))</span> <span class="o">{</span> <span class="c1">// userObj可能为null!
+</span><span class="ln">17</span><span class="c1"></span>                            <span class="n">userInfo</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">userObj</span><span class="o">.</span><span class="na">optString</span><span class="o">(</span><span class="s">&#34;userId&#34;</span><span class="o">));</span>
+<span class="ln">18</span>                        <span class="o">}</span>
+<span class="ln">19</span>                    <span class="o">}</span>
+<span class="ln">20</span>                <span class="o">}</span>
+<span class="ln">21</span>                <span class="k">return</span> <span class="n">userInfo</span><span class="o">;</span>
+<span class="ln">22</span>            <span class="o">});</span>
+<span class="ln">23</span>
+<span class="ln">24</span>    <span class="k">return</span> <span class="n">userInfo</span><span class="o">;</span>
+<span class="ln">25</span><span class="o">}</span>
+</code></pre></div><p>通过简单的抽取方法，可读性得到很大提高：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">private</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">queryValidUsers</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln"> 2</span>    <span class="k">return</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">toJSonObject</span><span class="o">(</span><span class="n">getJsonStrFromSomewhere</span><span class="o">()))</span>
+<span class="ln"> 3</span>            <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">cur</span> <span class="o">-&gt;</span> <span class="n">cur</span><span class="o">.</span><span class="na">optJSONArray</span><span class="o">(</span><span class="s">&#34;data&#34;</span><span class="o">))</span>
+<span class="ln"> 4</span>            <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">collectNonStopUsers</span><span class="o">)</span>
+<span class="ln"> 5</span>            <span class="o">.</span><span class="na">orElse</span><span class="o">(</span><span class="n">Collections</span><span class="o">.</span><span class="na">emptySet</span><span class="o">());</span>
+<span class="ln"> 6</span><span class="o">}</span>
+<span class="ln"> 7</span>
+<span class="ln"> 8</span><span class="kd">private</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">collectNonStopUsers</span><span class="o">(</span><span class="n">JSONArray</span> <span class="n">dataArray</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 9</span>    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">userInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;(</span><span class="n">10</span><span class="o">);</span>   
+<span class="ln">10</span>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">dataArray</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+<span class="ln">11</span>        <span class="n">JSONArray</span> <span class="n">users</span> <span class="o">=</span> <span class="n">dataArray</span><span class="o">.</span><span class="na">optJSONObject</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">optJSONArray</span><span class="o">(</span><span class="s">&#34;users&#34;</span><span class="o">);</span>
+<span class="ln">12</span>        <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">users</span><span class="o">).</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">cur</span> <span class="o">-&gt;</span> <span class="o">{</span>
+<span class="ln">13</span>            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">cur</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+<span class="ln">14</span>                <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">optJSONObject</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+<span class="ln">15</span>                        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">user</span> <span class="o">-&gt;</span> <span class="o">!</span><span class="n">user</span><span class="o">.</span><span class="na">optBoolean</span><span class="o">(</span><span class="s">&#34;stopUse&#34;</span><span class="o">))</span>
+<span class="ln">16</span>                        <span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">user</span> <span class="o">-&gt;</span> <span class="n">userInfo</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">optString</span><span class="o">(</span><span class="s">&#34;userId&#34;</span><span class="o">)));</span>
+<span class="ln">17</span>            <span class="o">}</span>
+<span class="ln">18</span>        <span class="o">});</span>
+<span class="ln">19</span>    <span class="o">}</span>
+<span class="ln">20</span>    <span class="k">return</span> <span class="n">userInfo</span><span class="o">;</span>
+<span class="ln">21</span><span class="o">}</span>
+</code></pre></div><hr>
 <p>参考：</p>
 <ul>
 <li><a href="https://segmentfault.com/a/1190000038471657">https://segmentfault.com/a/1190000038471657</a></li>
@@ -489,6 +489,9 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
+        <a href="https://www.zengxi.net/2024/01/gateway-modify-request-response/" class="nav-link">通过SpringGateway对接口请求进行加解密</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
       </li>
       <li>
@@ -509,14 +512,11 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
       <li>
         <a href="https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/" class="nav-link">terraform中阿里云ECS ssh key变化问题</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/07/terraform_state_consistent/" class="nav-link">解决terraform与远程云服务器资源状态不一致的问题</a>
-      </li>
     </ul>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://www.zengxi.net/2023/12/unsafe_http_methods/" class="nav-link">不安全的http方法</a>
+        <a href="https://www.zengxi.net/2024/01/gateway-modify-request-response/" class="nav-link">通过SpringGateway对接口请求进行加解密</a>
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
@@ -555,7 +555,7 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
         
         <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class="post_tag button button_translucent">
           系统设计与优化
-          <span class="button_tally">12</span>
+          <span class="button_tally">13</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -711,15 +711,11 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
-            </a>
-            
-            
             <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
             </a>
             
             
@@ -727,11 +723,11 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=12>系统设计与优化<span class="button_tally">12</span>
+            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=13>系统设计与优化<span class="button_tally">13</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
@@ -934,10 +930,6 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/http/' class=" post_tag button button_translucent" data-position=1>HTTP<span class="button_tally">1</span>
-            </a>
-            
-            
             <a href='https://www.zengxi.net/tags/inputstream/' class=" post_tag button button_translucent" data-position=1>INPUTSTREAM<span class="button_tally">1</span>
             </a>
             
@@ -1106,6 +1098,10 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/spring-cloud/' class=" post_tag button button_translucent" data-position=1>SPRING-CLOUD<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/ssh/' class=" post_tag button button_translucent" data-position=1>SSH<span class="button_tally">1</span>
             </a>
             
@@ -1154,7 +1150,27 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
             </a>
             
             
@@ -1166,19 +1182,7 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%89%93%E5%8D%B0%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>打印机<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
             </a>
             
             
@@ -1186,35 +1190,11 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%8C%82%E8%BD%BD/' class=" post_tag button button_translucent" data-position=1>挂载<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
             </a>
             
             
@@ -1222,11 +1202,15 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%89%93%E5%8D%B0%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>打印机<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%8C%82%E8%BD%BD/' class=" post_tag button button_translucent" data-position=1>挂载<span class="button_tally">1</span>
             </a>
             
             
@@ -1234,11 +1218,15 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
             </a>
             
             
@@ -1246,11 +1234,7 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
             </a>
             
             
@@ -1262,10 +1246,6 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
-            </a>
-            
-            
             <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
             </a>
             
@@ -1274,11 +1254,27 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E7%BD%91%E5%85%B3/' class=" post_tag button button_translucent" data-position=1>网关<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
             </a>
             
             
@@ -1290,11 +1286,15 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1363,7 +1363,7 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://www.zengxi.net/icons/apple-touch-icon.png' class="icon icon_2 transparent">
-    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2023</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
+    <p>Copyright &copy;&nbsp;2018&nbsp;-&nbsp;<span class="year">2024</span>&nbsp;保罗札记. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <use xlink:href="#arrow"></use>
 </svg>
@@ -1371,7 +1371,7 @@ Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null �
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" integrity="sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" integrity="sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous"></script>
     
   </body>
 </html>

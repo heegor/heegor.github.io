@@ -5,16 +5,16 @@
     <link>https://www.zengxi.net/categories/mybatis/</link>
     <description>Recent content in mybatis on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 25 Jan 2021 13:59:00 +0800</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/categories/mybatis/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Jan 2021 13:59:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/mybatis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MyBatis查询中动态指定schema</title>
       <link>https://www.zengxi.net/2021/01/mybatis_set_schema/</link>
       <pubDate>Mon, 25 Jan 2021 13:59:00 +0800</pubDate>
+      
       <guid>https://www.zengxi.net/2021/01/mybatis_set_schema/</guid>
-      <description>由于业务的需要，在查询的时候，需要动态地在SQL语句中指定schema。在mybatis的的查询语句中，可以使用 ${schemaName}。注意，必须要用$, 而不是#&#xA;1SET search_path TO ${schemaName}; 2 3select * from foo where bar = #{bar}; </description>
+      <description>由于业务的需要，在查询的时候，需要动态地在SQL语句中指定schema。在mybatis的的查询语句中，可以使用 ${schemaName}。注意，必须要用$, 而不是#</description>
     </item>
+    
   </channel>
 </rss>

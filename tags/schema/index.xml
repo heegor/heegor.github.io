@@ -5,23 +5,27 @@
     <link>https://www.zengxi.net/tags/schema/</link>
     <description>Recent content in schema on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 25 Jan 2021 13:59:00 +0800</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/schema/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Jan 2021 13:59:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/schema/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MyBatis查询中动态指定schema</title>
       <link>https://www.zengxi.net/2021/01/mybatis_set_schema/</link>
       <pubDate>Mon, 25 Jan 2021 13:59:00 +0800</pubDate>
+      
       <guid>https://www.zengxi.net/2021/01/mybatis_set_schema/</guid>
-      <description>由于业务的需要，在查询的时候，需要动态地在SQL语句中指定schema。在mybatis的的查询语句中，可以使用 ${schemaName}。注意，必须要用$, 而不是#&#xA;1SET search_path TO ${schemaName}; 2 3select * from foo where bar = #{bar}; </description>
+      <description>由于业务的需要，在查询的时候，需要动态地在SQL语句中指定schema。在mybatis的的查询语句中，可以使用 ${schemaName}。注意，必须要用$, 而不是#</description>
     </item>
+    
     <item>
       <title>设置Postgres数据库的默认schema</title>
       <link>https://www.zengxi.net/2018/06/set-postgres-default-schema/</link>
       <pubDate>Fri, 15 Jun 2018 10:26:05 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2018/06/set-postgres-default-schema/</guid>
-      <description>查看当前的schema&#xA;1SHOW search_path; 设置默认schema，仅对当前连接有效&#xA;1SET search_path TO your_schema; 设置默认schema，数据库级别，修改之后的所有连接都有效&#xA;1ALTER database &amp;#34;your_database&amp;#34; SET search_path TO your_schema; </description>
+      <description>查看当前的schema
+1SHOWsearch_path;设置默认schema，仅对当前连接有效
+1SETsearch_pathTOyour_schema;设置默认schema，数据库级别，修改之后的所有连接都有效</description>
     </item>
+    
   </channel>
 </rss>

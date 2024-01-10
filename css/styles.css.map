@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "styles.css",
-	"sourceRoot": "/Users/paul/dev/hugo-space",
+	"sourceRoot": "/home/paul/hugo-space",
 	"sources": [
 		"themes/clarity-paul/assets/sass/main.sass",
 		"themes/clarity-paul/assets/sass/_variables.sass",

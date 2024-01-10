@@ -5,16 +5,24 @@
     <link>https://www.zengxi.net/tags/wal-e/</link>
     <description>Recent content in wal-e on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 09 Jun 2020 12:31:50 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/wal-e/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Jun 2020 12:31:50 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/wal-e/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>postgres增量备份工具：wal-e</title>
       <link>https://www.zengxi.net/2020/06/pg_wale_continuous_archiving/</link>
       <pubDate>Tue, 09 Jun 2020 12:31:50 +0000</pubDate>
+      
       <guid>https://www.zengxi.net/2020/06/pg_wale_continuous_archiving/</guid>
-      <description>wal-e这个工具可以用来给postgres数据库做基础备份与增量备份，这个对数据库容灾很有帮助。目前它支持将备份存储到AWS S3，Azure Blob Store与Google Storage等。&#xA;一些基本概念 Base Backup 也称为热备份，它不会中断PostgreSQL中任何事务。一旦启动了basebackup，它将等待一个checkpoint。如果到达了checkpoint，那么它将把整个数据目录复制到一个文件中。这些备份将会是replication或POINT IN TIME恢复的起点。通常，basebackup是不一致的，可能包含已经损坏的数据。这时，就需要用到WAL文件&#xA;WAL 通过WAL文件可以获得数据库内所有数据的变更。这些变更首先写入WAL文件，然后再对数据库进行实际性地写入 。因此被称作Write Ahead Log。&#xA;Consitent Backup Consitent Backup(一致性备份) = Base backup + WAL backup&#xA;WAL日志文件必须在还原基础备份之后再还原。还原WAL文件的相关命令，必须在recovery.conf的restore_command中设置&#xA;WAL-E中的一些命令 backup-push - 做基础备份 backup-fetch - 做还原基础备份 wal-push - 备份wal文件 wal-fetch - 还原wal文件 用法 大致的用法就是：&#xA;主库 安装wal-e，在配置目录中指定备份需要存储的地址以及身份认证 新建crontab，调用backup-push定时做基础备份 修改postgres配置目录下的postgresql.conf中的配置，开启archive并指定archive命令备份wal文件 备库 安装wal-e，在配置目录中指定获取备份的地址以及身份认证 用backup-fetch还原一次基础备份 在postgres的数据目录下面，新增recovery.conf配置文件，里面指定了还原wal备份的命令 更多详细内容与配置，可以参考它的github项目：https://github.com/wal-e/wal-e/&#xA;参考链接：&#xA;https://github.com/wal-e/wal-e/ https://dba.stackexchange.com/questions/211416/postgresql-how-to-take-incremental-backup-with-wal-e/211422 </description>
+      <description>wal-e这个工具可以用来给postgres数据库做基础备份与增量备份，这个对数据库容灾很有帮助。目前它支持将备份存储到AWS S3，Azure Blob Store与Google Storage等。
+一些基本概念 Base Backup 也称为热备份，它不会中断PostgreSQL中任何事务。一旦启动了basebackup，它将等待一个checkpoint。如果到达了checkpoint，那么它将把整个数据目录复制到一个文件中。这些备份将会是replication或POINT IN TIME恢复的起点。通常，basebackup是不一致的，可能包含已经损坏的数据。这时，就需要用到WAL文件
+WAL 通过WAL文件可以获得数据库内所有数据的变更。这些变更首先写入WAL文件，然后再对数据库进行实际性地写入 。因此被称作Write Ahead Log。
+Consitent Backup Consitent Backup(一致性备份) = Base backup + WAL backup
+WAL日志文件必须在还原基础备份之后再还原。还原WAL文件的相关命令，必须在recovery.conf的restore_command中设置
+WAL-E中的一些命令  backup-push - 做基础备份 backup-fetch - 做还原基础备份 wal-push - 备份wal文件 wal-fetch - 还原wal文件  用法 大致的用法就是：
+ 主库  安装wal-e，在配置目录中指定备份需要存储的地址以及身份认证 新建crontab，调用backup-push定时做基础备份 修改postgres配置目录下的postgresql.conf中的配置，开启archive并指定archive命令备份wal文件   备库  安装wal-e，在配置目录中指定获取备份的地址以及身份认证 用backup-fetch还原一次基础备份 在postgres的数据目录下面，新增recovery.conf配置文件，里面指定了还原wal备份的命令    更多详细内容与配置，可以参考它的github项目：https://github.com/wal-e/wal-e/
+ 参考链接：
+ https://github.com/wal-e/wal-e/ https://dba.stackexchange.com/questions/211416/postgresql-how-to-take-incremental-backup-with-wal-e/211422  </description>
     </item>
+    
   </channel>
 </rss>
