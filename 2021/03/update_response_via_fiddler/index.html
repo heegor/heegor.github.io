@@ -45,8 +45,8 @@
     
     
     <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
-    "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" as="script" integrity=
+    "sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous">
 
     
     <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
@@ -167,82 +167,82 @@
     <p>使用Fiddler抓包工具，通过修改CustomRules.js脚本达到修改Http请求的Response中Body信息（如JSON串）。</p>
 <p>常用于在Server开发未完全Ready而前端或客户端开发需要Server数据时，修改请求的返回数据，达到Debug和测试的目的，较添加BreakPoint的方法更加便捷。</p>
 <p>本例Demo中会为JSON添加一个字段和修改一个字段，如下所示：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="ln"> 1</span><span class="c1">// 原JSON串 V1.0
-</span><span class="ln"> 2</span><span class="c1"></span><span class="p">{</span>    
-<span class="ln"> 3</span>  <span class="nt">&#34;music&#34;</span><span class="p">:</span> <span class="s2">&#34;big big world&#34;</span><span class="p">,</span>
-<span class="ln"> 4</span>  <span class="nt">&#34;singer&#34;</span><span class="p">:</span> <span class="s2">&#34;Emilia Rydberg&#34;</span>
-<span class="ln"> 5</span><span class="p">}</span> 
-<span class="ln"> 6</span>
-<span class="ln"> 7</span><span class="c1">// 新JSON串 V1.1
-</span><span class="ln"> 8</span><span class="c1"></span><span class="p">{</span>
-<span class="ln"> 9</span>  <span class="nt">&#34;music&#34;</span><span class="p">:</span> <span class="s2">&#34;big big world&#34;</span><span class="p">,</span>
-<span class="ln">10</span>  <span class="nt">&#34;singer&#34;</span><span class="p">:</span> <span class="s2">&#34;艾密莉亚·怀得堡&#34;</span><span class="p">,</span>    　　<span class="c1">// 修改该字段(英文名改为中文名显示)
-</span><span class="ln">11</span><span class="c1"></span>  <span class="nt">&#34;similar song&#34;</span><span class="p">:</span> <span class="p">[</span>    　　　　　　  <span class="c1">// 添加该字段(相似歌曲列表)
-</span><span class="ln">12</span><span class="c1"></span>    <span class="p">{</span>
-<span class="ln">13</span>      <span class="nt">&#34;music&#34;</span><span class="p">:</span> <span class="s2">&#34;dying in the sun&#34;</span><span class="p">,</span>
-<span class="ln">14</span>      <span class="nt">&#34;singer&#34;</span><span class="p">:</span> <span class="s2">&#34;The Cranberries&#34;</span>
-<span class="ln">15</span>    <span class="p">},</span>
-<span class="ln">16</span>    <span class="p">{</span>
-<span class="ln">17</span>      <span class="nt">&#34;music&#34;</span><span class="p">:</span> <span class="s2">&#34;seasons in sun&#34;</span><span class="p">,</span>
-<span class="ln">18</span>      <span class="nt">&#34;singer&#34;</span><span class="p">:</span> <span class="s2">&#34;WestLife&#34;</span>
-<span class="ln">19</span>    <span class="p">}</span>
-<span class="ln">20</span>  <span class="p">]</span>
-<span class="ln">21</span><span class="p">}</span>
-</code></pre></div><h1 id="基本流程">基本流程</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// 原JSON串 V1.0
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="p">{</span>    
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">  <span class="nt">&#34;music&#34;</span><span class="p">:</span> <span class="s2">&#34;big big world&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">  <span class="nt">&#34;singer&#34;</span><span class="p">:</span> <span class="s2">&#34;Emilia Rydberg&#34;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="p">}</span> 
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1">// 新JSON串 V1.1
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">  <span class="nt">&#34;music&#34;</span><span class="p">:</span> <span class="s2">&#34;big big world&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">  <span class="nt">&#34;singer&#34;</span><span class="p">:</span> <span class="s2">&#34;艾密莉亚·怀得堡&#34;</span><span class="p">,</span>    　　<span class="c1">// 修改该字段(英文名改为中文名显示)
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="c1"></span>  <span class="nt">&#34;similar song&#34;</span><span class="p">:</span> <span class="p">[</span>    　　　　　　  <span class="c1">// 添加该字段(相似歌曲列表)
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="c1"></span>    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">      <span class="nt">&#34;music&#34;</span><span class="p">:</span> <span class="s2">&#34;dying in the sun&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">      <span class="nt">&#34;singer&#34;</span><span class="p">:</span> <span class="s2">&#34;The Cranberries&#34;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">      <span class="nt">&#34;music&#34;</span><span class="p">:</span> <span class="s2">&#34;seasons in sun&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">      <span class="nt">&#34;singer&#34;</span><span class="p">:</span> <span class="s2">&#34;WestLife&#34;</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h1 id="基本流程">基本流程</h1>
 <p><img src="/images/p/2021/03/update_response_via_fiddler_process.png" alt=""></p>
 <h1 id="基本步骤简单">基本步骤（简单）</h1>
 <p>打开并编辑Customize Rule文件，在方法 OnBeforeResponse 中插入修改代码，重启Fiddler重新加载Rule，运行。</p>
 <p>插入代码：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="ln"> 1</span><span class="kr">static</span> <span class="kd">function</span> <span class="nx">OnBeforeResponse</span><span class="p">(</span><span class="nx">oSession</span><span class="o">:</span> <span class="nx">Session</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="k">if</span> <span class="p">(</span><span class="nx">m_Hide304s</span> <span class="o">&amp;&amp;</span> <span class="nx">oSession</span><span class="p">.</span><span class="nx">responseCode</span> <span class="o">==</span> <span class="mi">304</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln"> 3</span>        <span class="nx">oSession</span><span class="p">[</span><span class="s2">&#34;ui-hide&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;true&#34;</span><span class="p">;</span>
-<span class="ln"> 4</span>    <span class="p">}</span>
-<span class="ln"> 5</span>    
-<span class="ln"> 6</span>    <span class="c1">// 判断是否为目标请求
-</span><span class="ln"> 7</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">isMusicRequest</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-<span class="ln"> 8</span>    <span class="k">if</span> <span class="p">((</span><span class="nx">oSession</span><span class="p">.</span><span class="nx">host</span> <span class="o">==</span> <span class="s2">&#34;m.baidu.com&#34;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>                <span class="c1">// host  
-</span><span class="ln"> 9</span><span class="c1"></span>        <span class="nx">oSession</span><span class="p">.</span><span class="nx">fullUrl</span><span class="p">.</span><span class="nx">Contains</span><span class="p">(</span><span class="s2">&#34;suggest?ctl=his&amp;action=list&#34;</span><span class="p">))</span>   <span class="c1">// url
-</span><span class="ln">10</span><span class="c1"></span>    <span class="p">{</span>
-<span class="ln">11</span>        <span class="nx">isMusicRequest</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-<span class="ln">12</span>    <span class="p">}</span>
-<span class="ln">13</span>
-<span class="ln">14</span>    <span class="c1">// 修改返回JSON串
-</span><span class="ln">15</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">isMusicRequest</span><span class="p">)</span>
-<span class="ln">16</span>    <span class="p">{</span>
-<span class="ln">17</span>        <span class="c1">// 1, 获取Response Body中JSON字符串
-</span><span class="ln">18</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">responseStringOriginal</span> <span class="o">=</span>  <span class="nx">oSession</span><span class="p">.</span><span class="nx">GetResponseBodyAsString</span><span class="p">();</span>
-<span class="ln">19</span>        <span class="c1">//FiddlerObject.log(responseStringOriginal);    // 可在控制台中输出Log
-</span><span class="ln">20</span><span class="c1"></span>  
-<span class="ln">21</span>        <span class="c1">// 2, 转换为可编辑的JSONObject变量
-</span><span class="ln">22</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">responseJSON</span> <span class="o">=</span> <span class="nx">Fiddler</span><span class="p">.</span><span class="nx">WebFormats</span><span class="p">.</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">JsonDecode</span><span class="p">(</span><span class="nx">responseStringOriginal</span><span class="p">);</span>
-<span class="ln">23</span>        
-<span class="ln">24</span>        <span class="c1">// 3, 修改JSONObject变量
-</span><span class="ln">25</span><span class="c1"></span>        <span class="c1">// 3.1修改字段
-</span><span class="ln">26</span><span class="c1"></span>        <span class="nx">responseJSON</span><span class="p">.</span><span class="nx">JSONObject</span><span class="p">[</span><span class="s1">&#39;singer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;艾密莉亚·怀得堡&#34;</span><span class="p">;</span>
-<span class="ln">27</span>        <span class="c1">// 3.2添加字段
-</span><span class="ln">28</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">similarSong1</span><span class="o">=</span> <span class="s1">&#39;{&#39;</span> <span class="o">+</span>
-<span class="ln">29</span>                          <span class="s1">&#39;&#34;music&#34;: &#34;dying in the sun&#34;,&#39;</span><span class="o">+</span>
-<span class="ln">30</span>                          <span class="s1">&#39;&#34;singer&#34;: &#34;The Cranberries&#34;&#39;</span><span class="o">+</span>
-<span class="ln">31</span>                          <span class="s1">&#39;}&#39;</span><span class="p">;</span>
-<span class="ln">32</span>        <span class="kd">var</span> <span class="nx">similarSong2</span><span class="o">=</span> <span class="s1">&#39;{&#39;</span> <span class="o">+</span>
-<span class="ln">33</span>                          <span class="s1">&#39;&#34;music&#34;: &#34;seasons in sun&#34;,&#39;</span><span class="o">+</span>
-<span class="ln">34</span>                          <span class="s1">&#39;&#34;singer&#34;: &#34;WestLife&#34;&#39;</span><span class="o">+</span>
-<span class="ln">35</span>                          <span class="s1">&#39;}&#39;</span><span class="p">;</span>
-<span class="ln">36</span>        
-<span class="ln">37</span>        <span class="kd">var</span> <span class="nx">similarSong</span> <span class="o">=</span> <span class="s1">&#39;[&#39;</span> <span class="o">+</span>
-<span class="ln">38</span>                          <span class="nx">similarSong1</span> <span class="o">+</span>
-<span class="ln">39</span>                          <span class="s1">&#39;,&#39;</span> <span class="o">+</span>
-<span class="ln">40</span>                          <span class="nx">similarSong2</span> <span class="o">+</span>
-<span class="ln">41</span>                          <span class="s1">&#39;]&#39;</span><span class="p">;</span>
-<span class="ln">42</span>        <span class="nx">responseJSON</span><span class="p">.</span><span class="nx">JSONObject</span><span class="p">[</span><span class="s1">&#39;similar song&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">Fiddler</span><span class="p">.</span><span class="nx">WebFormats</span><span class="p">.</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">JsonDecode</span><span class="p">(</span><span class="nx">similarSong</span><span class="p">).</span><span class="nx">JSONObject</span> <span class="p">;</span>
-<span class="ln">43</span>        
-<span class="ln">44</span>        <span class="c1">// 4, 重新设置Response Body
-</span><span class="ln">45</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">responseStringDestinal</span> <span class="o">=</span> <span class="nx">Fiddler</span><span class="p">.</span><span class="nx">WebFormats</span><span class="p">.</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">JsonEncode</span><span class="p">(</span><span class="nx">responseJSON</span><span class="p">.</span><span class="nx">JSONObject</span><span class="p">);</span>
-<span class="ln">46</span>        <span class="c1">//FiddlerObject.log(responseStringDestinal);
-</span><span class="ln">47</span><span class="c1"></span>        <span class="nx">oSession</span><span class="p">.</span><span class="nx">utilSetResponseBody</span><span class="p">(</span><span class="nx">responseStringDestinal</span><span class="p">);</span>
-<span class="ln">48</span>    <span class="p">}</span>
-<span class="ln">49</span><span class="p">}</span>
-</code></pre></div><h1 id="customize-rule编辑方式">Customize Rule编辑方式</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kr">static</span> <span class="kd">function</span> <span class="nx">OnBeforeResponse</span><span class="p">(</span><span class="nx">oSession</span><span class="o">:</span> <span class="nx">Session</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">m_Hide304s</span> <span class="o">&amp;&amp;</span> <span class="nx">oSession</span><span class="p">.</span><span class="nx">responseCode</span> <span class="o">==</span> <span class="mi">304</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">        <span class="nx">oSession</span><span class="p">[</span><span class="s2">&#34;ui-hide&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;true&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="c1">// 判断是否为目标请求
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1"></span>    <span class="kd">var</span> <span class="nx">isMusicRequest</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="k">if</span> <span class="p">((</span><span class="nx">oSession</span><span class="p">.</span><span class="nx">host</span> <span class="o">==</span> <span class="s2">&#34;m.baidu.com&#34;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>                <span class="c1">// host  
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="c1"></span>        <span class="nx">oSession</span><span class="p">.</span><span class="nx">fullUrl</span><span class="p">.</span><span class="nx">Contains</span><span class="p">(</span><span class="s2">&#34;suggest?ctl=his&amp;action=list&#34;</span><span class="p">))</span>   <span class="c1">// url
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1"></span>    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="nx">isMusicRequest</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="c1">// 修改返回JSON串
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">isMusicRequest</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="c1">// 1, 获取Response Body中JSON字符串
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="c1"></span>        <span class="kd">var</span> <span class="nx">responseStringOriginal</span> <span class="o">=</span>  <span class="nx">oSession</span><span class="p">.</span><span class="nx">GetResponseBodyAsString</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="c1">//FiddlerObject.log(responseStringOriginal);    // 可在控制台中输出Log
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="c1"></span>  
+</span></span><span class="line"><span class="ln">21</span><span class="cl">        <span class="c1">// 2, 转换为可编辑的JSONObject变量
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="c1"></span>        <span class="kd">var</span> <span class="nx">responseJSON</span> <span class="o">=</span> <span class="nx">Fiddler</span><span class="p">.</span><span class="nx">WebFormats</span><span class="p">.</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">JsonDecode</span><span class="p">(</span><span class="nx">responseStringOriginal</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">        
+</span></span><span class="line"><span class="ln">24</span><span class="cl">        <span class="c1">// 3, 修改JSONObject变量
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="c1"></span>        <span class="c1">// 3.1修改字段
+</span></span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="c1"></span>        <span class="nx">responseJSON</span><span class="p">.</span><span class="nx">JSONObject</span><span class="p">[</span><span class="s1">&#39;singer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;艾密莉亚·怀得堡&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">        <span class="c1">// 3.2添加字段
+</span></span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="c1"></span>        <span class="kd">var</span> <span class="nx">similarSong1</span><span class="o">=</span> <span class="s1">&#39;{&#39;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">                          <span class="s1">&#39;&#34;music&#34;: &#34;dying in the sun&#34;,&#39;</span><span class="o">+</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">                          <span class="s1">&#39;&#34;singer&#34;: &#34;The Cranberries&#34;&#39;</span><span class="o">+</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">                          <span class="s1">&#39;}&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">        <span class="kd">var</span> <span class="nx">similarSong2</span><span class="o">=</span> <span class="s1">&#39;{&#39;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">                          <span class="s1">&#39;&#34;music&#34;: &#34;seasons in sun&#34;,&#39;</span><span class="o">+</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">                          <span class="s1">&#39;&#34;singer&#34;: &#34;WestLife&#34;&#39;</span><span class="o">+</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">                          <span class="s1">&#39;}&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">        
+</span></span><span class="line"><span class="ln">37</span><span class="cl">        <span class="kd">var</span> <span class="nx">similarSong</span> <span class="o">=</span> <span class="s1">&#39;[&#39;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">                          <span class="nx">similarSong1</span> <span class="o">+</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">                          <span class="s1">&#39;,&#39;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">                          <span class="nx">similarSong2</span> <span class="o">+</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl">                          <span class="s1">&#39;]&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">42</span><span class="cl">        <span class="nx">responseJSON</span><span class="p">.</span><span class="nx">JSONObject</span><span class="p">[</span><span class="s1">&#39;similar song&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">Fiddler</span><span class="p">.</span><span class="nx">WebFormats</span><span class="p">.</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">JsonDecode</span><span class="p">(</span><span class="nx">similarSong</span><span class="p">).</span><span class="nx">JSONObject</span> <span class="p">;</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">        
+</span></span><span class="line"><span class="ln">44</span><span class="cl">        <span class="c1">// 4, 重新设置Response Body
+</span></span></span><span class="line"><span class="ln">45</span><span class="cl"><span class="c1"></span>        <span class="kd">var</span> <span class="nx">responseStringDestinal</span> <span class="o">=</span> <span class="nx">Fiddler</span><span class="p">.</span><span class="nx">WebFormats</span><span class="p">.</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">JsonEncode</span><span class="p">(</span><span class="nx">responseJSON</span><span class="p">.</span><span class="nx">JSONObject</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl">        <span class="c1">//FiddlerObject.log(responseStringDestinal);
+</span></span></span><span class="line"><span class="ln">47</span><span class="cl"><span class="c1"></span>        <span class="nx">oSession</span><span class="p">.</span><span class="nx">utilSetResponseBody</span><span class="p">(</span><span class="nx">responseStringDestinal</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">49</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h1 id="customize-rule编辑方式">Customize Rule编辑方式</h1>
 <p>可以通过Fiddler菜单打开CustomRules.js文件然后通过第三方编辑器来编辑并保存，或者通过Fiddler ScriptEditor工具来编辑（推荐，右侧有相关类使用参考）。</p>
 <p><img src="/images/p/2021/03/update_response_via_fiddler_customize_rule.png" alt=""></p>
 <p><img src="/images/p/2021/03/update_response_via_fiddler_script_editor.png" alt=""></p>
@@ -275,6 +275,9 @@
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
+        <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/01/gateway-modify-request-response/" class="nav-link">通过SpringGateway对接口请求进行加解密</a>
       </li>
       <li>
@@ -295,14 +298,17 @@
       <li>
         <a href="https://www.zengxi.net/2020/07/zookeeper_purge_file/" class="nav-link">zookeeper服务器文件清理</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/" class="nav-link">terraform中阿里云ECS ssh key变化问题</a>
-      </li>
     </ul>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/01/gateway-modify-request-response/" class="nav-link">通过SpringGateway对接口请求进行加解密</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2023/12/unsafe_http_methods/" class="nav-link">不安全的http方法</a>
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
@@ -318,12 +324,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/" class="nav-link">Spring Boot 自动设置响应头引发的问题</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/11/on-premise-vs-private-cloud/" class="nav-link">On-Premise 与 Private Cloud 区别</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/05/access-new-bing/" class="nav-link">不用魔法直接访问 New Bing</a>
       </li>
     </ul>
     <div>
@@ -441,6 +441,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/categories/kafka/' class=" post_tag button button_translucent" data-position=1>KAFKA<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=18>KUBERNETES<span class="button_tally">18</span>
             </a>
             
@@ -497,11 +501,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
             </a>
             
             
@@ -513,7 +521,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
             </a>
             
             
@@ -716,6 +724,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/http/' class=" post_tag button button_translucent" data-position=1>HTTP<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/inputstream/' class=" post_tag button button_translucent" data-position=1>INPUTSTREAM<span class="button_tally">1</span>
             </a>
             
@@ -753,6 +765,10 @@
             
             
             <a href='https://www.zengxi.net/tags/jvm/' class=" post_tag button button_translucent" data-position=2>JVM<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/kafka/' class=" post_tag button button_translucent" data-position=1>KAFKA<span class="button_tally">1</span>
             </a>
             
             
@@ -936,31 +952,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=2>安全<span class="button_tally">2</span>
             </a>
             
             
@@ -968,23 +964,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
             </a>
             
             
@@ -992,7 +980,23 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
             </a>
             
             
@@ -1000,19 +1004,39 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=4>排序<span class="button_tally">4</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
             </a>
             
             
@@ -1020,7 +1044,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BA%8B%E5%8A%A1/' class=" post_tag button button_translucent" data-position=1>事务<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
             </a>
             
             
@@ -1032,6 +1064,14 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E7%BD%91%E5%85%B3/' class=" post_tag button button_translucent" data-position=1>网关<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
             </a>
             
@@ -1040,27 +1080,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BD%91%E5%85%B3/' class=" post_tag button button_translucent" data-position=1>网关<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
             </a>
             
             
@@ -1072,15 +1096,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1157,7 +1177,7 @@
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" integrity="sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" integrity="sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous"></script>
     
   </body>
 </html>

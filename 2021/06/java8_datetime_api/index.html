@@ -20,14 +20,14 @@
 
 <meta property="og:type" content="article">
 <meta name="description" content="相关背景 Java对日期、日历及时间的处理一直以来都饱受诟病：
- java.util.Date和java.util.Calendar类易用性差，不支持时区，非线程安全 用于格式化日期的类DateFormat被放在java.text包中，它是一个抽象类，所以我们需要实例化一个SimpleDateFormat对象来处理日期 …">
+java.util.Date和java.util.Calendar类易用性差，不支持时区，非线程安全 用于格式化日期的类DateFormat被放在java.text包中，它是一个抽象类，所以我们需要实例化一个SimpleDateFormat对象来处理日期格 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="Java 8新特性 - (9)DateTime API" />
 <meta property="og:url" content="https://www.zengxi.net/2021/06/java8_datetime_api/" />
 <meta property="og:title" content="Java 8新特性 - (9)DateTime API" />
 <meta property="og:description" content="相关背景 Java对日期、日历及时间的处理一直以来都饱受诟病：
- java.util.Date和java.util.Calendar类易用性差，不支持时区，非线程安全 用于格式化日期的类DateFormat被放在java.text包中，它是一个抽象类，所以我们需要实例化一个SimpleDateFormat对象来处理日期 …" />
+java.util.Date和java.util.Calendar类易用性差，不支持时区，非线程安全 用于格式化日期的类DateFormat被放在java.text包中，它是一个抽象类，所以我们需要实例化一个SimpleDateFormat对象来处理日期格 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -43,8 +43,8 @@
     
     
     <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
-    "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" as="script" integrity=
+    "sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous">
 
     
     <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
@@ -210,70 +210,70 @@
 </ul>
 <h2 id="localdate">LocalDate</h2>
 <p>LocalDate类内只包含日期，不包含具体时间。只需要表示日期而不包含时间，就可以使用它。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// 只获取日期
-</span><span class="ln">2</span><span class="c1"></span><span class="n">LocalDate</span> <span class="n">today</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
-<span class="ln">3</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">today</span><span class="o">);</span>
-<span class="ln">4</span>
-<span class="ln">5</span><span class="kt">int</span> <span class="n">year</span> <span class="o">=</span> <span class="n">today</span><span class="o">.</span><span class="na">getYear</span><span class="o">();</span>
-<span class="ln">6</span><span class="kt">int</span> <span class="n">month</span> <span class="o">=</span> <span class="n">today</span><span class="o">.</span><span class="na">getMonthValue</span><span class="o">();</span>
-<span class="ln">7</span><span class="kt">int</span> <span class="n">day</span> <span class="o">=</span> <span class="n">today</span><span class="o">.</span><span class="na">getDayOfMonth</span><span class="o">();</span>
-<span class="ln">8</span>
-<span class="ln">9</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&#34;Year : %d Month : %d day : %d \t %n&#34;</span><span class="o">,</span> <span class="n">year</span><span class="o">,</span> <span class="n">month</span><span class="o">,</span> <span class="n">day</span><span class="o">);</span>
-</code></pre></div><p>同时，还可以通过LocalDate获取日期是月份的第几天、周的第几天，月份的天数，是否为闰年等。看下面的代码是不是非常方便。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">LocalDate</span> <span class="n">today</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
-<span class="ln">2</span><span class="c1">// 月份中的第几天
-</span><span class="ln">3</span><span class="c1"></span><span class="kt">int</span> <span class="n">dayOfMonth</span> <span class="o">=</span> <span class="n">today</span><span class="o">.</span><span class="na">getDayOfMonth</span><span class="o">();</span>
-<span class="ln">4</span><span class="c1">// 一周的第几天
-</span><span class="ln">5</span><span class="c1"></span><span class="n">DayOfWeek</span> <span class="n">dayOfWeek</span> <span class="o">=</span> <span class="n">today</span><span class="o">.</span><span class="na">getDayOfWeek</span><span class="o">();</span>
-<span class="ln">6</span><span class="c1">// 月份的天数
-</span><span class="ln">7</span><span class="c1"></span><span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">today</span><span class="o">.</span><span class="na">lengthOfMonth</span><span class="o">();</span>
-<span class="ln">8</span><span class="c1">// 是否为闰年
-</span><span class="ln">9</span><span class="c1"></span><span class="kt">boolean</span> <span class="n">leapYear</span> <span class="o">=</span> <span class="n">today</span><span class="o">.</span><span class="na">isLeapYear</span><span class="o">();</span>
-</code></pre></div><p>上面通过now获取LocalDate对象，也可以通过静态方法of()或parse创建任意一个日期。再也不用像之前一样年只能从1900年开始，月必须从0开始等。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">LocalDate</span> <span class="n">oneDay</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">2019</span><span class="o">,</span><span class="n">10</span><span class="o">,</span><span class="n">1</span><span class="o">);</span>
-<span class="ln">2</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">oneDay</span><span class="o">);</span>
-<span class="ln">3</span>
-<span class="ln">4</span><span class="n">LocalDate</span> <span class="n">parseDay</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;2019-10-01&#34;</span><span class="o">);</span>
-<span class="ln">5</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">parseDay</span><span class="o">);</span>
-<span class="ln">6</span><span class="c1">// 打印输出：2019-10-01
-</span></code></pre></div><p>LocalDate重写了equals方法，让日期的比较也变得简单了。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>// 定义任意日期
-<span class="ln">2</span>LocalDate oneDay = LocalDate.of(2019, 10, 1);
-<span class="ln">3</span>System.out.println(oneDay);
-<span class="ln">4</span>
-<span class="ln">5</span>// 定义任意比较
-<span class="ln">6</span>LocalDate anyDay = LocalDate.of(2019, 10, 1);
-<span class="ln">7</span>System.out.println(oneDay.equals(anyDay));
-</code></pre></div><p>同时，针对日期还可延伸出MonthDay或YearMonth类，顾名思义，只包含月天或年月。同样适用于equals方法来比较。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// 只获取日期</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">LocalDate</span><span class="w"> </span><span class="n">today</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">today</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">today</span><span class="p">.</span><span class="na">getYear</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">month</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">today</span><span class="p">.</span><span class="na">getMonthValue</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">day</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">today</span><span class="p">.</span><span class="na">getDayOfMonth</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&#34;Year : %d Month : %d day : %d \t %n&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="n">month</span><span class="p">,</span><span class="w"> </span><span class="n">day</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>同时，还可以通过LocalDate获取日期是月份的第几天、周的第几天，月份的天数，是否为闰年等。看下面的代码是不是非常方便。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">LocalDate</span><span class="w"> </span><span class="n">today</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="c1">// 月份中的第几天</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">dayOfMonth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">today</span><span class="p">.</span><span class="na">getDayOfMonth</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="c1">// 一周的第几天</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">DayOfWeek</span><span class="w"> </span><span class="n">dayOfWeek</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">today</span><span class="p">.</span><span class="na">getDayOfWeek</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="c1">// 月份的天数</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">today</span><span class="p">.</span><span class="na">lengthOfMonth</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w"></span><span class="c1">// 是否为闰年</span><span class="w">
+</span></span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="w"></span><span class="kt">boolean</span><span class="w"> </span><span class="n">leapYear</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">today</span><span class="p">.</span><span class="na">isLeapYear</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></div><p>上面通过now获取LocalDate对象，也可以通过静态方法of()或parse创建任意一个日期。再也不用像之前一样年只能从1900年开始，月必须从0开始等。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">LocalDate</span><span class="w"> </span><span class="n">oneDay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">2019</span><span class="p">,</span><span class="n">10</span><span class="p">,</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">oneDay</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">LocalDate</span><span class="w"> </span><span class="n">parseDay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&#34;2019-10-01&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">parseDay</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="c1">// 打印输出：2019-10-01</span><span class="w">
+</span></span></span></code></pre></div><p>LocalDate重写了equals方法，让日期的比较也变得简单了。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">// 定义任意日期
+</span></span><span class="line"><span class="ln">2</span><span class="cl">LocalDate oneDay = LocalDate.of(2019, 10, 1);
+</span></span><span class="line"><span class="ln">3</span><span class="cl">System.out.println(oneDay);
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl">// 定义任意比较
+</span></span><span class="line"><span class="ln">6</span><span class="cl">LocalDate anyDay = LocalDate.of(2019, 10, 1);
+</span></span><span class="line"><span class="ln">7</span><span class="cl">System.out.println(oneDay.equals(anyDay));
+</span></span></code></pre></div><p>同时，针对日期还可延伸出MonthDay或YearMonth类，顾名思义，只包含月天或年月。同样适用于equals方法来比较。</p>
 <p>另外使用before和after可以比较两个日期前后时间。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kt">boolean</span> <span class="n">notBefore</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;2019-10-01&#34;</span><span class="o">).</span><span class="na">isBefore</span><span class="o">(</span><span class="n">LocalDate</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;2019-10-02&#34;</span><span class="o">));</span>
-<span class="ln">2</span><span class="kt">boolean</span> <span class="n">isAfter</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;2019-10-01&#34;</span><span class="o">).</span><span class="na">isAfter</span><span class="o">(</span><span class="n">LocalDate</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;2019-10-02&#34;</span><span class="o">));</span>
-</code></pre></div><p>对日期进行前一天后一天或前一个月的加减也变得十分方便。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">LocalDate</span> <span class="n">tomorrowDay</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">().</span><span class="na">plusDays</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
-<span class="ln">2</span><span class="n">LocalDate</span> <span class="n">nextMonth</span> <span class="o">=</span>  <span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">().</span><span class="na">plusMonths</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
-</code></pre></div><p>还有，可以获取某一天的开始时间和当天所在月的第一天等。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">().</span><span class="na">atStartOfDay</span><span class="o">();</span>
-<span class="ln">2</span><span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span class="n">TemporalAdjusters</span><span class="o">.</span><span class="na">firstDayOfMonth</span><span class="o">());</span>
-</code></pre></div><h2 id="localtime">LocalTime</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kt">boolean</span><span class="w"> </span><span class="n">notBefore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&#34;2019-10-01&#34;</span><span class="p">).</span><span class="na">isBefore</span><span class="p">(</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&#34;2019-10-02&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="kt">boolean</span><span class="w"> </span><span class="n">isAfter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&#34;2019-10-01&#34;</span><span class="p">).</span><span class="na">isAfter</span><span class="p">(</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&#34;2019-10-02&#34;</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><p>对日期进行前一天后一天或前一个月的加减也变得十分方便。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">LocalDate</span><span class="w"> </span><span class="n">tomorrowDay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">plusDays</span><span class="p">(</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">LocalDate</span><span class="w"> </span><span class="n">nextMonth</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">plusMonths</span><span class="p">(</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>还有，可以获取某一天的开始时间和当天所在月的第一天等。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">atStartOfDay</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">with</span><span class="p">(</span><span class="n">TemporalAdjusters</span><span class="p">.</span><span class="na">firstDayOfMonth</span><span class="p">());</span><span class="w">
+</span></span></span></code></pre></div><h2 id="localtime">LocalTime</h2>
 <p>LocalTime和LocalDate类似，区别在于LocalDate不包含具体时间，而LocalTime包含具体时间。同样可以使用now或of方法来获得对象。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">LocalTime</span> <span class="n">localTime</span> <span class="o">=</span> <span class="n">LocalTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
-<span class="ln">2</span><span class="n">LocalTime</span> <span class="n">oneTime</span> <span class="o">=</span> <span class="n">LocalTime</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">10</span><span class="o">,</span><span class="n">10</span><span class="o">,</span><span class="n">10</span><span class="o">);</span>
-</code></pre></div><p>LocalDate类似它也拥有parse、isBefore、获取时间单元等方法，就不再赘述。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">LocalTime</span><span class="w"> </span><span class="n">localTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalTime</span><span class="p">.</span><span class="na">now</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">LocalTime</span><span class="w"> </span><span class="n">oneTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">10</span><span class="p">,</span><span class="n">10</span><span class="p">,</span><span class="n">10</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>LocalDate类似它也拥有parse、isBefore、获取时间单元等方法，就不再赘述。</p>
 <p>需要注意的是，LocalTime获得的时间格式为：11:41:58.904。也就是，HH:mm:ss.nnn，这里nnn是纳秒。</p>
 <p>还有一个在实战中查询日期区间时我们经常定义的“23:59:59.99”常量再也不用自己定义了。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// 23:59:59.999999999
-</span><span class="ln">2</span><span class="c1"></span><span class="n">LocalTime</span> <span class="n">maxTime</span> <span class="o">=</span> <span class="n">LocalTime</span><span class="o">.</span><span class="na">MAX</span><span class="o">;</span>
-<span class="ln">3</span><span class="c1">// 00:00
-</span><span class="ln">4</span><span class="c1"></span><span class="n">LocalTime</span> <span class="n">minTime</span> <span class="o">=</span> <span class="n">LocalTime</span><span class="o">.</span><span class="na">MIN</span><span class="o">;</span>
-</code></pre></div><h2 id="localdatetime">LocalDateTime</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// 23:59:59.999999999</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">LocalTime</span><span class="w"> </span><span class="n">maxTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalTime</span><span class="p">.</span><span class="na">MAX</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="c1">// 00:00</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">LocalTime</span><span class="w"> </span><span class="n">minTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalTime</span><span class="p">.</span><span class="na">MIN</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><h2 id="localdatetime">LocalDateTime</h2>
 <p>LocalDateTime表示日期和时间组合。可以通过of()方法直接创建，也可以调用LocalDate的atTime()方法或LocalTime的atDate()方法将LocalDate或LocalTime合并成一个LocalDateTime。</p>
 <p>创建时间示例：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">LocalDateTime</span> <span class="n">now</span> <span class="o">=</span> <span class="n">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
-<span class="ln">2</span><span class="n">LocalDateTime</span> <span class="n">oneTime</span> <span class="o">=</span> <span class="n">LocalDateTime</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">2019</span><span class="o">,</span><span class="n">10</span><span class="o">,</span><span class="n">14</span><span class="o">,</span><span class="n">10</span><span class="o">,</span><span class="n">12</span><span class="o">,</span><span class="n">12</span><span class="o">);</span>
-<span class="ln">3</span>
-<span class="ln">4</span><span class="c1">// 拼接日期
-</span><span class="ln">5</span><span class="c1"></span><span class="n">LocalTime</span><span class="o">.</span><span class="na">now</span><span class="o">().</span><span class="na">atDate</span><span class="o">(</span><span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">());</span>
-</code></pre></div><p>LocalDateTime与LocalDate和LocalTime之间可以相互转化。其他日期增减等操作与上面的类似。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">LocalDateTime</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">LocalDateTime</span><span class="w"> </span><span class="n">oneTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">2019</span><span class="p">,</span><span class="n">10</span><span class="p">,</span><span class="n">14</span><span class="p">,</span><span class="n">10</span><span class="p">,</span><span class="n">12</span><span class="p">,</span><span class="n">12</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="c1">// 拼接日期</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">LocalTime</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">atDate</span><span class="p">(</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">());</span><span class="w">
+</span></span></span></code></pre></div><p>LocalDateTime与LocalDate和LocalTime之间可以相互转化。其他日期增减等操作与上面的类似。</p>
 <h2 id="instant">Instant</h2>
 <p>Instant用于一个时间戳，与System.currentTimeMillis()类似，但Instant可以精确到纳秒（Nano-Second）。</p>
 <p>查看Instant源码，可以发现它的内部使用了两个常量：</p>
@@ -282,66 +282,66 @@
 <li>nanos表示纳秒部分（nanos的值不会超过999,999,999）</li>
 </ul>
 <p>Instant除了可以使用now()方法创建，还可以通过ofEpochSecond方法创建。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Instant</span> <span class="n">now</span> <span class="o">=</span> <span class="n">Instant</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
-<span class="ln">2</span><span class="n">Instant</span><span class="o">.</span><span class="na">ofEpochSecond</span><span class="o">(</span><span class="n">365</span> <span class="o">*</span> <span class="n">24</span> <span class="o">*</span> <span class="n">60</span><span class="o">,</span> <span class="n">100</span><span class="o">);</span>
-</code></pre></div><p>其中ofEpochSecond第一个参数表示秒，第二个参数表示纳秒。整体表示：从1970-01-01 00:00:00开始后的365天100纳秒的时间点。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Instant</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Instant</span><span class="p">.</span><span class="na">now</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">Instant</span><span class="p">.</span><span class="na">ofEpochSecond</span><span class="p">(</span><span class="n">365</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">24</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">60</span><span class="p">,</span><span class="w"> </span><span class="n">100</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>其中ofEpochSecond第一个参数表示秒，第二个参数表示纳秒。整体表示：从1970-01-01 00:00:00开始后的365天100纳秒的时间点。</p>
 <h2 id="duration">Duration</h2>
 <p>Duration的内部实现与Instant类似，也是包含两部分：seconds表示秒，nanos表示纳秒。两者的区别是Instant用于表示一个时间戳（或者说是一个时间点），而Duration表示一个时间段，所以Duration类中不包含now()静态方法。</p>
 <p>可以通过Duration.between()方法创建Duration对象</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="n">LocalDateTime</span> <span class="n">from</span> <span class="o">=</span> <span class="n">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
-<span class="ln"> 2</span><span class="n">LocalDateTime</span> <span class="n">to</span> <span class="o">=</span> <span class="n">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">().</span><span class="na">plusDays</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
-<span class="ln"> 3</span><span class="n">Duration</span> <span class="n">duration</span> <span class="o">=</span> <span class="n">Duration</span><span class="o">.</span><span class="na">between</span><span class="o">(</span><span class="n">from</span><span class="o">,</span> <span class="n">to</span><span class="o">);</span>
-<span class="ln"> 4</span>
-<span class="ln"> 5</span><span class="c1">// 区间统计换算
-</span><span class="ln"> 6</span><span class="c1">// 总天数
-</span><span class="ln"> 7</span><span class="c1"></span><span class="kt">long</span> <span class="n">days</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="na">toDays</span><span class="o">();</span>
-<span class="ln"> 8</span><span class="c1">// 小时数
-</span><span class="ln"> 9</span><span class="c1"></span><span class="kt">long</span> <span class="n">hours</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="na">toHours</span><span class="o">();</span>
-<span class="ln">10</span><span class="c1">// 分钟数
-</span><span class="ln">11</span><span class="c1"></span><span class="kt">long</span> <span class="n">minutes</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="na">toMinutes</span><span class="o">();</span>
-<span class="ln">12</span><span class="c1">// 秒数
-</span><span class="ln">13</span><span class="c1"></span><span class="kt">long</span> <span class="n">seconds</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="na">getSeconds</span><span class="o">();</span>
-<span class="ln">14</span><span class="c1">// 毫秒数
-</span><span class="ln">15</span><span class="c1"></span><span class="kt">long</span> <span class="n">milliSeconds</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="na">toMillis</span><span class="o">();</span>
-<span class="ln">16</span><span class="c1">// 纳秒数
-</span><span class="ln">17</span><span class="c1"></span><span class="kt">long</span> <span class="n">nanoSeconds</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="na">toNanos</span><span class="o">();</span>
-</code></pre></div><p>Duration对象还可以通过of()方法创建，该方法参数为时间段长度和时间单位。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// 7天
-</span><span class="ln">2</span><span class="c1"></span><span class="n">Duration</span> <span class="n">duration1</span> <span class="o">=</span> <span class="n">Duration</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">7</span><span class="o">,</span> <span class="n">ChronoUnit</span><span class="o">.</span><span class="na">DAYS</span><span class="o">);</span>
-<span class="ln">3</span><span class="c1">// 60秒
-</span><span class="ln">4</span><span class="c1"></span><span class="n">Duration</span> <span class="n">duration2</span> <span class="o">=</span> <span class="n">Duration</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">60</span><span class="o">,</span> <span class="n">ChronoUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
-</code></pre></div><h2 id="period">Period</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">LocalDateTime</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w"></span><span class="n">LocalDateTime</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">plusDays</span><span class="p">(</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"></span><span class="n">Duration</span><span class="w"> </span><span class="n">duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">between</span><span class="p">(</span><span class="n">from</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w"></span><span class="c1">// 区间统计换算</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w"></span><span class="c1">// 总天数</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w"></span><span class="kt">long</span><span class="w"> </span><span class="n">days</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration</span><span class="p">.</span><span class="na">toDays</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w"></span><span class="c1">// 小时数</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"></span><span class="kt">long</span><span class="w"> </span><span class="n">hours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration</span><span class="p">.</span><span class="na">toHours</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w"></span><span class="c1">// 分钟数</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w"></span><span class="kt">long</span><span class="w"> </span><span class="n">minutes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration</span><span class="p">.</span><span class="na">toMinutes</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w"></span><span class="c1">// 秒数</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w"></span><span class="kt">long</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration</span><span class="p">.</span><span class="na">getSeconds</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w"></span><span class="c1">// 毫秒数</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w"></span><span class="kt">long</span><span class="w"> </span><span class="n">milliSeconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration</span><span class="p">.</span><span class="na">toMillis</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w"></span><span class="c1">// 纳秒数</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w"></span><span class="kt">long</span><span class="w"> </span><span class="n">nanoSeconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration</span><span class="p">.</span><span class="na">toNanos</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></div><p>Duration对象还可以通过of()方法创建，该方法参数为时间段长度和时间单位。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// 7天</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">Duration</span><span class="w"> </span><span class="n">duration1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">7</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">DAYS</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="c1">// 60秒</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">Duration</span><span class="w"> </span><span class="n">duration2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">60</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h2 id="period">Period</h2>
 <p>Period与Duration类似，获取一个日期段，只不过单位为年月日，也可以通过of方法和between方法创建，between方法接收的参数为LocalDate。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Period</span> <span class="n">period</span> <span class="o">=</span> <span class="n">Period</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">10</span><span class="o">,</span> <span class="n">25</span><span class="o">);</span>
-<span class="ln">2</span><span class="n">Period</span> <span class="n">period1</span> <span class="o">=</span> <span class="n">Period</span><span class="o">.</span><span class="na">between</span><span class="o">(</span><span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">(),</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">().</span><span class="na">plusYears</span><span class="o">(</span><span class="n">1</span><span class="o">));</span>
-</code></pre></div><h2 id="zoneddatetime">ZonedDateTime</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Period</span><span class="w"> </span><span class="n">period</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Period</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="n">10</span><span class="p">,</span><span class="w"> </span><span class="n">25</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">Period</span><span class="w"> </span><span class="n">period1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Period</span><span class="p">.</span><span class="na">between</span><span class="p">(</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">(),</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">plusYears</span><span class="p">(</span><span class="n">1</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><h2 id="zoneddatetime">ZonedDateTime</h2>
 <p>ZonedDateTime类，用于处理带时区的日期和时间。它由两部分构成，LocalDateTime和ZoneId</p>
 <p>ZoneId表示不同的时区。大约有40不同的时区。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="c1">// 获取所有时区集合
-</span><span class="ln">2</span><span class="c1"></span><span class="n">Set</span> <span class="n">allZoneIds</span> <span class="o">=</span> <span class="n">ZoneId</span><span class="o">.</span><span class="na">getAvailableZoneIds</span><span class="o">();</span>
-<span class="ln">3</span>
-<span class="ln">4</span><span class="c1">// 创建时区
-</span><span class="ln">5</span><span class="c1"></span><span class="n">ZoneId</span> <span class="n">zoneId</span> <span class="o">=</span> <span class="n">ZoneId</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;Asia/Shanghai&#34;</span><span class="o">);</span>
-<span class="ln">6</span>
-<span class="ln">7</span><span class="c1">// 把LocalDateTime转换成特定的时区
-</span><span class="ln">8</span><span class="c1"></span><span class="n">ZonedDateTime</span> <span class="n">zonedDateTime</span> <span class="o">=</span> <span class="n">ZonedDateTime</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">(),</span> <span class="n">zoneId</span><span class="o">);</span>
-</code></pre></div><p>另外和时区一起使用的类是OffsetDateTime类，OffsetDateTime是不变的，表示date-time偏移，存储所有日期和时间字段，精确至纳秒，从UTC/Greenwich计算偏移。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// 获取所有时区集合</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">Set</span><span class="w"> </span><span class="n">allZoneIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZoneId</span><span class="p">.</span><span class="na">getAvailableZoneIds</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="c1">// 创建时区</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">ZoneId</span><span class="w"> </span><span class="n">zoneId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;Asia/Shanghai&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="c1">// 把LocalDateTime转换成特定的时区</span><span class="w">
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w"></span><span class="n">ZonedDateTime</span><span class="w"> </span><span class="n">zonedDateTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZonedDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">(),</span><span class="w"> </span><span class="n">zoneId</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>另外和时区一起使用的类是OffsetDateTime类，OffsetDateTime是不变的，表示date-time偏移，存储所有日期和时间字段，精确至纳秒，从UTC/Greenwich计算偏移。</p>
 <h2 id="时间日期格式化">时间日期格式化</h2>
 <h3 id="增加和减少日期">增加和减少日期</h3>
 <p>Java 8中的日期/时间类都是不可变的，这是为了保证线程安全。当然，新的日期/时间类也提供了方法用于创建对象的可变版本，比如增加一天或者减少一天：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">LocalDate</span> <span class="n">date</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">2017</span><span class="o">,</span> <span class="n">1</span><span class="o">,</span> <span class="n">5</span><span class="o">);</span>          <span class="c1">// 2017-01-05
-</span><span class="ln">2</span><span class="c1"></span>
-<span class="ln">3</span><span class="n">LocalDate</span> <span class="n">date1</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="na">withYear</span><span class="o">(</span><span class="n">2016</span><span class="o">);</span>              <span class="c1">// 修改为 2016-01-05
-</span><span class="ln">4</span><span class="c1"></span><span class="n">LocalDate</span> <span class="n">date2</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="na">withMonth</span><span class="o">(</span><span class="n">2</span><span class="o">);</span>                <span class="c1">// 修改为 2017-02-05
-</span><span class="ln">5</span><span class="c1"></span><span class="n">LocalDate</span> <span class="n">date3</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="na">withDayOfMonth</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>           <span class="c1">// 修改为 2017-01-01
-</span><span class="ln">6</span><span class="c1"></span>
-<span class="ln">7</span><span class="n">LocalDate</span> <span class="n">date4</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="na">plusYears</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>                <span class="c1">// 增加一年 2018-01-05
-</span><span class="ln">8</span><span class="c1"></span><span class="n">LocalDate</span> <span class="n">date5</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="na">minusMonths</span><span class="o">(</span><span class="n">2</span><span class="o">);</span>              <span class="c1">// 减少两个月 2016-11-05
-</span><span class="ln">9</span><span class="c1"></span><span class="n">LocalDate</span> <span class="n">date6</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="na">plus</span><span class="o">(</span><span class="n">5</span><span class="o">,</span> <span class="n">ChronoUnit</span><span class="o">.</span><span class="na">DAYS</span><span class="o">);</span>    <span class="c1">// 增加5天 2017-01-10
-</span></code></pre></div><p>上面例子中对于日期的操作比较简单，但是有些时候我们要面临更复杂的时间操作，比如将时间调到下一个工作日，或者是下个月的最后一天，这时候我们可以使用with()方法的另一个重载方法，它接收一个TemporalAdjuster参数，可以使我们更加灵活的调整日期：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">LocalDate</span> <span class="n">date7</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="na">with</span><span class="o">(</span><span class="n">nextOrSame</span><span class="o">(</span><span class="n">DayOfWeek</span><span class="o">.</span><span class="na">SUNDAY</span><span class="o">));</span>      <span class="c1">// 返回下一个距离当前时间最近的星期日
-</span><span class="ln">2</span><span class="c1"></span><span class="n">LocalDate</span> <span class="n">date9</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="na">with</span><span class="o">(</span><span class="n">lastInMonth</span><span class="o">(</span><span class="n">DayOfWeek</span><span class="o">.</span><span class="na">SATURDAY</span><span class="o">));</span>   <span class="c1">// 返回本月最后一个星期六
-</span></code></pre></div><p>TemporalAdjusters类中包含了很多静态方法可以直接使用，下面的表格列出了一些方法：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">LocalDate</span><span class="w"> </span><span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">2017</span><span class="p">,</span><span class="w"> </span><span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="n">5</span><span class="p">);</span><span class="w">          </span><span class="c1">// 2017-01-05</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">LocalDate</span><span class="w"> </span><span class="n">date1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">withYear</span><span class="p">(</span><span class="n">2016</span><span class="p">);</span><span class="w">              </span><span class="c1">// 修改为 2016-01-05</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">LocalDate</span><span class="w"> </span><span class="n">date2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">withMonth</span><span class="p">(</span><span class="n">2</span><span class="p">);</span><span class="w">                </span><span class="c1">// 修改为 2017-02-05</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">LocalDate</span><span class="w"> </span><span class="n">date3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">withDayOfMonth</span><span class="p">(</span><span class="n">1</span><span class="p">);</span><span class="w">           </span><span class="c1">// 修改为 2017-01-01</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="n">LocalDate</span><span class="w"> </span><span class="n">date4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">plusYears</span><span class="p">(</span><span class="n">1</span><span class="p">);</span><span class="w">                </span><span class="c1">// 增加一年 2018-01-05</span><span class="w">
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w"></span><span class="n">LocalDate</span><span class="w"> </span><span class="n">date5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">minusMonths</span><span class="p">(</span><span class="n">2</span><span class="p">);</span><span class="w">              </span><span class="c1">// 减少两个月 2016-11-05</span><span class="w">
+</span></span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="w"></span><span class="n">LocalDate</span><span class="w"> </span><span class="n">date6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="n">5</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">DAYS</span><span class="p">);</span><span class="w">    </span><span class="c1">// 增加5天 2017-01-10</span><span class="w">
+</span></span></span></code></pre></div><p>上面例子中对于日期的操作比较简单，但是有些时候我们要面临更复杂的时间操作，比如将时间调到下一个工作日，或者是下个月的最后一天，这时候我们可以使用with()方法的另一个重载方法，它接收一个TemporalAdjuster参数，可以使我们更加灵活的调整日期：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">LocalDate</span><span class="w"> </span><span class="n">date7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">with</span><span class="p">(</span><span class="n">nextOrSame</span><span class="p">(</span><span class="n">DayOfWeek</span><span class="p">.</span><span class="na">SUNDAY</span><span class="p">));</span><span class="w">      </span><span class="c1">// 返回下一个距离当前时间最近的星期日</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">LocalDate</span><span class="w"> </span><span class="n">date9</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">with</span><span class="p">(</span><span class="n">lastInMonth</span><span class="p">(</span><span class="n">DayOfWeek</span><span class="p">.</span><span class="na">SATURDAY</span><span class="p">));</span><span class="w">   </span><span class="c1">// 返回本月最后一个星期六</span><span class="w">
+</span></span></span></code></pre></div><p>TemporalAdjusters类中包含了很多静态方法可以直接使用，下面的表格列出了一些方法：</p>
 <table>
 <thead>
 <tr>
@@ -405,66 +405,66 @@
 </tbody>
 </table>
 <p>如果上面表格中列出的方法不能满足你的需求，你还可以创建自定义的TemporalAdjuster接口的实现，TemporalAdjuster也是一个函数式接口，所以我们可以使用Lambda表达式：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="nd">@FunctionalInterface</span>
-<span class="ln">2</span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">TemporalAdjuster</span> <span class="o">{</span>
-<span class="ln">3</span>    <span class="n">Temporal</span> <span class="nf">adjustInto</span><span class="o">(</span><span class="n">Temporal</span> <span class="n">temporal</span><span class="o">);</span>
-<span class="ln">4</span><span class="o">}</span>
-</code></pre></div><p>比如给定一个日期，计算该日期的下一个工作日（不包括星期六和星期天）：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="n">LocalDate</span> <span class="n">date</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">2017</span><span class="o">,</span> <span class="n">1</span><span class="o">,</span> <span class="n">5</span><span class="o">);</span>
-<span class="ln"> 2</span><span class="n">date</span><span class="o">.</span><span class="na">with</span><span class="o">(</span><span class="n">temporal</span> <span class="o">-&gt;</span> <span class="o">{</span>
-<span class="ln"> 3</span>    <span class="c1">// 当前日期
-</span><span class="ln"> 4</span><span class="c1"></span>    <span class="n">DayOfWeek</span> <span class="n">dayOfWeek</span> <span class="o">=</span> <span class="n">DayOfWeek</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">temporal</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ChronoField</span><span class="o">.</span><span class="na">DAY_OF_WEEK</span><span class="o">));</span>
-<span class="ln"> 5</span>
-<span class="ln"> 6</span>    <span class="c1">// 正常情况下，每次增加一天
-</span><span class="ln"> 7</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">dayToAdd</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
-<span class="ln"> 8</span>
-<span class="ln"> 9</span>    <span class="c1">// 如果是星期五，增加三天
-</span><span class="ln">10</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">dayOfWeek</span> <span class="o">==</span> <span class="n">DayOfWeek</span><span class="o">.</span><span class="na">FRIDAY</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">11</span>        <span class="n">dayToAdd</span> <span class="o">=</span> <span class="n">3</span><span class="o">;</span>
-<span class="ln">12</span>    <span class="o">}</span>
-<span class="ln">13</span>
-<span class="ln">14</span>    <span class="c1">// 如果是星期六，增加两天
-</span><span class="ln">15</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">dayOfWeek</span> <span class="o">==</span> <span class="n">DayOfWeek</span><span class="o">.</span><span class="na">SATURDAY</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">16</span>        <span class="n">dayToAdd</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span>
-<span class="ln">17</span>    <span class="o">}</span>
-<span class="ln">18</span>
-<span class="ln">19</span>    <span class="k">return</span> <span class="n">temporal</span><span class="o">.</span><span class="na">plus</span><span class="o">(</span><span class="n">dayToAdd</span><span class="o">,</span> <span class="n">ChronoUnit</span><span class="o">.</span><span class="na">DAYS</span><span class="o">);</span>
-<span class="ln">20</span><span class="o">});</span>
-</code></pre></div><h3 id="格式化日期">格式化日期</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="nd">@FunctionalInterface</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">TemporalAdjuster</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">    </span><span class="n">Temporal</span><span class="w"> </span><span class="nf">adjustInto</span><span class="p">(</span><span class="n">Temporal</span><span class="w"> </span><span class="n">temporal</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>比如给定一个日期，计算该日期的下一个工作日（不包括星期六和星期天）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">LocalDate</span><span class="w"> </span><span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">2017</span><span class="p">,</span><span class="w"> </span><span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="n">5</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w"></span><span class="n">date</span><span class="p">.</span><span class="na">with</span><span class="p">(</span><span class="n">temporal</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">    </span><span class="c1">// 当前日期</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">    </span><span class="n">DayOfWeek</span><span class="w"> </span><span class="n">dayOfWeek</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DayOfWeek</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">temporal</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">DAY_OF_WEEK</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">    </span><span class="c1">// 正常情况下，每次增加一天</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">dayToAdd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">    </span><span class="c1">// 如果是星期五，增加三天</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dayOfWeek</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DayOfWeek</span><span class="p">.</span><span class="na">FRIDAY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">        </span><span class="n">dayToAdd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">3</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">    </span><span class="c1">// 如果是星期六，增加两天</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dayOfWeek</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DayOfWeek</span><span class="p">.</span><span class="na">SATURDAY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">        </span><span class="n">dayToAdd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">2</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">temporal</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="n">dayToAdd</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">DAYS</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w"></span><span class="p">});</span><span class="w">
+</span></span></span></code></pre></div><h3 id="格式化日期">格式化日期</h3>
 <p>Java 8对日期的格式化操作非常简单，首先看到上面的类大多都提供了parse方法，可以直接通过解析字符串得到对应的对象。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">String</span> <span class="n">strDate6</span> <span class="o">=</span> <span class="s">&#34;2017-01-05&#34;</span><span class="o">;</span>
-<span class="ln">2</span><span class="n">String</span> <span class="n">strDate7</span> <span class="o">=</span> <span class="s">&#34;2017-01-05 12:30:05&#34;</span><span class="o">;</span>
-<span class="ln">3</span>
-<span class="ln">4</span><span class="n">LocalDate</span> <span class="n">date</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">strDate6</span><span class="o">,</span> <span class="n">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">&#34;yyyy-MM-dd&#34;</span><span class="o">));</span>
-<span class="ln">5</span><span class="n">LocalDateTime</span> <span class="n">dateTime1</span> <span class="o">=</span> <span class="n">LocalDateTime</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">strDate7</span><span class="o">,</span> <span class="n">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">&#34;yyyy-MM-dd HH:mm:ss&#34;</span><span class="o">));</span>
-</code></pre></div><p>Java 8的日期类有一个format()方法用于将日期格式化为字符串，该方法接收一个DateTimeFormatter类型参数。可以使用DateTimeFormatter预置的格式，也可以通过DateTimeFormatter.ofPattern方法来指定格式。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">LocalDateTime</span> <span class="n">dateTime</span> <span class="o">=</span> <span class="n">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
-<span class="ln">2</span><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">dateTime</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">DateTimeFormatter</span><span class="o">.</span><span class="na">ISO_LOCAL_DATE_TIME</span><span class="o">);</span>
-<span class="ln">3</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
-<span class="ln">4</span>
-<span class="ln">5</span><span class="n">str</span> <span class="o">=</span> <span class="n">dateTime</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">&#34;yyyy-MM-dd&#34;</span><span class="o">));</span>
-<span class="ln">6</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
-<span class="ln">7</span>
-<span class="ln">8</span><span class="c1">// 今天是：2017年 一月 05日 星期四
-</span><span class="ln">9</span><span class="c1"></span><span class="n">str</span> <span class="o">=</span> <span class="n">dateTime</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">&#34;今天是：YYYY年 MMMM DD日 E&#34;</span><span class="o">,</span> <span class="n">Locale</span><span class="o">.</span><span class="na">CHINESE</span><span class="o">));</span>
-</code></pre></div><h2 id="时区">时区</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">String</span><span class="w"> </span><span class="n">strDate6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;2017-01-05&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">String</span><span class="w"> </span><span class="n">strDate7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;2017-01-05 12:30:05&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">LocalDate</span><span class="w"> </span><span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="n">strDate6</span><span class="p">,</span><span class="w"> </span><span class="n">DateTimeFormatter</span><span class="p">.</span><span class="na">ofPattern</span><span class="p">(</span><span class="s">&#34;yyyy-MM-dd&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">LocalDateTime</span><span class="w"> </span><span class="n">dateTime1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="n">strDate7</span><span class="p">,</span><span class="w"> </span><span class="n">DateTimeFormatter</span><span class="p">.</span><span class="na">ofPattern</span><span class="p">(</span><span class="s">&#34;yyyy-MM-dd HH:mm:ss&#34;</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><p>Java 8的日期类有一个format()方法用于将日期格式化为字符串，该方法接收一个DateTimeFormatter类型参数。可以使用DateTimeFormatter预置的格式，也可以通过DateTimeFormatter.ofPattern方法来指定格式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">LocalDateTime</span><span class="w"> </span><span class="n">dateTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dateTime</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="n">DateTimeFormatter</span><span class="p">.</span><span class="na">ISO_LOCAL_DATE_TIME</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">str</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dateTime</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="n">DateTimeFormatter</span><span class="p">.</span><span class="na">ofPattern</span><span class="p">(</span><span class="s">&#34;yyyy-MM-dd&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">str</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w"></span><span class="c1">// 今天是：2017年 一月 05日 星期四</span><span class="w">
+</span></span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="w"></span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dateTime</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="n">DateTimeFormatter</span><span class="p">.</span><span class="na">ofPattern</span><span class="p">(</span><span class="s">&#34;今天是：YYYY年 MMMM DD日 E&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">Locale</span><span class="p">.</span><span class="na">CHINESE</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><h2 id="时区">时区</h2>
 <p>Java 8中的时区操作被很大程度上简化了，新的时区类java.time.ZoneId是原有的java.util.TimeZone类的替代品。ZoneId对象可以通过ZoneId.of()方法创建，也可以通过ZoneId.systemDefault()获取系统默认时区：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">ZoneId</span> <span class="n">shanghaiZoneId</span> <span class="o">=</span> <span class="n">ZoneId</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;Asia/Shanghai&#34;</span><span class="o">);</span>
-<span class="ln">2</span><span class="n">ZoneId</span> <span class="n">systemZoneId</span> <span class="o">=</span> <span class="n">ZoneId</span><span class="o">.</span><span class="na">systemDefault</span><span class="o">();</span>
-</code></pre></div><p>of()方法接收一个“区域/城市”的字符串作为参数，你可以通过getAvailableZoneIds()方法获取所有合法的“区域/城市”字符串：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">zoneIds</span> <span class="o">=</span> <span class="n">ZoneId</span><span class="o">.</span><span class="na">getAvailableZoneIds</span><span class="o">();</span>
-</code></pre></div><p>对于老的时区类TimeZone，Java 8也提供了转化方法：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">ZoneId</span> <span class="n">oldToNewZoneId</span> <span class="o">=</span> <span class="n">TimeZone</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">toZoneId</span><span class="o">();</span>
-</code></pre></div><p>有了ZoneId，我们就可以将一个LocalDate、LocalTime或LocalDateTime对象转化为ZonedDateTime对象：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">LocalDateTime</span> <span class="n">localDateTime</span> <span class="o">=</span> <span class="n">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
-<span class="ln">2</span><span class="n">ZonedDateTime</span> <span class="n">zonedDateTime</span> <span class="o">=</span> <span class="n">ZonedDateTime</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">localDateTime</span><span class="o">,</span> <span class="n">shanghaiZoneId</span><span class="o">);</span>
-</code></pre></div><p>将zonedDateTime打印到控制台为：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">2017</span><span class="o">-</span><span class="n">01</span><span class="o">-</span><span class="n">05T15</span><span class="o">:</span><span class="n">26</span><span class="o">:</span><span class="n">56</span><span class="o">.</span><span class="na">147</span><span class="o">+</span><span class="n">08</span><span class="o">:</span><span class="n">00</span><span class="o">[</span><span class="n">Asia</span><span class="o">/</span><span class="n">Shanghai</span><span class="o">]</span>
-</code></pre></div><p>另一种表示时区的方式是使用ZoneOffset，它是以当前时间和世界标准时间（UTC）/格林威治时间（GMT）的偏差来计算，例如：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">ZoneOffset</span> <span class="n">zoneOffset</span> <span class="o">=</span> <span class="n">ZoneOffset</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;+09:00&#34;</span><span class="o">);</span>
-<span class="ln">2</span><span class="n">LocalDateTime</span> <span class="n">localDateTime</span> <span class="o">=</span> <span class="n">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
-<span class="ln">3</span><span class="n">OffsetDateTime</span> <span class="n">offsetDateTime</span> <span class="o">=</span> <span class="n">OffsetDateTime</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">localDateTime</span><span class="o">,</span> <span class="n">zoneOffset</span><span class="o">);</span>
-</code></pre></div><h2 id="其他历法">其他历法</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">ZoneId</span><span class="w"> </span><span class="n">shanghaiZoneId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;Asia/Shanghai&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">ZoneId</span><span class="w"> </span><span class="n">systemZoneId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZoneId</span><span class="p">.</span><span class="na">systemDefault</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></div><p>of()方法接收一个“区域/城市”的字符串作为参数，你可以通过getAvailableZoneIds()方法获取所有合法的“区域/城市”字符串：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">zoneIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZoneId</span><span class="p">.</span><span class="na">getAvailableZoneIds</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></div><p>对于老的时区类TimeZone，Java 8也提供了转化方法：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">ZoneId</span><span class="w"> </span><span class="n">oldToNewZoneId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeZone</span><span class="p">.</span><span class="na">getDefault</span><span class="p">().</span><span class="na">toZoneId</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></div><p>有了ZoneId，我们就可以将一个LocalDate、LocalTime或LocalDateTime对象转化为ZonedDateTime对象：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">LocalDateTime</span><span class="w"> </span><span class="n">localDateTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">ZonedDateTime</span><span class="w"> </span><span class="n">zonedDateTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZonedDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">localDateTime</span><span class="p">,</span><span class="w"> </span><span class="n">shanghaiZoneId</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>将zonedDateTime打印到控制台为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">2017</span><span class="o">-</span><span class="n">01</span><span class="o">-</span><span class="n">05T15</span><span class="p">:</span><span class="n">26</span><span class="p">:</span><span class="n">56</span><span class="p">.</span><span class="na">147</span><span class="o">+</span><span class="n">08</span><span class="p">:</span><span class="n">00</span><span class="o">[</span><span class="n">Asia</span><span class="o">/</span><span class="n">Shanghai</span><span class="o">]</span><span class="w">
+</span></span></span></code></pre></div><p>另一种表示时区的方式是使用ZoneOffset，它是以当前时间和世界标准时间（UTC）/格林威治时间（GMT）的偏差来计算，例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">ZoneOffset</span><span class="w"> </span><span class="n">zoneOffset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZoneOffset</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;+09:00&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">LocalDateTime</span><span class="w"> </span><span class="n">localDateTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">OffsetDateTime</span><span class="w"> </span><span class="n">offsetDateTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OffsetDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">localDateTime</span><span class="p">,</span><span class="w"> </span><span class="n">zoneOffset</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h2 id="其他历法">其他历法</h2>
 <p>Java中使用的历法是ISO 8601日历系统，它是世界民用历法，也就是我们所说的公历。平年有365天，闰年是366天。闰年的定义是：非世纪年，能被4整除；世纪年能被400整除。为了计算的一致性，公元1年的前一年被当做公元0年，以此类推。</p>
 <p>此外Java 8还提供了4套其他历法，每套历法都包含一个日期类，分别是：</p>
 <ul>
@@ -475,12 +475,12 @@
 </ul>
 <p>每个日期类都继承ChronoLocalDate类，所以可以在不知道具体历法的情况下也可以操作。不过这些历法一般不常用，除非是有某些特殊需求情况下才会使用。</p>
 <p>这些不同的历法也可以用于向公历转换：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">LocalDate</span> <span class="n">date</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
-<span class="ln">2</span><span class="n">JapaneseDate</span> <span class="n">jpDate</span> <span class="o">=</span> <span class="n">JapaneseDate</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">date</span><span class="o">);</span>
-</code></pre></div><p>由于它们都继承ChronoLocalDate类，所以在不知道具体历法情况下，可以通过ChronoLocalDate类操作日期：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Chronology</span> <span class="n">jpChronology</span> <span class="o">=</span> <span class="n">Chronology</span><span class="o">.</span><span class="na">ofLocale</span><span class="o">(</span><span class="n">Locale</span><span class="o">.</span><span class="na">JAPANESE</span><span class="o">);</span>
-<span class="ln">2</span><span class="n">ChronoLocalDate</span> <span class="n">jpChronoLocalDate</span> <span class="o">=</span> <span class="n">jpChronology</span><span class="o">.</span><span class="na">dateNow</span><span class="o">();</span>
-</code></pre></div><p>我们在开发过程中应该尽量避免使用ChronoLocalDate，尽量用与历法无关的方式操作时间，因为不同的历法计算日期的方式不一样，比如开发者会在程序中做一些假设，假设一年中有12个月，如果是中国农历中包含了闰月，一年有可能是13个月，但开发者认为是12个月，多出来的一个月属于明年的。再比如假设年份是累加的，过了一年就在原来的年份上加一，但日本天皇在换代之后需要重新纪年，所以过了一年年份可能会从1开始计算。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">LocalDate</span><span class="w"> </span><span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">JapaneseDate</span><span class="w"> </span><span class="n">jpDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JapaneseDate</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="n">date</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>由于它们都继承ChronoLocalDate类，所以在不知道具体历法情况下，可以通过ChronoLocalDate类操作日期：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Chronology</span><span class="w"> </span><span class="n">jpChronology</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Chronology</span><span class="p">.</span><span class="na">ofLocale</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">JAPANESE</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">ChronoLocalDate</span><span class="w"> </span><span class="n">jpChronoLocalDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jpChronology</span><span class="p">.</span><span class="na">dateNow</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></div><p>我们在开发过程中应该尽量避免使用ChronoLocalDate，尽量用与历法无关的方式操作时间，因为不同的历法计算日期的方式不一样，比如开发者会在程序中做一些假设，假设一年中有12个月，如果是中国农历中包含了闰月，一年有可能是13个月，但开发者认为是12个月，多出来的一个月属于明年的。再比如假设年份是累加的，过了一年就在原来的年份上加一，但日本天皇在换代之后需要重新纪年，所以过了一年年份可能会从1开始计算。</p>
 <p>在实际开发过程中建议使用LocalDate，包括存储、操作、业务规则的解读；除非需要将程序的输入或者输出本地化，这时可以使用ChronoLocalDate类。</p>
 <hr>
 <p>参考：</p>
@@ -503,6 +503,9 @@
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
+        <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/01/gateway-modify-request-response/" class="nav-link">通过SpringGateway对接口请求进行加解密</a>
       </li>
       <li>
@@ -523,14 +526,17 @@
       <li>
         <a href="https://www.zengxi.net/2020/07/zookeeper_purge_file/" class="nav-link">zookeeper服务器文件清理</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/" class="nav-link">terraform中阿里云ECS ssh key变化问题</a>
-      </li>
     </ul>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/01/gateway-modify-request-response/" class="nav-link">通过SpringGateway对接口请求进行加解密</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2023/12/unsafe_http_methods/" class="nav-link">不安全的http方法</a>
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
@@ -546,12 +552,6 @@
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/" class="nav-link">Spring Boot 自动设置响应头引发的问题</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/11/on-premise-vs-private-cloud/" class="nav-link">On-Premise 与 Private Cloud 区别</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/05/access-new-bing/" class="nav-link">不用魔法直接访问 New Bing</a>
       </li>
     </ul>
     <div>
@@ -669,6 +669,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/categories/kafka/' class=" post_tag button button_translucent" data-position=1>KAFKA<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=18>KUBERNETES<span class="button_tally">18</span>
             </a>
             
@@ -725,11 +729,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
             </a>
             
             
@@ -741,7 +749,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
             </a>
             
             
@@ -944,6 +952,10 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/http/' class=" post_tag button button_translucent" data-position=1>HTTP<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/inputstream/' class=" post_tag button button_translucent" data-position=1>INPUTSTREAM<span class="button_tally">1</span>
             </a>
             
@@ -981,6 +993,10 @@
             
             
             <a href='https://www.zengxi.net/tags/jvm/' class=" post_tag button button_translucent" data-position=2>JVM<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/kafka/' class=" post_tag button button_translucent" data-position=1>KAFKA<span class="button_tally">1</span>
             </a>
             
             
@@ -1164,31 +1180,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=2>安全<span class="button_tally">2</span>
             </a>
             
             
@@ -1196,23 +1192,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
             </a>
             
             
@@ -1220,7 +1208,23 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
             </a>
             
             
@@ -1228,19 +1232,39 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=4>排序<span class="button_tally">4</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
             </a>
             
             
@@ -1248,7 +1272,15 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BA%8B%E5%8A%A1/' class=" post_tag button button_translucent" data-position=1>事务<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
             </a>
             
             
@@ -1260,6 +1292,14 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E7%BD%91%E5%85%B3/' class=" post_tag button button_translucent" data-position=1>网关<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
             </a>
             
@@ -1268,27 +1308,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BD%91%E5%85%B3/' class=" post_tag button button_translucent" data-position=1>网关<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
             </a>
             
             
@@ -1300,15 +1324,11 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1385,7 +1405,7 @@
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" integrity="sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" integrity="sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous"></script>
     
   </body>
 </html>

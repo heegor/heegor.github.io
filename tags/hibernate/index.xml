@@ -5,19 +5,16 @@
     <link>https://www.zengxi.net/tags/hibernate/</link>
     <description>Recent content in hibernate on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 06 Dec 2018 16:35:24 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/hibernate/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 Dec 2018 16:35:24 +0000</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/tags/hibernate/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hibernate中用criteria builder处理日期与时间分开的字段</title>
       <link>https://www.zengxi.net/2018/12/hibernate-criteria-builder-time-range/</link>
       <pubDate>Thu, 06 Dec 2018 16:35:24 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2018/12/hibernate-criteria-builder-time-range/</guid>
-      <description>现有系统中原先在设计数据库字段的时候，把日期与时间分别存入两个不同的字段，但是这两个字段在数据库中都是以timestamp类型来保存。这样的话，如果需要在where条件中把这两个字段与某个特定的时间做比较，则需要分别截取有效的信息。对于日期字段仅仅取出日期的值，把时间舍弃；对于时间字段仅仅取出时间的值，把日期舍弃。
-举个例子，假设数据库中有两个字段：returnSlaDate存的是物品归还截止日期，returnSlaTime存的是物品归还截止时间。实际在保存的时候，数据库中returnSlaDate字段的值可能会是 2018-12-31 00:00:00 ，其中 00:00:00 是没有用的，在与特定时间做比较的时候，需要舍弃；returnSlaTime字段的值可能会是 1970-01-01 17:59:59 ，其中 1970-01-01 是没有用的，在与特定时间做比较的时候，需要舍弃。
-假设数据库中有另外一个字段actualReturnDate，它表示物品实际归还时间（仅仅一个字段表示，包含有效的日期与时间）。如果现在有个需求，要在系统中查出来物品未按时归还的记录，需要怎么处理呢？直接用SQL写会相对简单，如果用hibernate的criteria builder则需要用as关键字做一下转换。下面是示例代码：
-1// 转换截止日期字段成java.sql.Date类型，这样可以仅取出日期的值 2Expression returnSlaDate = pTimeSchedule.get(&amp;#34;returnSlaDate&amp;#34;).as(java.sql.Date.class); 3// 转换截止时间字段成java.sql.Time类型，这样可以仅取出时间的值 4Expression returnSlaTime = pTimeSchedule.get(&amp;#34;returnSlaTime&amp;#34;).as(java.sql.Time.class); 5 6// 对实际归还时间做与上面一样的处理 7Expression actualReturnDate = pTimeSchedule.get(&amp;#34;actualReturnDate&amp;#34;).as(java.sql.Date.class); 8Expression actualReturnTime = pTimeSchedule.get(&amp;#34;actualReturnDate&amp;#34;).as(java.sql.Time.class); 9 10// 在where语句中，筛选出实际归还日期大于截止日期，或者实际归还日期等于截止日期且归还时间大于截止时间 11orFilter.add(builder.or( 12 builder.greaterThan(actualReturnDate, returnSlaDate), 13 builder.and( 14 builder.equal(actualReturnDate, returnSlaDate), 15 builder.greaterThan(actualReturnTime, returnSlaTime) 16 ) 17)); 18 打出hibernate的日志，可以看到转换之后的SQL语句</description>
+      <description>现有系统中原先在设计数据库字段的时候，把日期与时间分别存入两个不同的字段，但是这两个字段在数据库中都是以timestamp类型来保存。这样的话，如果需要在where条件中把这两个字段与某个特定的时间做比较，则需要分别截取有效的信息。对于日期字段仅仅取出日期的值，把时间舍弃；对于时间字段仅仅取出时间的值，把日期舍弃。&#xA;举个例子，假设数据库中有两个字段：returnSlaDate存的是物品归还截止日期，returnSlaTime存的是物品归还截止时间。实际在保存的时候，数据库中returnSlaDate字段的值可能会是 2018-12-31 00:00:00 ，其中 00:00:00 是没有用的，在与特定时间做比较的时候，需要舍弃；returnSlaTime字段的值可能会是 1970-01-01 17:59:59 ，其中 1970-01-01 是没有用的，在与特定时间做比较的时候，需要舍弃。&#xA;假设数据库中有另外一个字段actualReturnDate，它表示物品实际归还时间（仅仅一个字段表示，包含有效的日期与时间）。如果现在有个需求，要在系统中查出来物品未按时归还的记录，需要怎么处理呢？直接用SQL写会相对简单，如果用hibernate的criteria builder则需要用as关键字做一下转换。下面是示例代码：&#xA;1// 转换截止日期字段成java.sql.Date类型，这样可以仅取出日期的值 2Expression returnSlaDate = pTimeSchedule.get(&amp;#34;returnSlaDate&amp;#34;).as(java.sql.Date.class); 3// 转换截止时间字段成java.sql.Time类型，这样可以仅取出时间的值 4Expression returnSlaTime = pTimeSchedule.get(&amp;#34;returnSlaTime&amp;#34;).as(java.sql.Time.class); 5 6// 对实际归还时间做与上面一样的处理 7Expression actualReturnDate = pTimeSchedule.get(&amp;#34;actualReturnDate&amp;#34;).as(java.sql.Date.class); 8Expression actualReturnTime = pTimeSchedule.get(&amp;#34;actualReturnDate&amp;#34;).as(java.sql.Time.class); 9 10// 在where语句中，筛选出实际归还日期大于截止日期，或者实际归还日期等于截止日期且归还时间大于截止时间 11orFilter.add(builder.or( 12 builder.greaterThan(actualReturnDate, returnSlaDate), 13 builder.and( 14 builder.equal(actualReturnDate, returnSlaDate), 15 builder.greaterThan(actualReturnTime, returnSlaTime) 16 ) 17)); 打出hibernate的日志，可以看到转换之后的SQL语句&#xA;1( 2 cast(generatedAlias0.actualReturnDate as date)&amp;gt;cast(generatedAlias0.timeSchedule.returnSlaDate as date) 3) 4or ( 5 ( 6 cast(generatedAlias0.actualReturnDate as date)=cast(generatedAlias0.</description>
     </item>
-    
   </channel>
 </rss>

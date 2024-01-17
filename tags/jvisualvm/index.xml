@@ -5,27 +5,16 @@
     <link>https://www.zengxi.net/tags/jvisualvm/</link>
     <description>Recent content in jvisualvm on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 28 Jun 2018 09:26:06 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/jvisualvm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Jun 2018 09:26:06 +0000</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/tags/jvisualvm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>通过SSH和JMX远程监控Java服务</title>
       <link>https://www.zengxi.net/2018/06/connect-remote-jmx-with-ssh/</link>
       <pubDate>Thu, 28 Jun 2018 09:26:06 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2018/06/connect-remote-jmx-with-ssh/</guid>
-      <description>在日常工作中，可以使用一些监控数据的图形展示工具（比如Grafana等）来查看服务器上面JVM的使用情况，比如内存或者CPU的占用情况。但是，在需要解决实际问题的时候，比如CPU或者内存占用过高，还是需要连接到远程的服务器，查看JVM的具体运行情况来分析问题产生的原因。
-通常情况下，我们是通过开启远程服务器上的JMX，使用JVisualVM或JConsole客户端，远程连接到服务器上。然而，在实际的生产环境中，Java应用服务器并没有直接暴露在公网，必须通过跳板机来连接。
-网上查了一些资料，多数比较麻烦，有些还需要借助第三方工具。后来找到一个简便的方法，在使用JVisualVM或JConsole客户端的时候，通过指定socks代理的方式来连接远程服务器。下面是具体的步骤。
-Java应用开启JMX 在应用启动命令里面添加下面的参数。指定JMX端口为18888
- -Dcom.sun.management.jmxremote.port=18888 -Dcom.sun.management.jmxremote.rmi.port=18888 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false
- 指定本地socks代理的端口和跳板机 在命令行中执行下面的命令开启端口转发
-1ssh -N -D 10099 my-bastion 注意：
- 上述例子中的 my-bastion 是跳板机别名，在 ~/.ssh/config中配置。 10099 是绑定的本地端口号 ssh命令帮助文档中对两个参数的解释:   -N Do not execute a remote command. This is useful for just forwarding ports. -D [bind_address:]port Specifies a local “dynamic” application-level port forwarding.  用工具连接远程jvm JConsole客户端 如果使用jconsole客户端连接。可以直接指定需要连接的服务
-1jconsole -J-DsocksProxyHost=localhost -J-DsocksProxyPort=10099 service:jmx:rmi:///jndi/rmi://10.10.3.11:18888/jmxrmi JVisualVM客户端 如果使用jvisualvm客户端连接，先启动指定代理服务器的参数来启动jvisualvm
-1jvisualvm -J-DsocksProxyHost=localhost -J-DsocksProxyPort=10099 然后在jvm里面先添加remote host，再添加类似下面的JMX连接
- service:jmx:rmi:///jndi/rmi://10.10.3.11:18888/jmxrmi
- 双击左边添加好的JMX连接，就可以连上服务器并监控JVM的实际状况了</description>
+      <description>在日常工作中，可以使用一些监控数据的图形展示工具（比如Grafana等）来查看服务器上面JVM的使用情况，比如内存或者CPU的占用情况。但是，在需要解决实际问题的时候，比如CPU或者内存占用过高，还是需要连接到远程的服务器，查看JVM的具体运行情况来分析问题产生的原因。&#xA;通常情况下，我们是通过开启远程服务器上的JMX，使用JVisualVM或JConsole客户端，远程连接到服务器上。然而，在实际的生产环境中，Java应用服务器并没有直接暴露在公网，必须通过跳板机来连接。&#xA;网上查了一些资料，多数比较麻烦，有些还需要借助第三方工具。后来找到一个简便的方法，在使用JVisualVM或JConsole客户端的时候，通过指定socks代理的方式来连接远程服务器。下面是具体的步骤。&#xA;Java应用开启JMX 在应用启动命令里面添加下面的参数。指定JMX端口为18888&#xA;-Dcom.sun.management.jmxremote.port=18888 -Dcom.sun.management.jmxremote.rmi.port=18888 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false&#xA;指定本地socks代理的端口和跳板机 在命令行中执行下面的命令开启端口转发&#xA;1ssh -N -D 10099 my-bastion 注意：&#xA;上述例子中的 my-bastion 是跳板机别名，在 ~/.ssh/config中配置。 10099 是绑定的本地端口号 ssh命令帮助文档中对两个参数的解释: -N Do not execute a remote command. This is useful for just forwarding ports. -D [bind_address:]port Specifies a local “dynamic” application-level port forwarding. 用工具连接远程jvm JConsole客户端 如果使用jconsole客户端连接。可以直接指定需要连接的服务&#xA;1jconsole -J-DsocksProxyHost=localhost -J-DsocksProxyPort=10099 service:jmx:rmi:///jndi/rmi://10.10.3.11:18888/jmxrmi JVisualVM客户端 如果使用jvisualvm客户端连接，先启动指定代理服务器的参数来启动jvisualvm&#xA;1jvisualvm -J-DsocksProxyHost=localhost -J-DsocksProxyPort=10099 然后在jvm里面先添加remote host，再添加类似下面的JMX连接&#xA;service:jmx:rmi:///jndi/rmi://10.10.3.11:18888/jmxrmi&#xA;双击左边添加好的JMX连接，就可以连上服务器并监控JVM的实际状况了</description>
     </item>
-    
   </channel>
 </rss>

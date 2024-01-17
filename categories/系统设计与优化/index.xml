@@ -5,198 +5,100 @@
     <link>https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/</link>
     <description>Recent content in 系统设计与优化 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 09 Jan 2024 21:01:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Jan 2024 21:01:00 +0800</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>通过SpringGateway对接口请求进行加解密</title>
       <link>https://www.zengxi.net/2024/01/gateway-modify-request-response/</link>
       <pubDate>Tue, 09 Jan 2024 21:01:00 +0800</pubDate>
-      
       <guid>https://www.zengxi.net/2024/01/gateway-modify-request-response/</guid>
-      <description>有个需求，要求在前端调用接口时，将请求数据与响应数据做加密。做了一下调研，可以用下面的方式来实现：
-1public class EncryptGatewayFilter implements GlobalFilter, Ordered { 2 3 private static final String BODY_ENCRYPT_HEADER = &amp;#34;X-ENCRYPTED&amp;#34;; 4 private static final String ENCRYPT_VERSION_1 = &amp;#34;1.0&amp;#34;; 5 6 @Override 7 public int getOrder() { 8 return -99; 9 } 10 11 @Override 12 public Mono&amp;lt;Void&amp;gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) { 13 // 请求头中标识了该请求是加密过的 14 HttpHeaders httpHeaders = exchange.getRequest().getHeaders(); 15 String bodyEncryptHeader = httpHeaders.getFirst(BODY_ENCRYPT_HEADER); 16 17 if (bodyEncryptHeader != null &amp;amp;&amp;amp; bodyEncryptHeader.equals(ENCRYPT_VERSION_1)) { 18 // 这里可以处理一些自定义的逻辑，并且将参数传到后续的方法中 19 CustomParam step1Param = this.</description>
+      <description>有个需求，要求在前端调用接口时，将请求数据与响应数据做加密。做了一下调研，可以用下面的方式来实现：&#xA;1public class EncryptGatewayFilter implements GlobalFilter, Ordered { 2 3 private static final String BODY_ENCRYPT_HEADER = &amp;#34;X-ENCRYPTED&amp;#34;; 4 private static final String ENCRYPT_VERSION_1 = &amp;#34;1.0&amp;#34;; 5 6 @Override 7 public int getOrder() { 8 return -99; 9 } 10 11 @Override 12 public Mono&amp;lt;Void&amp;gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) { 13 // 请求头中标识了该请求是加密过的 14 HttpHeaders httpHeaders = exchange.getRequest().getHeaders(); 15 String bodyEncryptHeader = httpHeaders.getFirst(BODY_ENCRYPT_HEADER); 16 17 if (bodyEncryptHeader != null &amp;amp;&amp;amp; bodyEncryptHeader.equals(ENCRYPT_VERSION_1)) { 18 // 这里可以处理一些自定义的逻辑，并且将参数传到后续的方法中 19 CustomParam step1Param = this.</description>
     </item>
-    
     <item>
       <title>数据查询ES设计演变</title>
       <link>https://www.zengxi.net/2023/12/es-order-search-evolution/</link>
       <pubDate>Fri, 22 Dec 2023 21:01:00 +0800</pubDate>
-      
       <guid>https://www.zengxi.net/2023/12/es-order-search-evolution/</guid>
-      <description>这里总结一下过去曾参与的一个系统中，对于订单查询设计的演变过程
-第一阶段：仅数据库查询 这个是最初始的阶段，数据查询直接走数据库查询。这种方式会完全依赖于数据库的性能，随着数据越来越来，查询效率也会越来越低
-第二阶段：hibernate 拦截器检测数据变化并更新 ES 随着订单数据量的增多，原先直接查询数据库的方式已经无法满足对性能的要求。因此引入了 Elastic Search 来作为快速订单查询这个功能的支撑，同时增加了一个ES查询服务，用来对ES做读写操作。
-考虑到某些租户的数据量很小，直接查询数据库就满足业务上的客户端响应需求。因此，增加了一个租户级别上的配置，用来开启或者关闭 ES 查询。
-写 ES 由于这个系统使用的是 hibernate 来做数据的持久化，因此添加了一个 hibernate 拦截器，用来监听数据持久化的事件，根据不同的数据变更操作（新增、更新或删除），在 Elastic Search 中做不同的处理：
- 如果是在数据库中新增一个订单， 则在 ES 中创建一个文档 如果是在数据库中更新一个订单， 则在 ES 中更新对应文档 如果是在数据库中删除一个订单， 则在 ES 中删除对应文档  如果租户没有开启 ES 查询，那么订单数据更新的时候，也不会写 ES 数据，这样就可以节省存储资源。
-读 ES 在读取订单数据的时候，会先判断某个租户是否开启了 ES 查询，如果未开启就查数据库，开启则通过 ES 查询服务来获取订单数据。
-存在的问题 利用 ES 查询，响应速度明显得到提升。但是在实际的运行过程中，发现了另外一个问题：应用如果重启（比如新迭代发布），有些在内存中未处理的数据就无法同步到 ES，这就导致 ES 中的数据没有及时更新。
-第三阶段：引入 Kafka 引入消息队列中间件可以解决上面的问题，将保证消息消费的任务交给中间件，而不需要在业务应用上实现这个功能。
-写 ES 与原先的方案相比，做了一些改动。hibernate 拦截器检测到订单数据变化后，将数据先写入到 Kafka，然后订单的 ES 查询服务去消费 kafka 的数据。
-写入到 kafka 的数据与原先也有些变化。原先的方案中，将变更的数据与操作类型都作为参数，ES 查询服务直接根据这些参数修改 ES 中的文档数据。新的方案中，kafka 中只放租户 ID 与订单 ID，通过这两个参数查询数据库来获取信息，如果数据库中没有数据，则表示订单被删除，就删除 ES 中的文档；如果数据库中有数据，则创建或者更新ES 文档。这么做的好处就是：</description>
+      <description>这里总结一下过去曾参与的一个系统中，对于订单查询设计的演变过程&#xA;第一阶段：仅数据库查询 这个是最初始的阶段，数据查询直接走数据库查询。这种方式会完全依赖于数据库的性能，随着数据越来越来，查询效率也会越来越低&#xA;第二阶段：hibernate 拦截器检测数据变化并更新 ES 随着订单数据量的增多，原先直接查询数据库的方式已经无法满足对性能的要求。因此引入了 Elastic Search 来作为快速订单查询这个功能的支撑，同时增加了一个ES查询服务，用来对ES做读写操作。&#xA;考虑到某些租户的数据量很小，直接查询数据库就满足业务上的客户端响应需求。因此，增加了一个租户级别上的配置，用来开启或者关闭 ES 查询。&#xA;写 ES 由于这个系统使用的是 hibernate 来做数据的持久化，因此添加了一个 hibernate 拦截器，用来监听数据持久化的事件，根据不同的数据变更操作（新增、更新或删除），在 Elastic Search 中做不同的处理：&#xA;如果是在数据库中新增一个订单， 则在 ES 中创建一个文档 如果是在数据库中更新一个订单， 则在 ES 中更新对应文档 如果是在数据库中删除一个订单， 则在 ES 中删除对应文档 如果租户没有开启 ES 查询，那么订单数据更新的时候，也不会写 ES 数据，这样就可以节省存储资源。&#xA;读 ES 在读取订单数据的时候，会先判断某个租户是否开启了 ES 查询，如果未开启就查数据库，开启则通过 ES 查询服务来获取订单数据。&#xA;存在的问题 利用 ES 查询，响应速度明显得到提升。但是在实际的运行过程中，发现了另外一个问题：应用如果重启（比如新迭代发布），有些在内存中未处理的数据就无法同步到 ES，这就导致 ES 中的数据没有及时更新。&#xA;第三阶段：引入 Kafka 引入消息队列中间件可以解决上面的问题，将保证消息消费的任务交给中间件，而不需要在业务应用上实现这个功能。&#xA;写 ES 与原先的方案相比，做了一些改动。hibernate 拦截器检测到订单数据变化后，将数据先写入到 Kafka，然后订单的 ES 查询服务去消费 kafka 的数据。&#xA;写入到 kafka 的数据与原先也有些变化。原先的方案中，将变更的数据与操作类型都作为参数，ES 查询服务直接根据这些参数修改 ES 中的文档数据。新的方案中，kafka 中只放租户 ID 与订单 ID，通过这两个参数查询数据库来获取信息，如果数据库中没有数据，则表示订单被删除，就删除 ES 中的文档；如果数据库中有数据，则创建或者更新ES 文档。这么做的好处就是：</description>
     </item>
-    
     <item>
       <title>线程池原因导致java.lang.OutOfMemoryError</title>
       <link>https://www.zengxi.net/2021/07/threadpool_oom/</link>
       <pubDate>Mon, 19 Jul 2021 16:19:00 +0800</pubDate>
-      
       <guid>https://www.zengxi.net/2021/07/threadpool_oom/</guid>
-      <description>问题描述 线上环境某个服务经常性地抛出内存溢出，看日志是下面的错误
-1java.lang.OutOfMemoryError: unable to create new native thread 2 at java.lang.Thread.start0(Native Method) ~[?:1.8.0_112] 3 at java.lang.Thread.start(Thread.java:714) ~[?:1.8.0_112] 4 at java.util.concurrent.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:950) ~[?:1.8.0_112] 5 at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1357) ~[?:1.8.0_112] 6 at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134) ~[?:1.8.0_112] 造成这个错误主要有2个原因：
- 剩余的系统内存不足，导致无法创建新的线程 总线程数达到操作系统允许的上限  看了代码后，发现开发人员把线程池作为一个方法的局部变量，由于这方法是被定时任务调用的，也就意味着线程池局部变量会被实例化N次，如果线程池没有被回收，那么最终总线程数会达到操作系统的上限。
-问题剖析 当对象实例不再使用或者方法执行完毕后，什么时候会释放线程与关闭线程池？不同的线程池的实现方式可能不一样，但是主要还是看是否设置了核心线程数。
- 如果没有设置核心线程数，比如 newCachedThreadPool ，在线程池的线程空闲时间到达 60s 后，线程会关闭，所有线程关闭后线程池也相应关闭回收。 如果设置了核心线程数，比如 newSingleThreadExecutor 和 newFixedThreadPool，如果没有主动去关闭，或者设置核心线程的超时时间，核心线程会一直存在不会被关闭，这个线程池就不会被释放回收。  可以通过下面的ThreadPoolExecutor源码中runWorker方法，看到要执行线程退出processWorkerExit需要这几种情况：
- 线程池的状态 &amp;gt;= STOP。对于这个情况，线程池的状态要达到 STOP，需要调用shutdown或者shutdownNow方法 getTask 获取到空任务  1final void runWorker(Worker w) { 2 Thread wt = Thread.currentThread(); 3 Runnable task = w.</description>
+      <description>问题描述 线上环境某个服务经常性地抛出内存溢出，看日志是下面的错误&#xA;1java.lang.OutOfMemoryError: unable to create new native thread 2 at java.lang.Thread.start0(Native Method) ~[?:1.8.0_112] 3 at java.lang.Thread.start(Thread.java:714) ~[?:1.8.0_112] 4 at java.util.concurrent.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:950) ~[?:1.8.0_112] 5 at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1357) ~[?:1.8.0_112] 6 at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134) ~[?:1.8.0_112] 造成这个错误主要有2个原因：&#xA;剩余的系统内存不足，导致无法创建新的线程 总线程数达到操作系统允许的上限 看了代码后，发现开发人员把线程池作为一个方法的局部变量，由于这方法是被定时任务调用的，也就意味着线程池局部变量会被实例化N次，如果线程池没有被回收，那么最终总线程数会达到操作系统的上限。&#xA;问题剖析 当对象实例不再使用或者方法执行完毕后，什么时候会释放线程与关闭线程池？不同的线程池的实现方式可能不一样，但是主要还是看是否设置了核心线程数。&#xA;如果没有设置核心线程数，比如 newCachedThreadPool ，在线程池的线程空闲时间到达 60s 后，线程会关闭，所有线程关闭后线程池也相应关闭回收。 如果设置了核心线程数，比如 newSingleThreadExecutor 和 newFixedThreadPool，如果没有主动去关闭，或者设置核心线程的超时时间，核心线程会一直存在不会被关闭，这个线程池就不会被释放回收。 可以通过下面的ThreadPoolExecutor源码中runWorker方法，看到要执行线程退出processWorkerExit需要这几种情况：&#xA;线程池的状态 &amp;gt;= STOP。对于这个情况，线程池的状态要达到 STOP，需要调用shutdown或者shutdownNow方法 getTask 获取到空任务 1final void runWorker(Worker w) { 2 Thread wt = Thread.currentThread(); 3 Runnable task = w.firstTask; 4 w.firstTask = null; 5 w.</description>
     </item>
-    
     <item>
       <title>阿里云WAF与SNI问题</title>
       <link>https://www.zengxi.net/2021/06/aliyun_waf_sni/</link>
       <pubDate>Thu, 17 Jun 2021 16:28:00 +0800</pubDate>
-      
       <guid>https://www.zengxi.net/2021/06/aliyun_waf_sni/</guid>
-      <description>什么是SNI 当多个网站托管在一台服务器上并共享一个IP地址，并且每个网站都有自己的SSL证书，在客户端设备尝试安全地连接到其中一个网站时，服务器可能不知道显示哪个SSL证书。这是因为SSL/TLS握手发生在客户端设备通过HTTP指示连接到某个网站之前。这个有点像邮寄包裹到公寓楼而不是独栋房子。将邮件邮寄到某人的独栋房子时，仅街道地址就足以将包裹发送给收件人。但是，当包裹进入公寓楼时，除了街道地址外，还需要公寓号码。否则，包裹可能无法送达收件人或根本无法交付。
-服务器名称指示（SNI，Server Name Indication）旨在解决此问题。 SNI是TLS协议（以前称为SSL协议）的扩展，该协议在HTTPS中使用。它包含在TLS/SSL握手流程中，以确保客户端设备能够看到他们尝试访问的网站的正确SSL证书。该扩展使得可以在TLS握手期间指定网站的主机名或域名，而不是在握手之后打开HTTP连接时指定。
-SNI在2003年被添加为TLS/SSL的扩展；它最初不是协议的一部分。几乎所有的浏览器、操作系统和Web服务器都支持它，除了一些仍在使用的最旧的浏览器和操作系统。如果客户端或者浏览器不支持SNI，用户可能无法访问某些网站，将返回错误消息，例如&amp;quot;您的连接缺乏安全隐私。&amp;quot;
-阿里云WAF对于SNI的支持 如下图，阿里云WAF支持多配置多个域名，并根据用户请求来返回对应域名的证书。同时阿里云有个默认证书，当无法确定证书的时候，就返回默认的证书。
-对于共享型的WAF，默认返回的是阿里云的SSL证书；对于独享型的WAF，用户可以在控制台配置默认的证书。
-这个对to-B的系统来说，会有一定的挑战。如果对方企业用的是比较老的SAP版本，可能http客户端不支持SNI，这样的话，共享版的WAF会返回默认的阿里云证书，客户端验证证书时候会报错。这种情况，可能就只能选择独享版WAF，毕竟用户可以自定义默认证书，将默认证书设置成所需要的证书即可。
-另外，在更新SSL证书的时候，如果使用的是独享版WAF，除了更新所配置域名的证书以外，也要更新默认的证书。否则，由于旧的默认证书过期，对于不支持SNI的客户端，会出现验证证书的错误。
-SNI兼容性 SNI支持以下桌面版浏览器：
- Chrome 5及以上版本 Chrome 6及以上版本（Windows XP） Firefox 2及以上版本 IE 7及以上版本（运行在Windows Vista/Server 2008及以上版本系统中，在XP系统中任何版本的IE浏览器都不支持SNI） Konqueror 4.7及以上版本 Opera 8及以上版本 Safari 3.0 on Windows Vista/Server 2008及以上版本，Mac OS X 10.5.6 及以上版本  SNI支持以下库：
- GNU TLS Java 7及以上版本，仅作为客户端 HTTP client 4.3.2及以上版本 libcurl 7.18.1及以上版本 NSS 3.1.1及以上版本 OpenSSL 0.9.8j及以上版本 OpenSSL 0.9.8f及以上版本，需配置flag Qt 4.8及以上版本 Python3、Python 2.7.9及以上版本  SNI支持以下手机端浏览器：
- Android Browser on 3.0 Honeycomb及以上版本 iOS Safari on iOS 4及以上版本 Windows Phone 7及以上版本  SNI支持以下服务器：</description>
+      <description>什么是SNI 当多个网站托管在一台服务器上并共享一个IP地址，并且每个网站都有自己的SSL证书，在客户端设备尝试安全地连接到其中一个网站时，服务器可能不知道显示哪个SSL证书。这是因为SSL/TLS握手发生在客户端设备通过HTTP指示连接到某个网站之前。这个有点像邮寄包裹到公寓楼而不是独栋房子。将邮件邮寄到某人的独栋房子时，仅街道地址就足以将包裹发送给收件人。但是，当包裹进入公寓楼时，除了街道地址外，还需要公寓号码。否则，包裹可能无法送达收件人或根本无法交付。&#xA;服务器名称指示（SNI，Server Name Indication）旨在解决此问题。 SNI是TLS协议（以前称为SSL协议）的扩展，该协议在HTTPS中使用。它包含在TLS/SSL握手流程中，以确保客户端设备能够看到他们尝试访问的网站的正确SSL证书。该扩展使得可以在TLS握手期间指定网站的主机名或域名，而不是在握手之后打开HTTP连接时指定。&#xA;SNI在2003年被添加为TLS/SSL的扩展；它最初不是协议的一部分。几乎所有的浏览器、操作系统和Web服务器都支持它，除了一些仍在使用的最旧的浏览器和操作系统。如果客户端或者浏览器不支持SNI，用户可能无法访问某些网站，将返回错误消息，例如&amp;quot;您的连接缺乏安全隐私。&amp;quot;&#xA;阿里云WAF对于SNI的支持 如下图，阿里云WAF支持多配置多个域名，并根据用户请求来返回对应域名的证书。同时阿里云有个默认证书，当无法确定证书的时候，就返回默认的证书。&#xA;对于共享型的WAF，默认返回的是阿里云的SSL证书；对于独享型的WAF，用户可以在控制台配置默认的证书。&#xA;这个对to-B的系统来说，会有一定的挑战。如果对方企业用的是比较老的SAP版本，可能http客户端不支持SNI，这样的话，共享版的WAF会返回默认的阿里云证书，客户端验证证书时候会报错。这种情况，可能就只能选择独享版WAF，毕竟用户可以自定义默认证书，将默认证书设置成所需要的证书即可。&#xA;另外，在更新SSL证书的时候，如果使用的是独享版WAF，除了更新所配置域名的证书以外，也要更新默认的证书。否则，由于旧的默认证书过期，对于不支持SNI的客户端，会出现验证证书的错误。&#xA;SNI兼容性 SNI支持以下桌面版浏览器：&#xA;Chrome 5及以上版本 Chrome 6及以上版本（Windows XP） Firefox 2及以上版本 IE 7及以上版本（运行在Windows Vista/Server 2008及以上版本系统中，在XP系统中任何版本的IE浏览器都不支持SNI） Konqueror 4.7及以上版本 Opera 8及以上版本 Safari 3.0 on Windows Vista/Server 2008及以上版本，Mac OS X 10.5.6 及以上版本 SNI支持以下库：&#xA;GNU TLS Java 7及以上版本，仅作为客户端 HTTP client 4.3.2及以上版本 libcurl 7.18.1及以上版本 NSS 3.1.1及以上版本 OpenSSL 0.9.8j及以上版本 OpenSSL 0.9.8f及以上版本，需配置flag Qt 4.8及以上版本 Python3、Python 2.7.9及以上版本 SNI支持以下手机端浏览器：&#xA;Android Browser on 3.0 Honeycomb及以上版本 iOS Safari on iOS 4及以上版本 Windows Phone 7及以上版本 SNI支持以下服务器：</description>
     </item>
-    
     <item>
       <title>订单ES查询性能优化</title>
       <link>https://www.zengxi.net/2021/02/es_search_improvement/</link>
       <pubDate>Sat, 20 Feb 2021 13:12:00 +0800</pubDate>
-      
       <guid>https://www.zengxi.net/2021/02/es_search_improvement/</guid>
-      <description>背景 由于系统中的订单量大，一些查询语句需要级联多张表来查询，单纯靠数据库的索引已经无法满足查询速度与用户界面响应速度的要求，因此在5年前引入了ES来加快查询速度。但是，原先的方案中ES存放的是全量的订单数据，并且是存放在同一个数据库索引中，随着业务的发展与订单量的累积，ES查询的速度已经越来越慢。通过Grafana监控数据，可以看到单个索引的数据量已达到1.5TB，主要的性能指标越来越差。ES的CPU使用率不时地大于80%，甚至100%，导致极端情况下ES查询耗时十几秒。对于用户的直观感受就是，在界面上面查询数据，需要耗时很久才能看到数据。
-解决方案 系统总是慢慢演变的，某个时间点的解决方案都是基于当前的一些情况，满足近3年内的需求就足够了。考虑到成本问题，尽可能在不增加硬件投入的情况下，找到节省时间的优化方案。
-在原先的方案中，索引中有1.5TB的数据量。从1.5TB的数据集里面查找数据，会很耗时间。由于系统中大部分的操作都是根据公司来区分的，所以如果把ES里面的数据，按照公司来拆分成不同的索引，某个公司查询订单的时候，仅仅查询它自己公司的索引。拆分成若干个索引之后，最大的一个索引不到3GB，小的一些索引就100多MB。由于单个公司索引的数据量很小，查询速度自然就比原先快了。
-系统中也存在一些查询，需要跨公司来查数据，但是这些查询有个特点，它们仅仅需要查最近一定时间范围内的数据，比如半年之内。对于这些数据，可以再专门建一个ES索引来存放，同时有个后台的Job，定期删除过期的数据。这样，就可以控制该索引的总数据量在一定的范围之内，不会因为数据量多大的原因导致查询变慢。
-当然，在写代码实现的时候还需要考虑很多具体的问题，比如：
- 修改原先ES数据实时同步方案，支持根据公司ID写入到不同的索引 修改原先ES数据全量加载方案，支持根据公司ID写入到不同的索引 修改原先ES数据查询方案，支持根据公司ID从不同的索引读取数据 修改ES查询相关设置参数的实现逻辑，比如某个公司是否开启ES，开启ES的走ES查询，不开启ES的走数据库查询。 需要考虑到将来的扩展性，如何更合理的接口 原先的java ES库的某些操作不支持显式指定index名称，需要继承该库中的一些类并重写方法 在过渡阶段，让系统支持新旧两种的查询方式，不需要重启服务，仅通过修改配置就可以实现无缝切换。这样的话，如果由于新方案中，代码有bug，可以直接通过修改配置切换到旧的方式，bug修复后再切换成新的。等到新方案的上线一定的时间，稳定之后，再移除旧方案的代码  优化前后的性能对比 通过Grafana的监控数据，可以很明显地看出优化的效果。
-切换新旧方案的瞬间 切换新旧方案的瞬间，可以看到查询耗时断崖式减少
-平峰时期CPU使用率对比 优化前平均40%左右
-优化后平均5%
-高峰时期CPU使用率对比 优化前平均82%，最高98%
-优化后平均15%
-平峰时期查询耗时对比 优化前平均3.2s
-优化后9ms
-高峰时期查询耗时对比 优化前平均7.8s，最高13.24s
-优化后平均32ms</description>
+      <description>背景 由于系统中的订单量大，一些查询语句需要级联多张表来查询，单纯靠数据库的索引已经无法满足查询速度与用户界面响应速度的要求，因此在5年前引入了ES来加快查询速度。但是，原先的方案中ES存放的是全量的订单数据，并且是存放在同一个数据库索引中，随着业务的发展与订单量的累积，ES查询的速度已经越来越慢。通过Grafana监控数据，可以看到单个索引的数据量已达到1.5TB，主要的性能指标越来越差。ES的CPU使用率不时地大于80%，甚至100%，导致极端情况下ES查询耗时十几秒。对于用户的直观感受就是，在界面上面查询数据，需要耗时很久才能看到数据。&#xA;解决方案 系统总是慢慢演变的，某个时间点的解决方案都是基于当前的一些情况，满足近3年内的需求就足够了。考虑到成本问题，尽可能在不增加硬件投入的情况下，找到节省时间的优化方案。&#xA;在原先的方案中，索引中有1.5TB的数据量。从1.5TB的数据集里面查找数据，会很耗时间。由于系统中大部分的操作都是根据公司来区分的，所以如果把ES里面的数据，按照公司来拆分成不同的索引，某个公司查询订单的时候，仅仅查询它自己公司的索引。拆分成若干个索引之后，最大的一个索引不到3GB，小的一些索引就100多MB。由于单个公司索引的数据量很小，查询速度自然就比原先快了。&#xA;系统中也存在一些查询，需要跨公司来查数据，但是这些查询有个特点，它们仅仅需要查最近一定时间范围内的数据，比如半年之内。对于这些数据，可以再专门建一个ES索引来存放，同时有个后台的Job，定期删除过期的数据。这样，就可以控制该索引的总数据量在一定的范围之内，不会因为数据量多大的原因导致查询变慢。&#xA;当然，在写代码实现的时候还需要考虑很多具体的问题，比如：&#xA;修改原先ES数据实时同步方案，支持根据公司ID写入到不同的索引 修改原先ES数据全量加载方案，支持根据公司ID写入到不同的索引 修改原先ES数据查询方案，支持根据公司ID从不同的索引读取数据 修改ES查询相关设置参数的实现逻辑，比如某个公司是否开启ES，开启ES的走ES查询，不开启ES的走数据库查询。 需要考虑到将来的扩展性，如何更合理的接口 原先的java ES库的某些操作不支持显式指定index名称，需要继承该库中的一些类并重写方法 在过渡阶段，让系统支持新旧两种的查询方式，不需要重启服务，仅通过修改配置就可以实现无缝切换。这样的话，如果由于新方案中，代码有bug，可以直接通过修改配置切换到旧的方式，bug修复后再切换成新的。等到新方案的上线一定的时间，稳定之后，再移除旧方案的代码 优化前后的性能对比 通过Grafana的监控数据，可以很明显地看出优化的效果。&#xA;切换新旧方案的瞬间 切换新旧方案的瞬间，可以看到查询耗时断崖式减少&#xA;平峰时期CPU使用率对比 优化前平均40%左右&#xA;优化后平均5%&#xA;高峰时期CPU使用率对比 优化前平均82%，最高98%&#xA;优化后平均15%&#xA;平峰时期查询耗时对比 优化前平均3.2s&#xA;优化后9ms&#xA;高峰时期查询耗时对比 优化前平均7.8s，最高13.24s&#xA;优化后平均32ms</description>
     </item>
-    
     <item>
       <title>jetty临时目录下的资源文件被删导致js等资源找不到</title>
       <link>https://www.zengxi.net/2020/07/jetty_tmp_dir/</link>
       <pubDate>Tue, 14 Jul 2020 22:03:51 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/07/jetty_tmp_dir/</guid>
-      <description>生产环境上jetty运行一段时间后，在打开某个网页的时候发现有js、css文件找不到，但是重启之后问题会解决。后来发现是设定了tmpwatch后台任务，定时会清理一次系统的tmp目录。
-默认情况下，如果没有指定jetty的临时目录，默认会使用系统的临时目录。解决方案就是，修改jetty的临时文件存放目录，不要放在 /tmp 目录下面。主要有下面几个方法：
- 设置basetempdir值  1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Call name=&amp;#34;setAttribute&amp;#34;&amp;gt; 7 &amp;lt;Arg&amp;gt;org.eclipse.jetty.webapp.basetempdir&amp;lt;/Arg&amp;gt; 8 &amp;lt;Arg&amp;gt;/home/my/foo&amp;lt;/Arg&amp;gt; 9 &amp;lt;/Call&amp;gt; 10&amp;lt;/Configure&amp;gt;  设置tempDirectory值  1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Set name=&amp;#34;tempDirectory&amp;#34;&amp;gt;/some/dir/foo&amp;lt;/Set&amp;gt; 7&amp;lt;/Configure&amp;gt;  设置 javax.servlet.context.tempdir 属性  1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Call name=&amp;#34;setAttribute&amp;#34;&amp;gt; 7 &amp;lt;Arg&amp;gt;javax.servlet.context.tempdir&amp;lt;/Arg&amp;gt; 8 &amp;lt;Arg&amp;gt;/some/dir/foo&amp;lt;/Arg&amp;gt; 9 &amp;lt;/Call&amp;gt; 10 11&amp;lt;/Configure&amp;gt;  在启动参数里面修改  1java -jar .</description>
+      <description>生产环境上jetty运行一段时间后，在打开某个网页的时候发现有js、css文件找不到，但是重启之后问题会解决。后来发现是设定了tmpwatch后台任务，定时会清理一次系统的tmp目录。&#xA;默认情况下，如果没有指定jetty的临时目录，默认会使用系统的临时目录。解决方案就是，修改jetty的临时文件存放目录，不要放在 /tmp 目录下面。主要有下面几个方法：&#xA;设置basetempdir值 1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Call name=&amp;#34;setAttribute&amp;#34;&amp;gt; 7 &amp;lt;Arg&amp;gt;org.eclipse.jetty.webapp.basetempdir&amp;lt;/Arg&amp;gt; 8 &amp;lt;Arg&amp;gt;/home/my/foo&amp;lt;/Arg&amp;gt; 9 &amp;lt;/Call&amp;gt; 10&amp;lt;/Configure&amp;gt; 设置tempDirectory值 1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Set name=&amp;#34;tempDirectory&amp;#34;&amp;gt;/some/dir/foo&amp;lt;/Set&amp;gt; 7&amp;lt;/Configure&amp;gt; 设置 javax.servlet.context.tempdir 属性 1&amp;lt;Configure class=&amp;#34;org.eclipse.jetty.webapp.WebAppContext&amp;#34;&amp;gt; 2 3 &amp;lt;Set name=&amp;#34;contextPath&amp;#34;&amp;gt;/test&amp;lt;/Set&amp;gt; 4 &amp;lt;Set name=&amp;#34;war&amp;#34;&amp;gt;foo.war&amp;lt;/Set&amp;gt; 5 6 &amp;lt;Call name=&amp;#34;setAttribute&amp;#34;&amp;gt; 7 &amp;lt;Arg&amp;gt;javax.servlet.context.tempdir&amp;lt;/Arg&amp;gt; 8 &amp;lt;Arg&amp;gt;/some/dir/foo&amp;lt;/Arg&amp;gt; 9 &amp;lt;/Call&amp;gt; 10 11&amp;lt;/Configure&amp;gt; 在启动参数里面修改 1java -jar ../start.jar -Djava.io.tmpdir=/path/to/desired/directory 参考：</description>
     </item>
-    
     <item>
       <title>rsyslog内存占用高导致服务不可用</title>
       <link>https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/</link>
       <pubDate>Mon, 22 Jun 2020 09:29:31 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/</guid>
-      <description>这几天生产环境中某个服务内存不时地被撑爆，原先以为是应用的问题，但是近来没有上过新的代码。该服务的总内存是8G，启动参数关于内存的配置大致是：-Xmx=6.4G，-Xms=4G 左右。看了Grafana上面的监控记录，JVM 老年代使用最多也就到4G左右，在GC的日志中发现也仅仅用到4G左右，并没有到达最高的内存值。这两个结果可以看出来，应该不是应用程序导致内存占用过大。
-后来用top命令看了一下，发现rsyslog进程使用了将近40%的内存。再查一下日志文件，发现一些日志文件大小都达到2G以上。
-rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程，不应该占用那么内存，即使它同步延迟较大甚至不工作，也不应该影响到应用程序的正常运行。那么，我们可以通过限制它的内存使用率来解决这个问题。
-如果是Ubuntu系统，可以通过修改 /etc/systemd/system/rsyslog.service 文件，在Service项目下面修改或者添加以下参数。在其他的Linux系统下，路径可能不同。通常情况下rsyslogd大小只有5M，所以将内存上限设置为8M，绝对内存限制为80M。注意: $SYSLOGD_OPTIONS这个参数必须添加上去，否则限制可能不生效。
-1[Service] 2ExecStart=/usr/sbin/rsyslogd -n $SYSLOGD_OPTIONS 3MemoryAccounting=yes 4MemoryMax=80M 5MemoryHigh=8M 然后重启服务:
-1systemctl daemon-reload 2systemctl restart rsyslog 几个参数的含义：
-   名称 描述     MemoryAccounting 若设为”yes”则表示为此单元开启内存占用统计。 注意，这同时也隐含的开启了该单元 所属的 slice 以及父 slice 内所有单元的内存占用统计。 此选项的默认值由 DefaultMemoryAccounting= 决定   MemoryHigh 尽可能限制该单元中的进程最多可以使用多少内存。 虽然这是一个允许被突破的柔性限制，但是突破限制后，进程的运行速度将会大打折扣， 并且系统将会尽可能尽快回收超出的内存。此选项的目的在于柔性限制内存使用量。选项值可以是以字节为单位的绝对内存大小(可以使用以1024为基数的 K, M, G, T 后缀)， 也可以是以百分比表示的相对内存大小(相对于系统的全部物理内存)， 还可以设为特殊值 “infinity” 表示不作限制。   MemoryMax 绝对刚性的限制该单元中的进程最多可以使用多少内存。 这是一个不允许突破的刚性限制，触碰此限制会导致进程由于内存不足而被强制杀死。 建议将 MemoryHigh= 用作主要的内存限制手段， 而将 MemoryMax= 用作不可突破的底线。选项值可以是以字节为单位的绝对大小(可以使用以1024为基数的 K, M, G, T 后缀)， 也可以是以百分比表示的相对大小(相对于系统的全部物理内存)， 还可以设为特殊值 “infinity” 表示不作限制。     参考链接：</description>
+      <description>这几天生产环境中某个服务内存不时地被撑爆，原先以为是应用的问题，但是近来没有上过新的代码。该服务的总内存是8G，启动参数关于内存的配置大致是：-Xmx=6.4G，-Xms=4G 左右。看了Grafana上面的监控记录，JVM 老年代使用最多也就到4G左右，在GC的日志中发现也仅仅用到4G左右，并没有到达最高的内存值。这两个结果可以看出来，应该不是应用程序导致内存占用过大。&#xA;后来用top命令看了一下，发现rsyslog进程使用了将近40%的内存。再查一下日志文件，发现一些日志文件大小都达到2G以上。&#xA;rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程，不应该占用那么内存，即使它同步延迟较大甚至不工作，也不应该影响到应用程序的正常运行。那么，我们可以通过限制它的内存使用率来解决这个问题。&#xA;如果是Ubuntu系统，可以通过修改 /etc/systemd/system/rsyslog.service 文件，在Service项目下面修改或者添加以下参数。在其他的Linux系统下，路径可能不同。通常情况下rsyslogd大小只有5M，所以将内存上限设置为8M，绝对内存限制为80M。注意: $SYSLOGD_OPTIONS这个参数必须添加上去，否则限制可能不生效。&#xA;1[Service] 2ExecStart=/usr/sbin/rsyslogd -n $SYSLOGD_OPTIONS 3MemoryAccounting=yes 4MemoryMax=80M 5MemoryHigh=8M 然后重启服务:&#xA;1systemctl daemon-reload 2systemctl restart rsyslog 几个参数的含义：&#xA;名称 描述 MemoryAccounting 若设为”yes”则表示为此单元开启内存占用统计。 注意，这同时也隐含的开启了该单元 所属的 slice 以及父 slice 内所有单元的内存占用统计。 此选项的默认值由 DefaultMemoryAccounting= 决定 MemoryHigh 尽可能限制该单元中的进程最多可以使用多少内存。 虽然这是一个允许被突破的柔性限制，但是突破限制后，进程的运行速度将会大打折扣， 并且系统将会尽可能尽快回收超出的内存。此选项的目的在于柔性限制内存使用量。选项值可以是以字节为单位的绝对内存大小(可以使用以1024为基数的 K, M, G, T 后缀)， 也可以是以百分比表示的相对内存大小(相对于系统的全部物理内存)， 还可以设为特殊值 “infinity” 表示不作限制。 MemoryMax 绝对刚性的限制该单元中的进程最多可以使用多少内存。 这是一个不允许突破的刚性限制，触碰此限制会导致进程由于内存不足而被强制杀死。 建议将 MemoryHigh= 用作主要的内存限制手段， 而将 MemoryMax= 用作不可突破的底线。选项值可以是以字节为单位的绝对大小(可以使用以1024为基数的 K, M, G, T 后缀)， 也可以是以百分比表示的相对大小(相对于系统的全部物理内存)， 还可以设为特殊值 “infinity” 表示不作限制。 参考链接：&#xA;https://www.sunsea.im/rsyslogd-systemd-journald-high-memory-solution.html https://blog.espnlol.com/?p=525 </description>
     </item>
-    
     <item>
       <title>用string adapter来解决系统接口对接中发现的空值验证问题</title>
       <link>https://www.zengxi.net/2020/06/string_adapter/</link>
       <pubDate>Mon, 01 Jun 2020 13:44:01 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/06/string_adapter/</guid>
-      <description>客户用的是很旧版本的ERP系统，在与客户系统做接口对接的时候发现了一个问题。假设接口请求需要的body是xml格式的，共有三个字段：name, mobile, email。由于客户ERP系统比较老，如果某个字段没有值，传的是空字符串，而不是将该字段在请求消息体中隐藏。客户发的请求类似下面的例子：
-1&amp;lt;xml&amp;gt; 2 &amp;lt;name&amp;gt;John&amp;lt;/name&amp;gt; 3 &amp;lt;mobile&amp;gt;13800138000&amp;lt;/mobile&amp;gt; 4 &amp;lt;email&amp;gt;&amp;lt;/email&amp;gt; 5&amp;lt;/xml&amp;gt; 由于历史遗留问题，我方系统里在字段上面加了 javax.validation.constraints.Pattern 注解使用正则表达式来对传入的请求值做验证。当传入值为空字符串的时候，正则表达式验证就无法通过。
-与客户做过沟通，对于空值的字段，他们也没有办法在请求中隐藏字段，只能传空字符串。那就只能在我方系统这边看看是否可以通过修改代码来解决。一种方案是修改正则表达式，来兼容空字符串，但是由于这些都是传统代码，不确定把空字符串设置在这个字段上面会对后面的处理会有什么影响。如果有更合适的、代价更小的方案，那么就最好不选择这种。
-1@XmlType 2@XmlAccessorType(XmlAccessType.FIELD) 3public class TestRequest implements Serializable { 4 @XmlElement(required = true) 5 private String name; 6 7 @XmlElement(required = false) 8 @Pattern(regexp = Constants.regexpMobile, message = &amp;#34;invalidMobile&amp;#34;) 9 private String mobile; 10 11 @XmlElement(required = false) 12 @Pattern(regexp = Constants.regexpEmail, message = &amp;#34;invalidEmail&amp;#34;) 13 private String email; 14 15 // getter / setter 16 .</description>
+      <description>客户用的是很旧版本的ERP系统，在与客户系统做接口对接的时候发现了一个问题。假设接口请求需要的body是xml格式的，共有三个字段：name, mobile, email。由于客户ERP系统比较老，如果某个字段没有值，传的是空字符串，而不是将该字段在请求消息体中隐藏。客户发的请求类似下面的例子：&#xA;1&amp;lt;xml&amp;gt; 2 &amp;lt;name&amp;gt;John&amp;lt;/name&amp;gt; 3 &amp;lt;mobile&amp;gt;13800138000&amp;lt;/mobile&amp;gt; 4 &amp;lt;email&amp;gt;&amp;lt;/email&amp;gt; 5&amp;lt;/xml&amp;gt; 由于历史遗留问题，我方系统里在字段上面加了 javax.validation.constraints.Pattern 注解使用正则表达式来对传入的请求值做验证。当传入值为空字符串的时候，正则表达式验证就无法通过。&#xA;与客户做过沟通，对于空值的字段，他们也没有办法在请求中隐藏字段，只能传空字符串。那就只能在我方系统这边看看是否可以通过修改代码来解决。一种方案是修改正则表达式，来兼容空字符串，但是由于这些都是传统代码，不确定把空字符串设置在这个字段上面会对后面的处理会有什么影响。如果有更合适的、代价更小的方案，那么就最好不选择这种。&#xA;1@XmlType 2@XmlAccessorType(XmlAccessType.FIELD) 3public class TestRequest implements Serializable { 4 @XmlElement(required = true) 5 private String name; 6 7 @XmlElement(required = false) 8 @Pattern(regexp = Constants.regexpMobile, message = &amp;#34;invalidMobile&amp;#34;) 9 private String mobile; 10 11 @XmlElement(required = false) 12 @Pattern(regexp = Constants.regexpEmail, message = &amp;#34;invalidEmail&amp;#34;) 13 private String email; 14 15 // getter / setter 16 .</description>
     </item>
-    
     <item>
       <title>Spring Quartz 指定Scheduler Name</title>
       <link>https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/</link>
       <pubDate>Sun, 31 May 2020 15:43:31 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/05/spring_quartz_customize_scheduler_name/</guid>
-      <description>当前项目使用quartz与spring来做基于数据库的集群化任务调度，但是在实际使用过程发现同一个scheduler中，不同group之间任务调度可能会相互跑串。当前项目中使用的 quartz-scheduler 版本 2.3.1， spring 版本 3.2.18.RELEASE。
-举个例子，配置是这样的, 下面示例中隐去不重要的配置
-1&amp;lt;bean id=&amp;#34;my-cluster-scheduler&amp;#34; 2 class=&amp;#34;org.springframework.scheduling.quartz.SchedulerFactoryBean&amp;#34; 3 lazy-init=&amp;#34;false&amp;#34;&amp;gt; 4 ... 5 &amp;lt;property name=&amp;#34;quartzProperties&amp;#34;&amp;gt; 6 &amp;lt;props&amp;gt; 7 &amp;lt;prop key=&amp;#34;org.quartz.jobStore.isClustered&amp;#34;&amp;gt;true&amp;lt;/prop&amp;gt; 8 &amp;lt;prop key=&amp;#34;org.quartz.jobStore.class&amp;#34;&amp;gt;org.quartz.impl.jdbcjobstore.JobStoreCMT&amp;lt;/prop&amp;gt; 9 &amp;lt;/props&amp;gt; 10 ... 11 &amp;lt;/property&amp;gt; 12 &amp;lt;property name=&amp;#34;jobDetails&amp;#34;&amp;gt; 13 &amp;lt;list&amp;gt; 14 &amp;lt;ref bean=&amp;#34;myTestJobDetailBean&amp;#34;/&amp;gt; 15 &amp;lt;/list&amp;gt; 16 &amp;lt;/property&amp;gt; 17 &amp;lt;property name=&amp;#34;triggers&amp;#34;&amp;gt; 18 &amp;lt;list&amp;gt; 19 &amp;lt;ref bean=&amp;#34;myTestJobTrigger&amp;#34;/&amp;gt; 20 &amp;lt;/list&amp;gt; 21 &amp;lt;/property&amp;gt; 22&amp;lt;/bean&amp;gt; 23 24&amp;lt;bean id=&amp;#34;myTestJobTrigger&amp;#34; class=&amp;#34;org.springframework.scheduling.quartz.CronTriggerFactoryBean&amp;#34;&amp;gt; 25 &amp;lt;property name=&amp;#34;jobDetail&amp;#34; ref=&amp;#34;myTestJobDetailBean&amp;#34;/&amp;gt; 26 &amp;lt;property name=&amp;#34;cronExpression&amp;#34; value=&amp;#34;${my.</description>
+      <description>当前项目使用quartz与spring来做基于数据库的集群化任务调度，但是在实际使用过程发现同一个scheduler中，不同group之间任务调度可能会相互跑串。当前项目中使用的 quartz-scheduler 版本 2.3.1， spring 版本 3.2.18.RELEASE。&#xA;举个例子，配置是这样的, 下面示例中隐去不重要的配置&#xA;1&amp;lt;bean id=&amp;#34;my-cluster-scheduler&amp;#34; 2 class=&amp;#34;org.springframework.scheduling.quartz.SchedulerFactoryBean&amp;#34; 3 lazy-init=&amp;#34;false&amp;#34;&amp;gt; 4 ... 5 &amp;lt;property name=&amp;#34;quartzProperties&amp;#34;&amp;gt; 6 &amp;lt;props&amp;gt; 7 &amp;lt;prop key=&amp;#34;org.quartz.jobStore.isClustered&amp;#34;&amp;gt;true&amp;lt;/prop&amp;gt; 8 &amp;lt;prop key=&amp;#34;org.quartz.jobStore.class&amp;#34;&amp;gt;org.quartz.impl.jdbcjobstore.JobStoreCMT&amp;lt;/prop&amp;gt; 9 &amp;lt;/props&amp;gt; 10 ... 11 &amp;lt;/property&amp;gt; 12 &amp;lt;property name=&amp;#34;jobDetails&amp;#34;&amp;gt; 13 &amp;lt;list&amp;gt; 14 &amp;lt;ref bean=&amp;#34;myTestJobDetailBean&amp;#34;/&amp;gt; 15 &amp;lt;/list&amp;gt; 16 &amp;lt;/property&amp;gt; 17 &amp;lt;property name=&amp;#34;triggers&amp;#34;&amp;gt; 18 &amp;lt;list&amp;gt; 19 &amp;lt;ref bean=&amp;#34;myTestJobTrigger&amp;#34;/&amp;gt; 20 &amp;lt;/list&amp;gt; 21 &amp;lt;/property&amp;gt; 22&amp;lt;/bean&amp;gt; 23 24&amp;lt;bean id=&amp;#34;myTestJobTrigger&amp;#34; class=&amp;#34;org.springframework.scheduling.quartz.CronTriggerFactoryBean&amp;#34;&amp;gt; 25 &amp;lt;property name=&amp;#34;jobDetail&amp;#34; ref=&amp;#34;myTestJobDetailBean&amp;#34;/&amp;gt; 26 &amp;lt;property name=&amp;#34;cronExpression&amp;#34; value=&amp;#34;${my.</description>
     </item>
-    
     <item>
       <title>根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</title>
       <link>https://www.zengxi.net/2020/01/manage-distribution-session-by-id/</link>
       <pubDate>Sun, 26 Jan 2020 16:21:39 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/01/manage-distribution-session-by-id/</guid>
-      <description>背景 由于历史原因，原先的界面是用vaadin框架来实现。但是这个框架不适合互联网的分布式系统，正在逐步用目前主流的前端框架重写各个模块，把旧的vaadin页面替换掉。在替换过程中，新老界面并存。
-vaadin界面的servlet，每次都会判断请求中的session id值，如果在服务器中找不到对应这个id的session，就会重新生成一个。由于session id是在新界面登录的时候生成的，当点击链接从新界面跳转到vaadin界面的时候，vaadin服务会发现没有这个session id，就会重新生成一个新的session。换句话说，新老界面会有各自的session id。当然，分布式系统本来就有这个问题，可以采用分布式session的来解决。
-原先开发人员的解决方案是:
- 把session信息存入redis缓存，session id作为key 每次跳转到vaadin界面后，用新生成的session id替换掉旧的session id，同时在redis里面把session信息从旧的key，复制到新的key这边。  但是这种解决方案存在一个问题，主要是由上面解决方案的第2点引起的。由于每次从新界面跳转到vaadin界面都会生成新的session id，如果打开两个浏览器页面，分别跳转到新的界面，那么这个就会导致第一个跳转的那个浏览器页面中的session id被覆盖。vaadin框架是有状态的，它在客户端与服务器端保持一个长连接，并检测session id的有效性。session id的变化，导致长连接的登录信息失效，被弹回到登录界面。从用户体验上来讲，就是被强制登出。
-从另外一个角度说，原先开发人员的解决方案是不合理的，它也不是一种标准的分布式session的解决方案。
-如何解决 比较合适的解决方案是，vaadin界面不能自己生成session id，而是要复用在新界面登录之后所生成的session id。当vaadin界面有请求的时候，根据请求中的session id查询服务器上是否有对应的session，如果有则返回对应的session；如果没有，则新建一个以该session id为主键的session。换句话说，新老界面都应该要使用相同session id，一旦登录之后，在当前用户这次登录的有效生命周期内，session id保持不变。这样就不会存在上面说的，由于session id的变化而导致被强制登出的问题。
-具体实现的关键是用到HttpServletRequesWrapper类，它能够快速提供HttpServletRequest的自定义实现。
- |----------------------| | (I) ServletRequest | |----------------------| | | ------------------------------------------- | | | | |--------------------------| |-----------------------------| | (I) HttpServletRequest | | (C) ServletRequestWrapper | |--------------------------| |-----------------------------| | | | | ------------------------------------------- | | |---------------------------------| | (C) HttpServletRequestWrapper | |---------------------------------|  如下的代码是从 Tomcat 抽取出来的，展现了HttpServletRequesWrapper类是如何运行的。</description>
+      <description>背景 由于历史原因，原先的界面是用vaadin框架来实现。但是这个框架不适合互联网的分布式系统，正在逐步用目前主流的前端框架重写各个模块，把旧的vaadin页面替换掉。在替换过程中，新老界面并存。&#xA;vaadin界面的servlet，每次都会判断请求中的session id值，如果在服务器中找不到对应这个id的session，就会重新生成一个。由于session id是在新界面登录的时候生成的，当点击链接从新界面跳转到vaadin界面的时候，vaadin服务会发现没有这个session id，就会重新生成一个新的session。换句话说，新老界面会有各自的session id。当然，分布式系统本来就有这个问题，可以采用分布式session的来解决。&#xA;原先开发人员的解决方案是:&#xA;把session信息存入redis缓存，session id作为key 每次跳转到vaadin界面后，用新生成的session id替换掉旧的session id，同时在redis里面把session信息从旧的key，复制到新的key这边。 但是这种解决方案存在一个问题，主要是由上面解决方案的第2点引起的。由于每次从新界面跳转到vaadin界面都会生成新的session id，如果打开两个浏览器页面，分别跳转到新的界面，那么这个就会导致第一个跳转的那个浏览器页面中的session id被覆盖。vaadin框架是有状态的，它在客户端与服务器端保持一个长连接，并检测session id的有效性。session id的变化，导致长连接的登录信息失效，被弹回到登录界面。从用户体验上来讲，就是被强制登出。&#xA;从另外一个角度说，原先开发人员的解决方案是不合理的，它也不是一种标准的分布式session的解决方案。&#xA;如何解决 比较合适的解决方案是，vaadin界面不能自己生成session id，而是要复用在新界面登录之后所生成的session id。当vaadin界面有请求的时候，根据请求中的session id查询服务器上是否有对应的session，如果有则返回对应的session；如果没有，则新建一个以该session id为主键的session。换句话说，新老界面都应该要使用相同session id，一旦登录之后，在当前用户这次登录的有效生命周期内，session id保持不变。这样就不会存在上面说的，由于session id的变化而导致被强制登出的问题。&#xA;具体实现的关键是用到HttpServletRequesWrapper类，它能够快速提供HttpServletRequest的自定义实现。&#xA;|----------------------| | (I) ServletRequest | |----------------------| | | ------------------------------------------- | | | | |--------------------------| |-----------------------------| | (I) HttpServletRequest | | (C) ServletRequestWrapper | |--------------------------| |-----------------------------| | | | | ------------------------------------------- | | |---------------------------------| | (C) HttpServletRequestWrapper | |---------------------------------| 如下的代码是从 Tomcat 抽取出来的，展现了HttpServletRequesWrapper类是如何运行的。</description>
     </item>
-    
     <item>
       <title>Quartz job使用过程中的发现问题与改进</title>
       <link>https://www.zengxi.net/2020/01/quartz-job-issue-improvement/</link>
       <pubDate>Sun, 05 Jan 2020 18:22:24 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/01/quartz-job-issue-improvement/</guid>
-      <description>遇到的问题与原因分析 生产环境中遇到的问题：
- 服务在启动过程中，不时地卡住，后来发生的越来越频繁。看日志分析，卡在初始化quartz job store的时候 服务在运行过程中，不时地出现定时任务不被触发的情况  通过分析，得知问题产生的原因：
- 目前代码中用的是Quartz scheduler 1.8.3版本，定时框架采用的是行锁，通过执行下面的SQL来锁住特定的记录。在分布式的系统的情况下，节点越多越容易发生锁等待，甚至死锁。Quartz scheduler 的 2.x 版本做了改进，在QRTZ_LOCKS表中多加了一个字段 SCHED_NAME。这有一个好处就是，可以给不同的应用分配不同的scheduler name，这样定时框架在调度的时候，不同的应用分别去尝试锁定不同的行，而不像之前锁的时同一个行，避免死锁的发生。  1SELECT*FROMQRTZ_LOCKSWHERELOCK_NAME=$1FORUPDATE; org.quartz.threadPool.threadCount 值设置太小。Quartz scheduler的线程池大小不足，这个也有可能导致定时任务在排队，无法被触发。  另外，在研究现有代码过程中，还发现另外3个问题：
- group未正确赋值。Quartz中实际上是把job name与group的组合作为一个唯一标识的key，用它来触发和调度一个任务。job name相同，group不同，被当做是不同的任务。如果同一个应用多个节点，需要分成不同的组来分别执行不同的定时任务（比如其中一个组仅统计某个时间段出国的旅游人数，另外一个组仅统计在国内的旅游人数），那就必须给不同的组赋予不同的group值。否则，可能导致其中的一个任务没有执行，因为他们被当做是同一个任务。 应用中的instanceId被写死在配置文件中。由于一个应用往往有多个节点，这个就导致集群中有多个节点的instanceId是相同。然而同一个Quartz scheduler的集群中，任意节点的instanceId必须保证唯一。 目前的系统有个需求，某个任务必须在某个服务的所有节点上执行，比如定时从数据库或者其他地方同步某些配置项到内存中。由于Quartz框架不支持这个功能，原先的代码对job detail等类进行扩展，添加了一个属性，用来表示该任务是在该应用的所有节点上或仅仅选择一台执行。为了支持这个功能，代码改动的比较多，甚至也有可能是因为这些改动，直接或者间接导致前面的那些问题。在网上搜索了一下，发现也有一些人有类似的需求，他们在某网站上面提问，使用Quartz框架时怎样才能支持任务在集群的所有节点上执行。后来仔细想想，Quartz框架支持集群模式与基于内存的RAMJobStore单机模式这两种，如果需要在所有节点上执行，其实使用基于内存的RAMJobStore单机模式就可以了，没有必要再通过扩展集群模式来支持这个功能。  解决方案 最终的解决方案，总结如下：
- 升级所有应用的quartz scheduler库至2.3.1版本 不同的应用，分别赋予不同的scheduler name；同一个应用中，如果同时有集群模式与单机模式，需要使用不同的scheduler，并赋予不同的name值 对于同一个应用，某个任务仅需要任意一个节点执行的，使用JobStoreCMT的cluster模式。同时需要保证不同节点instanceId不同， 比如将org.quartz.scheduler.instanceId的值设置为AUTO 对于同一个应用，某个任务需要所有节点都执行的，使用基于内存的RAMJobStore org.quartz.threadPool.threadCount 设置成与任务数一致。避免因线程数不够，任务无法执行 job detail赋予正确的group名称 如果job不允许并发，则在job对应的类上添加@DisallowConcurrentExecution 注解 如果job对应的类上面有autowire的需求，可以自定义一个job factory，继承SpringBeanJobFactory，并调用AutowireCapableBeanFactory的autowireBean，来避免Job类里面@Autowired无法注入的问题。同时在配置文件中使用自定义的job factory  1&amp;lt;property name=&amp;#34;jobFactory&amp;#34; ref=&amp;#34;myCustomizedJobFactory&amp;#34; /&amp;gt; </description>
+      <description>遇到的问题与原因分析 生产环境中遇到的问题：&#xA;服务在启动过程中，不时地卡住，后来发生的越来越频繁。看日志分析，卡在初始化quartz job store的时候 服务在运行过程中，不时地出现定时任务不被触发的情况 通过分析，得知问题产生的原因：&#xA;目前代码中用的是Quartz scheduler 1.8.3版本，定时框架采用的是行锁，通过执行下面的SQL来锁住特定的记录。在分布式的系统的情况下，节点越多越容易发生锁等待，甚至死锁。Quartz scheduler 的 2.x 版本做了改进，在QRTZ_LOCKS表中多加了一个字段 SCHED_NAME。这有一个好处就是，可以给不同的应用分配不同的scheduler name，这样定时框架在调度的时候，不同的应用分别去尝试锁定不同的行，而不像之前锁的时同一个行，避免死锁的发生。 1SELECT * FROM QRTZ_LOCKS WHERE LOCK_NAME = $1 FOR UPDATE; org.quartz.threadPool.threadCount 值设置太小。Quartz scheduler的线程池大小不足，这个也有可能导致定时任务在排队，无法被触发。 另外，在研究现有代码过程中，还发现另外3个问题：&#xA;group未正确赋值。Quartz中实际上是把job name与group的组合作为一个唯一标识的key，用它来触发和调度一个任务。job name相同，group不同，被当做是不同的任务。如果同一个应用多个节点，需要分成不同的组来分别执行不同的定时任务（比如其中一个组仅统计某个时间段出国的旅游人数，另外一个组仅统计在国内的旅游人数），那就必须给不同的组赋予不同的group值。否则，可能导致其中的一个任务没有执行，因为他们被当做是同一个任务。 应用中的instanceId被写死在配置文件中。由于一个应用往往有多个节点，这个就导致集群中有多个节点的instanceId是相同。然而同一个Quartz scheduler的集群中，任意节点的instanceId必须保证唯一。 目前的系统有个需求，某个任务必须在某个服务的所有节点上执行，比如定时从数据库或者其他地方同步某些配置项到内存中。由于Quartz框架不支持这个功能，原先的代码对job detail等类进行扩展，添加了一个属性，用来表示该任务是在该应用的所有节点上或仅仅选择一台执行。为了支持这个功能，代码改动的比较多，甚至也有可能是因为这些改动，直接或者间接导致前面的那些问题。在网上搜索了一下，发现也有一些人有类似的需求，他们在某网站上面提问，使用Quartz框架时怎样才能支持任务在集群的所有节点上执行。后来仔细想想，Quartz框架支持集群模式与基于内存的RAMJobStore单机模式这两种，如果需要在所有节点上执行，其实使用基于内存的RAMJobStore单机模式就可以了，没有必要再通过扩展集群模式来支持这个功能。 解决方案 最终的解决方案，总结如下：&#xA;升级所有应用的quartz scheduler库至2.3.1版本 不同的应用，分别赋予不同的scheduler name；同一个应用中，如果同时有集群模式与单机模式，需要使用不同的scheduler，并赋予不同的name值 对于同一个应用，某个任务仅需要任意一个节点执行的，使用JobStoreCMT的cluster模式。同时需要保证不同节点instanceId不同， 比如将org.quartz.scheduler.instanceId的值设置为AUTO 对于同一个应用，某个任务需要所有节点都执行的，使用基于内存的RAMJobStore org.quartz.threadPool.threadCount 设置成与任务数一致。避免因线程数不够，任务无法执行 job detail赋予正确的group名称 如果job不允许并发，则在job对应的类上添加@DisallowConcurrentExecution 注解 如果job对应的类上面有autowire的需求，可以自定义一个job factory，继承SpringBeanJobFactory，并调用AutowireCapableBeanFactory的autowireBean，来避免Job类里面@Autowired无法注入的问题。同时在配置文件中使用自定义的job factory 1&amp;lt;property name=&amp;#34;jobFactory&amp;#34; ref=&amp;#34;myCustomizedJobFactory&amp;#34; /&amp;gt; </description>
     </item>
-    
     <item>
       <title>复盘 - 手机app上一行代码导致的生产事故</title>
       <link>https://www.zengxi.net/2019/12/incident-caused-by-app/</link>
       <pubDate>Tue, 10 Dec 2019 23:46:11 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2019/12/incident-caused-by-app/</guid>
-      <description>过程 由于一些历史原因，以及与原先代码的兼容性，临时文件存储在minio中。
-某天，生产环境突发事故，minio集群的CPU与内存爆了，只能重启集群。过了十来分钟，很多服务都不可用，健康检查都不通过。日志中的错误信息显示，这些服务都是数据库拿不到连接。需要事先处理数据库连接的问题，于是连接到数据库查死锁，终止导致死锁的sql进程，再重启来恢复这些服务。
-由于前不久minio集群挂掉，很容易就想到是由于minio的原因。其他服务通过RPC调用一个文件存储服务来操作minio中的数据，当minio集群挂掉的时候，文件存储服务访问minio一直想访问minio直到超时。在这个期间，其他服务如果有事务调用文件存储服务来操作minio中文件，那么这个事务就不会被提交，一会占着数据库连接。
-minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉。幸运的是，文件存储服务，当初做了兼容，支持两种临时文件存储方式，一个是本地磁盘，另外一个是minio，修改配置文件可以方便的切换。于是先切换成本地磁盘方式，然后升级minio集群的CPU与内存配置，重启minio集群。接着，修改文件存储服务的配置文件，切换回minio的方式。至此，所有的服务都慢慢恢复正常了。
-接着，细究这个事故的根源，联想到几天前发现app上面的bug，会一直在后台不断地上传图片。当时由于app出了紧急修复的版本，就没有当回事了。没想到过了几天，问题彻底暴露出来了。未升级app到最新版本的用户，在这几天内依然不停地上传文件。访问量的增大，minio集群原先的配置已经扛不住了。幸运的是，之前app实现了一个版本强制升级更新的机制，可以直接在后台修改当前所支持的最小版本，这样就让用户强制更新到最新的版本，避免了继续不停地传文件。
-这段时间大概几十万个文件，约200多G的大小。这些文件都上传到同一个bucket中，由于minio的内部实现是一个bucket采用文件夹形式保存，当一个bucket文件夹中的文件数量过多，已经无法列出某个文件夹下面的文件，总是超时。文件存储服务中的归档删除机制失效，导致空间无法释放，逐渐变小。如果没空间，又会导致服务不可用。幸运的是，有办法获取到具体的文件名，只能手动写脚本直接处理文件，释放空间。
-时间线  网页上面发现关联了几千个图片，后来发现是app的bug，会不断地上传图片，修复app 过了几天，先是minio集群爆了，十几分钟后其他服务挂了 释放数据库死锁，其他服务恢复 升级minio集群配置，文件存储服务恢复 强制让app客户端升级到最新版本，文件存储服务压力减小 手动写脚本直接处理minio中的文件，释放minio空间。  总结 做的对的地方：
- 文件存储服务做了兼容，支持多种方式，出了问题，有个备选方案 app版本可以控制最低支持的版本，有强制升级机制  需要改进的地方：
- 发现app上面bug的时候，没有考虑周全，以为只是小问题，太疏忽 服务之间耦合性有点高，容错性不够。一个服务挂了，可能导致雪崩 minio存储的时候，需要指定子路径。不能放在同一个文件夹下面，要分散到多个子文件夹中。 没有服务降级机制，如果minio挂了，自动启用本地磁盘，不需要重启服务器 minio 当初建机器的时候，没有使用lv等方式，不方便扩展磁盘，如果存在磁盘不足的情况，那么扩容就不方便 配置文件的修改，需要重启服务，造成短时间内不可用  </description>
+      <description>过程 由于一些历史原因，以及与原先代码的兼容性，临时文件存储在minio中。&#xA;某天，生产环境突发事故，minio集群的CPU与内存爆了，只能重启集群。过了十来分钟，很多服务都不可用，健康检查都不通过。日志中的错误信息显示，这些服务都是数据库拿不到连接。需要事先处理数据库连接的问题，于是连接到数据库查死锁，终止导致死锁的sql进程，再重启来恢复这些服务。&#xA;由于前不久minio集群挂掉，很容易就想到是由于minio的原因。其他服务通过RPC调用一个文件存储服务来操作minio中的数据，当minio集群挂掉的时候，文件存储服务访问minio一直想访问minio直到超时。在这个期间，其他服务如果有事务调用文件存储服务来操作minio中文件，那么这个事务就不会被提交，一会占着数据库连接。&#xA;minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉。幸运的是，文件存储服务，当初做了兼容，支持两种临时文件存储方式，一个是本地磁盘，另外一个是minio，修改配置文件可以方便的切换。于是先切换成本地磁盘方式，然后升级minio集群的CPU与内存配置，重启minio集群。接着，修改文件存储服务的配置文件，切换回minio的方式。至此，所有的服务都慢慢恢复正常了。&#xA;接着，细究这个事故的根源，联想到几天前发现app上面的bug，会一直在后台不断地上传图片。当时由于app出了紧急修复的版本，就没有当回事了。没想到过了几天，问题彻底暴露出来了。未升级app到最新版本的用户，在这几天内依然不停地上传文件。访问量的增大，minio集群原先的配置已经扛不住了。幸运的是，之前app实现了一个版本强制升级更新的机制，可以直接在后台修改当前所支持的最小版本，这样就让用户强制更新到最新的版本，避免了继续不停地传文件。&#xA;这段时间大概几十万个文件，约200多G的大小。这些文件都上传到同一个bucket中，由于minio的内部实现是一个bucket采用文件夹形式保存，当一个bucket文件夹中的文件数量过多，已经无法列出某个文件夹下面的文件，总是超时。文件存储服务中的归档删除机制失效，导致空间无法释放，逐渐变小。如果没空间，又会导致服务不可用。幸运的是，有办法获取到具体的文件名，只能手动写脚本直接处理文件，释放空间。&#xA;时间线 网页上面发现关联了几千个图片，后来发现是app的bug，会不断地上传图片，修复app 过了几天，先是minio集群爆了，十几分钟后其他服务挂了 释放数据库死锁，其他服务恢复 升级minio集群配置，文件存储服务恢复 强制让app客户端升级到最新版本，文件存储服务压力减小 手动写脚本直接处理minio中的文件，释放minio空间。 总结 做的对的地方：&#xA;文件存储服务做了兼容，支持多种方式，出了问题，有个备选方案 app版本可以控制最低支持的版本，有强制升级机制 需要改进的地方：&#xA;发现app上面bug的时候，没有考虑周全，以为只是小问题，太疏忽 服务之间耦合性有点高，容错性不够。一个服务挂了，可能导致雪崩 minio存储的时候，需要指定子路径。不能放在同一个文件夹下面，要分散到多个子文件夹中。 没有服务降级机制，如果minio挂了，自动启用本地磁盘，不需要重启服务器 minio 当初建机器的时候，没有使用lv等方式，不方便扩展磁盘，如果存在磁盘不足的情况，那么扩容就不方便 配置文件的修改，需要重启服务，造成短时间内不可用 </description>
     </item>
-    
     <item>
       <title>记一次打开Excel文件错误的排查</title>
       <link>https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/</link>
       <pubDate>Wed, 05 Dec 2018 17:56:09 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/</guid>
-      <description>在生产环境中，某个结果集导出的excel文件用Microsoft Excel无法打开，看到如下错误：
-最开始怀疑是在生成文件的时候，文件损坏掉了，但是重新生成多次，得到的结果都是一样的。在相同的界面，导出其他结果集所生成的文件却都是可以成功打开的，这样就可以排除代码功能方面的问题。如果和代码无关，那么就可能和数据有关系。根据出错提示给出的文件地址“C:\Users\ZHANGZ~1\AppData\Local\Temp\error083200_01.xml”, 打开该临时文件，可以看到下面的信息
-1&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; standalone=&amp;#34;true&amp;#34;?&amp;gt; 2@namespace html url(http://www.w3.org/1999/xhtml); :root { font:small Verdana; font-weight: bold; padding: 2em; padding-left:4em; } * { display: block; padding-left: 2em; } html|style { display: none; } html|span, html|a { display: inline; padding: 0; font-weight: normal; text-decoration: none; } html|span.block { display: block; } *[html|hidden], span.block[html|hidden] { display: none; } .expand { display: block; } .expand:before { content: &amp;#39;+&amp;#39;; color: red; position: absolute; left: -1em; } .</description>
+      <description>在生产环境中，某个结果集导出的excel文件用Microsoft Excel无法打开，看到如下错误：&#xA;最开始怀疑是在生成文件的时候，文件损坏掉了，但是重新生成多次，得到的结果都是一样的。在相同的界面，导出其他结果集所生成的文件却都是可以成功打开的，这样就可以排除代码功能方面的问题。如果和代码无关，那么就可能和数据有关系。根据出错提示给出的文件地址“C:\Users\ZHANGZ~1\AppData\Local\Temp\error083200_01.xml”, 打开该临时文件，可以看到下面的信息&#xA;1&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; standalone=&amp;#34;true&amp;#34;?&amp;gt; 2@namespace html url(http://www.w3.org/1999/xhtml); :root { font:small Verdana; font-weight: bold; padding: 2em; padding-left:4em; } * { display: block; padding-left: 2em; } html|style { display: none; } html|span, html|a { display: inline; padding: 0; font-weight: normal; text-decoration: none; } html|span.block { display: block; } *[html|hidden], span.block[html|hidden] { display: none; } .expand { display: block; } .expand:before { content: &amp;#39;+&amp;#39;; color: red; position: absolute; left: -1em; } .</description>
     </item>
-    
   </channel>
 </rss>

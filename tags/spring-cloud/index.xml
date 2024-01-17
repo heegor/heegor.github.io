@@ -5,17 +5,16 @@
     <link>https://www.zengxi.net/tags/spring-cloud/</link>
     <description>Recent content in Spring Cloud on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 09 Jan 2024 21:01:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/spring-cloud/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Jan 2024 21:01:00 +0800</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/tags/spring-cloud/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>通过SpringGateway对接口请求进行加解密</title>
       <link>https://www.zengxi.net/2024/01/gateway-modify-request-response/</link>
       <pubDate>Tue, 09 Jan 2024 21:01:00 +0800</pubDate>
-      
       <guid>https://www.zengxi.net/2024/01/gateway-modify-request-response/</guid>
-      <description>有个需求，要求在前端调用接口时，将请求数据与响应数据做加密。做了一下调研，可以用下面的方式来实现：
-1public class EncryptGatewayFilter implements GlobalFilter, Ordered { 2 3 private static final String BODY_ENCRYPT_HEADER = &amp;#34;X-ENCRYPTED&amp;#34;; 4 private static final String ENCRYPT_VERSION_1 = &amp;#34;1.0&amp;#34;; 5 6 @Override 7 public int getOrder() { 8 return -99; 9 } 10 11 @Override 12 public Mono&amp;lt;Void&amp;gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) { 13 // 请求头中标识了该请求是加密过的 14 HttpHeaders httpHeaders = exchange.getRequest().getHeaders(); 15 String bodyEncryptHeader = httpHeaders.getFirst(BODY_ENCRYPT_HEADER); 16 17 if (bodyEncryptHeader != null &amp;amp;&amp;amp; bodyEncryptHeader.equals(ENCRYPT_VERSION_1)) { 18 // 这里可以处理一些自定义的逻辑，并且将参数传到后续的方法中 19 CustomParam step1Param = this.</description>
+      <description>有个需求，要求在前端调用接口时，将请求数据与响应数据做加密。做了一下调研，可以用下面的方式来实现：&#xA;1public class EncryptGatewayFilter implements GlobalFilter, Ordered { 2 3 private static final String BODY_ENCRYPT_HEADER = &amp;#34;X-ENCRYPTED&amp;#34;; 4 private static final String ENCRYPT_VERSION_1 = &amp;#34;1.0&amp;#34;; 5 6 @Override 7 public int getOrder() { 8 return -99; 9 } 10 11 @Override 12 public Mono&amp;lt;Void&amp;gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) { 13 // 请求头中标识了该请求是加密过的 14 HttpHeaders httpHeaders = exchange.getRequest().getHeaders(); 15 String bodyEncryptHeader = httpHeaders.getFirst(BODY_ENCRYPT_HEADER); 16 17 if (bodyEncryptHeader != null &amp;amp;&amp;amp; bodyEncryptHeader.equals(ENCRYPT_VERSION_1)) { 18 // 这里可以处理一些自定义的逻辑，并且将参数传到后续的方法中 19 CustomParam step1Param = this.</description>
     </item>
-    
   </channel>
 </rss>

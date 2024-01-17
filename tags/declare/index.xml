@@ -5,21 +5,16 @@
     <link>https://www.zengxi.net/tags/declare/</link>
     <description>Recent content in declare on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Sun, 19 Jan 2020 16:40:17 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/declare/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Jan 2020 16:40:17 +0000</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/tags/declare/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mac下shell命令支持map</title>
       <link>https://www.zengxi.net/2020/01/mac-shell-support-map/</link>
       <pubDate>Sun, 19 Jan 2020 16:40:17 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/01/mac-shell-support-map/</guid>
-      <description>Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：
-1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持，需要升级至4.x以上的版本
-1# 安装最新版本的bash 2brew install bash 3 4# 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash 5# 需要把新版本的shell添加至信任列表中 6sudo bash -c &amp;#39;echo /usr/local/bin/bash &amp;gt;&amp;gt; /etc/shells&amp;#39; 7 8# 如果需要的话，修改默认shell为新版本的bash 9chsh -s /usr/local/bin/bash 需要注意的是，升级完之后，如果shell脚本需要用新版本的bash来执行，必须在相关的shell脚本开头的部分，将 #!/bin/bash 替换成 #!/usr/local/bin/bash， 否则还是用旧版本的bash来执行。
-那为什么不执行类似下面的命令，删除原先的bash，并给新版本的bash建立一个链接呢？这个是由于MacOS有系统完整性保护机制（System Integrity Protection，SIP），它会阻止所有用户（包括root）修改 /bin 下面目录的内容。当然，也有办法绕过这保护机制，嫌麻烦的话，就不要去动它了。
-1sudo rm /bin/bash 2sudo ln -s /usr/local/bin/bash /bin/bash  参考文章：
- https://itnext.io/upgrading-bash-on-macos-7138bd1066ba  </description>
+      <description>Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：&#xA;1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持，需要升级至4.x以上的版本&#xA;1# 安装最新版本的bash 2brew install bash 3 4# 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash 5# 需要把新版本的shell添加至信任列表中 6sudo bash -c &amp;#39;echo /usr/local/bin/bash &amp;gt;&amp;gt; /etc/shells&amp;#39; 7 8# 如果需要的话，修改默认shell为新版本的bash 9chsh -s /usr/local/bin/bash 需要注意的是，升级完之后，如果shell脚本需要用新版本的bash来执行，必须在相关的shell脚本开头的部分，将 #!/bin/bash 替换成 #!/usr/local/bin/bash， 否则还是用旧版本的bash来执行。&#xA;那为什么不执行类似下面的命令，删除原先的bash，并给新版本的bash建立一个链接呢？这个是由于MacOS有系统完整性保护机制（System Integrity Protection，SIP），它会阻止所有用户（包括root）修改 /bin 下面目录的内容。当然，也有办法绕过这保护机制，嫌麻烦的话，就不要去动它了。&#xA;1sudo rm /bin/bash 2sudo ln -s /usr/local/bin/bash /bin/bash 参考文章：&#xA;https://itnext.io/upgrading-bash-on-macos-7138bd1066ba </description>
     </item>
-    
   </channel>
 </rss>

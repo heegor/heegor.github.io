@@ -5,61 +5,37 @@
     <link>https://www.zengxi.net/tags/session/</link>
     <description>Recent content in session on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 29 Mar 2021 11:55:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/session/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Mar 2021 11:55:00 +0800</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/tags/session/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CXF记录WebService的soap日志</title>
       <link>https://www.zengxi.net/2021/03/cxf_ws_log/</link>
       <pubDate>Mon, 29 Mar 2021 11:55:00 +0800</pubDate>
-      
       <guid>https://www.zengxi.net/2021/03/cxf_ws_log/</guid>
-      <description>cxf本身就支持日志功能，能打印传入传出的soap报文，但是需要配置一下。
-这里配置的是cxf结合spring做的WebService，配置步骤如下：
- 在spring配置文件中的jaxws:endpoint节点下配置日志拦截器  1&amp;lt;import resource=&amp;#34;classpath:META-INF/cxf/cxf.xml&amp;#34; /&amp;gt; 2&amp;lt;import resource=&amp;#34;classpath:META-INF/cxf/cxf-extension-soap.xml&amp;#34; /&amp;gt; 3&amp;lt;import resource=&amp;#34;classpath:META-INF/cxf/cxf-servlet.xml&amp;#34; /&amp;gt; 4 5&amp;lt;!-- 配置的cxf web service的地址 --&amp;gt; 6&amp;lt;jaxws:endpoint id=&amp;#34;searchReq11&amp;#34; implementor=&amp;#34;com.iflytek.server.HelloImpl&amp;#34; 7 address=&amp;#34;/SearchReqService.asmx&amp;#34;&amp;gt; 8 &amp;lt;jaxws:inInterceptors&amp;gt; 9 &amp;lt;bean class=&amp;#34;org.apache.cxf.interceptor.LoggingInInterceptor&amp;#34; /&amp;gt; 10 &amp;lt;/jaxws:inInterceptors&amp;gt; 11 &amp;lt;jaxws:outInterceptors&amp;gt; 12 &amp;lt;bean class=&amp;#34;org.apache.cxf.interceptor.LoggingOutInterceptor&amp;#34; /&amp;gt; 13 &amp;lt;/jaxws:outInterceptors&amp;gt; 14&amp;lt;/jaxws:endpoint&amp;gt; 具体的日志输出目录（3种方式）。需要注意,下面的3种方式优先级从低到高：   什么也不配置，使用java原生的java.util.logging.Logger记录日志。日志文件为Tomcat的logs/catalina.xxxx-xx-xx.log 配置使用slf4j+log4j。cxf默认为使用slf4j记录日志。所以在项目中引入slf4j的jar包即可。如果同时引入log4j则使用log4j记录日志，如果同时引入jcl则使用jcl记录日志。 直接使用log4j记录日志。在项目的类加载路径下创建目录META-INF/cxf/，然后在目录下新建文件“org.apache.cxf.Logger”，在文件中写入：org.apache.cxf.common.logging.Log4jLogger即可。特别要注意，(1)上述目录要放在classes目录下；(2)要引入log4j的jar包。   参考：
- http://ajita.iteye.com/blog/1745845  </description>
+      <description>cxf本身就支持日志功能，能打印传入传出的soap报文，但是需要配置一下。&#xA;这里配置的是cxf结合spring做的WebService，配置步骤如下：&#xA;在spring配置文件中的jaxws:endpoint节点下配置日志拦截器 1&amp;lt;import resource=&amp;#34;classpath:META-INF/cxf/cxf.xml&amp;#34; /&amp;gt; 2&amp;lt;import resource=&amp;#34;classpath:META-INF/cxf/cxf-extension-soap.xml&amp;#34; /&amp;gt; 3&amp;lt;import resource=&amp;#34;classpath:META-INF/cxf/cxf-servlet.xml&amp;#34; /&amp;gt; 4 5&amp;lt;!-- 配置的cxf web service的地址 --&amp;gt; 6&amp;lt;jaxws:endpoint id=&amp;#34;searchReq11&amp;#34; implementor=&amp;#34;com.iflytek.server.HelloImpl&amp;#34; 7 address=&amp;#34;/SearchReqService.asmx&amp;#34;&amp;gt; 8 &amp;lt;jaxws:inInterceptors&amp;gt; 9 &amp;lt;bean class=&amp;#34;org.apache.cxf.interceptor.LoggingInInterceptor&amp;#34; /&amp;gt; 10 &amp;lt;/jaxws:inInterceptors&amp;gt; 11 &amp;lt;jaxws:outInterceptors&amp;gt; 12 &amp;lt;bean class=&amp;#34;org.apache.cxf.interceptor.LoggingOutInterceptor&amp;#34; /&amp;gt; 13 &amp;lt;/jaxws:outInterceptors&amp;gt; 14&amp;lt;/jaxws:endpoint&amp;gt; 具体的日志输出目录（3种方式）。需要注意,下面的3种方式优先级从低到高： 什么也不配置，使用java原生的java.util.logging.Logger记录日志。日志文件为Tomcat的logs/catalina.xxxx-xx-xx.log 配置使用slf4j+log4j。cxf默认为使用slf4j记录日志。所以在项目中引入slf4j的jar包即可。如果同时引入log4j则使用log4j记录日志，如果同时引入jcl则使用jcl记录日志。 直接使用log4j记录日志。在项目的类加载路径下创建目录META-INF/cxf/，然后在目录下新建文件“org.apache.cxf.Logger”，在文件中写入：org.apache.cxf.common.logging.Log4jLogger即可。特别要注意，(1)上述目录要放在classes目录下；(2)要引入log4j的jar包。 参考：&#xA;http://ajita.iteye.com/blog/1745845 </description>
     </item>
-    
     <item>
       <title>设置周日为一个星期的第一天</title>
       <link>https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/</link>
       <pubDate>Mon, 29 Mar 2021 11:49:00 +0800</pubDate>
-      
       <guid>https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/</guid>
-      <description>用 “locale”命令检查当前的区域，例如我的机器运行结果是：
-1ls@ls-laptop:~$ locale 2 3LANG=zh_CN.UTF-8 4LANGUAGE=zh_CN.UTF-8 5LC_CTYPE=&amp;#34;zh_CN.UTF-8&amp;#34; 6LC_NUMERIC=&amp;#34;zh_CN.UTF-8&amp;#34; 7LC_TIME=&amp;#34;zh_CN.UTF-8&amp;#34; 8LC_COLLATE=&amp;#34;zh_CN.UTF-8&amp;#34; 9LC_MONETARY=&amp;#34;zh_CN.UTF-8&amp;#34; 10LC_MESSAGES=&amp;#34;zh_CN.UTF-8&amp;#34; 11LC_PAPER=&amp;#34;zh_CN.UTF-8&amp;#34; 12LC_NAME=&amp;#34;zh_CN.UTF-8&amp;#34; 13LC_ADDRESS=&amp;#34;zh_CN.UTF-8&amp;#34; 14LC_TELEPHONE=&amp;#34;zh_CN.UTF-8&amp;#34; 15LC_MEASUREMENT=&amp;#34;zh_CN.UTF-8&amp;#34; 16LC_IDENTIFICATION=&amp;#34;zh_CN.UTF-8&amp;#34; 17LC_ALL= 执行下面命令
-1sudo gedit /usr/share/i18n/locales/zh_CN 找到 “first_weekday 2” 这一行，将2改成1，周日就是每周的第一天了
-执行下面的命令重新生成 locale 信息
-1sudo locale-gen 重新启动
- 参考原文：
- http://ubuntuforums.org/archive/index.php/t-26409.html  </description>
+      <description>用 “locale”命令检查当前的区域，例如我的机器运行结果是：&#xA;1ls@ls-laptop:~$ locale 2 3LANG=zh_CN.UTF-8 4LANGUAGE=zh_CN.UTF-8 5LC_CTYPE=&amp;#34;zh_CN.UTF-8&amp;#34; 6LC_NUMERIC=&amp;#34;zh_CN.UTF-8&amp;#34; 7LC_TIME=&amp;#34;zh_CN.UTF-8&amp;#34; 8LC_COLLATE=&amp;#34;zh_CN.UTF-8&amp;#34; 9LC_MONETARY=&amp;#34;zh_CN.UTF-8&amp;#34; 10LC_MESSAGES=&amp;#34;zh_CN.UTF-8&amp;#34; 11LC_PAPER=&amp;#34;zh_CN.UTF-8&amp;#34; 12LC_NAME=&amp;#34;zh_CN.UTF-8&amp;#34; 13LC_ADDRESS=&amp;#34;zh_CN.UTF-8&amp;#34; 14LC_TELEPHONE=&amp;#34;zh_CN.UTF-8&amp;#34; 15LC_MEASUREMENT=&amp;#34;zh_CN.UTF-8&amp;#34; 16LC_IDENTIFICATION=&amp;#34;zh_CN.UTF-8&amp;#34; 17LC_ALL= 执行下面命令&#xA;1sudo gedit /usr/share/i18n/locales/zh_CN 找到 “first_weekday 2” 这一行，将2改成1，周日就是每周的第一天了&#xA;执行下面的命令重新生成 locale 信息&#xA;1sudo locale-gen 重新启动&#xA;参考原文：&#xA;http://ubuntuforums.org/archive/index.php/t-26409.html </description>
     </item>
-    
     <item>
       <title>删除Jetty中session ID的node名称</title>
       <link>https://www.zengxi.net/2021/03/jetty_session_remove_node_name/</link>
       <pubDate>Mon, 29 Mar 2021 11:47:00 +0800</pubDate>
-      
       <guid>https://www.zengxi.net/2021/03/jetty_session_remove_node_name/</guid>
-      <description>jetty 9.4 版本对session id的生成做了升级. 他会自动在session id后面加个节点的名字(workName配置项). jetty 9.3 以及之前的版本没有这个问题.
-可以通过修改配置文件来去除session id后缀:
-1# 执行下面命令来启用sessions模块，这样就会在start.d目录下面自动生成sessions.ini配置文件 2java -jar &amp;#34;/usr/local/jetty/start.jar&amp;#34; --add-to-startd=sessions 3 4# 修改sessions.ini配置，把下面配置项的值为空 5jetty.sessionIdManager.workerName= </description>
+      <description>jetty 9.4 版本对session id的生成做了升级. 他会自动在session id后面加个节点的名字(workName配置项). jetty 9.3 以及之前的版本没有这个问题.&#xA;可以通过修改配置文件来去除session id后缀:&#xA;1# 执行下面命令来启用sessions模块，这样就会在start.d目录下面自动生成sessions.ini配置文件 2java -jar &amp;#34;/usr/local/jetty/start.jar&amp;#34; --add-to-startd=sessions 3 4# 修改sessions.ini配置，把下面配置项的值为空 5jetty.sessionIdManager.workerName= </description>
     </item>
-    
     <item>
       <title>根据ID来管理分布式session - 新老界面session不一致导致强制登出问题的修复</title>
       <link>https://www.zengxi.net/2020/01/manage-distribution-session-by-id/</link>
       <pubDate>Sun, 26 Jan 2020 16:21:39 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/01/manage-distribution-session-by-id/</guid>
-      <description>背景 由于历史原因，原先的界面是用vaadin框架来实现。但是这个框架不适合互联网的分布式系统，正在逐步用目前主流的前端框架重写各个模块，把旧的vaadin页面替换掉。在替换过程中，新老界面并存。
-vaadin界面的servlet，每次都会判断请求中的session id值，如果在服务器中找不到对应这个id的session，就会重新生成一个。由于session id是在新界面登录的时候生成的，当点击链接从新界面跳转到vaadin界面的时候，vaadin服务会发现没有这个session id，就会重新生成一个新的session。换句话说，新老界面会有各自的session id。当然，分布式系统本来就有这个问题，可以采用分布式session的来解决。
-原先开发人员的解决方案是:
- 把session信息存入redis缓存，session id作为key 每次跳转到vaadin界面后，用新生成的session id替换掉旧的session id，同时在redis里面把session信息从旧的key，复制到新的key这边。  但是这种解决方案存在一个问题，主要是由上面解决方案的第2点引起的。由于每次从新界面跳转到vaadin界面都会生成新的session id，如果打开两个浏览器页面，分别跳转到新的界面，那么这个就会导致第一个跳转的那个浏览器页面中的session id被覆盖。vaadin框架是有状态的，它在客户端与服务器端保持一个长连接，并检测session id的有效性。session id的变化，导致长连接的登录信息失效，被弹回到登录界面。从用户体验上来讲，就是被强制登出。
-从另外一个角度说，原先开发人员的解决方案是不合理的，它也不是一种标准的分布式session的解决方案。
-如何解决 比较合适的解决方案是，vaadin界面不能自己生成session id，而是要复用在新界面登录之后所生成的session id。当vaadin界面有请求的时候，根据请求中的session id查询服务器上是否有对应的session，如果有则返回对应的session；如果没有，则新建一个以该session id为主键的session。换句话说，新老界面都应该要使用相同session id，一旦登录之后，在当前用户这次登录的有效生命周期内，session id保持不变。这样就不会存在上面说的，由于session id的变化而导致被强制登出的问题。
-具体实现的关键是用到HttpServletRequesWrapper类，它能够快速提供HttpServletRequest的自定义实现。
- |----------------------| | (I) ServletRequest | |----------------------| | | ------------------------------------------- | | | | |--------------------------| |-----------------------------| | (I) HttpServletRequest | | (C) ServletRequestWrapper | |--------------------------| |-----------------------------| | | | | ------------------------------------------- | | |---------------------------------| | (C) HttpServletRequestWrapper | |---------------------------------|  如下的代码是从 Tomcat 抽取出来的，展现了HttpServletRequesWrapper类是如何运行的。</description>
+      <description>背景 由于历史原因，原先的界面是用vaadin框架来实现。但是这个框架不适合互联网的分布式系统，正在逐步用目前主流的前端框架重写各个模块，把旧的vaadin页面替换掉。在替换过程中，新老界面并存。&#xA;vaadin界面的servlet，每次都会判断请求中的session id值，如果在服务器中找不到对应这个id的session，就会重新生成一个。由于session id是在新界面登录的时候生成的，当点击链接从新界面跳转到vaadin界面的时候，vaadin服务会发现没有这个session id，就会重新生成一个新的session。换句话说，新老界面会有各自的session id。当然，分布式系统本来就有这个问题，可以采用分布式session的来解决。&#xA;原先开发人员的解决方案是:&#xA;把session信息存入redis缓存，session id作为key 每次跳转到vaadin界面后，用新生成的session id替换掉旧的session id，同时在redis里面把session信息从旧的key，复制到新的key这边。 但是这种解决方案存在一个问题，主要是由上面解决方案的第2点引起的。由于每次从新界面跳转到vaadin界面都会生成新的session id，如果打开两个浏览器页面，分别跳转到新的界面，那么这个就会导致第一个跳转的那个浏览器页面中的session id被覆盖。vaadin框架是有状态的，它在客户端与服务器端保持一个长连接，并检测session id的有效性。session id的变化，导致长连接的登录信息失效，被弹回到登录界面。从用户体验上来讲，就是被强制登出。&#xA;从另外一个角度说，原先开发人员的解决方案是不合理的，它也不是一种标准的分布式session的解决方案。&#xA;如何解决 比较合适的解决方案是，vaadin界面不能自己生成session id，而是要复用在新界面登录之后所生成的session id。当vaadin界面有请求的时候，根据请求中的session id查询服务器上是否有对应的session，如果有则返回对应的session；如果没有，则新建一个以该session id为主键的session。换句话说，新老界面都应该要使用相同session id，一旦登录之后，在当前用户这次登录的有效生命周期内，session id保持不变。这样就不会存在上面说的，由于session id的变化而导致被强制登出的问题。&#xA;具体实现的关键是用到HttpServletRequesWrapper类，它能够快速提供HttpServletRequest的自定义实现。&#xA;|----------------------| | (I) ServletRequest | |----------------------| | | ------------------------------------------- | | | | |--------------------------| |-----------------------------| | (I) HttpServletRequest | | (C) ServletRequestWrapper | |--------------------------| |-----------------------------| | | | | ------------------------------------------- | | |---------------------------------| | (C) HttpServletRequestWrapper | |---------------------------------| 如下的代码是从 Tomcat 抽取出来的，展现了HttpServletRequesWrapper类是如何运行的。</description>
     </item>
-    
   </channel>
 </rss>

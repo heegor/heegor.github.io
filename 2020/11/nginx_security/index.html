@@ -43,8 +43,8 @@
     
     
     <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
-    "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" as="script" integrity=
+    "sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous">
 
     
     <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
@@ -204,276 +204,276 @@
     <h2 id="基础知识">基础知识</h2>
 <h3 id="常用配置">常用配置</h3>
 <p>顶部配置</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1">#定义 Nginx 运行的用户和用户组</span>
-<span class="ln"> 2</span>user nginx<span class="p">;</span>
-<span class="ln"> 3</span> 
-<span class="ln"> 4</span><span class="c1">#进程文件</span>
-<span class="ln"> 5</span>pid /var/run/nginx.pid<span class="p">;</span>
-<span class="ln"> 6</span> 
-<span class="ln"> 7</span><span class="c1">#错误日志位置和级别，debug、info、notice、warn、error、crit</span>
-<span class="ln"> 8</span>error_log  /var/log/nginx/error.log warn<span class="p">;</span>
-<span class="ln"> 9</span> 
-<span class="ln">10</span><span class="c1">#Nginx worker 的进程数，一般可设置为可用的CPU内核数。</span>
-<span class="ln">11</span>worker_processes 8<span class="p">;</span>
-<span class="ln">12</span> 
-<span class="ln">13</span><span class="c1">#每个 worker 打开文件描述符的最大数量限制。理论值应该是最多打开文件数（系统的值ulimit -n）</span>
-<span class="ln">14</span><span class="c1">#与 nginx 进程数相除，但是 nginx 分配请求并不均匀，所以建议与ulimit -n的值保持一致。</span>
-<span class="ln">15</span>worker_rlimit_nofile 65535<span class="p">;</span>
-</code></pre></div><p>Events 模块</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>events <span class="o">{</span>
-<span class="ln"> 2</span>    <span class="c1">#设置一个worker进程同时打开的最大连接数</span>
-<span class="ln"> 3</span>    worker_connections 2048<span class="p">;</span>
-<span class="ln"> 4</span> 
-<span class="ln"> 5</span>    <span class="c1">#告诉nginx收到一个新连接通知后接受尽可能多的连接</span>
-<span class="ln"> 6</span>    multi_accept on<span class="p">;</span>
-<span class="ln"> 7</span> 
-<span class="ln"> 8</span>    <span class="c1">#设置用于复用客户端线程的轮询方法。如果你使用Linux 2.6+，你应该使用epoll。</span>
-<span class="ln"> 9</span>    <span class="c1"># 如果你使用*BSD，你应该使用kqueue。</span>
-<span class="ln">10</span>    use epoll<span class="p">;</span>
-<span class="ln">11</span><span class="o">}</span>
-</code></pre></div><p>HTTP 模块</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">  1</span>http <span class="o">{</span>
-<span class="ln">  2</span>    <span class="c1">#隐藏 Nginx 的版本号，提高安全性。</span>
-<span class="ln">  3</span>    server_tokens off<span class="p">;</span>
-<span class="ln">  4</span> 
-<span class="ln">  5</span>    <span class="c1">#开启高效文件传输模式，sendfile 指令指定 Nginx 是否调用sendfile 函数来输出文件，</span>
-<span class="ln">  6</span>    <span class="c1">#对于普通应用设为 on，如果用来进行下载等应用磁盘 IO 重负载应用，可设置为 off，以平</span>
-<span class="ln">  7</span>    <span class="c1">#衡磁盘与网络 I/O 处理速度，降低系统的负载。</span>
-<span class="ln">  8</span>    sendfile on<span class="p">;</span>
-<span class="ln">  9</span> 
-<span class="ln"> 10</span>    <span class="c1">#是否开启目录列表访问，默认关闭。</span>
-<span class="ln"> 11</span>    autoindex off<span class="p">;</span>
-<span class="ln"> 12</span> 
-<span class="ln"> 13</span>    <span class="c1">#告诉 Nginx 在一个数据包里发送所有头文件，而不一个接一个的发送</span>
-<span class="ln"> 14</span>    tcp_nopush on<span class="p">;</span>
-<span class="ln"> 15</span> 
-<span class="ln"> 16</span>    <span class="c1">#告诉 Nginx 不要缓存数据，而是一段一段的发送--当需要及时发送数据时，就应该给应用设置</span>
-<span class="ln"> 17</span>    <span class="c1">#这个属性，这样发送一小块数据信息时就不能立即得到返回值。Nginx 默认会始终工作在 tcp </span>
-<span class="ln"> 18</span>    <span class="c1">#nopush 状态下。但是当开启前面的 sendfile on; 时，它的工作特点是 nopush 的最后一</span>
-<span class="ln"> 19</span>    <span class="c1">#个包会自动转转换到 nopush off。为了减小那200ms的延迟，开启 nodelay on; 将其很快</span>
-<span class="ln"> 20</span>    <span class="c1">#传送出去。结论就是 sendfile on; 开启时，tcp_nopush 和 tcp_nodelay 都是on 是可以的。</span>
-<span class="ln"> 21</span>    tcp_nodelay on<span class="p">;</span>
-<span class="ln"> 22</span> 
-<span class="ln"> 23</span>    <span class="c1">#日志格式设定</span>
-<span class="ln"> 24</span>    log_format  main  <span class="s1">&#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;</span>
-<span class="ln"> 25</span>    <span class="s1">&#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;</span>
-<span class="ln"> 26</span>    <span class="s1">&#39;&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34;&#39;</span><span class="p">;</span>
-<span class="ln"> 27</span>    <span class="c1">#定义访问日志，设置为 off 可以关闭日志，提高性能</span>
-<span class="ln"> 28</span>    access_log /var/log/nginx/access.log main<span class="p">;</span>
-<span class="ln"> 29</span> 
-<span class="ln"> 30</span> 
-<span class="ln"> 31</span>    <span class="c1">#连接超时时间，单位是秒</span>
-<span class="ln"> 32</span>    keepalive_timeout 120<span class="p">;</span>
-<span class="ln"> 33</span> 
-<span class="ln"> 34</span>    <span class="c1">#读取HTTP头部的超时时间，默认值 60。客户端与服务器建立连接后将开始接收HTTP头部，在这个过程中，</span>
-<span class="ln"> 35</span>    <span class="c1">#如果在一个时间间隔（超时时间）内没有读取到客户端发来的字节，则认为超时，并向客户端返回408 </span>
-<span class="ln"> 36</span>    <span class="c1">#(&#34;Request timed out&#34;)响应。</span>
-<span class="ln"> 37</span>    client_header_timeout 60<span class="p">;</span>
-<span class="ln"> 38</span> 
-<span class="ln"> 39</span>    <span class="c1">#默认值 60。与client_header_timeout相似，只是这个超时时间只在读取HTTP包体时才有效。</span>
-<span class="ln"> 40</span>    client_body_timeout 10<span class="p">;</span>
-<span class="ln"> 41</span> 
-<span class="ln"> 42</span>    <span class="c1">#发送响应的超时时间，默认值 60。即Nginx服务器向客户端发送了数据包，但客户端一直没有去接收这个数</span>
-<span class="ln"> 43</span>    <span class="c1">#据包。如果某个连接超过send_timeout定义的超时时间，那么Nginx将会关闭这个连接。</span>
-<span class="ln"> 44</span>    send_timeout 60<span class="p">;</span>
-<span class="ln"> 45</span> 
-<span class="ln"> 46</span>    <span class="c1">#连接超时后将通过向客户端发送RST包来直接重置连接。这个选项打开后，Nginx会在某个连接超时后，不是</span>
-<span class="ln"> 47</span>    <span class="c1">#使用正常情形下的四次握手关闭TCP连接，而是直接向用户发送RST重置包，不再等待用户的应答，直接释放</span>
-<span class="ln"> 48</span>    <span class="c1">#Nginx服务器上关于这个套接字使用的所有缓存（如TCP滑动窗口）。相比正常的关闭方式，它使得服务器避</span>
-<span class="ln"> 49</span>    <span class="c1">#免产生许多处于FIN_WAIT_1、FIN_WAIT_2、TIME_WAIT状态的TCP连接。注意，使用RST重置包关闭连接</span>
-<span class="ln"> 50</span>    <span class="c1">#会带来一些问题，默认情况下不会开启。</span>
-<span class="ln"> 51</span>    reset_timedout_connection off<span class="p">;</span>
-<span class="ln"> 52</span> 
-<span class="ln"> 53</span>    <span class="c1">#要限制连接，必须先有一个容器对连接进行计数，&#34;zone=&#34; 是给它一个名字，可以随便叫，这个名字要跟下</span>
-<span class="ln"> 54</span>    <span class="c1">#面的 limit_conn 一致。$binary_remote_addr 用二进制来储存客户端的地址，1m 可以储存 32000</span>
-<span class="ln"> 55</span>    <span class="c1">#个并发会话。</span>
-<span class="ln"> 56</span>    limit_conn_zone <span class="nv">$binary_remote_addr</span> <span class="nv">zone</span><span class="o">=</span>addr:5m<span class="p">;</span>
-<span class="ln"> 57</span> 
-<span class="ln"> 58</span>    <span class="c1">#给定的key设置最大连接数。这里key是addr，我们设置的值是100，也就是说我们允许每一个IP地址最多同</span>
-<span class="ln"> 59</span>    <span class="c1">#时打开有100个连接。</span>
-<span class="ln"> 60</span>    limit_conn addr 100<span class="p">;</span>
-<span class="ln"> 61</span> 
-<span class="ln"> 62</span>    <span class="c1">#对每个连接限速100k。这如果一个IP允许两个并发连接，那么这个IP就是限速200K。</span>
-<span class="ln"> 63</span>    limit_rate 100k<span class="p">;</span>
-<span class="ln"> 64</span> 
-<span class="ln"> 65</span>    <span class="c1">#include 是一个在当前文件中包含另一个文件内容的指令。这里我们使用它来加载文件扩展名与文件类型映</span>
-<span class="ln"> 66</span>    <span class="c1">#射表。nginx根据映射关系，设置http请求响应头的Content-Type值。当在映射表找不到时，使用nginx.conf</span>
-<span class="ln"> 67</span>    <span class="c1">#中default-type指定的默认值。</span>
-<span class="ln"> 68</span>    include /etc/nginx/mime.types<span class="p">;</span>
-<span class="ln"> 69</span> 
-<span class="ln"> 70</span>    <span class="c1">#设置文件使用的默认的MIME-type</span>
-<span class="ln"> 71</span>    default_type text/html<span class="p">;</span>
-<span class="ln"> 72</span> 
-<span class="ln"> 73</span>    <span class="c1">#默认编码</span>
-<span class="ln"> 74</span>    charset UTF-8<span class="p">;</span>
-<span class="ln"> 75</span> 
-<span class="ln"> 76</span>    <span class="c1">#该模块可以读取预先压缩的gz文件，这样可以减少每次请求进行gzip压缩的CPU资源消耗。该模块启用后，</span>
-<span class="ln"> 77</span>    <span class="c1">#nginx首先检查是否存在请求静态文件的gz结尾的文件，如果有则直接返回该gz文件内容。</span>
-<span class="ln"> 78</span>    gzip_static off<span class="p">;</span> 
-<span class="ln"> 79</span> 
-<span class="ln"> 80</span>    <span class="c1">#开启 gzip 压缩。</span>
-<span class="ln"> 81</span>    gzip on<span class="p">;</span>
-<span class="ln"> 82</span> 
-<span class="ln"> 83</span>    <span class="c1"># 禁用客户端为 IE6 时的 gzip功能。</span>
-<span class="ln"> 84</span>    gzip_disable <span class="s2">&#34;msie6&#34;</span><span class="p">;</span>
-<span class="ln"> 85</span> 
-<span class="ln"> 86</span>    <span class="c1">#Nginx做为反向代理的时候启用。可选值：off|expired|no-cache|no-sotre|private|no_last_modified|no_etag|auth|any</span>
-<span class="ln"> 87</span>    gzip_proxied any<span class="p">;</span>
-<span class="ln"> 88</span> 
-<span class="ln"> 89</span>    <span class="c1">#设置允许压缩的页面最小字节数，页面字节数从header头中的Content-Length中进行获取。</span>
-<span class="ln"> 90</span>    <span class="c1">#建议设置成大于1k的字节数，小于1k可能会越压越大。</span>
-<span class="ln"> 91</span>    gzip_min_length 1024<span class="p">;</span>
-<span class="ln"> 92</span> 
-<span class="ln"> 93</span>    <span class="c1">#设置数据的压缩等级。这个等级可以是1-9之间的任意数值，9是最慢但是压缩比最大的。</span>
-<span class="ln"> 94</span>    gzip_comp_level 5<span class="p">;</span>
-<span class="ln"> 95</span> 
-<span class="ln"> 96</span>    <span class="c1">#设置系统获取几个单位的缓存用于存储gzip的压缩结果数据流。 例如 4 4k 代表以4k为单位，</span>
-<span class="ln"> 97</span>    <span class="c1">#按照原始数据大小以4k为单位的4倍申请内存。如果没有设置，默认值是申请跟原始数据相同大小的内存空间</span>
-<span class="ln"> 98</span>    <span class="c1">#去存储gzip压缩结果。</span>
-<span class="ln"> 99</span>    gzip_buffers <span class="m">4</span> 16k<span class="p">;</span>
-<span class="ln">100</span> 
-<span class="ln">101</span>    <span class="c1">#设置需要压缩的数据格式。Nginx默认只对text/html进行压缩。</span>
-<span class="ln">102</span>    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript<span class="p">;</span>
-<span class="ln">103</span> 
-<span class="ln">104</span>    <span class="c1">#为打开文件指定缓存，默认是没有启用的，max 指定缓存数量，建议和打开文件数一致，inactive</span>
-<span class="ln">105</span>    <span class="c1">#是指经过多长时间文件没被请求后删除缓存。</span>
-<span class="ln">106</span>    open_file_cache <span class="nv">max</span><span class="o">=</span><span class="m">65535</span> <span class="nv">inactive</span><span class="o">=</span>30s<span class="p">;</span>
-<span class="ln">107</span> 
-<span class="ln">108</span>    <span class="c1">#多长时间检查一次缓存的有效信息</span>
-<span class="ln">109</span>    open_file_cache_valid 30s<span class="p">;</span>
-<span class="ln">110</span> 
-<span class="ln">111</span>    <span class="c1">#open_file_cache指令中的inactive参数时间内文件的最少使用次数，如果超过这个数字，文件描述符一</span>
-<span class="ln">112</span>    <span class="c1">#直是在缓存中打开的。出现 Last-Modified 不变的情况，就是因为当nginx对一个静态文件缓存后，如果</span>
-<span class="ln">113</span>    <span class="c1">#30s内还在访问它，那么它的缓存就一直存在，直到30s内你不访问了为止。</span>
-<span class="ln">114</span>    open_file_cache_min_uses 2<span class="p">;</span>
-<span class="ln">115</span>    <span class="c1">#是否记录cache错误</span>
-<span class="ln">116</span>    open_file_cache_errors on<span class="p">;</span>
-<span class="ln">117</span> 
-<span class="ln">118</span>    include /etc/nginx/conf.d/*.conf<span class="p">;</span>
-<span class="ln">119</span>    include /etc/nginx/sites-enabled/*<span class="p">;</span>
-<span class="ln">120</span><span class="o">}</span>
-</code></pre></div><p>SERVER 模块</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>server <span class="o">{</span>
-<span class="ln"> 2</span>    <span class="c1">#监听端口，nginx 会根据请求的 HOST 来决定使用哪个 SERVER 段的配置。如果没有匹配的 server_name，</span>
-<span class="ln"> 3</span>    <span class="c1">#则默认使用配置文件中第一个。加上 default_server 则可以以指定没有匹配时的默认规则。</span>
-<span class="ln"> 4</span>    <span class="c1">#listen 80;</span>
-<span class="ln"> 5</span>    listen <span class="m">80</span> default_server<span class="p">;</span>
-<span class="ln"> 6</span> 
-<span class="ln"> 7</span>    <span class="c1">#域名可以有多个，用空格隔开</span>
-<span class="ln"> 8</span>    server_name www.test.com test.com<span class="p">;</span>
-<span class="ln"> 9</span>    root /user/share/nginx/html/test<span class="p">;</span>
-<span class="ln">10</span> 
-<span class="ln">11</span>    <span class="c1">#404页面配置</span>
-<span class="ln">12</span>    error_page   <span class="m">404</span>   /404.html<span class="p">;</span>
-<span class="ln">13</span> 
-<span class="ln">14</span>    <span class="c1">#配置 ssl，有需要时开启。</span>
-<span class="ln">15</span>    ssl on<span class="p">;</span>
-<span class="ln">16</span>    ssl_certificate /etc/nginx/ssl/server.crt<span class="p">;</span>
-<span class="ln">17</span>    ssl_certificate_key /etc/nginx/ssl/server.key<span class="p">;</span>
-<span class="ln">18</span> 
-<span class="ln">19</span>    location / <span class="o">{</span>
-<span class="ln">20</span>        index   index.html index.php<span class="p">;</span>
-<span class="ln">21</span>    <span class="o">}</span>
-<span class="ln">22</span> 
-<span class="ln">23</span>    <span class="c1">#图片缓存时间设置</span>
-<span class="ln">24</span>    location ~ .*.<span class="o">(</span>gif<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>png<span class="p">|</span>bmp<span class="p">|</span>swf<span class="o">)</span>$ <span class="o">{</span>
-<span class="ln">25</span>        expires 10d<span class="p">;</span>
-<span class="ln">26</span>    <span class="o">}</span>
-<span class="ln">27</span> 
-<span class="ln">28</span>    <span class="c1">#JS和CSS缓存时间设置</span>
-<span class="ln">29</span>    location ~ .*.<span class="o">(</span>js<span class="p">|</span>css<span class="o">)</span>?$ <span class="o">{</span>
-<span class="ln">30</span>        expires 1h<span class="p">;</span>
-<span class="ln">31</span>    <span class="o">}</span>
-<span class="ln">32</span> 
-<span class="ln">33</span>    location ~ <span class="o">[</span>^/<span class="o">]</span><span class="se">\.</span>php<span class="o">(</span>/<span class="p">|</span>$<span class="o">)</span> <span class="o">{</span>
-<span class="ln">34</span>        fastcgi_index   index.php<span class="p">;</span>
-<span class="ln">35</span>        <span class="c1">#开启 PATH_INFO 支持，作用就是把参数按照给定的正则表达式分割成 $fastcgi_script_name 和 $fastcgi_path_info。</span>
-<span class="ln">36</span>        <span class="c1">#例如：请求 index.php/id/1 不加此行配置时，fastcgi_script_name 是 /index.php/id/1，fastcgi_path_info 是空。</span>
-<span class="ln">37</span>        <span class="c1">#加上之后，fastcgi_script_name 是 index.php，fastcgi_path_info 是 /id/1</span>
-<span class="ln">38</span>        fastcgi_split_path_info ^<span class="o">(</span>.+<span class="se">\.</span>php<span class="o">)(</span>.*<span class="o">)</span>$<span class="p">;</span>
-<span class="ln">39</span> 
-<span class="ln">40</span>        <span class="c1">#此值即是 PHP 中 $_SERVER[&#39;SCRIPT_FILENAME&#39;] 的值</span>
-<span class="ln">41</span>        fastcgi_param   SCRIPT_FILENAME <span class="nv">$document_root$fastcgi_script_name</span><span class="p">;</span>
-<span class="ln">42</span>        fastcgi_param   PATH_INFO               <span class="nv">$fastcgi_path_info</span><span class="p">;</span>
-<span class="ln">43</span>        fastcgi_param   PATH_TRANSLATED <span class="nv">$document_root$fastcgi_path_info</span><span class="p">;</span>
-<span class="ln">44</span> 
-<span class="ln">45</span>        <span class="c1">#指定FastCGI服务器监听端口与地址。须和 PHP-FPM 的设置相同。</span>
-<span class="ln">46</span>        <span class="c1">#fastcgi_pass   127.0.0.1:9000;</span>
-<span class="ln">47</span>        fastcgi_pass    unix:/var/run/php5-fpm.sock<span class="p">;</span>
-<span class="ln">48</span>        include fastcgi_params<span class="p">;</span>
-<span class="ln">49</span>    <span class="o">}</span>
-<span class="ln">50</span><span class="o">}</span>
-</code></pre></div><h2 id="设置">设置</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">#定义 Nginx 运行的用户和用户组</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">user nginx<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="c1">#进程文件</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">pid /var/run/nginx.pid<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1">#错误日志位置和级别，debug、info、notice、warn、error、crit</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">error_log  /var/log/nginx/error.log warn<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1">#Nginx worker 的进程数，一般可设置为可用的CPU内核数。</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">worker_processes 8<span class="p">;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="c1">#每个 worker 打开文件描述符的最大数量限制。理论值应该是最多打开文件数（系统的值ulimit -n）</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="c1">#与 nginx 进程数相除，但是 nginx 分配请求并不均匀，所以建议与ulimit -n的值保持一致。</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">worker_rlimit_nofile 65535<span class="p">;</span>
+</span></span></code></pre></div><p>Events 模块</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln"> 1</span><span class="cl">events <span class="o">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="c1">#设置一个worker进程同时打开的最大连接数</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    worker_connections 2048<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="c1">#告诉nginx收到一个新连接通知后接受尽可能多的连接</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    multi_accept on<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="c1">#设置用于复用客户端线程的轮询方法。如果你使用Linux 2.6+，你应该使用epoll。</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="c1"># 如果你使用*BSD，你应该使用kqueue。</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    use epoll<span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>HTTP 模块</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">  1</span><span class="cl">http <span class="o">{</span>
+</span></span><span class="line"><span class="ln">  2</span><span class="cl">    <span class="c1">#隐藏 Nginx 的版本号，提高安全性。</span>
+</span></span><span class="line"><span class="ln">  3</span><span class="cl">    server_tokens off<span class="p">;</span>
+</span></span><span class="line"><span class="ln">  4</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">  5</span><span class="cl">    <span class="c1">#开启高效文件传输模式，sendfile 指令指定 Nginx 是否调用sendfile 函数来输出文件，</span>
+</span></span><span class="line"><span class="ln">  6</span><span class="cl">    <span class="c1">#对于普通应用设为 on，如果用来进行下载等应用磁盘 IO 重负载应用，可设置为 off，以平</span>
+</span></span><span class="line"><span class="ln">  7</span><span class="cl">    <span class="c1">#衡磁盘与网络 I/O 处理速度，降低系统的负载。</span>
+</span></span><span class="line"><span class="ln">  8</span><span class="cl">    sendfile on<span class="p">;</span>
+</span></span><span class="line"><span class="ln">  9</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 10</span><span class="cl">    <span class="c1">#是否开启目录列表访问，默认关闭。</span>
+</span></span><span class="line"><span class="ln"> 11</span><span class="cl">    autoindex off<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 12</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 13</span><span class="cl">    <span class="c1">#告诉 Nginx 在一个数据包里发送所有头文件，而不一个接一个的发送</span>
+</span></span><span class="line"><span class="ln"> 14</span><span class="cl">    tcp_nopush on<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 15</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 16</span><span class="cl">    <span class="c1">#告诉 Nginx 不要缓存数据，而是一段一段的发送--当需要及时发送数据时，就应该给应用设置</span>
+</span></span><span class="line"><span class="ln"> 17</span><span class="cl">    <span class="c1">#这个属性，这样发送一小块数据信息时就不能立即得到返回值。Nginx 默认会始终工作在 tcp </span>
+</span></span><span class="line"><span class="ln"> 18</span><span class="cl">    <span class="c1">#nopush 状态下。但是当开启前面的 sendfile on; 时，它的工作特点是 nopush 的最后一</span>
+</span></span><span class="line"><span class="ln"> 19</span><span class="cl">    <span class="c1">#个包会自动转转换到 nopush off。为了减小那200ms的延迟，开启 nodelay on; 将其很快</span>
+</span></span><span class="line"><span class="ln"> 20</span><span class="cl">    <span class="c1">#传送出去。结论就是 sendfile on; 开启时，tcp_nopush 和 tcp_nodelay 都是on 是可以的。</span>
+</span></span><span class="line"><span class="ln"> 21</span><span class="cl">    tcp_nodelay on<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 22</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 23</span><span class="cl">    <span class="c1">#日志格式设定</span>
+</span></span><span class="line"><span class="ln"> 24</span><span class="cl">    log_format  main  <span class="s1">&#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;</span>
+</span></span><span class="line"><span class="ln"> 25</span><span class="cl">    <span class="s1">&#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;</span>
+</span></span><span class="line"><span class="ln"> 26</span><span class="cl">    <span class="s1">&#39;&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 27</span><span class="cl">    <span class="c1">#定义访问日志，设置为 off 可以关闭日志，提高性能</span>
+</span></span><span class="line"><span class="ln"> 28</span><span class="cl">    access_log /var/log/nginx/access.log main<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 29</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 30</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 31</span><span class="cl">    <span class="c1">#连接超时时间，单位是秒</span>
+</span></span><span class="line"><span class="ln"> 32</span><span class="cl">    keepalive_timeout 120<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 33</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 34</span><span class="cl">    <span class="c1">#读取HTTP头部的超时时间，默认值 60。客户端与服务器建立连接后将开始接收HTTP头部，在这个过程中，</span>
+</span></span><span class="line"><span class="ln"> 35</span><span class="cl">    <span class="c1">#如果在一个时间间隔（超时时间）内没有读取到客户端发来的字节，则认为超时，并向客户端返回408 </span>
+</span></span><span class="line"><span class="ln"> 36</span><span class="cl">    <span class="c1">#(&#34;Request timed out&#34;)响应。</span>
+</span></span><span class="line"><span class="ln"> 37</span><span class="cl">    client_header_timeout 60<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 38</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 39</span><span class="cl">    <span class="c1">#默认值 60。与client_header_timeout相似，只是这个超时时间只在读取HTTP包体时才有效。</span>
+</span></span><span class="line"><span class="ln"> 40</span><span class="cl">    client_body_timeout 10<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 41</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 42</span><span class="cl">    <span class="c1">#发送响应的超时时间，默认值 60。即Nginx服务器向客户端发送了数据包，但客户端一直没有去接收这个数</span>
+</span></span><span class="line"><span class="ln"> 43</span><span class="cl">    <span class="c1">#据包。如果某个连接超过send_timeout定义的超时时间，那么Nginx将会关闭这个连接。</span>
+</span></span><span class="line"><span class="ln"> 44</span><span class="cl">    send_timeout 60<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 45</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 46</span><span class="cl">    <span class="c1">#连接超时后将通过向客户端发送RST包来直接重置连接。这个选项打开后，Nginx会在某个连接超时后，不是</span>
+</span></span><span class="line"><span class="ln"> 47</span><span class="cl">    <span class="c1">#使用正常情形下的四次握手关闭TCP连接，而是直接向用户发送RST重置包，不再等待用户的应答，直接释放</span>
+</span></span><span class="line"><span class="ln"> 48</span><span class="cl">    <span class="c1">#Nginx服务器上关于这个套接字使用的所有缓存（如TCP滑动窗口）。相比正常的关闭方式，它使得服务器避</span>
+</span></span><span class="line"><span class="ln"> 49</span><span class="cl">    <span class="c1">#免产生许多处于FIN_WAIT_1、FIN_WAIT_2、TIME_WAIT状态的TCP连接。注意，使用RST重置包关闭连接</span>
+</span></span><span class="line"><span class="ln"> 50</span><span class="cl">    <span class="c1">#会带来一些问题，默认情况下不会开启。</span>
+</span></span><span class="line"><span class="ln"> 51</span><span class="cl">    reset_timedout_connection off<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 52</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 53</span><span class="cl">    <span class="c1">#要限制连接，必须先有一个容器对连接进行计数，&#34;zone=&#34; 是给它一个名字，可以随便叫，这个名字要跟下</span>
+</span></span><span class="line"><span class="ln"> 54</span><span class="cl">    <span class="c1">#面的 limit_conn 一致。$binary_remote_addr 用二进制来储存客户端的地址，1m 可以储存 32000</span>
+</span></span><span class="line"><span class="ln"> 55</span><span class="cl">    <span class="c1">#个并发会话。</span>
+</span></span><span class="line"><span class="ln"> 56</span><span class="cl">    limit_conn_zone <span class="nv">$binary_remote_addr</span> <span class="nv">zone</span><span class="o">=</span>addr:5m<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 57</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 58</span><span class="cl">    <span class="c1">#给定的key设置最大连接数。这里key是addr，我们设置的值是100，也就是说我们允许每一个IP地址最多同</span>
+</span></span><span class="line"><span class="ln"> 59</span><span class="cl">    <span class="c1">#时打开有100个连接。</span>
+</span></span><span class="line"><span class="ln"> 60</span><span class="cl">    limit_conn addr 100<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 61</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 62</span><span class="cl">    <span class="c1">#对每个连接限速100k。这如果一个IP允许两个并发连接，那么这个IP就是限速200K。</span>
+</span></span><span class="line"><span class="ln"> 63</span><span class="cl">    limit_rate 100k<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 64</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 65</span><span class="cl">    <span class="c1">#include 是一个在当前文件中包含另一个文件内容的指令。这里我们使用它来加载文件扩展名与文件类型映</span>
+</span></span><span class="line"><span class="ln"> 66</span><span class="cl">    <span class="c1">#射表。nginx根据映射关系，设置http请求响应头的Content-Type值。当在映射表找不到时，使用nginx.conf</span>
+</span></span><span class="line"><span class="ln"> 67</span><span class="cl">    <span class="c1">#中default-type指定的默认值。</span>
+</span></span><span class="line"><span class="ln"> 68</span><span class="cl">    include /etc/nginx/mime.types<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 69</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 70</span><span class="cl">    <span class="c1">#设置文件使用的默认的MIME-type</span>
+</span></span><span class="line"><span class="ln"> 71</span><span class="cl">    default_type text/html<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 72</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 73</span><span class="cl">    <span class="c1">#默认编码</span>
+</span></span><span class="line"><span class="ln"> 74</span><span class="cl">    charset UTF-8<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 75</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 76</span><span class="cl">    <span class="c1">#该模块可以读取预先压缩的gz文件，这样可以减少每次请求进行gzip压缩的CPU资源消耗。该模块启用后，</span>
+</span></span><span class="line"><span class="ln"> 77</span><span class="cl">    <span class="c1">#nginx首先检查是否存在请求静态文件的gz结尾的文件，如果有则直接返回该gz文件内容。</span>
+</span></span><span class="line"><span class="ln"> 78</span><span class="cl">    gzip_static off<span class="p">;</span> 
+</span></span><span class="line"><span class="ln"> 79</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 80</span><span class="cl">    <span class="c1">#开启 gzip 压缩。</span>
+</span></span><span class="line"><span class="ln"> 81</span><span class="cl">    gzip on<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 82</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 83</span><span class="cl">    <span class="c1"># 禁用客户端为 IE6 时的 gzip功能。</span>
+</span></span><span class="line"><span class="ln"> 84</span><span class="cl">    gzip_disable <span class="s2">&#34;msie6&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 85</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 86</span><span class="cl">    <span class="c1">#Nginx做为反向代理的时候启用。可选值：off|expired|no-cache|no-sotre|private|no_last_modified|no_etag|auth|any</span>
+</span></span><span class="line"><span class="ln"> 87</span><span class="cl">    gzip_proxied any<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 88</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 89</span><span class="cl">    <span class="c1">#设置允许压缩的页面最小字节数，页面字节数从header头中的Content-Length中进行获取。</span>
+</span></span><span class="line"><span class="ln"> 90</span><span class="cl">    <span class="c1">#建议设置成大于1k的字节数，小于1k可能会越压越大。</span>
+</span></span><span class="line"><span class="ln"> 91</span><span class="cl">    gzip_min_length 1024<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 92</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 93</span><span class="cl">    <span class="c1">#设置数据的压缩等级。这个等级可以是1-9之间的任意数值，9是最慢但是压缩比最大的。</span>
+</span></span><span class="line"><span class="ln"> 94</span><span class="cl">    gzip_comp_level 5<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 95</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 96</span><span class="cl">    <span class="c1">#设置系统获取几个单位的缓存用于存储gzip的压缩结果数据流。 例如 4 4k 代表以4k为单位，</span>
+</span></span><span class="line"><span class="ln"> 97</span><span class="cl">    <span class="c1">#按照原始数据大小以4k为单位的4倍申请内存。如果没有设置，默认值是申请跟原始数据相同大小的内存空间</span>
+</span></span><span class="line"><span class="ln"> 98</span><span class="cl">    <span class="c1">#去存储gzip压缩结果。</span>
+</span></span><span class="line"><span class="ln"> 99</span><span class="cl">    gzip_buffers <span class="m">4</span> 16k<span class="p">;</span>
+</span></span><span class="line"><span class="ln">100</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">101</span><span class="cl">    <span class="c1">#设置需要压缩的数据格式。Nginx默认只对text/html进行压缩。</span>
+</span></span><span class="line"><span class="ln">102</span><span class="cl">    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript<span class="p">;</span>
+</span></span><span class="line"><span class="ln">103</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">104</span><span class="cl">    <span class="c1">#为打开文件指定缓存，默认是没有启用的，max 指定缓存数量，建议和打开文件数一致，inactive</span>
+</span></span><span class="line"><span class="ln">105</span><span class="cl">    <span class="c1">#是指经过多长时间文件没被请求后删除缓存。</span>
+</span></span><span class="line"><span class="ln">106</span><span class="cl">    open_file_cache <span class="nv">max</span><span class="o">=</span><span class="m">65535</span> <span class="nv">inactive</span><span class="o">=</span>30s<span class="p">;</span>
+</span></span><span class="line"><span class="ln">107</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">108</span><span class="cl">    <span class="c1">#多长时间检查一次缓存的有效信息</span>
+</span></span><span class="line"><span class="ln">109</span><span class="cl">    open_file_cache_valid 30s<span class="p">;</span>
+</span></span><span class="line"><span class="ln">110</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">111</span><span class="cl">    <span class="c1">#open_file_cache指令中的inactive参数时间内文件的最少使用次数，如果超过这个数字，文件描述符一</span>
+</span></span><span class="line"><span class="ln">112</span><span class="cl">    <span class="c1">#直是在缓存中打开的。出现 Last-Modified 不变的情况，就是因为当nginx对一个静态文件缓存后，如果</span>
+</span></span><span class="line"><span class="ln">113</span><span class="cl">    <span class="c1">#30s内还在访问它，那么它的缓存就一直存在，直到30s内你不访问了为止。</span>
+</span></span><span class="line"><span class="ln">114</span><span class="cl">    open_file_cache_min_uses 2<span class="p">;</span>
+</span></span><span class="line"><span class="ln">115</span><span class="cl">    <span class="c1">#是否记录cache错误</span>
+</span></span><span class="line"><span class="ln">116</span><span class="cl">    open_file_cache_errors on<span class="p">;</span>
+</span></span><span class="line"><span class="ln">117</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">118</span><span class="cl">    include /etc/nginx/conf.d/*.conf<span class="p">;</span>
+</span></span><span class="line"><span class="ln">119</span><span class="cl">    include /etc/nginx/sites-enabled/*<span class="p">;</span>
+</span></span><span class="line"><span class="ln">120</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>SERVER 模块</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln"> 1</span><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="c1">#监听端口，nginx 会根据请求的 HOST 来决定使用哪个 SERVER 段的配置。如果没有匹配的 server_name，</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="c1">#则默认使用配置文件中第一个。加上 default_server 则可以以指定没有匹配时的默认规则。</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="c1">#listen 80;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    listen <span class="m">80</span> default_server<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="c1">#域名可以有多个，用空格隔开</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    server_name www.test.com test.com<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    root /user/share/nginx/html/test<span class="p">;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="c1">#404页面配置</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    error_page   <span class="m">404</span>   /404.html<span class="p">;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="c1">#配置 ssl，有需要时开启。</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    ssl on<span class="p">;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    ssl_certificate /etc/nginx/ssl/server.crt<span class="p">;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    ssl_certificate_key /etc/nginx/ssl/server.key<span class="p">;</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    location / <span class="o">{</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">        index   index.html index.php<span class="p">;</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">23</span><span class="cl">    <span class="c1">#图片缓存时间设置</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    location ~ .*.<span class="o">(</span>gif<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>png<span class="p">|</span>bmp<span class="p">|</span>swf<span class="o">)</span>$ <span class="o">{</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">        expires 10d<span class="p">;</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="c1">#JS和CSS缓存时间设置</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">    location ~ .*.<span class="o">(</span>js<span class="p">|</span>css<span class="o">)</span>?$ <span class="o">{</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">        expires 1h<span class="p">;</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">33</span><span class="cl">    location ~ <span class="o">[</span>^/<span class="o">]</span><span class="se">\.</span>php<span class="o">(</span>/<span class="p">|</span>$<span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">        fastcgi_index   index.php<span class="p">;</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">        <span class="c1">#开启 PATH_INFO 支持，作用就是把参数按照给定的正则表达式分割成 $fastcgi_script_name 和 $fastcgi_path_info。</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">        <span class="c1">#例如：请求 index.php/id/1 不加此行配置时，fastcgi_script_name 是 /index.php/id/1，fastcgi_path_info 是空。</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">        <span class="c1">#加上之后，fastcgi_script_name 是 index.php，fastcgi_path_info 是 /id/1</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">        fastcgi_split_path_info ^<span class="o">(</span>.+<span class="se">\.</span>php<span class="o">)(</span>.*<span class="o">)</span>$<span class="p">;</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">40</span><span class="cl">        <span class="c1">#此值即是 PHP 中 $_SERVER[&#39;SCRIPT_FILENAME&#39;] 的值</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl">        fastcgi_param   SCRIPT_FILENAME <span class="nv">$document_root$fastcgi_script_name</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">42</span><span class="cl">        fastcgi_param   PATH_INFO               <span class="nv">$fastcgi_path_info</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">        fastcgi_param   PATH_TRANSLATED <span class="nv">$document_root$fastcgi_path_info</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">45</span><span class="cl">        <span class="c1">#指定FastCGI服务器监听端口与地址。须和 PHP-FPM 的设置相同。</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl">        <span class="c1">#fastcgi_pass   127.0.0.1:9000;</span>
+</span></span><span class="line"><span class="ln">47</span><span class="cl">        fastcgi_pass    unix:/var/run/php5-fpm.sock<span class="p">;</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl">        include fastcgi_params<span class="p">;</span>
+</span></span><span class="line"><span class="ln">49</span><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="ln">50</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h2 id="设置">设置</h2>
 <h3 id="通过分区挂载允许最少特权">通过分区挂载允许最少特权</h3>
 <p>服务器上的网页/html/php文件单独分区。例如，新建一个分区/dev/sda5(第一逻辑分区)，并且挂载在/nginx。确保 /nginx是以noexec, nodev and nosetuid的权限挂载。比如，下面是一个/etc/fstab的挂载/nginx的信息：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="nv">LABEL</span><span class="o">=</span>/nginx /nginx ext3 defaults,nosuid,noexec,nodev <span class="m">1</span> <span class="m">2</span>
-</code></pre></div><p>注意：需要使用fdisk和mkfs.ext3命令创建一个新分区。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">LABEL</span><span class="o">=</span>/nginx /nginx ext3 defaults,nosuid,noexec,nodev <span class="m">1</span> <span class="m">2</span>
+</span></span></code></pre></div><p>注意：需要使用fdisk和mkfs.ext3命令创建一个新分区。</p>
 <h3 id="配置etcsysctlconf强化linux安全">配置/etc/sysctl.conf强化Linux安全</h3>
 <p>可以通过编辑/etc/sysctl.conf来控制和配置Linux内核、网络设置。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1"># Avoid a smurf attack</span>
-<span class="ln"> 2</span>net.ipv4.icmp_echo_ignore_broadcasts <span class="o">=</span> <span class="m">1</span>
-<span class="ln"> 3</span><span class="c1"># Turn on protection for bad icmp error messages</span>
-<span class="ln"> 4</span>net.ipv4.icmp_ignore_bogus_error_responses <span class="o">=</span> <span class="m">1</span>
-<span class="ln"> 5</span><span class="c1"># Turn on syncookies for SYN flood attack protection</span>
-<span class="ln"> 6</span>net.ipv4.tcp_syncookies <span class="o">=</span> <span class="m">1</span>
-<span class="ln"> 7</span><span class="c1"># Turn on and log spoofed, source routed, and redirect packets</span>
-<span class="ln"> 8</span>net.ipv4.conf.all.log_martians <span class="o">=</span> <span class="m">1</span>
-<span class="ln"> 9</span>net.ipv4.conf.default.log_martians <span class="o">=</span> <span class="m">1</span>
-<span class="ln">10</span><span class="c1"># No source routed packets here</span>
-<span class="ln">11</span>net.ipv4.conf.all.accept_source_route <span class="o">=</span> <span class="m">0</span>
-<span class="ln">12</span>net.ipv4.conf.default.accept_source_route <span class="o">=</span> <span class="m">0</span>
-<span class="ln">13</span><span class="c1"># Turn on reverse path filtering</span>
-<span class="ln">14</span>net.ipv4.conf.all.rp_filter <span class="o">=</span> <span class="m">1</span>
-<span class="ln">15</span>net.ipv4.conf.default.rp_filter <span class="o">=</span> <span class="m">1</span>
-<span class="ln">16</span><span class="c1"># Make sure no one can alter the routing tables</span>
-<span class="ln">17</span>net.ipv4.conf.all.accept_redirects <span class="o">=</span> <span class="m">0</span>
-<span class="ln">18</span>net.ipv4.conf.default.accept_redirects <span class="o">=</span> <span class="m">0</span>
-<span class="ln">19</span>net.ipv4.conf.all.secure_redirects <span class="o">=</span> <span class="m">0</span>
-<span class="ln">20</span>net.ipv4.conf.default.secure_redirects <span class="o">=</span> <span class="m">0</span>
-<span class="ln">21</span><span class="c1"># Don’t act as a router</span>
-<span class="ln">22</span>net.ipv4.ip_forward <span class="o">=</span> <span class="m">0</span>
-<span class="ln">23</span>net.ipv4.conf.all.send_redirects <span class="o">=</span> <span class="m">0</span>
-<span class="ln">24</span>net.ipv4.conf.default.send_redirects <span class="o">=</span> <span class="m">0</span>
-<span class="ln">25</span><span class="c1"># Turn on execshild</span>
-<span class="ln">26</span>kernel.exec-shield <span class="o">=</span> <span class="m">1</span>
-<span class="ln">27</span>kernel.randomize_va_space <span class="o">=</span> <span class="m">1</span>
-<span class="ln">28</span><span class="c1"># Tuen IPv6</span>
-<span class="ln">29</span>net.ipv6.conf.default.router_solicitations <span class="o">=</span> <span class="m">0</span>
-<span class="ln">30</span>net.ipv6.conf.default.accept_ra_rtr_pref <span class="o">=</span> <span class="m">0</span>
-<span class="ln">31</span>net.ipv6.conf.default.accept_ra_pinfo <span class="o">=</span> <span class="m">0</span>
-<span class="ln">32</span>net.ipv6.conf.default.accept_ra_defrtr <span class="o">=</span> <span class="m">0</span>
-<span class="ln">33</span>net.ipv6.conf.default.autoconf <span class="o">=</span> <span class="m">0</span>
-<span class="ln">34</span>net.ipv6.conf.default.dad_transmits <span class="o">=</span> <span class="m">0</span>
-<span class="ln">35</span>net.ipv6.conf.default.max_addresses <span class="o">=</span> <span class="m">1</span>
-<span class="ln">36</span><span class="c1"># Optimization for port usefor LBs</span>
-<span class="ln">37</span><span class="c1"># Increase system file descriptor limit</span>
-<span class="ln">38</span>fs.file-max <span class="o">=</span> <span class="m">65535</span>
-<span class="ln">39</span><span class="c1"># Allow for more PIDs (to reduce rollover problems); may break some programs 32768</span>
-<span class="ln">40</span>kernel.pid_max <span class="o">=</span> <span class="m">65536</span>
-<span class="ln">41</span><span class="c1"># Increase system IP port limits</span>
-<span class="ln">42</span>net.ipv4.ip_local_port_range <span class="o">=</span> <span class="m">2000</span> <span class="m">65000</span>
-<span class="ln">43</span><span class="c1"># Increase TCP max buffer size setable using setsockopt()</span>
-<span class="ln">44</span>net.ipv4.tcp_rmem <span class="o">=</span> <span class="m">4096</span> <span class="m">87380</span> <span class="m">8388608</span>
-<span class="ln">45</span>net.ipv4.tcp_wmem <span class="o">=</span> <span class="m">4096</span> <span class="m">87380</span> <span class="m">8388608</span>
-<span class="ln">46</span><span class="c1"># Increase Linux auto tuning TCP buffer limits</span>
-<span class="ln">47</span><span class="c1"># min, default, and max number of bytes to use</span>
-<span class="ln">48</span><span class="c1"># set max to at least 4MB, or higher if you use very high BDP paths</span>
-<span class="ln">49</span><span class="c1"># Tcp Windows etc</span>
-<span class="ln">50</span>net.core.rmem_max <span class="o">=</span> <span class="m">8388608</span>
-<span class="ln">51</span>net.core.wmem_max <span class="o">=</span> <span class="m">8388608</span>
-<span class="ln">52</span>net.core.netdev_max_backlog <span class="o">=</span> <span class="m">5000</span>
-<span class="ln">53</span>net.ipv4.tcp_window_scaling <span class="o">=</span> <span class="m">1</span>
-</code></pre></div><h3 id="控制缓冲区溢出攻击">控制缓冲区溢出攻击</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1"># Avoid a smurf attack</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">net.ipv4.icmp_echo_ignore_broadcasts <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"># Turn on protection for bad icmp error messages</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">net.ipv4.icmp_ignore_bogus_error_responses <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1"># Turn on syncookies for SYN flood attack protection</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">net.ipv4.tcp_syncookies <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1"># Turn on and log spoofed, source routed, and redirect packets</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">net.ipv4.conf.all.log_martians <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">net.ipv4.conf.default.log_martians <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1"># No source routed packets here</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">net.ipv4.conf.all.accept_source_route <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">net.ipv4.conf.default.accept_source_route <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="c1"># Turn on reverse path filtering</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">net.ipv4.conf.all.rp_filter <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">net.ipv4.conf.default.rp_filter <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="c1"># Make sure no one can alter the routing tables</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">net.ipv4.conf.all.accept_redirects <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">net.ipv4.conf.default.accept_redirects <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">net.ipv4.conf.all.secure_redirects <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">net.ipv4.conf.default.secure_redirects <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="c1"># Don’t act as a router</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">net.ipv4.ip_forward <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">net.ipv4.conf.all.send_redirects <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">net.ipv4.conf.default.send_redirects <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="c1"># Turn on execshild</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">kernel.exec-shield <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">kernel.randomize_va_space <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="c1"># Tuen IPv6</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">net.ipv6.conf.default.router_solicitations <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">net.ipv6.conf.default.accept_ra_rtr_pref <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">net.ipv6.conf.default.accept_ra_pinfo <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">net.ipv6.conf.default.accept_ra_defrtr <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">net.ipv6.conf.default.autoconf <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">net.ipv6.conf.default.dad_transmits <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">net.ipv6.conf.default.max_addresses <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl"><span class="c1"># Optimization for port usefor LBs</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl"><span class="c1"># Increase system file descriptor limit</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">fs.file-max <span class="o">=</span> <span class="m">65535</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl"><span class="c1"># Allow for more PIDs (to reduce rollover problems); may break some programs 32768</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">kernel.pid_max <span class="o">=</span> <span class="m">65536</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl"><span class="c1"># Increase system IP port limits</span>
+</span></span><span class="line"><span class="ln">42</span><span class="cl">net.ipv4.ip_local_port_range <span class="o">=</span> <span class="m">2000</span> <span class="m">65000</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl"><span class="c1"># Increase TCP max buffer size setable using setsockopt()</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl">net.ipv4.tcp_rmem <span class="o">=</span> <span class="m">4096</span> <span class="m">87380</span> <span class="m">8388608</span>
+</span></span><span class="line"><span class="ln">45</span><span class="cl">net.ipv4.tcp_wmem <span class="o">=</span> <span class="m">4096</span> <span class="m">87380</span> <span class="m">8388608</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl"><span class="c1"># Increase Linux auto tuning TCP buffer limits</span>
+</span></span><span class="line"><span class="ln">47</span><span class="cl"><span class="c1"># min, default, and max number of bytes to use</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl"><span class="c1"># set max to at least 4MB, or higher if you use very high BDP paths</span>
+</span></span><span class="line"><span class="ln">49</span><span class="cl"><span class="c1"># Tcp Windows etc</span>
+</span></span><span class="line"><span class="ln">50</span><span class="cl">net.core.rmem_max <span class="o">=</span> <span class="m">8388608</span>
+</span></span><span class="line"><span class="ln">51</span><span class="cl">net.core.wmem_max <span class="o">=</span> <span class="m">8388608</span>
+</span></span><span class="line"><span class="ln">52</span><span class="cl">net.core.netdev_max_backlog <span class="o">=</span> <span class="m">5000</span>
+</span></span><span class="line"><span class="ln">53</span><span class="cl">net.ipv4.tcp_window_scaling <span class="o">=</span> <span class="m">1</span>
+</span></span></code></pre></div><h3 id="控制缓冲区溢出攻击">控制缓冲区溢出攻击</h3>
 <p>编辑nginx.conf，为所有客户端设置缓冲区的大小限制。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">##Start: Size Limits &amp; Buffer Overflows ##    //server上下文</span>
-<span class="ln">2</span>
-<span class="ln">3</span>client_body_buffer_size 1K<span class="p">;</span>
-<span class="ln">4</span>client_header_buffer_size 1k<span class="p">;</span>
-<span class="ln">5</span>client_max_body_size 1k<span class="p">;</span>
-<span class="ln">6</span>large_client_header_buffers <span class="m">2</span> 1k<span class="p">;</span>
-<span class="ln">7</span>
-<span class="ln">8</span><span class="c1">##END:Size Limits &amp; Buffer Overflows ##</span>
-</code></pre></div><p>说明</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">##Start: Size Limits &amp; Buffer Overflows ##    //server上下文</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl">client_body_buffer_size 1K<span class="p">;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">client_header_buffer_size 1k<span class="p">;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">client_max_body_size 1k<span class="p">;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">large_client_header_buffers <span class="m">2</span> 1k<span class="p">;</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="c1">##END:Size Limits &amp; Buffer Overflows ##</span>
+</span></span></code></pre></div><p>说明</p>
 <ol>
 <li>client_body_buffer_size 1k-（默认8k或16k）这个指令可以指定连接请求实体的缓冲区大小。如果连接请求超过缓存区指定的值，那么这些请求实体的整体或部分将尝试写入一个临时文件。</li>
 <li>client_header_buffer_size 1k-指令指定客户端请求头部的缓冲区大小。绝大多数情况下一个请求头不会大于1k，不过如果有来自于wap客户端的较大的cookie它可能会大于 1k，Nginx将分配给它一个更大的缓冲区，这个值可以在large_client_header_buffers里面设置。</li>
@@ -483,13 +483,13 @@
 同样，请求的头部最长字段不能大于一个缓冲区，否则服务器将返回”Bad request” (400)。缓冲区只在需求时分开。默认一个缓冲区大小为操作系统中分页文件大小，通常是4k或8k，如果一个连接请求最终将状态转换为keep- alive，它所占用的缓冲区将被释放。</li>
 </ol>
 <p>还需要控制超时来提高服务器性能并与客户端断开连接。按照如下编辑：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">## Start: Timeouts ##</span>
-<span class="ln">2</span>client_body_timeout 10<span class="p">;</span>
-<span class="ln">3</span>client_header_timeout 10<span class="p">;</span>
-<span class="ln">4</span>keepalive_timeout <span class="m">5</span> 5<span class="p">;</span>
-<span class="ln">5</span>send_timeout 10<span class="p">;</span>
-<span class="ln">6</span><span class="c1">## End: Timeouts ##</span>
-</code></pre></div><p>说明</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">## Start: Timeouts ##</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">client_body_timeout 10<span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">client_header_timeout 10<span class="p">;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">keepalive_timeout <span class="m">5</span> 5<span class="p">;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">send_timeout 10<span class="p">;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="c1">## End: Timeouts ##</span>
+</span></span></code></pre></div><p>说明</p>
 <ol>
 <li>client_body_timeout 10;-指令指定读取请求实体的超时时间。这里的超时是指一个请求实体没有进入读取步骤，如果连接超过这个时间而客户端没有任何响应，Nginx将返回一个”Request time out” (408)错误。</li>
 <li>client_header_timeout 10;-指令指定读取客户端请求头标题的超时时间。这里的超时是指一个请求头没有进入读取步骤，如果连接超过这个时间而客户端没有任何响应，Nginx将返回一个”Request time out” (408)错误。</li>
@@ -499,225 +499,223 @@
 <h3 id="控制并发连接">控制并发连接</h3>
 <p>可以使用NginxHttpLimitZone模块来限制指定的会话或者一个IP地址的特殊情况下的并发连接。</p>
 <p>编辑nginx.conf, 每个远程IP地址的客户端同时打开连接不能超过5个:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">### Directive describes the zone,in which the session states are stored i.e. stored in slimits. ###</span>
-<span class="ln">2</span><span class="c1">### 1m can handle 32000 sessions with 32 bytes/session,set to 5m x 32000 session###</span>
-<span class="ln">3</span>limit_conn_zone <span class="nv">$binary_remote_addr</span> <span class="nv">zone</span><span class="o">=</span>slimits:5m<span class="p">;</span>
-<span class="ln">4</span>
-<span class="ln">5</span><span class="c1">### Control maximum number of simultaneous connections for one session i.e.###</span>
-<span class="ln">6</span><span class="c1">### restricts the amount of connections from a single ip address ###</span>
-<span class="ln">7</span>limit_conn slimits 5<span class="p">;</span>
-<span class="ln">8</span>
-</code></pre></div><h3 id="只允许域名的访问">只允许域名的访问</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">### Directive describes the zone,in which the session states are stored i.e. stored in slimits. ###</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1">### 1m can handle 32000 sessions with 32 bytes/session,set to 5m x 32000 session###</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">limit_conn_zone <span class="nv">$binary_remote_addr</span> <span class="nv">zone</span><span class="o">=</span>slimits:5m<span class="p">;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="c1">### Control maximum number of simultaneous connections for one session i.e.###</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="c1">### restricts the amount of connections from a single ip address ###</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">limit_conn slimits 5<span class="p">;</span>
+</span></span></code></pre></div><h3 id="只允许域名的访问">只允许域名的访问</h3>
 <p>可以逃过ip扫描</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">## Only requests to our Host are allowed i.e. xxx.in,images.xxx.in and www.xxx.in</span>
-<span class="ln">2</span>
-<span class="ln">3</span><span class="k">if</span><span class="o">(</span><span class="nv">$host</span> !~ ^<span class="o">(</span>xxx.in<span class="p">|</span>www.xxx.in<span class="p">|</span>images.xxx.in<span class="o">)</span>$<span class="o">)</span> <span class="o">{</span>
-<span class="ln">4</span>    <span class="c1"># 444 = Connection closed without response</span>
-<span class="ln">5</span>    retrun 444<span class="p">;</span>
-<span class="ln">6</span><span class="o">}</span>
-</code></pre></div><p>或者</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="k">if</span> <span class="o">(</span> <span class="nv">$host</span> !~* <span class="s1">&#39;abc.com&#39;</span> <span class="o">)</span> <span class="o">{</span>  
-<span class="ln">2</span>    <span class="k">return</span> 403<span class="p">;</span>  
-<span class="ln">3</span><span class="o">}</span>  
-</code></pre></div><h3 id="url-参数过滤敏感字">url 参数过滤敏感字</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="k">if</span> <span class="o">(</span><span class="nv">$query_string</span> ~* <span class="s2">&#34;union.*select.*\(&#34;</span><span class="o">)</span> <span class="o">{</span>   
-<span class="ln">2</span>    rewrite ^/<span class="o">(</span>.*<span class="o">)</span>$  <span class="nv">$host</span>  permanent<span class="p">;</span>  
-<span class="ln">3</span><span class="o">}</span>   
-<span class="ln">4</span>
-<span class="ln">5</span><span class="k">if</span> <span class="o">(</span><span class="nv">$query_string</span> ~* <span class="s2">&#34;concat.*\(&#34;</span><span class="o">)</span> <span class="o">{</span>   
-<span class="ln">6</span>    rewrite ^/<span class="o">(</span>.*<span class="o">)</span>$  <span class="nv">$host</span>  permanent<span class="p">;</span>  
-<span class="ln">7</span><span class="o">}</span>  
-</code></pre></div><h3 id="限制可用的请求方法">限制可用的请求方法</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">## Only requests to our Host are allowed i.e. xxx.in,images.xxx.in and www.xxx.in</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="k">if</span><span class="o">(</span><span class="nv">$host</span> !~ ^<span class="o">(</span>xxx.in<span class="p">|</span>www.xxx.in<span class="p">|</span>images.xxx.in<span class="o">)</span>$<span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="c1"># 444 = Connection closed without response</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    retrun 444<span class="p">;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>或者</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">if</span> <span class="o">(</span> <span class="nv">$host</span> !~* <span class="s1">&#39;abc.com&#39;</span> <span class="o">)</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">return</span> 403<span class="p">;</span>  
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="o">}</span>  
+</span></span></code></pre></div><h3 id="url-参数过滤敏感字">url 参数过滤敏感字</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="nv">$query_string</span> ~* <span class="s2">&#34;union.*select.*\(&#34;</span><span class="o">)</span> <span class="o">{</span>   
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    rewrite ^/<span class="o">(</span>.*<span class="o">)</span>$  <span class="nv">$host</span>  permanent<span class="p">;</span>  
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="o">}</span>   
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="nv">$query_string</span> ~* <span class="s2">&#34;concat.*\(&#34;</span><span class="o">)</span> <span class="o">{</span>   
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    rewrite ^/<span class="o">(</span>.*<span class="o">)</span>$  <span class="nv">$host</span>  permanent<span class="p">;</span>  
+</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="o">}</span>  
+</span></span></code></pre></div><h3 id="限制可用的请求方法">限制可用的请求方法</h3>
 <p>下面的指令将过滤只允许GET,HEAD和POST方法：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">##Only allow these request methods##</span>
-<span class="ln">2</span>
-<span class="ln">3</span><span class="k">if</span><span class="o">(</span><span class="nv">$request_method</span> !~ ^<span class="o">(</span>GET<span class="p">|</span>HEAD<span class="p">|</span>POST<span class="o">)</span>$<span class="o">)</span> <span class="o">{</span>
-<span class="ln">4</span>    retrun 444<span class="p">;</span>
-<span class="ln">5</span><span class="o">}</span>
-</code></pre></div><h3 id="拒绝一些user-agents">拒绝一些User-Agents</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1">##Block download agents ##</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span><span class="k">if</span> <span class="o">(</span><span class="nv">$http_user_agent</span> ~* LWP::Simple<span class="p">|</span>BBBike<span class="p">|</span>wget<span class="o">){</span>
-<span class="ln"> 4</span>
-<span class="ln"> 5</span>retrun 403<span class="p">;</span>
-<span class="ln"> 6</span>
-<span class="ln"> 7</span><span class="o">}</span>
-<span class="ln"> 8</span>
-<span class="ln"> 9</span><span class="c1">##Block some robots ##</span>
-<span class="ln">10</span><span class="c1"># 阻止Soso和有道的机器人：</span>
-<span class="ln">11</span><span class="k">if</span> <span class="o">(</span><span class="nv">$http_user_agent</span> ~* Sosospider<span class="p">|</span>Yodaobot<span class="o">){</span>
-<span class="ln">12</span>    retrun 403<span class="p">;</span>
-<span class="ln">13</span><span class="o">}</span>
-</code></pre></div><p>为了更好的维护，最好创建一个文件，包含不期望的user agent列表。例如/etc/nginx/blockuseragents.rules包含如下内容：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>map <span class="nv">$http_user_agent</span> <span class="nv">$blockedagent</span> <span class="o">{</span>
-<span class="ln">2</span>    default 0<span class="p">;</span>
-<span class="ln">3</span>    ~*malicious 1<span class="p">;</span>
-<span class="ln">4</span>    ~*bot 1<span class="p">;</span>
-<span class="ln">5</span>    ~*backdoor 1<span class="p">;</span>
-<span class="ln">6</span>    ~*crawler 1<span class="p">;</span>
-<span class="ln">7</span>    ~*bandit 1<span class="p">;</span>
-<span class="ln">8</span><span class="o">}</span>
-</code></pre></div><p>然后将如下语句放入配置文件的server模块内,并加入if语句设置阻止后进入的页面：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>include /etc/nginx/blockuseragents.rules<span class="p">;</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span>server <span class="o">{</span>
-<span class="ln"> 4</span>    <span class="k">if</span> <span class="o">(</span><span class="nv">$blockedagent</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln"> 5</span>        <span class="k">return</span> 403<span class="p">;</span>
-<span class="ln"> 6</span>    <span class="o">}</span>
-<span class="ln"> 7</span>
-<span class="ln"> 8</span>    listen  192.168.0.12:8080<span class="p">;</span>
-<span class="ln"> 9</span>    ...
-<span class="ln">10</span><span class="o">}</span>
-</code></pre></div><h3 id="目录限制ip访问">目录限制IP访问</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">##Only allow these request methods##</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="k">if</span><span class="o">(</span><span class="nv">$request_method</span> !~ ^<span class="o">(</span>GET<span class="p">|</span>HEAD<span class="p">|</span>POST<span class="o">)</span>$<span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    retrun 444<span class="p">;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="拒绝一些user-agents">拒绝一些User-Agents</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">##Block download agents ##</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="nv">$http_user_agent</span> ~* LWP::Simple<span class="p">|</span>BBBike<span class="p">|</span>wget<span class="o">){</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">retrun 403<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="c1">##Block some robots ##</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1"># 阻止Soso和有道的机器人：</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="nv">$http_user_agent</span> ~* Sosospider<span class="p">|</span>Yodaobot<span class="o">){</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    retrun 403<span class="p">;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>为了更好的维护，最好创建一个文件，包含不期望的user agent列表。例如/etc/nginx/blockuseragents.rules包含如下内容：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">map <span class="nv">$http_user_agent</span> <span class="nv">$blockedagent</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    default 0<span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    ~*malicious 1<span class="p">;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    ~*bot 1<span class="p">;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    ~*backdoor 1<span class="p">;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    ~*crawler 1<span class="p">;</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    ~*bandit 1<span class="p">;</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>然后将如下语句放入配置文件的server模块内,并加入if语句设置阻止后进入的页面：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln"> 1</span><span class="cl">include /etc/nginx/blockuseragents.rules<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="nv">$blockedagent</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="k">return</span> 403<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    listen  192.168.0.12:8080<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    ...
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="目录限制ip访问">目录限制IP访问</h3>
 <p>可以对指定的目录设置访问权限。所有的网站目录应该一一配置，只允许必须的目录访问权限。</p>
 <p>可以通过IP地址来限制访问目录/admin/:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>location /docs/ <span class="o">{</span>
-<span class="ln"> 2</span>  <span class="c1">##block one workstation</span>
-<span class="ln"> 3</span>
-<span class="ln"> 4</span>  deny 192.168.1.1<span class="p">;</span>
-<span class="ln"> 5</span>
-<span class="ln"> 6</span>  <span class="c1">## allow anyone in 192.168.1.0/24</span>
-<span class="ln"> 7</span>  allow 192.168.1.0/24<span class="p">;</span>
-<span class="ln"> 8</span>
-<span class="ln"> 9</span>  <span class="c1">##drop rest of the world</span>
-<span class="ln">10</span>
-<span class="ln">11</span>  deny all<span class="p">;</span>
-<span class="ln">12</span>
-<span class="ln">13</span><span class="o">}</span>
-</code></pre></div><p>更多的时候客户端请求会经过层层代理，我们需要通过$http_x_forwarded_for来进行限制，可以这样写：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="nb">set</span> <span class="nv">$allow</span> false<span class="p">;</span>
-<span class="ln">2</span><span class="k">if</span> <span class="o">(</span><span class="nv">$http_x_forwarded_for</span> <span class="o">=</span> <span class="s2">&#34;211.144.204.2&#34;</span><span class="o">)</span> <span class="o">{</span> <span class="nb">set</span> <span class="nv">$allow</span> true<span class="p">;</span> <span class="o">}</span>
-<span class="ln">3</span><span class="k">if</span> <span class="o">(</span><span class="nv">$http_x_forwarded_for</span> ~ <span class="s2">&#34;108.2.66.[89]&#34;</span><span class="o">)</span> <span class="o">{</span> <span class="nb">set</span> <span class="nv">$allow</span> true<span class="p">;</span> <span class="o">}</span>
-<span class="ln">4</span><span class="k">if</span> <span class="o">(</span><span class="nv">$allow</span> <span class="o">=</span> <span class="nb">false</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> 404<span class="p">;</span> <span class="o">}</span>
-</code></pre></div><h3 id="通过密码保护目录">通过密码保护目录</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln"> 1</span><span class="cl">location /docs/ <span class="o">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  <span class="c1">##block one workstation</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">  deny 192.168.1.1<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">  <span class="c1">## allow anyone in 192.168.1.0/24</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">  allow 192.168.1.0/24<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">  <span class="c1">##drop rest of the world</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl">  deny all<span class="p">;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>更多的时候客户端请求会经过层层代理，我们需要通过$http_x_forwarded_for来进行限制，可以这样写：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">set</span> <span class="nv">$allow</span> false<span class="p">;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="nv">$http_x_forwarded_for</span> <span class="o">=</span> <span class="s2">&#34;211.144.204.2&#34;</span><span class="o">)</span> <span class="o">{</span> <span class="nb">set</span> <span class="nv">$allow</span> true<span class="p">;</span> <span class="o">}</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="nv">$http_x_forwarded_for</span> ~ <span class="s2">&#34;108.2.66.[89]&#34;</span><span class="o">)</span> <span class="o">{</span> <span class="nb">set</span> <span class="nv">$allow</span> true<span class="p">;</span> <span class="o">}</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="nv">$allow</span> <span class="o">=</span> <span class="nb">false</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> 404<span class="p">;</span> <span class="o">}</span>
+</span></span></code></pre></div><h3 id="通过密码保护目录">通过密码保护目录</h3>
 <p>首先创建密码文件并增加“user”用户：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>mkdir /usr/local/nginx/conf/.htpasswd/
-<span class="ln">2</span>
-<span class="ln">3</span>htpasswd -c /usr/local/nginx/conf/.htpasswd/passwd user
-</code></pre></div><p>编辑nginx.conf,加入需要保护的目录：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1">###Password Protect /personal-images/ and /delta/ directories###</span>
-<span class="ln">2</span>
-<span class="ln">3</span>location ~ /<span class="o">(</span>personal-images/./delta/.<span class="o">)</span> <span class="o">{</span>
-<span class="ln">4</span>    auth_basic <span class="s2">&#34;Restricted&#34;</span><span class="p">;</span>
-<span class="ln">5</span>    auth_basic_user_file /usr/local/nginx/conf/.htpasswd/passwd<span class="p">;</span>
-<span class="ln">6</span>
-<span class="ln">7</span><span class="o">}</span>
-</code></pre></div><p>密码文件生成后，也可以用以下的命令来增加允许访问的用户：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>htpasswd -s /usr/local/nginx/conf/.htpasswd/passwd userName
-</code></pre></div><h3 id="如何防止图片盗链">如何防止图片盗链</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">mkdir /usr/local/nginx/conf/.htpasswd/
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl">htpasswd -c /usr/local/nginx/conf/.htpasswd/passwd user
+</span></span></code></pre></div><p>编辑nginx.conf,加入需要保护的目录：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">###Password Protect /personal-images/ and /delta/ directories###</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl">location ~ /<span class="o">(</span>personal-images/./delta/.<span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    auth_basic <span class="s2">&#34;Restricted&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    auth_basic_user_file /usr/local/nginx/conf/.htpasswd/passwd<span class="p">;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">
+</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>密码文件生成后，也可以用以下的命令来增加允许访问的用户：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">htpasswd -s /usr/local/nginx/conf/.htpasswd/passwd userName
+</span></span></code></pre></div><h3 id="如何防止图片盗链">如何防止图片盗链</h3>
 <p>如果有人直接用你网站的图片地址来显示在他的网站上，会造成你需要支付额外的宽带费用。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1"># Stop deep linking or hot linking</span>
-<span class="ln">2</span>location /images/ <span class="o">{</span>
-<span class="ln">3</span>    valid_referers none blocked www.example.com example.com<span class="p">;</span>
-<span class="ln">4</span>    <span class="k">if</span> <span class="o">(</span><span class="nv">$invalid_referer</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">5</span>        <span class="k">return</span> 403<span class="p">;</span>
-<span class="ln">6</span>    <span class="o">}</span>
-<span class="ln">7</span><span class="o">}</span>
-</code></pre></div><p>重定向并显示指定图片</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>location /images/ <span class="o">{</span>
-<span class="ln">2</span>    valid_referers blocked www.example.com example.com<span class="p">;</span>
-<span class="ln">3</span>    <span class="k">if</span> <span class="o">(</span><span class="nv">$invalid_referer</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">4</span>        rewrite ^/images/uploads.*.<span class="o">(</span>gif<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>png<span class="o">)</span>$ http://www.examples.com/banned.jpg last
-<span class="ln">5</span>    <span class="o">}</span>
-<span class="ln">6</span><span class="o">}</span>
-</code></pre></div><h3 id="nginx-ssl配置">Nginx SSL配置</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1"># Stop deep linking or hot linking</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">location /images/ <span class="o">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    valid_referers none blocked www.example.com example.com<span class="p">;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="nv">$invalid_referer</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        <span class="k">return</span> 403<span class="p">;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>重定向并显示指定图片</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">location /images/ <span class="o">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    valid_referers blocked www.example.com example.com<span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="nv">$invalid_referer</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">        rewrite ^/images/uploads.*.<span class="o">(</span>gif<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>png<span class="o">)</span>$ http://www.examples.com/banned.jpg last
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="nginx-ssl配置">Nginx SSL配置</h3>
 <p>编辑nginx.conf并更新：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>server<span class="o">{</span>
-<span class="ln"> 2</span>    server_name example.com<span class="p">;</span>
-<span class="ln"> 3</span>
-<span class="ln"> 4</span>    listen 443<span class="p">;</span>
-<span class="ln"> 5</span>
-<span class="ln"> 6</span>    ssl on<span class="p">;</span>
-<span class="ln"> 7</span>    ssl_certificate /user/local/nginx/conf/server.crt<span class="p">;</span>
-<span class="ln"> 8</span>    ssl_certificate_key /usr/local/nginx/conf/server.key<span class="p">;</span>
-<span class="ln"> 9</span>    access_log /usr/local/nginx/logs/ssl.access.log<span class="p">;</span>
-<span class="ln">10</span>    error_log /usr/local/nginx/logs/ssl.error.log<span class="p">;</span>
-<span class="ln">11</span><span class="o">}</span>
-</code></pre></div><h3 id="在防火墙级限制每个ip的连接数">在防火墙级限制每个IP的连接数</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln"> 1</span><span class="cl">server<span class="o">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    server_name example.com<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    listen 443<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    ssl on<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    ssl_certificate /user/local/nginx/conf/server.crt<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    ssl_certificate_key /usr/local/nginx/conf/server.key<span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    access_log /usr/local/nginx/logs/ssl.access.log<span class="p">;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    error_log /usr/local/nginx/logs/ssl.error.log<span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="在防火墙级限制每个ip的连接数">在防火墙级限制每个IP的连接数</h3>
 <p>网络服务器必须监视连接和每秒连接限制。PF和Iptales都能够在进入你的nginx服务器之前阻止最终用户的访问。
 Linux Iptables:限制每次Nginx连接数</p>
 <p>下面的例子会阻止来自一个IP的60秒钟内超过15个连接端口80的连接数。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>/sbin/iptables -A INPUT -p tcp –dport <span class="m">80</span> -i eth0 -m state –state NEW -m recent –set
-<span class="ln">2</span>/sbin/iptables -A INPUT -p tcp –dport <span class="m">80</span> -i eth0 -m state –state NEW -m recent –update –seconds <span class="m">60</span> –hitcount <span class="m">15</span> -j DROP
-<span class="ln">3</span>service iptables save
-</code></pre></div><p>请根据具体情况来设置限制的连接数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">/sbin/iptables -A INPUT -p tcp –dport <span class="m">80</span> -i eth0 -m state –state NEW -m recent –set
+</span></span><span class="line"><span class="ln">2</span><span class="cl">/sbin/iptables -A INPUT -p tcp –dport <span class="m">80</span> -i eth0 -m state –state NEW -m recent –update –seconds <span class="m">60</span> –hitcount <span class="m">15</span> -j DROP
+</span></span><span class="line"><span class="ln">3</span><span class="cl">service iptables save
+</span></span></code></pre></div><p>请根据具体情况来设置限制的连接数。</p>
 <h3 id="配置操作系统保护web服务器">配置操作系统保护Web服务器</h3>
 <p>Nginx以用户nginx运行。但是根目录（/nginx或者/usr /local/nginx/html）不应该设置属于用户nginx或对用户nginx可写。</p>
 <p>找出错误权限的文件可以使用如下命令：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>find /nginx -user nginx
-<span class="ln">2</span>find /usr/local/nginx/html -user nginx
-</code></pre></div><p>确保你更所有权为root或其它用户，一个典型的权限设置 /usr/local/nginx/html/</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>ls -l /usr/local/nginx/html/
-</code></pre></div><p>示例输出：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>-rw-r–r– <span class="m">1</span> root root <span class="m">925</span> Jan <span class="m">3</span> 00:50 error4xx.html
-<span class="ln">2</span>-rw-r–r– <span class="m">1</span> root root <span class="m">52</span> Jan <span class="m">3</span> 10:00 error5xx.html
-<span class="ln">3</span>-rw-r–r– <span class="m">1</span> root root <span class="m">134</span> Jan <span class="m">3</span> 00:52 index.html
-</code></pre></div><p>你必须删除由vi或其它文本编辑器创建的备份文件：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>find /nginx -name ‘.?’ -not -name .ht -or -name ‘~’ -or -name ‘.bak’ -or -name ‘.old*’
-<span class="ln">2</span>find /usr/local/nginx/html/ -name ‘.?’ -not -name .ht -or -name ‘~’ -or -name ‘.bak’ -or -name ‘.old*’
-</code></pre></div><p>通过find命令的-delete选项来删除这些文件。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">find /nginx -user nginx
+</span></span><span class="line"><span class="ln">2</span><span class="cl">find /usr/local/nginx/html -user nginx
+</span></span></code></pre></div><p>确保你更所有权为root或其它用户，一个典型的权限设置 /usr/local/nginx/html/</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">ls -l /usr/local/nginx/html/
+</span></span></code></pre></div><p>示例输出：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">-rw-r–r– <span class="m">1</span> root root <span class="m">925</span> Jan <span class="m">3</span> 00:50 error4xx.html
+</span></span><span class="line"><span class="ln">2</span><span class="cl">-rw-r–r– <span class="m">1</span> root root <span class="m">52</span> Jan <span class="m">3</span> 10:00 error5xx.html
+</span></span><span class="line"><span class="ln">3</span><span class="cl">-rw-r–r– <span class="m">1</span> root root <span class="m">134</span> Jan <span class="m">3</span> 00:52 index.html
+</span></span></code></pre></div><p>你必须删除由vi或其它文本编辑器创建的备份文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">find /nginx -name ‘.?’ -not -name .ht -or -name ‘~’ -or -name ‘.bak’ -or -name ‘.old*’
+</span></span><span class="line"><span class="ln">2</span><span class="cl">find /usr/local/nginx/html/ -name ‘.?’ -not -name .ht -or -name ‘~’ -or -name ‘.bak’ -or -name ‘.old*’
+</span></span></code></pre></div><p>通过find命令的-delete选项来删除这些文件。</p>
 <h3 id="限制nginx连接传出">限制Nginx连接传出</h3>
 <p>黑客会使用工具如wget下载你服务器本地的文件。使用Iptables从nginx用户来阻止传出连接。ipt_owner模块试图匹配本地产生的数据包的创建者。下面的例子中只允许user用户在外面使用80连接。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>/sbin/iptables -A OUTPUT -o eth0 -m owner –uid-owner vivek -p tcp –dport <span class="m">80</span> -m state –state NEW,ESTABLISHED -j ACCEPT
-</code></pre></div><h3 id="根据用户的真实-ip-做连接限制">根据用户的真实 IP 做连接限制</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1">## 这里取得原始用户的IP地址</span>
-<span class="ln"> 2</span>map <span class="nv">$http_x_forwarded_for</span>  <span class="nv">$clientRealIp</span> <span class="o">{</span>
-<span class="ln"> 3</span>    <span class="s2">&#34;&#34;</span>  <span class="nv">$remote_addr</span><span class="p">;</span>
-<span class="ln"> 4</span>    ~^<span class="o">(</span>?P&lt;firstAddr&gt;<span class="o">[</span>0-9<span class="se">\.</span><span class="o">]</span>+<span class="o">)</span>,?.*$    <span class="nv">$firstAddr</span><span class="p">;</span>
-<span class="ln"> 5</span><span class="o">}</span>
-<span class="ln"> 6</span> 
-<span class="ln"> 7</span><span class="c1">## 针对原始用户 IP 地址做限制</span>
-<span class="ln"> 8</span>limit_conn_zone <span class="nv">$clientRealIp</span> <span class="nv">zone</span><span class="o">=</span>TotalConnLimitZone:20m <span class="p">;</span>
-<span class="ln"> 9</span>limit_conn  TotalConnLimitZone  50<span class="p">;</span>
-<span class="ln">10</span>limit_conn_log_level notice<span class="p">;</span>
-<span class="ln">11</span> 
-<span class="ln">12</span><span class="c1">## 针对原始用户 IP 地址做限制</span>
-<span class="ln">13</span>limit_req_zone <span class="nv">$clientRealIp</span> <span class="nv">zone</span><span class="o">=</span>ConnLimitZone:20m  <span class="nv">rate</span><span class="o">=</span>10r/s<span class="p">;</span>
-<span class="ln">14</span><span class="c1">#limit_req zone=ConnLimitZone burst=10 nodelay;</span>
-<span class="ln">15</span>limit_req_log_level notice<span class="p">;</span>
-<span class="ln">16</span> 
-<span class="ln">17</span><span class="c1">## 具体服务器配置</span>
-<span class="ln">18</span>server <span class="o">{</span>
-<span class="ln">19</span>    listen   80<span class="p">;</span>
-<span class="ln">20</span>    location ~ <span class="se">\.</span>php$ <span class="o">{</span>
-<span class="ln">21</span>        <span class="c1">## 最多 5 个排队， 由于每秒处理 10 个请求 + 5个排队，你一秒最多发送 15 个请求过来，再多就直接返回 503 错误给你了</span>
-<span class="ln">22</span>        limit_req <span class="nv">zone</span><span class="o">=</span>ConnLimitZone <span class="nv">burst</span><span class="o">=</span><span class="m">5</span> nodelay<span class="p">;</span>
-<span class="ln">23</span> 
-<span class="ln">24</span>        fastcgi_pass   127.0.0.1:9000<span class="p">;</span>
-<span class="ln">25</span>        fastcgi_index  index.php<span class="p">;</span>
-<span class="ln">26</span>        include fastcgi_params<span class="p">;</span>
-<span class="ln">27</span>    <span class="o">}</span>  
-<span class="ln">28</span> 
-<span class="ln">29</span><span class="o">}</span>
-</code></pre></div><h3 id="经过多层cdn之后取得原始用户的ip地址">经过多层CDN之后取得原始用户的IP地址</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">/sbin/iptables -A OUTPUT -o eth0 -m owner –uid-owner vivek -p tcp –dport <span class="m">80</span> -m state –state NEW,ESTABLISHED -j ACCEPT
+</span></span></code></pre></div><h3 id="根据用户的真实-ip-做连接限制">根据用户的真实 IP 做连接限制</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">## 这里取得原始用户的IP地址</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">map <span class="nv">$http_x_forwarded_for</span>  <span class="nv">$clientRealIp</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="s2">&#34;&#34;</span>  <span class="nv">$remote_addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    ~^<span class="o">(</span>?P&lt;firstAddr&gt;<span class="o">[</span>0-9<span class="se">\.</span><span class="o">]</span>+<span class="o">)</span>,?.*$    <span class="nv">$firstAddr</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1">## 针对原始用户 IP 地址做限制</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">limit_conn_zone <span class="nv">$clientRealIp</span> <span class="nv">zone</span><span class="o">=</span>TotalConnLimitZone:20m <span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">limit_conn  TotalConnLimitZone  50<span class="p">;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">limit_conn_log_level notice<span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="c1">## 针对原始用户 IP 地址做限制</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">limit_req_zone <span class="nv">$clientRealIp</span> <span class="nv">zone</span><span class="o">=</span>ConnLimitZone:20m  <span class="nv">rate</span><span class="o">=</span>10r/s<span class="p">;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="c1">#limit_req zone=ConnLimitZone burst=10 nodelay;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">limit_req_log_level notice<span class="p">;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="c1">## 具体服务器配置</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    listen   80<span class="p">;</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    location ~ <span class="se">\.</span>php$ <span class="o">{</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">        <span class="c1">## 最多 5 个排队， 由于每秒处理 10 个请求 + 5个排队，你一秒最多发送 15 个请求过来，再多就直接返回 503 错误给你了</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        limit_req <span class="nv">zone</span><span class="o">=</span>ConnLimitZone <span class="nv">burst</span><span class="o">=</span><span class="m">5</span> nodelay<span class="p">;</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">24</span><span class="cl">        fastcgi_pass   127.0.0.1:9000<span class="p">;</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">        fastcgi_index  index.php<span class="p">;</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">        include fastcgi_params<span class="p">;</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="o">}</span>  
+</span></span><span class="line"><span class="ln">28</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="经过多层cdn之后取得原始用户的ip地址">经过多层CDN之后取得原始用户的IP地址</h3>
 <p>通过 map 指令，我们为 nginx 创建了一个变量 $clientRealIp ，这个就是 原始用户的真实 IP 地址，不论用户是直接访问，还是通过一串 CDN 之后的访问，我们都能取得正确的原始IP地址</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>map <span class="nv">$http_x_forwarded_for</span>  <span class="nv">$clientRealIp</span> <span class="o">{</span>
-<span class="ln">2</span>        <span class="c1">## 没有通过代理，直接用 remote_addr</span>
-<span class="ln">3</span>    <span class="s2">&#34;&#34;</span>  <span class="nv">$remote_addr</span><span class="p">;</span> 
-<span class="ln">4</span>        <span class="c1">## 用正则匹配，从 x_forwarded_for 中取得用户的原始IP</span>
-<span class="ln">5</span>        <span class="c1">## 例如   X-Forwarded-For: 202.123.123.11, 208.22.22.234, 192.168.2.100,...</span>
-<span class="ln">6</span>        <span class="c1">## 这里第一个 202.123.123.11 是用户的真实 IP，后面其它都是经过的 CDN 服务器</span>
-<span class="ln">7</span>    ~^<span class="o">(</span>?P&lt;firstAddr&gt;<span class="o">[</span>0-9<span class="se">\.</span><span class="o">]</span>+<span class="o">)</span>,?.*$    <span class="nv">$firstAddr</span><span class="p">;</span>
-<span class="ln">8</span><span class="o">}</span>
-<span class="ln">9</span>
-</code></pre></div><h3 id="隐藏版本信息">隐藏版本信息</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>server_tokens   off<span class="p">;</span>
-<span class="ln">2</span>proxy_hide_header        X-Powered-By<span class="p">;</span>
-</code></pre></div><h3 id="禁用扩展名">禁用扩展名</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>location ~* .<span class="o">(</span>txt<span class="p">|</span>doc<span class="p">|</span>sql<span class="p">|</span>gz<span class="p">|</span>svn<span class="p">|</span>git<span class="o">)</span>$ <span class="o">{</span>
-<span class="ln">2</span>   deny all<span class="p">;</span>
-<span class="ln">3</span><span class="o">}</span>
-</code></pre></div><h3 id="重定向http请求到https">重定向HTTP请求到HTTPS</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>server <span class="o">{</span>
-<span class="ln">2</span>    ...
-<span class="ln">3</span>    <span class="k">return</span> <span class="m">301</span>  https://<span class="nv">$server_name$request_uri</span><span class="p">;</span>
-<span class="ln">4</span>    ...
-<span class="ln">5</span><span class="o">}</span>
-</code></pre></div><h3 id="防止xss攻击">防止XSS攻击</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>add_header X-Frame-Options <span class="s2">&#34;SAMEORIGIN&#34;</span><span class="p">;</span>
-<span class="ln">2</span>add_header X-XSS-Protection <span class="s2">&#34;1; mode=block&#34;</span><span class="p">;</span>
-<span class="ln">3</span>add_header X-Content-Type-Options <span class="s2">&#34;nosniff&#34;</span><span class="p">;</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">map <span class="nv">$http_x_forwarded_for</span>  <span class="nv">$clientRealIp</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">        <span class="c1">## 没有通过代理，直接用 remote_addr</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="s2">&#34;&#34;</span>  <span class="nv">$remote_addr</span><span class="p">;</span> 
+</span></span><span class="line"><span class="ln">4</span><span class="cl">        <span class="c1">## 用正则匹配，从 x_forwarded_for 中取得用户的原始IP</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        <span class="c1">## 例如   X-Forwarded-For: 202.123.123.11, 208.22.22.234, 192.168.2.100,...</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">        <span class="c1">## 这里第一个 202.123.123.11 是用户的真实 IP，后面其它都是经过的 CDN 服务器</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    ~^<span class="o">(</span>?P&lt;firstAddr&gt;<span class="o">[</span>0-9<span class="se">\.</span><span class="o">]</span>+<span class="o">)</span>,?.*$    <span class="nv">$firstAddr</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="隐藏版本信息">隐藏版本信息</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">server_tokens   off<span class="p">;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">proxy_hide_header        X-Powered-By<span class="p">;</span>
+</span></span></code></pre></div><h3 id="禁用扩展名">禁用扩展名</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">location ~* .<span class="o">(</span>txt<span class="p">|</span>doc<span class="p">|</span>sql<span class="p">|</span>gz<span class="p">|</span>svn<span class="p">|</span>git<span class="o">)</span>$ <span class="o">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">   deny all<span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="重定向http请求到https">重定向HTTP请求到HTTPS</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    ...
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="k">return</span> <span class="m">301</span>  https://<span class="nv">$server_name$request_uri</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    ...
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="防止xss攻击">防止XSS攻击</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">add_header X-Frame-Options <span class="s2">&#34;SAMEORIGIN&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">add_header X-XSS-Protection <span class="s2">&#34;1; mode=block&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">add_header X-Content-Type-Options <span class="s2">&#34;nosniff&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
 <li><code>X-Frame-Options</code>： 响应头表示是否允许浏览器加载frame等属性，有三个配置DENY禁止任何网页被嵌入,SAMEORIGIN`只允许本网站的嵌套,ALLOW-FROM允许指定地址的嵌套</li>
 <li><code>X-XSS-Protection</code>： 表示启用XSS过滤（禁用过滤为X-XSS-Protection: 0），mode=block表示若检查到XSS攻击则停止渲染页面</li>
 <li><code>X-Content-Type-Options</code>： 响应头用来指定浏览器对未指定或错误指定Content-Type资源真正类型的猜测行为，nosniff 表示不允许任何猜测</li>
@@ -727,11 +725,11 @@ Linux Iptables:限制每次Nginx连接数</p>
 <h3 id="目录只读">目录只读</h3>
 <p>如果没有上传需求，完全可以把网站根目录弄成只读的，加固安全。</p>
 <p>做了一点小动作，给网站根目录搞了一个只读的挂载点。这里假设网站根目录为/var/www/html</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>mkdir -p /data  
-<span class="ln">2</span>mkdir -p /var/www/html  
-<span class="ln">3</span>mount --bind /data /var/www/html  
-<span class="ln">4</span>mount -o remount,ro --bind /data /var/www/html  
-</code></pre></div><p>网站内容实际位于/data，网站内容更新就往/data里更新，目录/var/www/html无法执行任何写操作，否则会报错“Read-only file system”，极大程度上可以防止提权篡改。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">data</span>  
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span>  
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">mount</span> <span class="o">--</span><span class="n">bind</span> <span class="o">/</span><span class="n">data</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span>  
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="n">mount</span> <span class="o">-</span><span class="n">o</span> <span class="n">remount</span><span class="p">,</span><span class="n">ro</span> <span class="o">--</span><span class="n">bind</span> <span class="o">/</span><span class="n">data</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span>  
+</span></span></code></pre></div><p>网站内容实际位于/data，网站内容更新就往/data里更新，目录/var/www/html无法执行任何写操作，否则会报错“Read-only file system”，极大程度上可以防止提权篡改。</p>
 <hr>
 <p>参考链接：</p>
 <ul>
@@ -756,6 +754,9 @@ Linux Iptables:限制每次Nginx连接数</p>
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
+        <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/01/gateway-modify-request-response/" class="nav-link">通过SpringGateway对接口请求进行加解密</a>
       </li>
       <li>
@@ -776,14 +777,17 @@ Linux Iptables:限制每次Nginx连接数</p>
       <li>
         <a href="https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/" class="nav-link">terraform中阿里云ECS ssh key变化问题</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/07/terraform_state_consistent/" class="nav-link">解决terraform与远程云服务器资源状态不一致的问题</a>
-      </li>
     </ul>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/01/gateway-modify-request-response/" class="nav-link">通过SpringGateway对接口请求进行加解密</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2023/12/unsafe_http_methods/" class="nav-link">不安全的http方法</a>
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
@@ -799,12 +803,6 @@ Linux Iptables:限制每次Nginx连接数</p>
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/" class="nav-link">Spring Boot 自动设置响应头引发的问题</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/11/on-premise-vs-private-cloud/" class="nav-link">On-Premise 与 Private Cloud 区别</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/05/access-new-bing/" class="nav-link">不用魔法直接访问 New Bing</a>
       </li>
     </ul>
     <div>
@@ -922,6 +920,10 @@ Linux Iptables:限制每次Nginx连接数</p>
             </a>
             
             
+            <a href='https://www.zengxi.net/categories/kafka/' class=" post_tag button button_translucent" data-position=1>KAFKA<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=18>KUBERNETES<span class="button_tally">18</span>
             </a>
             
@@ -978,11 +980,15 @@ Linux Iptables:限制每次Nginx连接数</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
             </a>
             
             
@@ -994,7 +1000,7 @@ Linux Iptables:限制每次Nginx连接数</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
             </a>
             
             
@@ -1197,6 +1203,10 @@ Linux Iptables:限制每次Nginx连接数</p>
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/http/' class=" post_tag button button_translucent" data-position=1>HTTP<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/inputstream/' class=" post_tag button button_translucent" data-position=1>INPUTSTREAM<span class="button_tally">1</span>
             </a>
             
@@ -1234,6 +1244,10 @@ Linux Iptables:限制每次Nginx连接数</p>
             
             
             <a href='https://www.zengxi.net/tags/jvm/' class=" post_tag button button_translucent" data-position=2>JVM<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/kafka/' class=" post_tag button button_translucent" data-position=1>KAFKA<span class="button_tally">1</span>
             </a>
             
             
@@ -1417,31 +1431,11 @@ Linux Iptables:限制每次Nginx连接数</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=2>安全<span class="button_tally">2</span>
             </a>
             
             
@@ -1449,23 +1443,15 @@ Linux Iptables:限制每次Nginx连接数</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
             </a>
             
             
@@ -1473,7 +1459,23 @@ Linux Iptables:限制每次Nginx连接数</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
             </a>
             
             
@@ -1481,19 +1483,39 @@ Linux Iptables:限制每次Nginx连接数</p>
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=4>排序<span class="button_tally">4</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
             </a>
             
             
@@ -1501,7 +1523,15 @@ Linux Iptables:限制每次Nginx连接数</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BA%8B%E5%8A%A1/' class=" post_tag button button_translucent" data-position=1>事务<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
             </a>
             
             
@@ -1513,6 +1543,14 @@ Linux Iptables:限制每次Nginx连接数</p>
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E7%BD%91%E5%85%B3/' class=" post_tag button button_translucent" data-position=1>网关<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
             </a>
             
@@ -1521,27 +1559,11 @@ Linux Iptables:限制每次Nginx连接数</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BD%91%E5%85%B3/' class=" post_tag button button_translucent" data-position=1>网关<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
             </a>
             
             
@@ -1553,15 +1575,11 @@ Linux Iptables:限制每次Nginx连接数</p>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1638,7 +1656,7 @@ Linux Iptables:限制每次Nginx连接数</p>
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" integrity="sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" integrity="sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous"></script>
     
   </body>
 </html>

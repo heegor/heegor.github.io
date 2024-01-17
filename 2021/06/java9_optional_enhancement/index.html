@@ -20,18 +20,18 @@
 
 <meta property="og:type" content="article">
 <meta name="description" content="相关文章： Java 8引入Optional类
- Optional 类在 Java 8 中引入，Optional 类的引入很好的解决空指针异常。。在 java 9 中, 添加了三个方法来改进它的功能.
+Optional 类在 Java 8 中引入，Optional 类的引入很好的解决空指针异常。。在 java 9 中, 添加了三个方法来改进它的功能.
 stream() 方法 语法
-1public Stream&lt;T&gt; stream() stream 方法的作 …">
+1public Stream&lt;T&gt; stream() stream 方法的作用 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="Java 9新特性 - (5)Optional类中新增几个方法" />
 <meta property="og:url" content="https://www.zengxi.net/2021/06/java9_optional_enhancement/" />
 <meta property="og:title" content="Java 9新特性 - (5)Optional类中新增几个方法" />
 <meta property="og:description" content="相关文章： Java 8引入Optional类
- Optional 类在 Java 8 中引入，Optional 类的引入很好的解决空指针异常。。在 java 9 中, 添加了三个方法来改进它的功能.
+Optional 类在 Java 8 中引入，Optional 类的引入很好的解决空指针异常。。在 java 9 中, 添加了三个方法来改进它的功能.
 stream() 方法 语法
-1public Stream&lt;T&gt; stream() stream 方法的作 …" />
+1public Stream&lt;T&gt; stream() stream 方法的作用 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -47,8 +47,8 @@ stream() 方法 语法
     
     
     <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
-    "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" as="script" integrity=
+    "sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous">
 
     
     <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
@@ -185,63 +185,63 @@ stream() 方法 语法
 <p>Optional 类在 Java 8 中引入，Optional 类的引入很好的解决空指针异常。。在 java 9 中, 添加了三个方法来改进它的功能.</p>
 <h2 id="stream-方法">stream() 方法</h2>
 <p>语法</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>public Stream&lt;T&gt; stream()
-</code></pre></div><p>stream 方法的作用就是将 Optional 转为一个 Stream，如果该 Optional 中包含值，那么就返回包含这个值的 Stream，否则返回一个空的 Stream（Stream.empty()）。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">public Stream&lt;T&gt; stream()
+</span></span></code></pre></div><p>stream 方法的作用就是将 Optional 转为一个 Stream，如果该 Optional 中包含值，那么就返回包含这个值的 Stream，否则返回一个空的 Stream（Stream.empty()）。</p>
 <p>实例</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span> <span class="o">(</span>
-<span class="ln"> 2</span>    <span class="n">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">(),</span> 
-<span class="ln"> 3</span>    <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">),</span> 
-<span class="ln"> 4</span>    <span class="n">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">(),</span> 
-<span class="ln"> 5</span>    <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">));</span>
-<span class="ln"> 6</span>
-<span class="ln"> 7</span><span class="c1">//filter the list based to print non-empty values
-</span><span class="ln"> 8</span><span class="c1">//if optional is non-empty, get the value in stream, otherwise return empty
-</span><span class="ln"> 9</span><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">filteredList</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
-<span class="ln">10</span>  <span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="n">o</span> <span class="o">-&gt;</span> <span class="n">o</span><span class="o">.</span><span class="na">isPresent</span><span class="o">()</span> <span class="o">?</span> <span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">get</span><span class="o">())</span> <span class="o">:</span> <span class="n">Stream</span><span class="o">.</span><span class="na">empty</span><span class="o">())</span>
-<span class="ln">11</span>  <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
-<span class="ln">12</span>
-<span class="ln">13</span><span class="c1">//Optional::stream method will return a stream of either one 
-</span><span class="ln">14</span><span class="c1">//or zero element if data is present or not.
-</span><span class="ln">15</span><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">filteredListJava9</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
-<span class="ln">16</span>  <span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="n">Optional</span><span class="o">::</span><span class="n">stream</span><span class="o">)</span>
-<span class="ln">17</span>  <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
-<span class="ln">18</span>
-<span class="ln">19</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">filteredList</span><span class="o">);</span>
-<span class="ln">20</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">filteredListJava9</span><span class="o">);</span>
-</code></pre></div><p>执行输出结果为：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>[A, B]
-<span class="ln">2</span>[A, B]
-</code></pre></div><h2 id="ifpresentorelse-方法">ifPresentOrElse() 方法</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">(),</span><span class="w"> 
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">),</span><span class="w"> 
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">(),</span><span class="w"> 
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;B&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w"></span><span class="c1">//filter the list based to print non-empty values</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w"></span><span class="c1">//if optional is non-empty, get the value in stream, otherwise return empty</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">filteredList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">  </span><span class="p">.</span><span class="na">flatMap</span><span class="p">(</span><span class="n">o</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="na">isPresent</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="na">get</span><span class="p">())</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Stream</span><span class="p">.</span><span class="na">empty</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">  </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w"></span><span class="c1">//Optional::stream method will return a stream of either one </span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w"></span><span class="c1">//or zero element if data is present or not.</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">filteredListJava9</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">  </span><span class="p">.</span><span class="na">flatMap</span><span class="p">(</span><span class="n">Optional</span><span class="p">::</span><span class="n">stream</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w">  </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">filteredList</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">filteredListJava9</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>执行输出结果为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">[A, B]
+</span></span><span class="line"><span class="ln">2</span><span class="cl">[A, B]
+</span></span></code></pre></div><h2 id="ifpresentorelse-方法">ifPresentOrElse() 方法</h2>
 <p>语法</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">ifPresentOrElse</span><span class="o">(</span><span class="n">Consumer</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">action</span><span class="o">,</span> <span class="n">Runnable</span> <span class="n">emptyAction</span><span class="o">)</span>
-</code></pre></div><p>ifPresentOrElse 方法的改进就是有了 else，接受两个参数 Consumer 和 Runnable。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">ifPresentOrElse</span><span class="p">(</span><span class="n">Consumer</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">action</span><span class="p">,</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="n">emptyAction</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></div><p>ifPresentOrElse 方法的改进就是有了 else，接受两个参数 Consumer 和 Runnable。</p>
 <p>ifPresentOrElse 方法的用途是，如果一个 Optional 包含值，则对其包含的值调用函数 action，即 action.accept(value)，这与 ifPresent 一致；与 ifPresent 方法的区别在于，ifPresentOrElse 还有第二个参数 emptyAction —— 如果 Optional 不包含值，那么 ifPresentOrElse 便会调用 emptyAction，即 emptyAction.run()。</p>
 <p>实例</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">optional</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
-<span class="ln">2</span><span class="n">optional</span><span class="o">.</span><span class="na">ifPresentOrElse</span><span class="o">(</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Value: &#34;</span> <span class="o">+</span> <span class="n">x</span><span class="o">),</span> 
-<span class="ln">3</span>    <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Not Present.&#34;</span><span class="o">));</span>
-<span class="ln">4</span><span class="n">optional</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>
-<span class="ln">5</span><span class="n">optional</span><span class="o">.</span><span class="na">ifPresentOrElse</span><span class="o">(</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Value: &#34;</span> <span class="o">+</span> <span class="n">x</span><span class="o">),</span> 
-<span class="ln">6</span>    <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Not Present.&#34;</span><span class="o">));</span>
-</code></pre></div><p>执行输出结果为：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>Value: 1
-<span class="ln">2</span>Not Present.
-</code></pre></div><h2 id="or-方法">or() 方法</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">optional</span><span class="p">.</span><span class="na">ifPresentOrElse</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Value: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">),</span><span class="w"> 
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">    </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Not Present.&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">optional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">optional</span><span class="p">.</span><span class="na">ifPresentOrElse</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Value: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">),</span><span class="w"> 
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">    </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Not Present.&#34;</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><p>执行输出结果为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Value: 1
+</span></span><span class="line"><span class="ln">2</span><span class="cl">Not Present.
+</span></span></code></pre></div><h2 id="or-方法">or() 方法</h2>
 <p>语法</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kd">public</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">or</span><span class="o">(</span><span class="n">Supplier</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Optional</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">supplier</span><span class="o">)</span>
-</code></pre></div><p>如果值存在，返回 Optional 指定的值，否则返回一个预设的值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">or</span><span class="p">(</span><span class="n">Supplier</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">supplier</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></div><p>如果值存在，返回 Optional 指定的值，否则返回一个预设的值。</p>
 <p>实例</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optional1</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;Mahesh&#34;</span><span class="o">);</span>
-<span class="ln">2</span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">supplierString</span> <span class="o">=</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;Not Present&#34;</span><span class="o">);</span>
-<span class="ln">3</span><span class="n">optional1</span> <span class="o">=</span> <span class="n">optional1</span><span class="o">.</span><span class="na">or</span><span class="o">(</span> <span class="n">supplierString</span><span class="o">);</span>
-<span class="ln">4</span><span class="n">optional1</span><span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Value: &#34;</span> <span class="o">+</span> <span class="n">x</span><span class="o">));</span>
-<span class="ln">5</span><span class="n">optional1</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>    
-<span class="ln">6</span><span class="n">optional1</span> <span class="o">=</span> <span class="n">optional1</span><span class="o">.</span><span class="na">or</span><span class="o">(</span> <span class="n">supplierString</span><span class="o">);</span>
-<span class="ln">7</span><span class="n">optional1</span><span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Value: &#34;</span> <span class="o">+</span> <span class="n">x</span><span class="o">));</span>  
-</code></pre></div><p>执行输出结果为：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>Value: Mahesh
-<span class="ln">2</span>Value: Not Present
-</code></pre></div><p>参考java文档可以看出来or, orElse, orElseGet 区别，主要是在返回值与方法参数上</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optional1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;Mahesh&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">supplierString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;Not Present&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">optional1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optional1</span><span class="p">.</span><span class="na">or</span><span class="p">(</span><span class="w"> </span><span class="n">supplierString</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">optional1</span><span class="p">.</span><span class="na">ifPresent</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Value: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">optional1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">();</span><span class="w">    
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">optional1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optional1</span><span class="p">.</span><span class="na">or</span><span class="p">(</span><span class="w"> </span><span class="n">supplierString</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="n">optional1</span><span class="p">.</span><span class="na">ifPresent</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Value: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">));</span><span class="w">  
+</span></span></span></code></pre></div><p>执行输出结果为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Value: Mahesh
+</span></span><span class="line"><span class="ln">2</span><span class="cl">Value: Not Present
+</span></span></code></pre></div><p>参考java文档可以看出来or, orElse, orElseGet 区别，主要是在返回值与方法参数上</p>
 <table>
 <thead>
 <tr>
@@ -290,6 +290,9 @@ stream() 方法 语法
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
+        <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/01/gateway-modify-request-response/" class="nav-link">通过SpringGateway对接口请求进行加解密</a>
       </li>
       <li>
@@ -310,14 +313,17 @@ stream() 方法 语法
       <li>
         <a href="https://www.zengxi.net/2020/07/zookeeper_purge_file/" class="nav-link">zookeeper服务器文件清理</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/" class="nav-link">terraform中阿里云ECS ssh key变化问题</a>
-      </li>
     </ul>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/01/gateway-modify-request-response/" class="nav-link">通过SpringGateway对接口请求进行加解密</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2023/12/unsafe_http_methods/" class="nav-link">不安全的http方法</a>
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
@@ -333,12 +339,6 @@ stream() 方法 语法
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/" class="nav-link">Spring Boot 自动设置响应头引发的问题</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/11/on-premise-vs-private-cloud/" class="nav-link">On-Premise 与 Private Cloud 区别</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/05/access-new-bing/" class="nav-link">不用魔法直接访问 New Bing</a>
       </li>
     </ul>
     <div>
@@ -456,6 +456,10 @@ stream() 方法 语法
             </a>
             
             
+            <a href='https://www.zengxi.net/categories/kafka/' class=" post_tag button button_translucent" data-position=1>KAFKA<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=18>KUBERNETES<span class="button_tally">18</span>
             </a>
             
@@ -512,11 +516,15 @@ stream() 方法 语法
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
             </a>
             
             
@@ -528,7 +536,7 @@ stream() 方法 语法
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
             </a>
             
             
@@ -731,6 +739,10 @@ stream() 方法 语法
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/http/' class=" post_tag button button_translucent" data-position=1>HTTP<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/inputstream/' class=" post_tag button button_translucent" data-position=1>INPUTSTREAM<span class="button_tally">1</span>
             </a>
             
@@ -768,6 +780,10 @@ stream() 方法 语法
             
             
             <a href='https://www.zengxi.net/tags/jvm/' class=" post_tag button button_translucent" data-position=2>JVM<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/kafka/' class=" post_tag button button_translucent" data-position=1>KAFKA<span class="button_tally">1</span>
             </a>
             
             
@@ -951,31 +967,11 @@ stream() 方法 语法
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=2>安全<span class="button_tally">2</span>
             </a>
             
             
@@ -983,23 +979,15 @@ stream() 方法 语法
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
             </a>
             
             
@@ -1007,7 +995,23 @@ stream() 方法 语法
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
             </a>
             
             
@@ -1015,19 +1019,39 @@ stream() 方法 语法
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=4>排序<span class="button_tally">4</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
             </a>
             
             
@@ -1035,7 +1059,15 @@ stream() 方法 语法
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BA%8B%E5%8A%A1/' class=" post_tag button button_translucent" data-position=1>事务<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
             </a>
             
             
@@ -1047,6 +1079,14 @@ stream() 方法 语法
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E7%BD%91%E5%85%B3/' class=" post_tag button button_translucent" data-position=1>网关<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
             </a>
             
@@ -1055,27 +1095,11 @@ stream() 方法 语法
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BD%91%E5%85%B3/' class=" post_tag button button_translucent" data-position=1>网关<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
             </a>
             
             
@@ -1087,15 +1111,11 @@ stream() 方法 语法
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1172,7 +1192,7 @@ stream() 方法 语法
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" integrity="sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" integrity="sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous"></script>
     
   </body>
 </html>

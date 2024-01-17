@@ -5,136 +5,72 @@
     <link>https://www.zengxi.net/categories/linux/</link>
     <description>Recent content in Linux on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Sat, 14 Nov 2020 11:45:39 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 14 Nov 2020 11:45:39 +0000</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>利用frp与nginx实现公网访问NAS</title>
       <link>https://www.zengxi.net/2020/11/nas_frp_nginx/</link>
       <pubDate>Sat, 14 Nov 2020 11:45:39 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/11/nas_frp_nginx/</guid>
-      <description>能够在远程访问存储NAS上面的资料，才能真正发挥NAS的作用。但是对于没有公网IP的内网用户，如何实现在公网上面访问NAS，是一个需要事先解决的问题。
-如果拥有一个有公网IP的VPS，可以通过 frp + Nginx 来实现内网穿透解决这个问题。另外，从安全角度考虑，如果有可能的话，整个链路上面的都使用 https 协议通讯更加安全。
-下面大致描绘了访问的链路图：
- 浏览器通过https协议与 VPS 通讯。浏览器的请求先发到nginx上，ngnix再将请求转发的至frps。在frps前面加上nginx做反向代理的好处是，如果这个VPS上面有其他请求转发的需求（比如这个VPS部署了个人网站或者博客），那在访问所有这些服务的时候，都可以使用同一个端口（比如443）。使用默认端口的话，在访问的时候，端口号都可以不用输入 frps与部署在NAS内网的frpc通讯，frpc将请求转发至内网的NAS。  1(( browser )) ---https---&amp;gt; (( nginx --&amp;gt; frps )) ---https---&amp;gt;&amp;gt; (( frpc --&amp;gt; NAS )) VPS上的配置 配置frps 从 https://github.com/fatedier/frp/releases 上找到最新的版本并下载。解压后，修改frps.ini:
-1[common] 2bind_port = 7000 3vhost_https_port = 7443 4# 使用kcp加速 5kcp_bind_port = 7001 6 7# auth 8authentication_method = token 9token = 12345678 10 11# log 12log_file = /var/log/frps.log 13log_level = info 14log_max_days = 3 15 下面注册frps为系统服务。如果是ubuntu系统，按如下格式创建一个新的文件 /etc/systemd/system/frps.</description>
+      <description>能够在远程访问存储NAS上面的资料，才能真正发挥NAS的作用。但是对于没有公网IP的内网用户，如何实现在公网上面访问NAS，是一个需要事先解决的问题。&#xA;如果拥有一个有公网IP的VPS，可以通过 frp + Nginx 来实现内网穿透解决这个问题。另外，从安全角度考虑，如果有可能的话，整个链路上面的都使用 https 协议通讯更加安全。&#xA;下面大致描绘了访问的链路图：&#xA;浏览器通过https协议与 VPS 通讯。浏览器的请求先发到nginx上，ngnix再将请求转发的至frps。在frps前面加上nginx做反向代理的好处是，如果这个VPS上面有其他请求转发的需求（比如这个VPS部署了个人网站或者博客），那在访问所有这些服务的时候，都可以使用同一个端口（比如443）。使用默认端口的话，在访问的时候，端口号都可以不用输入 frps与部署在NAS内网的frpc通讯，frpc将请求转发至内网的NAS。 1(( browser )) ---https---&amp;gt; (( nginx --&amp;gt; frps )) ---https---&amp;gt;&amp;gt; (( frpc --&amp;gt; NAS )) VPS上的配置 配置frps 从 https://github.com/fatedier/frp/releases 上找到最新的版本并下载。解压后，修改frps.ini:&#xA;1[common] 2bind_port = 7000 3vhost_https_port = 7443 4# 使用kcp加速 5kcp_bind_port = 7001 6 7# auth 8authentication_method = token 9token = 12345678 10 11# log 12log_file = /var/log/frps.log 13log_level = info 14log_max_days = 3 下面注册frps为系统服务。如果是ubuntu系统，按如下格式创建一个新的文件 /etc/systemd/system/frps.service&#xA;1[Unit] 2Description=frps service 3After=network.</description>
     </item>
-    
     <item>
       <title>Cloudflare开启HTTPS加密后，请求转发到源站报522错误</title>
       <link>https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/</link>
       <pubDate>Fri, 13 Nov 2020 08:23:45 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/11/cloudflare_https_redirect_522_error/</guid>
-      <description>笔者使用Cloudflare做DNS，同时使用Cloudflare的SSL证书服务。整个链路如下图:
-1|----------| |-----------| |---------------| 2| Brower | ------&amp;gt; | Cloudfare | ------&amp;gt; | Origin Server | 3|----------| |-----------| |---------------| 4 笔者想要做整个链路的https，但是在配置完之后，打开页面是看到522的错误。这个错误表示连接上源站点，但是请求超时。可以参考这个页面来找到可能的原因： https://support.cloudflare.com/hc/en-us/articles/115003011431-Error-522-Connection-timed-out#522error
-Cloudfare在配置https的时候有4个选项：
- Off (not secure): 不开启 Flexible: 仅在浏览器与Cloudflare之间用https加密传输, Cloudflare到源站之间不加密 Full: 整个链路的端到端加密, 源站可使用自签名的证书 Full (strict)：整个链路的端到端加密，但是源站必须使用可信任的CA证书或者Cloudflare Origin CA证书。Cloudflare Origin CA证书是用于Cloudfare与源站之间的加密通讯，需要在Cloudflare控制台配置  如果选择不恰当的选项，可能会导致访问错误。比如，如果源网站用的是自签名的证书，但是选择Full (strict)选项，会报证书错误。
-笔者遇到522的问题，是由于iptables规则的设置问题。把cloudflare的ip段添加到iptables的允许列表中就可以了。ip列表见： https://www.cloudflare.com/zh-cn/ips
-1iptables -A INPUT -p tcp -s 173.245.48.0/20 -j ACCEPT 2iptables -A INPUT -p tcp -s 103.21.244.0/22 -j ACCEPT 3iptables -A INPUT -p tcp -s 103.22.200.0/22 -j ACCEPT 4iptables -A INPUT -p tcp -s 103.</description>
+      <description>笔者使用Cloudflare做DNS，同时使用Cloudflare的SSL证书服务。整个链路如下图:&#xA;1|----------| |-----------| |---------------| 2| Brower | ------&amp;gt; | Cloudfare | ------&amp;gt; | Origin Server | 3|----------| |-----------| |---------------| 笔者想要做整个链路的https，但是在配置完之后，打开页面是看到522的错误。这个错误表示连接上源站点，但是请求超时。可以参考这个页面来找到可能的原因： https://support.cloudflare.com/hc/en-us/articles/115003011431-Error-522-Connection-timed-out#522error&#xA;Cloudfare在配置https的时候有4个选项：&#xA;Off (not secure): 不开启 Flexible: 仅在浏览器与Cloudflare之间用https加密传输, Cloudflare到源站之间不加密 Full: 整个链路的端到端加密, 源站可使用自签名的证书 Full (strict)：整个链路的端到端加密，但是源站必须使用可信任的CA证书或者Cloudflare Origin CA证书。Cloudflare Origin CA证书是用于Cloudfare与源站之间的加密通讯，需要在Cloudflare控制台配置 如果选择不恰当的选项，可能会导致访问错误。比如，如果源网站用的是自签名的证书，但是选择Full (strict)选项，会报证书错误。&#xA;笔者遇到522的问题，是由于iptables规则的设置问题。把cloudflare的ip段添加到iptables的允许列表中就可以了。ip列表见： https://www.cloudflare.com/zh-cn/ips&#xA;1iptables -A INPUT -p tcp -s 173.245.48.0/20 -j ACCEPT 2iptables -A INPUT -p tcp -s 103.21.244.0/22 -j ACCEPT 3iptables -A INPUT -p tcp -s 103.22.200.0/22 -j ACCEPT 4iptables -A INPUT -p tcp -s 103.</description>
     </item>
-    
     <item>
       <title>Linux查看某个端口是否被占用</title>
       <link>https://www.zengxi.net/2020/11/ubuntu_install_postgresql/</link>
       <pubDate>Mon, 09 Nov 2020 08:23:45 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/11/ubuntu_install_postgresql/</guid>
-      <description> 使用lsof  1lsof -i 2 3lsof -i:80 使用netstat  1netstat -anp | grep 80 </description>
+      <description> 使用lsof 1lsof -i 2 3lsof -i:80 使用netstat 1netstat -anp | grep 80 </description>
     </item>
-    
     <item>
       <title>grep 返回 Binary file (standard input) matches</title>
       <link>https://www.zengxi.net/2020/07/grep_binary_file_match/</link>
       <pubDate>Mon, 20 Jul 2020 11:31:49 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/07/grep_binary_file_match/</guid>
-      <description>grep &amp;quot;keyword&amp;quot; xxx.log时输出: Binary file (standard input) matches
-这个是因为grep命令认为它是一个二进制文件。解决方案是，加上一个参数 -a：
-1grep -a &amp;#34;keyword&amp;#34; xxx.log 该参数的解释：
-1-a, --text equivalent to --binary-files=text </description>
+      <description>grep &amp;quot;keyword&amp;quot; xxx.log时输出: Binary file (standard input) matches&#xA;这个是因为grep命令认为它是一个二进制文件。解决方案是，加上一个参数 -a：&#xA;1grep -a &amp;#34;keyword&amp;#34; xxx.log 该参数的解释：&#xA;1-a, --text equivalent to --binary-files=text </description>
     </item>
-    
     <item>
       <title>Linux下面使用dd命令烧录U盘并查看执行进度</title>
       <link>https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/</link>
       <pubDate>Mon, 13 Jul 2020 10:36:12 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/</guid>
-      <description>烧录U盘 先用fdisk来查看U盘的盘符
-1sudo fdisk -l 再用dd命令来写数据到U盘
-1sudo dd if=/home/paul/Downloads/test.iso of=/dev/sdc bs=1M count=10000 查看执行进度 假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命令行窗口，执行下面的命令，注意命令上面可能需要加上sudo
-方法一：
-1watch -n 5 pkill -USR1 ^dd$ 方法二：
-1watch -n 5 killall -USR1 dd 方法三：
-1while killall -USR1 dd; do sleep 5; done 方法四：
-1while (ps auxww |grep &amp;#34; dd &amp;#34; |grep -v grep |awk &amp;#39;{print $2}&amp;#39; |while read pid; do kill -USR1 $pid; done) ; do sleep 5; done 上述四种方法中使用三个命令：pkill、killall、kill向dd命令发送SIGUSR1信息，dd命令进程接收到信号之后就打印出自己当前的进度。
-看到的效果类似：
-1772+0 records in 2772+0 records out 3809500672 bytes (810 MB, 772 MiB) copied, 117.</description>
+      <description>烧录U盘 先用fdisk来查看U盘的盘符&#xA;1sudo fdisk -l 再用dd命令来写数据到U盘&#xA;1sudo dd if=/home/paul/Downloads/test.iso of=/dev/sdc bs=1M count=10000 查看执行进度 假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命令行窗口，执行下面的命令，注意命令上面可能需要加上sudo&#xA;方法一：&#xA;1watch -n 5 pkill -USR1 ^dd$ 方法二：&#xA;1watch -n 5 killall -USR1 dd 方法三：&#xA;1while killall -USR1 dd; do sleep 5; done 方法四：&#xA;1while (ps auxww |grep &amp;#34; dd &amp;#34; |grep -v grep |awk &amp;#39;{print $2}&amp;#39; |while read pid; do kill -USR1 $pid; done) ; do sleep 5; done 上述四种方法中使用三个命令：pkill、killall、kill向dd命令发送SIGUSR1信息，dd命令进程接收到信号之后就打印出自己当前的进度。&#xA;看到的效果类似：&#xA;1772+0 records in 2772+0 records out 3809500672 bytes (810 MB, 772 MiB) copied, 117.</description>
     </item>
-    
     <item>
       <title>shell中用tr命令转换字符大小写</title>
       <link>https://www.zengxi.net/2018/07/shell-translate-character/</link>
       <pubDate>Wed, 25 Jul 2018 21:40:22 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2018/07/shell-translate-character/</guid>
-      <description>在写shell脚本的时候，可能需要将特定的英文字符转换大小写。可以借助tr命令来实现这个功能。
-（1）tr的下面这个命令表示把string1替换成string2
- tr string1 string2  运行下面的命令
-1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a&amp;#39; &amp;#39;A&amp;#39; 可以看到输出结果中把a换成了A
- this is A pen  （2）同时，tr命令也支持指定一个字符的范围，在这个范围内分别作替换
- tr &#39;c1-c2&#39; &#39;c3-c4&#39;  比如，如果只需要把从a到h的字符，替换成大写，那么可以用下面的命令
-1tr &amp;#39;a-h&amp;#39; &amp;#39;A-H&amp;#39; 运行下面的命令
-1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a-h&amp;#39; &amp;#39;A-H&amp;#39; 可以看到输出结果中把从a到h的字符全部换成了大写：
- tHis is A pEn  如果要把所有字符转成大写，那么只需要把范围指定成a-z即可。运行下面的命令
-1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a-z&amp;#39; &amp;#39;A-Z&amp;#39; 可以看输出结果：
- THIS IS A PEN   </description>
+      <description>在写shell脚本的时候，可能需要将特定的英文字符转换大小写。可以借助tr命令来实现这个功能。&#xA;（1）tr的下面这个命令表示把string1替换成string2&#xA;tr string1 string2 运行下面的命令&#xA;1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a&amp;#39; &amp;#39;A&amp;#39; 可以看到输出结果中把a换成了A&#xA;this is A pen （2）同时，tr命令也支持指定一个字符的范围，在这个范围内分别作替换&#xA;tr &#39;c1-c2&#39; &#39;c3-c4&#39; 比如，如果只需要把从a到h的字符，替换成大写，那么可以用下面的命令&#xA;1tr &amp;#39;a-h&amp;#39; &amp;#39;A-H&amp;#39; 运行下面的命令&#xA;1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a-h&amp;#39; &amp;#39;A-H&amp;#39; 可以看到输出结果中把从a到h的字符全部换成了大写：&#xA;tHis is A pEn 如果要把所有字符转成大写，那么只需要把范围指定成a-z即可。运行下面的命令&#xA;1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a-z&amp;#39; &amp;#39;A-Z&amp;#39; 可以看输出结果：&#xA;THIS IS A PEN </description>
     </item>
-    
     <item>
       <title>date命令按指定locale所对应的日期格式输出</title>
       <link>https://www.zengxi.net/2018/07/force-date-use-locale/</link>
       <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2018/07/force-date-use-locale/</guid>
-      <description>在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。
-比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出
-1date +%a 下面是locale为zh_CN的输出：
- 三  下面是locale为en_US的输出：
- Wed  如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值
-首先我们可以运行下面的命令来列出当前系统安装了哪些locale。这一步有一定的必要，因为在不同的系统下面，locale名称可能不同。比如，Ubuntu下面叫做zh_CN.utf8，而MacOS下面叫做zh_CN.UTF-8。如果locale名称没用对，那么看到的就不是所期望的结果。
-1locale -a 知道locale的具体名称之后，可以用类似下面的命令来指定locale并按照指定格式输出。
-1LC_ALL=zh_CN.UTF-8 date 2LC_ALL=zh_CN.UTF-8 date +%a 3 4LC_ALL=en_US.UTF-8 date 5LC_ALL=en_US.UTF-8 date +%a 上面的命令分别有如下的输出:
- 2018年 7月 4日 星期三 20时33分41秒 CST 三 Wed Jul 4 20:33:41 CST 2018 Wed  </description>
+      <description>在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。&#xA;比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出&#xA;1date +%a 下面是locale为zh_CN的输出：&#xA;三 下面是locale为en_US的输出：&#xA;Wed 如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值&#xA;首先我们可以运行下面的命令来列出当前系统安装了哪些locale。这一步有一定的必要，因为在不同的系统下面，locale名称可能不同。比如，Ubuntu下面叫做zh_CN.utf8，而MacOS下面叫做zh_CN.UTF-8。如果locale名称没用对，那么看到的就不是所期望的结果。&#xA;1locale -a 知道locale的具体名称之后，可以用类似下面的命令来指定locale并按照指定格式输出。&#xA;1LC_ALL=zh_CN.UTF-8 date 2LC_ALL=zh_CN.UTF-8 date +%a 3 4LC_ALL=en_US.UTF-8 date 5LC_ALL=en_US.UTF-8 date +%a 上面的命令分别有如下的输出:&#xA;2018年 7月 4日 星期三 20时33分41秒 CST 三 Wed Jul 4 20:33:41 CST 2018 Wed </description>
     </item>
-    
     <item>
       <title>Ubuntu 16.04系统自带截屏工具快捷键</title>
       <link>https://www.zengxi.net/2018/06/ubuntu-screenshot-shortcut/</link>
       <pubDate>Mon, 25 Jun 2018 03:34:29 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2018/06/ubuntu-screenshot-shortcut/</guid>
-      <description>Ubuntu 16.04系统自带了截屏工具，可以实现窗口截屏、区域截屏等。默认的快捷键是：
-1 Print 全屏截图 2 Ctrl + Print 全屏截图并保存到剪贴板 3 4 Alt + Print 窗口截图 5 Ctrl + Alt + Print 窗口截图并保存到剪贴板 6 7 Shift + Print 区域截图 8 Ctrl + Shift + Print 区域截图并保存到剪贴板 9 10 Ctrl + Shift + Alt + R 录制屏幕短视频 </description>
+      <description>Ubuntu 16.04系统自带了截屏工具，可以实现窗口截屏、区域截屏等。默认的快捷键是：&#xA;1 Print 全屏截图 2 Ctrl + Print 全屏截图并保存到剪贴板 3 4 Alt + Print 窗口截图 5 Ctrl + Alt + Print 窗口截图并保存到剪贴板 6 7 Shift + Print 区域截图 8 Ctrl + Shift + Print 区域截图并保存到剪贴板 9 10 Ctrl + Shift + Alt + R 录制屏幕短视频 </description>
     </item>
-    
     <item>
       <title>如何控制grep命令显示在相关文本前后的行数</title>
       <link>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</link>
       <pubDate>Tue, 19 Jun 2018 23:03:44 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</guid>
-      <description>在Linux/Unix系统中使用grep命令的时候，有时候我们想要把匹配文本的前后几行的信息也同时显示出来。这可以通过设置一些参数来达到目的。
-grep的帮助文档中有这几个参数：
- -A num, --after-context=num Print num lines of trailing context after each match.
--B num, --before-context=num Print num lines of leading context before each match.
--C num, --context=num Print num lines of leading and trailing context surrounding each match.
- -A 表示同时输出匹配行的后面几行
-1grep -A 5 word /home/test/a.log -B 表示同时输出匹配行的前面几行
-1grep -B 5 word /home/test/a.log -C 表示同时输出匹配行的前面几行和后面几行
-1grep -C5 word /home/test/a.log </description>
+      <description>在Linux/Unix系统中使用grep命令的时候，有时候我们想要把匹配文本的前后几行的信息也同时显示出来。这可以通过设置一些参数来达到目的。&#xA;grep的帮助文档中有这几个参数：&#xA;-A num, --after-context=num Print num lines of trailing context after each match.&#xA;-B num, --before-context=num Print num lines of leading context before each match.&#xA;-C num, --context=num Print num lines of leading and trailing context surrounding each match.&#xA;-A 表示同时输出匹配行的后面几行&#xA;1grep -A 5 word /home/test/a.log -B 表示同时输出匹配行的前面几行&#xA;1grep -B 5 word /home/test/a.log -C 表示同时输出匹配行的前面几行和后面几行&#xA;1grep -C5 word /home/test/a.log </description>
     </item>
-    
   </channel>
 </rss>

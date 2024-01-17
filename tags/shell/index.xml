@@ -5,69 +5,37 @@
     <link>https://www.zengxi.net/tags/shell/</link>
     <description>Recent content in shell on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 20 Jul 2020 11:31:49 +0000</lastBuildDate><atom:link href="https://www.zengxi.net/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Jul 2020 11:31:49 +0000</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/tags/shell/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>grep 返回 Binary file (standard input) matches</title>
       <link>https://www.zengxi.net/2020/07/grep_binary_file_match/</link>
       <pubDate>Mon, 20 Jul 2020 11:31:49 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/07/grep_binary_file_match/</guid>
-      <description>grep &amp;quot;keyword&amp;quot; xxx.log时输出: Binary file (standard input) matches
-这个是因为grep命令认为它是一个二进制文件。解决方案是，加上一个参数 -a：
-1grep -a &amp;#34;keyword&amp;#34; xxx.log 该参数的解释：
-1-a, --text equivalent to --binary-files=text </description>
+      <description>grep &amp;quot;keyword&amp;quot; xxx.log时输出: Binary file (standard input) matches&#xA;这个是因为grep命令认为它是一个二进制文件。解决方案是，加上一个参数 -a：&#xA;1grep -a &amp;#34;keyword&amp;#34; xxx.log 该参数的解释：&#xA;1-a, --text equivalent to --binary-files=text </description>
     </item>
-    
     <item>
       <title>Mac下shell命令支持map</title>
       <link>https://www.zengxi.net/2020/01/mac-shell-support-map/</link>
       <pubDate>Sun, 19 Jan 2020 16:40:17 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2020/01/mac-shell-support-map/</guid>
-      <description>Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：
-1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持，需要升级至4.x以上的版本
-1# 安装最新版本的bash 2brew install bash 3 4# 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash 5# 需要把新版本的shell添加至信任列表中 6sudo bash -c &amp;#39;echo /usr/local/bin/bash &amp;gt;&amp;gt; /etc/shells&amp;#39; 7 8# 如果需要的话，修改默认shell为新版本的bash 9chsh -s /usr/local/bin/bash 需要注意的是，升级完之后，如果shell脚本需要用新版本的bash来执行，必须在相关的shell脚本开头的部分，将 #!/bin/bash 替换成 #!/usr/local/bin/bash， 否则还是用旧版本的bash来执行。
-那为什么不执行类似下面的命令，删除原先的bash，并给新版本的bash建立一个链接呢？这个是由于MacOS有系统完整性保护机制（System Integrity Protection，SIP），它会阻止所有用户（包括root）修改 /bin 下面目录的内容。当然，也有办法绕过这保护机制，嫌麻烦的话，就不要去动它了。
-1sudo rm /bin/bash 2sudo ln -s /usr/local/bin/bash /bin/bash  参考文章：
- https://itnext.io/upgrading-bash-on-macos-7138bd1066ba  </description>
+      <description>Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：&#xA;1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持，需要升级至4.x以上的版本&#xA;1# 安装最新版本的bash 2brew install bash 3 4# 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash 5# 需要把新版本的shell添加至信任列表中 6sudo bash -c &amp;#39;echo /usr/local/bin/bash &amp;gt;&amp;gt; /etc/shells&amp;#39; 7 8# 如果需要的话，修改默认shell为新版本的bash 9chsh -s /usr/local/bin/bash 需要注意的是，升级完之后，如果shell脚本需要用新版本的bash来执行，必须在相关的shell脚本开头的部分，将 #!/bin/bash 替换成 #!/usr/local/bin/bash， 否则还是用旧版本的bash来执行。&#xA;那为什么不执行类似下面的命令，删除原先的bash，并给新版本的bash建立一个链接呢？这个是由于MacOS有系统完整性保护机制（System Integrity Protection，SIP），它会阻止所有用户（包括root）修改 /bin 下面目录的内容。当然，也有办法绕过这保护机制，嫌麻烦的话，就不要去动它了。&#xA;1sudo rm /bin/bash 2sudo ln -s /usr/local/bin/bash /bin/bash 参考文章：&#xA;https://itnext.io/upgrading-bash-on-macos-7138bd1066ba </description>
     </item>
-    
     <item>
       <title>shell中用tr命令转换字符大小写</title>
       <link>https://www.zengxi.net/2018/07/shell-translate-character/</link>
       <pubDate>Wed, 25 Jul 2018 21:40:22 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2018/07/shell-translate-character/</guid>
-      <description>在写shell脚本的时候，可能需要将特定的英文字符转换大小写。可以借助tr命令来实现这个功能。
-（1）tr的下面这个命令表示把string1替换成string2
- tr string1 string2  运行下面的命令
-1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a&amp;#39; &amp;#39;A&amp;#39; 可以看到输出结果中把a换成了A
- this is A pen  （2）同时，tr命令也支持指定一个字符的范围，在这个范围内分别作替换
- tr &#39;c1-c2&#39; &#39;c3-c4&#39;  比如，如果只需要把从a到h的字符，替换成大写，那么可以用下面的命令
-1tr &amp;#39;a-h&amp;#39; &amp;#39;A-H&amp;#39; 运行下面的命令
-1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a-h&amp;#39; &amp;#39;A-H&amp;#39; 可以看到输出结果中把从a到h的字符全部换成了大写：
- tHis is A pEn  如果要把所有字符转成大写，那么只需要把范围指定成a-z即可。运行下面的命令
-1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a-z&amp;#39; &amp;#39;A-Z&amp;#39; 可以看输出结果：
- THIS IS A PEN   </description>
+      <description>在写shell脚本的时候，可能需要将特定的英文字符转换大小写。可以借助tr命令来实现这个功能。&#xA;（1）tr的下面这个命令表示把string1替换成string2&#xA;tr string1 string2 运行下面的命令&#xA;1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a&amp;#39; &amp;#39;A&amp;#39; 可以看到输出结果中把a换成了A&#xA;this is A pen （2）同时，tr命令也支持指定一个字符的范围，在这个范围内分别作替换&#xA;tr &#39;c1-c2&#39; &#39;c3-c4&#39; 比如，如果只需要把从a到h的字符，替换成大写，那么可以用下面的命令&#xA;1tr &amp;#39;a-h&amp;#39; &amp;#39;A-H&amp;#39; 运行下面的命令&#xA;1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a-h&amp;#39; &amp;#39;A-H&amp;#39; 可以看到输出结果中把从a到h的字符全部换成了大写：&#xA;tHis is A pEn 如果要把所有字符转成大写，那么只需要把范围指定成a-z即可。运行下面的命令&#xA;1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a-z&amp;#39; &amp;#39;A-Z&amp;#39; 可以看输出结果：&#xA;THIS IS A PEN </description>
     </item>
-    
     <item>
       <title>date命令按指定locale所对应的日期格式输出</title>
       <link>https://www.zengxi.net/2018/07/force-date-use-locale/</link>
       <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
-      
       <guid>https://www.zengxi.net/2018/07/force-date-use-locale/</guid>
-      <description>在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。
-比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出
-1date +%a 下面是locale为zh_CN的输出：
- 三  下面是locale为en_US的输出：
- Wed  如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值
-首先我们可以运行下面的命令来列出当前系统安装了哪些locale。这一步有一定的必要，因为在不同的系统下面，locale名称可能不同。比如，Ubuntu下面叫做zh_CN.utf8，而MacOS下面叫做zh_CN.UTF-8。如果locale名称没用对，那么看到的就不是所期望的结果。
-1locale -a 知道locale的具体名称之后，可以用类似下面的命令来指定locale并按照指定格式输出。
-1LC_ALL=zh_CN.UTF-8 date 2LC_ALL=zh_CN.UTF-8 date +%a 3 4LC_ALL=en_US.UTF-8 date 5LC_ALL=en_US.UTF-8 date +%a 上面的命令分别有如下的输出:
- 2018年 7月 4日 星期三 20时33分41秒 CST 三 Wed Jul 4 20:33:41 CST 2018 Wed  </description>
+      <description>在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。&#xA;比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出&#xA;1date +%a 下面是locale为zh_CN的输出：&#xA;三 下面是locale为en_US的输出：&#xA;Wed 如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值&#xA;首先我们可以运行下面的命令来列出当前系统安装了哪些locale。这一步有一定的必要，因为在不同的系统下面，locale名称可能不同。比如，Ubuntu下面叫做zh_CN.utf8，而MacOS下面叫做zh_CN.UTF-8。如果locale名称没用对，那么看到的就不是所期望的结果。&#xA;1locale -a 知道locale的具体名称之后，可以用类似下面的命令来指定locale并按照指定格式输出。&#xA;1LC_ALL=zh_CN.UTF-8 date 2LC_ALL=zh_CN.UTF-8 date +%a 3 4LC_ALL=en_US.UTF-8 date 5LC_ALL=en_US.UTF-8 date +%a 上面的命令分别有如下的输出:&#xA;2018年 7月 4日 星期三 20时33分41秒 CST 三 Wed Jul 4 20:33:41 CST 2018 Wed </description>
     </item>
-    
   </channel>
 </rss>

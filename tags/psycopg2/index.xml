@@ -5,18 +5,16 @@
     <link>https://www.zengxi.net/tags/psycopg2/</link>
     <description>Recent content in psycopg2 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 26 Jan 2021 17:17:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/psycopg2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Jan 2021 17:17:00 +0800</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/tags/psycopg2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用Python在两个Postgres数据库直接复制数据</title>
       <link>https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/</link>
       <pubDate>Tue, 26 Jan 2021 17:17:00 +0800</pubDate>
-      
       <guid>https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/</guid>
-      <description>在python脚本中，通过 psycopg2 库的copy_expert，可以很方便地在两个Postgres数据库之间复制数据
-1s = StringIO() 2 3# Export into memory buffer 4sql = &amp;#34;&amp;#34;&amp;#34; 5COPY (select * from foo) TO STDOUT WITH CSV HEADER ENCODING &amp;#39;UTF8&amp;#39;; 6&amp;#34;&amp;#34;&amp;#34; 7 8sourceCursor = sourceConn.cursor() 9sourceCursor.copy_expert(sql, s) 10 11# Import from memory buffer to destination database 12sql = &amp;#34;&amp;#34;&amp;#34; 13COPY bar from STDIN WITH CSV HEADER ENCODING &amp;#39;UTF8&amp;#39;; 14&amp;#34;&amp;#34;&amp;#34; 15destinationCursor = destinationConn.cursor() 16destinationCursor.copy_expert(sql, s)  参考：
- https://www.psycopg.org/docs/cursor.html#cursor.copy_expert  </description>
+      <description>在python脚本中，通过 psycopg2 库的copy_expert，可以很方便地在两个Postgres数据库之间复制数据&#xA;1s = StringIO() 2 3# Export into memory buffer 4sql = &amp;#34;&amp;#34;&amp;#34; 5 COPY (select * from foo) TO STDOUT WITH CSV HEADER ENCODING &amp;#39;UTF8&amp;#39;; 6&amp;#34;&amp;#34;&amp;#34; 7 8sourceCursor = sourceConn.cursor() 9sourceCursor.copy_expert(sql, s) 10 11# Import from memory buffer to destination database 12sql = &amp;#34;&amp;#34;&amp;#34; 13 COPY bar from STDIN WITH CSV HEADER ENCODING &amp;#39;UTF8&amp;#39;; 14&amp;#34;&amp;#34;&amp;#34; 15destinationCursor = destinationConn.cursor() 16destinationCursor.copy_expert(sql, s) 参考：&#xA;https://www.psycopg.org/docs/cursor.html#cursor.copy_expert </description>
     </item>
-    
   </channel>
 </rss>

@@ -20,14 +20,14 @@
 
 <meta property="og:type" content="article">
 <meta name="description" content="目前主要有两种升级方式，它们分别使用于不同的场景。
-   升级方式 优点 缺点     pglogical逻辑复制升级 停机时间短 需提前准备从库，并搭建replication，在replication期间，需考虑DDL语句带来的影响。   pg_upgrade升级 不需要提前准备replication 升级完成后需检 …">
+升级方式 优点 缺点 pglogical逻辑复制升级 停机时间短 需提前准备从库，并搭建replication，在replication期间，需考虑DDL语句带来的影响。 pg_upgrade升级 不需要提前准备replication 升级完成后需检查index是否正 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="Postgres 9.x 升级至 10.x" />
 <meta property="og:url" content="https://www.zengxi.net/2019/12/pg-upgrade-version/" />
 <meta property="og:title" content="Postgres 9.x 升级至 10.x" />
 <meta property="og:description" content="目前主要有两种升级方式，它们分别使用于不同的场景。
-   升级方式 优点 缺点     pglogical逻辑复制升级 停机时间短 需提前准备从库，并搭建replication，在replication期间，需考虑DDL语句带来的影响。   pg_upgrade升级 不需要提前准备replication 升级完成后需检 …" />
+升级方式 优点 缺点 pglogical逻辑复制升级 停机时间短 需提前准备从库，并搭建replication，在replication期间，需考虑DDL语句带来的影响。 pg_upgrade升级 不需要提前准备replication 升级完成后需检查index是否正 …" />
 <meta property="og:image" content="https://www.zengxi.net/images/thumbnail.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://www.zengxi.net/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://www.zengxi.net/icons/favicon-32x32.png'>
@@ -43,8 +43,8 @@
     
     
     <link rel="preload" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity = "sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" as="script" integrity=
-    "sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous">
+    <link rel="preload" href="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" as="script" integrity=
+    "sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous">
 
     
     <link rel="stylesheet" type="text/css" href="https://www.zengxi.net/css/styles.613dbb3b5b79bb3e7a6465fe6ecc178c68338b5e74f6a363c4784690ce9b599f119bb7c4451702005b1e37d4b114209f3e0cd02de779ec469ad25233a332d7bf.css" integrity="sha512-YT27O1t5uz56ZGX&#43;bswXjGgzi1509qNjxHhGkM6bWZ8Rm7fERRcCAFseN9SxFCCfPgzQLed57Eaa0lIzozLXvw==" crossorigin="anonymous">
@@ -192,200 +192,200 @@
 <h2 id="前提条件">前提条件</h2>
 <h3 id="所有表都必须有主键">所有表都必须有主键</h3>
 <p>可以用下面的语句来检查</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="k">SELECT</span><span class="w"> </span><span class="k">table_name</span><span class="w">
-</span><span class="ln">2</span><span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span><span class="w">
-</span><span class="ln">3</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">table_catalog</span><span class="p">,</span><span class="w"> </span><span class="n">table_schema</span><span class="p">,</span><span class="w"> </span><span class="k">table_name</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">IN</span><span class="w">
-</span><span class="ln">4</span><span class="w">          </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">table_catalog</span><span class="p">,</span><span class="w"> </span><span class="n">table_schema</span><span class="p">,</span><span class="w"> </span><span class="k">table_name</span><span class="w">
-</span><span class="ln">5</span><span class="w">             </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">table_constraints</span><span class="w">
-</span><span class="ln">6</span><span class="w">            </span><span class="k">WHERE</span><span class="w"> </span><span class="n">constraint_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PRIMARY KEY&#39;</span><span class="p">)</span><span class="w">
-</span><span class="ln">7</span><span class="w">   </span><span class="k">AND</span><span class="w"> </span><span class="n">table_schema</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;myschema&#39;</span><span class="p">)</span><span class="w">
-</span></code></pre></div><h3 id="super-user无密码访问provider和subscriber">super user无密码访问provider和subscriber</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">table_name</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">table_catalog</span><span class="p">,</span><span class="w"> </span><span class="n">table_schema</span><span class="p">,</span><span class="w"> </span><span class="k">table_name</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">IN</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">          </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">table_catalog</span><span class="p">,</span><span class="w"> </span><span class="n">table_schema</span><span class="p">,</span><span class="w"> </span><span class="k">table_name</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">             </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">table_constraints</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">            </span><span class="k">WHERE</span><span class="w"> </span><span class="n">constraint_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PRIMARY KEY&#39;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w">   </span><span class="k">AND</span><span class="w"> </span><span class="n">table_schema</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;myschema&#39;</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></div><h3 id="super-user无密码访问provider和subscriber">super user无密码访问provider和subscriber</h3>
 <p>修改配置文件</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="c1"># prodvider 上配置允许 super user 从 subscriber 上访问 replication。</span>
-<span class="ln">2</span><span class="c1"># 假如 subscriber IP 是 10.1.10.15，则 provider 的 pg_hba.conf 中应包含以下配置</span>
-<span class="ln">3</span>host    all             postgres       10.1.10.15/32               trust
-<span class="ln">4</span>host    replication     postgres       10.1.10.15/32                 trust
-</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span><span class="c1"># subscriber 上允许 super user 访问本地的 postgresql，</span>
-<span class="ln">2</span><span class="c1"># 假如 subscriber IP 是 10.1.10.6，pg_hba.conf 中应包含以下配置</span>
-<span class="ln">3</span>host    all             postgres             10.1.10.6/32            trust
-</code></pre></div><h3 id="subscriber必须拥有和provider一样的表结构">subscriber必须拥有和provider一样的表结构</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1"># prodvider 上配置允许 super user 从 subscriber 上访问 replication。</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1"># 假如 subscriber IP 是 10.1.10.15，则 provider 的 pg_hba.conf 中应包含以下配置</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">host    all             postgres       10.1.10.15/32               trust
+</span></span><span class="line"><span class="ln">4</span><span class="cl">host    replication     postgres       10.1.10.15/32                 trust
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1"># subscriber 上允许 super user 访问本地的 postgresql，</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1"># 假如 subscriber IP 是 10.1.10.6，pg_hba.conf 中应包含以下配置</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">host    all             postgres             10.1.10.6/32            trust
+</span></span></code></pre></div><h3 id="subscriber必须拥有和provider一样的表结构">subscriber必须拥有和provider一样的表结构</h3>
 <p>在 provider 上导出结构数据</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo -iu postgres pg_dumpall --schema-only -f dump.sql
-</code></pre></div><p>在 subscriber 上导入结构数据</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>sudo -iu postgres psql -f dump.sql
-</code></pre></div><h2 id="搭建逻辑复制">搭建逻辑复制</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">sudo -iu postgres pg_dumpall --schema-only -f dump.sql
+</span></span></code></pre></div><p>在 subscriber 上导入结构数据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">sudo -iu postgres psql -f dump.sql
+</span></span></code></pre></div><h2 id="搭建逻辑复制">搭建逻辑复制</h2>
 <h3 id="主库上的操作">主库上的操作</h3>
 <ol>
 <li>provider安装pglogical</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>apt install postgresql-9.5-pglogical/xenial-pgdg
-</code></pre></div><ol start="2">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">apt install postgresql-9.5-pglogical/xenial-pgdg
+</span></span></code></pre></div><ol start="2">
 <li>provider上，连到对应的数据库，创建pglogical扩展
 mydb=# CREATE EXTENSION pglogical;</li>
 <li>创建逻辑复制节点</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="c1">-- host 填的是provider的IP
-</span><span class="ln">2</span><span class="c1"></span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">node_name</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;provider&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dsn</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;host=10.1.10.6 port=5432 dbname=mydb&#39;</span><span class="p">);</span><span class="w">
-</span></code></pre></div><ol start="4">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">-- host 填的是provider的IP
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1"></span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">node_name</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;provider&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dsn</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;host=10.1.10.6 port=5432 dbname=mydb&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><ol start="4">
 <li>添加所有表到需要逻辑复制的集合中</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">replication_set_add_all_tables</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">ARRAY</span><span class="p">[</span><span class="s1">&#39;public&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;monitoring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;authenticator&#39;</span><span class="p">]);</span><span class="w">
-</span></code></pre></div><p>如果replication_set_add_all_tables 出现 deadlock, 可尝试逐个表添加</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">postgres</span><span class="o">@</span><span class="n">provider</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">`</span><span class="n">psql</span><span class="w"> </span><span class="n">mydb</span><span class="w"> </span><span class="o">-</span><span class="k">c</span><span class="w"> </span><span class="s1">&#39;\d&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">grep</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">cut</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="s1">&#39;|&#39;</span><span class="w"> </span><span class="o">-</span><span class="n">f</span><span class="w"> </span><span class="mi">2</span><span class="o">`</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">psql</span><span class="w"> </span><span class="n">mydb</span><span class="w"> </span><span class="o">-</span><span class="k">c</span><span class="w"> </span><span class="s2">&#34;select pglogical.replication_set_add_table(&#39;default&#39;, &#39;$i&#39;)&#34;</span><span class="p">;</span><span class="w"> </span><span class="n">done</span><span class="w">
-</span></code></pre></div><h3 id="从库上的操作">从库上的操作</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">replication_set_add_all_tables</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">ARRAY</span><span class="p">[</span><span class="s1">&#39;public&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;monitoring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;authenticator&#39;</span><span class="p">]);</span><span class="w">
+</span></span></span></code></pre></div><p>如果replication_set_add_all_tables 出现 deadlock, 可尝试逐个表添加</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">postgres</span><span class="o">@</span><span class="n">provider</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">`</span><span class="n">psql</span><span class="w"> </span><span class="n">mydb</span><span class="w"> </span><span class="o">-</span><span class="k">c</span><span class="w"> </span><span class="s1">&#39;\d&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">grep</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">cut</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="s1">&#39;|&#39;</span><span class="w"> </span><span class="o">-</span><span class="n">f</span><span class="w"> </span><span class="mi">2</span><span class="o">`</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">psql</span><span class="w"> </span><span class="n">mydb</span><span class="w"> </span><span class="o">-</span><span class="k">c</span><span class="w"> </span><span class="s2">&#34;select pglogical.replication_set_add_table(&#39;default&#39;, &#39;$i&#39;)&#34;</span><span class="p">;</span><span class="w"> </span><span class="n">done</span><span class="w">
+</span></span></span></code></pre></div><h3 id="从库上的操作">从库上的操作</h3>
 <p>安装的 pg 10.x 作为从库，和逻辑复制的subscriber</p>
 <ol>
 <li>从库上安装postgresql-10</li>
 <li>subscriber安装pglogical</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>apt install postgresql-10-pglogical/xenial-pgdg
-</code></pre></div><ol start="3">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">apt install postgresql-10-pglogical/xenial-pgdg
+</span></span></code></pre></div><ol start="3">
 <li>修改subscriber配置, 重启PostgreSQL</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>shared_preload_libraries = &#39;pglogical&#39;
-</code></pre></div><ol start="4">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">shared_preload_libraries</span> <span class="o">=</span> <span class="s1">&#39;pglogical&#39;</span>
+</span></span></code></pre></div><ol start="4">
 <li>subscriber上，连到对应的数据库，创建pglogical扩展</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="n">EXTENSION</span><span class="w"> </span><span class="n">pglogical</span><span class="p">;</span><span class="w">
-</span></code></pre></div><ol start="5">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="n">EXTENSION</span><span class="w"> </span><span class="n">pglogical</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><ol start="5">
 <li>创建逻辑复制节点</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="c1">-- host 填的是subscriber的IP
-</span><span class="ln">2</span><span class="c1"></span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">node_name</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;subscriber&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dsn</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;host=10.1.10.15 port=5432 dbname=mydb&#39;</span><span class="p">);</span><span class="w">
-</span></code></pre></div><ol start="6">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">-- host 填的是subscriber的IP
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1"></span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">node_name</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;subscriber&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dsn</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;host=10.1.10.15 port=5432 dbname=mydb&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><ol start="6">
 <li>创建逻辑复制订阅端</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="c1">-- host 填的是provider的IP
-</span><span class="ln">2</span><span class="c1"></span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">create_subscription</span><span class="p">(</span><span class="w"> </span><span class="n">subscription_name</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;subscriber&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">provider_dsn</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;host=10.1.10.6 port=5432 dbname=mydb&#39;</span><span class="p">);</span><span class="w">
-</span></code></pre></div><h2 id="升级">升级</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">-- host 填的是provider的IP
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1"></span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">create_subscription</span><span class="p">(</span><span class="w"> </span><span class="n">subscription_name</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;subscriber&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">provider_dsn</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;host=10.1.10.6 port=5432 dbname=mydb&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h2 id="升级">升级</h2>
 <h3 id="一次性同步所有sequence数据provider-上执行">一次性同步所有sequence数据，provider 上执行</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">replication_set_add_all_sequences</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">ARRAY</span><span class="p">[</span><span class="s1">&#39;public&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;monitoring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;authenticator&#39;</span><span class="p">],</span><span class="w"> </span><span class="k">true</span><span class="p">);</span><span class="w">
-</span></code></pre></div><h3 id="升级完成后需drop-replication">升级完成后需drop replication</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">replication_set_add_all_sequences</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">ARRAY</span><span class="p">[</span><span class="s1">&#39;public&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;monitoring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;authenticator&#39;</span><span class="p">],</span><span class="w"> </span><span class="k">true</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h3 id="升级完成后需drop-replication">升级完成后需drop replication</h3>
 <h4 id="subscribe端的操作">subscribe端的操作</h4>
 <p>subscriber端删除订阅</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">drop_subscription</span><span class="p">(</span><span class="s1">&#39;subscriber&#39;</span><span class="p">);</span><span class="w">
-</span></code></pre></div><p>subscriber端删除逻辑复制节点</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">drop_node</span><span class="p">(</span><span class="s1">&#39;subscriber&#39;</span><span class="p">);</span><span class="w">
-</span></code></pre></div><h4 id="provider端的操作">provider端的操作</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">drop_subscription</span><span class="p">(</span><span class="s1">&#39;subscriber&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>subscriber端删除逻辑复制节点</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">drop_node</span><span class="p">(</span><span class="s1">&#39;subscriber&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h4 id="provider端的操作">provider端的操作</h4>
 <p>provider端删除逻辑复制节点</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="ln">1</span><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">drop_node</span><span class="p">(</span><span class="s1">&#39;provider&#39;</span><span class="p">);</span><span class="w">
-</span></code></pre></div><h1 id="pg_upgrade升级">pg_upgrade升级</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">mydb</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pglogical</span><span class="p">.</span><span class="n">drop_node</span><span class="p">(</span><span class="s1">&#39;provider&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h1 id="pg_upgrade升级">pg_upgrade升级</h1>
 <p>事前准备</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln"> 1</span><span class="nb">export</span> <span class="nv">LC_CTYPE</span><span class="o">=</span>en_US.UTF-8
-<span class="ln"> 2</span><span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8
-<span class="ln"> 3</span>
-<span class="ln"> 4</span>apt update
-<span class="ln"> 5</span>
-<span class="ln"> 6</span><span class="c1"># 安装pg 10</span>
-<span class="ln"> 7</span>apt install postgresql-10
-<span class="ln"> 8</span>
-<span class="ln"> 9</span><span class="c1"># 安装索引检查插件</span>
-<span class="ln">10</span>apt install postgresql-10-amcheck
-</code></pre></div><p>停止服务</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>service postgresql@9.5-main stop
-<span class="ln">2</span>service postgresql@10-main stop
-</code></pre></div><p>检查当前的postgres集群</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>user@ubuntu:~# pg_lsclusters
-<span class="ln">2</span>
-<span class="ln">3</span>Ver Cluster Port Status Owner    Data directory               Log file
-<span class="ln">4</span>9.5 main    <span class="m">5432</span> down   postgres /var/lib/postgresql/9.5/main /var/log/postgresql/postgresql-%d.csv
-<span class="ln">5</span><span class="m">10</span>  main    <span class="m">5433</span> down   postgres /var/lib/postgresql/10/main  /var/log/postgresql/postgresql-10-main.log
-</code></pre></div><p>根据上面输出停掉pg 10的集群</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>user@ubuntu:~# pg_dropcluster --stop <span class="m">10</span> main
-</code></pre></div><p>升级9.x的集群</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln"> 1</span>user@ubuntu:~# pg_upgradecluster --method upgrade --link 9.5 main
-<span class="ln"> 2</span>
-<span class="ln"> 3</span>Finding the real data directory <span class="k">for</span> the <span class="nb">source</span> cluster      ok
-<span class="ln"> 4</span>Finding the real data directory <span class="k">for</span> the target cluster      ok
-<span class="ln"> 5</span>Performing Consistency Checks
-<span class="ln"> 6</span>-----------------------------
-<span class="ln"> 7</span>Checking cluster versions                                   ok
-<span class="ln"> 8</span>Checking database user is the install user                  ok
-<span class="ln"> 9</span>Checking database connection settings                       ok
-<span class="ln">10</span>Checking <span class="k">for</span> prepared transactions                          ok
-<span class="ln">11</span>Checking <span class="k">for</span> reg* data types in user tables                 ok
-<span class="ln">12</span>Checking <span class="k">for</span> contrib/isn with bigint-passing mismatch       ok
-<span class="ln">13</span>Checking <span class="k">for</span> invalid <span class="s2">&#34;unknown&#34;</span> user columns                 ok
-<span class="ln">14</span>Checking <span class="k">for</span> roles starting with <span class="s2">&#34;pg_&#34;</span>                      ok
-<span class="ln">15</span>Creating dump of global objects                             ok
-<span class="ln">16</span>Creating dump of database schemas
-<span class="ln">17</span>                                                            ok
-<span class="ln">18</span>Checking <span class="k">for</span> presence of required libraries                 ok
-<span class="ln">19</span>Checking database user is the install user                  ok
-<span class="ln">20</span>Checking <span class="k">for</span> prepared transactions                          ok
-<span class="ln">21</span> 
-<span class="ln">22</span>If pg_upgrade fails after this point, you must re-initdb the
-<span class="ln">23</span>new cluster before continuing.
-<span class="ln">24</span> 
-<span class="ln">25</span>Performing Upgrade
-<span class="ln">26</span>------------------
-<span class="ln">27</span>Analyzing all rows in the new cluster                       ok
-<span class="ln">28</span>Freezing all rows in the new cluster                        ok
-<span class="ln">29</span>Deleting files from new pg_xact                             ok
-<span class="ln">30</span>Copying old pg_clog to new server                           ok
-<span class="ln">31</span>Setting next transaction ID and epoch <span class="k">for</span> new cluster       ok
-<span class="ln">32</span>Deleting files from new pg_multixact/offsets                ok
-<span class="ln">33</span>Copying old pg_multixact/offsets to new server              ok
-<span class="ln">34</span>Deleting files from new pg_multixact/members                ok
-<span class="ln">35</span>Copying old pg_multixact/members to new server              ok
-<span class="ln">36</span>Setting next multixact ID and offset <span class="k">for</span> new cluster        ok
-<span class="ln">37</span>Resetting WAL archives                                      ok
-<span class="ln">38</span>Setting frozenxid and minmxid counters in new cluster       ok
-<span class="ln">39</span>Restoring global objects in the new cluster                 ok
-<span class="ln">40</span>Restoring database schemas in the new cluster
-<span class="ln">41</span>                                                            ok
-<span class="ln">42</span>Adding <span class="s2">&#34;.old&#34;</span> suffix to old global/pg_control               ok
-<span class="ln">43</span> 
-<span class="ln">44</span>If you want to start the old cluster, you will need to remove
-<span class="ln">45</span>the <span class="s2">&#34;.old&#34;</span> suffix from /var/lib/postgresql/9.5/main/global/pg_control.old.
-<span class="ln">46</span>Because <span class="s2">&#34;link&#34;</span> mode was used, the old cluster cannot be safely
-<span class="ln">47</span>started once the new cluster has been started.
-<span class="ln">48</span> 
-<span class="ln">49</span>Linking user relation files
-<span class="ln">50</span>                                                            ok
-<span class="ln">51</span>Setting next OID <span class="k">for</span> new cluster                            ok
-<span class="ln">52</span>Sync data directory to disk                                 ok
-<span class="ln">53</span>Creating script to analyze new cluster                      ok
-<span class="ln">54</span>Creating script to delete old cluster                       ok
-<span class="ln">55</span>Checking <span class="k">for</span> <span class="nb">hash</span> indexes                                   ok
-<span class="ln">56</span> 
-<span class="ln">57</span>Upgrade Complete
-<span class="ln">58</span>----------------
-<span class="ln">59</span>Optimizer statistics are not transferred by pg_upgrade so,
-<span class="ln">60</span>once you start the new server, consider running:
-<span class="ln">61</span>    ./analyze_new_cluster.sh
-<span class="ln">62</span> 
-<span class="ln">63</span>Running this script will delete the old cluster<span class="err">&#39;</span>s data files:
-<span class="ln">64</span>    ./delete_old_cluster.sh
-<span class="ln">65</span>pg_upgrade output scripts are in /var/log/postgresql/pg_upgradecluster-9.5-10-main.yo8D
-<span class="ln">66</span>Re-enabling connections to the old cluster...
-<span class="ln">67</span>Copying old configuration files...
-<span class="ln">68</span>Copying old start.conf...
-<span class="ln">69</span>Copying old pg_ctl.conf...
-<span class="ln">70</span>Disabling automatic startup of old cluster...
-<span class="ln">71</span>Configuring old cluster to use a different port <span class="o">(</span>5433<span class="o">)</span>...
-<span class="ln">72</span>Success. Please check that the upgraded cluster works. If it does,
-<span class="ln">73</span>you can remove the old cluster with
-<span class="ln">74</span>    pg_dropcluster 9.5 main
-<span class="ln">75</span> 
-<span class="ln">76</span>Ver Cluster Port Status Owner    Data directory               Log file
-<span class="ln">77</span>9.5 main    <span class="m">5433</span> down   postgres /var/lib/postgresql/9.5/main /var/log/postgresql/postgresql-%d.csv
-<span class="ln">78</span>Ver Cluster Port Status Owner    Data directory              Log file
-<span class="ln">79</span><span class="m">10</span>  main    <span class="m">5432</span> down   postgres /var/lib/postgresql/10/main /var/log/postgresql/postgresql-%d.csv
-</code></pre></div><p>复制pg的配置到pg 10上</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>cp postgresql.conf /etc/postgresql/10/main/postgresql.conf
-</code></pre></div><p>重启pg 10</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>service postgresql@10-main start
-</code></pre></div><p>移除pg 9 集群</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>pg_dropcluster --stop 9.5 main
-</code></pre></div><p>查看当前的集群</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="ln">1</span>pg_lsclusters
-<span class="ln">2</span>
-<span class="ln">3</span>Ver Cluster Port Status Owner    Data directory              Log file
-<span class="ln">4</span><span class="m">10</span>  main    <span class="m">5432</span> online postgres /var/lib/postgresql/10/main /var/log/postgresql/postgresql-%d.csv
-</code></pre></div><p>执行vacuum analyze</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>sudo -iu postgres psql -c &#39;vacuum analyze&#39;
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nb">export</span> <span class="nv">LC_CTYPE</span><span class="o">=</span>en_US.UTF-8
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">apt update
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c1"># 安装pg 10</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">apt install postgresql-10
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="c1"># 安装索引检查插件</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">apt install postgresql-10-amcheck
+</span></span></code></pre></div><p>停止服务</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">service postgresql@9.5-main stop
+</span></span><span class="line"><span class="ln">2</span><span class="cl">service postgresql@10-main stop
+</span></span></code></pre></div><p>检查当前的postgres集群</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">user@ubuntu:~# pg_lsclusters
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl">Ver Cluster Port Status Owner    Data directory               Log file
+</span></span><span class="line"><span class="ln">4</span><span class="cl">9.5 main    <span class="m">5432</span> down   postgres /var/lib/postgresql/9.5/main /var/log/postgresql/postgresql-%d.csv
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="m">10</span>  main    <span class="m">5433</span> down   postgres /var/lib/postgresql/10/main  /var/log/postgresql/postgresql-10-main.log
+</span></span></code></pre></div><p>根据上面输出停掉pg 10的集群</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">user@ubuntu:~# pg_dropcluster --stop <span class="m">10</span> main
+</span></span></code></pre></div><p>升级9.x的集群</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln"> 1</span><span class="cl">user@ubuntu:~# pg_upgradecluster --method upgrade --link 9.5 main
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">Finding the real data directory <span class="k">for</span> the <span class="nb">source</span> cluster      ok
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">Finding the real data directory <span class="k">for</span> the target cluster      ok
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">Performing Consistency Checks
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">-----------------------------
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">Checking cluster versions                                   ok
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">Checking database user is the install user                  ok
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">Checking database connection settings                       ok
+</span></span><span class="line"><span class="ln">10</span><span class="cl">Checking <span class="k">for</span> prepared transactions                          ok
+</span></span><span class="line"><span class="ln">11</span><span class="cl">Checking <span class="k">for</span> reg* data types in user tables                 ok
+</span></span><span class="line"><span class="ln">12</span><span class="cl">Checking <span class="k">for</span> contrib/isn with bigint-passing mismatch       ok
+</span></span><span class="line"><span class="ln">13</span><span class="cl">Checking <span class="k">for</span> invalid <span class="s2">&#34;unknown&#34;</span> user columns                 ok
+</span></span><span class="line"><span class="ln">14</span><span class="cl">Checking <span class="k">for</span> roles starting with <span class="s2">&#34;pg_&#34;</span>                      ok
+</span></span><span class="line"><span class="ln">15</span><span class="cl">Creating dump of global objects                             ok
+</span></span><span class="line"><span class="ln">16</span><span class="cl">Creating dump of database schemas
+</span></span><span class="line"><span class="ln">17</span><span class="cl">                                                            ok
+</span></span><span class="line"><span class="ln">18</span><span class="cl">Checking <span class="k">for</span> presence of required libraries                 ok
+</span></span><span class="line"><span class="ln">19</span><span class="cl">Checking database user is the install user                  ok
+</span></span><span class="line"><span class="ln">20</span><span class="cl">Checking <span class="k">for</span> prepared transactions                          ok
+</span></span><span class="line"><span class="ln">21</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">22</span><span class="cl">If pg_upgrade fails after this point, you must re-initdb the
+</span></span><span class="line"><span class="ln">23</span><span class="cl">new cluster before continuing.
+</span></span><span class="line"><span class="ln">24</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">25</span><span class="cl">Performing Upgrade
+</span></span><span class="line"><span class="ln">26</span><span class="cl">------------------
+</span></span><span class="line"><span class="ln">27</span><span class="cl">Analyzing all rows in the new cluster                       ok
+</span></span><span class="line"><span class="ln">28</span><span class="cl">Freezing all rows in the new cluster                        ok
+</span></span><span class="line"><span class="ln">29</span><span class="cl">Deleting files from new pg_xact                             ok
+</span></span><span class="line"><span class="ln">30</span><span class="cl">Copying old pg_clog to new server                           ok
+</span></span><span class="line"><span class="ln">31</span><span class="cl">Setting next transaction ID and epoch <span class="k">for</span> new cluster       ok
+</span></span><span class="line"><span class="ln">32</span><span class="cl">Deleting files from new pg_multixact/offsets                ok
+</span></span><span class="line"><span class="ln">33</span><span class="cl">Copying old pg_multixact/offsets to new server              ok
+</span></span><span class="line"><span class="ln">34</span><span class="cl">Deleting files from new pg_multixact/members                ok
+</span></span><span class="line"><span class="ln">35</span><span class="cl">Copying old pg_multixact/members to new server              ok
+</span></span><span class="line"><span class="ln">36</span><span class="cl">Setting next multixact ID and offset <span class="k">for</span> new cluster        ok
+</span></span><span class="line"><span class="ln">37</span><span class="cl">Resetting WAL archives                                      ok
+</span></span><span class="line"><span class="ln">38</span><span class="cl">Setting frozenxid and minmxid counters in new cluster       ok
+</span></span><span class="line"><span class="ln">39</span><span class="cl">Restoring global objects in the new cluster                 ok
+</span></span><span class="line"><span class="ln">40</span><span class="cl">Restoring database schemas in the new cluster
+</span></span><span class="line"><span class="ln">41</span><span class="cl">                                                            ok
+</span></span><span class="line"><span class="ln">42</span><span class="cl">Adding <span class="s2">&#34;.old&#34;</span> suffix to old global/pg_control               ok
+</span></span><span class="line"><span class="ln">43</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">44</span><span class="cl">If you want to start the old cluster, you will need to remove
+</span></span><span class="line"><span class="ln">45</span><span class="cl">the <span class="s2">&#34;.old&#34;</span> suffix from /var/lib/postgresql/9.5/main/global/pg_control.old.
+</span></span><span class="line"><span class="ln">46</span><span class="cl">Because <span class="s2">&#34;link&#34;</span> mode was used, the old cluster cannot be safely
+</span></span><span class="line"><span class="ln">47</span><span class="cl">started once the new cluster has been started.
+</span></span><span class="line"><span class="ln">48</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">49</span><span class="cl">Linking user relation files
+</span></span><span class="line"><span class="ln">50</span><span class="cl">                                                            ok
+</span></span><span class="line"><span class="ln">51</span><span class="cl">Setting next OID <span class="k">for</span> new cluster                            ok
+</span></span><span class="line"><span class="ln">52</span><span class="cl">Sync data directory to disk                                 ok
+</span></span><span class="line"><span class="ln">53</span><span class="cl">Creating script to analyze new cluster                      ok
+</span></span><span class="line"><span class="ln">54</span><span class="cl">Creating script to delete old cluster                       ok
+</span></span><span class="line"><span class="ln">55</span><span class="cl">Checking <span class="k">for</span> <span class="nb">hash</span> indexes                                   ok
+</span></span><span class="line"><span class="ln">56</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">57</span><span class="cl">Upgrade Complete
+</span></span><span class="line"><span class="ln">58</span><span class="cl">----------------
+</span></span><span class="line"><span class="ln">59</span><span class="cl">Optimizer statistics are not transferred by pg_upgrade so,
+</span></span><span class="line"><span class="ln">60</span><span class="cl">once you start the new server, consider running:
+</span></span><span class="line"><span class="ln">61</span><span class="cl">    ./analyze_new_cluster.sh
+</span></span><span class="line"><span class="ln">62</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">63</span><span class="cl">Running this script will delete the old cluster<span class="err">&#39;</span>s data files:
+</span></span><span class="line"><span class="ln">64</span><span class="cl">    ./delete_old_cluster.sh
+</span></span><span class="line"><span class="ln">65</span><span class="cl">pg_upgrade output scripts are in /var/log/postgresql/pg_upgradecluster-9.5-10-main.yo8D
+</span></span><span class="line"><span class="ln">66</span><span class="cl">Re-enabling connections to the old cluster...
+</span></span><span class="line"><span class="ln">67</span><span class="cl">Copying old configuration files...
+</span></span><span class="line"><span class="ln">68</span><span class="cl">Copying old start.conf...
+</span></span><span class="line"><span class="ln">69</span><span class="cl">Copying old pg_ctl.conf...
+</span></span><span class="line"><span class="ln">70</span><span class="cl">Disabling automatic startup of old cluster...
+</span></span><span class="line"><span class="ln">71</span><span class="cl">Configuring old cluster to use a different port <span class="o">(</span>5433<span class="o">)</span>...
+</span></span><span class="line"><span class="ln">72</span><span class="cl">Success. Please check that the upgraded cluster works. If it does,
+</span></span><span class="line"><span class="ln">73</span><span class="cl">you can remove the old cluster with
+</span></span><span class="line"><span class="ln">74</span><span class="cl">    pg_dropcluster 9.5 main
+</span></span><span class="line"><span class="ln">75</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">76</span><span class="cl">Ver Cluster Port Status Owner    Data directory               Log file
+</span></span><span class="line"><span class="ln">77</span><span class="cl">9.5 main    <span class="m">5433</span> down   postgres /var/lib/postgresql/9.5/main /var/log/postgresql/postgresql-%d.csv
+</span></span><span class="line"><span class="ln">78</span><span class="cl">Ver Cluster Port Status Owner    Data directory              Log file
+</span></span><span class="line"><span class="ln">79</span><span class="cl"><span class="m">10</span>  main    <span class="m">5432</span> down   postgres /var/lib/postgresql/10/main /var/log/postgresql/postgresql-%d.csv
+</span></span></code></pre></div><p>复制pg的配置到pg 10上</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">cp postgresql.conf /etc/postgresql/10/main/postgresql.conf
+</span></span></code></pre></div><p>重启pg 10</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">service postgresql@10-main start
+</span></span></code></pre></div><p>移除pg 9 集群</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">pg_dropcluster --stop 9.5 main
+</span></span></code></pre></div><p>查看当前的集群</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">pg_lsclusters
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl">Ver Cluster Port Status Owner    Data directory              Log file
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="m">10</span>  main    <span class="m">5432</span> online postgres /var/lib/postgresql/10/main /var/log/postgresql/postgresql-%d.csv
+</span></span></code></pre></div><p>执行vacuum analyze</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">sudo -iu postgres psql -c &#39;vacuum analyze&#39;
+</span></span></code></pre></div>
     
       
     
@@ -399,6 +399,9 @@ mydb=# CREATE EXTENSION pglogical;</li>
     <a href='https://www.zengxi.net/about/' class="button mt-1" role="button">阅读更多</a>
     <h2 class="mt-4">精选文章</h2>
     <ul>
+      <li>
+        <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
+      </li>
       <li>
         <a href="https://www.zengxi.net/2024/01/gateway-modify-request-response/" class="nav-link">通过SpringGateway对接口请求进行加解密</a>
       </li>
@@ -420,14 +423,17 @@ mydb=# CREATE EXTENSION pglogical;</li>
       <li>
         <a href="https://www.zengxi.net/2020/07/zookeeper_purge_file/" class="nav-link">zookeeper服务器文件清理</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/07/terraform_aliyun_ecs_ssh_key/" class="nav-link">terraform中阿里云ECS ssh key变化问题</a>
-      </li>
     </ul>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/01/gateway-modify-request-response/" class="nav-link">通过SpringGateway对接口请求进行加解密</a>
+      </li>
+      <li>
+        <a href="https://www.zengxi.net/2023/12/unsafe_http_methods/" class="nav-link">不安全的http方法</a>
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/12/es-order-search-evolution/" class="nav-link">数据查询ES设计演变</a>
@@ -443,12 +449,6 @@ mydb=# CREATE EXTENSION pglogical;</li>
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/" class="nav-link">Spring Boot 自动设置响应头引发的问题</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/11/on-premise-vs-private-cloud/" class="nav-link">On-Premise 与 Private Cloud 区别</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/05/access-new-bing/" class="nav-link">不用魔法直接访问 New Bing</a>
       </li>
     </ul>
     <div>
@@ -566,6 +566,10 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
+            <a href='https://www.zengxi.net/categories/kafka/' class=" post_tag button button_translucent" data-position=1>KAFKA<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/categories/kubernetes/' class=" post_tag button button_translucent" data-position=18>KUBERNETES<span class="button_tally">18</span>
             </a>
             
@@ -622,11 +626,15 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/categories/%E5%89%8D%E7%AB%AF/' class=" post_tag button button_translucent" data-position=1>前端<span class="button_tally">1</span>
             </a>
             
             
@@ -638,7 +646,7 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/categories/%E7%A1%AC%E4%BB%B6/' class=" post_tag button button_translucent" data-position=1>硬件<span class="button_tally">1</span>
             </a>
             
             
@@ -841,6 +849,10 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/http/' class=" post_tag button button_translucent" data-position=1>HTTP<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/inputstream/' class=" post_tag button button_translucent" data-position=1>INPUTSTREAM<span class="button_tally">1</span>
             </a>
             
@@ -878,6 +890,10 @@ mydb=# CREATE EXTENSION pglogical;</li>
             
             
             <a href='https://www.zengxi.net/tags/jvm/' class=" post_tag button button_translucent" data-position=2>JVM<span class="button_tally">2</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/kafka/' class=" post_tag button button_translucent" data-position=1>KAFKA<span class="button_tally">1</span>
             </a>
             
             
@@ -1061,31 +1077,11 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=1>安全<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AE%89%E5%85%A8/' class=" post_tag button button_translucent" data-position=2>安全<span class="button_tally">2</span>
             </a>
             
             
@@ -1093,23 +1089,15 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BB%8E%E5%BA%93/' class=" post_tag button button_translucent" data-position=1>从库<span class="button_tally">1</span>
             </a>
             
             
@@ -1117,7 +1105,23 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%AF%BC%E8%88%AA/' class=" post_tag button button_translucent" data-position=1>导航<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%A4%8D%E7%9B%98/' class=" post_tag button button_translucent" data-position=1>复盘<span class="button_tally">1</span>
             </a>
             
             
@@ -1125,19 +1129,39 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/' class=" post_tag button button_translucent" data-position=1>截屏<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/' class=" post_tag button button_translucent" data-position=2>命令<span class="button_tally">2</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E6%8E%92%E5%BA%8F/' class=" post_tag button button_translucent" data-position=4>排序<span class="button_tally">4</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/' class=" post_tag button button_translucent" data-position=1>企业微信<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/' class=" post_tag button button_translucent" data-position=1>本地部署<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%8D%87%E7%BA%A7/' class=" post_tag button button_translucent" data-position=1>升级<span class="button_tally">1</span>
             </a>
             
             
@@ -1145,7 +1169,15 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%9B%91%E6%8E%A7/' class=" post_tag button button_translucent" data-position=1>监控<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E4%BA%8B%E5%8A%A1/' class=" post_tag button button_translucent" data-position=1>事务<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/' class=" post_tag button button_translucent" data-position=1>数据迁移<span class="button_tally">1</span>
             </a>
             
             
@@ -1157,6 +1189,14 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E7%BD%91%E5%85%B3/' class=" post_tag button button_translucent" data-position=1>网关<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E7%BA%BF%E7%A8%8B/' class=" post_tag button button_translucent" data-position=1>线程<span class="button_tally">1</span>
             </a>
             
@@ -1165,27 +1205,11 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BB%B4%E4%BF%AE/' class=" post_tag button button_translucent" data-position=1>维修<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>性能优化<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E7%BD%91%E5%85%B3/' class=" post_tag button button_translucent" data-position=1>网关<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%B0%83%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>调试<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%A6%E6%9C%BA/' class=" post_tag button button_translucent" data-position=1>车机<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E5%BA%8F%E5%88%97%E5%8C%96/' class=" post_tag button button_translucent" data-position=1>序列化<span class="button_tally">1</span>
             </a>
             
             
@@ -1197,15 +1221,11 @@ mydb=# CREATE EXTENSION pglogical;</li>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%98%BF%E9%87%8C%E4%BA%91/' class=" post_tag button button_translucent" data-position=3>阿里云<span class="button_tally">3</span>
+            <a href='https://www.zengxi.net/tags/%E8%AF%81%E4%B9%A6/' class=" post_tag button button_translucent" data-position=1>证书<span class="button_tally">1</span>
             </a>
             
             
-            <a href='https://www.zengxi.net/tags/%E9%9B%86%E7%BE%A4/' class=" post_tag button button_translucent" data-position=1>集群<span class="button_tally">1</span>
-            </a>
-            
-            
-            <a href='https://www.zengxi.net/tags/%E9%BC%A0%E6%A0%87/' class=" post_tag button button_translucent" data-position=1>鼠标<span class="button_tally">1</span>
+            <a href='https://www.zengxi.net/tags/%E6%8A%93%E5%8C%85/' class=" post_tag button button_translucent" data-position=1>抓包<span class="button_tally">1</span>
             </a>
             
             <div class="tags_sort"><span title="sort alphabetically">[A~Z]</span><span title="sort by count">[0~9]</span>
@@ -1282,7 +1302,7 @@ mydb=# CREATE EXTENSION pglogical;</li>
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.aff4d61d2895675be21ac0ef454401891ba695266ac81dfc2b88dbc08b995d6bc0bd8c9ee7fc24401636e34d649314c5ceff124200ca70d83f86236881d85dc0.js" integrity="sha512-r/TWHSiVZ1viGsDvRUQBiRumlSZqyB38K4jbwIuZXWvAvYye5/wkQBY2401kkxTFzv8SQgDKcNg/hiNogdhdwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.zengxi.net/js/bundle.min.fe3b75f8eaf5936278dda18708eee30d652de06fce03e403c966d0e1cb94c2f135a1369b6c5e3e7efd09db74a0b777afa36d3dcf14754559b5c3cd6c2703bf77.js" integrity="sha512-/jt1&#43;Or1k2J43aGHCO7jDWUt4G/OA&#43;QDyWbQ4cuUwvE1oTabbF4&#43;fv0J23Sgt3evo209zxR1RVm1w81sJwO/dw==" crossorigin="anonymous"></script>
     
   </body>
 </html>

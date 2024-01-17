@@ -5,36 +5,23 @@
     <link>https://www.zengxi.net/tags/jvm/</link>
     <description>Recent content in jvm on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 07 Dec 2023 20:45:00 +0800</lastBuildDate><atom:link href="https://www.zengxi.net/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Dec 2023 20:45:00 +0800</lastBuildDate>
+    <atom:link href="https://www.zengxi.net/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>JVM 参数项区别：-D、-X、-XX</title>
       <link>https://www.zengxi.net/2023/12/jvm-args/</link>
       <pubDate>Thu, 07 Dec 2023 20:45:00 +0800</pubDate>
-      
       <guid>https://www.zengxi.net/2023/12/jvm-args/</guid>
-      <description>JVM 包含多种不同类型的参数选项：
- -D 用来设置系统属性，属于标准选项 -X 设置非标准选项，支持的选项范围跟具体的 JVM 实现有关 -XX 设置高级选项，允许开发者调整 JVM 的行为、性能、输出调试信息，支持的选项范围也跟具体的 JVM 实现有关  标准选项（standard options）-D 标准选项是所有 JVM 实现都会支持。在控制台输入 java 这个命令，除了能看到 java 命令的使用手册，还能看到机器上默认的 JVM 所支持的所有标准选项。
-Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，这个不是环境变量。
-可以在命令行中带入参数:
-1-Dfoo=bar1 也可以在java代码中，设置或者读取值
-1// 设置值 2System.getProperty(&amp;#34;foo&amp;#34;); 3 4// 读取值 5System.setProperty(&amp;#34;foo&amp;#34;, &amp;#34;bar2&amp;#34;); 非标准选项（non-standard options，或者 extra-options） -X 和标准选项类似，可以直接通过 java -X 命令获取 JVM 支持的所有非标准选项。比如下面两个最常见的选项：-Xms 和 -Xmx
-非标准选项的支持是与 JVM 的具体实现紧密相关的，并且它们在不同的版本可能会发生改变。
-高级选项（advanced options）-XX 高级选项以 -XX 开头，这些选项一般用于开发者调整 JVM 的行为、性能或输出调试信息等。
-根据参数值类型的不同，高级选项又可以分为两类：布尔类型的选项和带参数的选项。
-(1) 布尔选项 布尔类型的选项不带参数，只是一个开关。开关是不需要参数的，可以通过 + 启用某个功能（-XX:+Option），而通过 - 禁用某个功能（-XX:-Option）。</description>
+      <description>JVM 包含多种不同类型的参数选项：&#xA;-D 用来设置系统属性，属于标准选项 -X 设置非标准选项，支持的选项范围跟具体的 JVM 实现有关 -XX 设置高级选项，允许开发者调整 JVM 的行为、性能、输出调试信息，支持的选项范围也跟具体的 JVM 实现有关 标准选项（standard options）-D 标准选项是所有 JVM 实现都会支持。在控制台输入 java 这个命令，除了能看到 java 命令的使用手册，还能看到机器上默认的 JVM 所支持的所有标准选项。&#xA;Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，这个不是环境变量。&#xA;可以在命令行中带入参数:&#xA;1-Dfoo=bar1 也可以在java代码中，设置或者读取值&#xA;1// 设置值 2System.getProperty(&amp;#34;foo&amp;#34;); 3 4// 读取值 5System.setProperty(&amp;#34;foo&amp;#34;, &amp;#34;bar2&amp;#34;); 非标准选项（non-standard options，或者 extra-options） -X 和标准选项类似，可以直接通过 java -X 命令获取 JVM 支持的所有非标准选项。比如下面两个最常见的选项：-Xms 和 -Xmx&#xA;非标准选项的支持是与 JVM 的具体实现紧密相关的，并且它们在不同的版本可能会发生改变。&#xA;高级选项（advanced options）-XX 高级选项以 -XX 开头，这些选项一般用于开发者调整 JVM 的行为、性能或输出调试信息等。&#xA;根据参数值类型的不同，高级选项又可以分为两类：布尔类型的选项和带参数的选项。&#xA;(1) 布尔选项 布尔类型的选项不带参数，只是一个开关。开关是不需要参数的，可以通过 + 启用某个功能（-XX:+Option），而通过 - 禁用某个功能（-XX:-Option）。</description>
     </item>
-    
     <item>
       <title>Java 8新特性 - (14)Hotspot删除永久代</title>
       <link>https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/</link>
       <pubDate>Tue, 22 Jun 2021 12:58:00 +0800</pubDate>
-      
       <guid>https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/</guid>
-      <description>JDK 6、JDK 7、JDK 8 内存模型演变 这些版本的JVM内存模型主要有以下差异：
- JDK 6：有永久代，静态变量存放在永久代上。 JDK 7：有永久代，但已经把字符串常量池、静态变量，存放在堆上。逐渐地减少永久代的使用。 JDK 8：无永久代，运行时常量池、类常量池，都保存在元数据区，也就是常说的元空间。但字符串常量池仍然存放在堆上。  内存模型各区域概要 程序计数器  较小的内存空间、线程私有，记录当前线程所执行的字节码行号。 如果执行 Java 方法，计数器记录虚拟机字节码当前指令的地址，本地方法则为空。 这一块区域没有任何 OutOfMemoryError 定义。  Java虚拟机栈  每一个方法在执行的同时，都会创建出一个栈帧，用于存放局部变量表、操作数栈、动态链接、方法出口、线程等信息。 方法从调用到执行完成，都对应着栈帧从虚拟机中入栈和出栈的过程。 最终，栈帧会随着方法的创建到结束而销毁。  本地方法栈  本地方法栈与Java虚拟机栈作用类似，唯一不同的就是本地方法栈执行的是Native方法，而虚拟机栈是为JVM执行Java方法服务的。 与 Java 虚拟机栈一样，本地方法栈也会抛出 StackOverflowError 和 OutOfMemoryError 异常。 Java 8 HotSpot虚拟机直接就把本地方法栈和虚拟机栈合二为一。  堆和元空间 Java 8 JVM 的内存结构主要由三大块组成：堆内存、元空间和栈，Java 堆是内存空间占据最大的一块区域。
- Java 堆，由年轻代和年老代组成，分别占据1/3和2/3。 而年轻代又分为三部分，Eden、From Survivor、To Survivor，占据比例为8:1:1，可调。 这里特意画出了元空间，也就是直接内存区域。在 Java 8 之后就不在堆上分配方法区了。 元空间从虚拟机Java堆中转移到本地内存，默认情况下，元空间的大小仅受本地内存的限制，说白了也就是以后不会因为永久代空间不够而抛出OOM异常出现了。Java 8以前版本的 class和JAR包数据存储在 PermGen下面 ，PermGen 大小是固定的，而且项目之间无法共用，公有的 class，所以比较容易出现OOM异常。  常量池 从 Java 7开始把常量池从永久代中剥离，直到 Java 8 去掉了永久代。而字符串常量池一直放在堆空间，用于存储字符串对象，或是字符串对象的引用。</description>
+      <description>JDK 6、JDK 7、JDK 8 内存模型演变 这些版本的JVM内存模型主要有以下差异：&#xA;JDK 6：有永久代，静态变量存放在永久代上。 JDK 7：有永久代，但已经把字符串常量池、静态变量，存放在堆上。逐渐地减少永久代的使用。 JDK 8：无永久代，运行时常量池、类常量池，都保存在元数据区，也就是常说的元空间。但字符串常量池仍然存放在堆上。 内存模型各区域概要 程序计数器 较小的内存空间、线程私有，记录当前线程所执行的字节码行号。 如果执行 Java 方法，计数器记录虚拟机字节码当前指令的地址，本地方法则为空。 这一块区域没有任何 OutOfMemoryError 定义。 Java虚拟机栈 每一个方法在执行的同时，都会创建出一个栈帧，用于存放局部变量表、操作数栈、动态链接、方法出口、线程等信息。 方法从调用到执行完成，都对应着栈帧从虚拟机中入栈和出栈的过程。 最终，栈帧会随着方法的创建到结束而销毁。 本地方法栈 本地方法栈与Java虚拟机栈作用类似，唯一不同的就是本地方法栈执行的是Native方法，而虚拟机栈是为JVM执行Java方法服务的。 与 Java 虚拟机栈一样，本地方法栈也会抛出 StackOverflowError 和 OutOfMemoryError 异常。 Java 8 HotSpot虚拟机直接就把本地方法栈和虚拟机栈合二为一。 堆和元空间 Java 8 JVM 的内存结构主要由三大块组成：堆内存、元空间和栈，Java 堆是内存空间占据最大的一块区域。&#xA;Java 堆，由年轻代和年老代组成，分别占据1/3和2/3。 而年轻代又分为三部分，Eden、From Survivor、To Survivor，占据比例为8:1:1，可调。 这里特意画出了元空间，也就是直接内存区域。在 Java 8 之后就不在堆上分配方法区了。 元空间从虚拟机Java堆中转移到本地内存，默认情况下，元空间的大小仅受本地内存的限制，说白了也就是以后不会因为永久代空间不够而抛出OOM异常出现了。Java 8以前版本的 class和JAR包数据存储在 PermGen下面 ，PermGen 大小是固定的，而且项目之间无法共用，公有的 class，所以比较容易出现OOM异常。 常量池 从 Java 7开始把常量池从永久代中剥离，直到 Java 8 去掉了永久代。而字符串常量池一直放在堆空间，用于存储字符串对象，或是字符串对象的引用。&#xA;为什么废弃永久代（PermGen） 参照官方说明 JEP122：http://openjdk.java.net/jeps/122：</description>
     </item>
-    
   </channel>
 </rss>
