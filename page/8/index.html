@@ -132,6 +132,34 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/">Kubernetes in Action笔记 - (2) k8s集群架构</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Dec 3, 2020</span>
+    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">集群架构 k8s集群由很多节点组成，被分成两种类型：Master节点与Node节点。
+Master节点 承载着控制和管理整个集群系统的 Control Panel。包含下面组件：
+API Server 一个api服务器，所有外部与k8s集群的交互都需要经过它 可水平扩展 Scheduler 将pod调度到具体的Node节点上 一个master集群中只会有一个节点处于激活状态，由etcd选举产生 Control Manager 执行集群级别的功能，通过apiserver监控集群状态做出相应的处理，如复制组件、持续跟踪工作节点 、处理节点失败等 一个master集群中只会有一个节点处于激活状态，由etcd选举产生 etcd 一个可靠的分 …</p>
+          <a href="https://www.zengxi.net/2020/12/k8s_cluster_structure/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/12/k8s_container_tech_intro/">Kubernetes in Action笔记 - (1) 容器技术介绍</a>
       </h3>
       <div class="post_meta">
@@ -395,35 +423,6 @@
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/08/manjaro_debtap/">Manjaro安装deb包</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Aug 13, 2020</span>
-    <a href='https://www.zengxi.net/tags/manjaro' class="post_tag button button_translucent">manjaro
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">安装debtap
-1yay -S debtap 替换源，解决国内debtap同步仓库执行超慢的问题。打开 /usr/bin/debtap，更换 debtap 内容：
-将 http://ftp.debian.org/debian/dists 替换成 https://mirrors.ustc.edu.cn/debian/dists 将 http://archive.ubuntu.com/ubuntu/dists 替换成 https://mirrors.ustc.edu.cn/ubuntu/dists 升级debtap数据库
-1sudo debtap -u 转换deb包。注意： 转换过程中会提示输入包名，以及license。包名随 …</p>
-          <a href="https://www.zengxi.net/2020/08/manjaro_debtap/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -466,6 +465,9 @@
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
+        <a href="https://www.zengxi.net/2024/10/short-link-service/" class="nav-link">设计百万链路服务</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
       </li>
       <li>
@@ -486,12 +488,12 @@
       <li>
         <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/07/zookeeper_purge_file/" class="nav-link">zookeeper服务器文件清理</a>
-      </li>
     </ul>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
+      <li>
+        <a href="https://www.zengxi.net/2024/10/short-link-service/" class="nav-link">设计百万链路服务</a>
+      </li>
       <li>
         <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
       </li>
@@ -513,9 +515,6 @@
       <li>
         <a href="https://www.zengxi.net/2023/12/wecom-dev-tool/" class="nav-link">企业微信调试工具</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/" class="nav-link">Spring Boot 自动设置响应头引发的问题</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -532,7 +531,7 @@
         
         <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class="post_tag button button_translucent">
           系统设计与优化
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -708,7 +707,7 @@
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=13>系统设计与优化<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=14>系统设计与优化<span class="button_tally">14</span>
             </a>
             
             
@@ -1179,11 +1178,19 @@
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E7%9F%AD%E9%93%BE/' class=" post_tag button button_translucent" data-position=1>短链<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
             </a>
             
             
             <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/' class=" post_tag button button_translucent" data-position=1>分布式系统<span class="button_tally">1</span>
             </a>
             
             
@@ -1212,6 +1219,10 @@
             
             
             <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%9D%A2%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>面试<span class="button_tally">1</span>
             </a>
             
             

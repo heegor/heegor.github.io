@@ -132,6 +132,35 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/">设置周日为一个星期的第一天</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Mar 29, 2021</span>
+    <a href='https://www.zengxi.net/tags/jetty' class="post_tag button button_translucent">jetty
+    </a>
+    <a href='https://www.zengxi.net/tags/session' class="post_tag button button_translucent">session
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">用 “locale”命令检查当前的区域，例如我的机器运行结果是：
+1ls@ls-laptop:~$ locale 2 3LANG=zh_CN.UTF-8 4LANGUAGE=zh_CN.UTF-8 5LC_CTYPE=&#34;zh_CN.UTF-8&#34; 6LC_NUMERIC=&#34;zh_CN.UTF-8&#34; 7LC_TIME=&#34;zh_CN.UTF-8&#34; 8LC_COLLATE=&#34;zh_CN.UTF-8&#34; 9LC_MONETARY=&#34;zh_CN.UTF-8&#34; 10LC_MESSAGES=&#34;zh_CN.UTF-8&#34; …</p>
+          <a href="https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/03/jetty_session_remove_node_name/">删除Jetty中session ID的node名称</a>
       </h3>
       <div class="post_meta">
@@ -403,37 +432,6 @@ lastUpdateTimeStr - 上次推送的时间。会与sitemap.xml中的时间做比�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/">使用Python在两个Postgres数据库直接复制数据</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jan 26, 2021</span>
-    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
-    </a>
-    <a href='https://www.zengxi.net/tags/python' class="post_tag button button_translucent">python
-    </a>
-    <a href='https://www.zengxi.net/tags/psycopg2' class="post_tag button button_translucent">psycopg2
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">在python脚本中，通过 psycopg2 库的copy_expert，可以很方便地在两个Postgres数据库之间复制数据
-1s = StringIO() 2 3# Export into memory buffer 4sql = &#34;&#34;&#34; 5 COPY (select * from foo) TO STDOUT WITH CSV HEADER ENCODING &#39;UTF8&#39;; 6&#34;&#34;&#34; 7 8sourceCursor = sourceConn.cursor() 9sourceCursor.copy_expert(sql, s) 10 11# Import from …</p>
-          <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -476,6 +474,9 @@ lastUpdateTimeStr - 上次推送的时间。会与sitemap.xml中的时间做比�
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
+        <a href="https://www.zengxi.net/2024/10/short-link-service/" class="nav-link">设计百万链路服务</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
       </li>
       <li>
@@ -496,12 +497,12 @@ lastUpdateTimeStr - 上次推送的时间。会与sitemap.xml中的时间做比�
       <li>
         <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/07/zookeeper_purge_file/" class="nav-link">zookeeper服务器文件清理</a>
-      </li>
     </ul>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
+      <li>
+        <a href="https://www.zengxi.net/2024/10/short-link-service/" class="nav-link">设计百万链路服务</a>
+      </li>
       <li>
         <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
       </li>
@@ -523,9 +524,6 @@ lastUpdateTimeStr - 上次推送的时间。会与sitemap.xml中的时间做比�
       <li>
         <a href="https://www.zengxi.net/2023/12/wecom-dev-tool/" class="nav-link">企业微信调试工具</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/" class="nav-link">Spring Boot 自动设置响应头引发的问题</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -542,7 +540,7 @@ lastUpdateTimeStr - 上次推送的时间。会与sitemap.xml中的时间做比�
         
         <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class="post_tag button button_translucent">
           系统设计与优化
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -718,7 +716,7 @@ lastUpdateTimeStr - 上次推送的时间。会与sitemap.xml中的时间做比�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=13>系统设计与优化<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=14>系统设计与优化<span class="button_tally">14</span>
             </a>
             
             
@@ -1189,11 +1187,19 @@ lastUpdateTimeStr - 上次推送的时间。会与sitemap.xml中的时间做比�
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E7%9F%AD%E9%93%BE/' class=" post_tag button button_translucent" data-position=1>短链<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
             </a>
             
             
             <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/' class=" post_tag button button_translucent" data-position=1>分布式系统<span class="button_tally">1</span>
             </a>
             
             
@@ -1222,6 +1228,10 @@ lastUpdateTimeStr - 上次推送的时间。会与sitemap.xml中的时间做比�
             
             
             <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%9D%A2%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>面试<span class="button_tally">1</span>
             </a>
             
             

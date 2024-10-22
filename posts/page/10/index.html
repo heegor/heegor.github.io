@@ -128,6 +128,39 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/">Linux下面使用dd命令烧录U盘并查看执行进度</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jul 13, 2020</span>
+    <a href='https://www.zengxi.net/tags/linux' class="post_tag button button_translucent">linux
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">烧录U盘 先用fdisk来查看U盘的盘符
+1sudo fdisk -l 再用dd命令来写数据到U盘
+1sudo dd if=/home/paul/Downloads/test.iso of=/dev/sdc bs=1M count=10000 查看执行进度 假定需要每5秒输出dd的进度，可以使用下面几种方法。新开一个命令行窗口，执行下面的命令，注意命令上面可能需要加上sudo
+方法一：
+1watch -n 5 pkill -USR1 ^dd$ 方法二：
+1watch -n 5 killall -USR1 dd 方法三：
+1while killall -USR1 dd; do sleep 5; done 方法四：
+1while (ps …</p>
+          <a href="https://www.zengxi.net/2020/07/linux_dd_cmd_write_usb_disk/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/">rsyslog内存占用高导致服务不可用</a>
       </h3>
       <div class="post_meta">
@@ -386,35 +419,6 @@ WAL 通过WAL文件可以获得数据库内所 …</p>
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/04/docker-hub-mirror/">Docker Hub国内镜像加速</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Apr 22, 2020</span>
-    <a href='https://www.zengxi.net/tags/docker' class="post_tag button button_translucent">docker
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">国内访问Docker Hub速度比较感人，这个时候需要配置国内的镜像，来加速下载。由于镜像服务可能出现宕机，建议同时配置多个镜像。
-Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json，写入如下内容
-1{ 2 &#34;registry-mirrors&#34;: [ 3 &#34;https://hub-mirror.c.163.com&#34;, 4 &#34;https://registry.docker-cn.com&#34; 5 ] 6} 重启服务
-1sudo systemctl daemon-reload 2sudo systemctl …</p>
-          <a href="https://www.zengxi.net/2020/04/docker-hub-mirror/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -457,6 +461,9 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
+        <a href="https://www.zengxi.net/2024/10/short-link-service/" class="nav-link">设计百万链路服务</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
       </li>
       <li>
@@ -477,12 +484,12 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
       <li>
         <a href="https://www.zengxi.net/2020/11/nas_frp_nginx/" class="nav-link">利用frp与nginx实现公网访问NAS</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2020/07/zookeeper_purge_file/" class="nav-link">zookeeper服务器文件清理</a>
-      </li>
     </ul>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
+      <li>
+        <a href="https://www.zengxi.net/2024/10/short-link-service/" class="nav-link">设计百万链路服务</a>
+      </li>
       <li>
         <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
       </li>
@@ -504,9 +511,6 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
       <li>
         <a href="https://www.zengxi.net/2023/12/wecom-dev-tool/" class="nav-link">企业微信调试工具</a>
       </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/" class="nav-link">Spring Boot 自动设置响应头引发的问题</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">分类</h2>
@@ -523,7 +527,7 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
         
         <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class="post_tag button button_translucent">
           系统设计与优化
-          <span class="button_tally">13</span>
+          <span class="button_tally">14</span>
         </a>
         
         <a href='https://www.zengxi.net/categories/postgres/' class="post_tag button button_translucent">
@@ -699,7 +703,7 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
             </a>
             
             
-            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=13>系统设计与优化<span class="button_tally">13</span>
+            <a href='https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/' class=" post_tag button button_translucent" data-position=14>系统设计与优化<span class="button_tally">14</span>
             </a>
             
             
@@ -1170,11 +1174,19 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
             </a>
             
             
+            <a href='https://www.zengxi.net/tags/%E7%9F%AD%E9%93%BE/' class=" post_tag button button_translucent" data-position=1>短链<span class="button_tally">1</span>
+            </a>
+            
+            
             <a href='https://www.zengxi.net/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/' class=" post_tag button button_translucent" data-position=1>对象存储<span class="button_tally">1</span>
             </a>
             
             
             <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/' class=" post_tag button button_translucent" data-position=1>分布式<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/' class=" post_tag button button_translucent" data-position=1>分布式系统<span class="button_tally">1</span>
             </a>
             
             
@@ -1203,6 +1215,10 @@ Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json�
             
             
             <a href='https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/' class=" post_tag button button_translucent" data-position=1>轮询<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E9%9D%A2%E8%AF%95/' class=" post_tag button button_translucent" data-position=1>面试<span class="button_tally">1</span>
             </a>
             
             

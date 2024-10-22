@@ -7,8 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 09 Jan 2024 21:01:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 22 Oct 2024 23:01:00 +0800</lastBuildDate>
     <atom:link href="https://www.zengxi.net/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>设计百万链路服务</title>
+      <link>https://www.zengxi.net/2024/10/short-link-service/</link>
+      <pubDate>Tue, 22 Oct 2024 23:01:00 +0800</pubDate>
+      <guid>https://www.zengxi.net/2024/10/short-link-service/</guid>
+      <description>状态码 301 和 302 的区别 301 301 是永久重定向。301 跳转会默认被浏览器缓存，当用户第一次访问某个短链后，如果服务器返回 301 状态码，则这个用户在后后续多次访问同一短链接地址，浏览器会直接请求缓存中的跳转地址，不会再请求短链服务重新获取地址。这么做的优点是降低了服务器的压力，但是无法统计短链接的点击次数。&#xA;302 302 是临时重定向。302 跳转默认不会被浏览器缓存，除非提示浏览器缓存。因此用户每次访问同一短链地址，浏览器都会去短链服务器上重新取长链接的地址。此方式优点是能够统计到短链接被点击的次数，但是服务器的压力变大了。&#xA;短链接和长链接映射的是实现方案 哈希法 哈希法推荐 Google 出品的 MurmurHash 算法，MurmurHash 是一种非加密型哈希函数，非加密性能较高。&#xA;哈希法的会存在哈希冲突的问题（即就是两个不同的URL可能会生成相同的短链接），为了解决这个问题可以采用增加salt字段。也就是将短链字段设置为唯一键，重复短链插入数据库抛出异常时候进行处理: 增加盐值到长链后面，然后重新使用这个拼接的长链进行hash计算。此方式最多重试三次，尽最大努力解决哈希冲突问题。访问短链时，一并取出salt值，将长链处理后进行返回。&#xA;redis方案 在Redis中创建一个键，使用INCR命令递增该键的值，并将递增后的值作为唯一ID返回。由于Redis的INCR命令是原子性操作，所以可以确保每次生成的ID都是唯一的。为了增加ID的安全性，一般不建议使用Redis自增的数值，而是拼接一些其它信息，&#xA;uuid方案 UUID是通过一系列算法生成的128位数字，通常基于时间戳、计算机硬件标识符、随机数等元素；uuid方案实现简单，无需网络交互就能保证了ID的唯一性。&#xA;雪花算法 ID 雪花算法的生效id的效率高，但是雪花算法要避免时钟回拨的问题（会出现id重复的问题）&#xA;设计短链服务 由于是访问量很大，所以我们在设计的时候采用了LVS+Nginx扛住第一层的大流量。&#xA;LVS使用keepalived来保证高可用，LVS是工作在第四层并且其负载能力强，它负责将请求分发到nginx上 nginx单机的并发5万，针对百万的并发至少需要20台nginx来处理大的流量，nginx将请求转发到公司的网关上 网关根据服务的URL来解析地址找到对应的服务器，由于是百万流量所以网关也需要做集群来处理请求。 网关将请求转发到真实的短链服务上，短链服务自身使用了sentinel来限流、使用本地缓存（常见的是Guava、caffeine）、分布式缓存（如redis）来缓存数据，使用布隆过滤器过滤无效的请求。 有效的请求未命中缓存，此时就查询数据库，由于数据库抗并发能力弱，所以对数据库做了主从模式、读写分离方式来应对高并发。 数据库中查询出来的数据要同步到缓存中，以便于下次同样的短链请求可以不查询数据库而直接给消费者提供数据响应。 参考链接：&#xA;https://mp.weixin.qq.com/s/_6neJlc0Jc0w8JMfqnTr-g </description>
+    </item>
     <item>
       <title>通过SpringGateway对接口请求进行加解密</title>
       <link>https://www.zengxi.net/2024/01/gateway-modify-request-response/</link>
