@@ -132,6 +132,39 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/">Java 8新特性 - (14)Hotspot删除永久代</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Jun 22, 2021</span>
+    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
+    </a>
+    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
+    </a>
+    <a href='https://www.zengxi.net/tags/jvm' class="post_tag button button_translucent">jvm
+    </a>
+    <a href='https://www.zengxi.net/tags/hotspot' class="post_tag button button_translucent">hotspot
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">JDK 6、JDK 7、JDK 8 内存模型演变 这些版本的JVM内存模型主要有以下差异：
+JDK 6：有永久代，静态变量存放在永久代上。 JDK 7：有永久代，但已经把字符串常量池、静态变量，存放在堆上。逐渐地减少永久代的使用。 JDK 8：无永久代，运行时常量池、类常量池，都保存在元数据区，也就是常说的元空间。但字符串常量池仍然存放在堆上。 内存模型各区域概要 程序计数器 较小的内存空间、线程私有，记录当前线程所执行的字节码行号。 如果执行 Java 方法，计数器记录虚拟机字节码当前指令的地址，本地方法则为空。 这一块区域没有任何 OutOfMemoryError 定义。 Java虚拟机栈 每一个方法在执行的同时，都会创建出一个 …</p>
+          <a href="https://www.zengxi.net/2021/06/java8_hotspot_remove_permgen/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/06/java9_safevarargs_enhancement/">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a>
       </h3>
       <div class="post_meta">
@@ -402,39 +435,6 @@ Java 8为Integer，Long新增如下方法:
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2021/06/java8_base64/">Java 8新特性 - (11)Base64编解码</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jun 7, 2021</span>
-    <a href='https://www.zengxi.net/tags/java' class="post_tag button button_translucent">java
-    </a>
-    <a href='https://www.zengxi.net/tags/java-8' class="post_tag button button_translucent">java 8
-    </a>
-    <a href='https://www.zengxi.net/tags/base64' class="post_tag button button_translucent">base64
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">早期处理BASE64编码, 需借助外部依赖：commons-codec，sun.misc.BASE64Decoder或JAXB的DatatypeConverter。Java 8实现了BASE64编解码API，它包含到java.util包。
-java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编解码器：
-Basic编码 URL编码 MIME编码 Basic编码 Basic编码是标准的BASE64编码，用于处理常规的需求：输出的内容不添加换行符，而且输出的内容由字母加数字组成。
-1// 编码 2String asB64 = …</p>
-          <a href="https://www.zengxi.net/2021/06/java8_base64/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -477,7 +477,7 @@ Basic编码 URL编码 MIME编码 Basic编码 Basic编码是标准的BASE64编码
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
-        <a href="https://www.zengxi.net/2024/10/short-link-service/" class="nav-link">设计百万链路服务</a>
+        <a href="https://www.zengxi.net/2024/10/caffeine/" class="nav-link">本地缓存Caffeine</a>
       </li>
       <li>
         <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
@@ -504,6 +504,9 @@ Basic编码 URL编码 MIME编码 Basic编码 Basic编码是标准的BASE64编码
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2024/10/caffeine/" class="nav-link">本地缓存Caffeine</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/10/short-link-service/" class="nav-link">设计百万链路服务</a>
       </li>
       <li>
@@ -523,9 +526,6 @@ Basic编码 URL编码 MIME编码 Basic编码 Basic编码是标准的BASE64编码
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/12/jvm-args/" class="nav-link">JVM 参数项区别：-D、-X、-XX</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/12/wecom-dev-tool/" class="nav-link">企业微信调试工具</a>
       </li>
     </ul>
     <div>
@@ -606,6 +606,10 @@ Basic编码 URL编码 MIME编码 Basic编码 Basic编码是标准的BASE64编码
         <div class="post_tags_toggle button">所有分类</div>
         <div class="post_tags">
           <div class="tags_list">
+            
+            <a href='https://www.zengxi.net/categories/caffeine/' class=" post_tag button button_translucent" data-position=1>CAFFEINE<span class="button_tally">1</span>
+            </a>
+            
             
             <a href='https://www.zengxi.net/categories/chrome/' class=" post_tag button button_translucent" data-position=1>CHROME<span class="button_tally">1</span>
             </a>
@@ -843,6 +847,10 @@ Basic编码 URL编码 MIME编码 Basic编码 Basic编码是标准的BASE64编码
             
             
             <a href='https://www.zengxi.net/tags/bing/' class=" post_tag button button_translucent" data-position=1>BING<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/caffeine/' class=" post_tag button button_translucent" data-position=1>CAFFEINE<span class="button_tally">1</span>
             </a>
             
             
@@ -1215,6 +1223,10 @@ Basic编码 URL编码 MIME编码 Basic编码 Basic编码是标准的BASE64编码
             
             
             <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BC%93%E5%AD%98/' class=" post_tag button button_translucent" data-position=1>缓存<span class="button_tally">1</span>
             </a>
             
             

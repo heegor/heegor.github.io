@@ -7,8 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 22 Oct 2024 23:01:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 23 Oct 2024 13:01:00 +0800</lastBuildDate>
     <atom:link href="https://www.zengxi.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>本地缓存Caffeine</title>
+      <link>https://www.zengxi.net/2024/10/caffeine/</link>
+      <pubDate>Wed, 23 Oct 2024 13:01:00 +0800</pubDate>
+      <guid>https://www.zengxi.net/2024/10/caffeine/</guid>
+      <description>介绍 Caffeine 是基于Java 1.8 的高性能本地缓存库，由 Guava 改进而来，而且在 Spring5 开始的默认缓存实现就将 Caffeine 代替原来的Google Guava，官方说明指出，其缓存命中率已经接近最优值。&#xA;实际上Caffeine这样的本地缓存和 ConcurrentMap 很像，即支持并发，并且支持O(1)时间复杂度的数据存取。二者的主要区别在于：&#xA;ConcurrentMap 将存储所有存入的数据，直到你显式将其移除 Caffeine将通过给定的配置，自动移除“不常用”的数据，以保持内存的合理占用。 因此，一种更好的理解方式是：Cache是一种带有存储和移除策略的Map。&#xA;Caffeine 基础 使用Caffeine，需要在工程中引入如下依赖&#xA;1&amp;lt;dependency&amp;gt; 2 &amp;lt;groupId&amp;gt;com.github.ben-manes.caffeine&amp;lt;/groupId&amp;gt; 3 &amp;lt;artifactId&amp;gt;caffeine&amp;lt;/artifactId&amp;gt; 4 &amp;lt;!--https://mvnrepository.com/artifact/com.github.ben-manes.caffeine/caffeinez找最新版--&amp;gt; 5 &amp;lt;version&amp;gt;3.0.5&amp;lt;/version&amp;gt; 6&amp;lt;/dependency&amp;gt; 1. 缓存加载策略 1.1 Cache手动创建 最普通的一种缓存，无需指定加载方式，需要手动调用 put()进行加载。需要注意的是 put() 方法对于已存在的 key 将进行覆盖，这点和 Map 的表现是一致的。&#xA;在获取缓存值时，如果想要在缓存值不存在时，原子地将值写入缓存，则可以调用 get(key, k -&amp;gt; value) 方法，该方法将避免写入竞争。在多线程情况下，当使用 get(key, k -&amp;gt; value) 时，如果有另一个线程同时调用本方法进行竞争，则后一线程会被阻塞，直到前一线程更新缓存完成；而若另一线程调用getIfPresent()方法，则会立即返回null，不会被阻塞。&#xA;调用 invalidate() 方法，将手动移除缓存。&#xA;1Cache&amp;lt;Object, Object&amp;gt; cache = Caffeine.newBuilder() 2 //初始数量 3 .initialCapacity(10) 4 //最大条数 5 .</description>
+    </item>
     <item>
       <title>设计百万链路服务</title>
       <link>https://www.zengxi.net/2024/10/short-link-service/</link>

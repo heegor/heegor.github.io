@@ -132,6 +132,37 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2024/10/caffeine/">本地缓存Caffeine</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Oct 23, 2024</span>
+    <a href='https://www.zengxi.net/tags/%E7%BC%93%E5%AD%98' class="post_tag button button_translucent">缓存
+    </a>
+    <a href='https://www.zengxi.net/tags/caffeine' class="post_tag button button_translucent">Caffeine
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">介绍 Caffeine 是基于Java 1.8 的高性能本地缓存库，由 Guava 改进而来，而且在 Spring5 开始的默认缓存实现就将 Caffeine 代替原来的Google Guava，官方说明指出，其缓存命中率已经接近最优值。
+实际上Caffeine这样的本地缓存和 ConcurrentMap 很像，即支持并发，并且支持O(1)时间复杂度的数据存取。二者的主要区别在于：
+ConcurrentMap 将存储所有存入的数据，直到你显式将其移除 Caffeine将通过给定的配置，自动移除“不常用”的数据，以保持内存的合理占用。 因此，一种更好的理解方式是：Cache是一种带有存储和移除策略的Map。
+Caffeine 基础 使 …</p>
+          <a href="https://www.zengxi.net/2024/10/caffeine/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2024/10/short-link-service/">设计百万链路服务</a>
       </h3>
       <div class="post_meta">
@@ -404,36 +435,6 @@ Java 允许我们以 -D= 这种键值对的形式设置系统属性。注意，�
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2023/11/on-premise-vs-private-cloud/">On-Premise 与 Private Cloud 区别</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Nov 9, 2023</span>
-    <a href='https://www.zengxi.net/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2' class="post_tag button button_translucent">本地部署
-    </a>
-    <a href='https://www.zengxi.net/tags/%E7%A7%81%E6%9C%89%E4%BA%91' class="post_tag button button_translucent">私有云
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">On-Premises 与 Private Cloud 有一定的区别：
-On-Premises 可以认为是本地部署，本地数据中心是指位于组织场所的物理基础设施。这些数据中心由组织的 IT 团队构建和维护，可以完全控制基础设施和数据管理流程。数据中心可以定制以满足特定需求，并且只能由授权人员访问。 Private Cloud 是私有云部署。私有云是虚拟化环境，提供与本地数据中心相同的功能。然而，与本地数据中心不同，私有云托管在远程基础设施上，可以从任何有互联网连接的地方访问。私有云可以由组织的 IT 团队或第三方服务提供商管理。 这两种方法都有其优点和缺点，需要权衡它们以确定哪种方法最适合自己的组织。以下是一些需要考虑的关键因素：
-私 …</p>
-          <a href="https://www.zengxi.net/2023/11/on-premise-vs-private-cloud/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item disabled">
@@ -476,7 +477,7 @@ On-Premises 可以认为是本地部署，本地数据中心是指位于组织�
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
-        <a href="https://www.zengxi.net/2024/10/short-link-service/" class="nav-link">设计百万链路服务</a>
+        <a href="https://www.zengxi.net/2024/10/caffeine/" class="nav-link">本地缓存Caffeine</a>
       </li>
       <li>
         <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
@@ -503,6 +504,9 @@ On-Premises 可以认为是本地部署，本地数据中心是指位于组织�
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2024/10/caffeine/" class="nav-link">本地缓存Caffeine</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/10/short-link-service/" class="nav-link">设计百万链路服务</a>
       </li>
       <li>
@@ -522,9 +526,6 @@ On-Premises 可以认为是本地部署，本地数据中心是指位于组织�
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/12/jvm-args/" class="nav-link">JVM 参数项区别：-D、-X、-XX</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/12/wecom-dev-tool/" class="nav-link">企业微信调试工具</a>
       </li>
     </ul>
     <div>
@@ -605,6 +606,10 @@ On-Premises 可以认为是本地部署，本地数据中心是指位于组织�
         <div class="post_tags_toggle button">所有分类</div>
         <div class="post_tags">
           <div class="tags_list">
+            
+            <a href='https://www.zengxi.net/categories/caffeine/' class=" post_tag button button_translucent" data-position=1>CAFFEINE<span class="button_tally">1</span>
+            </a>
+            
             
             <a href='https://www.zengxi.net/categories/chrome/' class=" post_tag button button_translucent" data-position=1>CHROME<span class="button_tally">1</span>
             </a>
@@ -842,6 +847,10 @@ On-Premises 可以认为是本地部署，本地数据中心是指位于组织�
             
             
             <a href='https://www.zengxi.net/tags/bing/' class=" post_tag button button_translucent" data-position=1>BING<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/caffeine/' class=" post_tag button button_translucent" data-position=1>CAFFEINE<span class="button_tally">1</span>
             </a>
             
             
@@ -1214,6 +1223,10 @@ On-Premises 可以认为是本地部署，本地数据中心是指位于组织�
             
             
             <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BC%93%E5%AD%98/' class=" post_tag button button_translucent" data-position=1>缓存<span class="button_tally">1</span>
             </a>
             
             

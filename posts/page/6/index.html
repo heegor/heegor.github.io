@@ -128,6 +128,37 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/">用Python读取sitemap并调用百度接口推送URL</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Feb 1, 2021</span>
+    <a href='https://www.zengxi.net/tags/python' class="post_tag button button_translucent">python
+    </a>
+    <a href='https://www.zengxi.net/tags/seo' class="post_tag button button_translucent">seo
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">SEO对于网站的推广很重要，大多数搜索引擎都提供了一些API用于给站长主动提交URL，加快网页被收录的速度。
+百度提供了快速收录的API接口，下面这个Python脚本可以用来读取本地磁盘中的sitemap.xml文件，并调用接口提交URL至百度。
+仅需要修改下面的参数：
+lastUpdateTimeStr - 上次推送的时间。会与sitemap.xml中的时间做比较，仅推送在该时间之后更新的URL siteMapPath - sitemap.xml在本地磁盘上的存放路径 siteUrl - 网站地址 baiduApiToken - Baidu API的token tmpFile - …</p>
+          <a href="https://www.zengxi.net/2021/02/python_push_url_to_baidu/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2021/01/python_copy_data_between_two_postgres/">使用Python在两个Postgres数据库直接复制数据</a>
       </h3>
       <div class="post_meta">
@@ -385,36 +416,6 @@ pod …</p>
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/12/k8s_statefulset/">Kubernetes in Action笔记 - (13) Statefulset</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Dec 29, 2020</span>
-    <a href='https://www.zengxi.net/tags/kubernetes' class="post_tag button button_translucent">kubernetes
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">了解Statefulset 与ReplicaSet比较 Statefulset 保证了pod在重新调度后保留它们的标识和状态。
-与ReplicaSet类似, Statefulset 也是依据Statefulset 的pod模板创建的，也会指定期望的副本个数。
-不同的是, Statefulset创建的pod副本并不是完全一样的。每个pod都可以拥有一组独立的数据卷(持久化状态)。pod的名字都是规律的(固定的), 而不是每个新pod都随机获取一个名字。
-提供稳定的网络标识 一个Statefulset创建的每个pod都有一个从零开始的顺序索引, 这个会体现在pod的名称和主机名上, 同样还会体现在pod对应的固定存储上。
-与普通的pod …</p>
-          <a href="https://www.zengxi.net/2020/12/k8s_statefulset/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -457,7 +458,7 @@ pod …</p>
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
-        <a href="https://www.zengxi.net/2024/10/short-link-service/" class="nav-link">设计百万链路服务</a>
+        <a href="https://www.zengxi.net/2024/10/caffeine/" class="nav-link">本地缓存Caffeine</a>
       </li>
       <li>
         <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
@@ -484,6 +485,9 @@ pod …</p>
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2024/10/caffeine/" class="nav-link">本地缓存Caffeine</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/10/short-link-service/" class="nav-link">设计百万链路服务</a>
       </li>
       <li>
@@ -503,9 +507,6 @@ pod …</p>
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/12/jvm-args/" class="nav-link">JVM 参数项区别：-D、-X、-XX</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/12/wecom-dev-tool/" class="nav-link">企业微信调试工具</a>
       </li>
     </ul>
     <div>
@@ -586,6 +587,10 @@ pod …</p>
         <div class="post_tags_toggle button">所有分类</div>
         <div class="post_tags">
           <div class="tags_list">
+            
+            <a href='https://www.zengxi.net/categories/caffeine/' class=" post_tag button button_translucent" data-position=1>CAFFEINE<span class="button_tally">1</span>
+            </a>
+            
             
             <a href='https://www.zengxi.net/categories/chrome/' class=" post_tag button button_translucent" data-position=1>CHROME<span class="button_tally">1</span>
             </a>
@@ -823,6 +828,10 @@ pod …</p>
             
             
             <a href='https://www.zengxi.net/tags/bing/' class=" post_tag button button_translucent" data-position=1>BING<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/caffeine/' class=" post_tag button button_translucent" data-position=1>CAFFEINE<span class="button_tally">1</span>
             </a>
             
             
@@ -1195,6 +1204,10 @@ pod …</p>
             
             
             <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BC%93%E5%AD%98/' class=" post_tag button button_translucent" data-position=1>缓存<span class="button_tally">1</span>
             </a>
             
             

@@ -132,6 +132,33 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
+        <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/">Postgres启动时遇到只读文件系统的错误</a>
+      </h3>
+      <div class="post_meta">
+  <svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg>
+  <span class="post_date">
+    Sep 20, 2020</span>
+    <a href='https://www.zengxi.net/tags/postgres' class="post_tag button button_translucent">postgres
+    </a>
+</div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">问题与解决方法 公司内部私有云由于断电，机器没有正常关机，结果导致 Postgres 服务器启动时，报错
+12020-09-09 07:22:15.296 UTC [3876] FATAL: could not remove old lock file &#34;postmaster.pid&#34;: Read-only file system 22020-09-09 07:22:15.296 UTC [3876] HINT: The file seems accidentally left over, but it could not be removed. Please remove the file by hand and …</p>
+          <a href="https://www.zengxi.net/2020/09/postgres_startup_readonly_file_error/" class="excerpt_more button">阅读更多</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
         <a href="https://www.zengxi.net/2020/08/manjaro_debtap/">Manjaro安装deb包</a>
       </h3>
       <div class="post_meta">
@@ -390,34 +417,6 @@ snapshot： 内存数据的快照，配置项为dataDir 事务日志：所有与
     </div>
   </li>
 
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://www.zengxi.net/2020/07/jetty_tmp_dir/">jetty临时目录下的资源文件被删导致js等资源找不到</a>
-      </h3>
-      <div class="post_meta">
-  <svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg>
-  <span class="post_date">
-    Jul 14, 2020</span>
-    <a href='https://www.zengxi.net/tags/jetty' class="post_tag button button_translucent">jetty
-    </a>
-</div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">生产环境上jetty运行一段时间后，在打开某个网页的时候发现有js、css文件找不到，但是重启之后问题会解决。后来发现是设定了tmpwatch后台任务，定时会清理一次系统的tmp目录。
-默认情况下，如果没有指定jetty的临时目录，默认会使用系统的临时目录。解决方案就是，修改jetty的临时文件存放目录，不要放在 /tmp 目录下面。主要有下面几个方法：
-设置basetempdir值 1&lt;Configure class=&#34;org.eclipse.jetty.webapp.WebAppContext&#34;&gt; 2 3 &lt;Set …</p>
-          <a href="https://www.zengxi.net/2020/07/jetty_tmp_dir/" class="excerpt_more button">阅读更多</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
     <li>
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -460,7 +459,7 @@ snapshot： 内存数据的快照，配置项为dataDir 事务日志：所有与
     <h2 class="mt-4">精选文章</h2>
     <ul>
       <li>
-        <a href="https://www.zengxi.net/2024/10/short-link-service/" class="nav-link">设计百万链路服务</a>
+        <a href="https://www.zengxi.net/2024/10/caffeine/" class="nav-link">本地缓存Caffeine</a>
       </li>
       <li>
         <a href="https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/" class="nav-link">Kafka 报 InvalidPidMappingException 问题解决</a>
@@ -487,6 +486,9 @@ snapshot： 内存数据的快照，配置项为dataDir 事务日志：所有与
     <h2 class="mt-4">最新文章</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://www.zengxi.net/2024/10/caffeine/" class="nav-link">本地缓存Caffeine</a>
+      </li>
+      <li>
         <a href="https://www.zengxi.net/2024/10/short-link-service/" class="nav-link">设计百万链路服务</a>
       </li>
       <li>
@@ -506,9 +508,6 @@ snapshot： 内存数据的快照，配置项为dataDir 事务日志：所有与
       </li>
       <li>
         <a href="https://www.zengxi.net/2023/12/jvm-args/" class="nav-link">JVM 参数项区别：-D、-X、-XX</a>
-      </li>
-      <li>
-        <a href="https://www.zengxi.net/2023/12/wecom-dev-tool/" class="nav-link">企业微信调试工具</a>
       </li>
     </ul>
     <div>
@@ -589,6 +588,10 @@ snapshot： 内存数据的快照，配置项为dataDir 事务日志：所有与
         <div class="post_tags_toggle button">所有分类</div>
         <div class="post_tags">
           <div class="tags_list">
+            
+            <a href='https://www.zengxi.net/categories/caffeine/' class=" post_tag button button_translucent" data-position=1>CAFFEINE<span class="button_tally">1</span>
+            </a>
+            
             
             <a href='https://www.zengxi.net/categories/chrome/' class=" post_tag button button_translucent" data-position=1>CHROME<span class="button_tally">1</span>
             </a>
@@ -826,6 +829,10 @@ snapshot： 内存数据的快照，配置项为dataDir 事务日志：所有与
             
             
             <a href='https://www.zengxi.net/tags/bing/' class=" post_tag button button_translucent" data-position=1>BING<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/caffeine/' class=" post_tag button button_translucent" data-position=1>CAFFEINE<span class="button_tally">1</span>
             </a>
             
             
@@ -1198,6 +1205,10 @@ snapshot： 内存数据的快照，配置项为dataDir 事务日志：所有与
             
             
             <a href='https://www.zengxi.net/tags/%E6%BB%9A%E8%BD%AE/' class=" post_tag button button_translucent" data-position=1>滚轮<span class="button_tally">1</span>
+            </a>
+            
+            
+            <a href='https://www.zengxi.net/tags/%E7%BC%93%E5%AD%98/' class=" post_tag button button_translucent" data-position=1>缓存<span class="button_tally">1</span>
             </a>
             
             
