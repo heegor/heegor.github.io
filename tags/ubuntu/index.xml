@@ -1,27 +1,104 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ubuntu on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/ubuntu/</link>
-    <description>Recent content in ubuntu on 保罗札记</description>
+    <title>保罗札记 – Ubuntu</title>
+    <link>http://localhost:1313/tags/ubuntu/</link>
+    <description>Recent content in Ubuntu on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Tue, 27 Oct 2020 08:23:45 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>Ubuntu安装Postgres</title>
-      <link>https://www.zengxi.net/2020/10/ubuntu_install_postgresql/</link>
+      <link>http://localhost:1313/blog/2020/10/ubuntu_install_postgresql/</link>
       <pubDate>Tue, 27 Oct 2020 08:23:45 +0000</pubDate>
-      <guid>https://www.zengxi.net/2020/10/ubuntu_install_postgresql/</guid>
-      <description>ubuntu自带的软件仓库可能没有最新的postgres，这就需要自己手动添加安装源，再安装&#xA;1# 添加安装源 2sudo sh -c &amp;#39;echo &amp;#34;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&amp;#34; &amp;gt; /etc/apt/sources.list.d/pgdg.list&amp;#39; 3 4# 导入key 5wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - 6 7# 更新软件列表 8sudo apt-get update 9 10# 查找相关的软件包 11sudo apt-cache search postgres 12 13# 安装 14sudo apt install &amp;lt;对应的软件名称&amp;gt; 参考：&#xA;https://www.postgresql.org/download/linux/ubuntu/ </description>
+      
+      <guid>http://localhost:1313/blog/2020/10/ubuntu_install_postgresql/</guid>
+      <description>
+        
+        
+        &lt;p&gt;ubuntu自带的软件仓库可能没有最新的postgres，这就需要自己手动添加安装源，再安装&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 添加安装源&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo sh -c &lt;span class=&#34;s1&#34;&gt;&amp;#39;echo &amp;#34;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&amp;#34; &amp;gt; /etc/apt/sources.list.d/pgdg.list&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 导入key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sudo apt-key add -
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 更新软件列表&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 查找相关的软件包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-cache search postgres
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 安装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install &amp;lt;对应的软件名称&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.postgresql.org/download/linux/ubuntu/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.postgresql.org/download/linux/ubuntu/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
     <item>
       <title>Ubuntu 16.04系统自带截屏工具快捷键</title>
-      <link>https://www.zengxi.net/2018/06/ubuntu-screenshot-shortcut/</link>
+      <link>http://localhost:1313/blog/2018/06/ubuntu-screenshot-shortcut/</link>
       <pubDate>Mon, 25 Jun 2018 03:34:29 +0000</pubDate>
-      <guid>https://www.zengxi.net/2018/06/ubuntu-screenshot-shortcut/</guid>
-      <description>Ubuntu 16.04系统自带了截屏工具，可以实现窗口截屏、区域截屏等。默认的快捷键是：&#xA;1 Print 全屏截图 2 Ctrl + Print 全屏截图并保存到剪贴板 3 4 Alt + Print 窗口截图 5 Ctrl + Alt + Print 窗口截图并保存到剪贴板 6 7 Shift + Print 区域截图 8 Ctrl + Shift + Print 区域截图并保存到剪贴板 9 10 Ctrl + Shift + Alt + R 录制屏幕短视频 </description>
+      
+      <guid>http://localhost:1313/blog/2018/06/ubuntu-screenshot-shortcut/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Ubuntu 16.04系统自带了截屏工具，可以实现窗口截屏、区域截屏等。默认的快捷键是：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;    Print                       全屏截图    
+    Ctrl &amp;#43; Print                全屏截图并保存到剪贴板    
+
+    Alt &amp;#43; Print                 窗口截图    
+    Ctrl &amp;#43; Alt &amp;#43; Print          窗口截图并保存到剪贴板    
+
+    Shift &amp;#43; Print               区域截图
+    Ctrl &amp;#43; Shift &amp;#43; Print        区域截图并保存到剪贴板
+
+    Ctrl &amp;#43; Shift &amp;#43; Alt &amp;#43; R      录制屏幕短视频&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

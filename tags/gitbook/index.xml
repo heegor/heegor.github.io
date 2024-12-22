@@ -1,20 +1,60 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>gitbook on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/gitbook/</link>
-    <description>Recent content in gitbook on 保罗札记</description>
+    <title>保罗札记 – Gitbook</title>
+    <link>http://localhost:1313/tags/gitbook/</link>
+    <description>Recent content in Gitbook on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Sat, 01 Aug 2020 09:21:02 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/gitbook/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/gitbook/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>gitbook因为nodejs版本不匹配导致安装报错</title>
-      <link>https://www.zengxi.net/2020/08/gitbook_installation_error/</link>
+      <link>http://localhost:1313/blog/2020/08/gitbook_installation_error/</link>
       <pubDate>Sat, 01 Aug 2020 09:21:02 +0000</pubDate>
-      <guid>https://www.zengxi.net/2020/08/gitbook_installation_error/</guid>
-      <description>如果nodejs使用的不是10.x版本，就会报错&#xA;1Installing GitBook 3.2.3 2/usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287 3 if (cb) cb.apply(this, arguments) 4 ^ 5 6TypeError: cb.apply is not a function 7 at /usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287:18 8 at FSReqCallback.oncomplete (fs.js:177:5) 参考：&#xA;https://www.bilibili.com/read/cv6932054/ </description>
+      
+      <guid>http://localhost:1313/blog/2020/08/gitbook_installation_error/</guid>
+      <description>
+        
+        
+        &lt;p&gt;如果nodejs使用的不是10.x版本，就会报错&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;Installing GitBook 3.2.3
+/usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287
+      if (cb) cb.apply(this, arguments)
+                 ^
+
+TypeError: cb.apply is not a function
+    at /usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287:18
+    at FSReqCallback.oncomplete (fs.js:177:5)&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.bilibili.com/read/cv6932054/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.bilibili.com/read/cv6932054/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

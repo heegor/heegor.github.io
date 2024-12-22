@@ -1,34 +1,196 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>jetty on 保罗札记</title>
-    <link>https://www.zengxi.net/categories/jetty/</link>
-    <description>Recent content in jetty on 保罗札记</description>
+    <title>保罗札记 – Jetty</title>
+    <link>http://localhost:1313/categories/jetty/</link>
+    <description>Recent content in Jetty on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Mon, 29 Mar 2021 11:55:00 +0800</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/categories/jetty/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/categories/jetty/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>CXF记录WebService的soap日志</title>
-      <link>https://www.zengxi.net/2021/03/cxf_ws_log/</link>
+      <link>http://localhost:1313/blog/2021/03/cxf_ws_log/</link>
       <pubDate>Mon, 29 Mar 2021 11:55:00 +0800</pubDate>
-      <guid>https://www.zengxi.net/2021/03/cxf_ws_log/</guid>
-      <description>cxf本身就支持日志功能，能打印传入传出的soap报文，但是需要配置一下。&#xA;这里配置的是cxf结合spring做的WebService，配置步骤如下：&#xA;在spring配置文件中的jaxws:endpoint节点下配置日志拦截器 1&amp;lt;import resource=&amp;#34;classpath:META-INF/cxf/cxf.xml&amp;#34; /&amp;gt; 2&amp;lt;import resource=&amp;#34;classpath:META-INF/cxf/cxf-extension-soap.xml&amp;#34; /&amp;gt; 3&amp;lt;import resource=&amp;#34;classpath:META-INF/cxf/cxf-servlet.xml&amp;#34; /&amp;gt; 4 5&amp;lt;!-- 配置的cxf web service的地址 --&amp;gt; 6&amp;lt;jaxws:endpoint id=&amp;#34;searchReq11&amp;#34; implementor=&amp;#34;com.iflytek.server.HelloImpl&amp;#34; 7 address=&amp;#34;/SearchReqService.asmx&amp;#34;&amp;gt; 8 &amp;lt;jaxws:inInterceptors&amp;gt; 9 &amp;lt;bean class=&amp;#34;org.apache.cxf.interceptor.LoggingInInterceptor&amp;#34; /&amp;gt; 10 &amp;lt;/jaxws:inInterceptors&amp;gt; 11 &amp;lt;jaxws:outInterceptors&amp;gt; 12 &amp;lt;bean class=&amp;#34;org.apache.cxf.interceptor.LoggingOutInterceptor&amp;#34; /&amp;gt; 13 &amp;lt;/jaxws:outInterceptors&amp;gt; 14&amp;lt;/jaxws:endpoint&amp;gt; 具体的日志输出目录（3种方式）。需要注意,下面的3种方式优先级从低到高： 什么也不配置，使用java原生的java.util.logging.Logger记录日志。日志文件为Tomcat的logs/catalina.xxxx-xx-xx.log 配置使用slf4j+log4j。cxf默认为使用slf4j记录日志。所以在项目中引入slf4j的jar包即可。如果同时引入log4j则使用log4j记录日志，如果同时引入jcl则使用jcl记录日志。 直接使用log4j记录日志。在项目的类加载路径下创建目录META-INF/cxf/，然后在目录下新建文件“org.apache.cxf.Logger”，在文件中写入：org.apache.cxf.common.logging.Log4jLogger即可。特别要注意，(1)上述目录要放在classes目录下；(2)要引入log4j的jar包。 参考：&#xA;http://ajita.iteye.com/blog/1745845 </description>
+      
+      <guid>http://localhost:1313/blog/2021/03/cxf_ws_log/</guid>
+      <description>
+        
+        
+        &lt;p&gt;cxf本身就支持日志功能，能打印传入传出的soap报文，但是需要配置一下。&lt;/p&gt;
+&lt;p&gt;这里配置的是cxf结合spring做的WebService，配置步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在spring配置文件中的jaxws:endpoint节点下配置日志拦截器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;import&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;resource=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;classpath:META-INF/cxf/cxf.xml&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;import&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;resource=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;classpath:META-INF/cxf/cxf-extension-soap.xml&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;import&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;resource=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;classpath:META-INF/cxf/cxf-servlet.xml&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 配置的cxf web service的地址 --&amp;gt;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;jaxws:endpoint&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;searchReq11&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;implementor=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;com.iflytek.server.HelloImpl&amp;#34;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;na&#34;&gt;address=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/SearchReqService.asmx&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;jaxws:inInterceptors&amp;gt;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;org.apache.cxf.interceptor.LoggingInInterceptor&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/jaxws:inInterceptors&amp;gt;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;jaxws:outInterceptors&amp;gt;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;org.apache.cxf.interceptor.LoggingOutInterceptor&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/jaxws:outInterceptors&amp;gt;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/jaxws:endpoint&amp;gt;&lt;/span&gt;  &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;具体的日志输出目录（3种方式）。需要注意,下面的3种方式优先级从低到高：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;什么也不配置，使用java原生的java.util.logging.Logger记录日志。日志文件为Tomcat的logs/catalina.xxxx-xx-xx.log&lt;/li&gt;
+&lt;li&gt;配置使用slf4j+log4j。cxf默认为使用slf4j记录日志。所以在项目中引入slf4j的jar包即可。如果同时引入log4j则使用log4j记录日志，如果同时引入jcl则使用jcl记录日志。&lt;/li&gt;
+&lt;li&gt;直接使用log4j记录日志。在项目的类加载路径下创建目录META-INF/cxf/，然后在目录下新建文件“org.apache.cxf.Logger”，在文件中写入：org.apache.cxf.common.logging.Log4jLogger即可。特别要注意，(1)上述目录要放在classes目录下；(2)要引入log4j的jar包。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://ajita.iteye.com/blog/1745845&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://ajita.iteye.com/blog/1745845&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
     <item>
       <title>设置周日为一个星期的第一天</title>
-      <link>https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/</link>
+      <link>http://localhost:1313/blog/2021/03/linux_set_sunday_as_first_day_of_week/</link>
       <pubDate>Mon, 29 Mar 2021 11:49:00 +0800</pubDate>
-      <guid>https://www.zengxi.net/2021/03/linux_set_sunday_as_first_day_of_week/</guid>
-      <description>用 “locale”命令检查当前的区域，例如我的机器运行结果是：&#xA;1ls@ls-laptop:~$ locale 2 3LANG=zh_CN.UTF-8 4LANGUAGE=zh_CN.UTF-8 5LC_CTYPE=&amp;#34;zh_CN.UTF-8&amp;#34; 6LC_NUMERIC=&amp;#34;zh_CN.UTF-8&amp;#34; 7LC_TIME=&amp;#34;zh_CN.UTF-8&amp;#34; 8LC_COLLATE=&amp;#34;zh_CN.UTF-8&amp;#34; 9LC_MONETARY=&amp;#34;zh_CN.UTF-8&amp;#34; 10LC_MESSAGES=&amp;#34;zh_CN.UTF-8&amp;#34; 11LC_PAPER=&amp;#34;zh_CN.UTF-8&amp;#34; 12LC_NAME=&amp;#34;zh_CN.UTF-8&amp;#34; 13LC_ADDRESS=&amp;#34;zh_CN.UTF-8&amp;#34; 14LC_TELEPHONE=&amp;#34;zh_CN.UTF-8&amp;#34; 15LC_MEASUREMENT=&amp;#34;zh_CN.UTF-8&amp;#34; 16LC_IDENTIFICATION=&amp;#34;zh_CN.UTF-8&amp;#34; 17LC_ALL= 执行下面命令&#xA;1sudo gedit /usr/share/i18n/locales/zh_CN 找到 “first_weekday 2” 这一行，将2改成1，周日就是每周的第一天了&#xA;执行下面的命令重新生成 locale 信息&#xA;1sudo locale-gen 重新启动&#xA;参考原文：&#xA;http://ubuntuforums.org/archive/index.php/t-26409.html </description>
+      
+      <guid>http://localhost:1313/blog/2021/03/linux_set_sunday_as_first_day_of_week/</guid>
+      <description>
+        
+        
+        &lt;p&gt;用 “locale”命令检查当前的区域，例如我的机器运行结果是：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;ls@ls-laptop:~$ locale
+
+LANG=zh_CN.UTF-8
+LANGUAGE=zh_CN.UTF-8
+LC_CTYPE=&amp;#34;zh_CN.UTF-8&amp;#34;
+LC_NUMERIC=&amp;#34;zh_CN.UTF-8&amp;#34;
+LC_TIME=&amp;#34;zh_CN.UTF-8&amp;#34;
+LC_COLLATE=&amp;#34;zh_CN.UTF-8&amp;#34;
+LC_MONETARY=&amp;#34;zh_CN.UTF-8&amp;#34;
+LC_MESSAGES=&amp;#34;zh_CN.UTF-8&amp;#34;
+LC_PAPER=&amp;#34;zh_CN.UTF-8&amp;#34;
+LC_NAME=&amp;#34;zh_CN.UTF-8&amp;#34;
+LC_ADDRESS=&amp;#34;zh_CN.UTF-8&amp;#34;
+LC_TELEPHONE=&amp;#34;zh_CN.UTF-8&amp;#34;
+LC_MEASUREMENT=&amp;#34;zh_CN.UTF-8&amp;#34;
+LC_IDENTIFICATION=&amp;#34;zh_CN.UTF-8&amp;#34;
+LC_ALL=&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;执行下面命令&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;sudo gedit /usr/share/i18n/locales/zh_CN&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;找到 “first_weekday 2” 这一行，将2改成1，周日就是每周的第一天了&lt;/p&gt;
+&lt;p&gt;执行下面的命令重新生成 locale 信息&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;sudo locale-gen&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;重新启动&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;参考原文：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://ubuntuforums.org/archive/index.php/t-26409.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://ubuntuforums.org/archive/index.php/t-26409.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
     <item>
       <title>删除Jetty中session ID的node名称</title>
-      <link>https://www.zengxi.net/2021/03/jetty_session_remove_node_name/</link>
+      <link>http://localhost:1313/blog/2021/03/jetty_session_remove_node_name/</link>
       <pubDate>Mon, 29 Mar 2021 11:47:00 +0800</pubDate>
-      <guid>https://www.zengxi.net/2021/03/jetty_session_remove_node_name/</guid>
-      <description>jetty 9.4 版本对session id的生成做了升级. 他会自动在session id后面加个节点的名字(workName配置项). jetty 9.3 以及之前的版本没有这个问题.&#xA;可以通过修改配置文件来去除session id后缀:&#xA;1# 执行下面命令来启用sessions模块，这样就会在start.d目录下面自动生成sessions.ini配置文件 2java -jar &amp;#34;/usr/local/jetty/start.jar&amp;#34; --add-to-startd=sessions 3 4# 修改sessions.ini配置，把下面配置项的值为空 5jetty.sessionIdManager.workerName= </description>
+      
+      <guid>http://localhost:1313/blog/2021/03/jetty_session_remove_node_name/</guid>
+      <description>
+        
+        
+        &lt;p&gt;jetty 9.4 版本对session id的生成做了升级. 他会自动在session id后面加个节点的名字(workName配置项). jetty 9.3 以及之前的版本没有这个问题.&lt;/p&gt;
+&lt;p&gt;可以通过修改配置文件来去除session id后缀:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 执行下面命令来启用sessions模块，这样就会在start.d目录下面自动生成sessions.ini配置文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;java -jar &lt;span class=&#34;s2&#34;&gt;&amp;#34;/usr/local/jetty/start.jar&amp;#34;&lt;/span&gt; --add-to-startd&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;sessions
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 修改sessions.ini配置，把下面配置项的值为空&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;jetty.sessionIdManager.workerName&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

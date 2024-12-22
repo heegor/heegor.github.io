@@ -1,34 +1,324 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Links on 保罗札记</title>
-    <link>https://www.zengxi.net/links/</link>
+    <title>保罗札记 – Links</title>
+    <link>http://localhost:1313/links/</link>
     <description>Recent content in Links on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Tue, 25 May 2021 15:00:00 +0800</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/links/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/links/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>Java各版本特性</title>
-      <link>https://www.zengxi.net/links/java_feature/</link>
+      <link>http://localhost:1313/links/java_feature/</link>
       <pubDate>Tue, 25 May 2021 15:00:00 +0800</pubDate>
-      <guid>https://www.zengxi.net/links/java_feature/</guid>
-      <description>最后更新日期：2021-06-24&#xA;Java 7 Java语法特性:&#xA;二进制前缀0b或者0B。整型（byte, short, int, long）可以直接用二进制表示 字面常量数字的下划线。用下划线连接整数提升其可读性，自身无含义，不可用在数字的起始和末尾。 switch 支持String类型。 泛型实例化类型自动推断。 try-with-resources语句。 单个catch中捕获多个异常类型（用| 分割）并通过改进的类型检查重新抛出异常。 Java 8 Lamda表达式(Lambda Expressions)。Lambda允许把函数作为一个方法的参数（函数作为参数传递进方法中)。 方法引用（Method references）。方法引用提供了非常有用的语法，可以直接引用已有Java类或对象（实例）的方法或构造器。与Lambda联合使用，可以使语言的构造更紧凑简洁，减少冗余代码。 默认方法（Default methods）。默认方法允许将新功能添加到库的接口中，并确保兼容实现老版本接口的旧有代码。 重复注解（Repeating Annotations）。重复注解提供了在同一声明或类型中多次应用相同注解类型的能力。 类型注解（Type Annotation）。在任何地方都能使用注解，而不仅仅在声明的地方。 类型推断增强。 方法参数反射（Method Parameter Reflection）。 Stream API 。新添加的Stream API（java.util.stream） 把真正的函数式编程风格引入到Java中。Stream API集成到了Collections API里。 HashMap改进，在键值哈希冲突时能有更好表现。 Date Time API。加强对日期和时间的处理。 java.util 包下的改进，提供了几个实用的工具类： 并行数组排序 标准的Base64编解码 支持无符号运算 Optional类 java.util.concurrent 包下增加了新的类和方法。 java.util.concurrent.ConcurrentHashMap 类添加了新的方法以支持新的StreamApi和lambada表达式。 java.util.concurrent.atomic 包下新增了类以支持可伸缩可更新的变量。 java.util.concurrent.ForkJoinPool类新增了方法以支持 common pool。 新增了java.util.concurrent.locks.StampedLock类，为控制读/写访问提供了一个基于性能的锁，且有三种模式可供选择。 HotSpot 删除了永久代. 方法调用的字节码指令支持默认方法。 Java 9 Java模块系统 （Java Platform Module System）。 新的版本号格式。$MAJOR.$MINOR.$SECURITY.$PATCH java shell，交互式命令行控制台。 在private instance methods方法上可以使用@SafeVarargs注解。 支持diamond语法与匿名内部类结合使用。 下划线_不能单独作为变量名使用。 支持私有接口方法 Javadoc 简化Doclet API。 支持生成HTML5格式。 加入了搜索框,使用这个搜索框可以查询程序元素、标记的单词和文档中的短语。 支持新的模块系统。 JVM 增强了Garbage-First(G1)并用它替代Parallel GC成为默认的垃圾收集器。 统一了JVM 日志，为所有组件引入了同一个日志系统。 删除了JDK 8中弃用的GC组合。（DefNew + CMS，ParNew + SerialOld，Incremental CMS）。 properties文件支持UTF-8编码,之前只支持ISO-8859-1。 支持Unicode 8.</description>
+      
+      <guid>http://localhost:1313/links/java_feature/</guid>
+      <description>
+        
+        
+        &lt;hr&gt;
+&lt;p&gt;&lt;em&gt;最后更新日期：2021-06-24&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;Java 7&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;java-7&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#java-7&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;http://localhost:1313/2021/02/java7_gramma_new_features/&#34; &gt;Java语法特性&lt;/a&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;二进制前缀0b或者0B。整型（byte, short, int, long）可以直接用二进制表示&lt;/li&gt;
+&lt;li&gt;字面常量数字的下划线。用下划线连接整数提升其可读性，自身无含义，不可用在数字的起始和末尾。&lt;/li&gt;
+&lt;li&gt;switch 支持String类型。&lt;/li&gt;
+&lt;li&gt;泛型实例化类型自动推断。&lt;/li&gt;
+&lt;li&gt;try-with-resources语句。&lt;/li&gt;
+&lt;li&gt;单个catch中捕获多个异常类型（用| 分割）并通过改进的类型检查重新抛出异常。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Java 8&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;java-8&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#java-8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/02/java8_lambda/&#34; &gt;Lamda表达式(Lambda Expressions)&lt;/a&gt;。Lambda允许把函数作为一个方法的参数（函数作为参数传递进方法中)。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/04/java8_method_references/&#34; &gt;方法引用（Method references）&lt;/a&gt;。方法引用提供了非常有用的语法，可以直接引用已有Java类或对象（实例）的方法或构造器。与Lambda联合使用，可以使语言的构造更紧凑简洁，减少冗余代码。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/05/java8_default_method/&#34; &gt;默认方法（Default methods）&lt;/a&gt;。默认方法允许将新功能添加到库的接口中，并确保兼容实现老版本接口的旧有代码。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/05/java8_repeating_annotations/&#34; &gt;重复注解（Repeating Annotations）&lt;/a&gt;。重复注解提供了在同一声明或类型中多次应用相同注解类型的能力。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/05/java8_type_annotation&#34; &gt;类型注解（Type Annotation）&lt;/a&gt;。在任何地方都能使用注解，而不仅仅在声明的地方。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/05/java8_type_inference&#34; &gt;类型推断增强&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/05/java8_method_parameter_reflection/&#34; &gt;方法参数反射（Method Parameter Reflection）&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/03/java8_stream_api/&#34; &gt;Stream API&lt;/a&gt; 。新添加的Stream API（java.util.stream） 把真正的函数式编程风格引入到Java中。Stream API集成到了Collections API里。&lt;/li&gt;
+&lt;li&gt;HashMap改进，在键值哈希冲突时能有更好表现。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/06/java8_datetime_api/&#34; &gt;Date Time API&lt;/a&gt;。加强对日期和时间的处理。&lt;/li&gt;
+&lt;li&gt;java.util 包下的改进，提供了几个实用的工具类：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/06/java8_parallel_sort/&#34; &gt;并行数组排序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/06/java8_base64/&#34; &gt;标准的Base64编解码&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/06/java8_unsigned_arithmetic/&#34; &gt;支持无符号运算&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/06/java8_optional/&#34; &gt;Optional类&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;12&#34;&gt;
+&lt;li&gt;java.util.concurrent 包下增加了新的类和方法。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;java.util.concurrent.ConcurrentHashMap 类添加了新的方法以支持新的StreamApi和lambada表达式。&lt;/li&gt;
+&lt;li&gt;java.util.concurrent.atomic 包下新增了类以支持可伸缩可更新的变量。&lt;/li&gt;
+&lt;li&gt;java.util.concurrent.ForkJoinPool类新增了方法以支持 common pool。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;13&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/06/java8_stamped_lock/&#34; &gt;新增了java.util.concurrent.locks.StampedLock类&lt;/a&gt;，为控制读/写访问提供了一个基于性能的锁，且有三种模式可供选择。&lt;/li&gt;
+&lt;li&gt;HotSpot&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/06/java8_hotspot_remove_permgen/&#34; &gt;删除了永久代&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;方法调用的字节码指令支持默认方法。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Java 9&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;java-9&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#java-9&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Java模块系统 （Java Platform Module System）。&lt;/li&gt;
+&lt;li&gt;新的版本号格式。$MAJOR.$MINOR.$SECURITY.$PATCH&lt;/li&gt;
+&lt;li&gt;java shell，交互式命令行控制台。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/06/java9_safevarargs_enhancement/&#34; &gt;在private instance methods方法上可以使用@SafeVarargs注解&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/06/java9_anonymous_inner_class_and_diamond_operator/&#34; &gt;支持diamond语法与匿名内部类结合使用&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;下划线_不能单独作为变量名使用。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/06/java9_interface_private_method/&#34; &gt;支持私有接口方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Javadoc&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;简化Doclet API。&lt;/li&gt;
+&lt;li&gt;支持生成HTML5格式。&lt;/li&gt;
+&lt;li&gt;加入了搜索框,使用这个搜索框可以查询程序元素、标记的单词和文档中的短语。&lt;/li&gt;
+&lt;li&gt;支持新的模块系统。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;9&#34;&gt;
+&lt;li&gt;JVM&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;增强了Garbage-First(G1)并用它替代Parallel GC成为默认的垃圾收集器。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/06/java9_unique_jvm_log/&#34; &gt;统一了JVM 日志，为所有组件引入了同一个日志系统&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;删除了JDK 8中弃用的GC组合。（DefNew + CMS，ParNew + SerialOld，Incremental CMS）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;10&#34;&gt;
+&lt;li&gt;properties文件支持UTF-8编码,之前只支持ISO-8859-1。&lt;/li&gt;
+&lt;li&gt;支持Unicode 8.0，在JDK8中是Unicode 6.2。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/2021/06/java9_optional_enhancement/&#34; &gt;Optional类新增三个方法&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Java 10&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;java-10&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#java-10&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;局部变量类型推断（Local-Variable Type Inference）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//之前的代码格式&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;URL&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;URL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.oracle.com/&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;URLConnection&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;conn&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;openConnection&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Reader&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;reader&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BufferedReader&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InputStreamReader&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;conn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getInputStream&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()))&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//java10中用var来声明变量&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;URL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.oracle.com/&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;conn&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;openConnection&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;reader&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BufferedReader&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InputStreamReader&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;conn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getInputStream&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()));&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;var是一个保留类型名称，而不是关键字。所以之前使用var作为变量、方法名、包名的都没问题，但是如果作为类或接口名，那么这个类和接口就必须重命名了。&lt;/p&gt;
+&lt;p&gt;var的使用场景主要有以下四种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;本地变量初始化。&lt;/li&gt;
+&lt;li&gt;增强for循环中。&lt;/li&gt;
+&lt;li&gt;传统for循环中声明的索引变量。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Try-with-resources&lt;/code&gt; 变量。​&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;2.Optional类添加了新的方法orElseThrow(无参数版)。相比于已经存在的get方法，这个方法更推荐使用。&lt;/p&gt;
+&lt;h2&gt;Java 11&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;java-11&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#java-11&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;支持Unicode 10.0,在jdk10中是8.0。&lt;/li&gt;
+&lt;li&gt;标准化HTTP Client&lt;/li&gt;
+&lt;li&gt;编译器线程的延迟分配。添加了新的命令&lt;code&gt;-XX:+UseDynamicNumberOfCompilerThreads&lt;/code&gt;动态控制编译器线程的数量。&lt;/li&gt;
+&lt;li&gt;新的垃圾收集器—ZGC。一种可伸缩的低延迟垃圾收集器(实验性)。&lt;/li&gt;
+&lt;li&gt;Epsilon。一款新的实验性无操作垃圾收集器。Epsilon GC 只负责内存分配，不实现任何内存回收机制。这对于性能测试非常有用，可用于与其他GC对比成本和收益。&lt;/li&gt;
+&lt;li&gt;Lambda参数的局部变量语法。java10中引入的var字段得到了增强，现在可以用在lambda表达式的声明中。如果lambda表达式的其中一个形式参数使用了var，那所有的参数都必须使用var。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.jianshu.com/p/38985b61ea83&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.jianshu.com/p/38985b61ea83&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
     <item>
       <title>国内常用镜像地址</title>
-      <link>https://www.zengxi.net/links/mirror/</link>
+      <link>http://localhost:1313/links/mirror/</link>
       <pubDate>Thu, 14 Jan 2021 15:00:00 +0800</pubDate>
-      <guid>https://www.zengxi.net/links/mirror/</guid>
-      <description>最近更新日期：2021-02-24&#xA;Docker Hub 镜像列表 无需登录：&#xA;Azure 中国镜像 - https://dockerhub.azk8s.cn 科大镜像站 - https://docker.mirrors.ustc.edu.cn 七牛云 - https://reg-mirror.qiniu.com 网易云 - https://hub-mirror.c.163.com 腾讯云 - https://mirror.ccs.tencentyun.com 需登录：&#xA;DaoCloud - http://&amp;lt;your_code&amp;gt;.m.daocloud.io 阿里云 - https://&amp;lt;your_code&amp;gt;.mirror.aliyuncs.com 本地配置 创建或编辑 /etc/docker/daemon.json：&#xA;1{ 2 &amp;#34;registry-mirrors&amp;#34;: [ 3 &amp;#34;https://docker.mirrors.ustc.edu.cn&amp;#34;, 4 &amp;#34;https://reg-mirror.qiniu.com&amp;#34; 5 ] 6} 执行下面命令&#xA;1sudo systemctl daemon-reload 2sudo systemctl restart docker quay.io 镜像列表 quay-mirror.qiniu.com (七牛云, 推荐, 但没有找到长期支持的声明) quay.mirrors.ustc.edu.cn (中科大, 经常不可用, 不推荐) 本地配置 将镜像中的 quay.io 替换成国内镜像地址，例如：&#xA;1quay.io/prometheus/node-exporter:v0.18.1 2# 替换成如下格式 3quay-mirror.qiniu.com/prometheus/node-exporter:v0.18.1 gcr.io 和 k8s.</description>
+      
+      <guid>http://localhost:1313/links/mirror/</guid>
+      <description>
+        
+        
+        &lt;hr&gt;
+&lt;p&gt;&lt;em&gt;最近更新日期：2021-02-24&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;Docker Hub&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;docker-hub&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#docker-hub&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;镜像列表&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;镜像列表&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e9%95%9c%e5%83%8f%e5%88%97%e8%a1%a8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;无需登录：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Azure 中国镜像 - &lt;a href=&#34;https://dockerhub.azk8s.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://dockerhub.azk8s.cn&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;科大镜像站 - &lt;a href=&#34;https://docker.mirrors.ustc.edu.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://docker.mirrors.ustc.edu.cn&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;七牛云 - &lt;a href=&#34;https://reg-mirror.qiniu.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://reg-mirror.qiniu.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;网易云 - &lt;a href=&#34;https://hub-mirror.c.163.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://hub-mirror.c.163.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;腾讯云 - &lt;a href=&#34;https://mirror.ccs.tencentyun.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://mirror.ccs.tencentyun.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;需登录：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DaoCloud - http://&amp;lt;your_code&amp;gt;.m.daocloud.io&lt;/li&gt;
+&lt;li&gt;阿里云 - https://&amp;lt;your_code&amp;gt;.mirror.aliyuncs.com&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;本地配置&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;本地配置&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%9c%ac%e5%9c%b0%e9%85%8d%e7%bd%ae&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;创建或编辑 /etc/docker/daemon.json：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;registry-mirrors&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://docker.mirrors.ustc.edu.cn&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://reg-mirror.qiniu.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;执行下面命令&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo systemctl daemon-reload
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo systemctl restart docker&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h2&gt;quay.io&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;quayio&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#quayio&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;镜像列表&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;镜像列表-1&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e9%95%9c%e5%83%8f%e5%88%97%e8%a1%a8-1&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;quay-mirror.qiniu.com (七牛云, 推荐, 但没有找到长期支持的声明)&lt;/li&gt;
+&lt;li&gt;quay.mirrors.ustc.edu.cn (中科大, 经常不可用, 不推荐)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;本地配置&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;本地配置-1&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%9c%ac%e5%9c%b0%e9%85%8d%e7%bd%ae-1&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;将镜像中的 quay.io 替换成国内镜像地址，例如：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;quay.io/prometheus/node-exporter:v0.18.1
+# 替换成如下格式
+quay-mirror.qiniu.com/prometheus/node-exporter:v0.18.1&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h2&gt;gcr.io 和 k8s.gcr.io&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;gcrio-和-k8sgcrio&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#gcrio-%e5%92%8c-k8sgcrio&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;k8s.gcr.io 是 gcr.io/google-containers 的别名，所以 k8s.gcr.io/&lt;image&gt;:&lt;tag&gt; 等同于 gcr.io/google-containers/&lt;image&gt;:&lt;tag&gt;&lt;/p&gt;
+&lt;p&gt;目前未找到这两个源的通用镜像站，只能去国内镜像站找别人传上来的副本：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://hub.docker.com/u/googlecontainersmirror&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://hub.docker.com/u/googlecontainersmirror&lt;/a&gt;  (从 gcr.io 同步到Docker Hub的镜像, 只包含核心的几个镜像和版本, 能保障K8S正常运行)&lt;/li&gt;
+&lt;li&gt;registry.aliyuncs.com/google_containers (阿里云第三方用户上传的镜像，镜像比较多)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最好是自己同步镜像而不直接使用现有的第三方个人镜像库，因为需要避免生产的K8S集群遭遇到安全问题&lt;/p&gt;
+&lt;h2&gt;Python3 pip&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;python3-pip&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#python3-pip&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;本地配置&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;本地配置-2&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%9c%ac%e5%9c%b0%e9%85%8d%e7%bd%ae-2&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;临时使用时用参数 -i&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pip install &amp;lt;包名&amp;gt; -i https://mirrors.aliyun.com/pypi/simple&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;指定全局安装源&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pip config &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; global.index-url https://mirrors.aliyun.com/pypi/simple&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h3&gt;镜像列表&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;镜像列表-2&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e9%95%9c%e5%83%8f%e5%88%97%e8%a1%a8-2&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;阿里云：https://mirrors.aliyun.com/pypi/simple/&lt;/li&gt;
+&lt;li&gt;中国科技大学 ：https://pypi.mirrors.ustc.edu.cn/simple/&lt;/li&gt;
+&lt;li&gt;清华大学： &lt;a href=&#34;https://pypi.tuna.tsinghua.edu.cn/simple/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://pypi.tuna.tsinghua.edu.cn/simple/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
     <item>
       <title>在线学习资源</title>
-      <link>https://www.zengxi.net/links/learning_material/</link>
+      <link>http://localhost:1313/links/learning_material/</link>
       <pubDate>Thu, 14 Jan 2021 15:00:00 +0800</pubDate>
-      <guid>https://www.zengxi.net/links/learning_material/</guid>
-      <description>Ansible Ansible中文权威指南 - https://ansible-tran.readthedocs.io/en/latest/ Kubernetes k8s官方文档 - https://kubernetes.io/zh/docs/home/ </description>
+      
+      <guid>http://localhost:1313/links/learning_material/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;Ansible&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;ansible&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#ansible&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Ansible中文权威指南 - &lt;a href=&#34;https://ansible-tran.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://ansible-tran.readthedocs.io/en/latest/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Kubernetes&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;kubernetes&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#kubernetes&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;k8s官方文档 - &lt;a href=&#34;https://kubernetes.io/zh/docs/home/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://kubernetes.io/zh/docs/home/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

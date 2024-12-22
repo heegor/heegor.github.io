@@ -1,20 +1,101 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>rsyslog on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/rsyslog/</link>
-    <description>Recent content in rsyslog on 保罗札记</description>
+    <title>保罗札记 – Rsyslog</title>
+    <link>http://localhost:1313/tags/rsyslog/</link>
+    <description>Recent content in Rsyslog on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Mon, 22 Jun 2020 09:29:31 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/rsyslog/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/rsyslog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>rsyslog内存占用高导致服务不可用</title>
-      <link>https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/</link>
+      <link>http://localhost:1313/blog/2020/06/rsyslog_high_memory_usage/</link>
       <pubDate>Mon, 22 Jun 2020 09:29:31 +0000</pubDate>
-      <guid>https://www.zengxi.net/2020/06/rsyslog_high_memory_usage/</guid>
-      <description>这几天生产环境中某个服务内存不时地被撑爆，原先以为是应用的问题，但是近来没有上过新的代码。该服务的总内存是8G，启动参数关于内存的配置大致是：-Xmx=6.4G，-Xms=4G 左右。看了Grafana上面的监控记录，JVM 老年代使用最多也就到4G左右，在GC的日志中发现也仅仅用到4G左右，并没有到达最高的内存值。这两个结果可以看出来，应该不是应用程序导致内存占用过大。&#xA;后来用top命令看了一下，发现rsyslog进程使用了将近40%的内存。再查一下日志文件，发现一些日志文件大小都达到2G以上。&#xA;rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程，不应该占用那么内存，即使它同步延迟较大甚至不工作，也不应该影响到应用程序的正常运行。那么，我们可以通过限制它的内存使用率来解决这个问题。&#xA;如果是Ubuntu系统，可以通过修改 /etc/systemd/system/rsyslog.service 文件，在Service项目下面修改或者添加以下参数。在其他的Linux系统下，路径可能不同。通常情况下rsyslogd大小只有5M，所以将内存上限设置为8M，绝对内存限制为80M。注意: $SYSLOGD_OPTIONS这个参数必须添加上去，否则限制可能不生效。&#xA;1[Service] 2ExecStart=/usr/sbin/rsyslogd -n $SYSLOGD_OPTIONS 3MemoryAccounting=yes 4MemoryMax=80M 5MemoryHigh=8M 然后重启服务:&#xA;1systemctl daemon-reload 2systemctl restart rsyslog 几个参数的含义：&#xA;名称 描述 MemoryAccounting 若设为”yes”则表示为此单元开启内存占用统计。 注意，这同时也隐含的开启了该单元 所属的 slice 以及父 slice 内所有单元的内存占用统计。 此选项的默认值由 DefaultMemoryAccounting= 决定 MemoryHigh 尽可能限制该单元中的进程最多可以使用多少内存。 虽然这是一个允许被突破的柔性限制，但是突破限制后，进程的运行速度将会大打折扣， 并且系统将会尽可能尽快回收超出的内存。此选项的目的在于柔性限制内存使用量。选项值可以是以字节为单位的绝对内存大小(可以使用以1024为基数的 K, M, G, T 后缀)， 也可以是以百分比表示的相对内存大小(相对于系统的全部物理内存)， 还可以设为特殊值 “infinity” 表示不作限制。 MemoryMax 绝对刚性的限制该单元中的进程最多可以使用多少内存。 这是一个不允许突破的刚性限制，触碰此限制会导致进程由于内存不足而被强制杀死。 建议将 MemoryHigh= 用作主要的内存限制手段， 而将 MemoryMax= 用作不可突破的底线。选项值可以是以字节为单位的绝对大小(可以使用以1024为基数的 K, M, G, T 后缀)， 也可以是以百分比表示的相对大小(相对于系统的全部物理内存)， 还可以设为特殊值 “infinity” 表示不作限制。 参考链接：&#xA;https://www.sunsea.im/rsyslogd-systemd-journald-high-memory-solution.html https://blog.espnlol.com/?p=525 </description>
+      
+      <guid>http://localhost:1313/blog/2020/06/rsyslog_high_memory_usage/</guid>
+      <description>
+        
+        
+        &lt;p&gt;这几天生产环境中某个服务内存不时地被撑爆，原先以为是应用的问题，但是近来没有上过新的代码。该服务的总内存是8G，启动参数关于内存的配置大致是：-Xmx=6.4G，-Xms=4G 左右。看了Grafana上面的监控记录，JVM 老年代使用最多也就到4G左右，在GC的日志中发现也仅仅用到4G左右，并没有到达最高的内存值。这两个结果可以看出来，应该不是应用程序导致内存占用过大。&lt;/p&gt;
+&lt;p&gt;后来用top命令看了一下，发现rsyslog进程使用了将近40%的内存。再查一下日志文件，发现一些日志文件大小都达到2G以上。&lt;/p&gt;
+&lt;p&gt;rsyslog仅仅是用来同步日志，原则上讲，它仅仅是辅助的进程，不应该占用那么内存，即使它同步延迟较大甚至不工作，也不应该影响到应用程序的正常运行。那么，我们可以通过限制它的内存使用率来解决这个问题。&lt;/p&gt;
+&lt;p&gt;如果是Ubuntu系统，可以通过修改 /etc/systemd/system/rsyslog.service 文件，在Service项目下面修改或者添加以下参数。在其他的Linux系统下，路径可能不同。通常情况下rsyslogd大小只有5M，所以将内存上限设置为8M，绝对内存限制为80M。注意: $SYSLOGD_OPTIONS这个参数必须添加上去，否则限制可能不生效。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Service&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;ExecStart&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/usr/sbin/rsyslogd -n &lt;span class=&#34;nv&#34;&gt;$SYSLOGD_OPTIONS&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;MemoryAccounting&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;yes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;MemoryMax&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;80M
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;MemoryHigh&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;8M&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;然后重启服务:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;systemctl daemon-reload
+systemctl restart rsyslog&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;几个参数的含义：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;名称&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;描述&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;MemoryAccounting&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;若设为”yes”则表示为此单元开启内存占用统计。 注意，这同时也隐含的开启了该单元 所属的 slice 以及父 slice 内所有单元的内存占用统计。 此选项的默认值由 DefaultMemoryAccounting= 决定&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;MemoryHigh&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;尽可能限制该单元中的进程最多可以使用多少内存。 虽然这是一个允许被突破的柔性限制，但是突破限制后，进程的运行速度将会大打折扣， 并且系统将会尽可能尽快回收超出的内存。此选项的目的在于柔性限制内存使用量。选项值可以是以字节为单位的绝对内存大小(可以使用以1024为基数的 K, M, G, T 后缀)， 也可以是以百分比表示的相对内存大小(相对于系统的全部物理内存)， 还可以设为特殊值 “infinity” 表示不作限制。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;MemoryMax&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;绝对刚性的限制该单元中的进程最多可以使用多少内存。 这是一个不允许突破的刚性限制，触碰此限制会导致进程由于内存不足而被强制杀死。 建议将 MemoryHigh= 用作主要的内存限制手段， 而将 MemoryMax= 用作不可突破的底线。选项值可以是以字节为单位的绝对大小(可以使用以1024为基数的 K, M, G, T 后缀)， 也可以是以百分比表示的相对大小(相对于系统的全部物理内存)， 还可以设为特殊值 “infinity” 表示不作限制。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;p&gt;参考链接：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.sunsea.im/rsyslogd-systemd-journald-high-memory-solution.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.sunsea.im/rsyslogd-systemd-journald-high-memory-solution.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.espnlol.com/?p=525&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://blog.espnlol.com/?p=525&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

@@ -1,27 +1,187 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>zookeeper on 保罗札记</title>
-    <link>https://www.zengxi.net/categories/zookeeper/</link>
-    <description>Recent content in zookeeper on 保罗札记</description>
+    <title>保罗札记 – Zookeeper</title>
+    <link>http://localhost:1313/categories/zookeeper/</link>
+    <description>Recent content in Zookeeper on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Wed, 29 Jul 2020 10:32:19 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/categories/zookeeper/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/categories/zookeeper/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>zookeeper服务器文件清理</title>
-      <link>https://www.zengxi.net/2020/07/zookeeper_purge_file/</link>
+      <link>http://localhost:1313/blog/2020/07/zookeeper_purge_file/</link>
       <pubDate>Wed, 29 Jul 2020 10:32:19 +0000</pubDate>
-      <guid>https://www.zengxi.net/2020/07/zookeeper_purge_file/</guid>
-      <description>zookeeper主要存放了三类文件，他们都可以在配置文件中指定存储路径：&#xA;snapshot： 内存数据的快照，配置项为dataDir 事务日志：所有与修改数据相关的操作记录，配置项为dataLogDir。在没有dataLogDir配置项的时候，zookeeper默认将事务日志文件和快照日志文件都存储在dataDir对应的目录下。 log4j日志：记录zookeeper集群服务器运行日志。日志的配置地址在conf/目录下的log4j.properties文件中，该文件中有一个配置项为&amp;quot;zookeeper.log.dir=.&amp;quot; 正常运行过程中，zookeeper会不断地把快照数据和日志输出到这些目录。如果没有专门做配置或者人为清理，日志文件不会自动清理，磁盘会越占越多。&#xA;主要的清理方法有下面几种。&#xA;(1) 写脚本删除 写一个删除日志脚本，每天定时执行&#xA;1#!/bin/bash 2#snapshot file dir 3dataDir=/home/yinshi.nc/test/zk_data/version-2 4#tran log dir 5dataLogDir=/home/yinshi.nc/test/zk_log/version-2 6#zk log dir 7logDir=/home/yinshi.nc/test/logs 8#Keep 66 files 9count=66 10count=$[$count+1] 11 12ls -t $dataLogDir/log.* | tail -n +$count | xargs rm -f 13ls -t $dataDir/snapshot.* | tail -n +$count | xargs rm -f 14ls -t $logDir/zookeeper.log.* | tail -n +$count | xargs rm -f 写到crontab中，设置为每天凌晨2点执行一次就可以了&#xA;1crontab -e 22 2 * * * /bin/bash /root/clean_zook_log.</description>
+      
+      <guid>http://localhost:1313/blog/2020/07/zookeeper_purge_file/</guid>
+      <description>
+        
+        
+        &lt;p&gt;zookeeper主要存放了三类文件，他们都可以在配置文件中指定存储路径：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;snapshot： 内存数据的快照，配置项为dataDir&lt;/li&gt;
+&lt;li&gt;事务日志：所有与修改数据相关的操作记录，配置项为dataLogDir。在没有dataLogDir配置项的时候，zookeeper默认将事务日志文件和快照日志文件都存储在dataDir对应的目录下。&lt;/li&gt;
+&lt;li&gt;log4j日志：记录zookeeper集群服务器运行日志。日志的配置地址在conf/目录下的log4j.properties文件中，该文件中有一个配置项为&amp;quot;zookeeper.log.dir=.&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;正常运行过程中，zookeeper会不断地把快照数据和日志输出到这些目录。如果没有专门做配置或者人为清理，日志文件不会自动清理，磁盘会越占越多。&lt;/p&gt;
+&lt;p&gt;主要的清理方法有下面几种。&lt;/p&gt;
+&lt;h1&gt;(1) 写脚本删除&lt;/h1&gt;&lt;p&gt;写一个删除日志脚本，每天定时执行&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#!/bin/bash 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#snapshot file dir &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;dataDir&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/home/yinshi.nc/test/zk_data/version-2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#tran log dir &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;dataLogDir&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/home/yinshi.nc/test/zk_log/version-2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#zk log dir &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;logDir&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/home/yinshi.nc/test/logs
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#Keep 66 files &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;count&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;66&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;count&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;$&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$count&lt;/span&gt;+1&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ls -t &lt;span class=&#34;nv&#34;&gt;$dataLogDir&lt;/span&gt;/log.* &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tail -n +&lt;span class=&#34;nv&#34;&gt;$count&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; xargs rm -f 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ls -t &lt;span class=&#34;nv&#34;&gt;$dataDir&lt;/span&gt;/snapshot.* &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tail -n +&lt;span class=&#34;nv&#34;&gt;$count&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; xargs rm -f 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ls -t &lt;span class=&#34;nv&#34;&gt;$logDir&lt;/span&gt;/zookeeper.log.* &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tail -n +&lt;span class=&#34;nv&#34;&gt;$count&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; xargs rm -f &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;写到crontab中，设置为每天凌晨2点执行一次就可以了&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crontab -e
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; * * * /bin/bash /root/clean_zook_log.sh &amp;gt; /dev/null 2&amp;gt;&lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h1&gt;(2) Zookeeper自带工具&lt;/h1&gt;&lt;p&gt;使用ZK的工具类PurgeTxnLog，它的实现了一种简单的历史文件清理策略，可以参考API文档看一下使用方法：http://zookeeper.apache.org/doc/r3.4.3/api/index.html&lt;/p&gt;
+&lt;p&gt;其实在bin/zkCleanup.sh中，就直接调用了PurgeTxnLog这个工具类，所以直接使用这个脚本也是可以执行清理工作的，也更方便。比如：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/lib/zookeeper/bin/zkCleanup.sh /hadoop/zookeeper/version-2/ &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h1&gt;(3) Zookeeper自动清理配置项&lt;/h1&gt;&lt;p&gt;从3.4.0开始，zookeeper提供了自动清理snapshot和事务日志的功能，通过配置 autopurge.snapRetainCount 和 autopurge.purgeInterval 这两个参数能够实现定时清理了。这两个参数都是在zoo.cfg中配置的：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 指定清理频率，单位是小时，默认是0，表示不开启自己清理功能。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;autopurge.purgeInterval&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 和上面的参数搭配使用，指定需要保留的文件数目，默认是保留3个。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;autopurge.snapRetainCount&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/sunxucool/p/5500758.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.cnblogs.com/sunxucool/p/5500758.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/jxwch/p/6526271.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.cnblogs.com/jxwch/p/6526271.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
     <item>
       <title>查看zookeeper版本</title>
-      <link>https://www.zengxi.net/2020/07/check_zookeeper_version/</link>
+      <link>http://localhost:1313/blog/2020/07/check_zookeeper_version/</link>
       <pubDate>Tue, 28 Jul 2020 13:22:06 +0000</pubDate>
-      <guid>https://www.zengxi.net/2020/07/check_zookeeper_version/</guid>
-      <description>在控制台下面命令&#xA;1echo stat|nc localhost 2181 返回结果示例&#xA;1Zookeeper version: 3.4.8-1--1, built on Fri, 26 Feb 2016 14:51:43 +0100 2Clients: 3 /10.30.1.186:33824[1](queued=0,recved=203121,sent=203148) 4 /10.30.1.116:39374[1](queued=0,recved=56774,sent=56790) 5 /10.30.1.171:37240[1](queued=0,recved=20793,sent=20793) 6 7Latency min/avg/max: 0/0/10748 8Received: 855235993 9Sent: 856603574 10Connections: 36 11Outstanding: 0 12Zxid: 0x125c07103 13Mode: leader 14Node count: 6047 </description>
+      
+      <guid>http://localhost:1313/blog/2020/07/check_zookeeper_version/</guid>
+      <description>
+        
+        
+        &lt;p&gt;在控制台下面命令&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; stat&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;nc localhost &lt;span class=&#34;m&#34;&gt;2181&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;返回结果示例&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;Zookeeper version: 3.4.8-1--1, built on Fri, 26 Feb 2016 14:51:43 &amp;#43;0100
+Clients:
+ /10.30.1.186:33824[1](queued=0,recved=203121,sent=203148)
+ /10.30.1.116:39374[1](queued=0,recved=56774,sent=56790)
+ /10.30.1.171:37240[1](queued=0,recved=20793,sent=20793)
+
+Latency min/avg/max: 0/0/10748
+Received: 855235993
+Sent: 856603574
+Connections: 36
+Outstanding: 0
+Zxid: 0x125c07103
+Mode: leader
+Node count: 6047&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

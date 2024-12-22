@@ -1,20 +1,97 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>declare on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/declare/</link>
-    <description>Recent content in declare on 保罗札记</description>
+    <title>保罗札记 – Declare</title>
+    <link>http://localhost:1313/tags/declare/</link>
+    <description>Recent content in Declare on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Sun, 19 Jan 2020 16:40:17 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/declare/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/declare/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>Mac下shell命令支持map</title>
-      <link>https://www.zengxi.net/2020/01/mac-shell-support-map/</link>
+      <link>http://localhost:1313/blog/2020/01/mac-shell-support-map/</link>
       <pubDate>Sun, 19 Jan 2020 16:40:17 +0000</pubDate>
-      <guid>https://www.zengxi.net/2020/01/mac-shell-support-map/</guid>
-      <description>Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：&#xA;1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持，需要升级至4.x以上的版本&#xA;1# 安装最新版本的bash 2brew install bash 3 4# 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash 5# 需要把新版本的shell添加至信任列表中 6sudo bash -c &amp;#39;echo /usr/local/bin/bash &amp;gt;&amp;gt; /etc/shells&amp;#39; 7 8# 如果需要的话，修改默认shell为新版本的bash 9chsh -s /usr/local/bin/bash 需要注意的是，升级完之后，如果shell脚本需要用新版本的bash来执行，必须在相关的shell脚本开头的部分，将 #!/bin/bash 替换成 #!/usr/local/bin/bash， 否则还是用旧版本的bash来执行。&#xA;那为什么不执行类似下面的命令，删除原先的bash，并给新版本的bash建立一个链接呢？这个是由于MacOS有系统完整性保护机制（System Integrity Protection，SIP），它会阻止所有用户（包括root）修改 /bin 下面目录的内容。当然，也有办法绕过这保护机制，嫌麻烦的话，就不要去动它了。&#xA;1sudo rm /bin/bash 2sudo ln -s /usr/local/bin/bash /bin/bash 参考文章：&#xA;https://itnext.io/upgrading-bash-on-macos-7138bd1066ba </description>
+      
+      <guid>http://localhost:1313/blog/2020/01/mac-shell-support-map/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;declare: -A: invalid option
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;declare: usage: &lt;span class=&#34;nb&#34;&gt;declare&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-afFirtx&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-p&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;name&lt;span class=&#34;o&#34;&gt;[=&lt;/span&gt;value&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;这个参数从bash 4.x开始支持，需要升级至4.x以上的版本&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 安装最新版本的bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brew install bash
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 需要把新版本的shell添加至信任列表中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo bash -c &lt;span class=&#34;s1&#34;&gt;&amp;#39;echo /usr/local/bin/bash &amp;gt;&amp;gt; /etc/shells&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 如果需要的话，修改默认shell为新版本的bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;chsh -s /usr/local/bin/bash&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;需要注意的是，升级完之后，如果shell脚本需要用新版本的bash来执行，必须在相关的shell脚本开头的部分，将 #!/bin/bash 替换成 #!/usr/local/bin/bash， 否则还是用旧版本的bash来执行。&lt;/p&gt;
+&lt;p&gt;那为什么不执行类似下面的命令，删除原先的bash，并给新版本的bash建立一个链接呢？这个是由于MacOS有系统完整性保护机制（System Integrity Protection，SIP），它会阻止所有用户（包括root）修改 /bin 下面目录的内容。当然，也有办法绕过这保护机制，嫌麻烦的话，就不要去动它了。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;sudo rm /bin/bash
+sudo ln -s /usr/local/bin/bash /bin/bash&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;p&gt;参考文章：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://itnext.io/upgrading-bash-on-macos-7138bd1066ba&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://itnext.io/upgrading-bash-on-macos-7138bd1066ba&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

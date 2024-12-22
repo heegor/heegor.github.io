@@ -1,20 +1,68 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>轮询 on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/</link>
+    <title>保罗札记 – 轮询</title>
+    <link>http://localhost:1313/tags/%E8%BD%AE%E8%AF%A2/</link>
     <description>Recent content in 轮询 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Wed, 21 Nov 2018 17:13:06 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/%E8%BD%AE%E8%AF%A2/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/%E8%BD%AE%E8%AF%A2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>配置Nginx支持长轮询</title>
-      <link>https://www.zengxi.net/2018/11/nginx-setting-for-long-polling/</link>
+      <link>http://localhost:1313/blog/2018/11/nginx-setting-for-long-polling/</link>
       <pubDate>Wed, 21 Nov 2018 17:13:06 +0000</pubDate>
-      <guid>https://www.zengxi.net/2018/11/nginx-setting-for-long-polling/</guid>
-      <description>对于需要用到长轮询的web项目，可以在Nginx做一些配置来支持请求转发。分别在http与server块中加入下面的配置：&#xA;1http { 2 map $http_upgrade $connection_upgrade { 3 default upgrade; 4 &amp;#39;&amp;#39; close; 5 } 6} 7 8server { 9 location /your-api-url/ { 10 proxy_pass http://127.0.0.1:9000/your-api-url/; 11 proxy_http_version 1.1; 12 proxy_set_header Upgrade $http_upgrade; 13 proxy_set_header Connection $connection_upgrade; 14 proxy_set_header Host $http_host; 15 proxy_set_header X-Forwarded-Host $host; 16 proxy_set_header X-Forwarded-Server $host; 17 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; 18 proxy_buffering off; 19 proxy_ignore_client_abort off; 20 } 21} </description>
+      
+      <guid>http://localhost:1313/blog/2018/11/nginx-setting-for-long-polling/</guid>
+      <description>
+        
+        
+        &lt;p&gt;对于需要用到长轮询的web项目，可以在Nginx做一些配置来支持请求转发。分别在http与server块中加入下面的配置：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;http {
+    map $http_upgrade $connection_upgrade {
+        default upgrade;
+        &amp;#39;&amp;#39; close;
+    }
+}
+
+server {
+    location /your-api-url/ {
+        proxy_pass http://127.0.0.1:9000/your-api-url/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_buffering off;
+        proxy_ignore_client_abort off;
+    }
+}&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

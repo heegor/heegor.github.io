@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon shortcut" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.png" type="image/png" />
+<link rel="icon" href="/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/favicon-180x180.png" type="image/png" sizes="180x180" />
+<link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
+
+  <title>Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性 – 保罗札记</title>
+  <meta name="description" content="使用污点和容忍度阻止节点调度到特定节点 污点和容忍度 污点是在不修改已有pod信息的前提下,通过在节点上添加污点信息,来拒绝pod在某些节点上的部署。" />
+
+  
+    <link rel="canonical" href="http://localhost:1313/blog/2021/01/k8s_advanced_scheduling/" itemprop="url" />
+  
+
+  
+
+<meta property="og:title" content="Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性" />
+<meta property="og:description" content="使用污点和容忍度阻止节点调度到特定节点
+    污点和容忍度
+    污点是在不修改已有pod信息的前提下,通过在节点上添加污点信息,来拒绝pod在某些节点上的部署。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/2021/01/k8s_advanced_scheduling/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2021-01-05T23:00:00+08:00" />
+<meta property="article:modified_time" content="2024-11-30T18:58:28+08:00" />
+
+  
+  <meta itemprop="name" content="Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性">
+  <meta itemprop="description" content="使用污点和容忍度阻止节点调度到特定节点 污点和容忍度 污点是在不修改已有pod信息的前提下,通过在节点上添加污点信息,来拒绝pod在某些节点上的部署。">
+  <meta itemprop="datePublished" content="2021-01-05T23:00:00+08:00">
+  <meta itemprop="dateModified" content="2024-11-30T18:58:28+08:00">
+  <meta itemprop="wordCount" content="2918">
+  <meta itemprop="keywords" content="Kubernetes">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性">
+  <meta name="twitter:description" content="使用污点和容忍度阻止节点调度到特定节点 污点和容忍度 污点是在不修改已有pod信息的前提下,通过在节点上添加污点信息,来拒绝pod在某些节点上的部署。">
+
+    <link href="/css/compiled/main.css" rel="stylesheet" />
+
+
+
+  <link href="/css/custom.css" rel="stylesheet" />
+
+
+
+
+
+  <script>
+     
+    const defaultTheme = 'system';
+
+    const setDarkTheme = () => {
+      document.documentElement.classList.add("dark");
+      document.documentElement.style.colorScheme = "dark";
+    }
+    const setLightTheme = () => {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.style.colorScheme = "light";
+    }
+
+    if ("color-theme" in localStorage) {
+      localStorage.getItem("color-theme") === "dark" ? setDarkTheme() : setLightTheme();
+    } else {
+      defaultTheme === "dark" ? setDarkTheme() : setLightTheme();
+      if (defaultTheme === "system") {
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? setDarkTheme() : setLightTheme();
+      }
+    }
+  </script>
+
+  
+</head>
+<body dir="ltr"><div class="nav-container hx-sticky hx-top-0 hx-z-20 hx-w-full hx-bg-transparent print:hx-hidden">
+  <div class="nav-container-blur hx-pointer-events-none hx-absolute hx-z-[-1] hx-h-full hx-w-full hx-bg-white dark:hx-bg-dark hx-shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] contrast-more:hx-shadow-[0_0_0_1px_#000] dark:hx-shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] contrast-more:dark:hx-shadow-[0_0_0_1px_#fff]"></div>
+
+  <nav class="hx-mx-auto hx-flex hx-items-center hx-justify-end hx-gap-2 hx-h-16 hx-px-6 hx-max-w-[90rem]">
+    <a class="hx-flex hx-items-center hover:hx-opacity-75 ltr:hx-mr-auto rtl:hx-ml-auto" href="/">
+        <img class="hx-block dark:hx-hidden" src="/logos/logo.png" alt="保罗札记" height="46" width="220" />
+        <img class="hx-hidden dark:hx-block" src="/logos/logo.png" alt="保罗札记" height="46" width="220" />
+    </a><a
+            title="首页"
+            href="/"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">首页</span>
+          </a><a
+            title="技术博客"
+            href="/blog"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-font-medium"
+          >
+            <span class="hx-text-center">技术博客</span>
+          </a><a
+            title="关于我"
+            href="/about"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">关于我</span>
+          </a><div class="search-wrapper hx-relative md:hx-w-64">
+  <div class="hx-relative hx-flex hx-items-center hx-text-gray-900 contrast-more:hx-text-gray-800 dark:hx-text-gray-300 contrast-more:dark:hx-text-gray-300">
+    <input
+      placeholder="搜索文档..."
+      class="search-input hx-block hx-w-full hx-appearance-none hx-rounded-lg hx-px-3 hx-py-2 hx-transition-colors hx-text-base hx-leading-tight md:hx-text-sm hx-bg-black/[.05] dark:hx-bg-gray-50/10 focus:hx-bg-white dark:focus:hx-bg-dark placeholder:hx-text-gray-500 dark:placeholder:hx-text-gray-400 contrast-more:hx-border contrast-more:hx-border-current"
+      type="search"
+      value=""
+      spellcheck="false"
+    />
+    <kbd
+      class="hx-absolute hx-my-1.5 hx-select-none ltr:hx-right-1.5 rtl:hx-left-1.5 hx-h-5 hx-rounded hx-bg-white hx-px-1.5 hx-font-mono hx-text-[10px] hx-font-medium hx-text-gray-500 hx-border dark:hx-border-gray-100/20 dark:hx-bg-dark/50 contrast-more:hx-border-current contrast-more:hx-text-current contrast-more:dark:hx-border-current hx-items-center hx-gap-1 hx-transition-opacity hx-pointer-events-none hx-hidden sm:hx-flex"
+    >
+      CTRL K
+    </kbd>
+  </div>
+
+  <div>
+    <ul
+      class="search-results hextra-scrollbar hx-hidden hx-border hx-border-gray-200 hx-bg-white hx-text-gray-100 dark:hx-border-neutral-800 dark:hx-bg-neutral-900 hx-absolute hx-top-full hx-z-20 hx-mt-2 hx-overflow-auto hx-overscroll-contain hx-rounded-xl hx-py-2.5 hx-shadow-xl hx-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] md:hx-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx-inset-x-0 ltr:md:hx-left-auto rtl:md:hx-right-auto contrast-more:hx-border contrast-more:hx-border-gray-900 contrast-more:dark:hx-border-gray-50 hx-w-screen hx-min-h-[100px] hx-max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      style="transition: max-height 0.2s ease 0s;"
+    ></ul>
+  </div>
+</div>
+<button type="button" aria-label="Menu" class="hamburger-menu -hx-mr-2 hx-rounded hx-p-2 active:hx-bg-gray-400/20 md:hx-hidden"><svg height=24 fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8H20"></path></g><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16H20"></path></g></svg></button>
+  </nav>
+</div>
+
+  <div class="hx-mx-auto hx-flex hx-max-w-screen-xl">
+    
+    
+<nav class="hextra-toc hx-order-last hx-hidden hx-w-64 hx-shrink-0 xl:hx-block print:hx-hidden hx-px-4" aria-label="table of contents">
+    <div class="hextra-scrollbar hx-sticky hx-top-16 hx-overflow-y-auto hx-pr-4 hx-pt-6 hx-text-sm [hyphens:auto] hx-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:hx--mr-4 rtl:hx--ml-4"><p class="hx-mb-4 hx-font-semibold hx-tracking-tight">内容目录</p><ul>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%bd%bf%e7%94%a8%e6%b1%a1%e7%82%b9%e5%92%8c%e5%ae%b9%e5%bf%8d%e5%ba%a6%e9%98%bb%e6%ad%a2%e8%8a%82%e7%82%b9%e8%b0%83%e5%ba%a6%e5%88%b0%e7%89%b9%e5%ae%9a%e8%8a%82%e7%82%b9">使用污点和容忍度阻止节点调度到特定节点
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%b1%a1%e7%82%b9%e5%92%8c%e5%ae%b9%e5%bf%8d%e5%ba%a6">污点和容忍度
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%b7%bb%e5%8a%a0%e6%b1%a1%e7%82%b9%e4%b8%8e%e5%ae%b9%e5%bf%8d%e5%ba%a6">添加污点与容忍度
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%9c%a8%e8%8a%82%e7%82%b9%e4%b8%8a%e6%b7%bb%e5%8a%a0%e8%87%aa%e5%ae%9a%e4%b9%89%e6%b1%a1%e7%82%b9">在节点上添加自定义污点
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%9c%a8pod%e4%b8%8a%e6%b7%bb%e5%8a%a0%e6%b1%a1%e7%82%b9%e5%ae%b9%e5%bf%8d%e5%ba%a6">在pod上添加污点容忍度
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%b1%a1%e7%82%b9%e5%92%8c%e6%b1%a1%e7%82%b9%e5%ae%b9%e5%bf%8d%e5%ba%a6%e7%9a%84%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af">污点和污点容忍度的使用场景
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%9c%a8%e8%b0%83%e5%ba%a6%e6%97%b6%e4%bd%bf%e7%94%a8%e6%b1%a1%e7%82%b9%e5%92%8c%e5%ae%b9%e5%bf%8d%e5%ba%a6">在调度时使用污点和容忍度
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e9%85%8d%e7%bd%ae%e8%8a%82%e7%82%b9%e5%a4%b1%e6%95%88%e4%b9%8b%e5%90%8e%e7%9a%84pod%e9%87%8d%e6%96%b0%e8%b0%83%e5%ba%a6%e6%9c%80%e9%95%bf%e7%ad%89%e5%be%85%e6%97%b6%e9%97%b4">配置节点失效之后的pod重新调度最长等待时间
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%bd%bf%e7%94%a8%e8%8a%82%e7%82%b9%e4%ba%b2%e7%bc%98%e6%80%a7%e5%b0%86pod%e8%b0%83%e5%ba%a6%e5%88%b0%e7%89%b9%e5%ae%9a%e8%8a%82%e7%82%b9%e4%b8%8a">使用节点亲缘性将pod调度到特定节点上
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%8c%87%e5%ae%9a%e5%bc%ba%e5%88%b6%e6%80%a7%e8%8a%82%e7%82%b9%e4%ba%b2%e7%bc%98%e6%80%a7%e8%a7%84%e5%88%99">指定强制性节点亲缘性规则
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e8%b0%83%e5%ba%a6pod%e6%97%b6%e4%bc%98%e5%85%88%e8%80%83%e8%99%91%e6%9f%90%e4%ba%9b%e8%8a%82%e7%82%b9">调度pod时优先考虑某些节点
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%bd%bf%e7%94%a8pod%e4%ba%b2%e7%bc%98%e6%80%a7%e4%b8%8e%e9%9d%9e%e4%ba%b2%e7%bc%98%e6%80%a7%e5%af%b9pod%e8%bf%9b%e8%a1%8c%e5%8d%8f%e5%90%8c%e9%83%a8%e7%bd%b2">使用pod亲缘性与非亲缘性对pod进行协同部署
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%bd%bf%e7%94%a8pod%e9%97%b4%e4%ba%b2%e7%bc%98%e6%80%a7%e5%b0%86%e5%a4%9a%e4%b8%aapod%e9%83%a8%e7%bd%b2%e5%9c%a8%e5%90%8c%e4%b8%80%e4%b8%aa%e8%8a%82%e7%82%b9%e4%b8%8a">使用pod间亲缘性将多个pod部署在同一个节点上
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%b0%86pod%e9%83%a8%e7%bd%b2%e5%9c%a8%e5%90%8c%e4%b8%80%e6%9c%ba%e6%9f%9c%e5%8f%af%e7%94%a8%e6%80%a7%e5%8c%ba%e5%9f%9f%e6%88%96%e8%80%85%e5%9c%b0%e7%90%86%e5%9c%b0%e5%9f%9f">将pod部署在同一机柜、可用性区域或者地理地域
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#topologykey%e6%98%af%e5%a6%82%e4%bd%95%e5%b7%a5%e4%bd%9c%e7%9a%84">topologyKey是如何工作的
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e8%a1%a8%e8%be%bepod%e4%ba%b2%e7%bc%98%e6%80%a7%e4%bc%98%e5%85%88%e7%ba%a7%e5%8f%96%e4%bb%a3%e5%bc%ba%e5%88%b6%e6%80%a7%e8%a6%81%e6%b1%82">表达pod亲缘性优先级取代强制性要求
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%88%a9%e7%94%a8pod%e7%9a%84%e9%9d%9e%e4%ba%b2%e7%bc%98%e6%80%a7%e5%88%86%e5%bc%80%e8%b0%83%e5%ba%a6pod">利用pod的非亲缘性分开调度pod
+        </a>
+      </li></ul>
+      <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400"><div>
+          <div class="label_post_tag hx-text-gray-500">文章分类</div>
+          <div class="post_tag">
+            <a class="tag_item">kubernetes</a></div>
+        </div><div>
+          <div class="label_post_tag hx-text-gray-500">标签</div>
+          <div class="post_tag">
+            <a class="tag_item">kubernetes</a></div>
+        </div>
+        <div class="container_back_to_top">
+          <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx-transition-all hx-duration-75 hx-opacity-0 hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50">
+            <span>返回顶部</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hx-inline ltr:hx-ml-1 rtl:hx-mr-1 hx-h-3.5 hx-w-3.5 hx-border hx-rounded-full hx-border-gray-500 hover:hx-border-gray-900 dark:hx-border-gray-400 dark:hover:hx-border-gray-100 contrast-more:hx-border-gray-800 contrast-more:dark:hx-border-gray-50">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+            </svg>
+        </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+    <article class="hx-w-full hx-break-words hx-flex hx-min-h-[calc(100vh-var(--navbar-height))] hx-min-w-0 hx-justify-center hx-pb-8 hx-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
+        
+  <div class="hx-mt-1.5 hx-flex hx-items-center hx-gap-1 hx-overflow-hidden hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 contrast-more:hx-text-current">
+        <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
+          <a href="/blog/">技术博客</a>
+        </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性</div>
+  </div>
+
+        <h1 class="hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100">Kubernetes in Action笔记 - (18) 高级调度：污点、容忍度和亲缘性</h1>
+        <div class="hx-mt-4 hx-mb-16 hx-text-gray-500 hx-text-sm hx-flex hx-items-center hx-flex-wrap hx-gap-y-2"><span class="hx-mr-1">January 5, 2021</span></div>
+        <div class="content">
+          <h2>使用污点和容忍度阻止节点调度到特定节点<span class="hx-absolute -hx-mt-20" id="使用污点和容忍度阻止节点调度到特定节点"></span>
+    <a href="#%e4%bd%bf%e7%94%a8%e6%b1%a1%e7%82%b9%e5%92%8c%e5%ae%b9%e5%bf%8d%e5%ba%a6%e9%98%bb%e6%ad%a2%e8%8a%82%e7%82%b9%e8%b0%83%e5%ba%a6%e5%88%b0%e7%89%b9%e5%ae%9a%e8%8a%82%e7%82%b9" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><h3>污点和容忍度<span class="hx-absolute -hx-mt-20" id="污点和容忍度"></span>
+    <a href="#%e6%b1%a1%e7%82%b9%e5%92%8c%e5%ae%b9%e5%bf%8d%e5%ba%a6" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>污点是在不修改已有pod信息的前提下,通过在节点上添加污点信息,来拒绝pod在某些节点上的部署。</p>
+<p>只有当一个pod容忍某个节点的污点, 这个pod才能被调度到该节点。</p>
+<p>可以通过<code>kubectl describe node</code>查看节点的污点信息，在返回结果的Taints字段值中；可以通过<code>kubectl describe po</code>查看pod的污点容忍度，在返回结果的Tolerations字段值中。</p>
+<p>每一个污点都可以关联一个效果, 效果包含了以下三种:</p>
+<ul>
+<li>NoSchedule：表示如果pod没有容忍这些污点, pod则不能被调度到包含这些污点的节点上。</li>
+<li>PreferNoSchedule：它是NoSchedule的一个宽松的版本,表示尽量阻止pod被调度到这个节点上,但是如果没有其他节点可以调度, pod依然会被调度到这个节点上。</li>
+<li>NoExecute：不同于NoSchedule以及PreferNoSchedule,后两者只在调度期间起作用, 而NoExecute也会影响正在节点上运行着的pod。如果在一个节点上添加了NoExecute污点,那些在该节点上运行着的pod,如果没有容忍这个NoExecute污点,将会从这个节点去除。</li>
+</ul>
+<h3>添加污点与容忍度<span class="hx-absolute -hx-mt-20" id="添加污点与容忍度"></span>
+    <a href="#%e6%b7%bb%e5%8a%a0%e6%b1%a1%e7%82%b9%e4%b8%8e%e5%ae%b9%e5%bf%8d%e5%ba%a6" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><h4>在节点上添加自定义污点<span class="hx-absolute -hx-mt-20" id="在节点上添加自定义污点"></span>
+    <a href="#%e5%9c%a8%e8%8a%82%e7%82%b9%e4%b8%8a%e6%b7%bb%e5%8a%a0%e8%87%aa%e5%ae%9a%e4%b9%89%e6%b1%a1%e7%82%b9" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>假设有一个单独的 Kubernetes 集群,上面同时有生产环境和非生产环境的流量。其中最重要的一点是,非生产环境的pod不能运行在生产环境的节点上。可以通过在生产环境的节点上添加污点来满足这个要求:</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 这个命令添加了一个taint,其中key为node-type,value为production,效果为NoSchedule</span>
+</span></span><span class="line"><span class="cl">kubectl taint node nodel.k8s node-type<span class="o">=</span>production:NoSchedule</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h4>在pod上添加污点容忍度<span class="hx-absolute -hx-mt-20" id="在pod上添加污点容忍度"></span>
+    <a href="#%e5%9c%a8pod%e4%b8%8a%e6%b7%bb%e5%8a%a0%e6%b1%a1%e7%82%b9%e5%ae%b9%e5%bf%8d%e5%ba%a6" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/vlbetal</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">prod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">tolerations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 此处的污点容忍度允许pod被调度到生产环境节点上</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">node-type</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">Equal</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">production</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="l">NoSchedule</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>污点和污点容忍度的使用场景<span class="hx-absolute -hx-mt-20" id="污点和污点容忍度的使用场景"></span>
+    <a href="#%e6%b1%a1%e7%82%b9%e5%92%8c%e6%b1%a1%e7%82%b9%e5%ae%b9%e5%bf%8d%e5%ba%a6%e7%9a%84%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>节点可以拥有多个污点信息,而pod也可以有多个污点容忍度。</p>
+<p>污点可以只有一个key和一个效果,而不必设置value。污点容忍度可以通过设置Equal操作符Equal操作符来指定匹配的value(默认情况下的操作符)，或者也可以通过设置Exists操作符来匹配污点的key。</p>
+<h4>在调度时使用污点和容忍度<span class="hx-absolute -hx-mt-20" id="在调度时使用污点和容忍度"></span>
+    <a href="#%e5%9c%a8%e8%b0%83%e5%ba%a6%e6%97%b6%e4%bd%bf%e7%94%a8%e6%b1%a1%e7%82%b9%e5%92%8c%e5%ae%b9%e5%bf%8d%e5%ba%a6" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>污点可以用来组织新pod的调度(使用 NoSchedule效果),或者定义非优先调度的节点(使用PreferNoSchedule效果), 甚至是将已有的pod从当前节点剔除。</p>
+<p>可以用任何觉得合适的方式去设置污点和容忍度。例如,可以将一个集群分成多个部分,只允许开发团队将pod调度到他们特定的节点上。 当部分节点提供了某种特殊硬件, 并且只有部分pod需要使用到这些硬件的时候, 也可以通过设置污点和容忍度的方式来实现。</p>
+<h4>配置节点失效之后的pod重新调度最长等待时间<span class="hx-absolute -hx-mt-20" id="配置节点失效之后的pod重新调度最长等待时间"></span>
+    <a href="#%e9%85%8d%e7%bd%ae%e8%8a%82%e7%82%b9%e5%a4%b1%e6%95%88%e4%b9%8b%e5%90%8e%e7%9a%84pod%e9%87%8d%e6%96%b0%e8%b0%83%e5%ba%a6%e6%9c%80%e9%95%bf%e7%ad%89%e5%be%85%e6%97%b6%e9%97%b4" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>也可以配置一个容忍度, 用于当某个pod运行所在的节点变成unready或者unreachable状态时,k8s可以等待该pod被调度到其他节点的最长等待时间</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ kubectl get po prod-350605-lphSh -o yaml
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">  tolerations:
+</span></span><span class="line"><span class="cl">  - effect: NoExecute
+</span></span><span class="line"><span class="cl">    key: node.alpha.kubernetes.io/notReady
+</span></span><span class="line"><span class="cl">    operator: Exists
+</span></span><span class="line"><span class="cl">    tolerationSeconds: <span class="m">300</span>
+</span></span><span class="line"><span class="cl">  - effect: NoExecute
+</span></span><span class="line"><span class="cl">    key: node.alpha.kubernetes.io/unreachable
+</span></span><span class="line"><span class="cl">    operator: Exists
+</span></span><span class="line"><span class="cl">    tolerationSeconds: <span class="m">300</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>这两个容忍度表示, 该pod将容忍所在节点处于notReady或者unreachable状态维持300秒。当k8s控制器检测到有节点处于notReady或者unreachable状态时, 将会等待300秒, 如果状态持续的话, 之后将把该pod重新调度到其他节点上。当没有定义这两个容忍度时, 他们会自动添加到pod上。如果觉得5分钟太长的话,可以在pod描述中显式地将这两个容忍度设置得更短一些。</p>
+<p>注意：在作者写书的时候，这是一个alpha阶段的特性,在未来的k8s版本中可能会有所改变。基于污点信息的pod剔除也不是默认启的, 如果要启用这个特性, 需要在运行控制器管理器时使用<code>--feature-gates=TaintBasedEvictions=true</code>选项。</p>
+<h2>使用节点亲缘性将pod调度到特定节点上<span class="hx-absolute -hx-mt-20" id="使用节点亲缘性将pod调度到特定节点上"></span>
+    <a href="#%e4%bd%bf%e7%94%a8%e8%8a%82%e7%82%b9%e4%ba%b2%e7%bc%98%e6%80%a7%e5%b0%86pod%e8%b0%83%e5%ba%a6%e5%88%b0%e7%89%b9%e5%ae%9a%e8%8a%82%e7%82%b9%e4%b8%8a" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>可以定义pod的节点亲缘性规则，指定硬性限制或者偏好。</p>
+<p>如果指定一种偏好的话，k8s将尽量把这个pod 调度到某些特定的节点上面；如果没法实现的话, pod 将被调度到其他节点。</p>
+<h3>指定强制性节点亲缘性规则<span class="hx-absolute -hx-mt-20" id="指定强制性节点亲缘性规则"></span>
+    <a href="#%e6%8c%87%e5%ae%9a%e5%bc%ba%e5%88%b6%e6%80%a7%e8%8a%82%e7%82%b9%e4%ba%b2%e7%bc%98%e6%80%a7%e8%a7%84%e5%88%99" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>使用了节点选择器使得需要GPU的pod只被调度到有GPU的节点上。</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">vl</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind </span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia-gpu</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nodeSelector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">gpu</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">...</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>将节点选择器替换为节点亲缘性规则</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubia-gpu</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">affinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nodeAffinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">requiredDuringSchedulingIgnoredDuringExecution</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">nodeSelectorTerms</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">matchExpressions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">gpu</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">In</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<ul>
+<li>requiredDuringScheduling&hellip; 表明了该字段下定义的规则,为了让pod能调度到该节点上,明确指出了该节点必须包含的标签。</li>
+<li>&hellip;IgnoredDuringExecution 表明了该字段下定义的规则, 不会影响已经在节点上运行着的pod</li>
+</ul>
+<h3>调度pod时优先考虑某些节点<span class="hx-absolute -hx-mt-20" id="调度pod时优先考虑某些节点"></span>
+    <a href="#%e8%b0%83%e5%ba%a6pod%e6%97%b6%e4%bc%98%e5%85%88%e8%80%83%e8%99%91%e6%9f%90%e4%ba%9b%e8%8a%82%e7%82%b9" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>这个功能是通过 preferredDuringSchedulingIgnoredDuringExecution 宇段来实现的</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">nodeAffinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">preferredDuringSchedulingignoredDuringExecution</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">weight</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">preference</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">matchExpressions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">availability-zone</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">In</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">values</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">zone1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">weight</span><span class="p">:</span><span class="w"> </span><span class="m">20</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">preference</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">matchExpressions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">share-type</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">In</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">values</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">dedicated</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>使用pod亲缘性与非亲缘性对pod进行协同部署<span class="hx-absolute -hx-mt-20" id="使用pod亲缘性与非亲缘性对pod进行协同部署"></span>
+    <a href="#%e4%bd%bf%e7%94%a8pod%e4%ba%b2%e7%bc%98%e6%80%a7%e4%b8%8e%e9%9d%9e%e4%ba%b2%e7%bc%98%e6%80%a7%e5%af%b9pod%e8%bf%9b%e8%a1%8c%e5%8d%8f%e5%90%8c%e9%83%a8%e7%bd%b2" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>上面主要涉及到pod和节点之间的亲缘性，这里介绍如何指定pod自身之间的亲缘性。</p>
+<h4>使用pod间亲缘性将多个pod部署在同一个节点上<span class="hx-absolute -hx-mt-20" id="使用pod间亲缘性将多个pod部署在同一个节点上"></span>
+    <a href="#%e4%bd%bf%e7%94%a8pod%e9%97%b4%e4%ba%b2%e7%bc%98%e6%80%a7%e5%b0%86%e5%a4%9a%e4%b8%aapod%e9%83%a8%e7%bd%b2%e5%9c%a8%e5%90%8c%e4%b8%80%e4%b8%aa%e8%8a%82%e7%82%b9%e4%b8%8a" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>举例来说,想象一下你一个前端pod和一个后端pod, 将这些节点部署得比较靠近,可以降低延时,提高应用的性能。可以使用节点亲缘性规则来确保这两个pod被调度到同一个节点、同一个机架、同一个数据中心。但是,之后还需要指定调度到具体哪个节点、哪个机架或者哪个数据中心。因此,这不是一个最佳的解决方案。更好的做法应该是,让k8s将你的pod部署在任何它觉得合适的地方,同时确保2个pod是靠近的。这种功能可以通过pod亲缘性来实现。</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 注意不是nodeAffinity</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">podAffinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">requiredDuringSchedulingIgnoredDuringExecution</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">topologyKey</span><span class="p">:</span><span class="w"> </span><span class="l">kubernates.io/hostname</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">labelSelector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">backend</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>注意：除了使用简单的matchLabels字段, 也可以使用表达能力更强的matchExpressions字段。</p>
+<h4>将pod部署在同一机柜、可用性区域或者地理地域<span class="hx-absolute -hx-mt-20" id="将pod部署在同一机柜可用性区域或者地理地域"></span>
+    <a href="#%e5%b0%86pod%e9%83%a8%e7%bd%b2%e5%9c%a8%e5%90%8c%e4%b8%80%e6%9c%ba%e6%9f%9c%e5%8f%af%e7%94%a8%e6%80%a7%e5%8c%ba%e5%9f%9f%e6%88%96%e8%80%85%e5%9c%b0%e7%90%86%e5%9c%b0%e5%9f%9f" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>在同一个可用性区域中协同部署pod，需要将topologyKey属性设置为failure-domain.beta.kubernetes.io/zone</p>
+<p>在同一个地域中协同部署pod，需要将topologyKey属性设置为failure-domain.beta.kubernetes.io/region</p>
+<h4>topologyKey是如何工作的<span class="hx-absolute -hx-mt-20" id="topologykey是如何工作的"></span>
+    <a href="#topologykey%e6%98%af%e5%a6%82%e4%bd%95%e5%b7%a5%e4%bd%9c%e7%9a%84" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>topologyKey的工作方式很简单,可以任意设置自定义的键,唯一的前置条件就是,在节点上加上对应的标签。</p>
+<p>注意：在调度时,默认情况下,标签选择器只有匹配同一命名空间中的pod。但是,可以通过在label Selector同一级添加namespaces字段,实现从其他的命名空间选择pod的功能。</p>
+<h4>表达pod亲缘性优先级取代强制性要求<span class="hx-absolute -hx-mt-20" id="表达pod亲缘性优先级取代强制性要求"></span>
+    <a href="#%e8%a1%a8%e8%be%bepod%e4%ba%b2%e7%bc%98%e6%80%a7%e4%bc%98%e5%85%88%e7%ba%a7%e5%8f%96%e4%bb%a3%e5%bc%ba%e5%88%b6%e6%80%a7%e8%a6%81%e6%b1%82" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>podAffinity与nodeAffinity，都可以指定硬性限制（仅允许调度到特定节点或者pod）或者偏好（如果无法满足，则可以调度到其他地方）。</p>
+<h4>利用pod的非亲缘性分开调度pod<span class="hx-absolute -hx-mt-20" id="利用pod的非亲缘性分开调度pod"></span>
+    <a href="#%e5%88%a9%e7%94%a8pod%e7%9a%84%e9%9d%9e%e4%ba%b2%e7%bc%98%e6%80%a7%e5%88%86%e5%bc%80%e8%b0%83%e5%ba%a6pod" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>有时候可能希望pod远离彼此，这种特性叫作pod非亲缘性。</p>
+<p>它和pod亲缘性的表示方式一样, 只不过是将podAffinity字段换成podAntiAffinity, 这将导致调度器永远不会选择那些有包含podAntiAffinity匹配标签的pod所在的节点</p>
+<p>下面的例子使用非亲缘性分散一个部署中的pod：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 一个前端pod必须不能调度到有app=frontend标签的pod运行的节点</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">podAntiAffinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">requiredDuringSchedulingIgnoredDuringExecution</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">topologyKey</span><span class="p">:</span><span class="w"> </span><span class="l">kubernates.io/hostname</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">labelSelector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">frontend</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<hr>
+<p>图书资料：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30418855/" target="_blank" rel="noopener">https://book.douban.com/subject/30418855/</a></li>
+</ul>
+
+        </div>
+        
+    <div class="hx-mt-12 hx-mb-8 hx-block hx-text-xs hx-text-gray-500 ltr:hx-text-right rtl:hx-text-left dark:hx-text-gray-400">最后更新于 <time datetime="2024-11-30T18:58:28.000Z">November 30, 2024</time></div>
+        
+        <div class="hx-mb-8 hx-flex hx-items-center hx-border-t hx-pt-8 dark:hx-border-neutral-800 contrast-more:hx-border-neutral-400 dark:contrast-more:hx-border-neutral-400 print:hx-hidden"><a
+        href="/blog/2021/01/k8s_pod_auto_scaling/"
+        title="Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点"
+        class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-pr-4 rtl:hx-pl-4"
+      ><svg class="hx-inline hx-h-5 hx-shrink-0 ltr:hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点</a><a
+        href="/blog/2021/01/manjaro_set_default_java_version/"
+        title="Manjaro设置默认Java版本"
+        class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-ml-auto ltr:hx-pl-4 ltr:hx-text-right rtl:hx-mr-auto rtl:hx-pr-4 rtl:hx-text-left"
+      >Manjaro设置默认Java版本<svg class="hx-inline hx-h-5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a></div>
+        
+      </main>
+    </article>
+  </div>
+
+      <footer class="hextra-footer hx-bg-gray-100 hx-pb-[env(safe-area-inset-bottom)] dark:hx-bg-neutral-900 print:hx-bg-transparent"><div class="hx-mx-auto hx-flex hx-gap-2 hx-py-2 hx-px-4 hx-max-w-screen-xl"><button
+  title="切换主题"
+  data-theme="light"
+  class="theme-toggle hx-group hx-h-7 hx-rounded-md hx-px-2 hx-text-left hx-text-xs hx-font-medium hx-text-gray-600 hx-transition-colors dark:hx-text-gray-400 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50"
+  type="button"
+  aria-label="切换主题"
+>
+  <div class="hx-flex hx-items-center hx-gap-2 hx-capitalize"><svg height=12 class="group-data-[theme=light]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg><span class="group-data-[theme=light]:hx-hidden">浅色</span><svg height=12 class="group-data-[theme=dark]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg><span class="group-data-[theme=dark]:hx-hidden">深色</span></div>
+</button>
+</div><hr class="dark:hx-border-neutral-800" /><div
+    class="hx-max-w-screen-xl hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
+  >
+    <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start"><div class="hx-mt-6 hx-text-xs"><img class="favicon" src="/favicon-32x32.png">Copyright © 2018 - 2025 保罗札记. All Rights Reserved</div>
+    </div>
+  </div>
+</footer>
+    
+    <script defer src="/js/main.js" integrity=""></script>
+
+
+<script defer src="/lib/flexsearch/flexsearch.bundle.min.0425860527cc9968f9f049421c7a56b39327d475e2e3a8f550416be3a9134327.js" integrity="sha256-BCWGBSfMmWj58ElCHHpWs5Mn1HXi46j1UEFr46kTQyc="></script>
+    <script defer src="/zh-cn.search.js" integrity=""></script>
+
+
+  </body>
+</html>

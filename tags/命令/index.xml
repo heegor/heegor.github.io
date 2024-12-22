@@ -1,27 +1,175 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>命令 on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/</link>
+    <title>保罗札记 – 命令</title>
+    <link>http://localhost:1313/tags/%E5%91%BD%E4%BB%A4/</link>
     <description>Recent content in 命令 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Wed, 04 Jul 2018 23:03:18 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/%E5%91%BD%E4%BB%A4/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/%E5%91%BD%E4%BB%A4/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>date命令按指定locale所对应的日期格式输出</title>
-      <link>https://www.zengxi.net/2018/07/force-date-use-locale/</link>
+      <link>http://localhost:1313/blog/2018/07/force-date-use-locale/</link>
       <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
-      <guid>https://www.zengxi.net/2018/07/force-date-use-locale/</guid>
-      <description>在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。&#xA;比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出&#xA;1date +%a 下面是locale为zh_CN的输出：&#xA;三 下面是locale为en_US的输出：&#xA;Wed 如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值&#xA;首先我们可以运行下面的命令来列出当前系统安装了哪些locale。这一步有一定的必要，因为在不同的系统下面，locale名称可能不同。比如，Ubuntu下面叫做zh_CN.utf8，而MacOS下面叫做zh_CN.UTF-8。如果locale名称没用对，那么看到的就不是所期望的结果。&#xA;1locale -a 知道locale的具体名称之后，可以用类似下面的命令来指定locale并按照指定格式输出。&#xA;1LC_ALL=zh_CN.UTF-8 date 2LC_ALL=zh_CN.UTF-8 date +%a 3 4LC_ALL=en_US.UTF-8 date 5LC_ALL=en_US.UTF-8 date +%a 上面的命令分别有如下的输出:&#xA;2018年 7月 4日 星期三 20时33分41秒 CST 三 Wed Jul 4 20:33:41 CST 2018 Wed </description>
+      
+      <guid>http://localhost:1313/blog/2018/07/force-date-use-locale/</guid>
+      <description>
+        
+        
+        &lt;p&gt;在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。&lt;/p&gt;
+&lt;p&gt;比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;date +%a&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;下面是locale为zh_CN的输出：&lt;/p&gt;
+&lt;pre&gt;
+三
+&lt;/pre&gt;
+&lt;p&gt;下面是locale为en_US的输出：&lt;/p&gt;
+&lt;pre&gt;
+Wed
+&lt;/pre&gt;
+&lt;p&gt;如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;首先我们可以运行下面的命令来列出当前系统安装了哪些locale。这一步有一定的必要，因为在不同的系统下面，locale名称可能不同。比如，Ubuntu下面叫做&lt;code&gt;zh_CN.utf8&lt;/code&gt;，而MacOS下面叫做&lt;code&gt;zh_CN.UTF-8&lt;/code&gt;。如果locale名称没用对，那么看到的就不是所期望的结果。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;locale -a&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;知道locale的具体名称之后，可以用类似下面的命令来指定locale并按照指定格式输出。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;LC_ALL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;zh_CN.UTF-8 date
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;LC_ALL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;zh_CN.UTF-8 date +%a
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;LC_ALL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;en_US.UTF-8 date
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;LC_ALL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;en_US.UTF-8 date +%a&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;上面的命令分别有如下的输出:&lt;/p&gt;
+&lt;pre&gt;
+2018年 7月 4日 星期三 20时33分41秒 CST
+三
+
+Wed Jul  4 20:33:41 CST 2018
+Wed
+&lt;/pre&gt;
+
+      </description>
     </item>
+    
     <item>
       <title>如何控制grep命令显示在相关文本前后的行数</title>
-      <link>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</link>
+      <link>http://localhost:1313/blog/2018/06/grep-cmd-display-lines/</link>
       <pubDate>Tue, 19 Jun 2018 23:03:44 +0000</pubDate>
-      <guid>https://www.zengxi.net/2018/06/grep-cmd-display-lines/</guid>
-      <description>在Linux/Unix系统中使用grep命令的时候，有时候我们想要把匹配文本的前后几行的信息也同时显示出来。这可以通过设置一些参数来达到目的。&#xA;grep的帮助文档中有这几个参数：&#xA;-A num, --after-context=num Print num lines of trailing context after each match.&#xA;-B num, --before-context=num Print num lines of leading context before each match.&#xA;-C num, --context=num Print num lines of leading and trailing context surrounding each match.&#xA;-A 表示同时输出匹配行的后面几行&#xA;1grep -A 5 word /home/test/a.log -B 表示同时输出匹配行的前面几行&#xA;1grep -B 5 word /home/test/a.log -C 表示同时输出匹配行的前面几行和后面几行&#xA;1grep -C5 word /home/test/a.log </description>
+      
+      <guid>http://localhost:1313/blog/2018/06/grep-cmd-display-lines/</guid>
+      <description>
+        
+        
+        &lt;p&gt;在Linux/Unix系统中使用grep命令的时候，有时候我们想要把匹配文本的前后几行的信息也同时显示出来。这可以通过设置一些参数来达到目的。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;grep的帮助文档中有这几个参数：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;-A num, &amp;ndash;after-context=num &lt;br&gt;
+Print num lines of trailing context after each match.&lt;/p&gt;
+&lt;p&gt;-B num, &amp;ndash;before-context=num &lt;br&gt;
+Print num lines of leading context before each match.&lt;/p&gt;
+&lt;p&gt;-C num, &amp;ndash;context=num
+Print num lines of leading and trailing context surrounding each match.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;-A 表示同时输出匹配行的后面几行&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;grep -A &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; word /home/test/a.log&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;-B 表示同时输出匹配行的前面几行&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;grep -B &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; word /home/test/a.log&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;-C 表示同时输出匹配行的前面几行和后面几行&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;grep -C5 word /home/test/a.log&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

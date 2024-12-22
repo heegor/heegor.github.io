@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon shortcut" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.png" type="image/png" />
+<link rel="icon" href="/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/favicon-180x180.png" type="image/png" sizes="180x180" />
+<link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
+
+  <title>复盘 - 手机app上一行代码导致的生产事故 – 保罗札记</title>
+  <meta name="description" content="过程由于一些历史原因，以及与原先代码的兼容性，临时文件存储在minio中。
+某天，生产环境突发事故，minio集群的CPU与内存爆了，只能重启集群。过了十来分钟，很多服务都不可用，健康检查都不通过。日志中的错误信息显示，这些服务都是数据库拿不到连接。需要事先处理数据库连接的问题，于是连接到数据库查死锁，终止导致死锁的sql进程，再重启来恢复这些服务。" />
+
+  
+    <link rel="canonical" href="http://localhost:1313/blog/2019/12/incident-caused-by-app/" itemprop="url" />
+  
+
+  
+
+<meta property="og:title" content="复盘 - 手机app上一行代码导致的生产事故" />
+<meta property="og:description" content="过程由于一些历史原因，以及与原先代码的兼容性，临时文件存储在minio中。
+某天，生产环境突发事故，minio集群的CPU与内存爆了，只能重启集群。过了十来分钟，很多服务都不可用，健康检查都不通过。日志中的错误信息显示，这些服务都是数据库拿不到连接。需要事先处理数据库连接的问题，于是连接到数据库查死锁，终止导致死锁的sql进程，再重启来恢复这些服务。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/2019/12/incident-caused-by-app/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-12-10T23:46:11+00:00" />
+<meta property="article:modified_time" content="2024-11-30T18:58:28+08:00" />
+
+  
+  <meta itemprop="name" content="复盘 - 手机app上一行代码导致的生产事故">
+  <meta itemprop="description" content="过程由于一些历史原因，以及与原先代码的兼容性，临时文件存储在minio中。
+某天，生产环境突发事故，minio集群的CPU与内存爆了，只能重启集群。过了十来分钟，很多服务都不可用，健康检查都不通过。日志中的错误信息显示，这些服务都是数据库拿不到连接。需要事先处理数据库连接的问题，于是连接到数据库查死锁，终止导致死锁的sql进程，再重启来恢复这些服务。">
+  <meta itemprop="datePublished" content="2019-12-10T23:46:11+00:00">
+  <meta itemprop="dateModified" content="2024-11-30T18:58:28+08:00">
+  <meta itemprop="wordCount" content="1395">
+  <meta itemprop="keywords" content="生产事故,复盘">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="复盘 - 手机app上一行代码导致的生产事故">
+  <meta name="twitter:description" content="过程由于一些历史原因，以及与原先代码的兼容性，临时文件存储在minio中。
+某天，生产环境突发事故，minio集群的CPU与内存爆了，只能重启集群。过了十来分钟，很多服务都不可用，健康检查都不通过。日志中的错误信息显示，这些服务都是数据库拿不到连接。需要事先处理数据库连接的问题，于是连接到数据库查死锁，终止导致死锁的sql进程，再重启来恢复这些服务。">
+
+    <link href="/css/compiled/main.css" rel="stylesheet" />
+
+
+
+  <link href="/css/custom.css" rel="stylesheet" />
+
+
+
+
+
+  <script>
+     
+    const defaultTheme = 'system';
+
+    const setDarkTheme = () => {
+      document.documentElement.classList.add("dark");
+      document.documentElement.style.colorScheme = "dark";
+    }
+    const setLightTheme = () => {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.style.colorScheme = "light";
+    }
+
+    if ("color-theme" in localStorage) {
+      localStorage.getItem("color-theme") === "dark" ? setDarkTheme() : setLightTheme();
+    } else {
+      defaultTheme === "dark" ? setDarkTheme() : setLightTheme();
+      if (defaultTheme === "system") {
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? setDarkTheme() : setLightTheme();
+      }
+    }
+  </script>
+
+  
+</head>
+<body dir="ltr"><div class="nav-container hx-sticky hx-top-0 hx-z-20 hx-w-full hx-bg-transparent print:hx-hidden">
+  <div class="nav-container-blur hx-pointer-events-none hx-absolute hx-z-[-1] hx-h-full hx-w-full hx-bg-white dark:hx-bg-dark hx-shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] contrast-more:hx-shadow-[0_0_0_1px_#000] dark:hx-shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] contrast-more:dark:hx-shadow-[0_0_0_1px_#fff]"></div>
+
+  <nav class="hx-mx-auto hx-flex hx-items-center hx-justify-end hx-gap-2 hx-h-16 hx-px-6 hx-max-w-[90rem]">
+    <a class="hx-flex hx-items-center hover:hx-opacity-75 ltr:hx-mr-auto rtl:hx-ml-auto" href="/">
+        <img class="hx-block dark:hx-hidden" src="/logos/logo.png" alt="保罗札记" height="46" width="220" />
+        <img class="hx-hidden dark:hx-block" src="/logos/logo.png" alt="保罗札记" height="46" width="220" />
+    </a><a
+            title="首页"
+            href="/"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">首页</span>
+          </a><a
+            title="技术博客"
+            href="/blog"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-font-medium"
+          >
+            <span class="hx-text-center">技术博客</span>
+          </a><a
+            title="关于我"
+            href="/about"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">关于我</span>
+          </a><div class="search-wrapper hx-relative md:hx-w-64">
+  <div class="hx-relative hx-flex hx-items-center hx-text-gray-900 contrast-more:hx-text-gray-800 dark:hx-text-gray-300 contrast-more:dark:hx-text-gray-300">
+    <input
+      placeholder="搜索文档..."
+      class="search-input hx-block hx-w-full hx-appearance-none hx-rounded-lg hx-px-3 hx-py-2 hx-transition-colors hx-text-base hx-leading-tight md:hx-text-sm hx-bg-black/[.05] dark:hx-bg-gray-50/10 focus:hx-bg-white dark:focus:hx-bg-dark placeholder:hx-text-gray-500 dark:placeholder:hx-text-gray-400 contrast-more:hx-border contrast-more:hx-border-current"
+      type="search"
+      value=""
+      spellcheck="false"
+    />
+    <kbd
+      class="hx-absolute hx-my-1.5 hx-select-none ltr:hx-right-1.5 rtl:hx-left-1.5 hx-h-5 hx-rounded hx-bg-white hx-px-1.5 hx-font-mono hx-text-[10px] hx-font-medium hx-text-gray-500 hx-border dark:hx-border-gray-100/20 dark:hx-bg-dark/50 contrast-more:hx-border-current contrast-more:hx-text-current contrast-more:dark:hx-border-current hx-items-center hx-gap-1 hx-transition-opacity hx-pointer-events-none hx-hidden sm:hx-flex"
+    >
+      CTRL K
+    </kbd>
+  </div>
+
+  <div>
+    <ul
+      class="search-results hextra-scrollbar hx-hidden hx-border hx-border-gray-200 hx-bg-white hx-text-gray-100 dark:hx-border-neutral-800 dark:hx-bg-neutral-900 hx-absolute hx-top-full hx-z-20 hx-mt-2 hx-overflow-auto hx-overscroll-contain hx-rounded-xl hx-py-2.5 hx-shadow-xl hx-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] md:hx-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx-inset-x-0 ltr:md:hx-left-auto rtl:md:hx-right-auto contrast-more:hx-border contrast-more:hx-border-gray-900 contrast-more:dark:hx-border-gray-50 hx-w-screen hx-min-h-[100px] hx-max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      style="transition: max-height 0.2s ease 0s;"
+    ></ul>
+  </div>
+</div>
+<button type="button" aria-label="Menu" class="hamburger-menu -hx-mr-2 hx-rounded hx-p-2 active:hx-bg-gray-400/20 md:hx-hidden"><svg height=24 fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8H20"></path></g><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16H20"></path></g></svg></button>
+  </nav>
+</div>
+
+  <div class="hx-mx-auto hx-flex hx-max-w-screen-xl">
+    
+    
+<nav class="hextra-toc hx-order-last hx-hidden hx-w-64 hx-shrink-0 xl:hx-block print:hx-hidden hx-px-4" aria-label="table of contents">
+    <div class="hextra-scrollbar hx-sticky hx-top-16 hx-overflow-y-auto hx-pr-4 hx-pt-6 hx-text-sm [hyphens:auto] hx-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:hx--mr-4 rtl:hx--ml-4"><p class="hx-mb-4 hx-font-semibold hx-tracking-tight">内容目录</p><ul></ul><ul></ul><ul></ul>
+      <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400"><div>
+          <div class="label_post_tag hx-text-gray-500">文章分类</div>
+          <div class="post_tag">
+            <a class="tag_item">系统设计与优化</a></div>
+        </div><div>
+          <div class="label_post_tag hx-text-gray-500">标签</div>
+          <div class="post_tag">
+            <a class="tag_item">生产事故</a>
+            <a class="tag_item">复盘</a></div>
+        </div>
+        <div class="container_back_to_top">
+          <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx-transition-all hx-duration-75 hx-opacity-0 hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50">
+            <span>返回顶部</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hx-inline ltr:hx-ml-1 rtl:hx-mr-1 hx-h-3.5 hx-w-3.5 hx-border hx-rounded-full hx-border-gray-500 hover:hx-border-gray-900 dark:hx-border-gray-400 dark:hover:hx-border-gray-100 contrast-more:hx-border-gray-800 contrast-more:dark:hx-border-gray-50">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+            </svg>
+        </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+    <article class="hx-w-full hx-break-words hx-flex hx-min-h-[calc(100vh-var(--navbar-height))] hx-min-w-0 hx-justify-center hx-pb-8 hx-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
+        
+  <div class="hx-mt-1.5 hx-flex hx-items-center hx-gap-1 hx-overflow-hidden hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 contrast-more:hx-text-current">
+        <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
+          <a href="/blog/">技术博客</a>
+        </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">复盘 - 手机app上一行代码导致的生产事故</div>
+  </div>
+
+        <h1 class="hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100">复盘 - 手机app上一行代码导致的生产事故</h1>
+        <div class="hx-mt-4 hx-mb-16 hx-text-gray-500 hx-text-sm hx-flex hx-items-center hx-flex-wrap hx-gap-y-2"><span class="hx-mr-1">December 10, 2019</span></div>
+        <div class="content">
+          <h1>过程</h1><p>由于一些历史原因，以及与原先代码的兼容性，临时文件存储在minio中。</p>
+<p>某天，生产环境突发事故，minio集群的CPU与内存爆了，只能重启集群。过了十来分钟，很多服务都不可用，健康检查都不通过。日志中的错误信息显示，这些服务都是数据库拿不到连接。需要事先处理数据库连接的问题，于是连接到数据库查死锁，终止导致死锁的sql进程，再重启来恢复这些服务。</p>
+<!-- more -->
+<p>由于前不久minio集群挂掉，很容易就想到是由于minio的原因。其他服务通过RPC调用一个文件存储服务来操作minio中的数据，当minio集群挂掉的时候，文件存储服务访问minio一直想访问minio直到超时。在这个期间，其他服务如果有事务调用文件存储服务来操作minio中文件，那么这个事务就不会被提交，一会占着数据库连接。</p>
+<p>minio集群的硬件资源如果不升级，迟早CPU与内存还会再次爆掉。幸运的是，文件存储服务，当初做了兼容，支持两种临时文件存储方式，一个是本地磁盘，另外一个是minio，修改配置文件可以方便的切换。于是先切换成本地磁盘方式，然后升级minio集群的CPU与内存配置，重启minio集群。接着，修改文件存储服务的配置文件，切换回minio的方式。至此，所有的服务都慢慢恢复正常了。</p>
+<p>接着，细究这个事故的根源，联想到几天前发现app上面的bug，会一直在后台不断地上传图片。当时由于app出了紧急修复的版本，就没有当回事了。没想到过了几天，问题彻底暴露出来了。未升级app到最新版本的用户，在这几天内依然不停地上传文件。访问量的增大，minio集群原先的配置已经扛不住了。幸运的是，之前app实现了一个版本强制升级更新的机制，可以直接在后台修改当前所支持的最小版本，这样就让用户强制更新到最新的版本，避免了继续不停地传文件。</p>
+<p>这段时间大概几十万个文件，约200多G的大小。这些文件都上传到同一个bucket中，由于minio的内部实现是一个bucket采用文件夹形式保存，当一个bucket文件夹中的文件数量过多，已经无法列出某个文件夹下面的文件，总是超时。文件存储服务中的归档删除机制失效，导致空间无法释放，逐渐变小。如果没空间，又会导致服务不可用。幸运的是，有办法获取到具体的文件名，只能手动写脚本直接处理文件，释放空间。</p>
+<h1>时间线</h1><ol>
+<li>网页上面发现关联了几千个图片，后来发现是app的bug，会不断地上传图片，修复app</li>
+<li>过了几天，先是minio集群爆了，十几分钟后其他服务挂了</li>
+<li>释放数据库死锁，其他服务恢复</li>
+<li>升级minio集群配置，文件存储服务恢复</li>
+<li>强制让app客户端升级到最新版本，文件存储服务压力减小</li>
+<li>手动写脚本直接处理minio中的文件，释放minio空间。</li>
+</ol>
+<h1>总结</h1><p>做的对的地方：</p>
+<ol>
+<li>文件存储服务做了兼容，支持多种方式，出了问题，有个备选方案</li>
+<li>app版本可以控制最低支持的版本，有强制升级机制</li>
+</ol>
+<p>需要改进的地方：</p>
+<ol>
+<li>发现app上面bug的时候，没有考虑周全，以为只是小问题，太疏忽</li>
+<li>服务之间耦合性有点高，容错性不够。一个服务挂了，可能导致雪崩</li>
+<li>minio存储的时候，需要指定子路径。不能放在同一个文件夹下面，要分散到多个子文件夹中。</li>
+<li>没有服务降级机制，如果minio挂了，自动启用本地磁盘，不需要重启服务器</li>
+<li>minio 当初建机器的时候，没有使用lv等方式，不方便扩展磁盘，如果存在磁盘不足的情况，那么扩容就不方便</li>
+<li>配置文件的修改，需要重启服务，造成短时间内不可用</li>
+</ol>
+
+        </div>
+        
+    <div class="hx-mt-12 hx-mb-8 hx-block hx-text-xs hx-text-gray-500 ltr:hx-text-right rtl:hx-text-left dark:hx-text-gray-400">最后更新于 <time datetime="2024-11-30T18:58:28.000Z">November 30, 2024</time></div>
+        
+        <div class="hx-mb-8 hx-flex hx-items-center hx-border-t hx-pt-8 dark:hx-border-neutral-800 contrast-more:hx-border-neutral-400 dark:contrast-more:hx-border-neutral-400 print:hx-hidden"><a
+        href="/blog/2019/12/pg-recreate-pglogical-slave/"
+        title="重建基于pglogical逻辑复制的从库"
+        class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-pr-4 rtl:hx-pl-4"
+      ><svg class="hx-inline hx-h-5 hx-shrink-0 ltr:hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>重建基于pglogical逻辑复制的从库</a><a
+        href="/blog/2020/01/quartz-job-issue-improvement/"
+        title="Quartz job使用过程中的发现问题与改进"
+        class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-ml-auto ltr:hx-pl-4 ltr:hx-text-right rtl:hx-mr-auto rtl:hx-pr-4 rtl:hx-text-left"
+      >Quartz job使用过程中的发现问题与改进<svg class="hx-inline hx-h-5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a></div>
+        
+      </main>
+    </article>
+  </div>
+
+      <footer class="hextra-footer hx-bg-gray-100 hx-pb-[env(safe-area-inset-bottom)] dark:hx-bg-neutral-900 print:hx-bg-transparent"><div class="hx-mx-auto hx-flex hx-gap-2 hx-py-2 hx-px-4 hx-max-w-screen-xl"><button
+  title="切换主题"
+  data-theme="light"
+  class="theme-toggle hx-group hx-h-7 hx-rounded-md hx-px-2 hx-text-left hx-text-xs hx-font-medium hx-text-gray-600 hx-transition-colors dark:hx-text-gray-400 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50"
+  type="button"
+  aria-label="切换主题"
+>
+  <div class="hx-flex hx-items-center hx-gap-2 hx-capitalize"><svg height=12 class="group-data-[theme=light]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg><span class="group-data-[theme=light]:hx-hidden">浅色</span><svg height=12 class="group-data-[theme=dark]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg><span class="group-data-[theme=dark]:hx-hidden">深色</span></div>
+</button>
+</div><hr class="dark:hx-border-neutral-800" /><div
+    class="hx-max-w-screen-xl hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
+  >
+    <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start"><div class="hx-mt-6 hx-text-xs"><img class="favicon" src="/favicon-32x32.png">Copyright © 2018 - 2025 保罗札记. All Rights Reserved</div>
+    </div>
+  </div>
+</footer>
+    
+    <script defer src="/js/main.js" integrity=""></script>
+
+
+<script defer src="/lib/flexsearch/flexsearch.bundle.min.0425860527cc9968f9f049421c7a56b39327d475e2e3a8f550416be3a9134327.js" integrity="sha256-BCWGBSfMmWj58ElCHHpWs5Mn1HXi46j1UEFr46kTQyc="></script>
+    <script defer src="/zh-cn.search.js" integrity=""></script>
+
+
+  </body>
+</html>

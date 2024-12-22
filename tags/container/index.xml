@@ -1,20 +1,66 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>container on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/container/</link>
-    <description>Recent content in container on 保罗札记</description>
+    <title>保罗札记 – Container</title>
+    <link>http://localhost:1313/tags/container/</link>
+    <description>Recent content in Container on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Wed, 02 Dec 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/container/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/container/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>Kubernetes in Action笔记 - (1) 容器技术介绍</title>
-      <link>https://www.zengxi.net/2020/12/k8s_container_tech_intro/</link>
+      <link>http://localhost:1313/blog/2020/12/k8s_container_tech_intro/</link>
       <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>https://www.zengxi.net/2020/12/k8s_container_tech_intro/</guid>
-      <description>容器允许你在同一台机器上运行多个服务, 不仅提供不同的环境给每个服务, 而且将它们互相隔离。&#xA;容器与虚拟机比较 轻量级 和虚拟机比较, 容器更加轻量级, 它允许在相同的硬件上运行更多数量的组件。主要是因为每个虚拟机需要运行自己的一组系统进程, 这就产生了除组件进程消耗以外的额外计算资源损耗。而一个容器仅仅是运行在宿主机上被隔离的单个进程, 仅消耗应用容器消耗的资源, 不会有其他进程的开销。&#xA;虚拟化 多个容器则会完全执行运行在宿主机上的同一个内核的系统调用, 此内核是唯一一个在宿主机操作系统上执行指令的内核。 CPU也不需要做任何对虚拟机能做那样的虚拟化。&#xA;隔离性 虚拟机的主要好处是它们提供完全隔离的环境, 因为每个虚拟机运行在它自己的Linux内核上, 而容器都是调用同一个内核, 这会有一定的安全隐患&#xA;容器实现隔离机制介绍 用 Linux 命名空间隔离进程 默认情况下, 每个 Linux 系统最初仅有一个命名空间。可以创建额外的命名空间, 以及在它们之间组织资源。&#xA;对于一个进程, 可以在其中一个命名空间中运行它。进程将只能看到同一个命名空间下的资源。 存在多种类型的多个命名空间, 所以一个进程不单单只属于某一个命名空间, 而属于每个类型的一个命名空间。存在以下类型的命名空间:&#xA;Mount (mnt) Process ID (pid) Network (net) Inter-process communicaion (ipd) UTS (UNIX Time-Sharing) User ID (user) 每种命名空间被用来隔离一组特定的资源。例如, UTS 命名空间决定了运行在命名空间里的进程能看见哪些主机名和域名。通过分派两个不同的 UTS 命名空间给一对进程, 能使它们看见不同的本地主机名。换句话说, 这两个进程就好像正在两个不同的机器上运行一样(至少就主机名而言是这样的)。同样地, 一个进程属于什么 Network 命名空间决定了运行在进程里的应用程序能看见什么网络接口。每个网络接口属于一个命名空间, 但是可以从一个命名空间转移到另一个。 每个容器都使用它自己的网络命名空间, 因此每个容器仅能看见它自己的一组网络接口。&#xA;限制进程的可用资源 另外的隔离性就是限制容器能使用的系统资源。 这通过cgroups来实现。cgroups 是一个Linux 内核功能, 它被用来限制 一个进程或者一组进程的资源使用。一个进程的资源(CPU、 内存、 网络带宽等)使用量不能超出被分配的量。 这种方式下, 进程不能过分使用为其他进程保留的资源, 这和进程运行在不同的机器上是类似的。</description>
+      
+      <guid>http://localhost:1313/blog/2020/12/k8s_container_tech_intro/</guid>
+      <description>
+        
+        
+        &lt;p&gt;容器允许你在同一台机器上运行多个服务, 不仅提供不同的环境给每个服务, 而且将它们互相隔离。&lt;/p&gt;
+&lt;h2&gt;容器与虚拟机比较&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;容器与虚拟机比较&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%ae%b9%e5%99%a8%e4%b8%8e%e8%99%9a%e6%8b%9f%e6%9c%ba%e6%af%94%e8%be%83&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;轻量级&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;轻量级&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e8%bd%bb%e9%87%8f%e7%ba%a7&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;和虚拟机比较, 容器更加轻量级, 它允许在相同的硬件上运行更多数量的组件。主要是因为每个虚拟机需要运行自己的一组系统进程, 这就产生了除组件进程消耗以外的额外计算资源损耗。而一个容器仅仅是运行在宿主机上被隔离的单个进程, 仅消耗应用容器消耗的资源, 不会有其他进程的开销。&lt;/p&gt;
+&lt;h3&gt;虚拟化&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;虚拟化&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e8%99%9a%e6%8b%9f%e5%8c%96&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;多个容器则会完全执行运行在宿主机上的同一个内核的系统调用, 此内核是唯一一个在宿主机操作系统上执行指令的内核。 CPU也不需要做任何对虚拟机能做那样的虚拟化。&lt;/p&gt;
+&lt;h3&gt;隔离性&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;隔离性&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e9%9a%94%e7%a6%bb%e6%80%a7&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;虚拟机的主要好处是它们提供完全隔离的环境, 因为每个虚拟机运行在它自己的Linux内核上, 而容器都是调用同一个内核, 这会有一定的安全隐患&lt;/p&gt;
+&lt;h2&gt;容器实现隔离机制介绍&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;容器实现隔离机制介绍&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%ae%b9%e5%99%a8%e5%ae%9e%e7%8e%b0%e9%9a%94%e7%a6%bb%e6%9c%ba%e5%88%b6%e4%bb%8b%e7%bb%8d&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;用 Linux 命名空间隔离进程&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;用-linux-命名空间隔离进程&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e7%94%a8-linux-%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4%e9%9a%94%e7%a6%bb%e8%bf%9b%e7%a8%8b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;默认情况下, 每个 Linux 系统最初仅有一个命名空间。可以创建额外的命名空间, 以及在它们之间组织资源。&lt;/p&gt;
+&lt;p&gt;对于一个进程, 可以在其中一个命名空间中运行它。进程将只能看到同一个命名空间下的资源。 存在多种类型的多个命名空间, 所以一个进程不单单只属于某一个命名空间, 而属于每个类型的一个命名空间。存在以下类型的命名空间:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mount (mnt)&lt;/li&gt;
+&lt;li&gt;Process ID (pid)&lt;/li&gt;
+&lt;li&gt;Network (net)&lt;/li&gt;
+&lt;li&gt;Inter-process communicaion (ipd)&lt;/li&gt;
+&lt;li&gt;UTS (UNIX Time-Sharing)&lt;/li&gt;
+&lt;li&gt;User ID (user)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;每种命名空间被用来隔离一组特定的资源。例如, UTS 命名空间决定了运行在命名空间里的进程能看见哪些主机名和域名。通过分派两个不同的 UTS 命名空间给一对进程, 能使它们看见不同的本地主机名。换句话说, 这两个进程就好像正在两个不同的机器上运行一样(至少就主机名而言是这样的)。同样地, 一个进程属于什么 Network 命名空间决定了运行在进程里的应用程序能看见什么网络接口。每个网络接口属于一个命名空间, 但是可以从一个命名空间转移到另一个。 每个容器都使用它自己的网络命名空间, 因此每个容器仅能看见它自己的一组网络接口。&lt;/p&gt;
+&lt;h3&gt;限制进程的可用资源&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;限制进程的可用资源&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e9%99%90%e5%88%b6%e8%bf%9b%e7%a8%8b%e7%9a%84%e5%8f%af%e7%94%a8%e8%b5%84%e6%ba%90&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;另外的隔离性就是限制容器能使用的系统资源。 这通过cgroups来实现。cgroups 是一个Linux 内核功能, 它被用来限制 一个进程或者一组进程的资源使用。一个进程的资源(CPU、 内存、 网络带宽等)使用量不能超出被分配的量。 这种方式下, 进程不能过分使用为其他进程保留的资源, 这和进程运行在不同的机器上是类似的。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;备注：2020年3月发布的Linux 5.6引入了新的&lt;code&gt;Time Namespace&lt;/code&gt;这个命名空间，它可以让不同命名空间里的进程看到不同的系统时间&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;图书资料：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://book.douban.com/subject/30418855/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://book.douban.com/subject/30418855/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Linux_namespaces&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://en.wikipedia.org/wiki/Linux_namespaces&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

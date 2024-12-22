@@ -1,20 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>GPT4 on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/gpt4/</link>
+    <title>保罗札记 – GPT4</title>
+    <link>http://localhost:1313/tags/gpt4/</link>
     <description>Recent content in GPT4 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Mon, 08 May 2023 20:19:00 +0800</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/gpt4/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/gpt4/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>不用魔法直接访问 New Bing</title>
-      <link>https://www.zengxi.net/2023/05/access-new-bing/</link>
+      <link>http://localhost:1313/blog/2023/05/access-new-bing/</link>
       <pubDate>Mon, 08 May 2023 20:19:00 +0800</pubDate>
-      <guid>https://www.zengxi.net/2023/05/access-new-bing/</guid>
-      <description>微软的 new bing 已经接入 GPT-4, 这几天已经开放给用户免费免费，不用预约排队体验。但是大陆地区无法直接访问，即使安装了Edge 的 dev 版本也没用，需要借助工具。但是呢，即使通过魔法可能也无法访问，因为 ip 可能在微软的黑名单中。&#xA;目前有人开发了 NewBingGoGo 这个工具，可以不需要通过魔法来使用。目前这个工具有2个版本：&#xA;插件版：https://gitee.com/jja8/NewBingGoGo web版：https://github.com/jianjianai/NewBingGoGo-Web 使用的时候，可以目前免费的云服务提供商来部署。可以参考 使用免费的的云服务提供商创建魔法链接&#xA;嫌麻烦的话，可以直接用这个工具作者的演示网站, 只是有点慢：https://bingweb.jja8.cn/web/NewBingGoGo.html</description>
+      
+      <guid>http://localhost:1313/blog/2023/05/access-new-bing/</guid>
+      <description>
+        
+        
+        &lt;p&gt;微软的 new bing 已经接入 GPT-4, 这几天已经开放给用户免费免费，不用预约排队体验。但是大陆地区无法直接访问，即使安装了Edge 的 dev 版本也没用，需要借助工具。但是呢，即使通过魔法可能也无法访问，因为 ip 可能在微软的黑名单中。&lt;/p&gt;
+&lt;p&gt;目前有人开发了 NewBingGoGo 这个工具，可以不需要通过魔法来使用。目前这个工具有2个版本：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;插件版：https://gitee.com/jja8/NewBingGoGo&lt;/li&gt;
+&lt;li&gt;web版：https://github.com/jianjianai/NewBingGoGo-Web&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;使用的时候，可以目前免费的云服务提供商来部署。可以参考 &lt;a href=&#34;https://gitee.com/jja8/NewBingGoGo.wikis/blob/master/%E5%88%9B%E5%BB%BA%E9%AD%94%E6%B3%95%E9%93%BE%E6%8E%A5/%E4%BD%BF%E7%94%A8%E5%85%8D%E8%B4%B9%E7%9A%84%E7%9A%84%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E5%95%86%E5%88%9B%E5%BB%BA%E9%AD%94%E6%B3%95%E9%93%BE%E6%8E%A5.md&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;使用免费的的云服务提供商创建魔法链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;嫌麻烦的话，可以直接用这个工具作者的演示网站, 只是有点慢：https://bingweb.jja8.cn/web/NewBingGoGo.html&lt;/p&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

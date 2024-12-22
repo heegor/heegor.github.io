@@ -1,20 +1,114 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>migration on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/migration/</link>
-    <description>Recent content in migration on 保罗札记</description>
+    <title>保罗札记 – Migration</title>
+    <link>http://localhost:1313/tags/migration/</link>
+    <description>Recent content in Migration on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Wed, 27 Jun 2018 08:57:29 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/migration/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/migration/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>使用redis-cli与AOF迁移数据</title>
-      <link>https://www.zengxi.net/2018/06/redis-data-migration/</link>
+      <link>http://localhost:1313/blog/2018/06/redis-data-migration/</link>
       <pubDate>Wed, 27 Jun 2018 08:57:29 +0000</pubDate>
-      <guid>https://www.zengxi.net/2018/06/redis-data-migration/</guid>
-      <description>把一台Redis上的数据，迁移到另外一台Redis服务器上，有很多种方式。其中一个简便的方法是，利用Redis自带的命令行工具redis-cli，实现数据的无缝迁移。&#xA;在旧的Redis服务器上开启AOF 执行下面的命令，检查AOF是否开启。返回yes表示开启，no表示关闭&#xA;1redis-cli -h old_redis_ip -p old_redis_port config get appendonly 如果未开启，执行下面的命令开启AOF&#xA;1redis-cli -h old_redis_ip -p old_redis_port config set appendonly yes 复制AOF文件 默认生成的AOF文件名是appendonly.aof。到Redis数据目录可以看到appendonly.aof文件，复制该文件到新的Redis服务器上。&#xA;如果不知道Redis数据目录或者改过AOF的文件名，可以查看Redis的配置文件中的配置:&#xA;# The name of the append only file (default: &#34;appendonly.aof&#34;) appendfilename &#34;appendonly.aof&#34; # The working directory. # # The DB will be written inside this directory, with the filename specified # above using the &#39;dbfilename&#39; configuration directive. # # The Append Only File will also be created inside this directory.</description>
+      
+      <guid>http://localhost:1313/blog/2018/06/redis-data-migration/</guid>
+      <description>
+        
+        
+        &lt;p&gt;把一台Redis上的数据，迁移到另外一台Redis服务器上，有很多种方式。其中一个简便的方法是，利用Redis自带的命令行工具redis-cli，实现数据的无缝迁移。&lt;/p&gt;
+&lt;h1&gt;在旧的Redis服务器上开启AOF&lt;/h1&gt;&lt;p&gt;执行下面的命令，检查AOF是否开启。返回yes表示开启，no表示关闭&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;redis-cli -h old_redis_ip -p old_redis_port config get appendonly&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;如果未开启，执行下面的命令开启AOF&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;redis-cli -h old_redis_ip -p old_redis_port config &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; appendonly yes&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h1&gt;复制AOF文件&lt;/h1&gt;&lt;p&gt;默认生成的AOF文件名是appendonly.aof。到Redis数据目录可以看到appendonly.aof文件，复制该文件到新的Redis服务器上。&lt;/p&gt;
+&lt;p&gt;如果不知道Redis数据目录或者改过AOF的文件名，可以查看Redis的配置文件中的配置:&lt;/p&gt;
+&lt;pre&gt;
+# The name of the append only file (default: &#34;appendonly.aof&#34;)
+appendfilename &#34;appendonly.aof&#34;
+
+
+# The working directory.
+#
+# The DB will be written inside this directory, with the filename specified
+# above using the &#39;dbfilename&#39; configuration directive.
+#
+# The Append Only File will also be created inside this directory.
+#
+# Note that you must specify a directory here, not a file name.
+dir /var/lib/redis
+&lt;/pre&gt;
+&lt;h1&gt;将AOF文件中的数据导入到新的Redis服务器&lt;/h1&gt;&lt;p&gt;执行下面的命令，将AOF文件中的数据导入&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;redis-cli -h new_redis_ip -p new_redis_port --pipe &amp;lt; appendonly.aof&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h1&gt;在旧的Redis服务器上关闭AOF&lt;/h1&gt;&lt;p&gt;如果原有旧的Redis服务器不需要一直开启AOF，可通过以下命令关闭&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;redis-cli -h old_redis_ip -p old_redis_port config &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; appendonly no&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

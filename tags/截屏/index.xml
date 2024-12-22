@@ -1,20 +1,57 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>截屏 on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/</link>
+    <title>保罗札记 – 截屏</title>
+    <link>http://localhost:1313/tags/%E6%88%AA%E5%B1%8F/</link>
     <description>Recent content in 截屏 on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Mon, 25 Jun 2018 03:34:29 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/%E6%88%AA%E5%B1%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/%E6%88%AA%E5%B1%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>Ubuntu 16.04系统自带截屏工具快捷键</title>
-      <link>https://www.zengxi.net/2018/06/ubuntu-screenshot-shortcut/</link>
+      <link>http://localhost:1313/blog/2018/06/ubuntu-screenshot-shortcut/</link>
       <pubDate>Mon, 25 Jun 2018 03:34:29 +0000</pubDate>
-      <guid>https://www.zengxi.net/2018/06/ubuntu-screenshot-shortcut/</guid>
-      <description>Ubuntu 16.04系统自带了截屏工具，可以实现窗口截屏、区域截屏等。默认的快捷键是：&#xA;1 Print 全屏截图 2 Ctrl + Print 全屏截图并保存到剪贴板 3 4 Alt + Print 窗口截图 5 Ctrl + Alt + Print 窗口截图并保存到剪贴板 6 7 Shift + Print 区域截图 8 Ctrl + Shift + Print 区域截图并保存到剪贴板 9 10 Ctrl + Shift + Alt + R 录制屏幕短视频 </description>
+      
+      <guid>http://localhost:1313/blog/2018/06/ubuntu-screenshot-shortcut/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Ubuntu 16.04系统自带了截屏工具，可以实现窗口截屏、区域截屏等。默认的快捷键是：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;    Print                       全屏截图    
+    Ctrl &amp;#43; Print                全屏截图并保存到剪贴板    
+
+    Alt &amp;#43; Print                 窗口截图    
+    Ctrl &amp;#43; Alt &amp;#43; Print          窗口截图并保存到剪贴板    
+
+    Shift &amp;#43; Print               区域截图
+    Ctrl &amp;#43; Shift &amp;#43; Print        区域截图并保存到剪贴板
+
+    Ctrl &amp;#43; Shift &amp;#43; Alt &amp;#43; R      录制屏幕短视频&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

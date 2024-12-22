@@ -1,27 +1,51 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>chrome on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/chrome/</link>
-    <description>Recent content in chrome on 保罗札记</description>
+    <title>保罗札记 – Chrome</title>
+    <link>http://localhost:1313/tags/chrome/</link>
+    <description>Recent content in Chrome on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Wed, 15 Jul 2020 09:21:02 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/chrome/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/chrome/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>清除chrome中 HTTPS 证书缓存</title>
-      <link>https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/</link>
+      <link>http://localhost:1313/blog/2020/07/clear_chrome_https_cert_cache/</link>
       <pubDate>Wed, 15 Jul 2020 09:21:02 +0000</pubDate>
-      <guid>https://www.zengxi.net/2020/07/clear_chrome_https_cert_cache/</guid>
-      <description>在地址栏输入 chrome://net-internals/#hsts ， 找到 “Delete domain security policies”， 输入对应的域名，点击 Delete 按钮</description>
+      
+      <guid>http://localhost:1313/blog/2020/07/clear_chrome_https_cert_cache/</guid>
+      <description>
+        
+        
+        &lt;p&gt;在地址栏输入 chrome://net-internals/#hsts ， 找到 “Delete domain security policies”， 输入对应的域名，点击 Delete 按钮&lt;/p&gt;
+
+      </description>
     </item>
+    
     <item>
       <title>Manjaro设置chrome为默认浏览器</title>
-      <link>https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/</link>
+      <link>http://localhost:1313/blog/2020/05/manjaro_chrome_default_browser/</link>
       <pubDate>Mon, 25 May 2020 14:01:11 +0000</pubDate>
-      <guid>https://www.zengxi.net/2020/05/manjaro_chrome_default_browser/</guid>
-      <description>安装完 Manjaro，一般会自带 Firefox浏览器。如果自己想再安装 chrome，并且设置成默认浏览器，则需要两个步骤：&#xA;在 Default Applications 中选择 Chrome 为默认的浏览器。除了这一步还不够，打开 chrome 依然有提示说“chrome 不是默认浏览器”，这就需要下面的第二步来解决。 在 File Association 中找到 html 项， 选择使用 Chrome 打开该类型的文件。 </description>
+      
+      <guid>http://localhost:1313/blog/2020/05/manjaro_chrome_default_browser/</guid>
+      <description>
+        
+        
+        &lt;p&gt;安装完 Manjaro，一般会自带 Firefox浏览器。如果自己想再安装 chrome，并且设置成默认浏览器，则需要两个步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在 Default Applications 中选择 Chrome 为默认的浏览器。除了这一步还不够，打开 chrome 依然有提示说“chrome 不是默认浏览器”，这就需要下面的第二步来解决。&lt;/li&gt;
+&lt;li&gt;在 File Association 中找到 html 项， 选择使用 Chrome 打开该类型的文件。&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

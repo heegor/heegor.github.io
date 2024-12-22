@@ -1,20 +1,62 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>excel on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/excel/</link>
-    <description>Recent content in excel on 保罗札记</description>
+    <title>保罗札记 – Excel</title>
+    <link>http://localhost:1313/tags/excel/</link>
+    <description>Recent content in Excel on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Wed, 05 Dec 2018 17:56:09 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/excel/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/excel/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>记一次打开Excel文件错误的排查</title>
-      <link>https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/</link>
+      <link>http://localhost:1313/blog/2018/12/excel-trouble-shooting-zip-file/</link>
       <pubDate>Wed, 05 Dec 2018 17:56:09 +0000</pubDate>
-      <guid>https://www.zengxi.net/2018/12/excel-trouble-shooting-zip-file/</guid>
-      <description>在生产环境中，某个结果集导出的excel文件用Microsoft Excel无法打开，看到如下错误：&#xA;最开始怀疑是在生成文件的时候，文件损坏掉了，但是重新生成多次，得到的结果都是一样的。在相同的界面，导出其他结果集所生成的文件却都是可以成功打开的，这样就可以排除代码功能方面的问题。如果和代码无关，那么就可能和数据有关系。根据出错提示给出的文件地址“C:\Users\ZHANGZ~1\AppData\Local\Temp\error083200_01.xml”, 打开该临时文件，可以看到下面的信息&#xA;1&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; standalone=&amp;#34;true&amp;#34;?&amp;gt; 2@namespace html url(http://www.w3.org/1999/xhtml); :root { font:small Verdana; font-weight: bold; padding: 2em; padding-left:4em; } * { display: block; padding-left: 2em; } html|style { display: none; } html|span, html|a { display: inline; padding: 0; font-weight: normal; text-decoration: none; } html|span.block { display: block; } *[html|hidden], span.block[html|hidden] { display: none; } .expand { display: block; } .expand:before { content: &amp;#39;+&amp;#39;; color: red; position: absolute; left: -1em; } .</description>
+      
+      <guid>http://localhost:1313/blog/2018/12/excel-trouble-shooting-zip-file/</guid>
+      <description>
+        
+        
+        &lt;p&gt;在生产环境中，某个结果集导出的excel文件用Microsoft Excel无法打开，看到如下错误：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/p/2018/12/201812-excel-trouble-shooting-zip-file.png&#34; alt=&#34;打开Excel错误提示&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;最开始怀疑是在生成文件的时候，文件损坏掉了，但是重新生成多次，得到的结果都是一样的。在相同的界面，导出其他结果集所生成的文件却都是可以成功打开的，这样就可以排除代码功能方面的问题。如果和代码无关，那么就可能和数据有关系。根据出错提示给出的文件地址“C:\Users\ZHANGZ~1\AppData\Local\Temp\error083200_01.xml”, 打开该临时文件，可以看到下面的信息&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; standalone=&amp;#34;true&amp;#34;?&amp;gt;
+@namespace html url(http://www.w3.org/1999/xhtml); :root { font:small Verdana; font-weight: bold; padding: 2em; padding-left:4em; } * { display: block; padding-left: 2em; } html|style { display: none; } html|span, html|a { display: inline; padding: 0; font-weight: normal; text-decoration: none; } html|span.block { display: block; } *[html|hidden], span.block[html|hidden] { display: none; } .expand { display: block; } .expand:before { content: &amp;#39;&amp;#43;&amp;#39;; color: red; position: absolute; left: -1em; } .collapse { display: block; } .collapse:before { content: &amp;#39;-&amp;#39;; color: red; position: absolute; left:-1em; } 
+&amp;lt;recoveryLog xmlns=&amp;#34;http://schemas.openxmlformats.org/spreadsheetml/2006/main&amp;#34;&amp;gt;
+&amp;lt;logFileName&amp;gt;error084360_01.xml&amp;lt;/logFileName&amp;gt;
+&amp;lt;summary&amp;gt;Errors were detected in file &amp;#39;C:\Users\fieldeng\Downloads\test_zh_142053.xlsx&amp;#39;&amp;lt;/summary&amp;gt;
+&amp;lt;additionalInfo&amp;gt;
+&amp;lt;info&amp;gt;Excel completed file level validation and repair. Some parts of this workbook may have been repaired or discarded.&amp;lt;/info&amp;gt;
+&amp;lt;/additionalInfo&amp;gt;
+&amp;lt;removedParts&amp;gt;
+&amp;lt;removedPart&amp;gt;Replaced Part: /xl/worksheets/sheet1.xml part with XML error. 超出当前范围。 Line 478, column 0.&amp;lt;/removedPart&amp;gt;
+&amp;lt;/removedParts&amp;gt;
+&amp;lt;/recoveryLog&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;由文件内容可以估计是某个字段的值超过长度限制，但是依然无法有效地定位到真正出错的地方。后来发现excel文件实际上就是个zip压缩包，于是改一下扩展名，解压后看到一些目录和文件，一切就豁然开朗了。文件解压后，找到/xl/worksheets/sheet1.xml文件，用文本编辑器打开，跳转到478行，果然看到一个超长的字符串。这个超长的字符串是在代码里面拼接N个字段生成的，结果超出了xml文件能够接受的长度。定位到出错的地方，优化一下代码，就把解决问题了。&lt;/p&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

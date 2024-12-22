@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon shortcut" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.png" type="image/png" />
+<link rel="icon" href="/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/favicon-180x180.png" type="image/png" sizes="180x180" />
+<link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
+
+  <title>技术博客 – 保罗札记</title>
+  <meta name="description" content="" />
+
+  
+    <link rel="canonical" href="http://localhost:1313/blog/" itemprop="url" />
+  
+
+  
+
+<meta property="og:title" content="技术博客" />
+<meta property="og:description" content="Paul Zeng&#39;s personal website and blog" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://localhost:1313/blog/" />
+
+  
+  <meta itemprop="name" content="技术博客">
+  <meta itemprop="description" content="Paul Zeng&#39;s personal website and blog">
+  <meta itemprop="datePublished" content="2024-10-23T13:01:00+08:00">
+  <meta itemprop="dateModified" content="2024-11-30T18:58:28+08:00">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="技术博客">
+  <meta name="twitter:description" content="Paul Zeng&#39;s personal website and blog">
+
+    <link href="/css/compiled/main.css" rel="stylesheet" />
+
+
+
+  <link href="/css/custom.css" rel="stylesheet" />
+
+
+
+
+
+  <script>
+     
+    const defaultTheme = 'system';
+
+    const setDarkTheme = () => {
+      document.documentElement.classList.add("dark");
+      document.documentElement.style.colorScheme = "dark";
+    }
+    const setLightTheme = () => {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.style.colorScheme = "light";
+    }
+
+    if ("color-theme" in localStorage) {
+      localStorage.getItem("color-theme") === "dark" ? setDarkTheme() : setLightTheme();
+    } else {
+      defaultTheme === "dark" ? setDarkTheme() : setLightTheme();
+      if (defaultTheme === "system") {
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? setDarkTheme() : setLightTheme();
+      }
+    }
+  </script>
+
+  
+</head>
+<body dir="ltr"><div class="nav-container hx-sticky hx-top-0 hx-z-20 hx-w-full hx-bg-transparent print:hx-hidden">
+  <div class="nav-container-blur hx-pointer-events-none hx-absolute hx-z-[-1] hx-h-full hx-w-full hx-bg-white dark:hx-bg-dark hx-shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] contrast-more:hx-shadow-[0_0_0_1px_#000] dark:hx-shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] contrast-more:dark:hx-shadow-[0_0_0_1px_#fff]"></div>
+
+  <nav class="hx-mx-auto hx-flex hx-items-center hx-justify-end hx-gap-2 hx-h-16 hx-px-6 hx-max-w-[90rem]">
+    <a class="hx-flex hx-items-center hover:hx-opacity-75 ltr:hx-mr-auto rtl:hx-ml-auto" href="/">
+        <img class="hx-block dark:hx-hidden" src="/logos/logo.png" alt="保罗札记" height="46" width="220" />
+        <img class="hx-hidden dark:hx-block" src="/logos/logo.png" alt="保罗札记" height="46" width="220" />
+    </a><a
+            title="首页"
+            href="/"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">首页</span>
+          </a><a
+            title="技术博客"
+            href="/blog"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-font-medium"
+          >
+            <span class="hx-text-center">技术博客</span>
+          </a><a
+            title="关于我"
+            href="/about"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">关于我</span>
+          </a><div class="search-wrapper hx-relative md:hx-w-64">
+  <div class="hx-relative hx-flex hx-items-center hx-text-gray-900 contrast-more:hx-text-gray-800 dark:hx-text-gray-300 contrast-more:dark:hx-text-gray-300">
+    <input
+      placeholder="搜索文档..."
+      class="search-input hx-block hx-w-full hx-appearance-none hx-rounded-lg hx-px-3 hx-py-2 hx-transition-colors hx-text-base hx-leading-tight md:hx-text-sm hx-bg-black/[.05] dark:hx-bg-gray-50/10 focus:hx-bg-white dark:focus:hx-bg-dark placeholder:hx-text-gray-500 dark:placeholder:hx-text-gray-400 contrast-more:hx-border contrast-more:hx-border-current"
+      type="search"
+      value=""
+      spellcheck="false"
+    />
+    <kbd
+      class="hx-absolute hx-my-1.5 hx-select-none ltr:hx-right-1.5 rtl:hx-left-1.5 hx-h-5 hx-rounded hx-bg-white hx-px-1.5 hx-font-mono hx-text-[10px] hx-font-medium hx-text-gray-500 hx-border dark:hx-border-gray-100/20 dark:hx-bg-dark/50 contrast-more:hx-border-current contrast-more:hx-text-current contrast-more:dark:hx-border-current hx-items-center hx-gap-1 hx-transition-opacity hx-pointer-events-none hx-hidden sm:hx-flex"
+    >
+      CTRL K
+    </kbd>
+  </div>
+
+  <div>
+    <ul
+      class="search-results hextra-scrollbar hx-hidden hx-border hx-border-gray-200 hx-bg-white hx-text-gray-100 dark:hx-border-neutral-800 dark:hx-bg-neutral-900 hx-absolute hx-top-full hx-z-20 hx-mt-2 hx-overflow-auto hx-overscroll-contain hx-rounded-xl hx-py-2.5 hx-shadow-xl hx-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] md:hx-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx-inset-x-0 ltr:md:hx-left-auto rtl:md:hx-right-auto contrast-more:hx-border contrast-more:hx-border-gray-900 contrast-more:dark:hx-border-gray-50 hx-w-screen hx-min-h-[100px] hx-max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      style="transition: max-height 0.2s ease 0s;"
+    ></ul>
+  </div>
+</div>
+<button type="button" aria-label="Menu" class="hamburger-menu -hx-mr-2 hx-rounded hx-p-2 active:hx-bg-gray-400/20 md:hx-hidden"><svg height=24 fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8H20"></path></g><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16H20"></path></g></svg></button>
+  </nav>
+</div>
+<div class="hx-mx-auto hx-flex hx-max-w-screen-xl">
+    
+    <article class="hx-w-full hx-break-words hx-flex hx-min-h-[calc(100vh-var(--navbar-height))] hx-min-w-0 hx-justify-center hx-pb-8 hx-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
+        <br class="hx-mt-1.5 hx-text-sm" />
+        <h1 class="hx-text-center hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100">技术博客</h1>
+        <div class="content"></div>
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/07/manjaro_nutstore_gui_blank/">Manjaro升级后打开坚果云界面显示空白</a></h3>
+                <div><a class="tag_item">manjaro</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">修改 /opt/nutstore/conf/nutstore.properties
+# 将下面设置修改成false webui.enable=false 如果发现界面大小不能修改，则执行下面命令安装相关程序</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/07/manjaro_nutstore_gui_blank/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">July 2, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/java9_optional_enhancement/">Java 9新特性 - (5)Optional类中新增几个方法</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 9</a><a class="tag_item">optional</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7"> 相关文章： Java 8引入Optional类
+Optional 类在 Java 8 中引入，Optional 类的引入很好的解决空指针异常。。在 java 9 中, 添加了三个方法来改进它的功能.</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/java9_optional_enhancement/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 24, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/java8_optional/">Java 8新特性 - (15)Optional类</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a><a class="tag_item">optional</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7"> 相关文章： Java 9对Optional类的改进
+Java 8中引入了Optional类来解决 NullPointerException 与繁琐的 null 检查。它是一个封装值的类，用于保存类型为T的值，从本质上说它就是一个容器。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/java8_optional/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 24, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/java9_unique_jvm_log/">Java 9新特性 - (4)统一的JVM日志系统</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 9</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">Java 9新增了新的命令行选项-Xlog, 用于所有日志记录设置和统一的JVM日志记录
+Xlog的参数遵循以下规则：
+已按照在命令行中显示的顺序应用了多个参数。 最后的配置规则：对于相同的输出，多个参数可以按给定的顺序相互覆盖。 -Xlog[:option] option := [&lt;what&gt;][:[&lt;output&gt;][:[&lt;decorators&gt;][:&lt;output-options&gt;]]] &#39;help&#39; &#39;disable&#39; what := &lt;selector&gt;[,...] selector := &lt;tag-set&gt;[*][=&lt;level&gt;] tag-set := &lt;tag&gt;[+...] &#39;all&#39; tag := name of …</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/java9_unique_jvm_log/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 23, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/java8_hotspot_remove_permgen/">Java 8新特性 - (14)Hotspot删除永久代</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a><a class="tag_item">jvm</a><a class="tag_item">hotspot</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7"> JDK 6、JDK 7、JDK 8 内存模型演变 这些版本的JVM内存模型主要有以下差异：
+JDK 6：有永久代，静态变量存放在永久代上。 JDK 7：有永久代，但已经把字符串常量池、静态变量，存放在堆上。逐渐地减少永久代的使用。 JDK 8：无永久代，运行时常量池、类常量池，都保存在元数据区，也就是常说的元空间。但字符串常量池仍然存放在堆上。 内存模型各区域概要 程序计数器 较小的内存空间、线程私有，记录当前线程所执行的字节码行号。 如果执行 Java 方法，计数器记录虚拟机字节码当前指令的地址，本地方法则为空。 这一块区域没有任何 OutOfMemoryError 定义。 Java虚拟机栈 每一个方法在执行的同时，都会创建出一 …</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/java8_hotspot_remove_permgen/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 22, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/java9_safevarargs_enhancement/">Java 9新特性 - (3)@SafeVarargs注解支持私有方法</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 9</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">Java 7 引入了@SafeVarargs注解来抑制当方法具有varargs（可变数量的参数）时出现的不安全操作警告,比如具有模糊类型（比如：泛型）的可变参数。@SafeVarargs注解只能用于无法覆盖的方法（final方法、static方法或构造函数），因为重写方法仍然可以对其 varargs（可变数量的参数）执行不安全操作。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/java9_safevarargs_enhancement/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 21, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/java9_anonymous_inner_class_and_diamond_operator/">Java 9新特性 - (2)匿名内部类与菱形运算符</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 9</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">什么是菱形运算符 菱形操作符是作为 java SE 7 中的新功能引入的。菱形操作符的目的是通过将泛型类型保留在表达式的右侧来避免冗余代码。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/java9_anonymous_inner_class_and_diamond_operator/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 21, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/java9_interface_private_method/">Java 9新特性 - (1)接口中的私有方法</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 9</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">在Java 7或更早版本中，一个接口中只能定义如下两种：
+常量 抽象方法 在Java 8中接口引入了默认方法和静态方法。可以在接口中编写方法实现，仅仅需要使用default关键字来定义它们。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/java9_interface_private_method/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 18, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/aliyun_waf_sni/">阿里云WAF与SNI问题</a></h3>
+                <div><a class="tag_item">waf</a><a class="tag_item">阿里云</a><a class="tag_item">sni</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">什么是SNI 当多个网站托管在一台服务器上并共享一个IP地址，并且每个网站都有自己的SSL证书，在客户端设备尝试安全地连接到其中一个网站时，服务器可能不知道显示哪个SSL证书。这是因为SSL/TLS握手发生在客户端设备通过HTTP指示连接到某个网站之前。这个有点像邮寄包裹到公寓楼而不是独栋房子。将邮件邮寄到某人的独栋房子时，仅街道地址就足以将包裹发送给收件人。但是，当包裹进入公寓楼时，除了街道地址外，还需要公寓号码。否则，包裹可能无法送达收件人或根本无法交付。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/aliyun_waf_sni/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 17, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/docker_curl_ssl_certificate_fail/">Docker环境中curl报证书错误</a></h3>
+                <div><a class="tag_item">docker</a><a class="tag_item">curl</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">使用debian:buster-slim镜像编写dockfile，在调用curl命令的时候，报下面的错误：
+curl: (60) SSL certificate problem: unable to get local issuer certificate 这个是由于本地没有证书。其中一个解决办法是，在dockfile中加入类似下面的语句来安装证书，再调用curl命令</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/docker_curl_ssl_certificate_fail/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 16, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/manjaro_installation_failure/">Manjaro安装软件时找不到strip binary</a></h3>
+                <div><a class="tag_item">manjaro</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">Manjaro 安装软件时报错：
+:: (1/1) Parsing SRCINFO: wps-office ==&gt; ERROR: Cannot find the strip binary required for object file stripping. error downloading sources: wps-office 这个是由于某些基础包没装，执行下面命令安装基础包，然后再次安装需要的软件即可</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/manjaro_installation_failure/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 15, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/java8_stamped_lock/">Java 8新特性 - (13)StampedLock</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a><a class="tag_item">lock</a><a class="tag_item">StampedLock</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7"> synchronized 在java5之前，实现同步主要是使用synchronized。它是Java语言的关键字，当它用来修饰一个方法或者一个代码块的时候，能够保证在同一时刻最多只有一个线程执行该段代码。 有四种不同的同步块:</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/java8_stamped_lock/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 8, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/java8_unsigned_arithmetic/">Java 8新特性 - (12)无符号运算</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">Java 8为整型包装类，增加类支持无符号运算的方法。注意：仅仅是在新增的运算方法中将long或者int当做无符号的数做运算，而本身java并不支持无符号的数据类型</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/java8_unsigned_arithmetic/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 8, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/true_form_and_complement/">原码、反码、补码和位移运算</a></h3><p class="hx-opacity-80 hx-mt-4 hx-leading-7">原码、反码和补码 为运算方便，机器数有 3 种表示法，即原码、反码和补码。
+原码 原码是一种计算机中对数字的二进制定点表示法。原码表示法在数值前面增加了一位符号位（即最高位为符号位）：正数该位为 0，负数该位为 1（0 有两种表示：+0 和 -0），其余位表示数值的大小。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/true_form_and_complement/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 8, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/java8_base64/">Java 8新特性 - (11)Base64编解码</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a><a class="tag_item">base64</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">早期处理BASE64编码, 需借助外部依赖：commons-codec，sun.misc.BASE64Decoder或JAXB的DatatypeConverter。Java 8实现了BASE64编解码API，它包含到java.util包。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/java8_base64/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 7, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/java8_parallel_sort/">Java 8新特性 - (10)并行数组排序</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a><a class="tag_item">排序</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">在Java 7中已经有了Arrays.sort()方法可对对象进行排序，而在Java 8中，引入了新的并行排序，它比前者的排序速度更快，且遵循了Java 7引入的Fork/Join框架，可以把排序任务分配给线程池中可用的多个线程。 Java 8在java.util.Arrays类中新增了并行排序功能，能够更充分地利用多线程机制，最重要的方法是parallelSort()，可以显著加快多核机器上的数组排序</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/java8_parallel_sort/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 1, 2021</p>
+          </div>
+        
+    <ul class="pagination pagination-default">
+      <li class="page-item">
+        <a href="/blog/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item active">
+        <a aria-current="page" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/5/" aria-label="Page 5" class="page-link" role="button">5</a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/3/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/8/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul>
+      </main>
+    </article>
+    <div class="max-xl:hx-hidden hx-h-0 hx-w-64 hx-shrink-0"></div>
+  </div>
+      <footer class="hextra-footer hx-bg-gray-100 hx-pb-[env(safe-area-inset-bottom)] dark:hx-bg-neutral-900 print:hx-bg-transparent"><div class="hx-mx-auto hx-flex hx-gap-2 hx-py-2 hx-px-4 hx-max-w-screen-xl"><button
+  title="切换主题"
+  data-theme="light"
+  class="theme-toggle hx-group hx-h-7 hx-rounded-md hx-px-2 hx-text-left hx-text-xs hx-font-medium hx-text-gray-600 hx-transition-colors dark:hx-text-gray-400 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50"
+  type="button"
+  aria-label="切换主题"
+>
+  <div class="hx-flex hx-items-center hx-gap-2 hx-capitalize"><svg height=12 class="group-data-[theme=light]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg><span class="group-data-[theme=light]:hx-hidden">浅色</span><svg height=12 class="group-data-[theme=dark]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg><span class="group-data-[theme=dark]:hx-hidden">深色</span></div>
+</button>
+</div><hr class="dark:hx-border-neutral-800" /><div
+    class="hx-max-w-screen-xl hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
+  >
+    <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start"><div class="hx-mt-6 hx-text-xs"><img class="favicon" src="/favicon-32x32.png">Copyright © 2018 - 2025 保罗札记. All Rights Reserved</div>
+    </div>
+  </div>
+</footer>
+    
+    <script defer src="/js/main.js" integrity=""></script>
+
+
+<script defer src="/lib/flexsearch/flexsearch.bundle.min.0425860527cc9968f9f049421c7a56b39327d475e2e3a8f550416be3a9134327.js" integrity="sha256-BCWGBSfMmWj58ElCHHpWs5Mn1HXi46j1UEFr46kTQyc="></script>
+    <script defer src="/zh-cn.search.js" integrity=""></script>
+
+
+  </body>
+</html>

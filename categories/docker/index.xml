@@ -1,48 +1,453 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>docker on 保罗札记</title>
-    <link>https://www.zengxi.net/categories/docker/</link>
-    <description>Recent content in docker on 保罗札记</description>
+    <title>保罗札记 – Docker</title>
+    <link>http://localhost:1313/categories/docker/</link>
+    <description>Recent content in Docker on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Wed, 13 Dec 2023 14:19:00 +0800</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>Docker挂载文件，宿主机修改后容器里文件没有同步更新</title>
-      <link>https://www.zengxi.net/2023/12/docker-mount-file-not-sync/</link>
+      <link>http://localhost:1313/blog/2023/12/docker-mount-file-not-sync/</link>
       <pubDate>Wed, 13 Dec 2023 14:19:00 +0800</pubDate>
-      <guid>https://www.zengxi.net/2023/12/docker-mount-file-not-sync/</guid>
-      <description>问题描述 使用 Docker 时，有时需要挂载一个宿主机目录或者文件。但是有时候发现通过 vi 或者 vim 修改完宿主机上的文件之后，容器中对应的文件并没有变化，看不到修改的内容。&#xA;问题分析 Docker 中，mount volume 的原理是借用了 Linux Namespace 中的 Mount NameSpace 来隔离系统中不同进程的挂载点视图，实际文件是没有变化。比如，在container中，bash 实际就是一个运行在宿主机上的进程，被 Docker 用 Linux 分别隔离了 Mount Namespace、UTS Namespace、IPC Namespace、PID Namespace、Network Namespace 和 User Namespace，使得它看上去好像运行在了一个独立的、相对隔离的系统上，但实际它的一切资源都是宿主机在不同 Namespace 中的一个投影，文件也不例外。&#xA;Linux中，证明文件是否相同的根本途径是，判断其 inode，如果两个文件的inode相同，两个文件必定为同一文件，从而两个文件的内容也必然相同。&#xA;可以使用下面任意一个命令来查看文件inode：&#xA;1stat /path/to/file 2 3ls -i /path/to/file Linux 默认情况下，vi 或 vim 为了防止在修改文件的过程中，由于磁盘或者系统出现问题而导致当前被修改的文件的损坏，它做了类似如下逻辑：&#xA;复制出一个需要修改文件的副本，命名为在原来文件的基础上增加 &amp;quot;.swp&amp;quot; 后缀以及 &amp;quot;.&amp;quot; 前缀。 修改内容保存到有 .swp 后缀的文件，并 flush 到磁盘 执行 :wq 就会交换原文件和 swp 文件的名称 删除临时 swp 文件 从上面可以看出，原来的文件已经被删除，虽然新保存的文件名与原先的相同，但 inode 值是不同的。而容器还是会一直记录以前的文件，保持着与原先 inode 值一样的副本。只有当 restart 容器时，容器才会重新读取新的文件。宿主机上修改的内容才会更新。</description>
+      
+      <guid>http://localhost:1313/blog/2023/12/docker-mount-file-not-sync/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;问题描述&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;问题描述&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e9%97%ae%e9%a2%98%e6%8f%8f%e8%bf%b0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;使用 Docker 时，有时需要挂载一个宿主机目录或者文件。但是有时候发现通过 vi 或者 vim 修改完宿主机上的文件之后，容器中对应的文件并没有变化，看不到修改的内容。&lt;/p&gt;
+&lt;h2&gt;问题分析&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;问题分析&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e9%97%ae%e9%a2%98%e5%88%86%e6%9e%90&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Docker 中，mount volume 的原理是借用了 Linux Namespace 中的 Mount NameSpace 来隔离系统中不同进程的挂载点视图，实际文件是没有变化。比如，在container中，bash 实际就是一个运行在宿主机上的进程，被 Docker 用 Linux 分别隔离了 Mount Namespace、UTS Namespace、IPC Namespace、PID Namespace、Network Namespace 和 User Namespace，使得它看上去好像运行在了一个独立的、相对隔离的系统上，但实际它的一切资源都是宿主机在不同 Namespace 中的一个投影，文件也不例外。&lt;/p&gt;
+&lt;p&gt;Linux中，证明文件是否相同的根本途径是，判断其 inode，如果两个文件的inode相同，两个文件必定为同一文件，从而两个文件的内容也必然相同。&lt;/p&gt;
+&lt;p&gt;可以使用下面任意一个命令来查看文件inode：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;stat /path/to/file
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ls -i /path/to/file&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;Linux 默认情况下，vi 或 vim 为了防止在修改文件的过程中，由于磁盘或者系统出现问题而导致当前被修改的文件的损坏，它做了类似如下逻辑：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;复制出一个需要修改文件的副本，命名为在原来文件的基础上增加 &amp;ldquo;.swp&amp;rdquo; 后缀以及 &amp;ldquo;.&amp;rdquo; 前缀。&lt;/li&gt;
+&lt;li&gt;修改内容保存到有 .swp 后缀的文件，并 flush 到磁盘&lt;/li&gt;
+&lt;li&gt;执行 :wq 就会交换原文件和 swp 文件的名称&lt;/li&gt;
+&lt;li&gt;删除临时 swp 文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;从上面可以看出，原来的文件已经被删除，虽然新保存的文件名与原先的相同，但 inode 值是不同的。而容器还是会一直记录以前的文件，保持着与原先 inode 值一样的副本。只有当 restart 容器时，容器才会重新读取新的文件。宿主机上修改的内容才会更新。&lt;/p&gt;
+&lt;h2&gt;解决办法&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;解决办法&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e8%a7%a3%e5%86%b3%e5%8a%9e%e6%b3%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;1. 方法一&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;1-方法一&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#1-%e6%96%b9%e6%b3%95%e4%b8%80&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;使用 echo 修改文件，而不是使用 vim 或者 vi。&lt;/p&gt;
+&lt;h3&gt;2. 方法二&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;2-方法二&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#2-%e6%96%b9%e6%b3%95%e4%ba%8c&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;使用 cat 重定向来修改文件，而不是使用 vim 或者 vi。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cp /tmp/nginx.conf /tmp/nginx.conf2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;vi /tmp/nginx.conf2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cat /tmp/nginx.conf2 &amp;gt; /tmp/nginx.conf&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h3&gt;3. 方法三（不推荐）&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;3-方法三不推荐&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#3-%e6%96%b9%e6%b3%95%e4%b8%89%e4%b8%8d%e6%8e%a8%e8%8d%90&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;修改 vim 配置。执行 vim 命令，输入 &lt;code&gt;:scriptnames&lt;/code&gt; 查看 vim 配置文件路径，这边配置文件路径是 &lt;code&gt;/etc/vimrc&lt;/code&gt; ，在配置文件最后添加如下两行。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; backup
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;backupcopy&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;yes&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;这样可以解决问题，不过也有一个很大的副作用，那就是每次用vim编辑文件保存之后，vim会生成一个类似该被修改文件，但末尾增加了一个&amp;quot;~&amp;ldquo;后缀，用以保存修改之前的文件内容。此方法不推荐。&lt;/p&gt;
+&lt;h3&gt;4. 方法四 (推荐)&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;4-方法四-推荐&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#4-%e6%96%b9%e6%b3%95%e5%9b%9b-%e6%8e%a8%e8%8d%90&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;修改文件权限，文件默认权限是 644，把权限修改为 666。修改完权限后，再次通过 vim 修改并保存后，原文件的 inode 不会发生变化&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;chmod &lt;span class=&#34;m&#34;&gt;666&lt;/span&gt; /root/test.txt&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h3&gt;5. 方法五 (推荐)&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;5-方法五-推荐&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#5-%e6%96%b9%e6%b3%95%e4%ba%94-%e6%8e%a8%e8%8d%90&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;挂载目录，不要挂载文件。挂载目录不会出现宿主机文件更新，而容器中文件没有更新。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;参考链接：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/barneywill/p/10424530.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.cnblogs.com/barneywill/p/10424530.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://cloud.tencent.com/developer/article/1708294&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://cloud.tencent.com/developer/article/1708294&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://forums.docker.com/t/modify-a-file-which-mount-as-a-data-volume-but-it-didnt-change-in-container/2813/13&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://forums.docker.com/t/modify-a-file-which-mount-as-a-data-volume-but-it-didnt-change-in-container/2813/13&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/lylex/p/12781007.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.cnblogs.com/lylex/p/12781007.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
     <item>
       <title>Docker环境中curl报证书错误</title>
-      <link>https://www.zengxi.net/2021/06/docker_curl_ssl_certificate_fail/</link>
+      <link>http://localhost:1313/blog/2021/06/docker_curl_ssl_certificate_fail/</link>
       <pubDate>Wed, 16 Jun 2021 12:41:00 +0800</pubDate>
-      <guid>https://www.zengxi.net/2021/06/docker_curl_ssl_certificate_fail/</guid>
-      <description>使用debian:buster-slim镜像编写dockfile，在调用curl命令的时候，报下面的错误：&#xA;1curl: (60) SSL certificate problem: unable to get local issuer certificate 这个是由于本地没有证书。其中一个解决办法是，在dockfile中加入类似下面的语句来安装证书，再调用curl命令&#xA;1RUN \ 2 apt-get update &amp;amp;&amp;amp; \ 3 apt-get install ca-certificates &amp;amp;&amp;amp; \ 4 apt-get clean </description>
+      
+      <guid>http://localhost:1313/blog/2021/06/docker_curl_ssl_certificate_fail/</guid>
+      <description>
+        
+        
+        &lt;p&gt;使用debian:buster-slim镜像编写dockfile，在调用curl命令的时候，报下面的错误：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;curl: (60) SSL certificate problem: unable to get local issuer certificate&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;这个是由于本地没有证书。其中一个解决办法是，在dockfile中加入类似下面的语句来安装证书，再调用curl命令&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;RUN \
+  apt-get update &amp;amp;&amp;amp; \
+  apt-get install ca-certificates &amp;amp;&amp;amp; \
+  apt-get clean&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
     </item>
+    
     <item>
       <title>基于alpine构建docker镜像修改时区</title>
-      <link>https://www.zengxi.net/2021/03/update_docker_image_timezone/</link>
+      <link>http://localhost:1313/blog/2021/03/update_docker_image_timezone/</link>
       <pubDate>Thu, 25 Mar 2021 13:18:00 +0800</pubDate>
-      <guid>https://www.zengxi.net/2021/03/update_docker_image_timezone/</guid>
-      <description>默认apline镜像没有安装时区, 即使把宿主机的/etc/localtime 挂在到镜像中也无法把时区改成 GMT+8的.&#xA;这个就只能在构建镜像的时候,安装并设置一下时区&#xA;1RUN apk add tzdata \ 2&amp;amp;&amp;amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \ 3&amp;amp;&amp;amp; echo &amp;#34;Asia/Shanghai&amp;#34; &amp;gt; /etc/timezone </description>
+      
+      <guid>http://localhost:1313/blog/2021/03/update_docker_image_timezone/</guid>
+      <description>
+        
+        
+        &lt;p&gt;默认apline镜像没有安装时区, 即使把宿主机的/etc/localtime 挂在到镜像中也无法把时区改成 GMT+8的.&lt;/p&gt;
+&lt;p&gt;这个就只能在构建镜像的时候,安装并设置一下时区&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;RUN apk add tzdata \
+&amp;amp;&amp;amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \ 
+&amp;amp;&amp;amp; echo &amp;#34;Asia/Shanghai&amp;#34; &amp;gt; /etc/timezone&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
     </item>
+    
     <item>
       <title>Docker Hub国内镜像加速</title>
-      <link>https://www.zengxi.net/2020/04/docker-hub-mirror/</link>
+      <link>http://localhost:1313/blog/2020/04/docker-hub-mirror/</link>
       <pubDate>Wed, 22 Apr 2020 14:43:24 +0000</pubDate>
-      <guid>https://www.zengxi.net/2020/04/docker-hub-mirror/</guid>
-      <description>国内访问Docker Hub速度比较感人，这个时候需要配置国内的镜像，来加速下载。由于镜像服务可能出现宕机，建议同时配置多个镜像。&#xA;Ubuntu 16.04+、Debian 8+、CentOS 7 新建或者修改 /etc/docker/daemon.json，写入如下内容&#xA;1{ 2 &amp;#34;registry-mirrors&amp;#34;: [ 3 &amp;#34;https://hub-mirror.c.163.com&amp;#34;, 4 &amp;#34;https://registry.docker-cn.com&amp;#34; 5 ] 6} 重启服务&#xA;1sudo systemctl daemon-reload 2sudo systemctl restart docker Windows 10 在任务栏托盘 Docker 图标内右键菜单选择 Settings，打开配置窗口后在左侧导航菜单选择 Docker Engine，在右侧像下边一样编辑 json 文件，之后点击 Apply &amp;amp; Restart 保存后 Docker 就会重启并应用配置的镜像地址了。&#xA;1{ 2 &amp;#34;registry-mirrors&amp;#34;: [ 3 &amp;#34;https://hub-mirror.c.163.com&amp;#34;, 4 &amp;#34;https://registry.docker-cn.com&amp;#34; 5 ] 6} macOS 在任务栏点击 Docker Desktop 应用图标 -&amp;gt; Perferences，在左侧导航菜单选择 Docker Engine，在右侧像下边一样编辑 json 文件。修改完成之后，点击 Apply &amp;amp; Restart 按钮，Docker 就会重启并应用配置的镜像地址了。</description>
+      
+      <guid>http://localhost:1313/blog/2020/04/docker-hub-mirror/</guid>
+      <description>
+        
+        
+        &lt;p&gt;国内访问Docker Hub速度比较感人，这个时候需要配置国内的镜像，来加速下载。由于镜像服务可能出现宕机，建议同时配置多个镜像。&lt;/p&gt;
+&lt;h1&gt;Ubuntu 16.04+、Debian 8+、CentOS 7&lt;/h1&gt;&lt;p&gt;新建或者修改 /etc/docker/daemon.json，写入如下内容&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;registry-mirrors&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://hub-mirror.c.163.com&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://registry.docker-cn.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;重启服务&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo systemctl daemon-reload
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo systemctl restart docker&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h1&gt;Windows 10&lt;/h1&gt;&lt;p&gt;在任务栏托盘 Docker 图标内右键菜单选择 Settings，打开配置窗口后在左侧导航菜单选择 Docker Engine，在右侧像下边一样编辑 json 文件，之后点击 Apply &amp;amp; Restart 保存后 Docker 就会重启并应用配置的镜像地址了。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;registry-mirrors&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://hub-mirror.c.163.com&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://registry.docker-cn.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h1&gt;macOS&lt;/h1&gt;&lt;p&gt;在任务栏点击 Docker Desktop 应用图标 -&amp;gt; Perferences，在左侧导航菜单选择 Docker Engine，在右侧像下边一样编辑 json 文件。修改完成之后，点击 Apply &amp;amp; Restart 按钮，Docker 就会重启并应用配置的镜像地址了。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;registry-mirrors&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://hub-mirror.c.163.com&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://registry.docker-cn.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h1&gt;检查加速器是否生效&lt;/h1&gt;&lt;p&gt;执行下面命令&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;docker info&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;如果从结果中看到了如下内容，说明配置成功&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;Registry Mirrors:
+    https://hub-mirror.c.163.com/
+    https://registry.docker-cn.com/&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h1&gt;Docker Hub 镜像测速&lt;/h1&gt;&lt;p&gt;使用镜像前后，可使用 time 统计所花费的总时间。测速前先移除本地的镜像！&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker rmi node:latest
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;time&lt;/span&gt; docker pull node:latest&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;输出结果&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Pulling repository node
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;real   0m30s
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;user   0m0.129s
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sys    0m0.103s&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h1&gt;其他镜像&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;腾讯云 - &lt;a href=&#34;https://mirror.ccs.tencentyun.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://mirror.ccs.tencentyun.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;七牛云 - &lt;a href=&#34;https://reg-mirror.qiniu.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://reg-mirror.qiniu.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;中科大 - &lt;a href=&#34;https://docker.mirrors.ustc.edu.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://docker.mirrors.ustc.edu.cn&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;参考链接&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://yeasy.gitbooks.io/docker_practice/install/mirror.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://yeasy.gitbooks.io/docker_practice/install/mirror.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
     <item>
       <title>修改Alpine镜像源</title>
-      <link>https://www.zengxi.net/2020/04/modify-apine-mirror/</link>
+      <link>http://localhost:1313/blog/2020/04/modify-apine-mirror/</link>
       <pubDate>Tue, 21 Apr 2020 10:18:24 +0000</pubDate>
-      <guid>https://www.zengxi.net/2020/04/modify-apine-mirror/</guid>
-      <description>docker使用alpine作为基础可以减少image的大小，但是如果编写的dockerfile中需要安装一些软件，在编译image过程中，可能速度会很慢甚至卡住。&#xA;Alpine 的源文件为/etc/apk/repositories。默认的配置类似：&#xA;1http://dl-cdn.alpinelinux.org/alpine/v3.11/main 2http://dl-cdn.alpinelinux.org/alpine/v3.11/community 这个时候就需要在dockerfile中添加下面的命令，将安装包路径指向国内的镜像。&#xA;1# 使用阿里云的镜像源 2sed -i &amp;#39;s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g&amp;#39; /etc/apk/repositories 国内的其他一些镜像源&#xA;1# 中国科技大学 2sed -i &amp;#39;s/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g&amp;#39; /etc/apk/repositories 3 4# 清华大学 5sed -i &amp;#39;s/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g&amp;#39; /etc/apk/repositories </description>
+      
+      <guid>http://localhost:1313/blog/2020/04/modify-apine-mirror/</guid>
+      <description>
+        
+        
+        &lt;p&gt;docker使用alpine作为基础可以减少image的大小，但是如果编写的dockerfile中需要安装一些软件，在编译image过程中，可能速度会很慢甚至卡住。&lt;/p&gt;
+&lt;p&gt;Alpine 的源文件为/etc/apk/repositories。默认的配置类似：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;http://dl-cdn.alpinelinux.org/alpine/v3.11/main
+http://dl-cdn.alpinelinux.org/alpine/v3.11/community&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;这个时候就需要在dockerfile中添加下面的命令，将安装包路径指向国内的镜像。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 使用阿里云的镜像源&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sed -i &lt;span class=&#34;s1&#34;&gt;&amp;#39;s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g&amp;#39;&lt;/span&gt; /etc/apk/repositories&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;国内的其他一些镜像源&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 中国科技大学&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sed -i &lt;span class=&#34;s1&#34;&gt;&amp;#39;s/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g&amp;#39;&lt;/span&gt; /etc/apk/repositories
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 清华大学&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sed -i &lt;span class=&#34;s1&#34;&gt;&amp;#39;s/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g&amp;#39;&lt;/span&gt; /etc/apk/repositories&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

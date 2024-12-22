@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon shortcut" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.png" type="image/png" />
+<link rel="icon" href="/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/favicon-180x180.png" type="image/png" sizes="180x180" />
+<link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
+
+  <title>Kubernetes in Action笔记 - (16) 计算资源管理 – 保罗札记</title>
+  <meta name="description" content="为pod中的容器申请资源 创建一个pod时,可以指定容器对 CPU 和内存的资源请求量(即requests),以及资源限制量(即limits)。它是针对每个容器单独指定，pod对资源的请求量和限制量是所包含的所有容器的请求量和限制量之和。" />
+
+  
+    <link rel="canonical" href="http://localhost:1313/blog/2021/01/k8s_computing_resource_management/" itemprop="url" />
+  
+
+  
+
+<meta property="og:title" content="Kubernetes in Action笔记 - (16) 计算资源管理" />
+<meta property="og:description" content="为pod中的容器申请资源
+    创建一个pod时,可以指定容器对 CPU 和内存的资源请求量(即requests),以及资源限制量(即limits)。它是针对每个容器单独指定，pod对资源的请求量和限制量是所包含的所有容器的请求量和限制量之和。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/2021/01/k8s_computing_resource_management/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2021-01-03T19:22:00+08:00" />
+<meta property="article:modified_time" content="2024-11-30T18:58:28+08:00" />
+
+  
+  <meta itemprop="name" content="Kubernetes in Action笔记 - (16) 计算资源管理">
+  <meta itemprop="description" content="为pod中的容器申请资源 创建一个pod时,可以指定容器对 CPU 和内存的资源请求量(即requests),以及资源限制量(即limits)。它是针对每个容器单独指定，pod对资源的请求量和限制量是所包含的所有容器的请求量和限制量之和。">
+  <meta itemprop="datePublished" content="2021-01-03T19:22:00+08:00">
+  <meta itemprop="dateModified" content="2024-11-30T18:58:28+08:00">
+  <meta itemprop="wordCount" content="5497">
+  <meta itemprop="keywords" content="Kubernetes">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kubernetes in Action笔记 - (16) 计算资源管理">
+  <meta name="twitter:description" content="为pod中的容器申请资源 创建一个pod时,可以指定容器对 CPU 和内存的资源请求量(即requests),以及资源限制量(即limits)。它是针对每个容器单独指定，pod对资源的请求量和限制量是所包含的所有容器的请求量和限制量之和。">
+
+    <link href="/css/compiled/main.css" rel="stylesheet" />
+
+
+
+  <link href="/css/custom.css" rel="stylesheet" />
+
+
+
+
+
+  <script>
+     
+    const defaultTheme = 'system';
+
+    const setDarkTheme = () => {
+      document.documentElement.classList.add("dark");
+      document.documentElement.style.colorScheme = "dark";
+    }
+    const setLightTheme = () => {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.style.colorScheme = "light";
+    }
+
+    if ("color-theme" in localStorage) {
+      localStorage.getItem("color-theme") === "dark" ? setDarkTheme() : setLightTheme();
+    } else {
+      defaultTheme === "dark" ? setDarkTheme() : setLightTheme();
+      if (defaultTheme === "system") {
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? setDarkTheme() : setLightTheme();
+      }
+    }
+  </script>
+
+  
+</head>
+<body dir="ltr"><div class="nav-container hx-sticky hx-top-0 hx-z-20 hx-w-full hx-bg-transparent print:hx-hidden">
+  <div class="nav-container-blur hx-pointer-events-none hx-absolute hx-z-[-1] hx-h-full hx-w-full hx-bg-white dark:hx-bg-dark hx-shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] contrast-more:hx-shadow-[0_0_0_1px_#000] dark:hx-shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] contrast-more:dark:hx-shadow-[0_0_0_1px_#fff]"></div>
+
+  <nav class="hx-mx-auto hx-flex hx-items-center hx-justify-end hx-gap-2 hx-h-16 hx-px-6 hx-max-w-[90rem]">
+    <a class="hx-flex hx-items-center hover:hx-opacity-75 ltr:hx-mr-auto rtl:hx-ml-auto" href="/">
+        <img class="hx-block dark:hx-hidden" src="/logos/logo.png" alt="保罗札记" height="46" width="220" />
+        <img class="hx-hidden dark:hx-block" src="/logos/logo.png" alt="保罗札记" height="46" width="220" />
+    </a><a
+            title="首页"
+            href="/"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">首页</span>
+          </a><a
+            title="技术博客"
+            href="/blog"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-font-medium"
+          >
+            <span class="hx-text-center">技术博客</span>
+          </a><a
+            title="关于我"
+            href="/about"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">关于我</span>
+          </a><div class="search-wrapper hx-relative md:hx-w-64">
+  <div class="hx-relative hx-flex hx-items-center hx-text-gray-900 contrast-more:hx-text-gray-800 dark:hx-text-gray-300 contrast-more:dark:hx-text-gray-300">
+    <input
+      placeholder="搜索文档..."
+      class="search-input hx-block hx-w-full hx-appearance-none hx-rounded-lg hx-px-3 hx-py-2 hx-transition-colors hx-text-base hx-leading-tight md:hx-text-sm hx-bg-black/[.05] dark:hx-bg-gray-50/10 focus:hx-bg-white dark:focus:hx-bg-dark placeholder:hx-text-gray-500 dark:placeholder:hx-text-gray-400 contrast-more:hx-border contrast-more:hx-border-current"
+      type="search"
+      value=""
+      spellcheck="false"
+    />
+    <kbd
+      class="hx-absolute hx-my-1.5 hx-select-none ltr:hx-right-1.5 rtl:hx-left-1.5 hx-h-5 hx-rounded hx-bg-white hx-px-1.5 hx-font-mono hx-text-[10px] hx-font-medium hx-text-gray-500 hx-border dark:hx-border-gray-100/20 dark:hx-bg-dark/50 contrast-more:hx-border-current contrast-more:hx-text-current contrast-more:dark:hx-border-current hx-items-center hx-gap-1 hx-transition-opacity hx-pointer-events-none hx-hidden sm:hx-flex"
+    >
+      CTRL K
+    </kbd>
+  </div>
+
+  <div>
+    <ul
+      class="search-results hextra-scrollbar hx-hidden hx-border hx-border-gray-200 hx-bg-white hx-text-gray-100 dark:hx-border-neutral-800 dark:hx-bg-neutral-900 hx-absolute hx-top-full hx-z-20 hx-mt-2 hx-overflow-auto hx-overscroll-contain hx-rounded-xl hx-py-2.5 hx-shadow-xl hx-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] md:hx-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx-inset-x-0 ltr:md:hx-left-auto rtl:md:hx-right-auto contrast-more:hx-border contrast-more:hx-border-gray-900 contrast-more:dark:hx-border-gray-50 hx-w-screen hx-min-h-[100px] hx-max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      style="transition: max-height 0.2s ease 0s;"
+    ></ul>
+  </div>
+</div>
+<button type="button" aria-label="Menu" class="hamburger-menu -hx-mr-2 hx-rounded hx-p-2 active:hx-bg-gray-400/20 md:hx-hidden"><svg height=24 fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8H20"></path></g><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16H20"></path></g></svg></button>
+  </nav>
+</div>
+
+  <div class="hx-mx-auto hx-flex hx-max-w-screen-xl">
+    
+    
+<nav class="hextra-toc hx-order-last hx-hidden hx-w-64 hx-shrink-0 xl:hx-block print:hx-hidden hx-px-4" aria-label="table of contents">
+    <div class="hextra-scrollbar hx-sticky hx-top-16 hx-overflow-y-auto hx-pr-4 hx-pt-6 hx-text-sm [hyphens:auto] hx-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:hx--mr-4 rtl:hx--ml-4"><p class="hx-mb-4 hx-font-semibold hx-tracking-tight">内容目录</p><ul>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%b8%bapod%e4%b8%ad%e7%9a%84%e5%ae%b9%e5%99%a8%e7%94%b3%e8%af%b7%e8%b5%84%e6%ba%90">为pod中的容器申请资源
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e8%b5%84%e6%ba%90requests%e5%af%b9%e8%b0%83%e5%ba%a6%e7%9a%84%e5%bd%b1%e5%93%8d">资源requests对调度的影响
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e8%b0%83%e5%ba%a6%e5%99%a8%e5%a6%82%e4%bd%95%e5%88%a9%e7%94%a8pod-requests%e4%b8%ba%e5%85%b6%e9%80%89%e6%8b%a9%e6%9c%80%e4%bd%b3%e8%8a%82%e7%82%b9">调度器如何利用pod requests为其选择最佳节点
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%9f%a5%e7%9c%8b%e8%8a%82%e7%82%b9%e8%b5%84%e6%ba%90%e6%80%bb%e9%87%8f">查看节点资源总量
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#cpu-requests%e5%af%b9cpu%e6%97%b6%e9%97%b4%e5%88%86%e9%85%8d%e7%9a%84%e5%bd%b1%e5%93%8d">CPU requests对CPU时间分配的影响
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e9%99%90%e5%88%b6%e5%ae%b9%e5%99%a8%e7%9a%84%e5%8f%af%e7%94%a8%e8%b5%84%e6%ba%90">限制容器的可用资源
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e8%ae%be%e7%bd%ae%e5%ae%b9%e5%99%a8%e5%8f%af%e4%bd%bf%e7%94%a8%e8%b5%84%e6%ba%90%e9%87%8f%e7%9a%84%e7%a1%ac%e9%99%90%e5%88%b6">设置容器可使用资源量的硬限制
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%ae%b9%e5%99%a8%e4%b8%ad%e7%9a%84%e5%ba%94%e7%94%a8%e5%a6%82%e4%bd%95%e7%9c%8b%e5%be%85limits">容器中的应用如何看待limits
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%9c%a8%e5%ae%b9%e5%99%a8%e5%86%85%e7%9c%8b%e5%88%b0%e7%9a%84%e5%a7%8b%e7%bb%88%e6%98%af%e8%8a%82%e7%82%b9%e7%9a%84%e5%86%85%e5%ad%98-%e8%80%8c%e4%b8%8d%e6%98%af%e5%ae%b9%e5%99%a8%e6%9c%ac%e8%ba%ab%e7%9a%84%e5%86%85%e5%ad%98">在容器内看到的始终是节点的内存, 而不是容器本身的内存
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%ae%b9%e5%99%a8%e5%86%85%e5%90%8c%e6%a0%b7%e5%8f%af%e4%bb%a5%e7%9c%8b%e5%88%b0%e8%8a%82%e7%82%b9%e6%89%80%e6%9c%89%e7%9a%84-cpu-%e6%a0%b8">容器内同样可以看到节点所有的 CPU 核
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#pod-qos%e7%ad%89%e7%ba%a7">pod QoS等级
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%ae%9a%e4%b9%89pod%e7%9a%84qos%e7%ad%89%e7%ba%a7">定义pod的QoS等级
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%b8%bapod%e5%88%86%e9%85%8dbesteffort%e7%ad%89%e7%ba%a7">为pod分配BestEffort等级
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%b8%bapod%e5%88%86%e9%85%8dguaranteed%e7%ad%89%e7%ba%a7">为pod分配Guaranteed等级
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%b8%bapod%e5%88%86%e9%85%8dburstable%e7%ad%89%e7%ba%a7">为pod分配Burstable等级
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%8d%95%e5%ae%b9%e5%99%a8pod%e7%9a%84qos%e7%ad%89%e7%ba%a7">单容器Pod的QOS等级
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%a4%9a%e5%ae%b9%e5%99%a8pod%e7%9a%84qos%e7%ad%89%e7%ba%a7">多容器Pod的QOS等级
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%86%85%e5%ad%98%e4%b8%8d%e8%b6%b3%e6%97%b6%e5%93%aa%e4%b8%aa%e8%bf%9b%e7%a8%8b%e4%bc%9a%e8%a2%ab%e6%9d%80%e6%ad%bb">内存不足时哪个进程会被杀死
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e7%ad%89%e7%ba%a7%e4%b8%8d%e5%90%8c%e7%9a%84%e6%83%85%e5%86%b5">等级不同的情况
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e7%ad%89%e7%ba%a7%e7%9b%b8%e5%90%8c%e7%9a%84%e6%83%85%e5%86%b5">等级相同的情况
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%b8%ba%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4%e4%b8%ad%e7%9a%84pod%e8%ae%be%e7%bd%ae%e9%bb%98%e8%ae%a4%e7%9a%84requests%e5%92%8climits">为命名空间中的pod设置默认的requests和limits
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e9%99%90%e5%88%b6%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4%e4%b8%ad%e7%9a%84%e5%8f%af%e7%94%a8%e8%b5%84%e6%ba%90%e6%80%bb%e9%87%8f">限制命名空间中的可用资源总量
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%b8%bacpu%e5%92%8c%e5%86%85%e5%ad%98%e5%88%9b%e5%bb%baresourcequota">为CPU和内存创建ResourceQuota
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%b8%ba%e6%8c%81%e4%b9%85%e5%8c%96%e5%ad%98%e5%82%a8%e6%8c%87%e5%ae%9a%e9%85%8d%e9%a2%9d">为持久化存储指定配额
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e9%99%90%e5%88%b6%e5%8f%af%e5%88%9b%e5%bb%ba%e5%af%b9%e8%b1%a1%e7%9a%84%e4%b8%aa%e6%95%b0">限制可创建对象的个数
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%b8%ba%e7%89%b9%e5%ae%9a%e7%9a%84pod%e7%8a%b6%e6%80%81%e6%88%96%e8%80%85qos%e7%ad%89%e7%ba%a7%e6%8c%87%e5%ae%9a%e9%85%8d%e9%a2%9d">为特定的pod状态或者QoS等级指定配额
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e7%9b%91%e6%8e%a7-pod-%e7%9a%84%e8%b5%84%e6%ba%90%e4%bd%bf%e7%94%a8%e9%87%8f">监控 pod 的资源使用量
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%94%b6%e9%9b%86%e8%8e%b7%e5%8f%96%e5%ae%9e%e9%99%85%e8%b5%84%e6%ba%90%e4%bd%bf%e7%94%a8%e6%83%85%e5%86%b5">收集、获取实际资源使用情况
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%98%be%e7%a4%ba%e9%9b%86%e7%be%a4%e8%8a%82%e7%82%b9%e7%9a%84cpu%e5%92%8c%e5%86%85%e5%ad%98%e4%bd%bf%e7%94%a8%e9%87%8f">显示集群节点的CPU和内存使用量
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%bf%9d%e5%ad%98%e5%b9%b6%e5%88%86%e6%9e%90%e5%8e%86%e5%8f%b2%e8%b5%84%e6%ba%90%e7%9a%84%e4%bd%bf%e7%94%a8%e7%bb%9f%e8%ae%a1%e4%bf%a1%e6%81%af">保存并分析历史资源的使用统计信息
+        </a>
+      </li></ul>
+      <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400"><div>
+          <div class="label_post_tag hx-text-gray-500">文章分类</div>
+          <div class="post_tag">
+            <a class="tag_item">kubernetes</a></div>
+        </div><div>
+          <div class="label_post_tag hx-text-gray-500">标签</div>
+          <div class="post_tag">
+            <a class="tag_item">kubernetes</a></div>
+        </div>
+        <div class="container_back_to_top">
+          <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx-transition-all hx-duration-75 hx-opacity-0 hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50">
+            <span>返回顶部</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hx-inline ltr:hx-ml-1 rtl:hx-mr-1 hx-h-3.5 hx-w-3.5 hx-border hx-rounded-full hx-border-gray-500 hover:hx-border-gray-900 dark:hx-border-gray-400 dark:hover:hx-border-gray-100 contrast-more:hx-border-gray-800 contrast-more:dark:hx-border-gray-50">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+            </svg>
+        </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+    <article class="hx-w-full hx-break-words hx-flex hx-min-h-[calc(100vh-var(--navbar-height))] hx-min-w-0 hx-justify-center hx-pb-8 hx-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
+        
+  <div class="hx-mt-1.5 hx-flex hx-items-center hx-gap-1 hx-overflow-hidden hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 contrast-more:hx-text-current">
+        <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
+          <a href="/blog/">技术博客</a>
+        </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">Kubernetes in Action笔记 - (16) 计算资源管理</div>
+  </div>
+
+        <h1 class="hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100">Kubernetes in Action笔记 - (16) 计算资源管理</h1>
+        <div class="hx-mt-4 hx-mb-16 hx-text-gray-500 hx-text-sm hx-flex hx-items-center hx-flex-wrap hx-gap-y-2"><span class="hx-mr-1">January 3, 2021</span></div>
+        <div class="content">
+          <h2>为pod中的容器申请资源<span class="hx-absolute -hx-mt-20" id="为pod中的容器申请资源"></span>
+    <a href="#%e4%b8%bapod%e4%b8%ad%e7%9a%84%e5%ae%b9%e5%99%a8%e7%94%b3%e8%af%b7%e8%b5%84%e6%ba%90" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>创建一个pod时,可以指定容器对 CPU 和内存的资源请求量(即requests),以及资源限制量(即limits)。它是针对每个容器单独指定，pod对资源的请求量和限制量是所包含的所有容器的请求量和限制量之和。</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">requests-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">busybox</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;dd&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;if=/dev/zero&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;of=/dev/null&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">200m      </span><span class="w"> </span><span class="c"># 申请200毫核，即一个CPU核心的1/5时间</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">10Mi   </span><span class="w"> </span><span class="c"># 申请50MB内存</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>资源requests对调度的影响<span class="hx-absolute -hx-mt-20" id="资源requests对调度的影响"></span>
+    <a href="#%e8%b5%84%e6%ba%90requests%e5%af%b9%e8%b0%83%e5%ba%a6%e7%9a%84%e5%bd%b1%e5%93%8d" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>资源requests指定了pod对资源需求的最小值。调度器在调度时只考虑那些未分配资源量满足pod需求量的节点。如果节点的未分配资源量小于pod需求量,这时节点没有能力提供pod对资源需求的最小量,因此k8s不会将该pod调度到这个节点。</p>
+<p>调度器在调度时并不关注各类资源在当前时刻的实际使用量,而只关心节点上部署的所有pod的资源申请量之和。尽管现有所有pod的资源实际使用量可能小于它的申请量,但如果使用基于实际资源消耗量的调度算法将打破系统为这些已部署成功的pod提供足够资源的保证。</p>
+<h4>调度器如何利用pod requests为其选择最佳节点<span class="hx-absolute -hx-mt-20" id="调度器如何利用pod-requests为其选择最佳节点"></span>
+    <a href="#%e8%b0%83%e5%ba%a6%e5%99%a8%e5%a6%82%e4%bd%95%e5%88%a9%e7%94%a8pod-requests%e4%b8%ba%e5%85%b6%e9%80%89%e6%8b%a9%e6%9c%80%e4%bd%b3%e8%8a%82%e7%82%b9" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>调度器首先会对节点列表进行过滤，排除那些不满足需求的节点, 然后根据预先配置的优先级函数对其余节点进行排序。其中有两个基于资源请求量的优先级排序函数:</p>
+<ul>
+<li>LeastRequestedPriority：优先将pod调度到请求量少的节点上，也就是拥有更多未分配资源的节点</li>
+<li>MostRequestedPriority：优先调度到请求量多的节点，拥有更少未分配资源的节点。</li>
+</ul>
+<p>它们都只考虑资源请求量, 而不关注实际使用资源量。</p>
+<p>调度器只能配置一种优先级函数。</p>
+<p>配置调度器使用MostRequestedPriority函数, 可以在为每个pod提供足量CPU与内存资源的同时, 确保k8s使用尽可能少的节点。通过使pod紧凑地编排,一些节点可以保持空闲并可随时从集群中移除。</p>
+<h4>查看节点资源总量<span class="hx-absolute -hx-mt-20" id="查看节点资源总量"></span>
+    <a href="#%e6%9f%a5%e7%9c%8b%e8%8a%82%e7%82%b9%e8%b5%84%e6%ba%90%e6%80%bb%e9%87%8f" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>查看节点资源总量</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ kubectl describe nodes
+</span></span><span class="line"><span class="cl">Name: minikube
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl"><span class="c1"># 节点的资源总量</span>
+</span></span><span class="line"><span class="cl">Capacity:
+</span></span><span class="line"><span class="cl">    cpu: <span class="m">2</span>
+</span></span><span class="line"><span class="cl">    memory: 2048484Ki
+</span></span><span class="line"><span class="cl">    pods: <span class="m">110</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 可分配给pod的资源量</span>
+</span></span><span class="line"><span class="cl">Allocatable:
+</span></span><span class="line"><span class="cl">    cpu: <span class="m">2</span>
+</span></span><span class="line"><span class="cl">    memory: 1946084Ki
+</span></span><span class="line"><span class="cl">    pods: <span class="m">110</span>
+</span></span><span class="line"><span class="cl">...</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>通过kubectl describe node命令的输出结果，可以检查节点已经分配的资源，找出为什么pod没有成功调度</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl describe node</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>CPU requests对CPU时间分配的影响<span class="hx-absolute -hx-mt-20" id="cpu-requests对cpu时间分配的影响"></span>
+    <a href="#cpu-requests%e5%af%b9cpu%e6%97%b6%e9%97%b4%e5%88%86%e9%85%8d%e7%9a%84%e5%bd%b1%e5%93%8d" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>CPU requests不仅仅在调度时起作用,它还决定着剩余(未使用) 的CPU时间如何在pod之间分配。假设第一个pod请求了200毫核,另一个请求了1000毫核，那么未使用的CPU将按照1:5的比例来划分给这两个pod。</p>
+<p>另一方面,如果一个容器能够跑满CPU, 而另一个容器在该时段处于空闲状态,那么前者将可以使用整个CPU时间</p>
+<h2>限制容器的可用资源<span class="hx-absolute -hx-mt-20" id="限制容器的可用资源"></span>
+    <a href="#%e9%99%90%e5%88%b6%e5%ae%b9%e5%99%a8%e7%9a%84%e5%8f%af%e7%94%a8%e8%b5%84%e6%ba%90" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><h3>设置容器可使用资源量的硬限制<span class="hx-absolute -hx-mt-20" id="设置容器可使用资源量的硬限制"></span>
+    <a href="#%e8%ae%be%e7%bd%ae%e5%ae%b9%e5%99%a8%e5%8f%af%e4%bd%bf%e7%94%a8%e8%b5%84%e6%ba%90%e9%87%8f%e7%9a%84%e7%a1%ac%e9%99%90%e5%88%b6" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>CPU是一种可压缩资源,意味着我们可以在不对容器内运行的进程产生不利影响的同时,对其使用量进行限制</p>
+<p>内存是一种不可压缩资源。一旦系统为进程分配了一块内存,这块内存在进程主动释放之前将无法被回收。这就是为什么需要限制容器的最大内存分配量的根本原因。</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">busybox</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">10Mi </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 注意:因为这里没有指定资源requests,它将被设置为与资源limits相同的值 </span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>与资源requests不同的是,资源 limits 不受节点可分配资源量的约束。所有limits的总和允许超过节点资源总量的100%。换句话说,资源limits可以超卖。如果节点资源使用量超过100%,一些容器将被杀掉。</p>
+<p>当为一个容器设置 CPU 限额时,该进程只会分不到比限额更多的 CPU 而己。而内存却有所不同，当进程尝试申请分配比限额更多的内存时会被杀掉。如果 pod 的重启策略为 Always 或 OnFailure ,进程将会立即重启,因此用户可能根本察觉不到它被杀掉。但是如果它继续超限并被杀死, k8s会再次尝试重启,并开始增加下次重启的间隔时间。这种情况下用户会看到 pod 处于CrashLoopBackOff状态。</p>
+<p>CrashLoopBackOff 状态表示 Kubelet 还没有放弃,它意味着在每次崩溃之后,Kubelet 就会增加下次重启之前的间隔时间。 第一次崩渍之后, Kubelet立即重启容器, 如果容器再次崩溃, 会等待10秒钟后再重启。随着不断崩溃,延迟时间也会按照20、40、80、160秒以几何倍数增长,最终收敛在300秒。一旦间隔时间达到300秒, Kubelet将以5分钟为间隔时间对容器进行无限重启,直到容器正常运行或被删除。</p>
+<p>要定位容器crash的原因,可以通过查看pod日志以及<code>kubectl describe pod</code>命令。</p>
+<h3>容器中的应用如何看待limits<span class="hx-absolute -hx-mt-20" id="容器中的应用如何看待limits"></span>
+    <a href="#%e5%ae%b9%e5%99%a8%e4%b8%ad%e7%9a%84%e5%ba%94%e7%94%a8%e5%a6%82%e4%bd%95%e7%9c%8b%e5%be%85limits" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><h4>在容器内看到的始终是节点的内存, 而不是容器本身的内存<span class="hx-absolute -hx-mt-20" id="在容器内看到的始终是节点的内存-而不是容器本身的内存"></span>
+    <a href="#%e5%9c%a8%e5%ae%b9%e5%99%a8%e5%86%85%e7%9c%8b%e5%88%b0%e7%9a%84%e5%a7%8b%e7%bb%88%e6%98%af%e8%8a%82%e7%82%b9%e7%9a%84%e5%86%85%e5%ad%98-%e8%80%8c%e4%b8%8d%e6%98%af%e5%ae%b9%e5%99%a8%e6%9c%ac%e8%ba%ab%e7%9a%84%e5%86%85%e5%ad%98" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>在容器内看到的始终是节点的内存, 而不是容器本身的内存。即使你为容器设置了最大可用内存的限额, top 命令显示的是运行该容器的节点的内存数量, 而容器无法感知到此限制。</p>
+<p>对于Java程序来说这是个很大的问题，简单的设置 -Xmx 选项并不能解决问题，因为仅仅限制了堆大小,并不管其他 off-heap 内存。在新版本的Java 会考虑到容器 limits 以 缓解这个 问题</p>
+<h4>容器内同样可以看到节点所有的 CPU 核<span class="hx-absolute -hx-mt-20" id="容器内同样可以看到节点所有的-cpu-核"></span>
+    <a href="#%e5%ae%b9%e5%99%a8%e5%86%85%e5%90%8c%e6%a0%b7%e5%8f%af%e4%bb%a5%e7%9c%8b%e5%88%b0%e8%8a%82%e7%82%b9%e6%89%80%e6%9c%89%e7%9a%84-cpu-%e6%a0%b8" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>与内存完全一样,无论有没有配置 CPU limits, 容器内也会看到节点所有的CPU</p>
+<p>CPU limits 做的只是限制容器使用的 CPU 时间。</p>
+<p>一些程序通过查询系统 CPU 核数来决定启动工作线程的数量。同样在开发环境的笔记本电脑上运行良好,但是部署在拥有更多数量 CPU 的节点上,程序将快速启动大量线程,所有线程都会争夺(可能极其)有限的 CPU 时间。同时每个线程通常都需要额外的内存资源,导致应用的内存用量急剧增加。不要依赖应用程序从系统获取的 CPU 数量, 可能需要使用 Downward API 将
+CPU 限额传递至容器并使用这个值。也可以通过 cgroup 系统直接获取配置的 CPU限制,请查看下面的文件:</p>
+<ul>
+<li>/sys/fs/cgroup/cpu/cpu.cfs_quota_us</li>
+<li>/sys/fs/cgroup/cpu/cpu.cfs_period_us</li>
+</ul>
+<h2>pod QoS等级<span class="hx-absolute -hx-mt-20" id="pod-qos等级"></span>
+    <a href="#pod-qos%e7%ad%89%e7%ba%a7" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>当节点无法提供足量内存,哪个容器将被杀掉呢？k8s可能无法做出正确的决策。因此就需要一种方式, 通过这种方式可以指定哪种 pod 在该场景中优先级更高。k8s将pod 划分为3种QoS等级:</p>
+<ul>
+<li>BestEffort (优先级最低)</li>
+<li>Burstable</li>
+<li>Guaranteed (优先级最高)</li>
+</ul>
+<h3>定义pod的QoS等级<span class="hx-absolute -hx-mt-20" id="定义pod的qos等级"></span>
+    <a href="#%e5%ae%9a%e4%b9%89pod%e7%9a%84qos%e7%ad%89%e7%ba%a7" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>QoS等级不是通过独立的字段来分配，它来源于pod所包含的容器的资源requests和limits的配置。</p>
+<h4>为pod分配BestEffort等级<span class="hx-absolute -hx-mt-20" id="为pod分配besteffort等级"></span>
+    <a href="#%e4%b8%bapod%e5%88%86%e9%85%8dbesteffort%e7%ad%89%e7%ba%a7" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>最低优先级的QoS等级是BestEffort。会分配给那些没有(为任何容器)设置任何requests和limits的pod。</p>
+<h4>为pod分配Guaranteed等级<span class="hx-absolute -hx-mt-20" id="为pod分配guaranteed等级"></span>
+    <a href="#%e4%b8%bapod%e5%88%86%e9%85%8dguaranteed%e7%ad%89%e7%ba%a7" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>与 Burstable 相对的是 Guaranteed 等级,会分配给那些所有资源request和limits 相等的 pod 。对于一个 Guaranteed 级别的pod,有以下几个条件:</p>
+<ul>
+<li>CPU和内存都要设置 requests 和 limits</li>
+<li>每个容器都需要设置资源量</li>
+<li>它们必须相等(每个容器的每种资源的requests和limits必须相等)</li>
+</ul>
+<p>因为如果容器的资源 requests 没有显式设置,默认与limits相同,所以只设置所有资源(pod内每个容器的每种资源)的限制量就可以使pod的QoS等级为Guaranteed。这些 pod 的容器可以使用它所申请的等额资源,但是无法消耗更多的资源(因为它们的limits和requests相等)。</p>
+<h4>为pod分配Burstable等级<span class="hx-absolute -hx-mt-20" id="为pod分配burstable等级"></span>
+    <a href="#%e4%b8%bapod%e5%88%86%e9%85%8dburstable%e7%ad%89%e7%ba%a7" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>Burstable QoS等级介于BestEffort和Guaranteed之间。其他所有的pod都属于这个等级。包括:</p>
+<ul>
+<li>容器的requests和limits不相同的单容器 pod</li>
+<li>至少有一个容器只定义了requests 但没有定义limits的pod</li>
+<li>一个容器的request limits 相等,但是另一个容器不指定requests或limits的pod。</li>
+</ul>
+<p>Burstable pod可以获得它们所申请的等额资源,并可以使用额外的资源(不超过 limits)。</p>
+<h4>单容器Pod的QOS等级<span class="hx-absolute -hx-mt-20" id="单容器pod的qos等级"></span>
+    <a href="#%e5%8d%95%e5%ae%b9%e5%99%a8pod%e7%9a%84qos%e7%ad%89%e7%ba%a7" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>下面的表显示了基于资源requests和limits如何为单个容器Pod定义QoS等级。对于单容器pod,容器的QoS等级也适用于 pod 。</p>
+<table>
+  <thead>
+      <tr>
+          <th>CPU requests vs. limits</th>
+          <th>内 存的 requests vs. limits</th>
+          <th>容器 的 QoS 等级</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>未设置</td>
+          <td>未设置</td>
+          <td>BestEffort</td>
+      </tr>
+      <tr>
+          <td>未设置</td>
+          <td>Requests &lt; Limits</td>
+          <td>Burstable</td>
+      </tr>
+      <tr>
+          <td>未设置</td>
+          <td>Requests = Limits</td>
+          <td>Burstable</td>
+      </tr>
+      <tr>
+          <td>Requests &lt; Limits</td>
+          <td>未设置</td>
+          <td>Burstable</td>
+      </tr>
+      <tr>
+          <td>Requests &lt; Limits</td>
+          <td>Requests &lt; Limits</td>
+          <td>Burstable</td>
+      </tr>
+      <tr>
+          <td>Requests&lt; Limits</td>
+          <td>Requests = Limits</td>
+          <td>Burstable</td>
+      </tr>
+      <tr>
+          <td>Requests = Limits</td>
+          <td>Requests = Limits</td>
+          <td>Guaranteed</td>
+      </tr>
+  </tbody>
+</table>
+<p>注意：如果设置了requests而没有设置limits,参考表中requests小于limits那一行。如果设置了limits,requests默认与 limits相等,因此参考request等于limits那一行</p>
+<h4>多容器Pod的QOS等级<span class="hx-absolute -hx-mt-20" id="多容器pod的qos等级"></span>
+    <a href="#%e5%a4%9a%e5%ae%b9%e5%99%a8pod%e7%9a%84qos%e7%ad%89%e7%ba%a7" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>对千多容器pod, 如果所有的容器的QoS等级相同, 那么这个等级就是pod的QoS等级。如果至少有一个容器的QoS等级与其他不同,无论这个容器是什么等级, 这个pod的QoS等级都是Burstable等级。</p>
+<p>注意：运行kubectl describe pod以及通过pod的YAML/JSON描述的Status.qosClass字段都可以查看pod的QoS等级。</p>
+<h3>内存不足时哪个进程会被杀死<span class="hx-absolute -hx-mt-20" id="内存不足时哪个进程会被杀死"></span>
+    <a href="#%e5%86%85%e5%ad%98%e4%b8%8d%e8%b6%b3%e6%97%b6%e5%93%aa%e4%b8%aa%e8%bf%9b%e7%a8%8b%e4%bc%9a%e8%a2%ab%e6%9d%80%e6%ad%bb" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><h4>等级不同的情况<span class="hx-absolute -hx-mt-20" id="等级不同的情况"></span>
+    <a href="#%e7%ad%89%e7%ba%a7%e4%b8%8d%e5%90%8c%e7%9a%84%e6%83%85%e5%86%b5" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>BestEffort等级的pod首先被杀掉, 其次是Burstable pod, 最后是Guaranteed pod。Guaranteedpod只有在系统进程
+需要内存时才会被杀掉。</p>
+<h4>等级相同的情况<span class="hx-absolute -hx-mt-20" id="等级相同的情况"></span>
+    <a href="#%e7%ad%89%e7%ba%a7%e7%9b%b8%e5%90%8c%e7%9a%84%e6%83%85%e5%86%b5" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>每个运行中的进程都有一个称为OutOfMemory (OOM)分数的值。系统通过比较所有运行进程的OOM分数来选择要杀掉的进程。当需要释放内存时, 分数最高的进程将被杀死。</p>
+<p>OOM分数由两个参数计算得出:进程已消耗内存占可用内存的百分比,与一个基于pod QoS等级和容器内存申请量固定的OOM分数调节因子。对于两个属于Burstable等级的单容器的pod, 系统会杀掉内存实际使用量占内存申请量比例更高的pod。</p>
+<h2>为命名空间中的pod设置默认的requests和limits<span class="hx-absolute -hx-mt-20" id="为命名空间中的pod设置默认的requests和limits"></span>
+    <a href="#%e4%b8%ba%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4%e4%b8%ad%e7%9a%84pod%e8%ae%be%e7%bd%ae%e9%bb%98%e8%ae%a4%e7%9a%84requests%e5%92%8climits" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>用户可以通过创建一个LimitRange资源来避免给每个容器分别配置。它不仅允许用户 (为每个命名空间)指定能给容器配置的每种资源的最小和最大限额, 还支持在没有显式指定资源 requests 时为容器设置默认值。</p>
+<p>LimitRange资源中的limits应用千同一个命名空间中每个独立的pod、容器或者其他类型的对象。它并不会限制这个命名空间中所有pod可用资源的总量, 总量是通过ResourceQuota对象指定的</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">LimitRange</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 指定整个pod资源的limits</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 所有容器的CPU与内存请求量之和的最小值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">min</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">50m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">5Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 所有容器的CPU与内存请求量之和的最大值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">max</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">1Gi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Container</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 容器没有指定CPU与内存请求量时设置的默认值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">defaultRequest</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">100m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">10Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 没有指定limits时设置的默认值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">200m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">100Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 容器CPU和内存的资源request和limits的最小值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">min</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">50m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">5Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 容器CPU和内存的资源request和limits的最大值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">max</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">1Gi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 每种资源requests与limits的最大比值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maxLimitRequestRatio</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 请求PVC存储容量的最大值与最小值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">persistentVolumeClaim</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">min</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">1Gi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">max</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">10Gi</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h2>限制命名空间中的可用资源总量<span class="hx-absolute -hx-mt-20" id="限制命名空间中的可用资源总量"></span>
+    <a href="#%e9%99%90%e5%88%b6%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4%e4%b8%ad%e7%9a%84%e5%8f%af%e7%94%a8%e8%b5%84%e6%ba%90%e6%80%bb%e9%87%8f" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>ResourceQuota的接纳控制插件会检查将要创建的pod是否会引起总资源量超出ResourceQuota。如果那样,创建请求会被拒绝。资源配额只是在pod创建时进行检查,所以ResourceQuota对象仅仅作用于在其后创建的pod，并不影响已经存在的pod。</p>
+<h3>为CPU和内存创建ResourceQuota<span class="hx-absolute -hx-mt-20" id="为cpu和内存创建resourcequota"></span>
+    <a href="#%e4%b8%bacpu%e5%92%8c%e5%86%85%e5%ad%98%e5%88%9b%e5%bb%baresourcequota" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ResourceQuota</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">cpu-and-memory</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hard</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">requests.cpu</span><span class="p">:</span><span class="w"> </span><span class="l">400m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">requests.memory</span><span class="p">:</span><span class="w"> </span><span class="l">200Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">limits.cpu</span><span class="p">:</span><span class="w"> </span><span class="l">600m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">limits.memory</span><span class="p">:</span><span class="w"> </span><span class="l">500Mi</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>与LimitRange一样,ResourceQuota对象应用于它所创建的那个命名空间。</p>
+<p>查看配额和配额使用情况：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">kubectl describe quota</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>为持久化存储指定配额<span class="hx-absolute -hx-mt-20" id="为持久化存储指定配额"></span>
+    <a href="#%e4%b8%ba%e6%8c%81%e4%b9%85%e5%8c%96%e5%ad%98%e5%82%a8%e6%8c%87%e5%ae%9a%e9%85%8d%e9%a2%9d" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>它也可以限制某个命名空间中最多可以声明的持久化存储总量</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ResourceQuota</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">storage</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hard</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 可声明总存储量</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">requests.storage</span><span class="p">:</span><span class="w"> </span><span class="l">500Gi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># SSD可声明的存储量</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ssd.storageclass.storage.k8s.io/requests.storage</span><span class="p">:</span><span class="w"> </span><span class="l">300Gi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">standard.storageclass.storage.k8s.io/requests.storage</span><span class="p">:</span><span class="w"> </span><span class="l">1Ti</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>限制可创建对象的个数<span class="hx-absolute -hx-mt-20" id="限制可创建对象的个数"></span>
+    <a href="#%e9%99%90%e5%88%b6%e5%8f%af%e5%88%9b%e5%bb%ba%e5%af%b9%e8%b1%a1%e7%9a%84%e4%b8%aa%e6%95%b0" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>资源配额同样可以限制单个命名空间中的pod、ReplicationController、Service以及其他对象的个数。</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ResourceQuota</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">objects</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hard</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">pods</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">replicationcontrollers</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">secrets</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">configmaps</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">persistentvolumeclaims</span><span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">services</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">services.loadbalancers</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">services.nodeports</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ssd.storageclass.storage.k8s.io/persistentvolumeclaims</span><span class="p">:</span><span class="w"> </span><span class="m">2</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>为特定的pod状态或者QoS等级指定配额<span class="hx-absolute -hx-mt-20" id="为特定的pod状态或者qos等级指定配额"></span>
+    <a href="#%e4%b8%ba%e7%89%b9%e5%ae%9a%e7%9a%84pod%e7%8a%b6%e6%80%81%e6%88%96%e8%80%85qos%e7%ad%89%e7%ba%a7%e6%8c%87%e5%ae%9a%e9%85%8d%e9%a2%9d" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Quota 可以被一组quota scopes限制。目前配额作用范围共有4种:</p>
+<ul>
+<li>BestEffort：应用于 BestEffort QoS 等级</li>
+<li>NotBestEffort： 应用于除了BestEffort之外的 QoS等级，即Burstable和Guaranteed</li>
+<li>Termination：应用于配置了 activeDeadlineSeconds 的 pod</li>
+<li>NotTerminating：应用于那些没有指定activeDeadlineSeconds配置的 pod</li>
+</ul>
+<p>activeDeadlineSeconds属性定义了一个 pod 从开始尝试停止的时间到其被标记为 Failed 然后真正停止
+之前,允许其在节点上继续运行的秒数。</p>
+<p>配额的范围也决定着配额可以限制的内容。BestEffort范围只允许限制pod个数,而其他3种范围除了pod个数,还可以限制 CPU和内存的requests和limits。</p>
+<h2>监控 pod 的资源使用量<span class="hx-absolute -hx-mt-20" id="监控-pod-的资源使用量"></span>
+    <a href="#%e7%9b%91%e6%8e%a7-pod-%e7%9a%84%e8%b5%84%e6%ba%90%e4%bd%bf%e7%94%a8%e9%87%8f" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>设置合适的资源requests和limits对充分利用k8s节点资源来说非常重要。如果requests设置得太高,集群节点利用率就会比较低；如果设置得太低,应用就会处于CPU饥饿状态,甚至很容易被OOM Killer杀死。</p>
+<p>可以通过对容器在期望负载下的资源实际使用率进行监控来找到这个最佳配置</p>
+<h3>收集、获取实际资源使用情况<span class="hx-absolute -hx-mt-20" id="收集获取实际资源使用情况"></span>
+    <a href="#%e6%94%b6%e9%9b%86%e8%8e%b7%e5%8f%96%e5%ae%9e%e9%99%85%e8%b5%84%e6%ba%90%e4%bd%bf%e7%94%a8%e6%83%85%e5%86%b5" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Kubelet自身就包含了一个名为cAdvisor的agent,它会收集整个节点和节点上运行的所有单独容器的资源消耗情况。集中统计整个集群的监控信息需要运行一个叫作 Heapster的附加组件。</p>
+<p>Heapster以pod的方式运行在某个节点上,它通过普通的Kubernetes Service暴露服务,使外部可以通过一个稳定的IP地址访问。它从集群中所有的cAdvisor收集数据,然后通过一个单独的地址暴露。</p>
+<h3>显示集群节点的CPU和内存使用量<span class="hx-absolute -hx-mt-20" id="显示集群节点的cpu和内存使用量"></span>
+    <a href="#%e6%98%be%e7%a4%ba%e9%9b%86%e7%be%a4%e8%8a%82%e7%82%b9%e7%9a%84cpu%e5%92%8c%e5%86%85%e5%ad%98%e4%bd%bf%e7%94%a8%e9%87%8f" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>显示节点的CPU和内存的实际使用量</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl top node</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>显示单独pod的CPU和内存的实际使用量</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl top node --all-namespaces</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>显示容器的CPU和内存的实际使用量</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl top node --container</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>保存并分析历史资源的使用统计信息<span class="hx-absolute -hx-mt-20" id="保存并分析历史资源的使用统计信息"></span>
+    <a href="#%e4%bf%9d%e5%ad%98%e5%b9%b6%e5%88%86%e6%9e%90%e5%8e%86%e5%8f%b2%e8%b5%84%e6%ba%90%e7%9a%84%e4%bd%bf%e7%94%a8%e7%bb%9f%e8%ae%a1%e4%bf%a1%e6%81%af" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>一种方案是，使用 InfluxDB 来存储统计数据, 然后使用Grafana 对数据进行可视化和分析</p>
+<hr>
+<p>图书资料：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30418855/" target="_blank" rel="noopener">https://book.douban.com/subject/30418855/</a></li>
+</ul>
+
+        </div>
+        
+    <div class="hx-mt-12 hx-mb-8 hx-block hx-text-xs hx-text-gray-500 ltr:hx-text-right rtl:hx-text-left dark:hx-text-gray-400">最后更新于 <time datetime="2024-11-30T18:58:28.000Z">November 30, 2024</time></div>
+        
+        <div class="hx-mb-8 hx-flex hx-items-center hx-border-t hx-pt-8 dark:hx-border-neutral-800 contrast-more:hx-border-neutral-400 dark:contrast-more:hx-border-neutral-400 print:hx-hidden"><a
+        href="/blog/2021/01/k8s_node_security/"
+        title="Kubernetes in Action笔记 - (15) 节点与网络安全"
+        class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-pr-4 rtl:hx-pl-4"
+      ><svg class="hx-inline hx-h-5 hx-shrink-0 ltr:hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>Kubernetes in Action笔记 - (15) 节点与网络安全</a><a
+        href="/blog/2021/01/k8s_pod_auto_scaling/"
+        title="Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点"
+        class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-ml-auto ltr:hx-pl-4 ltr:hx-text-right rtl:hx-mr-auto rtl:hx-pr-4 rtl:hx-text-left"
+      >Kubernetes in Action笔记 - (17) 自动横向伸缩pod与集群节点<svg class="hx-inline hx-h-5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a></div>
+        
+      </main>
+    </article>
+  </div>
+
+      <footer class="hextra-footer hx-bg-gray-100 hx-pb-[env(safe-area-inset-bottom)] dark:hx-bg-neutral-900 print:hx-bg-transparent"><div class="hx-mx-auto hx-flex hx-gap-2 hx-py-2 hx-px-4 hx-max-w-screen-xl"><button
+  title="切换主题"
+  data-theme="light"
+  class="theme-toggle hx-group hx-h-7 hx-rounded-md hx-px-2 hx-text-left hx-text-xs hx-font-medium hx-text-gray-600 hx-transition-colors dark:hx-text-gray-400 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50"
+  type="button"
+  aria-label="切换主题"
+>
+  <div class="hx-flex hx-items-center hx-gap-2 hx-capitalize"><svg height=12 class="group-data-[theme=light]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg><span class="group-data-[theme=light]:hx-hidden">浅色</span><svg height=12 class="group-data-[theme=dark]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg><span class="group-data-[theme=dark]:hx-hidden">深色</span></div>
+</button>
+</div><hr class="dark:hx-border-neutral-800" /><div
+    class="hx-max-w-screen-xl hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
+  >
+    <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start"><div class="hx-mt-6 hx-text-xs"><img class="favicon" src="/favicon-32x32.png">Copyright © 2018 - 2025 保罗札记. All Rights Reserved</div>
+    </div>
+  </div>
+</footer>
+    
+    <script defer src="/js/main.js" integrity=""></script>
+
+
+<script defer src="/lib/flexsearch/flexsearch.bundle.min.0425860527cc9968f9f049421c7a56b39327d475e2e3a8f550416be3a9134327.js" integrity="sha256-BCWGBSfMmWj58ElCHHpWs5Mn1HXi46j1UEFr46kTQyc="></script>
+    <script defer src="/zh-cn.search.js" integrity=""></script>
+
+
+  </body>
+</html>

@@ -1,20 +1,59 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>wifi on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/wifi/</link>
-    <description>Recent content in wifi on 保罗札记</description>
+    <title>保罗札记 – Wifi</title>
+    <link>http://localhost:1313/tags/wifi/</link>
+    <description>Recent content in Wifi on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Fri, 24 Jan 2020 12:53:21 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/wifi/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/wifi/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>Mac 检查附近wifi所使用的信道</title>
-      <link>https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/</link>
+      <link>http://localhost:1313/blog/2020/01/mac-check-nearby-wifi-channel/</link>
       <pubDate>Fri, 24 Jan 2020 12:53:21 +0000</pubDate>
-      <guid>https://www.zengxi.net/2020/01/mac-check-nearby-wifi-channel/</guid>
-      <description>信道，也称作通道或频段，是以无线信号作为传输载体的数据信号传送通道。2.4G频段的工作频率为2.4-2.4835GHz，这83.5MHz频带划分为13个信道，各信道中心频率相差5MHz，向上向下分别扩展11MHz，信道带宽22MHz。中国采用欧洲/ETSI标准，使用1-13信道。&#xA;相近无线路由器采用相同或重叠信道会形成信道竞争关系，相互影响无线链路质量，为了有效避免信道重叠造成的相互干扰，相近无线路由器应选择互不重叠的信道工作。&#xA;早期无线路由器出厂时预设相同的信道（大多为6），因用户很少会修改信道，从而导致相互影响的情况。随着无线应用的迅速普及，无线路由器增加了信道自动选择功能，在设备启动时检测周围无线信道分布情况，选择最佳信道工作。&#xA;但是不要过分依赖路由器的自动选择，路由器没有那么智能。可以根据附近的wifi所使用的信道，手工选择一个不一样的。&#xA;在mac系统中，可以使用下面的命令来查看附近wifi使用信道的情况&#xA;1sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s 参考：&#xA;https://service.tp-link.com.cn/detail_article_3272.html http://www.voidcn.com/article/p-njamfbdk-dq.html </description>
+      
+      <guid>http://localhost:1313/blog/2020/01/mac-check-nearby-wifi-channel/</guid>
+      <description>
+        
+        
+        &lt;p&gt;信道，也称作通道或频段，是以无线信号作为传输载体的数据信号传送通道。2.4G频段的工作频率为2.4-2.4835GHz，这83.5MHz频带划分为13个信道，各信道中心频率相差5MHz，向上向下分别扩展11MHz，信道带宽22MHz。中国采用欧洲/ETSI标准，使用1-13信道。&lt;/p&gt;
+&lt;p&gt;相近无线路由器采用相同或重叠信道会形成信道竞争关系，相互影响无线链路质量，为了有效避免信道重叠造成的相互干扰，相近无线路由器应选择互不重叠的信道工作。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;早期无线路由器出厂时预设相同的信道（大多为6），因用户很少会修改信道，从而导致相互影响的情况。随着无线应用的迅速普及，无线路由器增加了信道自动选择功能，在设备启动时检测周围无线信道分布情况，选择最佳信道工作。&lt;/p&gt;
+&lt;p&gt;但是不要过分依赖路由器的自动选择，路由器没有那么智能。可以根据附近的wifi所使用的信道，手工选择一个不一样的。&lt;/p&gt;
+&lt;p&gt;在mac系统中，可以使用下面的命令来查看附近wifi使用信道的情况&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://service.tp-link.com.cn/detail_article_3272.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://service.tp-link.com.cn/detail_article_3272.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.voidcn.com/article/p-njamfbdk-dq.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.voidcn.com/article/p-njamfbdk-dq.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

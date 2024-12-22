@@ -1,20 +1,110 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ssh on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/ssh/</link>
-    <description>Recent content in ssh on 保罗札记</description>
+    <title>保罗札记 – Ssh</title>
+    <link>http://localhost:1313/tags/ssh/</link>
+    <description>Recent content in Ssh on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Thu, 28 Jun 2018 09:26:06 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>通过SSH和JMX远程监控Java服务</title>
-      <link>https://www.zengxi.net/2018/06/connect-remote-jmx-with-ssh/</link>
+      <link>http://localhost:1313/blog/2018/06/connect-remote-jmx-with-ssh/</link>
       <pubDate>Thu, 28 Jun 2018 09:26:06 +0000</pubDate>
-      <guid>https://www.zengxi.net/2018/06/connect-remote-jmx-with-ssh/</guid>
-      <description>在日常工作中，可以使用一些监控数据的图形展示工具（比如Grafana等）来查看服务器上面JVM的使用情况，比如内存或者CPU的占用情况。但是，在需要解决实际问题的时候，比如CPU或者内存占用过高，还是需要连接到远程的服务器，查看JVM的具体运行情况来分析问题产生的原因。&#xA;通常情况下，我们是通过开启远程服务器上的JMX，使用JVisualVM或JConsole客户端，远程连接到服务器上。然而，在实际的生产环境中，Java应用服务器并没有直接暴露在公网，必须通过跳板机来连接。&#xA;网上查了一些资料，多数比较麻烦，有些还需要借助第三方工具。后来找到一个简便的方法，在使用JVisualVM或JConsole客户端的时候，通过指定socks代理的方式来连接远程服务器。下面是具体的步骤。&#xA;Java应用开启JMX 在应用启动命令里面添加下面的参数。指定JMX端口为18888&#xA;-Dcom.sun.management.jmxremote.port=18888 -Dcom.sun.management.jmxremote.rmi.port=18888 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false&#xA;指定本地socks代理的端口和跳板机 在命令行中执行下面的命令开启端口转发&#xA;1ssh -N -D 10099 my-bastion 注意：&#xA;上述例子中的 my-bastion 是跳板机别名，在 ~/.ssh/config中配置。 10099 是绑定的本地端口号 ssh命令帮助文档中对两个参数的解释: -N Do not execute a remote command. This is useful for just forwarding ports. -D [bind_address:]port Specifies a local “dynamic” application-level port forwarding. 用工具连接远程jvm JConsole客户端 如果使用jconsole客户端连接。可以直接指定需要连接的服务&#xA;1jconsole -J-DsocksProxyHost=localhost -J-DsocksProxyPort=10099 service:jmx:rmi:///jndi/rmi://10.10.3.11:18888/jmxrmi JVisualVM客户端 如果使用jvisualvm客户端连接，先启动指定代理服务器的参数来启动jvisualvm&#xA;1jvisualvm -J-DsocksProxyHost=localhost -J-DsocksProxyPort=10099 然后在jvm里面先添加remote host，再添加类似下面的JMX连接&#xA;service:jmx:rmi:///jndi/rmi://10.10.3.11:18888/jmxrmi&#xA;双击左边添加好的JMX连接，就可以连上服务器并监控JVM的实际状况了</description>
+      
+      <guid>http://localhost:1313/blog/2018/06/connect-remote-jmx-with-ssh/</guid>
+      <description>
+        
+        
+        &lt;p&gt;在日常工作中，可以使用一些监控数据的图形展示工具（比如Grafana等）来查看服务器上面JVM的使用情况，比如内存或者CPU的占用情况。但是，在需要解决实际问题的时候，比如CPU或者内存占用过高，还是需要连接到远程的服务器，查看JVM的具体运行情况来分析问题产生的原因。&lt;/p&gt;
+&lt;p&gt;通常情况下，我们是通过开启远程服务器上的JMX，使用JVisualVM或JConsole客户端，远程连接到服务器上。然而，在实际的生产环境中，Java应用服务器并没有直接暴露在公网，必须通过跳板机来连接。&lt;/p&gt;
+&lt;p&gt;网上查了一些资料，多数比较麻烦，有些还需要借助第三方工具。后来找到一个简便的方法，在使用JVisualVM或JConsole客户端的时候，通过指定socks代理的方式来连接远程服务器。下面是具体的步骤。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h1&gt;Java应用开启JMX&lt;/h1&gt;&lt;p&gt;在应用启动命令里面添加下面的参数。指定JMX端口为18888&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;-Dcom.sun.management.jmxremote.port=18888  &lt;br&gt;
+-Dcom.sun.management.jmxremote.rmi.port=18888  &lt;br&gt;
+-Dcom.sun.management.jmxremote.authenticate=false  &lt;br&gt;
+-Dcom.sun.management.jmxremote.ssl=false&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1&gt;指定本地socks代理的端口和跳板机&lt;/h1&gt;&lt;p&gt;在命令行中执行下面的命令开启端口转发&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;ssh -N -D 10099 my-bastion&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;注意：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;上述例子中的 &lt;em&gt;my-bastion&lt;/em&gt; 是跳板机别名，在 ~/.ssh/config中配置。&lt;/li&gt;
+&lt;li&gt;10099 是绑定的本地端口号&lt;/li&gt;
+&lt;li&gt;ssh命令帮助文档中对两个参数的解释:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;
+  -N    Do not execute a remote command.  This is useful for just forwarding ports.
+
+  -D [bind_address:]port
+        Specifies a local “dynamic” application-level port forwarding.
+&lt;/pre&gt;
+&lt;h1&gt;用工具连接远程jvm&lt;/h1&gt;&lt;h2&gt;JConsole客户端&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;jconsole客户端&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#jconsole%e5%ae%a2%e6%88%b7%e7%ab%af&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;如果使用jconsole客户端连接。可以直接指定需要连接的服务&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;jconsole -J-DsocksProxyHost&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;localhost -J-DsocksProxyPort&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;10099&lt;/span&gt; service:jmx:rmi:///jndi/rmi://10.10.3.11:18888/jmxrmi&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h2&gt;JVisualVM客户端&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;jvisualvm客户端&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#jvisualvm%e5%ae%a2%e6%88%b7%e7%ab%af&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;如果使用jvisualvm客户端连接，先启动指定代理服务器的参数来启动jvisualvm&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;jvisualvm -J-DsocksProxyHost&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;localhost -J-DsocksProxyPort&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;10099&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;然后在jvm里面先添加remote host，再添加类似下面的JMX连接&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;service:jmx:rmi:///jndi/rmi://10.10.3.11:18888/jmxrmi&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;双击左边添加好的JMX连接，就可以连上服务器并监控JVM的实际状况了&lt;/p&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

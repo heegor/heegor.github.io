@@ -1,20 +1,94 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Spring Boot on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/spring-boot/</link>
+    <title>保罗札记 – Spring Boot</title>
+    <link>http://localhost:1313/tags/spring-boot/</link>
     <description>Recent content in Spring Boot on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Wed, 29 Nov 2023 21:01:00 +0800</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/spring-boot/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/spring-boot/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>Spring Boot 自动设置响应头引发的问题</title>
-      <link>https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/</link>
+      <link>http://localhost:1313/blog/2023/11/spring-boot-cve-2015-5211/</link>
       <pubDate>Wed, 29 Nov 2023 21:01:00 +0800</pubDate>
-      <guid>https://www.zengxi.net/2023/11/spring-boot-cve-2015-5211/</guid>
-      <description>在某次排查问题的时候，发现接口返回值的 Response Header 中居然多了下面这个值。&#xA;1Content-Disposition:inline;filename=f.txt Content-disposition 是 MIME 协议的扩展，它指示 MIME 用户代理如何显示附加的文件。上面的值就相当于告诉客户端将文件内容直接显示在页面，同时这个文件名为 f.txt。&#xA;排查了接口代码与 nginx 等设置，并没有发现显式设置它的地方，很疑惑它是什么时候被设置上去的，即使显式设置了 Reponse 的 content-type 也没有用。&#xA;最终在查找资料的时候发现，Spring boot 为了修复 CVE-2015-5211 漏洞，当 URL Path 中包含文件扩展名的时候，就会自动设置这个 Response Header&#xA;看到这个描述就马上知道原因了。自己的接口请求是类似下面这种结构的，spring boot 将 aaaa.bbbb.cccc 当作是文件名&#xA;1http://xxxxx/yyyyy/aaaa.bbbb.cccc 虽然说大部分情况下，即使有这个 Response Header 不会有什么影响，但是在某些特殊的场景，就会出现问题。比如，某个客户在他们的公司内部中部署了网络安全工具，这个网络工具检测到它返回值是个文件，自动将返回的报文加密。这个就导致网页请求接口的时候报错，在浏览器的开发者工具中可以看到下面的返回内容，完全是二进制的形式而不是json字符串&#xA;为了避免这个问题，可以将接口的地址改成下面这种形式，也就是通过 Query Parameter 的方式来传递带有&amp;quot;.&amp;quot;的数据。这样spring boot就不认为它要返回文件，不会自动加上那个 Response Header。&#xA;1http://xxxxx/yyyyy?code=aaaa.bbbb.cccc 这其实也是个编程习惯的问题。对于简单的查询参数，最好就用 GET 请求，以 Query Parameter 的方式来传值，而不是放在 URL Path 中。对于复杂的查询参数，就用 POST 请求，在 Body 中传值。&#xA;参考资料：&#xA;https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-requestmapping.html#mvc-ann-requestmapping-rfd https://spring.io/security/cve-2015-5211 https://github.com/spring-projects/spring-framework/issues/18220 https://github.com/spring-projects/spring-boot/issues/4220 </description>
+      
+      <guid>http://localhost:1313/blog/2023/11/spring-boot-cve-2015-5211/</guid>
+      <description>
+        
+        
+        &lt;p&gt;在某次排查问题的时候，发现接口返回值的 Response Header 中居然多了下面这个值。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;Content-Disposition:inline;filename=f.txt&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;Content-disposition 是 MIME 协议的扩展，它指示 MIME 用户代理如何显示附加的文件。上面的值就相当于告诉客户端将文件内容直接显示在页面，同时这个文件名为 f.txt。&lt;/p&gt;
+&lt;p&gt;排查了接口代码与 nginx 等设置，并没有发现显式设置它的地方，很疑惑它是什么时候被设置上去的，即使显式设置了 Reponse 的 content-type 也没有用。&lt;/p&gt;
+&lt;p&gt;最终在查找资料的时候发现，Spring boot 为了修复 CVE-2015-5211 漏洞，当 URL Path 中包含文件扩展名的时候，就会自动设置这个 Response Header&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/p/2023/11/spring-boot-cve-2015-5211_1.png&#34; alt=&#34;Spring Boot Suffix Match And RFD&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;看到这个描述就马上知道原因了。自己的接口请求是类似下面这种结构的，spring boot 将 aaaa.bbbb.cccc 当作是文件名&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;http://xxxxx/yyyyy/aaaa.bbbb.cccc&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;虽然说大部分情况下，即使有这个 Response Header 不会有什么影响，但是在某些特殊的场景，就会出现问题。比如，某个客户在他们的公司内部中部署了网络安全工具，这个网络工具检测到它返回值是个文件，自动将返回的报文加密。这个就导致网页请求接口的时候报错，在浏览器的开发者工具中可以看到下面的返回内容，完全是二进制的形式而不是json字符串&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/p/2023/11/spring-boot-cve-2015-5211_2.png&#34; alt=&#34;加密过的报文&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;为了避免这个问题，可以将接口的地址改成下面这种形式，也就是通过 Query Parameter 的方式来传递带有&amp;quot;.&amp;ldquo;的数据。这样spring boot就不认为它要返回文件，不会自动加上那个 Response Header。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;http://xxxxx/yyyyy?code=aaaa.bbbb.cccc&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;这其实也是个编程习惯的问题。对于简单的查询参数，最好就用 GET 请求，以 Query Parameter 的方式来传值，而不是放在 URL Path 中。对于复杂的查询参数，就用 POST 请求，在 Body 中传值。&lt;/p&gt;
+&lt;p&gt;参考资料：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-requestmapping.html#mvc-ann-requestmapping-rfd&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-requestmapping.html#mvc-ann-requestmapping-rfd&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://spring.io/security/cve-2015-5211&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://spring.io/security/cve-2015-5211&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/spring-projects/spring-framework/issues/18220&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/spring-projects/spring-framework/issues/18220&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/spring-projects/spring-boot/issues/4220&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/spring-projects/spring-boot/issues/4220&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

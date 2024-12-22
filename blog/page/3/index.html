@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon shortcut" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.png" type="image/png" />
+<link rel="icon" href="/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/favicon-180x180.png" type="image/png" sizes="180x180" />
+<link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
+
+  <title>技术博客 – 保罗札记</title>
+  <meta name="description" content="" />
+
+  
+    <link rel="canonical" href="http://localhost:1313/blog/" itemprop="url" />
+  
+
+  
+
+<meta property="og:title" content="技术博客" />
+<meta property="og:description" content="Paul Zeng&#39;s personal website and blog" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://localhost:1313/blog/" />
+
+  
+  <meta itemprop="name" content="技术博客">
+  <meta itemprop="description" content="Paul Zeng&#39;s personal website and blog">
+  <meta itemprop="datePublished" content="2024-10-23T13:01:00+08:00">
+  <meta itemprop="dateModified" content="2024-11-30T18:58:28+08:00">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="技术博客">
+  <meta name="twitter:description" content="Paul Zeng&#39;s personal website and blog">
+
+    <link href="/css/compiled/main.css" rel="stylesheet" />
+
+
+
+  <link href="/css/custom.css" rel="stylesheet" />
+
+
+
+
+
+  <script>
+     
+    const defaultTheme = 'system';
+
+    const setDarkTheme = () => {
+      document.documentElement.classList.add("dark");
+      document.documentElement.style.colorScheme = "dark";
+    }
+    const setLightTheme = () => {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.style.colorScheme = "light";
+    }
+
+    if ("color-theme" in localStorage) {
+      localStorage.getItem("color-theme") === "dark" ? setDarkTheme() : setLightTheme();
+    } else {
+      defaultTheme === "dark" ? setDarkTheme() : setLightTheme();
+      if (defaultTheme === "system") {
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? setDarkTheme() : setLightTheme();
+      }
+    }
+  </script>
+
+  
+</head>
+<body dir="ltr"><div class="nav-container hx-sticky hx-top-0 hx-z-20 hx-w-full hx-bg-transparent print:hx-hidden">
+  <div class="nav-container-blur hx-pointer-events-none hx-absolute hx-z-[-1] hx-h-full hx-w-full hx-bg-white dark:hx-bg-dark hx-shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] contrast-more:hx-shadow-[0_0_0_1px_#000] dark:hx-shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] contrast-more:dark:hx-shadow-[0_0_0_1px_#fff]"></div>
+
+  <nav class="hx-mx-auto hx-flex hx-items-center hx-justify-end hx-gap-2 hx-h-16 hx-px-6 hx-max-w-[90rem]">
+    <a class="hx-flex hx-items-center hover:hx-opacity-75 ltr:hx-mr-auto rtl:hx-ml-auto" href="/">
+        <img class="hx-block dark:hx-hidden" src="/logos/logo.png" alt="保罗札记" height="46" width="220" />
+        <img class="hx-hidden dark:hx-block" src="/logos/logo.png" alt="保罗札记" height="46" width="220" />
+    </a><a
+            title="首页"
+            href="/"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">首页</span>
+          </a><a
+            title="技术博客"
+            href="/blog"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-font-medium"
+          >
+            <span class="hx-text-center">技术博客</span>
+          </a><a
+            title="关于我"
+            href="/about"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">关于我</span>
+          </a><div class="search-wrapper hx-relative md:hx-w-64">
+  <div class="hx-relative hx-flex hx-items-center hx-text-gray-900 contrast-more:hx-text-gray-800 dark:hx-text-gray-300 contrast-more:dark:hx-text-gray-300">
+    <input
+      placeholder="搜索文档..."
+      class="search-input hx-block hx-w-full hx-appearance-none hx-rounded-lg hx-px-3 hx-py-2 hx-transition-colors hx-text-base hx-leading-tight md:hx-text-sm hx-bg-black/[.05] dark:hx-bg-gray-50/10 focus:hx-bg-white dark:focus:hx-bg-dark placeholder:hx-text-gray-500 dark:placeholder:hx-text-gray-400 contrast-more:hx-border contrast-more:hx-border-current"
+      type="search"
+      value=""
+      spellcheck="false"
+    />
+    <kbd
+      class="hx-absolute hx-my-1.5 hx-select-none ltr:hx-right-1.5 rtl:hx-left-1.5 hx-h-5 hx-rounded hx-bg-white hx-px-1.5 hx-font-mono hx-text-[10px] hx-font-medium hx-text-gray-500 hx-border dark:hx-border-gray-100/20 dark:hx-bg-dark/50 contrast-more:hx-border-current contrast-more:hx-text-current contrast-more:dark:hx-border-current hx-items-center hx-gap-1 hx-transition-opacity hx-pointer-events-none hx-hidden sm:hx-flex"
+    >
+      CTRL K
+    </kbd>
+  </div>
+
+  <div>
+    <ul
+      class="search-results hextra-scrollbar hx-hidden hx-border hx-border-gray-200 hx-bg-white hx-text-gray-100 dark:hx-border-neutral-800 dark:hx-bg-neutral-900 hx-absolute hx-top-full hx-z-20 hx-mt-2 hx-overflow-auto hx-overscroll-contain hx-rounded-xl hx-py-2.5 hx-shadow-xl hx-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] md:hx-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx-inset-x-0 ltr:md:hx-left-auto rtl:md:hx-right-auto contrast-more:hx-border contrast-more:hx-border-gray-900 contrast-more:dark:hx-border-gray-50 hx-w-screen hx-min-h-[100px] hx-max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      style="transition: max-height 0.2s ease 0s;"
+    ></ul>
+  </div>
+</div>
+<button type="button" aria-label="Menu" class="hamburger-menu -hx-mr-2 hx-rounded hx-p-2 active:hx-bg-gray-400/20 md:hx-hidden"><svg height=24 fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8H20"></path></g><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16H20"></path></g></svg></button>
+  </nav>
+</div>
+<div class="hx-mx-auto hx-flex hx-max-w-screen-xl">
+    
+    <article class="hx-w-full hx-break-words hx-flex hx-min-h-[calc(100vh-var(--navbar-height))] hx-min-w-0 hx-justify-center hx-pb-8 hx-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
+        <br class="hx-mt-1.5 hx-text-sm" />
+        <h1 class="hx-text-center hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100">技术博客</h1>
+        <div class="content"></div>
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/06/java8_datetime_api/">Java 8新特性 - (9)DateTime API</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">相关背景 Java对日期、日历及时间的处理一直以来都饱受诟病：
+java.util.Date和java.util.Calendar类易用性差，不支持时区，非线程安全 用于格式化日期的类DateFormat被放在java.text包中，它是一个抽象类，所以我们需要实例化一个SimpleDateFormat对象来处理日期格式化，并且DateFormat也是非线程安全，这意味着如果你在多线程程序中调用同一个DateFormat对象，会得到意想不到的结果。 对日期的计算方式繁琐，而且容易出错，因为月份是从0开始的，从Calendar中获取的月份需要加一才能表示当前月份。 由于以上这些问题，出现了一些三方的日期处理框架，例 …</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/06/java8_datetime_api/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 1, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/05/java8_method_parameter_reflection/">Java 8新特性 - (8)方法参数反射</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">方法的参数名，在很多时候我们是需要反射得到的。但是在java8之前，代码编译为class文件后，方法参数的类型是固定的，但参数名称却丢失了，这和动态语言严重依赖参数名称形成了鲜明对比。（java是静态语言，所以入参名称叫什么其实无所谓的）。虽然名称无所谓，但很多时候，我们需要此名称来做更好的安排.</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/05/java8_method_parameter_reflection/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">May 28, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/05/java8_type_inference/">Java 8新特性 - (7)泛型的类型推断</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">泛型简介 泛型由Java 1.5引入，泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。通俗点将就是“类型的变量”。这种类型变量可以用在类、接口和方法的创建中。理解Java泛型最简单的方法是把它看成一种便捷语法，能节省某些Java类型转换(casting)上的操作.</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/05/java8_type_inference/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">May 28, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/05/java8_type_annotation/">Java 8新特性 - (6)类型注解</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">什么是类型注解 在java 8之前，注解只能是在声明的地方所使用，比如类，方法，属性；从java 8开始，注解可以应用在任何地方。但是需要注意的是，类型注解只是语法而不是语义，并不会影响java的编译时间，加载时间，以及运行时间，也就是说，编译成class文件的时候并不包含类型注解。换句话说，仅提供定义这些类型的注释的功能，然后由框架和工具开发者来实际上使用它们。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/05/java8_type_annotation/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">May 28, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/05/java8_repeating_annotations/">Java 8新特性 - (5)重复注解</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">在JDK8之前，不能使用重复注解的，即某个位置相同注解只能出现一次。
+如果想编写一个定时任务的注解，使用者可以配置在每天哪一小时触发，而且允许用户配置多个时间。传统做法是：</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/05/java8_repeating_annotations/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">May 27, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/05/java8_default_method/">Java 8新特性 - (4)默认方法</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7"> 什么是默认方法 简单说，就是接口可以有实现方法，而且不需要实现类去实现其方法。只需在方法名前面加个default关键字即可。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/05/java8_default_method/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">May 26, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/04/java8_method_references/">Java 8新特性 - (3)方法引用</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7"> 方法引用（Method references）。方法引用提供了非常有用的语法，可以直接引用已有Java类或对象（实例）的方法或构造器。与lambda联合使用，可以使语言的构造更紧凑简洁，减少冗余代码。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/04/java8_method_references/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">April 7, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/03/update_response_via_fiddler/">在Fiddler中使用脚本来修改Response数据</a></h3>
+                <div><a class="tag_item">fiddler</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">使用Fiddler抓包工具，通过修改CustomRules.js脚本达到修改Http请求的Response中Body信息（如JSON串）。
+常用于在Server开发未完全Ready而前端或客户端开发需要Server数据时，修改请求的返回数据，达到Debug和测试的目的，较添加BreakPoint的方法更加便捷。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/03/update_response_via_fiddler/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">March 30, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/03/cxf_ws_log/">CXF记录WebService的soap日志</a></h3>
+                <div><a class="tag_item">jetty</a><a class="tag_item">session</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">cxf本身就支持日志功能，能打印传入传出的soap报文，但是需要配置一下。
+这里配置的是cxf结合spring做的WebService，配置步骤如下：</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/03/cxf_ws_log/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">March 29, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/03/linux_set_sunday_as_first_day_of_week/">设置周日为一个星期的第一天</a></h3>
+                <div><a class="tag_item">jetty</a><a class="tag_item">session</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">用 “locale”命令检查当前的区域，例如我的机器运行结果是：
+ls@ls-laptop:~$ locale LANG=zh_CN.UTF-8 LANGUAGE=zh_CN.UTF-8 LC_CTYPE=&#34;zh_CN.UTF-8&#34; LC_NUMERIC=&#34;zh_CN.UTF-8&#34; LC_TIME=&#34;zh_CN.UTF-8&#34; LC_COLLATE=&#34;zh_CN.UTF-8&#34; LC_MONETARY=&#34;zh_CN.UTF-8&#34; LC_MESSAGES=&#34;zh_CN.UTF-8&#34; LC_PAPER=&#34;zh_CN.UTF-8&#34; LC_NAME=&#34;zh_CN.UTF-8&#34; LC_ADDRESS=&#34;zh_CN.UTF-8&#34; …</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/03/linux_set_sunday_as_first_day_of_week/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">March 29, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/03/jetty_session_remove_node_name/">删除Jetty中session ID的node名称</a></h3>
+                <div><a class="tag_item">jetty</a><a class="tag_item">session</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">jetty 9.4 版本对session id的生成做了升级. 他会自动在session id后面加个节点的名字(workName配置项). jetty 9.3 以及之前的版本没有这个问题.</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/03/jetty_session_remove_node_name/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">March 29, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/03/nginx_cfg_for_long_polling/">配置Nginx支持长轮询</a></h3>
+                <div><a class="tag_item">nginx</a><a class="tag_item">长轮询</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">某些web应用需要使用到长轮询，在Nginx中需要添加配置来支持。比如说vaadin界面，如果没有做一些额外的配置，使用nginx做反向代理，会出现页面一直在加载的问题</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/03/nginx_cfg_for_long_polling/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">March 25, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/03/update_docker_image_timezone/">基于alpine构建docker镜像修改时区</a></h3>
+                <div><a class="tag_item">docker</a><a class="tag_item">alpine</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">默认apline镜像没有安装时区, 即使把宿主机的/etc/localtime 挂在到镜像中也无法把时区改成 GMT+8的.
+这个就只能在构建镜像的时候,安装并设置一下时区</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/03/update_docker_image_timezone/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">March 25, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/03/manjaro_printer_service_not_available/">Manjaro升级后打印服务不可用</a></h3>
+                <div><a class="tag_item">manjaro</a><a class="tag_item">打印机</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">Manjaro升级到某个版本后，在系统设置中，查看打印机，显示“打印机服务不可用，错误的文件描述符“。
+其中一个原因是CUPS（Common UNIX Printing System）打印管理服务未启动。可以用下面的方法来解决：</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/03/manjaro_printer_service_not_available/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">March 16, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/03/java8_stream_api/">Java 8新特性 - (2)Stream API</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7"> 什么是Stream API Stream API让开发者能够以一种声明的方式处理数据源（集合、数组等），它专注于对数据源进行各种高效的聚合操作（aggregate operation）和大批量数据操作 (bulk data operation)。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/03/java8_stream_api/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">March 5, 2021</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2021/02/java8_lambda/">Java 8新特性 - (1)Lambda表达式</a></h3>
+                <div><a class="tag_item">java</a><a class="tag_item">java 8</a><a class="tag_item">lambda</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7"> 为什么Java需要Lambda表达式? 在函数式编程语言中，函数是一等公民，它们可以独立存在，你可以将其赋值给一个变量，或将他们当做参数传给其他函数。JavaScript是最典型的函数式编程语言。函数式语言提供了一种强大的功能——闭包，相比于传统的编程方法有很多优势，闭包是一个可调用的对象，它记录了一些信息，这些信息来自于创建它的作用域。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2021/02/java8_lambda/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">February 25, 2021</p>
+          </div>
+        
+    <ul class="pagination pagination-default">
+      <li class="page-item">
+        <a href="/blog/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/2/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item active">
+        <a aria-current="page" aria-label="Page 3" class="page-link" role="button">3</a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/5/" aria-label="Page 5" class="page-link" role="button">5</a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/4/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/8/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul>
+      </main>
+    </article>
+    <div class="max-xl:hx-hidden hx-h-0 hx-w-64 hx-shrink-0"></div>
+  </div>
+      <footer class="hextra-footer hx-bg-gray-100 hx-pb-[env(safe-area-inset-bottom)] dark:hx-bg-neutral-900 print:hx-bg-transparent"><div class="hx-mx-auto hx-flex hx-gap-2 hx-py-2 hx-px-4 hx-max-w-screen-xl"><button
+  title="切换主题"
+  data-theme="light"
+  class="theme-toggle hx-group hx-h-7 hx-rounded-md hx-px-2 hx-text-left hx-text-xs hx-font-medium hx-text-gray-600 hx-transition-colors dark:hx-text-gray-400 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50"
+  type="button"
+  aria-label="切换主题"
+>
+  <div class="hx-flex hx-items-center hx-gap-2 hx-capitalize"><svg height=12 class="group-data-[theme=light]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg><span class="group-data-[theme=light]:hx-hidden">浅色</span><svg height=12 class="group-data-[theme=dark]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg><span class="group-data-[theme=dark]:hx-hidden">深色</span></div>
+</button>
+</div><hr class="dark:hx-border-neutral-800" /><div
+    class="hx-max-w-screen-xl hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
+  >
+    <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start"><div class="hx-mt-6 hx-text-xs"><img class="favicon" src="/favicon-32x32.png">Copyright © 2018 - 2025 保罗札记. All Rights Reserved</div>
+    </div>
+  </div>
+</footer>
+    
+    <script defer src="/js/main.js" integrity=""></script>
+
+
+<script defer src="/lib/flexsearch/flexsearch.bundle.min.0425860527cc9968f9f049421c7a56b39327d475e2e3a8f550416be3a9134327.js" integrity="sha256-BCWGBSfMmWj58ElCHHpWs5Mn1HXi46j1UEFr46kTQyc="></script>
+    <script defer src="/zh-cn.search.js" integrity=""></script>
+
+
+  </body>
+</html>

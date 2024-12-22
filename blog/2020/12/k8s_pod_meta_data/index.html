@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon shortcut" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.png" type="image/png" />
+<link rel="icon" href="/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/favicon-180x180.png" type="image/png" sizes="180x180" />
+<link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
+
+  <title>Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源 – 保罗札记</title>
+  <meta name="description" content="通过Downward API传递元数据 对于pod调度、运行前预设的数据，可以通过环境变量或者configMap和secret卷向应用传递配置数据。但是对于那些不能预先知道的数据, 比如pod的IP、 主机名或者是通过ReplicaSet等控制生成的pod名称，该如何获取呢？这种类型的数据，可以通过使用Kubernetes Downward API解决。" />
+
+  
+    <link rel="canonical" href="http://localhost:1313/blog/2020/12/k8s_pod_meta_data/" itemprop="url" />
+  
+
+  
+
+<meta property="og:title" content="Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源" />
+<meta property="og:description" content="通过Downward API传递元数据
+    对于pod调度、运行前预设的数据，可以通过环境变量或者configMap和secret卷向应用传递配置数据。但是对于那些不能预先知道的数据, 比如pod的IP、 主机名或者是通过ReplicaSet等控制生成的pod名称，该如何获取呢？这种类型的数据，可以通过使用Kubernetes Downward API解决。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/2020/12/k8s_pod_meta_data/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2020-12-26T14:53:00+08:00" />
+<meta property="article:modified_time" content="2024-11-30T18:58:28+08:00" />
+
+  
+  <meta itemprop="name" content="Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源">
+  <meta itemprop="description" content="通过Downward API传递元数据 对于pod调度、运行前预设的数据，可以通过环境变量或者configMap和secret卷向应用传递配置数据。但是对于那些不能预先知道的数据, 比如pod的IP、 主机名或者是通过ReplicaSet等控制生成的pod名称，该如何获取呢？这种类型的数据，可以通过使用Kubernetes Downward API解决。">
+  <meta itemprop="datePublished" content="2020-12-26T14:53:00+08:00">
+  <meta itemprop="dateModified" content="2024-11-30T18:58:28+08:00">
+  <meta itemprop="wordCount" content="2823">
+  <meta itemprop="keywords" content="Kubernetes">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源">
+  <meta name="twitter:description" content="通过Downward API传递元数据 对于pod调度、运行前预设的数据，可以通过环境变量或者configMap和secret卷向应用传递配置数据。但是对于那些不能预先知道的数据, 比如pod的IP、 主机名或者是通过ReplicaSet等控制生成的pod名称，该如何获取呢？这种类型的数据，可以通过使用Kubernetes Downward API解决。">
+
+    <link href="/css/compiled/main.css" rel="stylesheet" />
+
+
+
+  <link href="/css/custom.css" rel="stylesheet" />
+
+
+
+
+
+  <script>
+     
+    const defaultTheme = 'system';
+
+    const setDarkTheme = () => {
+      document.documentElement.classList.add("dark");
+      document.documentElement.style.colorScheme = "dark";
+    }
+    const setLightTheme = () => {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.style.colorScheme = "light";
+    }
+
+    if ("color-theme" in localStorage) {
+      localStorage.getItem("color-theme") === "dark" ? setDarkTheme() : setLightTheme();
+    } else {
+      defaultTheme === "dark" ? setDarkTheme() : setLightTheme();
+      if (defaultTheme === "system") {
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? setDarkTheme() : setLightTheme();
+      }
+    }
+  </script>
+
+  
+</head>
+<body dir="ltr"><div class="nav-container hx-sticky hx-top-0 hx-z-20 hx-w-full hx-bg-transparent print:hx-hidden">
+  <div class="nav-container-blur hx-pointer-events-none hx-absolute hx-z-[-1] hx-h-full hx-w-full hx-bg-white dark:hx-bg-dark hx-shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] contrast-more:hx-shadow-[0_0_0_1px_#000] dark:hx-shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] contrast-more:dark:hx-shadow-[0_0_0_1px_#fff]"></div>
+
+  <nav class="hx-mx-auto hx-flex hx-items-center hx-justify-end hx-gap-2 hx-h-16 hx-px-6 hx-max-w-[90rem]">
+    <a class="hx-flex hx-items-center hover:hx-opacity-75 ltr:hx-mr-auto rtl:hx-ml-auto" href="/">
+        <img class="hx-block dark:hx-hidden" src="/logos/logo.png" alt="保罗札记" height="46" width="220" />
+        <img class="hx-hidden dark:hx-block" src="/logos/logo.png" alt="保罗札记" height="46" width="220" />
+    </a><a
+            title="首页"
+            href="/"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">首页</span>
+          </a><a
+            title="技术博客"
+            href="/blog"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-font-medium"
+          >
+            <span class="hx-text-center">技术博客</span>
+          </a><a
+            title="关于我"
+            href="/about"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">关于我</span>
+          </a><div class="search-wrapper hx-relative md:hx-w-64">
+  <div class="hx-relative hx-flex hx-items-center hx-text-gray-900 contrast-more:hx-text-gray-800 dark:hx-text-gray-300 contrast-more:dark:hx-text-gray-300">
+    <input
+      placeholder="搜索文档..."
+      class="search-input hx-block hx-w-full hx-appearance-none hx-rounded-lg hx-px-3 hx-py-2 hx-transition-colors hx-text-base hx-leading-tight md:hx-text-sm hx-bg-black/[.05] dark:hx-bg-gray-50/10 focus:hx-bg-white dark:focus:hx-bg-dark placeholder:hx-text-gray-500 dark:placeholder:hx-text-gray-400 contrast-more:hx-border contrast-more:hx-border-current"
+      type="search"
+      value=""
+      spellcheck="false"
+    />
+    <kbd
+      class="hx-absolute hx-my-1.5 hx-select-none ltr:hx-right-1.5 rtl:hx-left-1.5 hx-h-5 hx-rounded hx-bg-white hx-px-1.5 hx-font-mono hx-text-[10px] hx-font-medium hx-text-gray-500 hx-border dark:hx-border-gray-100/20 dark:hx-bg-dark/50 contrast-more:hx-border-current contrast-more:hx-text-current contrast-more:dark:hx-border-current hx-items-center hx-gap-1 hx-transition-opacity hx-pointer-events-none hx-hidden sm:hx-flex"
+    >
+      CTRL K
+    </kbd>
+  </div>
+
+  <div>
+    <ul
+      class="search-results hextra-scrollbar hx-hidden hx-border hx-border-gray-200 hx-bg-white hx-text-gray-100 dark:hx-border-neutral-800 dark:hx-bg-neutral-900 hx-absolute hx-top-full hx-z-20 hx-mt-2 hx-overflow-auto hx-overscroll-contain hx-rounded-xl hx-py-2.5 hx-shadow-xl hx-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] md:hx-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx-inset-x-0 ltr:md:hx-left-auto rtl:md:hx-right-auto contrast-more:hx-border contrast-more:hx-border-gray-900 contrast-more:dark:hx-border-gray-50 hx-w-screen hx-min-h-[100px] hx-max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      style="transition: max-height 0.2s ease 0s;"
+    ></ul>
+  </div>
+</div>
+<button type="button" aria-label="Menu" class="hamburger-menu -hx-mr-2 hx-rounded hx-p-2 active:hx-bg-gray-400/20 md:hx-hidden"><svg height=24 fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8H20"></path></g><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16H20"></path></g></svg></button>
+  </nav>
+</div>
+
+  <div class="hx-mx-auto hx-flex hx-max-w-screen-xl">
+    
+    
+<nav class="hextra-toc hx-order-last hx-hidden hx-w-64 hx-shrink-0 xl:hx-block print:hx-hidden hx-px-4" aria-label="table of contents">
+    <div class="hextra-scrollbar hx-sticky hx-top-16 hx-overflow-y-auto hx-pr-4 hx-pt-6 hx-text-sm [hyphens:auto] hx-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:hx--mr-4 rtl:hx--ml-4"><p class="hx-mb-4 hx-font-semibold hx-tracking-tight">内容目录</p><ul>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e9%80%9a%e8%bf%87downward-api%e4%bc%a0%e9%80%92%e5%85%83%e6%95%b0%e6%8d%ae">通过Downward API传递元数据
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e9%80%9a%e8%bf%87%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f%e6%9a%b4%e9%9c%b2%e5%85%83%e6%95%b0%e6%8d%ae">通过环境变量暴露元数据
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e9%80%9a%e8%bf%87%e5%8d%b7%e4%bc%a0%e9%80%92%e5%85%83%e6%95%b0%e6%8d%ae">通过卷传递元数据
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e8%ae%bf%e9%97%ae%e6%9d%83%e9%99%90%e8%ae%be%e7%bd%ae">访问权限设置
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%bf%ae%e6%94%b9%e6%a0%87%e7%ad%be%e4%b8%8e%e6%b3%a8%e8%a7%a3">修改标签与注解
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%9c%a8%e5%8d%b7%e7%9a%84%e5%ae%9a%e4%b9%89%e4%b8%ad%e5%bc%95%e7%94%a8%e5%ae%b9%e5%99%a8%e7%ba%a7%e7%9a%84%e5%85%83%e6%95%b0%e6%8d%ae">在卷的定义中引用容器级的元数据
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#downward-api%e4%bc%98%e7%bc%ba%e7%82%b9">Downward API优缺点
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%b8%8ekubernetes-api%e6%9c%8d%e5%8a%a1%e5%99%a8%e4%ba%a4%e4%ba%92">与Kubernetes API服务器交互
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e9%80%9a%e8%bf%87-kubectl-proxy-%e8%ae%bf%e9%97%ae-api-%e6%9c%8d%e5%8a%a1%e5%99%a8">通过 Kubectl proxy 访问 API 服务器
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%bb%8epod%e5%86%85%e9%83%a8%e4%b8%8eapi%e6%9c%8d%e5%8a%a1%e5%99%a8%e8%bf%9b%e8%a1%8c%e4%ba%a4%e4%ba%92">从pod内部与API服务器进行交互
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#1-%e8%8e%b7%e5%8f%96api%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%9c%b0%e5%9d%80">(1) 获取API服务器地址
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#2%e9%aa%8c%e8%af%81%e8%ba%ab%e4%bb%bd">（2）验证身份
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e9%80%9a%e8%bf%87-ambassador-%e5%ae%b9%e5%99%a8%e7%ae%80%e5%8c%96%e4%b8%8e-api-%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%9a%84%e4%ba%a4%e4%ba%92">通过 ambassador 容器简化与 API 服务器的交互
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%bd%bf%e7%94%a8%e5%ae%a2%e6%88%b7%e7%ab%af%e5%ba%93%e4%b8%8eapi%e6%9c%8d%e5%8a%a1%e5%99%a8%e4%ba%a4%e4%ba%92">使用客户端库与API服务器交互
+        </a>
+      </li></ul>
+      <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400"><div>
+          <div class="label_post_tag hx-text-gray-500">文章分类</div>
+          <div class="post_tag">
+            <a class="tag_item">kubernetes</a></div>
+        </div><div>
+          <div class="label_post_tag hx-text-gray-500">标签</div>
+          <div class="post_tag">
+            <a class="tag_item">kubernetes</a></div>
+        </div>
+        <div class="container_back_to_top">
+          <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx-transition-all hx-duration-75 hx-opacity-0 hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50">
+            <span>返回顶部</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hx-inline ltr:hx-ml-1 rtl:hx-mr-1 hx-h-3.5 hx-w-3.5 hx-border hx-rounded-full hx-border-gray-500 hover:hx-border-gray-900 dark:hx-border-gray-400 dark:hover:hx-border-gray-100 contrast-more:hx-border-gray-800 contrast-more:dark:hx-border-gray-50">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+            </svg>
+        </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+    <article class="hx-w-full hx-break-words hx-flex hx-min-h-[calc(100vh-var(--navbar-height))] hx-min-w-0 hx-justify-center hx-pb-8 hx-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
+        
+  <div class="hx-mt-1.5 hx-flex hx-items-center hx-gap-1 hx-overflow-hidden hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 contrast-more:hx-text-current">
+        <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
+          <a href="/blog/">技术博客</a>
+        </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源</div>
+  </div>
+
+        <h1 class="hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100">Kubernetes in Action笔记 - (11) 从应用访问pod元数据及其他资源</h1>
+        <div class="hx-mt-4 hx-mb-16 hx-text-gray-500 hx-text-sm hx-flex hx-items-center hx-flex-wrap hx-gap-y-2"><span class="hx-mr-1">December 26, 2020</span></div>
+        <div class="content">
+          <h2>通过Downward API传递元数据<span class="hx-absolute -hx-mt-20" id="通过downward-api传递元数据"></span>
+    <a href="#%e9%80%9a%e8%bf%87downward-api%e4%bc%a0%e9%80%92%e5%85%83%e6%95%b0%e6%8d%ae" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>对于pod调度、运行前预设的数据，可以通过环境变量或者configMap和secret卷向应用传递配置数据。但是对于那些不能预先知道的数据, 比如pod的IP、 主机名或者是通过ReplicaSet等控制生成的pod名称，该如何获取呢？这种类型的数据，可以通过使用Kubernetes Downward API解决。</p>
+<p>Downward API可以给在pod中运行的进程暴露pod的元数据。目前可以给容器传递以下数据:</p>
+<ul>
+<li>pod的名称</li>
+<li>pod的IP</li>
+<li>pod所在的命名空间</li>
+<li>pod运行节点的名称</li>
+<li>pod运行所归属的服务账户的名称</li>
+<li>每个容器请求的CPU和内存的使用量</li>
+<li>每个容器可以使用的CPU和内存的限制</li>
+<li>pod的标签</li>
+<li>pod的注解</li>
+</ul>
+<h3>通过环境变量暴露元数据<span class="hx-absolute -hx-mt-20" id="通过环境变量暴露元数据"></span>
+    <a href="#%e9%80%9a%e8%bf%87%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f%e6%9a%b4%e9%9c%b2%e5%85%83%e6%95%b0%e6%8d%ae" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">POD_NAME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 引用pod manifest中的元数据名称字段,而不是设定一个具体的值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">fieldRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">fieldPath</span><span class="p">:</span><span class="w"> </span><span class="l">metadata.name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">POD_NAMESPACE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">fieldRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">fieldPath</span><span class="p">:</span><span class="w"> </span><span class="l">metadata.namespace</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">POD_IP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">fieldRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">fieldPath</span><span class="p">:</span><span class="w"> </span><span class="l">status.podIP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">NODE_NAME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">fieldRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">fieldPath</span><span class="p">:</span><span class="w"> </span><span class="l">spec.nodeName</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">SERVICE_ACCOUNT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">fieldRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">fieldPath</span><span class="p">:</span><span class="w"> </span><span class="l">spec.serviceAccountName</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">CONTAINER_CPU_REQUEST_MILLICORES</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 容器请求的CPU和内存使用量是使用resourceFieldRef字段而不是feildRef字段</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">resourceFieldRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">resource</span><span class="p">:</span><span class="w"> </span><span class="l">requests.cpu</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">divisor</span><span class="p">:</span><span class="w"> </span><span class="l">1m  </span><span class="w"> </span><span class="c"># 对于资源相关字段，定义一个基数单位，从而生成每一部分的值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">CONTAINER MEMORY LIMIT KIBIBYTES</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">resourceFieldRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">resource</span><span class="p">:</span><span class="w"> </span><span class="l">limits.memory</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">divisor</span><span class="p">:</span><span class="w"> </span><span class="l">1Ki</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>对于暴露资源请 和使用限制的环境变量, 我们会设定一个基数单位。实际的资源请求值和限制值除以这个基数单位, 所得的结果通过环境变量暴露出去。在上面的例子中, 我们设定 CPU 请求的基数为1m (即1 millicore, 也就是千分之一核CPU)。当我们设置资源请求为15m时, 环境变量CONTAINER_CPU_REQUEST_MILLICORES的值就是15</p>
+<p>在完成创建pod后, 我们可以使用kubectl exec命令来查看容器中的所有环境变量</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl <span class="nb">exec</span> downward env</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>通过卷传递元数据<span class="hx-absolute -hx-mt-20" id="通过卷传递元数据"></span>
+    <a href="#%e9%80%9a%e8%bf%87%e5%8d%b7%e4%bc%a0%e9%80%92%e5%85%83%e6%95%b0%e6%8d%ae" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>可以定义一个downwardAPI卷，并以文件的方式挂载在容器中。</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 后面会添加定义，通过downwardAPI卷来暴露这些标签</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">downward</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">foo</span><span class="p">:</span><span class="w"> </span><span class="l">bar</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key1</span><span class="p">:</span><span class="w"> </span><span class="l">value1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key2</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">      multi
+</span></span></span><span class="line"><span class="cl"><span class="sd">      line
+</span></span></span><span class="line"><span class="cl"><span class="sd">      value</span><span class="w">      
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">busybox</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;sleep&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;9999999&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">15m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">l00Ki</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">100m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">4Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 挂载卷</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">downward</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/downward</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 定义一个名字为downward的downwardAPI卷</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">downward</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">downwardAPI</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">items</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># Pod名称（来自manifest文件中的metadata.name字段）将被写入podName这个文件</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;podName&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">fieldRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">fieldPath</span><span class="p">:</span><span class="w"> </span><span class="l">metadata.name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;podNamespace&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">fieldRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">fieldPath</span><span class="p">:</span><span class="w"> </span><span class="l">metadata.namespace</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;labels&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">fieldRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">fieldPath</span><span class="p">:</span><span class="w"> </span><span class="l">metadata.labels</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;annotations&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">fieldRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">fieldPath</span><span class="p">:</span><span class="w"> </span><span class="l">metadata.annotations</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;containerCpuRequestMilliCores&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">resourceFieldRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">containerName</span><span class="p">:</span><span class="w"> </span><span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">resource</span><span class="p">:</span><span class="w"> </span><span class="l">requests.cpu</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">divisor</span><span class="p">:</span><span class="w"> </span><span class="l">1m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;containerMemoryLimitBytes&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">resourceFieldRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">containerName</span><span class="p">:</span><span class="w"> </span><span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">resource</span><span class="p">:</span><span class="w"> </span><span class="l">limits.memory</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">divisor</span><span class="p">:</span><span class="w"> </span><span class="m">1</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>访问权限设置<span class="hx-absolute -hx-mt-20" id="访问权限设置"></span>
+    <a href="#%e8%ae%bf%e9%97%ae%e6%9d%83%e9%99%90%e8%ae%be%e7%bd%ae" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>与configMap和secret卷一样，可以通过pod定义中downwardAPI卷的defaultMode属性来改变文件的访问权限设置。</p>
+<h3>修改标签与注解<span class="hx-absolute -hx-mt-20" id="修改标签与注解"></span>
+    <a href="#%e4%bf%ae%e6%94%b9%e6%a0%87%e7%ad%be%e4%b8%8e%e6%b3%a8%e8%a7%a3" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>可以在pod运行时修改标签和注解。当标签和注解被修改后, k8s会更新存有相关信息的文件,从而使pod可以获取最新的数据。这也解释了为什么不能通过环境变量的方式暴露标签和注解,在环境变量方式下,一旦标签和注解被修改,新的值将无法暴露。</p>
+<h3>在卷的定义中引用容器级的元数据<span class="hx-absolute -hx-mt-20" id="在卷的定义中引用容器级的元数据"></span>
+    <a href="#%e5%9c%a8%e5%8d%b7%e7%9a%84%e5%ae%9a%e4%b9%89%e4%b8%ad%e5%bc%95%e7%94%a8%e5%ae%b9%e5%99%a8%e7%ba%a7%e7%9a%84%e5%85%83%e6%95%b0%e6%8d%ae" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>当暴露容器级的元数据时,如容器可使用的资源限制或者资源请求(使用字段resourceFieldRef), 必须指定引用资源字段对应的容器名称。这是因为对于卷的定义是基于 pod 级的,而不是容器级的。当引用卷定义某一个容器的资源字段时, 需要明确说明引用的容器的名称。这个规则对于只包含单容器的 pod 同样适用。</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resourceFieldRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containerName</span><span class="p">:</span><span class="w"> </span><span class="l">main  </span><span class="w"> </span><span class="c">#必须指定容器名称</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">resource</span><span class="p">:</span><span class="w"> </span><span class="l">limits.memory</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">divisor</span><span class="p">:</span><span class="w"> </span><span class="m">1</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>使用卷的方式来暴露容器的资源请求和使用限制比环境变量的方式稍显复杂，但好处是如果有必要, 可以传递一个容器的资源字段到另一个容器(当然两个容器必须处于同一个 pod)。使用环境变量的方式, 一个容器只能传递它自身资源申请求和限制的信息。</p>
+<h3>Downward API优缺点<span class="hx-absolute -hx-mt-20" id="downward-api优缺点"></span>
+    <a href="#downward-api%e4%bc%98%e7%bc%ba%e7%82%b9" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>DownwardAPI 方式并不复杂, 它使得应用独立于k8s。这一点在处理部分数据已在环境变量中的现有应用时特别有用。它使得我们不必通过修改应用, 或者使用 shell 脚本获取数据再传递给环境变量的方式来暴露数据。</p>
+<p>不过这种方式获取的元数据是相当有限的, 如果需要获取更多的元数据, 需要使用直接访问 k8s API 服务器的方式</p>
+<h2>与Kubernetes API服务器交互<span class="hx-absolute -hx-mt-20" id="与kubernetes-api服务器交互"></span>
+    <a href="#%e4%b8%8ekubernetes-api%e6%9c%8d%e5%8a%a1%e5%99%a8%e4%ba%a4%e4%ba%92" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><h3>通过 Kubectl proxy 访问 API 服务器<span class="hx-absolute -hx-mt-20" id="通过-kubectl-proxy-访问-api-服务器"></span>
+    <a href="#%e9%80%9a%e8%bf%87-kubectl-proxy-%e8%ae%bf%e9%97%ae-api-%e6%9c%8d%e5%8a%a1%e5%99%a8" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>kubectl proxy命令启动了一 个代理服务来接收来自你本机的 HTTP 连接并转发至 API 服务器, 同时处理身份认证, 所以不需要每次请求都上传认证凭证。</p>
+<p>运行代理很简单, 执行下面的命令</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ kubectl proxy
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Starting to serve on 127.0.0.1:8001</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>上面的返回结果可以看到已经在本地8001代理端口接受请求。执行下面的命令，服务器会返回一个路径清单，这些路径对应了创建Pod、Service这些资源时定义的API组和版本信息</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl http://localhost: <span class="m">8001</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>通过这些路径可以获取更多的信息，比如下面这个命令可以获取到集群中所有job实例</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<pre><code>curl http://localhost:8001/apis/batch/vl/jobs</code></pre><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>从pod内部与API服务器进行交互<span class="hx-absolute -hx-mt-20" id="从pod内部与api服务器进行交互"></span>
+    <a href="#%e4%bb%8epod%e5%86%85%e9%83%a8%e4%b8%8eapi%e6%9c%8d%e5%8a%a1%e5%99%a8%e8%bf%9b%e8%a1%8c%e4%ba%a4%e4%ba%92" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>每个pod都会被自动挂载上一个默认的secret卷，映射到每个容器的 /var/run/secrets/kubernetes.io/serviceaccount目录下。 这个Secret包含三个条目：ca.crt、namespace与token, 包含了从pod内部安全访问KubernetesAPI服务器所需的全部信息。</p>
+<p>在pod中运行的应用如何正确访问k8s的 API:</p>
+<ul>
+<li>应用应该验证 API 服务器的证书是否是证书机构所签发, 这个证书是在ca.crt文件中。</li>
+<li>应用应该将它在token文件中持有的凭证通过Authorization标头来获得 API 服务器的授权。</li>
+<li>当对pod所在命名空间的 API对象进行CRUD操作时, 应该使用namespace文件来传递命名空间信息到 API服务器。</li>
+</ul>
+<h4>(1) 获取API服务器地址<span class="hx-absolute -hx-mt-20" id="1-获取api服务器地址"></span>
+    <a href="#1-%e8%8e%b7%e5%8f%96api%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%9c%b0%e5%9d%80" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>可以使用下面的命令来获取API服务器地址</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ kubectl get svc
+</span></span><span class="line"><span class="cl">NAME        CLUSTER-IP  EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>   AGE
+</span></span><span class="line"><span class="cl">kubernetes  10.0.0.1    &lt;none&gt;        443/TCP   46d</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>可以在容器内通过查询KUBERNETES_SERVICE_HOST 和 KUBERNETES_SERVICE_PORT 这两个环境变量</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ env <span class="p">|</span> grep KUBERNETES SERVICE
+</span></span><span class="line"><span class="cl">KUBERNETES_SERVICE <span class="nv">_PORT</span><span class="o">=</span><span class="m">443</span>
+</span></span><span class="line"><span class="cl"><span class="nv">KUBERNETES_SERVICE_HOST</span><span class="o">=</span>l0.0.0.1
+</span></span><span class="line"><span class="cl"><span class="nv">KUBERNETES_SERVICE_PORT_HTTPS</span><span class="o">=</span><span class="m">443</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>由于每个服务都获得一个DNS入口，也可以简单地将 curl 指向 https://kubernetes，DNS会自动解析到k8s API服务器</p>
+<h4>（2）验证身份<span class="hx-absolute -hx-mt-20" id="2验证身份"></span>
+    <a href="#2%e9%aa%8c%e8%af%81%e8%ba%ab%e4%bb%bd" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>指定证书</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt https://kubernetes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">或者，先定义成环境变量来简化后续的调用
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">CURL_CA_BUNDLE</span><span class="o">=</span>/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+</span></span><span class="line"><span class="cl">curl https://kubernetes</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>需要获得 API 服务器的授权, 以便可以读取并进一步修改或删除部署在集群中的 API 对象。</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">TOKEN</span><span class="o">=</span><span class="k">$(</span>cat /var/run/secrets/kubernetes.io/serviceaccount/token<span class="k">)</span>
+</span></span><span class="line"><span class="cl">curl -H <span class="s2">&#34;Authorization: Bearer </span><span class="nv">$TOKEN</span><span class="s2">&#34;</span> https://kubernetes</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>指定访问命名空间</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">NS</span><span class="o">=</span><span class="k">$(</span>cat /var/run/secrets/kubernetes.io/serviceaccount/namespace<span class="k">)</span>
+</span></span><span class="line"><span class="cl">curl -H <span class="s2">&#34;Authorization: Bearer </span><span class="nv">$TOKEN</span><span class="s2">&#34;</span> https://kubernetes/api/vl/namespaces/<span class="nv">$NS</span>/pods</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>通过 ambassador 容器简化与 API 服务器的交互<span class="hx-absolute -hx-mt-20" id="通过-ambassador-容器简化与-api-服务器的交互"></span>
+    <a href="#%e9%80%9a%e8%bf%87-ambassador-%e5%ae%b9%e5%99%a8%e7%ae%80%e5%8c%96%e4%b8%8e-api-%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%9a%84%e4%ba%a4%e4%ba%92" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>使用HTTPS、 证书和授权凭证, 对千开发者来说看上去有点复杂。 在pod中 向代理而不是直接向API服务器发送请求,
+通过代理来处理授权、 加密和服务器验证。</p>
+<p>如果一个应用需要查询API服务器，可以在主容器运行的同时, 启动一个ambassador容器,并在其中运行kubecctl proxy命令, 通过它来实现与API服务器的交互。在这种模式下, 运行在主容器中的应用不是直接与API服务器进行交互, 而是通过HTTP协议(不是HTTPS协议)与ambassador连接, 并且由ambassador通过HTTPS协议来连接API服务器, 对应用透明地来处理安全问题。 这种方式同样使用了默认凭证Secret卷中的文件。</p>
+<h3>使用客户端库与API服务器交互<span class="hx-absolute -hx-mt-20" id="使用客户端库与api服务器交互"></span>
+    <a href="#%e4%bd%bf%e7%94%a8%e5%ae%a2%e6%88%b7%e7%ab%af%e5%ba%93%e4%b8%8eapi%e6%9c%8d%e5%8a%a1%e5%99%a8%e4%ba%a4%e4%ba%92" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>目前, 存在由 API Machinery special interest group(SIG) 支持的两个版本的Kuberbetes API 客户端库。</p>
+<ul>
+<li>Galang client</li>
+<li>Python</li>
+</ul>
+<p>k8s社区中还有其他各种不同语言的客户端库</p>
+<hr>
+<p>图书资料：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30418855/" target="_blank" rel="noopener">https://book.douban.com/subject/30418855/</a></li>
+</ul>
+
+        </div>
+        
+    <div class="hx-mt-12 hx-mb-8 hx-block hx-text-xs hx-text-gray-500 ltr:hx-text-right rtl:hx-text-left dark:hx-text-gray-400">最后更新于 <time datetime="2024-11-30T18:58:28.000Z">November 30, 2024</time></div>
+        
+        <div class="hx-mb-8 hx-flex hx-items-center hx-border-t hx-pt-8 dark:hx-border-neutral-800 contrast-more:hx-border-neutral-400 dark:contrast-more:hx-border-neutral-400 print:hx-hidden"><a
+        href="/blog/2020/12/k8s_config_map_secret/"
+        title="Kubernetes in Action笔记 - (10) 使用ConfigMap与Secret传递应用配置"
+        class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-pr-4 rtl:hx-pl-4"
+      ><svg class="hx-inline hx-h-5 hx-shrink-0 ltr:hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>Kubernetes in Action笔记 - (10) 使用ConfigMap与Secret传递应用配置</a><a
+        href="/blog/2020/12/k8s_deployment/"
+        title="Kubernetes in Action笔记 - (12) Deployment"
+        class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-ml-auto ltr:hx-pl-4 ltr:hx-text-right rtl:hx-mr-auto rtl:hx-pr-4 rtl:hx-text-left"
+      >Kubernetes in Action笔记 - (12) Deployment<svg class="hx-inline hx-h-5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a></div>
+        
+      </main>
+    </article>
+  </div>
+
+      <footer class="hextra-footer hx-bg-gray-100 hx-pb-[env(safe-area-inset-bottom)] dark:hx-bg-neutral-900 print:hx-bg-transparent"><div class="hx-mx-auto hx-flex hx-gap-2 hx-py-2 hx-px-4 hx-max-w-screen-xl"><button
+  title="切换主题"
+  data-theme="light"
+  class="theme-toggle hx-group hx-h-7 hx-rounded-md hx-px-2 hx-text-left hx-text-xs hx-font-medium hx-text-gray-600 hx-transition-colors dark:hx-text-gray-400 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50"
+  type="button"
+  aria-label="切换主题"
+>
+  <div class="hx-flex hx-items-center hx-gap-2 hx-capitalize"><svg height=12 class="group-data-[theme=light]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg><span class="group-data-[theme=light]:hx-hidden">浅色</span><svg height=12 class="group-data-[theme=dark]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg><span class="group-data-[theme=dark]:hx-hidden">深色</span></div>
+</button>
+</div><hr class="dark:hx-border-neutral-800" /><div
+    class="hx-max-w-screen-xl hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
+  >
+    <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start"><div class="hx-mt-6 hx-text-xs"><img class="favicon" src="/favicon-32x32.png">Copyright © 2018 - 2025 保罗札记. All Rights Reserved</div>
+    </div>
+  </div>
+</footer>
+    
+    <script defer src="/js/main.js" integrity=""></script>
+
+
+<script defer src="/lib/flexsearch/flexsearch.bundle.min.0425860527cc9968f9f049421c7a56b39327d475e2e3a8f550416be3a9134327.js" integrity="sha256-BCWGBSfMmWj58ElCHHpWs5Mn1HXi46j1UEFr46kTQyc="></script>
+    <script defer src="/zh-cn.search.js" integrity=""></script>
+
+
+  </body>
+</html>

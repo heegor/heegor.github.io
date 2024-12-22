@@ -1,20 +1,64 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>kafka on 保罗札记</title>
-    <link>https://www.zengxi.net/categories/kafka/</link>
-    <description>Recent content in kafka on 保罗札记</description>
+    <title>保罗札记 – Kafka</title>
+    <link>http://localhost:1313/categories/kafka/</link>
+    <description>Recent content in Kafka on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Tue, 16 Jan 2024 21:01:00 +0800</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/categories/kafka/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/categories/kafka/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>Kafka 报 InvalidPidMappingException 问题解决</title>
-      <link>https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/</link>
+      <link>http://localhost:1313/blog/2024/01/kafka-invalid-pid-mapping/</link>
       <pubDate>Tue, 16 Jan 2024 21:01:00 +0800</pubDate>
-      <guid>https://www.zengxi.net/2024/01/kafka-invalid-pid-mapping/</guid>
-      <description>有个开发组不时地在测试环境中遇到下面的问题：&#xA;1Caused by: org.apache.kafka.common.errors.InvalidPidMappingException: The producer attempted to use a producer id which is not currently assigned to its transactional id 经过排查发现，这个开发组在代码中使用了 Kafka 的事务。这个错误的抛出与使用了事务有关系。&#xA;Spring kafka 支持一个叫做“僵尸围栏”的机制，用于处理在事务中参与的生产者或消费者与协调器之间的连接丢失或发生故障的情况。这个机制的目的是防止由于参与者变成无法通信的 &amp;quot;僵尸&amp;quot; 状态而导致事务状态不一致。具体来说，当一个生产者或消费者在参与 Kafka 事务期间与协调器失去联系时，它可能处于一种无法确认其事务状态的状态。&amp;quot;Zombie fencing&amp;quot; 的任务是在检测到这种情况时，将这个参与者标记为 &amp;quot;僵尸&amp;quot; 并且不再考虑其在事务中的状态。&#xA;为了识别和解决僵尸实例的问题，Kafka 为每个事务生产者分配一个称为 transaction id 的惟一标识符。这用于跨流程重新启动标识相同的生产者实例。事务生产者的第一个操作必须是在 kafka 集群中是显式地注册其 transaction id，接着 Kafka 代理会用给定的 transaction id 来检查已开启的事务并结束他们。它还增加与 transaction id 关联的 epoch 值。这个 epoch 是存储在每个 transaction id 中的内部元数据。一旦 epoch 发生碰撞，任何具有相同 transaction id 的生产者，只要带有老的 epoch 值都被认为是僵尸并且被隔离，同时来自这些生产者的未来事务写将被拒绝。&#xA;kafka 中有个 transactional.id.expiration.ms 配置，当生产者与集群超过这个时间长度没有通讯的话，transaction id 就会被设置成过期，这个就意味着被标记成“僵尸”状态。如果该生产者后面再次与 Kafka 代理通讯，就会接收到本文开头的那个异常。</description>
+      
+      <guid>http://localhost:1313/blog/2024/01/kafka-invalid-pid-mapping/</guid>
+      <description>
+        
+        
+        &lt;p&gt;有个开发组不时地在测试环境中遇到下面的问题：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;Caused by: org.apache.kafka.common.errors.InvalidPidMappingException: The producer attempted to use a producer id which is not currently assigned to its transactional id&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;经过排查发现，这个开发组在代码中使用了 Kafka 的事务。这个错误的抛出与使用了事务有关系。&lt;/p&gt;
+&lt;p&gt;Spring kafka 支持一个叫做“僵尸围栏”的机制，用于处理在事务中参与的生产者或消费者与协调器之间的连接丢失或发生故障的情况。这个机制的目的是防止由于参与者变成无法通信的 &amp;ldquo;僵尸&amp;rdquo; 状态而导致事务状态不一致。具体来说，当一个生产者或消费者在参与 Kafka 事务期间与协调器失去联系时，它可能处于一种无法确认其事务状态的状态。&amp;ldquo;Zombie fencing&amp;rdquo; 的任务是在检测到这种情况时，将这个参与者标记为 &amp;ldquo;僵尸&amp;rdquo; 并且不再考虑其在事务中的状态。&lt;/p&gt;
+&lt;p&gt;为了识别和解决僵尸实例的问题，Kafka 为每个事务生产者分配一个称为 transaction id 的惟一标识符。这用于跨流程重新启动标识相同的生产者实例。事务生产者的第一个操作必须是在 kafka 集群中是显式地注册其 transaction id，接着 Kafka 代理会用给定的 transaction id 来检查已开启的事务并结束他们。它还增加与 transaction id 关联的 &lt;code&gt;epoch&lt;/code&gt; 值。这个 &lt;code&gt;epoch&lt;/code&gt; 是存储在每个 transaction id 中的内部元数据。一旦 &lt;code&gt;epoch&lt;/code&gt; 发生碰撞，任何具有相同 transaction id 的生产者，只要带有老的 &lt;code&gt;epoch&lt;/code&gt; 值都被认为是僵尸并且被隔离，同时来自这些生产者的未来事务写将被拒绝。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/p/2024/01/kafka-invalid-pid-mapping_01.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;kafka 中有个 &lt;code&gt;transactional.id.expiration.ms&lt;/code&gt; 配置，当生产者与集群超过这个时间长度没有通讯的话，transaction id 就会被设置成过期，这个就意味着被标记成“僵尸”状态。如果该生产者后面再次与 Kafka 代理通讯，就会接收到本文开头的那个异常。&lt;/p&gt;
+&lt;p&gt;解决这个问题的也比较简单，在 producer factory 中设置一下 max age 这个属性值，比 &lt;code&gt;transactional.id.expiration.ms&lt;/code&gt; 属性值小就可以了。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Starting with version 2.5.8, you can now configure the maxAge property on the producer factory. This is useful when using transactional producers that might lay idle for the broker’s transactional.id.expiration.ms. With current kafka-clients, this can cause a ProducerFencedException without a rebalance. By setting the maxAge to less than transactional.id.expiration.ms, the factory will refresh the producer if it is past it’s max age.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;参考链接：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/59398186/facing-org-apache-kafka-common-errors-invalidpidmappingexception-in-spring-kafka&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://stackoverflow.com/questions/59398186/facing-org-apache-kafka-common-errors-invalidpidmappingexception-in-spring-kafka&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.spring.io/spring-kafka/docs/2.8.11/reference/html/#transactions&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://docs.spring.io/spring-kafka/docs/2.8.11/reference/html/#transactions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.confluent.io/blog/transactions-apache-kafka/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.confluent.io/blog/transactions-apache-kafka/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>

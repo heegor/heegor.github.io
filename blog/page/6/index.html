@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon shortcut" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.png" type="image/png" />
+<link rel="icon" href="/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/favicon-180x180.png" type="image/png" sizes="180x180" />
+<link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
+
+  <title>技术博客 – 保罗札记</title>
+  <meta name="description" content="" />
+
+  
+    <link rel="canonical" href="http://localhost:1313/blog/" itemprop="url" />
+  
+
+  
+
+<meta property="og:title" content="技术博客" />
+<meta property="og:description" content="Paul Zeng&#39;s personal website and blog" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://localhost:1313/blog/" />
+
+  
+  <meta itemprop="name" content="技术博客">
+  <meta itemprop="description" content="Paul Zeng&#39;s personal website and blog">
+  <meta itemprop="datePublished" content="2024-10-23T13:01:00+08:00">
+  <meta itemprop="dateModified" content="2024-11-30T18:58:28+08:00">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="技术博客">
+  <meta name="twitter:description" content="Paul Zeng&#39;s personal website and blog">
+
+    <link href="/css/compiled/main.css" rel="stylesheet" />
+
+
+
+  <link href="/css/custom.css" rel="stylesheet" />
+
+
+
+
+
+  <script>
+     
+    const defaultTheme = 'system';
+
+    const setDarkTheme = () => {
+      document.documentElement.classList.add("dark");
+      document.documentElement.style.colorScheme = "dark";
+    }
+    const setLightTheme = () => {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.style.colorScheme = "light";
+    }
+
+    if ("color-theme" in localStorage) {
+      localStorage.getItem("color-theme") === "dark" ? setDarkTheme() : setLightTheme();
+    } else {
+      defaultTheme === "dark" ? setDarkTheme() : setLightTheme();
+      if (defaultTheme === "system") {
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? setDarkTheme() : setLightTheme();
+      }
+    }
+  </script>
+
+  
+</head>
+<body dir="ltr"><div class="nav-container hx-sticky hx-top-0 hx-z-20 hx-w-full hx-bg-transparent print:hx-hidden">
+  <div class="nav-container-blur hx-pointer-events-none hx-absolute hx-z-[-1] hx-h-full hx-w-full hx-bg-white dark:hx-bg-dark hx-shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] contrast-more:hx-shadow-[0_0_0_1px_#000] dark:hx-shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] contrast-more:dark:hx-shadow-[0_0_0_1px_#fff]"></div>
+
+  <nav class="hx-mx-auto hx-flex hx-items-center hx-justify-end hx-gap-2 hx-h-16 hx-px-6 hx-max-w-[90rem]">
+    <a class="hx-flex hx-items-center hover:hx-opacity-75 ltr:hx-mr-auto rtl:hx-ml-auto" href="/">
+        <img class="hx-block dark:hx-hidden" src="/logos/logo.png" alt="保罗札记" height="46" width="220" />
+        <img class="hx-hidden dark:hx-block" src="/logos/logo.png" alt="保罗札记" height="46" width="220" />
+    </a><a
+            title="首页"
+            href="/"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">首页</span>
+          </a><a
+            title="技术博客"
+            href="/blog"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-font-medium"
+          >
+            <span class="hx-text-center">技术博客</span>
+          </a><a
+            title="关于我"
+            href="/about"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">关于我</span>
+          </a><div class="search-wrapper hx-relative md:hx-w-64">
+  <div class="hx-relative hx-flex hx-items-center hx-text-gray-900 contrast-more:hx-text-gray-800 dark:hx-text-gray-300 contrast-more:dark:hx-text-gray-300">
+    <input
+      placeholder="搜索文档..."
+      class="search-input hx-block hx-w-full hx-appearance-none hx-rounded-lg hx-px-3 hx-py-2 hx-transition-colors hx-text-base hx-leading-tight md:hx-text-sm hx-bg-black/[.05] dark:hx-bg-gray-50/10 focus:hx-bg-white dark:focus:hx-bg-dark placeholder:hx-text-gray-500 dark:placeholder:hx-text-gray-400 contrast-more:hx-border contrast-more:hx-border-current"
+      type="search"
+      value=""
+      spellcheck="false"
+    />
+    <kbd
+      class="hx-absolute hx-my-1.5 hx-select-none ltr:hx-right-1.5 rtl:hx-left-1.5 hx-h-5 hx-rounded hx-bg-white hx-px-1.5 hx-font-mono hx-text-[10px] hx-font-medium hx-text-gray-500 hx-border dark:hx-border-gray-100/20 dark:hx-bg-dark/50 contrast-more:hx-border-current contrast-more:hx-text-current contrast-more:dark:hx-border-current hx-items-center hx-gap-1 hx-transition-opacity hx-pointer-events-none hx-hidden sm:hx-flex"
+    >
+      CTRL K
+    </kbd>
+  </div>
+
+  <div>
+    <ul
+      class="search-results hextra-scrollbar hx-hidden hx-border hx-border-gray-200 hx-bg-white hx-text-gray-100 dark:hx-border-neutral-800 dark:hx-bg-neutral-900 hx-absolute hx-top-full hx-z-20 hx-mt-2 hx-overflow-auto hx-overscroll-contain hx-rounded-xl hx-py-2.5 hx-shadow-xl hx-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] md:hx-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx-inset-x-0 ltr:md:hx-left-auto rtl:md:hx-right-auto contrast-more:hx-border contrast-more:hx-border-gray-900 contrast-more:dark:hx-border-gray-50 hx-w-screen hx-min-h-[100px] hx-max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      style="transition: max-height 0.2s ease 0s;"
+    ></ul>
+  </div>
+</div>
+<button type="button" aria-label="Menu" class="hamburger-menu -hx-mr-2 hx-rounded hx-p-2 active:hx-bg-gray-400/20 md:hx-hidden"><svg height=24 fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8H20"></path></g><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16H20"></path></g></svg></button>
+  </nav>
+</div>
+<div class="hx-mx-auto hx-flex hx-max-w-screen-xl">
+    
+    <article class="hx-w-full hx-break-words hx-flex hx-min-h-[calc(100vh-var(--navbar-height))] hx-min-w-0 hx-justify-center hx-pb-8 hx-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
+        <br class="hx-mt-1.5 hx-text-sm" />
+        <h1 class="hx-text-center hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100">技术博客</h1>
+        <div class="content"></div>
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/09/postgres_startup_readonly_file_error/">Postgres启动时遇到只读文件系统的错误</a></h3>
+                <div><a class="tag_item">postgres</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">问题与解决方法公司内部私有云由于断电，机器没有正常关机，结果导致 Postgres 服务器启动时，报错
+2020-09-09 07:22:15.296 UTC [3876] FATAL: could not remove old lock file &#34;postmaster.pid&#34;: Read-only file system 2020-09-09 07:22:15.296 UTC [3876] HINT: The file seems accidentally left over, but it could not be removed. Please remove the file by hand and try again. …</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/09/postgres_startup_readonly_file_error/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">September 20, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/08/manjaro_debtap/">Manjaro安装deb包</a></h3>
+                <div><a class="tag_item">manjaro</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">安装debtap
+yay -S debtap 替换源，解决国内debtap同步仓库执行超慢的问题。打开 /usr/bin/debtap，更换 debtap 内容：</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/08/manjaro_debtap/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">August 13, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/08/linux_auto_set_brightness/">Manjaro笔记本启动时自动设置屏幕亮度</a></h3>
+                <div><a class="tag_item">manjaro</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">笔记本在manjaro在启动的时候，屏幕可能会默认设置为最大亮度。可以通过设置开机启动脚本，来设置启动时候的亮度。
+1. 创建一个启动service脚本执行下面的命令</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/08/linux_auto_set_brightness/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">August 10, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/08/gitbook_installation_error/">gitbook因为nodejs版本不匹配导致安装报错</a></h3>
+                <div><a class="tag_item">nodejs</a><a class="tag_item">gitbook</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">如果nodejs使用的不是10.x版本，就会报错
+Installing GitBook 3.2.3 /usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287 if (cb) cb.apply(this, arguments) ^ TypeError: cb.apply is not a function at …</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/08/gitbook_installation_error/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">August 1, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/07/zookeeper_purge_file/">zookeeper服务器文件清理</a></h3>
+                <div><a class="tag_item">zookeeper</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">zookeeper主要存放了三类文件，他们都可以在配置文件中指定存储路径：
+snapshot： 内存数据的快照，配置项为dataDir 事务日志：所有与修改数据相关的操作记录，配置项为dataLogDir。在没有dataLogDir配置项的时候，zookeeper默认将事务日志文件和快照日志文件都存储在dataDir对应的目录下。 log4j日志：记录zookeeper集群服务器运行日志。日志的配置地址在conf/目录下的log4j.properties文件中，该文件中有一个配置项为&#34;zookeeper.log.dir=.&#34; 正常运行过程中，zookeeper会不断地把快照数据和日志输出到这些目录。如果没有专门做配置或者人为清理，日 …</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/07/zookeeper_purge_file/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">July 29, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/07/check_zookeeper_version/">查看zookeeper版本</a></h3>
+                <div><a class="tag_item">zookeeper</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">在控制台下面命令
+echo stat|nc localhost 2181 返回结果示例
+Zookeeper version: 3.4.8-1--1, built on Fri, 26 Feb 2016 14:51:43 +0100 Clients: /10.30.1.186:33824[1](queued=0,recved=203121,sent=203148) /10.30.1.116:39374[1](queued=0,recved=56774,sent=56790) /10.30.1.171:37240[1](queued=0,recved=20793,sent=20793) Latency min/avg/max: …</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/07/check_zookeeper_version/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">July 28, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/07/terraform_aliyun_ecs_ssh_key/">terraform中阿里云ECS ssh key变化问题</a></h3>
+                <div><a class="tag_item">terraform</a><a class="tag_item">阿里云</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">目前的terraform脚本中，在新建阿里云ECS的时候，会通过 user_data 属性值来设定初始的ssh key。但是这个就存在一个隐患，如果将来想要改变初始的ssh key，再用terraform来推机器的时候，terraform发现user_data属性值发生变化，会删除现有的ECS并重建。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/07/terraform_aliyun_ecs_ssh_key/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">July 23, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/07/terraform_state_consistent/">解决terraform与远程云服务器资源状态不一致的问题</a></h3>
+                <div><a class="tag_item">terraform</a><a class="tag_item">阿里云</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">概述在运维过程中遇到了下面的情况：长期使用terraform管理资源，但是通过terraform以外的工具对云资源做过属性变更（比如通过网页上的控制台对云资源做属性变更）。此时，云资源的属性与terraform state的信息已经不一致，跑terraform plan就会发现，它会删除现有的，然后重建一个。但是这个是我们不希望看到的，我们希望可以保留原有实例并且把本地的terraform state更新成最新的属性。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/07/terraform_state_consistent/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">July 22, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/07/grep_binary_file_match/">grep 返回 Binary file (standard input) matches</a></h3>
+                <div><a class="tag_item">grep</a><a class="tag_item">shell</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">grep “keyword” xxx.log时输出: Binary file (standard input) matches
+这个是因为grep命令认为它是一个二进制文件。解决方案是，加上一个参数 -a：
+grep -a &#34;keyword&#34; xxx.log 该参数的解释：</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/07/grep_binary_file_match/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">July 20, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/07/clear_chrome_https_cert_cache/">清除chrome中 HTTPS 证书缓存</a></h3>
+                <div><a class="tag_item">chrome</a><a class="tag_item">证书</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">在地址栏输入 chrome://net-internals/#hsts ， 找到 “Delete domain security policies”， 输入对应的域名，点击 Delete 按钮</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/07/clear_chrome_https_cert_cache/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">July 15, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/07/jetty_tmp_dir/">jetty临时目录下的资源文件被删导致js等资源找不到</a></h3>
+                <div><a class="tag_item">jetty</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">生产环境上jetty运行一段时间后，在打开某个网页的时候发现有js、css文件找不到，但是重启之后问题会解决。后来发现是设定了tmpwatch后台任务，定时会清理一次系统的tmp目录。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/07/jetty_tmp_dir/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">July 14, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/07/linux_dd_cmd_write_usb_disk/">Linux下面使用dd命令烧录U盘并查看执行进度</a></h3>
+                <div><a class="tag_item">linux</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">烧录U盘先用fdisk来查看U盘的盘符
+sudo fdisk -l 再用dd命令来写数据到U盘</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/07/linux_dd_cmd_write_usb_disk/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">July 13, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/06/rsyslog_high_memory_usage/">rsyslog内存占用高导致服务不可用</a></h3>
+                <div><a class="tag_item">rsyslog</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">这几天生产环境中某个服务内存不时地被撑爆，原先以为是应用的问题，但是近来没有上过新的代码。该服务的总内存是8G，启动参数关于内存的配置大致是：-Xmx=6.4G，-Xms=4G 左右。看了Grafana上面的监控记录，JVM 老年代使用最多也就到4G左右，在GC的日志中发现也仅仅用到4G左右，并没有到达最高的内存值。这两个结果可以看出来，应该不是应用程序导致内存占用过大。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/06/rsyslog_high_memory_usage/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 22, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/06/pg_check_table_size/">转: postgresql 查看单个表大小</a></h3>
+                <div><a class="tag_item">postgres</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">原文链接：https://blog.csdn.net/kmust20093211/article/details/47616345
+方法一 ，查某个表</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/06/pg_check_table_size/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 15, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/06/pg_wale_continuous_archiving/">postgres增量备份工具：wal-e</a></h3>
+                <div><a class="tag_item">postgres</a><a class="tag_item">wal-e</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">wal-e这个工具可以用来给postgres数据库做基础备份与增量备份，这个对数据库容灾很有帮助。目前它支持将备份存储到AWS S3，Azure Blob Store与Google Storage等。</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/06/pg_wale_continuous_archiving/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 9, 2020</p>
+          </div>
+        
+          <div class="hx-mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/2020/06/string_adapter/">用string adapter来解决系统接口对接中发现的空值验证问题</a></h3>
+                <div><a class="tag_item">java</a></div>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">客户用的是很旧版本的ERP系统，在与客户系统做接口对接的时候发现了一个问题。假设接口请求需要的body是xml格式的，共有三个字段：name, mobile, email。由于客户ERP系统比较老，如果某个字段没有值，传的是空字符串，而不是将该字段在请求消息体中隐藏。客户发的请求类似下面的例子：</p>
+            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
+              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="/blog/2020/06/string_adapter/">更多 →</a>
+            </p>
+            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">June 1, 2020</p>
+          </div>
+        
+    <ul class="pagination pagination-default">
+      <li class="page-item">
+        <a href="/blog/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/5/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/5/" aria-label="Page 5" class="page-link" role="button">5</a>
+      </li>
+      <li class="page-item active">
+        <a aria-current="page" aria-label="Page 6" class="page-link" role="button">6</a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/7/" aria-label="Page 7" class="page-link" role="button">7</a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/8/" aria-label="Page 8" class="page-link" role="button">8</a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/7/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/page/8/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul>
+      </main>
+    </article>
+    <div class="max-xl:hx-hidden hx-h-0 hx-w-64 hx-shrink-0"></div>
+  </div>
+      <footer class="hextra-footer hx-bg-gray-100 hx-pb-[env(safe-area-inset-bottom)] dark:hx-bg-neutral-900 print:hx-bg-transparent"><div class="hx-mx-auto hx-flex hx-gap-2 hx-py-2 hx-px-4 hx-max-w-screen-xl"><button
+  title="切换主题"
+  data-theme="light"
+  class="theme-toggle hx-group hx-h-7 hx-rounded-md hx-px-2 hx-text-left hx-text-xs hx-font-medium hx-text-gray-600 hx-transition-colors dark:hx-text-gray-400 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50"
+  type="button"
+  aria-label="切换主题"
+>
+  <div class="hx-flex hx-items-center hx-gap-2 hx-capitalize"><svg height=12 class="group-data-[theme=light]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg><span class="group-data-[theme=light]:hx-hidden">浅色</span><svg height=12 class="group-data-[theme=dark]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg><span class="group-data-[theme=dark]:hx-hidden">深色</span></div>
+</button>
+</div><hr class="dark:hx-border-neutral-800" /><div
+    class="hx-max-w-screen-xl hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
+  >
+    <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start"><div class="hx-mt-6 hx-text-xs"><img class="favicon" src="/favicon-32x32.png">Copyright © 2018 - 2025 保罗札记. All Rights Reserved</div>
+    </div>
+  </div>
+</footer>
+    
+    <script defer src="/js/main.js" integrity=""></script>
+
+
+<script defer src="/lib/flexsearch/flexsearch.bundle.min.0425860527cc9968f9f049421c7a56b39327d475e2e3a8f550416be3a9134327.js" integrity="sha256-BCWGBSfMmWj58ElCHHpWs5Mn1HXi46j1UEFr46kTQyc="></script>
+    <script defer src="/zh-cn.search.js" integrity=""></script>
+
+
+  </body>
+</html>

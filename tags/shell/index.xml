@@ -1,41 +1,325 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>shell on 保罗札记</title>
-    <link>https://www.zengxi.net/tags/shell/</link>
-    <description>Recent content in shell on 保罗札记</description>
+    <title>保罗札记 – Shell</title>
+    <link>http://localhost:1313/tags/shell/</link>
+    <description>Recent content in Shell on 保罗札记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <language>zh-CN</language>
     <lastBuildDate>Mon, 20 Jul 2020 11:31:49 +0000</lastBuildDate>
-    <atom:link href="https://www.zengxi.net/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    
+	  <atom:link href="http://localhost:1313/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>grep 返回 Binary file (standard input) matches</title>
-      <link>https://www.zengxi.net/2020/07/grep_binary_file_match/</link>
+      <link>http://localhost:1313/blog/2020/07/grep_binary_file_match/</link>
       <pubDate>Mon, 20 Jul 2020 11:31:49 +0000</pubDate>
-      <guid>https://www.zengxi.net/2020/07/grep_binary_file_match/</guid>
-      <description>grep &amp;quot;keyword&amp;quot; xxx.log时输出: Binary file (standard input) matches&#xA;这个是因为grep命令认为它是一个二进制文件。解决方案是，加上一个参数 -a：&#xA;1grep -a &amp;#34;keyword&amp;#34; xxx.log 该参数的解释：&#xA;1-a, --text equivalent to --binary-files=text </description>
+      
+      <guid>http://localhost:1313/blog/2020/07/grep_binary_file_match/</guid>
+      <description>
+        
+        
+        &lt;p&gt;grep &amp;ldquo;keyword&amp;rdquo; xxx.log时输出: Binary file (standard input) matches&lt;/p&gt;
+&lt;p&gt;这个是因为grep命令认为它是一个二进制文件。解决方案是，加上一个参数 -a：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;grep -a &amp;#34;keyword&amp;#34; xxx.log&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;该参数的解释：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;-a, --text    equivalent to --binary-files=text&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
     </item>
+    
     <item>
       <title>Mac下shell命令支持map</title>
-      <link>https://www.zengxi.net/2020/01/mac-shell-support-map/</link>
+      <link>http://localhost:1313/blog/2020/01/mac-shell-support-map/</link>
       <pubDate>Sun, 19 Jan 2020 16:40:17 +0000</pubDate>
-      <guid>https://www.zengxi.net/2020/01/mac-shell-support-map/</guid>
-      <description>Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：&#xA;1declare: -A: invalid option 2declare: usage: declare [-afFirtx] [-p] [name[=value] ...] 这个参数从bash 4.x开始支持，需要升级至4.x以上的版本&#xA;1# 安装最新版本的bash 2brew install bash 3 4# 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash 5# 需要把新版本的shell添加至信任列表中 6sudo bash -c &amp;#39;echo /usr/local/bin/bash &amp;gt;&amp;gt; /etc/shells&amp;#39; 7 8# 如果需要的话，修改默认shell为新版本的bash 9chsh -s /usr/local/bin/bash 需要注意的是，升级完之后，如果shell脚本需要用新版本的bash来执行，必须在相关的shell脚本开头的部分，将 #!/bin/bash 替换成 #!/usr/local/bin/bash， 否则还是用旧版本的bash来执行。&#xA;那为什么不执行类似下面的命令，删除原先的bash，并给新版本的bash建立一个链接呢？这个是由于MacOS有系统完整性保护机制（System Integrity Protection，SIP），它会阻止所有用户（包括root）修改 /bin 下面目录的内容。当然，也有办法绕过这保护机制，嫌麻烦的话，就不要去动它了。&#xA;1sudo rm /bin/bash 2sudo ln -s /usr/local/bin/bash /bin/bash 参考文章：&#xA;https://itnext.io/upgrading-bash-on-macos-7138bd1066ba </description>
+      
+      <guid>http://localhost:1313/blog/2020/01/mac-shell-support-map/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Mac自带的bash是3.x版本的，shell中的declare命令不支持-A这个参数，会报下面的错误：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;declare: -A: invalid option
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;declare: usage: &lt;span class=&#34;nb&#34;&gt;declare&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-afFirtx&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-p&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;name&lt;span class=&#34;o&#34;&gt;[=&lt;/span&gt;value&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;这个参数从bash 4.x开始支持，需要升级至4.x以上的版本&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 安装最新版本的bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brew install bash
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 新版本的bash安装路径是 /usr/share/bin/bash, 而之前系统自带的是 /bin/bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 需要把新版本的shell添加至信任列表中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo bash -c &lt;span class=&#34;s1&#34;&gt;&amp;#39;echo /usr/local/bin/bash &amp;gt;&amp;gt; /etc/shells&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 如果需要的话，修改默认shell为新版本的bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;chsh -s /usr/local/bin/bash&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;需要注意的是，升级完之后，如果shell脚本需要用新版本的bash来执行，必须在相关的shell脚本开头的部分，将 #!/bin/bash 替换成 #!/usr/local/bin/bash， 否则还是用旧版本的bash来执行。&lt;/p&gt;
+&lt;p&gt;那为什么不执行类似下面的命令，删除原先的bash，并给新版本的bash建立一个链接呢？这个是由于MacOS有系统完整性保护机制（System Integrity Protection，SIP），它会阻止所有用户（包括root）修改 /bin 下面目录的内容。当然，也有办法绕过这保护机制，嫌麻烦的话，就不要去动它了。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;sudo rm /bin/bash
+sudo ln -s /usr/local/bin/bash /bin/bash&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;p&gt;参考文章：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://itnext.io/upgrading-bash-on-macos-7138bd1066ba&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://itnext.io/upgrading-bash-on-macos-7138bd1066ba&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
     </item>
+    
     <item>
       <title>shell中用tr命令转换字符大小写</title>
-      <link>https://www.zengxi.net/2018/07/shell-translate-character/</link>
+      <link>http://localhost:1313/blog/2018/07/shell-translate-character/</link>
       <pubDate>Wed, 25 Jul 2018 21:40:22 +0000</pubDate>
-      <guid>https://www.zengxi.net/2018/07/shell-translate-character/</guid>
-      <description>在写shell脚本的时候，可能需要将特定的英文字符转换大小写。可以借助tr命令来实现这个功能。&#xA;（1）tr的下面这个命令表示把string1替换成string2&#xA;tr string1 string2 运行下面的命令&#xA;1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a&amp;#39; &amp;#39;A&amp;#39; 可以看到输出结果中把a换成了A&#xA;this is A pen （2）同时，tr命令也支持指定一个字符的范围，在这个范围内分别作替换&#xA;tr &#39;c1-c2&#39; &#39;c3-c4&#39; 比如，如果只需要把从a到h的字符，替换成大写，那么可以用下面的命令&#xA;1tr &amp;#39;a-h&amp;#39; &amp;#39;A-H&amp;#39; 运行下面的命令&#xA;1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a-h&amp;#39; &amp;#39;A-H&amp;#39; 可以看到输出结果中把从a到h的字符全部换成了大写：&#xA;tHis is A pEn 如果要把所有字符转成大写，那么只需要把范围指定成a-z即可。运行下面的命令&#xA;1echo &amp;#39;this is a pen&amp;#39; | tr &amp;#39;a-z&amp;#39; &amp;#39;A-Z&amp;#39; 可以看输出结果：&#xA;THIS IS A PEN </description>
+      
+      <guid>http://localhost:1313/blog/2018/07/shell-translate-character/</guid>
+      <description>
+        
+        
+        &lt;p&gt;在写shell脚本的时候，可能需要将特定的英文字符转换大小写。可以借助tr命令来实现这个功能。&lt;/p&gt;
+&lt;p&gt;（1）tr的下面这个命令表示把string1替换成string2&lt;/p&gt;
+&lt;pre&gt;
+tr string1 string2
+&lt;/pre&gt;
+&lt;p&gt;运行下面的命令&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;this is a pen&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tr &lt;span class=&#34;s1&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;可以看到输出结果中把a换成了A&lt;/p&gt;
+&lt;pre&gt;
+this is A pen
+&lt;/pre&gt;    
+&lt;!-- more --&gt;
+&lt;p&gt;（2）同时，tr命令也支持指定一个字符的范围，在这个范围内分别作替换&lt;/p&gt;
+&lt;pre&gt;
+tr &#39;c1-c2&#39; &#39;c3-c4&#39;
+&lt;/pre&gt;
+&lt;p&gt;比如，如果只需要把从a到h的字符，替换成大写，那么可以用下面的命令&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tr &lt;span class=&#34;s1&#34;&gt;&amp;#39;a-h&amp;#39;&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;A-H&amp;#39;&lt;/span&gt; &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;运行下面的命令&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;this is a pen&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tr &lt;span class=&#34;s1&#34;&gt;&amp;#39;a-h&amp;#39;&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;A-H&amp;#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;可以看到输出结果中把从a到h的字符全部换成了大写：&lt;/p&gt;
+&lt;pre&gt;
+tHis is A pEn
+&lt;/pre&gt;    
+&lt;p&gt;如果要把所有字符转成大写，那么只需要把范围指定成a-z即可。运行下面的命令&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;this is a pen&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tr &lt;span class=&#34;s1&#34;&gt;&amp;#39;a-z&amp;#39;&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;A-Z&amp;#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;可以看输出结果：&lt;/p&gt;
+&lt;pre&gt;
+THIS IS A PEN
+&lt;/pre&gt;
+      </description>
     </item>
+    
     <item>
       <title>date命令按指定locale所对应的日期格式输出</title>
-      <link>https://www.zengxi.net/2018/07/force-date-use-locale/</link>
+      <link>http://localhost:1313/blog/2018/07/force-date-use-locale/</link>
       <pubDate>Wed, 04 Jul 2018 23:03:18 +0000</pubDate>
-      <guid>https://www.zengxi.net/2018/07/force-date-use-locale/</guid>
-      <description>在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。&#xA;比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出&#xA;1date +%a 下面是locale为zh_CN的输出：&#xA;三 下面是locale为en_US的输出：&#xA;Wed 如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值&#xA;首先我们可以运行下面的命令来列出当前系统安装了哪些locale。这一步有一定的必要，因为在不同的系统下面，locale名称可能不同。比如，Ubuntu下面叫做zh_CN.utf8，而MacOS下面叫做zh_CN.UTF-8。如果locale名称没用对，那么看到的就不是所期望的结果。&#xA;1locale -a 知道locale的具体名称之后，可以用类似下面的命令来指定locale并按照指定格式输出。&#xA;1LC_ALL=zh_CN.UTF-8 date 2LC_ALL=zh_CN.UTF-8 date +%a 3 4LC_ALL=en_US.UTF-8 date 5LC_ALL=en_US.UTF-8 date +%a 上面的命令分别有如下的输出:&#xA;2018年 7月 4日 星期三 20时33分41秒 CST 三 Wed Jul 4 20:33:41 CST 2018 Wed </description>
+      
+      <guid>http://localhost:1313/blog/2018/07/force-date-use-locale/</guid>
+      <description>
+        
+        
+        &lt;p&gt;在Linux，Unix或者MacOS的命令行输入date命令，可以获取到当前的系统时间。默认情况下，date命令是按照当前系统的locale的时间格式来输出的。&lt;/p&gt;
+&lt;p&gt;比如下面的命令输出当前是星期几，在不同的locale中可以看到有不同的输出&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;date +%a&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;下面是locale为zh_CN的输出：&lt;/p&gt;
+&lt;pre&gt;
+三
+&lt;/pre&gt;
+&lt;p&gt;下面是locale为en_US的输出：&lt;/p&gt;
+&lt;pre&gt;
+Wed
+&lt;/pre&gt;
+&lt;p&gt;如果当前系统的locale是zh_CN，但是想让date输出的星期几是英文而不是中文，有没有简单的办法呢？答案是有。可以通过指定locale临时环境变量来让date命令输出所期望的格式。这个临时环境变量的设置，仅对当前的命令有效，不会影响到其他地方的locale值&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;首先我们可以运行下面的命令来列出当前系统安装了哪些locale。这一步有一定的必要，因为在不同的系统下面，locale名称可能不同。比如，Ubuntu下面叫做&lt;code&gt;zh_CN.utf8&lt;/code&gt;，而MacOS下面叫做&lt;code&gt;zh_CN.UTF-8&lt;/code&gt;。如果locale名称没用对，那么看到的就不是所期望的结果。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;locale -a&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;知道locale的具体名称之后，可以用类似下面的命令来指定locale并按照指定格式输出。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;LC_ALL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;zh_CN.UTF-8 date
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;LC_ALL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;zh_CN.UTF-8 date +%a
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;LC_ALL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;en_US.UTF-8 date
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;LC_ALL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;en_US.UTF-8 date +%a&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;上面的命令分别有如下的输出:&lt;/p&gt;
+&lt;pre&gt;
+2018年 7月 4日 星期三 20时33分41秒 CST
+三
+
+Wed Jul  4 20:33:41 CST 2018
+Wed
+&lt;/pre&gt;
+
+      </description>
     </item>
+    
   </channel>
 </rss>
